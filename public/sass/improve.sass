@@ -9,14 +9,12 @@ $mobile: "(max-width: 767px)"
 /* Landscape phones and smaller */
 $mobile-xs: "(max-width: 480px)"
 
-
 body, html
   font-family: "Source Sans Pro"
   background: #E5E5E5
   height: 100%
   padding-top: 40px
   
-
 .container-fluid
   height: 100%
 
@@ -40,6 +38,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
   padding: 15px 0
   margin-left: 10px
   display: inline-block 
+
 .modal-content
   background: #F5F5F5 !important
 
@@ -70,6 +69,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 
 .form-control
   box-shadow: none
+  background: transparent
+
 
 
 .btn-search
@@ -187,7 +188,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
       background: #f3f3f3
 
 #main-content
-  margin-left: 225px
+  margin-left: 215px
+  padding: 0
   @media #{$mobile}, #{$mobile-xs}
     margin-left: 0
     padding: 15px

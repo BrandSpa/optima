@@ -28,13 +28,13 @@
 <section id="main-content">
 	
 
-  <div class="row">
 	@yield('content')
-  </div>
+	
 
   <div class="hide-menu hide">
     @include('layouts/partials/_menu')
   </div>
+
 </section>
 
   @include('companies/partials/_quote')

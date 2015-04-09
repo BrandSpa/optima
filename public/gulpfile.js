@@ -10,6 +10,7 @@ var declare = require('gulp-declare');
 
 gulp.task('concat-css', function(){
   gulp.src([
+    'bower_components/bootstrap/dist/css/bootstrap.min.css',
     'css/main.css',
     'css/improve.css',
     'css/fancySelect.css',

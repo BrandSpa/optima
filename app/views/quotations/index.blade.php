@@ -1,8 +1,8 @@
 @section('content')
-<div class="row col-lg-9">
 
-	<div class="col-lg-12">
-	
+<div class="col-lg-9">
+
+
 		<div class="panel panel-default" id="quotations">
 			<div class="panel-heading">
 			<div class="row">
@@ -70,10 +70,10 @@
 				</div>
 				
 			</div>
-		</div>
+
 	</div> <!-- end col -->
 
-	<div class="col-lg-12">
+
 		<div class="panel panel-default" id="todos">
 			<div class="panel-heading">
 				<a href="#" class="btn btn-primary btn-sm todo-open-create">Crear tarea</a>
@@ -100,11 +100,10 @@
 				</div>
 		</div>
 	
-		</div>
 	</div>
 </div> <!-- end row -->
 
-<div class="col-lg-3">
+<div class="col-lg-3" style="padding-left: 0">
 	<div class="panel panel-default" id="activities">
 		<div class="panel-heading">
 			<h5>Actividad Reciente</h5>
