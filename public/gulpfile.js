@@ -34,7 +34,7 @@ gulp.task('dependencies', function(){
     'node_modules/jquery.serializejson/jquery.serializejson.min.js',
     'node_modules/alertify/lib/alertify.min.js',
     'node_modules/summernote/dist/summernote.min.js',
-    'node_modules/chartjs/Chart.min.js',
+    'node_modules/chart.js/Chart.min.js',
 
     // Bower
     'bower_components/sidr/jquery.sidr.min.js', //need to change to Slideout.js
