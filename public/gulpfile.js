@@ -40,7 +40,7 @@ gulp.task('dependencies', function(){
     'bower_components/sidr/jquery.sidr.min.js', //need to change to Slideout.js
     'bower_components/slimscroll/jquery.slimscroll.min.js',
     'bower_components/timeago/jquery.timeago.js',
-    'bower_components/timeago/locales/jquery.timeago.es-short.js',
+    'bower_components/timeago/locales/jquery.timeago.es.js',
     'bower_components/jquery-ui/jquery-ui.min.js',
     'bower_components/pickadate/lib/picker.js',
     'bower_components/pickadate/lib/picker.date.js',
@@ -53,7 +53,7 @@ gulp.task('dependencies', function(){
     
     ])
   .pipe(concat('dependencies.js'))
-  .pipe(gulp.dest('js/dist/'))
+  .pipe(gulp.dest('js/dist/'));
 });
 
 gulp.task('coffee', function() {
@@ -74,7 +74,7 @@ gulp.task('coffee', function() {
     ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(concat('app.js'))
-  .pipe(gulp.dest('js/dist/'))
+  .pipe(gulp.dest('js/dist/'));
 });
 
 gulp.task('sass', function() {

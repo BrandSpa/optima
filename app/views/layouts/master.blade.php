@@ -50,8 +50,9 @@
 <script src="/js/helpers/helper-compare.js"></script>
 <script src="/js/helpers/backbone_helpers.js"></script>
 
-  <script src="/js/app/menu.js"></script>
-  <script src="/js/main.js"></script>
+ <script src="/js/app/menu.js"></script>
+ <script src="/js/main.js"></script>
+
   <script>
 	  optima.user_id = [[ Auth::user()->id ]];
 	  optima.user_email = "[[ Auth::user()->email ]]";
@@ -64,7 +65,6 @@
   <script src="/js/sockets.js"></script>
   <script src="/js/dist/app.js"></script>
   
-
    <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
