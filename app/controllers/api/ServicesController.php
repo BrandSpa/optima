@@ -26,7 +26,7 @@ class ServicesController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		$collection = Service::takeAndSkip(10, $offset);
+		$collection = Service::all();
 		return Response::json($collection, 200);
 	}
 
