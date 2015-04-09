@@ -1,0 +1,358 @@
+@import variables
+
+#posts-featured
+	margin-bottom: 15px
+
+.post-main-featured-item
+	padding-left: 0
+	padding-right: 7px
+
+	&:hover
+		cursor: pointer
+
+	@media #{$mobile}
+		padding: 0
+		margin-bottom: 15px
+
+	.img-container
+		height: 195px
+		overflow: hidden
+
+		img
+			margin-top: -35px
+
+			@media #{$tablet}
+				margin-top: 0px
+			
+			@media #{$mobile}
+				margin-top: 0px
+				width: 125%
+
+
+		@media #{$mobile}
+			height: auto
+			padding: 0
+
+	.content
+		padding: 20px
+		background: #fff
+		color: $color-gray
+		height: 180px
+		position: relative
+		overflow: hidden
+
+		+share_social
+
+		.footer
+			position: absolute
+			width: 100%
+			bottom: 0
+			left: 0
+			padding: 40px 15px 10px 20px
+			background: none,linear-gradient(180deg,rgba(255,255,255,0) 0,#fff 50%)
+			overflow: hidden
+		
+		@media #{$mobile}
+			width: 100%
+			height: 120px
+
+		h3
+			font-size: 1em
+			margin: 0
+			font-weight: bold
+			a
+				color: $color-darkBlue
+				font-size: 1.1em
+				line-height: 150%
+				@media #{$mobile}, @media #{$mobile-xs}
+					font-size: 0.8em
+
+		p
+			color: #7F7F7F
+			font-size: 1em
+			line-height: 170%
+			margin: 10px 0 10px 0
+			@media #{$mobile}
+				display: none
+
+		.date
+			font-size: 0.8em
+			font-style: italic
+			color: #7F7F7F
+
+		.country
+			font-size: 0.8em
+			font-style: italic
+			color: #7F7F7F
+			margin-right: 10px
+
+		.date
+			font-size: 0.8em
+			color: $color-gray
+			font-style: italic
+
+		.share
+			font-size: 0.8em
+			float: right
+			padding-right: 15px
+			color: $color-darkBlue
+			i
+				padding-left: 5px
+
+.post-featured-item
+	@media #{$desktop}, #{$desktop-lg}
+		&:first-child
+			padding-left: 7px
+			padding-right: 0
+
+		&:nth-child(2)
+			padding-left: 7px !important
+			padding-right: 0 !important
+
+		&:nth-child(2n+3)
+			padding-left: 7px
+			padding-right: 0
+
+	@media #{$mobile}
+		padding: 0 !important
+
+.post-item, .post-featured-item
+	height: 180px
+	margin-bottom: 15px
+	overflow: hidden
+	position: relative
+	cursor: pointer
+
+	@media #{$mobile}
+		height: 135px
+		padding: 0
+		width: 100%
+
+	@media #{$mobile-xs}
+		height: 120px
+
+	@media #{$tablet}, #{$desktop}, #{$desktop-lg}
+		&:first-child
+			padding-left: 0
+			padding-right: 7px
+		
+		&:first-child
+			padding-left: 0
+			padding-right: 7px
+
+		&:nth-child(2n+3)
+			padding-right: 0
+			padding-left: 7px
+
+		&:nth-child(2n+2)
+			padding-left: 0
+			padding-right: 7px
+
+		&:nth-child(2)
+			padding-right: 0
+			padding-left: 7px
+
+
+	.thumb
+		width: 40%
+		height: 180px
+		float: left
+		overflow: hidden
+		position: relative
+		background: $color-darkBlue
+		overflow: hidden
+
+		@media #{$mobile}
+			width: 25%
+
+		@media #{$mobile-xs}
+			width: 35%
+
+		@media #{$tablet}
+
+		img
+			display: block
+			position: absolute
+			width: 400px
+			overflow: auto
+			margin: auto
+			right: 0
+			top: 0
+			bottom: 0
+			left: -100px
+
+
+	.content
+		width: 60%
+		background: #fff
+		padding: 15px 20px 20px 20px
+		height: 180px
+		float: left
+		position: relative
+
+		+share_social
+
+		@media #{$mobile}
+			height: 135px
+			padding: 15px
+			width: 75%
+
+		@media #{$mobile-xs}
+			height: 120px
+			width: 65%
+		
+		h3
+			font-size: 1em
+			padding-right: 7px
+			line-height: 1.4em 
+			font-weight: bold
+			margin: 0 0 5px 0
+
+			a
+				color: $color-darkBlue
+
+			@media #{$mobile}
+				font-size: .9em
+
+		p
+			font-size: 1em
+			line-height: 150%
+			padding: 7px 0 7px 0 
+			margin: 0
+			color: #7F7F7F
+
+		.footer
+			position: absolute
+			width: 100%
+			bottom: 0
+			left: 0
+			padding: 40px 15px 10px 20px
+			background: none,linear-gradient(180deg,rgba(255,255,255,0) 0,#fff 50%)
+			overflow: hidden
+
+		.date
+			font-size: 0.8em
+			color: #7F7F7F
+			font-style: italic
+			
+		.country
+			font-size: 0.8em
+			font-style: italic
+			color: #7F7F7F
+			margin-right: 10px
+
+.post-header
+	background: $color-darkBlue
+	color: #fff
+	float: left
+	width: 100%
+	padding-right: 30px
+
+	@media #{$mobile}
+		padding: 30px
+
+	img
+		float: left
+		height: 150px
+		margin-right: 30px
+		
+	h1
+		padding: 15px 0 10px 30px
+		margin: 0
+		font-size: 1.4em
+		line-height: 1.5em
+		font-weight: 200
+		@media #{$mobile}
+			padding: 0
+	h5
+		color: #00A1B1
+		font-weight: 400
+		a
+			color: #00A1B1
+			font-weight: 400
+	.categories
+		span
+			color: #00A1B1
+			font-weight: 200
+
+	a
+		&.share
+			color: #fff
+			font-size: 28px
+			display: block
+			float: right
+			margin-right: 15px
+
+	.post-social
+		@media #{$desktop-lg}, #{$desktop}
+			margin-top: -30px
+
+
+.content
+	background: #fff
+	padding: 30px
+	color: $color-gray
+	font-size: 1em
+	line-height: 1.7em
+
+	@media #{$mobile}
+		padding: 15px
+
+.post-featured-item
+	&:first-child
+		padding-left: 0
+	&:first-child, &:nth-child(2n+3)
+		padding-left: 0
+
+	&:nth-child(2), &:nth-child(3)
+		padding-left: 7px
+		padding-right: 0
+
+	&:nth-child(2n+2)
+		padding-right: 0
+
+#posts-related
+	.post-item
+		&:first-child
+			padding-left: 0
+			padding-right: 7px
+
+		&:nth-child(2n+2)
+			padding-right: 0
+			padding-left: 7px
+
+		&:nth-child(2n+3)
+		padding-left: 0
+		padding-right: 7px
+
+.related-title
+	float: left
+	width: 100%
+	text-align: center
+	background: #fff
+	margin-bottom: 15px
+	padding: 15px
+	h3
+		font-size: 1.2em
+		color: #002855
+		margin: 0
+
+#post-detail
+
+	.content
+		float: left
+		width: 100%
+		margin-bottom: 15px
+		display: block
+		@media #{$mobile}
+			padding: 15px !important
+
+	.date
+		font-size: .8em
+		color: #7F7F7F
+		font-style: italic
+		padding-bottom: 15px
+		i
+			margin-right: 3px
+			&:nth-child(2)
+				margin-left: 10px

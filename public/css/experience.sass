@@ -1,0 +1,153 @@
+@import variables
+
+#experiences
+
+.experience-item
+	height: 155px
+	margin-bottom: 15px
+	overflow: hidden
+	cursor: pointer
+	@media #{$tablet}
+		height: 124px
+	@media #{$mobile-xs}
+		height: 100px
+
+	+order-items
+
+	.img-container
+		width: 35%
+		float: left
+		overflow: hidden
+		background: #fff
+
+		img
+			max-width: 100%
+
+		@media #{$mobile}
+			width: 30%
+
+		@media #{$mobile-xs}
+			width: 35%
+
+	.content
+		background: #fff
+		padding: 15px
+		float: left
+		width: 65%
+		height: 155px
+		position: relative
+
+		@media #{$mobile}
+			width: 70%
+
+		@media #{$tablet}
+			height: 124px
+
+		@media #{$mobile-xs}
+			width: 65%
+			height: 100px
+		+share_social
+		
+		h3
+			font-size: .9em
+			line-height: 1.4em 
+			font-weight: bold
+			margin: 15px 0 15px 0
+
+			@media #{$mobile-xs}
+				padding: 0
+
+			@media #{$mobile}, #{$tablet}
+				margin: 0 0 15px 0
+			a
+				color: $color-darkBlue
+				
+		p
+			color: $color-gray
+			font-size: 0.9em
+			line-height: 150%
+			padding: 0 15px 0 0
+
+		.footer
+			position: absolute
+			bottom: 0
+			right: 0
+			left: 0
+			padding: 30px 15px 10px 15px
+			background: none,linear-gradient(180deg,rgba(255,255,255,0) 0,#fff 50%)
+			overflow: hidden
+			width: 100%
+
+		.country
+			font-size: 0.8em
+			font-style: italic
+			color: #7F7F7F
+			margin-right: 10px
+			margin-left: 1px
+			i
+				padding-right: 3px
+
+		.date
+			font-size: 0.8em
+			color: $color-gray
+			font-style: italic
+			i
+				padding-right: 3px
+			
+
+.experience-header
+	background: $color-darkBlue
+	color: #fff
+	float: left
+	width: 100%
+	margin-bottom: 30px
+	padding-left: 30px
+	
+	@media #{$mobile}
+		padding-left: 15px
+		padding-bottom: 15px
+	
+	.year
+		margin: 15px 0 7px 0
+		display: block
+		font-weight: 200
+
+	img
+		float: right
+		height: 150px
+		margin-left: 30px
+		
+	h1
+		padding: 0 60px 15px 0
+		margin: 0
+		font-size: 1.4em
+		font-weight: 400
+		@media #{$mobile}
+			font-size: 1em
+			padding: 7px 0px
+
+	.company-name
+		font-size: 1.2em
+		display: block
+		@media #{$mobile}
+			font-size: .8em
+
+	.company-web
+		font-size: .9em
+		display: block
+		color: #00A1B1
+		a
+			color: #00A1B1
+
+		@media #{$mobile}
+			font-size: .8em
+
+.content
+	background: #fff
+	padding: 30px
+	color: $color-gray
+	font-size: 1em
+	line-height: 1.7em
+	margin-bottom: 15px
+
+

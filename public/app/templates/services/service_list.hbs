@@ -1,0 +1,8 @@
+ <div class="row col-lg-4">
+    <select class="form-control  select-xs" name="service">
+      <option value="">Seleccionar Servicio</option>
+      {{#each [] }}
+        <option value="{{id}}">{{title}}</option>
+      {{/each}}
+    </select>
+  </div>

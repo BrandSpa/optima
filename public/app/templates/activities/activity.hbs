@@ -1,0 +1,7 @@
+<td>
+<span class="timeago" title="{{ created_at }}">{{ created_at }}</span>
+<br>
+	{{ user.name }} {{ user.lastname }} {{ message }}
+	{{#if quotation_id }} en <a href="/quotations/{{ quotation_id }}">{{ quotation_id }}</a>{{/if}}<br>
+	
+</td>

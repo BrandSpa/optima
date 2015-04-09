@@ -1,0 +1,23 @@
+<table class="table table-condensed">
+  <tr>
+    <td>
+      <b>Creada</b> <span class="timeago" title="{{ created_at }}">{{ created_at }}</span>: <br>{{ created_at }}
+    </td>
+  </tr>
+
+  {{#if sent_at}}
+    <tr>
+      <td>
+        <b>Enviada</b> <span class="timeago" title="{{ sent_at }}">{{ sent_at }}</span>: <br>{{ sent_at }}
+      </td>
+    </tr>
+  {{/if}}
+
+  {{#if created_sent_diff }}
+    <tr>
+      <td>
+        <b>Enviada en</b> {{ created_sent_diff }} minutos
+      </td>
+    </tr>
+  {{/if}}
+</table>

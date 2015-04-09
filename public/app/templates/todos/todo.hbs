@@ -1,0 +1,18 @@
+{{#check_completed completed}}
+ <td>
+    <input type="checkbox" class="todo-completed">
+  </td>
+  <td>
+    {{ title }}
+  </td>
+  <td>
+    {{ description }}
+  </td>
+
+  <td><span class="timeago" title="{{ created_at }}">{{ created_at }}</span></td>
+  <td><span class="timeago" title="{{ expires_date }} {{ expires_time }}">{{ expires_date }} {{ expires_time }}</span></td>
+
+  <td>{{ assigned.name }} {{ assigned.lastname }}</td>
+  <td>{{ user.name }} {{ user.lastname }}</td>
+    <td><a href="/quotations/{{ tracking.quotation_id }}">{{ tracking.quotation_id }}</a></td>
+ {{/check_completed}}

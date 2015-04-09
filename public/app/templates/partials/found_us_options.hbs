@@ -1,0 +1,12 @@
+<option value="Asesores Comerciales">Asesores comerciales</option>
+<option value="Cliente">Cliente</option>
+<option value="Página Web Avante">Página Web Avante</option>
+<option value="Google Adwords">Google Adwords</option>
+<option value="Referido">Referido</option>
+<option value="Promoción">Promoción</option>
+<option value="Paginas Amarillas">Paginas Amarillas</option>
+<option value="Paginas Amarillas Web">Paginas Amarillas Web</option>
+<option value="Teléfono">Teléfono</option>
+<option value="Redes Sociales">Redes Sociales</option>
+<option value="Banner">Banner</option>
+<option value="Otros">Otros</option>

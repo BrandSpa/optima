@@ -1,0 +1,33 @@
+{
+  "name": "avante-optima",
+  "version": "1.0.0",
+  "description": "app for avante",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alejandro Sanabria alejandro@brandspa.com",
+  "license": "ISC",
+  "dependencies": {
+    "alertify": "^0.3.0",
+    "backbone": "^1.1.2",
+    "bootstrap": "^3.3.4",
+    "chart.js": "^1.0.2",
+    "handlebars": "^3.0.1",
+    "jquery": "^2.1.3",
+    "jquery-serializejson": "^2.5.0",
+    "moment": "^2.10.2",
+    "summernote": "^0.6.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-coffee": "^2.3.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^4.0.0",
+    "gulp-ruby-sass": "^1.0.1",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "gulp-wrap": "^0.11.0"
+  }
+}
