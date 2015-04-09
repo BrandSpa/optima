@@ -26,11 +26,7 @@
 	</div>
 
 <section id="main-content">
-	
-
 	@yield('content')
-	
-
   <div class="hide-menu hide">
     @include('layouts/partials/_menu')
   </div>

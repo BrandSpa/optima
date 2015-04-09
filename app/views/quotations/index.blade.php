@@ -2,7 +2,6 @@
 
 <div class="col-lg-9">
 
-
 		<div class="panel panel-default" id="quotations">
 			<div class="panel-heading">
 			<div class="row">
@@ -103,7 +102,7 @@
 	</div>
 </div> <!-- end row -->
 
-<div class="col-lg-3" style="padding-left: 0">
+<div class="col-lg-3" style="padding-left: 7px">
 	<div class="panel panel-default" id="activities">
 		<div class="panel-heading">
 			<h5>Actividad Reciente</h5>
