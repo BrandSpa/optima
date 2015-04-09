@@ -55,14 +55,13 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
-			'database'  => 'optima',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'database'  => $_ENV['DB_NAME'],
+			'username'  => $_ENV['DB_USER'],
+			'password'  => $_ENV['DB_PASS'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

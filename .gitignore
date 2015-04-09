@@ -3,4 +3,6 @@
 /public/node_modules
 /public/.sass-cache
 /sockets/node_modules
+.env.*.php
+.env.php
 
