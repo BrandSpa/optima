@@ -40,6 +40,7 @@ gulp.task('dependencies', function(){
     'bower_components/sidr/jquery.sidr.min.js', //need to change to Slideout.js
     'bower_components/slimscroll/jquery.slimscroll.min.js',
     'bower_components/timeago/jquery.timeago.js',
+    'bower_components/timeago/locales/jquery.timeago.es-short.js',
     'bower_components/jquery-ui/jquery-ui.min.js',
     'bower_components/pickadate/lib/picker.js',
     'bower_components/pickadate/lib/picker.date.js',
