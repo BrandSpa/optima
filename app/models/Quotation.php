@@ -202,7 +202,7 @@ class Quotation extends \Eloquent {
 
 	public static function search_by_quotation($query)
 	{
-		$quotations = Quotation::with('company', 'contact')->where("id", "like", "$query%")->orderBy('created_at', 'desc')->take(25)->get();
+		$quotations = Quotation::with('company', 'contact')->where("id", "like", "$query%")->orderBy('created_at', 'asc')->take(25)->get();
 		return $quotations;
 	}
 
@@ -212,7 +212,7 @@ class Quotation extends \Eloquent {
 			$query->where('name', 'like', "%$q%");
 		}))->whereHas('contact', function($query) use($q) {
 			$query->where('name', 'like', "%$q%");
-		})->orderBy('created_at', 'desc')->take(25)->get();
+		})->orderBy('created_at', 'asc')->take(25)->get();
 
 		return $quotations;
 	}
@@ -226,7 +226,7 @@ class Quotation extends \Eloquent {
 		->whereHas('company', function($query) use($q)
 		{
 			$query->where('name', 'like', "%$q%");
-		})->orderBy('created_at', 'desc')->take(25)->get();
+		})->orderBy('created_at', 'asc')->take(25)->get();
 
 		return $quotations;
 	}
