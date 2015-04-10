@@ -32,7 +32,7 @@ gulp.task('dependencies', function(){
     'node_modules/backbone/node_modules/underscore/underscore.js',
     'node_modules/backbone/backbone.js',
     'node_modules/moment/min/moment-with-locales.min.js',
-    'node_modules/jquery.serializejson/jquery.serializejson.min.js',
+    'node_modules/jquery-serializejson/jquery.serializejson.min.js',
     'node_modules/alertify/lib/alertify.min.js',
     'node_modules/summernote/dist/summernote.min.js',
     'node_modules/chart.js/Chart.min.js',
