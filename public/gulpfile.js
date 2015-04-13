@@ -134,7 +134,10 @@ gulp.task('coffee', function() {
     'app/views/services/list_quotation_select.coffee',
 
     //todos
-    'app/views/todos.coffee',
+    'app/views/todos/item.coffee',
+    'app/views/todos/list.coffee',
+    'app/views/todos/create.coffee',
+    'app/views/todos/mail.coffee',
 
     //trackings
     'app/views/trackings.coffee',

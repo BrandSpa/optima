@@ -3432,7 +3432,7 @@ $(function() {
     return TodoCreateView;
 
   })(Backbone.View);
-  optima.views.TodoMailNew = (function(superClass) {
+  return optima.views.TodoMailNew = (function(superClass) {
     extend(TodoMailNew, superClass);
 
     function TodoMailNew() {
@@ -3459,16 +3459,6 @@ $(function() {
     };
 
     return TodoMailNew;
-
-  })(Backbone.View);
-  return optima.views.TodoMailCompleted = (function(superClass) {
-    extend(TodoMailCompleted, superClass);
-
-    function TodoMailCompleted() {
-      return TodoMailCompleted.__super__.constructor.apply(this, arguments);
-    }
-
-    return TodoMailCompleted;
 
   })(Backbone.View);
 });

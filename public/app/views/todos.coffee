@@ -1,5 +1,5 @@
 $ ->
-
+  #item
   class optima.views.TodoView extends Backbone.View
     tagName: "tr"
     events: 
@@ -27,7 +27,7 @@ $ ->
       $.get 'http://127.0.0.1:3000/sendmail', data: {message: 'alo'}
       .done (res) ->
         console.log res
-
+  #list
   class optima.views.TodosView extends Backbone.View
     el: $ "#todos"
     events:
@@ -65,7 +65,7 @@ $ ->
       users.fetch()
         .done (users) ->
           view.render(users)
-
+  #create
   class optima.views.TodoCreateView extends Backbone.View
     el: $ '#todo-create-modal'
     template: $ '#todo-create-template'
@@ -126,7 +126,7 @@ $ ->
     cancel: (e) ->
       e.preventDefault()
       @closeModal()
-
+  #mail 
   class optima.views.TodoMailNew extends Backbone.View
     
     initialize: ->
@@ -137,5 +137,4 @@ $ ->
       view = template( model.toJSON() )
       $.post optima.mail_api_url, {message: view, subject: 'Nueva Tarea Asignada', to: [{"email":  optima.user_email}]}
 
-  class optima.views.TodoMailCompleted extends Backbone.View
 
