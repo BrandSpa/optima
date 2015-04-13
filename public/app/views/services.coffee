@@ -1,5 +1,5 @@
 $ ->
-  
+  # item
   class optima.views.ServiceView extends Backbone.View
     tagName: 'tr'
 
@@ -26,7 +26,8 @@ $ ->
       e.preventDefault()
       @model.destroy()
       @remove()
-
+      
+  # list
   class optima.views.ServicesView extends Backbone.View
     el: $ '#services'
     events:
@@ -68,6 +69,7 @@ $ ->
       query = $('.service-query').val()
       @collection.fetch data: query: query
 
+  # create
   class optima.views.ServiceCreate extends Backbone.View
     el: $ '#service-create-modal'
 
@@ -96,6 +98,7 @@ $ ->
         optima.services.add(model)
         @closeModal()
 
+  # edit
   class optima.views.ServiceEdit extends Backbone.View
     el: $ '#service-edit-modal'
 
@@ -128,6 +131,7 @@ $ ->
       e.preventDefault()
       @closeModal()
 
+  # item_quotation 
   class optima.views.QuotationServiceView extends Backbone.View
     template: $ '#quotation-service-template'
     tagName: 'tr'
@@ -166,6 +170,7 @@ $ ->
       @storeActivity @quotation_id, "elimino un servicio"
       @remove()
 
+  # list_quotation
   class optima.views.QuotationServicesView extends Backbone.View
     el: $ '#quotation-services'
     events: 
@@ -210,8 +215,8 @@ $ ->
       
     notify: (res)->
       socket.emit "quotation-service", res.toJSON().quotation_id
-     
 
+  #create_quotation
   class optima.views.QuotationServiceCreate extends Backbone.View
     el: $ '#quotation-service-create-modal'
     template: $ '#quotation-service-create-template'
@@ -237,6 +242,7 @@ $ ->
       e.preventDefault()
       @closeModal()
 
+  # item_result
   class optima.views.ServiceResult extends Backbone.View
     template: $ '#service-result-template'
     tagName: 'tr'
@@ -257,7 +263,8 @@ $ ->
       e.preventDefault()
       service_id = @model.get('id')
       optima.quotationServices.create quotation_id: @quotation_id, service_id: service_id
- 
+
+ #list_results
   class optima.views.ServiceResults extends Backbone.View
     el: $ '#quotation-service-create-modal'
     
@@ -274,6 +281,7 @@ $ ->
     close: ->
       @remove()
 
+  #list_quotation_select
   class optima.views.QuotationServiceSelect extends Backbone.View
     el: $ '#quotation-service-list'
 

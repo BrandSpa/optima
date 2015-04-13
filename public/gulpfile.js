@@ -122,7 +122,16 @@ gulp.task('coffee', function() {
     'app/views/products/edit_quotation.coffee',
 
     //services
-    'app/views/services.coffee',
+    'app/views/services/item.coffee',
+    'app/views/services/list.coffee',
+    'app/views/services/create.coffee',
+    'app/views/services/edit.coffee',
+    'app/views/services/item_quotation.coffee',
+    'app/views/services/list_quotation.coffee',
+    'app/views/services/create_quotation.coffee',
+    'app/views/services/item_result.coffee',
+    'app/views/services/list_results.coffee',
+    'app/views/services/list_quotation_select.coffee',
 
     //todos
     'app/views/todos.coffee',
