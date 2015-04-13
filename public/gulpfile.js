@@ -100,14 +100,37 @@ gulp.task('coffee', function() {
     'app/views/contacts/item_quotation.coffee',
     'app/views/contacts/list_quotation.coffee',
 
+    //quotations
+    'app/views/quotations/item.coffee',
+    'app/views/quotations/list.coffee',
+    'app/views/quotations/results.coffee',
+    'app/views/quotations/create.coffee',
+    'app/views/quotations/app.coffee',
+    'app/views/quotations/status.coffee',
+    'app/views/quotations/options.coffee',
+    'app/views/quotations/comment.coffee',
+    'app/views/quotations/no_effective.coffee',
+    'app/views/quotations/no_send.coffee',
+    'app/views/quotations/mail.coffee',
+    'app/views/quotations/times.coffee',
 
-    'app/views/quotations.coffee',
-    'app/views/quotation.coffee',
-    'app/views/products.coffee',
+
+    //products
+    'app/views/products/item_quotation.coffee',
+    'app/views/products/list_quotation.coffee',
+    'app/views/products/create_quotation.coffee',
+    'app/views/products/edit_quotation.coffee',
+
+    //services
     'app/views/services.coffee',
-    
+
+    //todos
     'app/views/todos.coffee',
+
+    //trackings
     'app/views/trackings.coffee',
+
+    //reports
     'app/views/reports.coffee',
     'app/views/app.coffee',
 

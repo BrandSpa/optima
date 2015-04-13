@@ -1,4 +1,5 @@
 $ ->
+  #app
   class optima.views.QuotationAppView extends Backbone.View
     el: $ '#quotation'
 
@@ -11,6 +12,7 @@ $ ->
       optima.contact.fetch()
       optima.quotationContact = new optima.views.QuotationContact model: optima.contact
 
+  #status    
   class optima.views.QuotationStatus extends Backbone.View
     el: $ '#quotation-options'
 
@@ -21,6 +23,7 @@ $ ->
       template = optima.templates.quotation_status
       $(@el).find('.panel-heading').html(template( @model.toJSON() ))    
 
+  #options
   class optima.views.QuotationOptions extends Backbone.View
     el: $ '#quotation-options'
 
@@ -155,7 +158,7 @@ $ ->
       else
         return true
 
-
+  #comment
   class optima.views.QuotationComment extends Backbone.View
     el: $ '#quotation-comment-modal'
     template: $ '#quotation-comment-template'
@@ -184,6 +187,7 @@ $ ->
       @broadcastChange "agrego un comentario"
       $(@el).modal('hide')
 
+  #no_effective
   class optima.views.QuotationNoEffective extends Backbone.View
     el: $ '#quotation-no-effective-modal'
     template: $ '#quotation-no-effective-template'
@@ -213,7 +217,8 @@ $ ->
       @model.save()
       $(@el).modal('hide')
       @broadcastChange "cambio estado a no efectiva"
-
+  
+  #no_send
   class optima.views.QuotationNoSend extends Backbone.View
     el: $ '#quotation-no-send-modal'
     template: $ '#quotation-no-send-template'
@@ -243,7 +248,8 @@ $ ->
       @model.save()
       $(@el).modal('hide')
       @broadcastChange "cambio estado a no enviada"
-
+  
+  #mail
   class optima.views.QuotationMail extends Backbone.View
     el: $ '#quotation-mail-modal'
     template: $ '#quotation-mail-template'
@@ -273,7 +279,8 @@ $ ->
       @model.save()
       $(@el).modal('hide')
       @broadcastChange "agrego email"
-
+  
+  #times
   class optima.views.QuotationTimes extends Backbone.View
     el: $ '#quotation-times'
     

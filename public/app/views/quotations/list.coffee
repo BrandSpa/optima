@@ -1,46 +1,4 @@
 $ ->
-
-  # item
-  class optima.views.QuotationView extends Backbone.View
-    tagName: 'tr'
-    events: 
-      'click .quotation-open-edit': 'openquotationEdit'
-      'click .quotation-open-contacts': 'openContacts'
-      'click .quotation-company-
-      lect': 'companySelect'
-      'click .quotation-contact-select': 'contactSelect'
-
-    render: ->
-      t = optima.templates.quotation
-      $(@el).html t(@model.toJSON())
-      @
-
-    openEdit: (e) ->
-      e.preventDefault()
-      edit = new optima.QuotationEdit model: @model
-      edit.render()
-
-    openContacts: (e) ->
-      e.preventDefault()
-      optima.quotationContacts.render(@model)
-
-    companySelect: (e)->
-      e.preventDefault()
-      company = @model.get('company')
-      $.post '/companies/session/'+company.id
-        .done ->
-          window.location.href = "/contacts/create"
-
-    contactSelect: (e)->
-      e.preventDefault()
-      company = @model.get('company')
-      contact = @model.get('contact')
-      $.post '/companies/session/'+company.id
-      $.post '/contacts/session/'+contact.id
-        .done ->
-          window.location.href = "/products/create"
-
-  # list
   class optima.views.QuotationsView extends Backbone.View
     el: $ '#quotations'
 
@@ -143,32 +101,3 @@ $ ->
       el = $(e.currentTarget)
       status = client_type: el.val()
       @filter(status)
-
-  # results
-  class optima.views.QuotationsResultsView extends Backbone.View
-    el: $ "#quotations-results"
-    template: $ "#quotations-results-template"
-
-    initialize: ->
-      @listenTo(@model, 'change', @render)
-
-    render: ->
-      source = @template.html()
-      template = Handlebars.compile(source)
-      $(@el).html template(@model.toJSON())
-      @
-      
-  # create
-  class optima.views.QuotationCreate extends Backbone.View
-    
-    initialize: ->
-      @listenTo(@model, 'sync', @stored)
-      pubsub.on('quotation:store', @store, @)
-
-    store: (data) ->
-      @model.save data
-
-    stored: (model) ->
-      pubsub.trigger('socket:notification', model)
-      socket.emit('quotations', model)
-      window.location = "/quotations/#{model.id}"
