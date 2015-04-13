@@ -114,7 +114,6 @@ gulp.task('coffee', function() {
     'app/views/quotations/mail.coffee',
     'app/views/quotations/times.coffee',
 
-
     //products
     'app/views/products/item_quotation.coffee',
     'app/views/products/list_quotation.coffee',
@@ -140,10 +139,21 @@ gulp.task('coffee', function() {
     'app/views/todos/mail.coffee',
 
     //trackings
-    'app/views/trackings.coffee',
+    'app/views/trackings/item.coffee',
+    'app/views/trackings/list.coffee',
+    'app/views/trackings/create.coffee',
+    'app/views/trackings/todo.coffee',
+    'app/views/trackings/todos.coffee',
 
     //reports
-    'app/views/reports.coffee',
+    'app/views/reports/filters.coffee',
+    'app/views/reports/by_status.coffee',
+    'app/views/reports/by_find_us.coffee',
+    'app/views/reports/by_advisor.coffee',
+    'app/views/reports/by_type.coffee',
+    'app/views/reports/by_no_effective.coffee',
+    'app/views/reports/by_diff_sent.coffee',
+
     'app/views/app.coffee',
 
     //App

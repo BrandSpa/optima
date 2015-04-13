@@ -1,4 +1,5 @@
 $ ->
+  # filters
   class optima.views.ReportsFilters extends Backbone.View
     el: $ "#reports-filters"
 
@@ -60,7 +61,8 @@ $ ->
       el = $(e.currentTarget).val()
       @filters = _.extend @filters, client_type: el
       @filter()
-
+  
+  # by_status
   class optima.views.ReportByStatus extends Backbone.View
     el: $ "#byStatus"
 
@@ -85,7 +87,7 @@ $ ->
       ctx = $("#byStatusCanvas").get(0).getContext("2d")
       view = new Chart(ctx).Bar data, responsive: true
   
-
+  #by_find_us
   class optima.views.ReportByFindUs extends Backbone.View
     el: $ "#byFindUs"
 
@@ -120,7 +122,7 @@ $ ->
       ctx = $("#byFindUsCanvas").get(0).getContext("2d")
       view = new Chart(ctx).Bar(data, {responsive: true})
 
-
+  # by_advisor
   class optima.views.ReportByAdvisor extends Backbone.View
     el: $ "#byAdvisors"
 
@@ -146,7 +148,8 @@ $ ->
       @$el.html('<canvas id="byAdvisorsCanvas" width="600" height="400"></canvas>')
       ctx = $("#byAdvisorsCanvas").get(0).getContext("2d")
       view = new Chart(ctx).Bar(data, {responsive: true})
-      
+  
+  # by_type    
   class optima.views.ReportByType extends Backbone.View
     el: $ "#byClientType"
 
@@ -174,7 +177,7 @@ $ ->
       ctx = $("#byClientTypeCanvas").get(0).getContext("2d")
       view = new Chart(ctx).Bar(data, {responsive: true})
 
-
+  # by_no_effective
   class optima.views.ReportByNoEffective extends Backbone.View
     el: $ "#byNoEffective"
 
@@ -204,6 +207,7 @@ $ ->
       ctx = $("#byNoEffectiveCanvas").get(0).getContext("2d")
       view = new Chart(ctx).Bar(data, {responsive: true})
 
+  # by_diff_sent
   class optima.views.ReportByDiffSent extends Backbone.View
     el: $ "#byDiffSent"
 

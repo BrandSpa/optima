@@ -1,5 +1,5 @@
 $ ->
-
+  #item
 	class optima.views.QuotationTracking extends Backbone.View
 		events: 
 			'click .tracking-open-edit': 'openEdit'
@@ -33,7 +33,7 @@ $ ->
 			users.fetch()
 				.done (users) ->
 					view.render(users, id)
-
+  #list
 	class optima.views.QuotationTrackings extends Backbone.View
 		el: $ "#trackings"
 
@@ -79,7 +79,7 @@ $ ->
 		noEffective: (e) ->
 			e.preventDefault()
 			pubsub.trigger('quotation:noEffective')
-		
+	#create
 	class optima.views.TrackingCreateView extends Backbone.View
 		el: $ '#tracking-create-modal'
 		template: $ '#tracking-create-template'
@@ -125,7 +125,7 @@ $ ->
 		cancel: (e) ->
 			e.preventDefault()
 			@closeModal()
-
+  #todos
 	class optima.views.TrackingTodos extends Backbone.View
 		
 		initialize: ->
@@ -137,7 +137,7 @@ $ ->
 				view = new optima.views.TrackingTodo model: model
 				@$el.find('.todos tbody').append view.render().el
 			, @
-
+  #todo
 	class optima.views.TrackingTodo extends Backbone.View
 		tagName: 'tr'
 

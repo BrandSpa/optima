@@ -2692,7 +2692,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.views.ServiceView = (function(superClass) {
+  return optima.views.ServiceView = (function(superClass) {
     extend(ServiceView, superClass);
 
     function ServiceView() {
@@ -2737,7 +2737,13 @@ $(function() {
     return ServiceView;
 
   })(Backbone.View);
-  optima.views.ServicesView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ServicesView = (function(superClass) {
     extend(ServicesView, superClass);
 
     function ServicesView() {
@@ -2815,7 +2821,13 @@ $(function() {
     return ServicesView;
 
   })(Backbone.View);
-  optima.views.ServiceCreate = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ServiceCreate = (function(superClass) {
     extend(ServiceCreate, superClass);
 
     function ServiceCreate() {
@@ -2864,7 +2876,13 @@ $(function() {
     return ServiceCreate;
 
   })(Backbone.View);
-  optima.views.ServiceEdit = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ServiceEdit = (function(superClass) {
     extend(ServiceEdit, superClass);
 
     function ServiceEdit() {
@@ -2918,7 +2936,13 @@ $(function() {
     return ServiceEdit;
 
   })(Backbone.View);
-  optima.views.QuotationServiceView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationServiceView = (function(superClass) {
     extend(QuotationServiceView, superClass);
 
     function QuotationServiceView() {
@@ -2980,7 +3004,13 @@ $(function() {
     return QuotationServiceView;
 
   })(Backbone.View);
-  optima.views.QuotationServicesView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationServicesView = (function(superClass) {
     extend(QuotationServicesView, superClass);
 
     function QuotationServicesView() {
@@ -3062,7 +3092,13 @@ $(function() {
     return QuotationServicesView;
 
   })(Backbone.View);
-  optima.views.QuotationServiceCreate = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationServiceCreate = (function(superClass) {
     extend(QuotationServiceCreate, superClass);
 
     function QuotationServiceCreate() {
@@ -3115,7 +3151,13 @@ $(function() {
     return QuotationServiceCreate;
 
   })(Backbone.View);
-  optima.views.ServiceResult = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ServiceResult = (function(superClass) {
     extend(ServiceResult, superClass);
 
     function ServiceResult() {
@@ -3156,7 +3198,13 @@ $(function() {
     return ServiceResult;
 
   })(Backbone.View);
-  optima.views.ServiceResults = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ServiceResults = (function(superClass) {
     extend(ServiceResults, superClass);
 
     function ServiceResults() {
@@ -3189,6 +3237,12 @@ $(function() {
     return ServiceResults;
 
   })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   return optima.views.QuotationServiceSelect = (function(superClass) {
     extend(QuotationServiceSelect, superClass);
 
@@ -3217,7 +3271,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.views.TodoView = (function(superClass) {
+  return optima.views.TodoView = (function(superClass) {
     extend(TodoView, superClass);
 
     function TodoView() {
@@ -3267,7 +3321,13 @@ $(function() {
     return TodoView;
 
   })(Backbone.View);
-  optima.views.TodosView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.TodosView = (function(superClass) {
     extend(TodosView, superClass);
 
     function TodosView() {
@@ -3334,7 +3394,13 @@ $(function() {
     return TodosView;
 
   })(Backbone.View);
-  optima.views.TodoCreateView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.TodoCreateView = (function(superClass) {
     extend(TodoCreateView, superClass);
 
     function TodoCreateView() {
@@ -3432,6 +3498,12 @@ $(function() {
     return TodoCreateView;
 
   })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   return optima.views.TodoMailNew = (function(superClass) {
     extend(TodoMailNew, superClass);
 
@@ -3467,7 +3539,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.views.QuotationTracking = (function(superClass) {
+  return optima.views.QuotationTracking = (function(superClass) {
     extend(QuotationTracking, superClass);
 
     function QuotationTracking() {
@@ -3527,7 +3599,13 @@ $(function() {
     return QuotationTracking;
 
   })(Backbone.View);
-  optima.views.QuotationTrackings = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationTrackings = (function(superClass) {
     extend(QuotationTrackings, superClass);
 
     function QuotationTrackings() {
@@ -3609,7 +3687,13 @@ $(function() {
     return QuotationTrackings;
 
   })(Backbone.View);
-  optima.views.TrackingCreateView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.TrackingCreateView = (function(superClass) {
     extend(TrackingCreateView, superClass);
 
     function TrackingCreateView() {
@@ -3692,7 +3776,38 @@ $(function() {
     return TrackingCreateView;
 
   })(Backbone.View);
-  optima.views.TrackingTodos = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.TrackingTodo = (function(superClass) {
+    extend(TrackingTodo, superClass);
+
+    function TrackingTodo() {
+      return TrackingTodo.__super__.constructor.apply(this, arguments);
+    }
+
+    TrackingTodo.prototype.tagName = 'tr';
+
+    TrackingTodo.prototype.render = function() {
+      var template;
+      template = optima.templates.todo_tracking;
+      this.$el.html(template(this.model.toJSON()));
+      return this;
+    };
+
+    return TrackingTodo;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.TrackingTodos = (function(superClass) {
     extend(TrackingTodos, superClass);
 
     function TrackingTodos() {
@@ -3715,25 +3830,6 @@ $(function() {
     };
 
     return TrackingTodos;
-
-  })(Backbone.View);
-  return optima.views.TrackingTodo = (function(superClass) {
-    extend(TrackingTodo, superClass);
-
-    function TrackingTodo() {
-      return TrackingTodo.__super__.constructor.apply(this, arguments);
-    }
-
-    TrackingTodo.prototype.tagName = 'tr';
-
-    TrackingTodo.prototype.render = function() {
-      var template;
-      template = optima.templates.todo_tracking;
-      this.$el.html(template(this.model.toJSON()));
-      return this;
-    };
-
-    return TrackingTodo;
 
   })(Backbone.View);
 });
