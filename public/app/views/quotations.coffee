@@ -1,10 +1,4 @@
 $ ->
-  class optima.models.Quotation extends Backbone.Model
-    urlRoot: '/api/v1/quotations'
-
-  class optima.collections.Quotations extends Backbone.Collection
-    model: optima.models.Quotation
-    url: '/api/v1/quotations'
 
   class optima.views.QuotationView extends Backbone.View
     tagName: 'tr'
@@ -55,7 +49,6 @@ $ ->
       'change .filter-status': 'filterByStatus'
       'change .filter-advisor': 'filterByAdvisor'
       'change .filter-client-type': 'filterByClientType'
-      
       
     initialize: ->
       @listenTo(@collection, 'reset', @render)
@@ -128,7 +121,6 @@ $ ->
       collection = new optima.collections.Quotations models
       @render(collection)
       @scrollToBottom()
-     
 
     scrollToBottom: ->
       container =  @$el.find('.table-responsive')

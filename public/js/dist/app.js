@@ -2,6 +2,134 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
+  optima.models.Activity = (function(superClass) {
+    extend(Activity, superClass);
+
+    function Activity() {
+      return Activity.__super__.constructor.apply(this, arguments);
+    }
+
+    Activity.prototype.urlRoot = '/api/v1/activities';
+
+    return Activity;
+
+  })(Backbone.Model);
+  return optima.collections.Activities = (function(superClass) {
+    extend(Activities, superClass);
+
+    function Activities() {
+      return Activities.__super__.constructor.apply(this, arguments);
+    }
+
+    Activities.prototype.url = '/api/v1/activities';
+
+    Activities.prototype.model = optima.models.Activity;
+
+    return Activities;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  optima.models.Company = (function(superClass) {
+    extend(Company, superClass);
+
+    function Company() {
+      return Company.__super__.constructor.apply(this, arguments);
+    }
+
+    Company.prototype.urlRoot = '/api/v1/companies';
+
+    return Company;
+
+  })(Backbone.Model);
+  return optima.collections.Companies = (function(superClass) {
+    extend(Companies, superClass);
+
+    function Companies() {
+      return Companies.__super__.constructor.apply(this, arguments);
+    }
+
+    Companies.prototype.model = optima.models.Company;
+
+    Companies.prototype.url = '/api/v1/companies';
+
+    return Companies;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  optima.models.Contact = (function(superClass) {
+    extend(Contact, superClass);
+
+    function Contact() {
+      return Contact.__super__.constructor.apply(this, arguments);
+    }
+
+    Contact.prototype.urlRoot = '/api/v1/contacts';
+
+    return Contact;
+
+  })(Backbone.Model);
+  return optima.collections.Contacts = (function(superClass) {
+    extend(Contacts, superClass);
+
+    function Contacts() {
+      return Contacts.__super__.constructor.apply(this, arguments);
+    }
+
+    Contacts.prototype.model = optima.models.Contact;
+
+    Contacts.prototype.url = '/api/v1/contacts';
+
+    return Contacts;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  optima.models.Quotation = (function(superClass) {
+    extend(Quotation, superClass);
+
+    function Quotation() {
+      return Quotation.__super__.constructor.apply(this, arguments);
+    }
+
+    Quotation.prototype.urlRoot = '/api/v1/quotations';
+
+    return Quotation;
+
+  })(Backbone.Model);
+  return optima.collections.Quotations = (function(superClass) {
+    extend(Quotations, superClass);
+
+    function Quotations() {
+      return Quotations.__super__.constructor.apply(this, arguments);
+    }
+
+    Quotations.prototype.model = optima.models.Quotation;
+
+    Quotations.prototype.url = '/api/v1/quotations';
+
+    return Quotations;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   optima.models.User = (function(superClass) {
     extend(User, superClass);
 
@@ -34,32 +162,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Activity = (function(superClass) {
-    extend(Activity, superClass);
-
-    function Activity() {
-      return Activity.__super__.constructor.apply(this, arguments);
-    }
-
-    Activity.prototype.urlRoot = '/api/v1/activities';
-
-    return Activity;
-
-  })(Backbone.Model);
-  optima.collections.Activities = (function(superClass) {
-    extend(Activities, superClass);
-
-    function Activities() {
-      return Activities.__super__.constructor.apply(this, arguments);
-    }
-
-    Activities.prototype.url = '/api/v1/activities';
-
-    Activities.prototype.model = optima.models.Activity;
-
-    return Activities;
-
-  })(Backbone.Collection);
   optima.views.ActivityView = (function(superClass) {
     extend(ActivityView, superClass);
 
@@ -241,32 +343,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Company = (function(superClass) {
-    extend(Company, superClass);
-
-    function Company() {
-      return Company.__super__.constructor.apply(this, arguments);
-    }
-
-    Company.prototype.urlRoot = '/api/v1/companies';
-
-    return Company;
-
-  })(Backbone.Model);
-  optima.collections.Companies = (function(superClass) {
-    extend(Companies, superClass);
-
-    function Companies() {
-      return Companies.__super__.constructor.apply(this, arguments);
-    }
-
-    Companies.prototype.model = optima.models.Company;
-
-    Companies.prototype.url = '/api/v1/companies';
-
-    return Companies;
-
-  })(Backbone.Collection);
   optima.views.CompanyView = (function(superClass) {
     extend(CompanyView, superClass);
 
@@ -679,32 +755,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Quotation = (function(superClass) {
-    extend(Quotation, superClass);
-
-    function Quotation() {
-      return Quotation.__super__.constructor.apply(this, arguments);
-    }
-
-    Quotation.prototype.urlRoot = '/api/v1/quotations';
-
-    return Quotation;
-
-  })(Backbone.Model);
-  optima.collections.Quotations = (function(superClass) {
-    extend(Quotations, superClass);
-
-    function Quotations() {
-      return Quotations.__super__.constructor.apply(this, arguments);
-    }
-
-    Quotations.prototype.model = optima.models.Quotation;
-
-    Quotations.prototype.url = '/api/v1/quotations';
-
-    return Quotations;
-
-  })(Backbone.Collection);
   optima.views.QuotationView = (function(superClass) {
     extend(QuotationView, superClass);
 
@@ -1489,32 +1539,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.QuotationProduct = (function(superClass) {
-    extend(QuotationProduct, superClass);
-
-    function QuotationProduct() {
-      return QuotationProduct.__super__.constructor.apply(this, arguments);
-    }
-
-    QuotationProduct.prototype.urlRoot = '/api/v1/products';
-
-    return QuotationProduct;
-
-  })(Backbone.Model);
-  optima.collections.QuotationProducts = (function(superClass) {
-    extend(QuotationProducts, superClass);
-
-    function QuotationProducts() {
-      return QuotationProducts.__super__.constructor.apply(this, arguments);
-    }
-
-    QuotationProducts.prototype.model = optima.models.QuotationProduct;
-
-    QuotationProducts.prototype.url = '/api/v1/products';
-
-    return QuotationProducts;
-
-  })(Backbone.Collection);
   optima.views.QuotationProductView = (function(superClass) {
     extend(QuotationProductView, superClass);
 
@@ -1834,32 +1858,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Service = (function(superClass) {
-    extend(Service, superClass);
-
-    function Service() {
-      return Service.__super__.constructor.apply(this, arguments);
-    }
-
-    Service.prototype.urlRoot = '/api/v1/services';
-
-    return Service;
-
-  })(Backbone.Model);
-  optima.collections.Services = (function(superClass) {
-    extend(Services, superClass);
-
-    function Services() {
-      return Services.__super__.constructor.apply(this, arguments);
-    }
-
-    Services.prototype.url = '/api/v1/services';
-
-    Services.prototype.model = optima.models.Service;
-
-    return Services;
-
-  })(Backbone.Collection);
   optima.views.ServiceView = (function(superClass) {
     extend(ServiceView, superClass);
 
@@ -2385,32 +2383,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Contact = (function(superClass) {
-    extend(Contact, superClass);
-
-    function Contact() {
-      return Contact.__super__.constructor.apply(this, arguments);
-    }
-
-    Contact.prototype.urlRoot = '/api/v1/contacts';
-
-    return Contact;
-
-  })(Backbone.Model);
-  optima.collections.Contacts = (function(superClass) {
-    extend(Contacts, superClass);
-
-    function Contacts() {
-      return Contacts.__super__.constructor.apply(this, arguments);
-    }
-
-    Contacts.prototype.model = optima.models.Contact;
-
-    Contacts.prototype.url = '/api/v1/contacts';
-
-    return Contacts;
-
-  })(Backbone.Collection);
   optima.views.ContactView = (function(superClass) {
     extend(ContactView, superClass);
 
@@ -2900,32 +2872,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Todo = (function(superClass) {
-    extend(Todo, superClass);
-
-    function Todo() {
-      return Todo.__super__.constructor.apply(this, arguments);
-    }
-
-    Todo.prototype.urlRoot = '/api/v1/todos';
-
-    return Todo;
-
-  })(Backbone.Model);
-  optima.collections.Todos = (function(superClass) {
-    extend(Todos, superClass);
-
-    function Todos() {
-      return Todos.__super__.constructor.apply(this, arguments);
-    }
-
-    Todos.prototype.url = '/api/v1/todos';
-
-    Todos.prototype.model = optima.models.Todo;
-
-    return Todos;
-
-  })(Backbone.Collection);
   optima.views.TodoView = (function(superClass) {
     extend(TodoView, superClass);
 
@@ -3186,32 +3132,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Tracking = (function(superClass) {
-    extend(Tracking, superClass);
-
-    function Tracking() {
-      return Tracking.__super__.constructor.apply(this, arguments);
-    }
-
-    Tracking.prototype.urlRoot = '/api/v1/trackings';
-
-    return Tracking;
-
-  })(Backbone.Model);
-  optima.collections.Trackings = (function(superClass) {
-    extend(Trackings, superClass);
-
-    function Trackings() {
-      return Trackings.__super__.constructor.apply(this, arguments);
-    }
-
-    Trackings.prototype.url = '/api/v1/trackings';
-
-    Trackings.prototype.model = optima.models.Tracking;
-
-    return Trackings;
-
-  })(Backbone.Collection);
   optima.views.QuotationTracking = (function(superClass) {
     extend(QuotationTracking, superClass);
 
@@ -3487,32 +3407,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.models.Report = (function(superClass) {
-    extend(Report, superClass);
-
-    function Report() {
-      return Report.__super__.constructor.apply(this, arguments);
-    }
-
-    Report.prototype.urlRoot = '/api/v1/reports';
-
-    return Report;
-
-  })(Backbone.Model);
-  optima.collections.Resports = (function(superClass) {
-    extend(Resports, superClass);
-
-    function Resports() {
-      return Resports.__super__.constructor.apply(this, arguments);
-    }
-
-    Resports.prototype.model = optima.models.Report;
-
-    Resports.prototype.url = '/api/v1/reports';
-
-    return Resports;
-
-  })(Backbone.Collection);
   optima.views.ReportsFilters = (function(superClass) {
     extend(ReportsFilters, superClass);
 

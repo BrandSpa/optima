@@ -59,6 +59,17 @@ gulp.task('dependencies', function(){
 
 gulp.task('coffee', function() {
   gulp.src([
+    //Models
+    'app/models/activity.coffee',
+    'app/models/company.coffee',
+    'app/models/contact.coffee',
+    'app/models/quotation.coffee',
+    'app/models/report.coffee',
+    'app/models/service.coffee',
+    'app/models/todo.coffee',
+    'app/models/tracking.coffee',
+    
+    //Views
     'app/views/users.coffee',
     'app/views/activities.coffee',
     'app/views/companies.coffee',
@@ -71,6 +82,8 @@ gulp.task('coffee', function() {
     'app/views/trackings.coffee',
     'app/views/reports.coffee',
     'app/views/app.coffee',
+
+    //App
     'app/router.coffee'
     ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
