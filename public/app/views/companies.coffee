@@ -185,7 +185,6 @@ $ ->
     cancel: (e) ->
       e.preventDefault()
       @closeModal()
-
   
   class optima.views.CompanyResult extends Backbone.View
     template: $ '#company-result-template'
@@ -205,7 +204,6 @@ $ ->
       optima.companyQuoteCreate.closeModal()
       view = new optima.views.ContactQuoteCreate model: new optima.models.Contact
       view.render(id)
-      
 
   class optima.views.CompanyResults extends Backbone.View
     el: $ '#company-quote-create-modal'

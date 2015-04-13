@@ -1,5 +1,5 @@
 $ ->
-
+  # item
   class optima.views.ContactView extends Backbone.View
     tagName: 'tr'
     template: $ '#contact-template'
@@ -21,6 +21,7 @@ $ ->
       edit = new optima.views.ContactEdit model: @model
       edit.render()
 
+  # list
   class optima.views.ContactsView extends Backbone.View
     el: $ '#contacts'
     events:
@@ -56,6 +57,7 @@ $ ->
       query = $('.contact-query').val()
       @collection.fetch data: query: query
 
+  # create_quotation 
   class optima.views.ContactQuoteCreate extends Backbone.View
     el: $ '#contact-quote-create-modal'
     template: $ '#contact-quote-create-template'
@@ -86,8 +88,6 @@ $ ->
       company_id = @model.get('company_id')
       pubsub.trigger('quotation:store', company_id: company_id, contact_id: id)
        
-        
-
     close: ->
       @remove()
       $('.modal-backdrop').remove()
@@ -104,6 +104,7 @@ $ ->
       view = new optima.views.QuoteCompanyContacts collection: collection
       view.render()
 
+  # create 
   class optima.views.ContactCreate extends Backbone.View
     el: $ '#contact-create-modal'
     template: $ '#contact-create-template'
@@ -137,7 +138,8 @@ $ ->
       e.preventDefault()
       @closeModal()
 
-   class optima.views.ContactEdit extends Backbone.View
+  #edit
+  class optima.views.ContactEdit extends Backbone.View
     el: $ '#contact-edit-modal'
     template: $ '#contact-edit-template'
     events:
@@ -166,6 +168,7 @@ $ ->
       e.preventDefault()
       @closeModal()
 
+  # item_company
   class optima.views.QuoteCompanyContact extends Backbone.View
     template: $ '#company-contact-template'
     tagName: 'tr'
@@ -184,7 +187,7 @@ $ ->
       company_id = @model.get('company_id')
       pubsub.trigger('quotation:store', company_id: company_id, contact_id: id)
 
-
+  # list_company
   class optima.views.QuoteCompanyContacts extends Backbone.View
     el: $ '#contact-quote-create-modal'
     initialize: ->
@@ -196,6 +199,7 @@ $ ->
         view = new optima.views.QuoteCompanyContact model: model
         $(el).find('table').append view.render().el
 
+  # item_quotation
   class optima.views.QuotationContact extends Backbone.View
     el: $ '#quotation-contact'
 
@@ -232,7 +236,7 @@ $ ->
       company_id = @model.get('company_id')
       view.render(company_id)
 
-
+  #list_quotation
   class optima.views.QuotationCompanyContacts extends Backbone.View
     el: $ "#quotation-company-contacts-modal"
     template: $ '#quotation-company-contact-template'

@@ -63,28 +63,58 @@ gulp.task('coffee', function() {
     'app/models/activity.coffee',
     'app/models/company.coffee',
     'app/models/contact.coffee',
+    'app/models/product.coffee',
     'app/models/quotation.coffee',
     'app/models/report.coffee',
     'app/models/service.coffee',
     'app/models/todo.coffee',
     'app/models/tracking.coffee',
+    'app/views/users.coffee',
     
     //Views
-    'app/views/users.coffee',
-    'app/views/activities.coffee',
-    'app/views/companies.coffee',
+
+    //activities    
+    'app/views/activities/item.coffee',
+    'app/views/activities/list.coffee',
+    'app/views/activities/item_quotation.coffee',
+    'app/views/activities/list_quotation.coffee',
+
+    //companies
+    'app/views/companies/item.coffee',
+    'app/views/companies/list.coffee',
+    'app/views/companies/create.coffee',
+    'app/views/companies/edit.coffee',
+    'app/views/companies/contacts.coffee',
+    'app/views/companies/create_quotation.coffee',
+    'app/views/companies/item_result.coffee',
+    'app/views/companies/list_results.coffee',
+
+    //contacts
+    'app/views/contacts/item.coffee',
+    'app/views/contacts/list.coffee',
+    'app/views/contacts/create_quotation.coffee',
+    'app/views/contacts/create.coffee',
+    'app/views/contacts/edit.coffee',
+    'app/views/contacts/item_company.coffee',
+    'app/views/contacts/list_company.coffee',
+    'app/views/contacts/item_quotation.coffee',
+    'app/views/contacts/list_quotation.coffee',
+
+
     'app/views/quotations.coffee',
     'app/views/quotation.coffee',
     'app/views/products.coffee',
     'app/views/services.coffee',
-    'app/views/contacts.coffee',
+    
     'app/views/todos.coffee',
     'app/views/trackings.coffee',
     'app/views/reports.coffee',
     'app/views/app.coffee',
 
     //App
-    'app/router.coffee'
+    'app/router.coffee',
+    'app/libs/handlebars_partials.coffee'
+
     ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(concat('app.js'))
@@ -101,7 +131,11 @@ gulp.task('sass', function() {
 
 //compile templates
 gulp.task('templates', function () {
-  gulp.src(['app/templates/*.hbs', 'app/templates/*/*.hbs'])
+  gulp.src([
+    'app/templates/*.hbs', 
+    'app/templates/*/*.hbs',
+    'app/templates/*/*/*.hbs'
+  ])
   .pipe(handlebars())
   .pipe(wrap('Handlebars.template(<%= contents %>)'))
   .pipe(declare({
@@ -114,8 +148,16 @@ gulp.task('templates', function () {
 
 gulp.task('watch', ['sass', 'coffee'], function(){
   gulp.watch('sass/*.sass', ['sass']);
-  gulp.watch(['app/*.coffee', 'app/*/*.coffee'], ['coffee']);
-  gulp.watch(['app/templates/*.hbs', 'app/templates/*/*.hbs'], ['templates']);
+  gulp.watch([
+    'app/*.coffee', 
+    'app/*/*.coffee',
+    'app/**/**/*.coffee'
+    ], ['coffee']);
+  gulp.watch([
+    'app/templates/*.hbs', 
+    'app/templates/*/*.hbs',
+    'app/templates/*/*/*.hbs',
+    ], ['templates']);
 });
 
 gulp.task('default', ['dependencies', 'watch']);

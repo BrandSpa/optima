@@ -8,6 +8,8 @@ use Input;
 
 class ContactsController extends \BaseController {
 
+	
+
 	public function index()
 	{
 		$company = Input::get('company_id');

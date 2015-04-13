@@ -98,6 +98,38 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
+  optima.models.QuotationProduct = (function(superClass) {
+    extend(QuotationProduct, superClass);
+
+    function QuotationProduct() {
+      return QuotationProduct.__super__.constructor.apply(this, arguments);
+    }
+
+    QuotationProduct.prototype.urlRoot = '/api/v1/products';
+
+    return QuotationProduct;
+
+  })(Backbone.Model);
+  return optima.collections.QuotationProducts = (function(superClass) {
+    extend(QuotationProducts, superClass);
+
+    function QuotationProducts() {
+      return QuotationProducts.__super__.constructor.apply(this, arguments);
+    }
+
+    QuotationProducts.prototype.model = optima.models.QuotationProduct;
+
+    QuotationProducts.prototype.url = '/api/v1/products';
+
+    return QuotationProducts;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   optima.models.Quotation = (function(superClass) {
     extend(Quotation, superClass);
 
@@ -122,6 +154,134 @@ $(function() {
     Quotations.prototype.url = '/api/v1/quotations';
 
     return Quotations;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  optima.models.Report = (function(superClass) {
+    extend(Report, superClass);
+
+    function Report() {
+      return Report.__super__.constructor.apply(this, arguments);
+    }
+
+    Report.prototype.urlRoot = '/api/v1/reports';
+
+    return Report;
+
+  })(Backbone.Model);
+  return optima.collections.Resports = (function(superClass) {
+    extend(Resports, superClass);
+
+    function Resports() {
+      return Resports.__super__.constructor.apply(this, arguments);
+    }
+
+    Resports.prototype.model = optima.models.Report;
+
+    Resports.prototype.url = '/api/v1/reports';
+
+    return Resports;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  optima.models.Service = (function(superClass) {
+    extend(Service, superClass);
+
+    function Service() {
+      return Service.__super__.constructor.apply(this, arguments);
+    }
+
+    Service.prototype.urlRoot = '/api/v1/services';
+
+    return Service;
+
+  })(Backbone.Model);
+  return optima.collections.Services = (function(superClass) {
+    extend(Services, superClass);
+
+    function Services() {
+      return Services.__super__.constructor.apply(this, arguments);
+    }
+
+    Services.prototype.url = '/api/v1/services';
+
+    Services.prototype.model = optima.models.Service;
+
+    return Services;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  optima.models.Todo = (function(superClass) {
+    extend(Todo, superClass);
+
+    function Todo() {
+      return Todo.__super__.constructor.apply(this, arguments);
+    }
+
+    Todo.prototype.urlRoot = '/api/v1/todos';
+
+    return Todo;
+
+  })(Backbone.Model);
+  return optima.collections.Todos = (function(superClass) {
+    extend(Todos, superClass);
+
+    function Todos() {
+      return Todos.__super__.constructor.apply(this, arguments);
+    }
+
+    Todos.prototype.url = '/api/v1/todos';
+
+    Todos.prototype.model = optima.models.Todo;
+
+    return Todos;
+
+  })(Backbone.Collection);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  optima.models.Tracking = (function(superClass) {
+    extend(Tracking, superClass);
+
+    function Tracking() {
+      return Tracking.__super__.constructor.apply(this, arguments);
+    }
+
+    Tracking.prototype.urlRoot = '/api/v1/trackings';
+
+    return Tracking;
+
+  })(Backbone.Model);
+  return optima.collections.Trackings = (function(superClass) {
+    extend(Trackings, superClass);
+
+    function Trackings() {
+      return Trackings.__super__.constructor.apply(this, arguments);
+    }
+
+    Trackings.prototype.url = '/api/v1/trackings';
+
+    Trackings.prototype.model = optima.models.Tracking;
+
+    return Trackings;
 
   })(Backbone.Collection);
 });
@@ -162,7 +322,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.views.ActivityView = (function(superClass) {
+  return optima.views.ActivityView = (function(superClass) {
     extend(ActivityView, superClass);
 
     function ActivityView() {
@@ -187,7 +347,13 @@ $(function() {
     return ActivityView;
 
   })(Backbone.View);
-  optima.views.ActivitiesView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ActivitiesView = (function(superClass) {
     extend(ActivitiesView, superClass);
 
     function ActivitiesView() {
@@ -262,7 +428,13 @@ $(function() {
     return ActivitiesView;
 
   })(Backbone.View);
-  optima.views.QuotationActivityView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationActivityView = (function(superClass) {
     extend(QuotationActivityView, superClass);
 
     function QuotationActivityView() {
@@ -282,6 +454,12 @@ $(function() {
     return QuotationActivityView;
 
   })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   return optima.views.QuotationActivitiesView = (function(superClass) {
     extend(QuotationActivitiesView, superClass);
 
@@ -332,8 +510,6 @@ $(function() {
       }, this);
     };
 
-    QuotationActivitiesView.prototype.store = function() {};
-
     return QuotationActivitiesView;
 
   })(Backbone.View);
@@ -343,7 +519,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.views.CompanyView = (function(superClass) {
+  return optima.views.CompanyView = (function(superClass) {
     extend(CompanyView, superClass);
 
     function CompanyView() {
@@ -398,7 +574,13 @@ $(function() {
     return CompanyView;
 
   })(Backbone.View);
-  optima.views.CompaniesView = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.CompaniesView = (function(superClass) {
     extend(CompaniesView, superClass);
 
     function CompaniesView() {
@@ -476,7 +658,13 @@ $(function() {
     return CompaniesView;
 
   })(Backbone.View);
-  optima.views.CompanyCreate = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.CompanyCreate = (function(superClass) {
     extend(CompanyCreate, superClass);
 
     function CompanyCreate() {
@@ -498,6 +686,7 @@ $(function() {
     CompanyCreate.prototype.render = function() {
       var template;
       template = optima.templates.company_create;
+      $(this.el).find('.modal-content').html(template(this.model.toJSON()));
       $(this.el).find('.modal-content').html(template(this.model.toJSON()));
       return $(this.el).modal({
         backdrop: 'static'
@@ -530,7 +719,13 @@ $(function() {
     return CompanyCreate;
 
   })(Backbone.View);
-  optima.views.CompanyEdit = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.CompanyEdit = (function(superClass) {
     extend(CompanyEdit, superClass);
 
     function CompanyEdit() {
@@ -545,7 +740,8 @@ $(function() {
     };
 
     CompanyEdit.prototype.initialize = function() {
-      return this.listenTo(this.model, 'sync', this.synced);
+      this.listenTo(this.model, 'sync', this.synced);
+      return this.listenTo(this.model, 'error', this.showErrors);
     };
 
     CompanyEdit.prototype.render = function() {
@@ -581,7 +777,13 @@ $(function() {
     return CompanyEdit;
 
   })(Backbone.View);
-  optima.views.CompanyContacts = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.CompanyContacts = (function(superClass) {
     extend(CompanyContacts, superClass);
 
     function CompanyContacts() {
@@ -589,8 +791,6 @@ $(function() {
     }
 
     CompanyContacts.prototype.el = $('#company-contacts-modal');
-
-    CompanyContacts.prototype.template = $('#company-contacts-template');
 
     CompanyContacts.prototype.render = function(model) {
       var template;
@@ -602,7 +802,13 @@ $(function() {
     return CompanyContacts;
 
   })(Backbone.View);
-  optima.views.CompanyQuoteCreate = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.CompanyQuoteCreate = (function(superClass) {
     extend(CompanyQuoteCreate, superClass);
 
     function CompanyQuoteCreate() {
@@ -679,7 +885,13 @@ $(function() {
     return CompanyQuoteCreate;
 
   })(Backbone.View);
-  optima.views.CompanyResult = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.CompanyResult = (function(superClass) {
     extend(CompanyResult, superClass);
 
     function CompanyResult() {
@@ -716,6 +928,12 @@ $(function() {
     return CompanyResult;
 
   })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   return optima.views.CompanyResults = (function(superClass) {
     extend(CompanyResults, superClass);
 
@@ -747,6 +965,544 @@ $(function() {
     };
 
     return CompanyResults;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ContactView = (function(superClass) {
+    extend(ContactView, superClass);
+
+    function ContactView() {
+      return ContactView.__super__.constructor.apply(this, arguments);
+    }
+
+    ContactView.prototype.tagName = 'tr';
+
+    ContactView.prototype.template = $('#contact-template');
+
+    ContactView.prototype.events = {
+      'click .contact-open-edit': 'openEdit'
+    };
+
+    ContactView.prototype.initialize = function() {
+      this.render();
+      this.listenTo(this.model, 'change', this.render);
+      return this.listenTo(this.model, 'error', this.showErrors);
+    };
+
+    ContactView.prototype.render = function() {
+      var template;
+      template = optima.templates.contact;
+      $(this.el).html(template(this.model.toJSON()));
+      return this;
+    };
+
+    ContactView.prototype.openEdit = function(e) {
+      var edit;
+      e.preventDefault();
+      edit = new optima.views.ContactEdit({
+        model: this.model
+      });
+      return edit.render();
+    };
+
+    return ContactView;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ContactsView = (function(superClass) {
+    extend(ContactsView, superClass);
+
+    function ContactsView() {
+      return ContactsView.__super__.constructor.apply(this, arguments);
+    }
+
+    ContactsView.prototype.el = $('#contacts');
+
+    ContactsView.prototype.events = {
+      'click .contact-see-more': 'seeMore',
+      'submit .contact-search': 'search'
+    };
+
+    ContactsView.prototype.initialize = function() {
+      this.listenTo(this.collection, 'reset', this.render);
+      return this.listenTo(this.collection, 'add', this.addOne, this);
+    };
+
+    ContactsView.prototype.addOne = function(model) {
+      var view;
+      view = new optima.views.ContactView({
+        model: model
+      });
+      return $(this.el).find('table .thead').after(view.render().el);
+    };
+
+    ContactsView.prototype.render = function() {
+      return this.collection.each(function(model) {
+        var view;
+        view = new optima.views.ContactView({
+          model: model
+        });
+        $(this.el).find('table').append(view.render().el);
+        return $(this.el).find('.table-responsive').slimScroll({
+          height: '400px'
+        });
+      }, this);
+    };
+
+    ContactsView.prototype.seeMore = function(e) {
+      var el, more, offset;
+      e.preventDefault();
+      el = e.currentTarget;
+      offset = $(el).data('offset');
+      more = offset + 10;
+      this.collection.fetch({
+        data: {
+          offset: more
+        }
+      });
+      return $(el).data('offset', more);
+    };
+
+    ContactsView.prototype.search = function(e) {
+      var query;
+      e.preventDefault();
+      query = $('.contact-query').val();
+      return this.collection.fetch({
+        data: {
+          query: query
+        }
+      });
+    };
+
+    return ContactsView;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ContactQuoteCreate = (function(superClass) {
+    extend(ContactQuoteCreate, superClass);
+
+    function ContactQuoteCreate() {
+      return ContactQuoteCreate.__super__.constructor.apply(this, arguments);
+    }
+
+    ContactQuoteCreate.prototype.el = $('#contact-quote-create-modal');
+
+    ContactQuoteCreate.prototype.template = $('#contact-quote-create-template');
+
+    ContactQuoteCreate.prototype.events = {
+      'click a.contact-create-store': 'store',
+      'click a.contacts-see': 'CompanyContacts',
+      'click .modal-close': 'cancel'
+    };
+
+    ContactQuoteCreate.prototype.initialize = function() {
+      this.listenTo(this.model, 'sync', this.added);
+      return this.listenTo(this.model, 'error', this.showErrors);
+    };
+
+    ContactQuoteCreate.prototype.render = function(company_id) {
+      var company, source, template;
+      source = $(this.template).html();
+      template = Handlebars.compile(source);
+      company = {
+        company_id: company_id
+      };
+      $(this.el).find('.modal-content').html(template(company));
+      return $(this.el).modal({
+        backdrop: 'static'
+      });
+    };
+
+    ContactQuoteCreate.prototype.store = function(e) {
+      var dataForm;
+      e.preventDefault();
+      dataForm = $('#contact-create-form').serializeJSON();
+      return this.model.save(dataForm, {
+        wait: true
+      });
+    };
+
+    ContactQuoteCreate.prototype.added = function() {
+      var company_id, id;
+      id = this.model.get('id');
+      company_id = this.model.get('company_id');
+      return pubsub.trigger('quotation:store', {
+        company_id: company_id,
+        contact_id: id
+      });
+    };
+
+    ContactQuoteCreate.prototype.close = function() {
+      this.remove();
+      return $('.modal-backdrop').remove();
+    };
+
+    ContactQuoteCreate.prototype.cancel = function(e) {
+      e.preventDefault();
+      return this.close();
+    };
+
+    ContactQuoteCreate.prototype.CompanyContacts = function(e) {
+      var collection, company_id, view;
+      e.preventDefault();
+      company_id = $('#contact-create-form').find("input[name='company_id']").val();
+      collection = new optima.collections.Contacts;
+      collection.fetch({
+        reset: true,
+        data: {
+          company_id: company_id
+        }
+      });
+      view = new optima.views.QuoteCompanyContacts({
+        collection: collection
+      });
+      return view.render();
+    };
+
+    return ContactQuoteCreate;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ContactCreate = (function(superClass) {
+    extend(ContactCreate, superClass);
+
+    function ContactCreate() {
+      return ContactCreate.__super__.constructor.apply(this, arguments);
+    }
+
+    ContactCreate.prototype.el = $('#contact-create-modal');
+
+    ContactCreate.prototype.template = $('#contact-create-template');
+
+    ContactCreate.prototype.events = {
+      'click a.contact-create-store': 'store',
+      'click a.contacts-see': 'CompanyContacts',
+      'click .modal-close': 'cancel'
+    };
+
+    ContactCreate.prototype.initialize = function() {
+      this.listenTo(this.model, 'sync', this.added);
+      return this.listenTo(this.model, 'error', this.showErrors);
+    };
+
+    ContactCreate.prototype.render = function(company_id) {
+      var company, template;
+      template = optima.templates.contact_create;
+      company = {
+        company_id: company_id
+      };
+      $(this.el).find('.modal-content').html(template(company));
+      $(this.el).modal({
+        backdrop: 'static'
+      });
+      return console.log(this);
+    };
+
+    ContactCreate.prototype.store = function(e) {
+      var dataForm;
+      e.preventDefault();
+      dataForm = $('#contact-create-form').serializeJSON();
+      return this.model.save(dataForm, {
+        wait: true
+      });
+    };
+
+    ContactCreate.prototype.added = function() {
+      var id;
+      id = this.model.get('id');
+      if (id) {
+        return this.closeModal();
+      }
+    };
+
+    ContactCreate.prototype.cancel = function(e) {
+      e.preventDefault();
+      return this.closeModal();
+    };
+
+    return ContactCreate;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ContactEdit = (function(superClass) {
+    extend(ContactEdit, superClass);
+
+    function ContactEdit() {
+      return ContactEdit.__super__.constructor.apply(this, arguments);
+    }
+
+    ContactEdit.prototype.el = $('#contact-edit-modal');
+
+    ContactEdit.prototype.template = $('#contact-edit-template');
+
+    ContactEdit.prototype.events = {
+      'click .contact-save-update': 'update',
+      'click .modal-close': 'cancel'
+    };
+
+    ContactEdit.prototype.initialize = function() {
+      this.listenTo(this.model, 'sync', this.synced);
+      return this.listenTo(this.model, 'error', this.showErrors);
+    };
+
+    ContactEdit.prototype.render = function() {
+      var template;
+      template = optima.templates.contact_edit;
+      $(this.el).find('.modal-content').html(template(this.model.toJSON()));
+      return $(this.el).modal({
+        backdrop: 'static'
+      });
+    };
+
+    ContactEdit.prototype.update = function(e) {
+      var dataForm, el;
+      e.preventDefault();
+      el = $(this.el);
+      dataForm = el.find('form').serializeJSON();
+      return this.model.save(dataForm, {
+        wait: true
+      });
+    };
+
+    ContactEdit.prototype.synced = function(model) {
+      if (model.id) {
+        return this.closeModal();
+      }
+    };
+
+    ContactEdit.prototype.cancel = function(e) {
+      e.preventDefault();
+      return this.closeModal();
+    };
+
+    return ContactEdit;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuoteCompanyContact = (function(superClass) {
+    extend(QuoteCompanyContact, superClass);
+
+    function QuoteCompanyContact() {
+      return QuoteCompanyContact.__super__.constructor.apply(this, arguments);
+    }
+
+    QuoteCompanyContact.prototype.template = $('#company-contact-template');
+
+    QuoteCompanyContact.prototype.tagName = 'tr';
+
+    QuoteCompanyContact.prototype.events = {
+      'click a.contact-quote': 'quote'
+    };
+
+    QuoteCompanyContact.prototype.render = function() {
+      var source, template;
+      source = $(this.template).html();
+      template = Handlebars.compile(source);
+      $(this.el).html(template(this.model.toJSON()));
+      return this;
+    };
+
+    QuoteCompanyContact.prototype.quote = function(e) {
+      var company_id, id;
+      e.preventDefault();
+      id = this.model.get('id');
+      company_id = this.model.get('company_id');
+      return pubsub.trigger('quotation:store', {
+        company_id: company_id,
+        contact_id: id
+      });
+    };
+
+    return QuoteCompanyContact;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuoteCompanyContacts = (function(superClass) {
+    extend(QuoteCompanyContacts, superClass);
+
+    function QuoteCompanyContacts() {
+      return QuoteCompanyContacts.__super__.constructor.apply(this, arguments);
+    }
+
+    QuoteCompanyContacts.prototype.el = $('#contact-quote-create-modal');
+
+    QuoteCompanyContacts.prototype.initialize = function() {
+      return this.listenTo(this.collection, 'reset', this.render);
+    };
+
+    QuoteCompanyContacts.prototype.render = function() {
+      var el;
+      el = $(this.el);
+      return this.collection.each(function(model) {
+        var view;
+        view = new optima.views.QuoteCompanyContact({
+          model: model
+        });
+        return $(el).find('table').append(view.render().el);
+      });
+    };
+
+    return QuoteCompanyContacts;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationContact = (function(superClass) {
+    extend(QuotationContact, superClass);
+
+    function QuotationContact() {
+      return QuotationContact.__super__.constructor.apply(this, arguments);
+    }
+
+    QuotationContact.prototype.el = $('#quotation-contact');
+
+    QuotationContact.prototype.template = $('#quotation-contact-template');
+
+    QuotationContact.prototype.events = {
+      'click a.quotation-contact-change': 'openChange',
+      'click a.quotation-contact-create': 'openCreate',
+      'click a.edit': 'openEdit'
+    };
+
+    QuotationContact.prototype.initialize = function() {
+      return this.listenTo(this.model, 'change', this.render);
+    };
+
+    QuotationContact.prototype.render = function() {
+      var template;
+      template = optima.templates.quotation_contact;
+      $(this.el).find('.table-responsive').html(template(this.model.toJSON()));
+      return this;
+    };
+
+    QuotationContact.prototype.openEdit = function(e) {
+      var edit;
+      e.preventDefault();
+      edit = new optima.views.ContactEdit({
+        model: this.model
+      });
+      return edit.render();
+    };
+
+    QuotationContact.prototype.openChange = function(e) {
+      var collection, company_id;
+      e.preventDefault();
+      collection = new optima.collections.Contacts;
+      company_id = this.model.get('company_id');
+      collection.fetch({
+        reset: true,
+        data: {
+          company_id: company_id
+        }
+      });
+      return optima.quotationCompanyContacts = new optima.views.QuotationCompanyContacts({
+        collection: collection
+      });
+    };
+
+    QuotationContact.prototype.openCreate = function(e) {
+      var company_id, view;
+      e.preventDefault();
+      view = new optima.views.ContactCreate({
+        model: new optima.models.Contact
+      });
+      company_id = this.model.get('company_id');
+      return view.render(company_id);
+    };
+
+    return QuotationContact;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationCompanyContacts = (function(superClass) {
+    extend(QuotationCompanyContacts, superClass);
+
+    function QuotationCompanyContacts() {
+      return QuotationCompanyContacts.__super__.constructor.apply(this, arguments);
+    }
+
+    QuotationCompanyContacts.prototype.el = $("#quotation-company-contacts-modal");
+
+    QuotationCompanyContacts.prototype.template = $('#quotation-company-contact-template');
+
+    QuotationCompanyContacts.prototype.events = {
+      'click .modal-close': 'close',
+      'click a.quotation-contact-change': 'changeContact'
+    };
+
+    QuotationCompanyContacts.prototype.initialize = function() {
+      this.listenTo(this.collection, 'reset', this.render);
+      return this.quotation_id = optima.pathArray[2];
+    };
+
+    QuotationCompanyContacts.prototype.render = function() {
+      var source, template;
+      source = $(this.template).html();
+      template = Handlebars.compile(source);
+      $(this.el).find('.select').html(template(this.collection.toJSON()));
+      return $(this.el).modal({
+        backdrop: 'static'
+      });
+    };
+
+    QuotationCompanyContacts.prototype.changeContact = function(e) {
+      var contact_id;
+      e.preventDefault();
+      contact_id = $('#select-company-contact').val();
+      pubsub.trigger('quotation:contact', contact_id);
+      return this.closeModal();
+    };
+
+    QuotationCompanyContacts.prototype.close = function(e) {
+      e.preventDefault();
+      return this.closeModal();
+    };
+
+    return QuotationCompanyContacts;
 
   })(Backbone.View);
 });
@@ -2383,495 +3139,6 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.views.ContactView = (function(superClass) {
-    extend(ContactView, superClass);
-
-    function ContactView() {
-      return ContactView.__super__.constructor.apply(this, arguments);
-    }
-
-    ContactView.prototype.tagName = 'tr';
-
-    ContactView.prototype.template = $('#contact-template');
-
-    ContactView.prototype.events = {
-      'click .contact-open-edit': 'openEdit'
-    };
-
-    ContactView.prototype.initialize = function() {
-      this.render();
-      this.listenTo(this.model, 'change', this.render);
-      return this.listenTo(this.model, 'error', this.showErrors);
-    };
-
-    ContactView.prototype.render = function() {
-      var template;
-      template = optima.templates.contact;
-      $(this.el).html(template(this.model.toJSON()));
-      return this;
-    };
-
-    ContactView.prototype.openEdit = function(e) {
-      var edit;
-      e.preventDefault();
-      edit = new optima.views.ContactEdit({
-        model: this.model
-      });
-      return edit.render();
-    };
-
-    return ContactView;
-
-  })(Backbone.View);
-  optima.views.ContactsView = (function(superClass) {
-    extend(ContactsView, superClass);
-
-    function ContactsView() {
-      return ContactsView.__super__.constructor.apply(this, arguments);
-    }
-
-    ContactsView.prototype.el = $('#contacts');
-
-    ContactsView.prototype.events = {
-      'click .contact-see-more': 'seeMore',
-      'submit .contact-search': 'search'
-    };
-
-    ContactsView.prototype.initialize = function() {
-      this.listenTo(this.collection, 'reset', this.render);
-      return this.listenTo(this.collection, 'add', this.addOne, this);
-    };
-
-    ContactsView.prototype.addOne = function(model) {
-      var view;
-      view = new optima.views.ContactView({
-        model: model
-      });
-      return $(this.el).find('table .thead').after(view.render().el);
-    };
-
-    ContactsView.prototype.render = function() {
-      return this.collection.each(function(model) {
-        var view;
-        view = new optima.views.ContactView({
-          model: model
-        });
-        $(this.el).find('table').append(view.render().el);
-        return $(this.el).find('.table-responsive').slimScroll({
-          height: '400px'
-        });
-      }, this);
-    };
-
-    ContactsView.prototype.seeMore = function(e) {
-      var el, more, offset;
-      e.preventDefault();
-      el = e.currentTarget;
-      offset = $(el).data('offset');
-      more = offset + 10;
-      this.collection.fetch({
-        data: {
-          offset: more
-        }
-      });
-      return $(el).data('offset', more);
-    };
-
-    ContactsView.prototype.search = function(e) {
-      var query;
-      e.preventDefault();
-      query = $('.contact-query').val();
-      return this.collection.fetch({
-        data: {
-          query: query
-        }
-      });
-    };
-
-    return ContactsView;
-
-  })(Backbone.View);
-  optima.views.ContactQuoteCreate = (function(superClass) {
-    extend(ContactQuoteCreate, superClass);
-
-    function ContactQuoteCreate() {
-      return ContactQuoteCreate.__super__.constructor.apply(this, arguments);
-    }
-
-    ContactQuoteCreate.prototype.el = $('#contact-quote-create-modal');
-
-    ContactQuoteCreate.prototype.template = $('#contact-quote-create-template');
-
-    ContactQuoteCreate.prototype.events = {
-      'click a.contact-create-store': 'store',
-      'click a.contacts-see': 'CompanyContacts',
-      'click .modal-close': 'cancel'
-    };
-
-    ContactQuoteCreate.prototype.initialize = function() {
-      this.listenTo(this.model, 'sync', this.added);
-      return this.listenTo(this.model, 'error', this.showErrors);
-    };
-
-    ContactQuoteCreate.prototype.render = function(company_id) {
-      var company, source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
-      company = {
-        company_id: company_id
-      };
-      $(this.el).find('.modal-content').html(template(company));
-      return $(this.el).modal({
-        backdrop: 'static'
-      });
-    };
-
-    ContactQuoteCreate.prototype.store = function(e) {
-      var dataForm;
-      e.preventDefault();
-      dataForm = $('#contact-create-form').serializeJSON();
-      return this.model.save(dataForm, {
-        wait: true
-      });
-    };
-
-    ContactQuoteCreate.prototype.added = function() {
-      var company_id, id;
-      id = this.model.get('id');
-      company_id = this.model.get('company_id');
-      return pubsub.trigger('quotation:store', {
-        company_id: company_id,
-        contact_id: id
-      });
-    };
-
-    ContactQuoteCreate.prototype.close = function() {
-      this.remove();
-      return $('.modal-backdrop').remove();
-    };
-
-    ContactQuoteCreate.prototype.cancel = function(e) {
-      e.preventDefault();
-      return this.close();
-    };
-
-    ContactQuoteCreate.prototype.CompanyContacts = function(e) {
-      var collection, company_id, view;
-      e.preventDefault();
-      company_id = $('#contact-create-form').find("input[name='company_id']").val();
-      collection = new optima.collections.Contacts;
-      collection.fetch({
-        reset: true,
-        data: {
-          company_id: company_id
-        }
-      });
-      view = new optima.views.QuoteCompanyContacts({
-        collection: collection
-      });
-      return view.render();
-    };
-
-    return ContactQuoteCreate;
-
-  })(Backbone.View);
-  optima.views.ContactCreate = (function(superClass) {
-    extend(ContactCreate, superClass);
-
-    function ContactCreate() {
-      return ContactCreate.__super__.constructor.apply(this, arguments);
-    }
-
-    ContactCreate.prototype.el = $('#contact-create-modal');
-
-    ContactCreate.prototype.template = $('#contact-create-template');
-
-    ContactCreate.prototype.events = {
-      'click a.contact-create-store': 'store',
-      'click a.contacts-see': 'CompanyContacts',
-      'click .modal-close': 'cancel'
-    };
-
-    ContactCreate.prototype.initialize = function() {
-      this.listenTo(this.model, 'sync', this.added);
-      return this.listenTo(this.model, 'error', this.showErrors);
-    };
-
-    ContactCreate.prototype.render = function(company_id) {
-      var company, template;
-      template = optima.templates.contact_create;
-      company = {
-        company_id: company_id
-      };
-      $(this.el).find('.modal-content').html(template(company));
-      $(this.el).modal({
-        backdrop: 'static'
-      });
-      return console.log(this);
-    };
-
-    ContactCreate.prototype.store = function(e) {
-      var dataForm;
-      e.preventDefault();
-      dataForm = $('#contact-create-form').serializeJSON();
-      return this.model.save(dataForm, {
-        wait: true
-      });
-    };
-
-    ContactCreate.prototype.added = function() {
-      var id;
-      id = this.model.get('id');
-      if (id) {
-        return this.closeModal();
-      }
-    };
-
-    ContactCreate.prototype.cancel = function(e) {
-      e.preventDefault();
-      return this.closeModal();
-    };
-
-    return ContactCreate;
-
-  })(Backbone.View);
-  optima.views.ContactEdit = (function(superClass) {
-    extend(ContactEdit, superClass);
-
-    function ContactEdit() {
-      return ContactEdit.__super__.constructor.apply(this, arguments);
-    }
-
-    ContactEdit.prototype.el = $('#contact-edit-modal');
-
-    ContactEdit.prototype.template = $('#contact-edit-template');
-
-    ContactEdit.prototype.events = {
-      'click .contact-save-update': 'update',
-      'click .modal-close': 'cancel'
-    };
-
-    ContactEdit.prototype.initialize = function() {
-      return this.listenTo(this.model, 'sync', this.synced);
-    };
-
-    ContactEdit.prototype.render = function() {
-      var template;
-      template = optima.templates.contact_edit;
-      $(this.el).find('.modal-content').html(template(this.model.toJSON()));
-      return $(this.el).modal({
-        backdrop: 'static'
-      });
-    };
-
-    ContactEdit.prototype.update = function(e) {
-      var dataForm, el;
-      e.preventDefault();
-      el = $(this.el);
-      dataForm = el.find('form').serializeJSON();
-      return this.model.save(dataForm, {
-        wait: true
-      });
-    };
-
-    ContactEdit.prototype.synced = function(model) {
-      if (model.id) {
-        return this.closeModal();
-      }
-    };
-
-    ContactEdit.prototype.cancel = function(e) {
-      e.preventDefault();
-      return this.closeModal();
-    };
-
-    return ContactEdit;
-
-  })(Backbone.View);
-  optima.views.QuoteCompanyContact = (function(superClass) {
-    extend(QuoteCompanyContact, superClass);
-
-    function QuoteCompanyContact() {
-      return QuoteCompanyContact.__super__.constructor.apply(this, arguments);
-    }
-
-    QuoteCompanyContact.prototype.template = $('#company-contact-template');
-
-    QuoteCompanyContact.prototype.tagName = 'tr';
-
-    QuoteCompanyContact.prototype.events = {
-      'click a.contact-quote': 'quote'
-    };
-
-    QuoteCompanyContact.prototype.render = function() {
-      var source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
-      $(this.el).html(template(this.model.toJSON()));
-      return this;
-    };
-
-    QuoteCompanyContact.prototype.quote = function(e) {
-      var company_id, id;
-      e.preventDefault();
-      id = this.model.get('id');
-      company_id = this.model.get('company_id');
-      return pubsub.trigger('quotation:store', {
-        company_id: company_id,
-        contact_id: id
-      });
-    };
-
-    return QuoteCompanyContact;
-
-  })(Backbone.View);
-  optima.views.QuoteCompanyContacts = (function(superClass) {
-    extend(QuoteCompanyContacts, superClass);
-
-    function QuoteCompanyContacts() {
-      return QuoteCompanyContacts.__super__.constructor.apply(this, arguments);
-    }
-
-    QuoteCompanyContacts.prototype.el = $('#contact-quote-create-modal');
-
-    QuoteCompanyContacts.prototype.initialize = function() {
-      return this.listenTo(this.collection, 'reset', this.render);
-    };
-
-    QuoteCompanyContacts.prototype.render = function() {
-      var el;
-      el = $(this.el);
-      return this.collection.each(function(model) {
-        var view;
-        view = new optima.views.QuoteCompanyContact({
-          model: model
-        });
-        return $(el).find('table').append(view.render().el);
-      });
-    };
-
-    return QuoteCompanyContacts;
-
-  })(Backbone.View);
-  optima.views.QuotationContact = (function(superClass) {
-    extend(QuotationContact, superClass);
-
-    function QuotationContact() {
-      return QuotationContact.__super__.constructor.apply(this, arguments);
-    }
-
-    QuotationContact.prototype.el = $('#quotation-contact');
-
-    QuotationContact.prototype.template = $('#quotation-contact-template');
-
-    QuotationContact.prototype.events = {
-      'click a.quotation-contact-change': 'openChange',
-      'click a.quotation-contact-create': 'openCreate',
-      'click a.edit': 'openEdit'
-    };
-
-    QuotationContact.prototype.initialize = function() {
-      return this.listenTo(this.model, 'change', this.render);
-    };
-
-    QuotationContact.prototype.render = function() {
-      var template;
-      template = optima.templates.quotation_contact;
-      $(this.el).find('.table-responsive').html(template(this.model.toJSON()));
-      return this;
-    };
-
-    QuotationContact.prototype.openEdit = function(e) {
-      var edit;
-      e.preventDefault();
-      edit = new optima.views.ContactEdit({
-        model: this.model
-      });
-      return edit.render();
-    };
-
-    QuotationContact.prototype.openChange = function(e) {
-      var collection, company_id;
-      e.preventDefault();
-      collection = new optima.collections.Contacts;
-      company_id = this.model.get('company_id');
-      collection.fetch({
-        reset: true,
-        data: {
-          company_id: company_id
-        }
-      });
-      return optima.quotationCompanyContacts = new optima.views.QuotationCompanyContacts({
-        collection: collection
-      });
-    };
-
-    QuotationContact.prototype.openCreate = function(e) {
-      var company_id, view;
-      e.preventDefault();
-      view = new optima.views.ContactCreate({
-        model: new optima.models.Contact
-      });
-      company_id = this.model.get('company_id');
-      return view.render(company_id);
-    };
-
-    return QuotationContact;
-
-  })(Backbone.View);
-  return optima.views.QuotationCompanyContacts = (function(superClass) {
-    extend(QuotationCompanyContacts, superClass);
-
-    function QuotationCompanyContacts() {
-      return QuotationCompanyContacts.__super__.constructor.apply(this, arguments);
-    }
-
-    QuotationCompanyContacts.prototype.el = $("#quotation-company-contacts-modal");
-
-    QuotationCompanyContacts.prototype.template = $('#quotation-company-contact-template');
-
-    QuotationCompanyContacts.prototype.events = {
-      'click .modal-close': 'close',
-      'click a.quotation-contact-change': 'changeContact'
-    };
-
-    QuotationCompanyContacts.prototype.initialize = function() {
-      this.listenTo(this.collection, 'reset', this.render);
-      return this.quotation_id = optima.pathArray[2];
-    };
-
-    QuotationCompanyContacts.prototype.render = function() {
-      var source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
-      $(this.el).find('.select').html(template(this.collection.toJSON()));
-      return $(this.el).modal({
-        backdrop: 'static'
-      });
-    };
-
-    QuotationCompanyContacts.prototype.changeContact = function(e) {
-      var contact_id;
-      e.preventDefault();
-      contact_id = $('#select-company-contact').val();
-      pubsub.trigger('quotation:contact', contact_id);
-      return this.closeModal();
-    };
-
-    QuotationCompanyContacts.prototype.close = function(e) {
-      e.preventDefault();
-      return this.closeModal();
-    };
-
-    return QuotationCompanyContacts;
-
-  })(Backbone.View);
-});
-
-var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-$(function() {
   optima.views.TodoView = (function(superClass) {
     extend(TodoView, superClass);
 
@@ -4014,5 +4281,12 @@ $(function() {
   optima.workspace = new optima.routers.Workspace;
   return Backbone.history.start({
     pushState: true
+  });
+});
+
+$(function() {
+  return Handlebars.registerPartial({
+    _sector_list: optima.templates._sector_list,
+    _cities_list: optima.templates._cities_list
   });
 });
