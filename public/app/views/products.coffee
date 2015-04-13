@@ -1,5 +1,5 @@
 $ -> 
-
+  # item_quotation
   class optima.views.QuotationProductView extends Backbone.View
     tagName: 'tr'
     events:
@@ -55,6 +55,7 @@ $ ->
       optima.quotationProductEdit = new optima.views.QuotationProductEdit model: @model
       optima.quotationProductEdit.render()
 
+  # list_quotation
   class optima.views.QuotationProductsView extends Backbone.View
     el: $ '#quotation-products'
     events:
@@ -100,6 +101,7 @@ $ ->
       view = new optima.views.QuotationProductCreate model: model
       view.render(quotation_id)
 
+  # create_quotation
   class optima.views.QuotationProductCreate extends Backbone.View
     el: $ '#product-create-modal'
 
@@ -155,7 +157,8 @@ $ ->
     cancel: (e) ->
       e.preventDefault()
       @close()
-
+      
+  # edit_quotation
   class optima.views.QuotationProductEdit extends Backbone.View
     el: $ '#product-create-modal'
 
