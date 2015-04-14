@@ -1,4 +1,4 @@
-<?php namespace API;
+<?php namespace Api;
 
 use Optima\Quotation;
 use Response;
