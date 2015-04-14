@@ -45,7 +45,7 @@ return array(
 	    'Optima\Providers\EventsServiceProvider',
 	    'Optima\Providers\MacrosServiceProvider',
 	    'Thujohn\Pdf\PdfServiceProvider',
-	    'PhantomPdf\Laravel\PhantomPdfServiceProvider',
+
 	),
 
 	/*
@@ -112,7 +112,6 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'PDF'             => 'Thujohn\Pdf\PdfFacade',
-		'PDFPhantom' => 'PhantomPdf\Laravel\PDFFacade'
 
 	),
 

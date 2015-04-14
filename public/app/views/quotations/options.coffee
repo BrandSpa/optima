@@ -110,8 +110,10 @@ $ ->
       id = @model.get('id')
       check = @checkResultsFields()
       if check
-        $.post "/quotations/#{id}/sendmail"
+        $.post "/api/v1/quotations/#{id}/sendmail"
+        
         alertify.success('Cotización enviada.')
+
         @updateQuotationSent()
         @broadcastChange "cambio estado a enviada"
         optima.quotation.fetch()
@@ -123,7 +125,7 @@ $ ->
       created_sent_diff = @model.get('created_sent_diff')
 
       if status != "Efectiva" || status != "Seguimiento"
-        console.log created_sent_diff
+        
         if !created_sent_diff || created_sent_diff < 0
           now = moment().format()
           diff = moment(now).diff(@model.get('created_at'), 'minutes')

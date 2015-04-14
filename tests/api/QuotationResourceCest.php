@@ -37,6 +37,14 @@ class QuotationResourceCest
         $this->contactId = $I->grabDataFromJsonResponse('id');
     }
 
+    public function _after(){
+    	DB::table('companies')->truncate();
+    	DB::table('contacts')->truncate();
+    	DB::table('quotations')->truncate();
+    	DB::table('services')->truncate();
+    	DB::table('quotation_service')->truncate();
+    }
+
      public function createQuotation(ApiTester $I)
     {
 
@@ -223,9 +231,62 @@ class QuotationResourceCest
 		$I->seeResponseContainsJson(['service_approval' => 0]);
     }
 
-    public function setQuotationSendDiff(ApiTester $I)
+    public function sendQuotation(ApiTester $I)
     {
+    	$quotationData = [
+    	'user_id' => 1,
+        'company_id' => $this->companyId,
+        'contact_id' => $this->contactId,
+        ];
 
+		$I->sendPOST($this->endpoint, $quotationData);
+		$quotationId = $I->grabDataFromJsonResponse('id');
+
+    	$I->sendPOST("/api/v1/quotations/$quotationId/sendmail");
+    	$I->seeResponseContainsJson($quotationData );
+    }
+
+    public function sendQuotationWithRecipients(ApiTester $I)
+    {
+    	$quotationData = [
+    	'user_id' => 1,
+        'company_id' => $this->companyId,
+        'contact_id' => $this->contactId,
+        'mail_recipient_1' => 'test1@brandspa.com',
+        'mail_recipient_2' => 'test2@brandspa.com',
+        ];
+
+		$I->sendPOST($this->endpoint, $quotationData);
+		$quotationId = $I->grabDataFromJsonResponse('id');
+
+    	$I->sendPOST("/api/v1/quotations/$quotationId/sendmail");
+    	$I->seeResponseContainsJson($quotationData);
+    }
+
+    public function updateQuotationStatusAndTimes(ApiTester $I)
+    {
+    	$quotationData = [
+    	'user_id' => 1,
+        'company_id' => $this->companyId,
+        'contact_id' => $this->contactId,
+        ];
+
+		$I->sendPOST($this->endpoint, $quotationData);
+		$quotationId = $I->grabDataFromJsonResponse('id');
+
+		$quotationDataUpdate = [
+			'status' => 'Enviada',
+			'sent_at' => date('Y-m-d'), 
+			'created_sent_diff' => 5
+		];
+
+		$I->sendPUT($this->endpoint."/$quotationId", $quotationDataUpdate);
+		$I->seeResponseContainsJson([
+			'id' => $quotationId,
+			'status' => 'Enviada',
+			'sent_at' => date('Y-m-d'), 
+			'created_sent_diff' => 5
+		]);
     }
 
 

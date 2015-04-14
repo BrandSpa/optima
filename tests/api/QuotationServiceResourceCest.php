@@ -31,6 +31,14 @@ class QuotationServiceResourceCest
     	$this->serviceId = $I->grabDataFromJsonResponse('id');
     }
 
+    public function _after(){
+    	DB::table('companies')->truncate();
+    	DB::table('contacts')->truncate();
+    	DB::table('quotations')->truncate();
+    	DB::table('services')->truncate();
+    	DB::table('quotation_service')->truncate();
+    }
+
     public function getAllRelationServices(ApiTester $I)
     {
 

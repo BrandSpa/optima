@@ -47,7 +47,8 @@ Route::group(['before' => 'auth'], function(){
 
 		Route::resource('quotations', 'QuotationsController');
 		Route::resource('quotations.services', 'QuotationServiceController');
-
+		Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
+		
 		Route::resource('services', 'ServicesController');
 		Route::resource('activities', 'ActivitiesController');
 		Route::resource('notifications', 'NotificationsController');

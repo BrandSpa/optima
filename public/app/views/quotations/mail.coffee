@@ -28,3 +28,4 @@ $ ->
       @model.save()
       $(@el).modal('hide')
       @broadcastChange "agrego email"
+      

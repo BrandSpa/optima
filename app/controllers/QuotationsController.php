@@ -76,13 +76,6 @@ class QuotationsController extends BaseController {
 		return Redirect::to('/quotations/'.$model->id);
 	}
 
-	public function sendMail($id)
-	{
-		$quotation = $this->quotation->find($id);
-		// check if results fields isn't empty, fields like type, type_categories!
-		$this->mailer->sendQuotation($quotation);
-		return Response::json($quotation, 200);
-	}
 
 	public function rethink($id)
 	{

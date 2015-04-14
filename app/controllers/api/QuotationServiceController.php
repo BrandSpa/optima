@@ -12,13 +12,15 @@ class QuotationServiceController extends \Controller{
   {
     $this->entity = $model;
   }
-
+  
   public function index($quoationId)
   {
   	$quotation = $this->entity->find($quoationId);
-  	$collection = $quotation->services()->get();
-
-  	return Response::json($collection, 200);
+  	if ($quotation) {
+  		$collection = $quotation->services()->get();
+  		return Response::json($collection, 200);
+  	}
+  	
   }
 
   public function show($quoationId, $serviceId)

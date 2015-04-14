@@ -2059,7 +2059,7 @@ $(function() {
       id = this.model.get('id');
       check = this.checkResultsFields();
       if (check) {
-        $.post("/quotations/" + id + "/sendmail");
+        $.post("/api/v1/quotations/" + id + "/sendmail");
         alertify.success('Cotización enviada.');
         this.updateQuotationSent();
         this.broadcastChange("cambio estado a enviada");
@@ -2074,7 +2074,6 @@ $(function() {
       status = this.model.get('status');
       created_sent_diff = this.model.get('created_sent_diff');
       if (status !== "Efectiva" || status !== "Seguimiento") {
-        console.log(created_sent_diff);
         if (!created_sent_diff || created_sent_diff < 0) {
           now = moment().format();
           diff = moment(now).diff(this.model.get('created_at'), 'minutes');
