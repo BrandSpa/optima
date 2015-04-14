@@ -4,7 +4,7 @@ use Optima\Quotation;
 use Response;
 use Input;
 
-class QuotationServiceController extends \Controller{
+class QuotationServiceController extends \Controller {
 
   protected $entity;
 
@@ -20,7 +20,6 @@ class QuotationServiceController extends \Controller{
   		$collection = $quotation->services()->get();
   		return Response::json($collection, 200);
   	}
-  	
   }
 
   public function show($quoationId, $serviceId)
