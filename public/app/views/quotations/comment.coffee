@@ -13,8 +13,8 @@ $ ->
       @storeActivity @id, msg
 
     render: ->
-      source = $(@template).html()
-      t = Handlebars.compile(source) 
+
+      t = optima.templates.quotation_comment
       $(@el).find('.modal-content').html(t(  @model.toJSON() ))
       $(@el).modal backdrop: 'static'
       optima.summernote(@el)

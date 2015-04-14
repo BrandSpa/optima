@@ -15,7 +15,7 @@ $ ->
 
     render: ->
       source = $(@template).html()
-      t = Handlebars.compile(source) 
+      t = optima.templates.quotation_mail
       $(@el).find('.modal-content').html(t(  @model.toJSON() ))
       $(@el).modal backdrop: 'static'
       optima.summernote(@el)

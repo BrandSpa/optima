@@ -15,7 +15,7 @@ $ ->
 
     render: ->
       source = $(@template).html()
-      t = Handlebars.compile(source) 
+      t = optima.templates.quotation_no_effective
       el = $(@el)
       el.find('.modal-content').html(t(  @model.toJSON() ))
       el.modal backdrop: 'static'

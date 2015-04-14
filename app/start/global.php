@@ -81,18 +81,10 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
-
+require_once app_path().'/helpers.php';
 
 Blade::setContentTags('[[', ']]');
 Blade::setEscapedContentTags('[[[', ']]]');
 
-/*
-|-------------------------------------------------------------------------
-|	priceFormat
-|-------------------------------------------------------------------------
-*/
-function priceFormat($price) 
-{
-	return number_format($price, null, ',',',');
-}
+
 

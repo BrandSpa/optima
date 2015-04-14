@@ -118,6 +118,55 @@
 	</div>
 </div>
 
+<div class="modal fade" id="quotation-company-contacts-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-body">
+      <div class="select"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="quotation-contact-change btn btn-primary btn-sm">Guardar</a>
+      <a href="#" class="btn btn-default btn-sm modal-close" >Cancelar</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="quotation-comment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+   
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="quotation-mail-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+   
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="quotation-no-effective-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+   
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="quotation-no-send-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+   
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <!-- includes -->
 @include('contacts/partials/_edit')
 @include('services/partials/_attach')

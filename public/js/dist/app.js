@@ -2143,9 +2143,8 @@ $(function() {
     };
 
     QuotationComment.prototype.render = function() {
-      var source, t;
-      source = $(this.template).html();
-      t = Handlebars.compile(source);
+      var t;
+      t = optima.templates.quotation_comment;
       $(this.el).find('.modal-content').html(t(this.model.toJSON()));
       $(this.el).modal({
         backdrop: 'static'
@@ -2202,7 +2201,7 @@ $(function() {
     QuotationNoEffective.prototype.render = function() {
       var el, source, t;
       source = $(this.template).html();
-      t = Handlebars.compile(source);
+      t = optima.templates.quotation_no_effective;
       el = $(this.el);
       el.find('.modal-content').html(t(this.model.toJSON()));
       return el.modal({
@@ -2243,8 +2242,6 @@ $(function() {
 
     QuotationNoSend.prototype.el = $('#quotation-no-send-modal');
 
-    QuotationNoSend.prototype.template = $('#quotation-no-send-template');
-
     QuotationNoSend.prototype.events = {
       'click a.quotation-no-send-save': 'save'
     };
@@ -2262,7 +2259,7 @@ $(function() {
     QuotationNoSend.prototype.render = function() {
       var el, source, t;
       source = $(this.template).html();
-      t = Handlebars.compile(source);
+      t = optima.templates.quotation_no_send;
       el = $(this.el);
       el.find('.modal-content').html(t(this.model.toJSON()));
       return el.modal({
@@ -2322,7 +2319,7 @@ $(function() {
     QuotationMail.prototype.render = function() {
       var source, t;
       source = $(this.template).html();
-      t = Handlebars.compile(source);
+      t = optima.templates.quotation_mail;
       $(this.el).find('.modal-content').html(t(this.model.toJSON()));
       $(this.el).modal({
         backdrop: 'static'

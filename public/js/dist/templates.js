@@ -160,6 +160,23 @@ this["optima"]["templates"]["company_edit"] = Handlebars.template({"1":function(
     + alias3(((helper = (helper = helpers.comment || (depth0 != null ? depth0.comment : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"comment","hash":{},"data":data}) : helper)))
     + "</textarea>\n    </div>\n    </div>\n  </form>\n  </div>\n    <div class=\"modal-footer\">\n        <a href=\"#\" class=\"company-save-update btn btn-primary btn-sm\">Guardar</a>\n        <a href=\"#\" class=\"btn btn-default btn-sm modal-close\">Cancelar</a>\n      </div>";
 },"usePartial":true,"useData":true});
+this["optima"]["templates"]["company_select_contact"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "  <option value=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
+    + " "
+    + alias3(((helper = (helper = helpers.lastname || (depth0 != null ? depth0.lastname : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"lastname","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<select name=\"contact_id\" class=\"form-control\" id=\"select-company-contact\">\n  <option value=\"\">Seleccionar Contacto</option>\n"
+    + ((stack1 = helpers.each.call(depth0,depth0,{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "</select>";
+},"useData":true});
 this["optima"]["templates"]["contact"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
@@ -478,6 +495,13 @@ this["optima"]["templates"]["quotation_activity"] = Handlebars.template({"compil
     + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
     + "</td>";
 },"useData":true});
+this["optima"]["templates"]["quotation_comment"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper;
+
+  return "  <div class=\"modal-body\">\n    <div class=\"form-group\">\n      <textarea name=\"comment\" rows=\"10\" class=\"form-control summernote\" id=\"quotation-comment-text\">"
+    + this.escapeExpression(((helper = (helper = helpers.comment || (depth0 != null ? depth0.comment : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"comment","hash":{},"data":data}) : helper)))
+    + "</textarea>\n    </div>\n  </div>\n  <div class=\"modal-footer\">\n    <a href=\"#\" class=\"btn btn-primary btn-sm quotation-comment-save\">Guardar</a>\n    <button type=\"button\" class=\"btn btn-default btn-sm\" data-dismiss=\"modal\">Cancelar</button>\n  </div>";
+},"useData":true});
 this["optima"]["templates"]["quotation_contact"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
@@ -512,6 +536,55 @@ this["optima"]["templates"]["quotation_contact"] = Handlebars.template({"1":func
     + " "
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.mobile_2 : depth0),{"name":"if","hash":{},"fn":this.program(3, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</td>\n    </tr>\n</table>";
+},"useData":true});
+this["optima"]["templates"]["quotation_mail"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return " <div class=\"modal-body\">\n  <form id=\"quotation-mail-form\">\n    <div class=\"row\">\n      <div class=\"form-group col-lg-6\">\n        <input type=\"text\" name=\"mail_recipient_1\" class=\"form-control\" placeholder=\"Para\" value=\""
+    + alias3(((helper = (helper = helpers.mail_recipient_1 || (depth0 != null ? depth0.mail_recipient_1 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mail_recipient_1","hash":{},"data":data}) : helper)))
+    + "\">\n      </div>\n      <div class=\"form-group col-lg-6\">\n        <input type=\"text\" name=\"mail_recipient_2\" class=\"form-control\" placeholder=\"Para\" value=\""
+    + alias3(((helper = (helper = helpers.mail_recipient_2 || (depth0 != null ? depth0.mail_recipient_2 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mail_recipient_2","hash":{},"data":data}) : helper)))
+    + "\">\n      </div>\n    </div>\n    <div class=\"form-group\">\n     <textarea name=\"mail_message\" id=\"\" rows=\"5\" class=\"form-control summernote\" placeholder=\"Mensaje\">"
+    + alias3(((helper = (helper = helpers.mail_message || (depth0 != null ? depth0.mail_message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mail_message","hash":{},"data":data}) : helper)))
+    + "</textarea>\n   </div>\n </form>\n</div>\n<div class=\"modal-footer\">\n  <a class=\"btn btn-primary btn-sm quotation-mail-save\">Guardar</a>\n  <button type=\"button\" class=\"btn btn-default btn-sm\" data-dismiss=\"modal\">Cancelar</button>\n</div>";
+},"useData":true});
+this["optima"]["templates"]["quotation_no_effective"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "        <option value=\""
+    + alias3(((helper = (helper = helpers.no_effective || (depth0 != null ? depth0.no_effective : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"no_effective","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.no_effective || (depth0 != null ? depth0.no_effective : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"no_effective","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"3":function(depth0,helpers,partials,data) {
+    return "        <option value=\"\">¿Por qué no es efectiva?</option>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "  <div class=\"modal-body\">\n    <div class=\"form-group\">\n      <select class=\"form-control\" id=\"quotation-no-effective-select\">\n"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.no_effective : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "        <option value=\"No disponible\">No disponible</option>\n        <option value=\"No confiable\">No confiable</option>\n        <option value=\"Competencia\">Competencia</option>\n        <option value=\"Por cliente\">Por cliente</option>\n      </select>\n    </div>\n    <div class=\"form-group\">\n    <textarea id=\"no_effective_note\" class=\"form-control\" placeholder=\"nota\">"
+    + this.escapeExpression(((helper = (helper = helpers.no_effective_note || (depth0 != null ? depth0.no_effective_note : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"no_effective_note","hash":{},"data":data}) : helper)))
+    + "</textarea>\n</div>\n  </div>\n  <div class=\"modal-footer\">\n    <a href=\"#\" class=\"btn btn-primary btn-sm quotation-no-effective-save\">Guardar</a>\n    <button type=\"button\" class=\"btn btn-default btn-sm\" data-dismiss=\"modal\">Cancelar</button>\n  </div>";
+},"useData":true});
+this["optima"]["templates"]["quotation_no_send"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "        <option value=\""
+    + alias3(((helper = (helper = helpers.status_cause || (depth0 != null ? depth0.status_cause : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"status_cause","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.status_cause || (depth0 != null ? depth0.status_cause : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"status_cause","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"3":function(depth0,helpers,partials,data) {
+    return "        <option value=\"\">¿Por qué no es enviada?</option>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "  <div class=\"modal-body\">\n    <div class=\"form-group\">\n      <select class=\"form-control\" id=\"quotation-no-send-select\">\n"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.status_cause : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "        <option value=\"No confiable\">No confiable</option>\n        <option value=\"Competencia\">Competencia</option>\n        <option value=\"Por cliente\">Por cliente</option>\n      </select>\n    </div>\n    <div class=\"form-group\">\n    <textarea id=\"no_send_note\" class=\"form-control\" placeholder=\"nota\">"
+    + this.escapeExpression(((helper = (helper = helpers.no_send_note || (depth0 != null ? depth0.no_send_note : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"no_send_note","hash":{},"data":data}) : helper)))
+    + "</textarea>\n</div>\n  </div>\n  <div class=\"modal-footer\">\n    <a href=\"#\" class=\"btn btn-primary btn-sm quotation-no-send-save\">Guardar</a>\n    <button type=\"button\" class=\"btn btn-default btn-sm\" data-dismiss=\"modal\">Cancelar</button>\n  </div>";
 },"useData":true});
 this["optima"]["templates"]["quotation_options"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
