@@ -86,7 +86,7 @@
 	<div class="col-lg-3" style="padding-left: 7px">
 
 		<div class="panel panel-default" id="quotation-contact">
-			<div class="panel-heading btn-hidden">
+			<div class="panel-heading">
 				<a href="#" class="quotation-contact-change btn btn-primary btn-xs ">Cambiar contacto</a>
 				<a href="#" class="btn btn-primary btn-xs quotation-contact-create">Agregar Contacto</a>
 			</div>
