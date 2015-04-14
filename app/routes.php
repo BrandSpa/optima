@@ -19,7 +19,6 @@ Route::group(['before' => 'auth'], function(){
 	Route::get('quotations/{id}', 'PagesController@quotation');
 	Route::get('companies/{id}/mails', 'CompaniesController@getMails');
 
-
 	/*
 	|-------------------------------------------------------------------------
 	|	Quotations routes
@@ -45,7 +44,10 @@ Route::group(['before' => 'auth'], function(){
 		Route::resource('companies', 'CompaniesController');
 		Route::resource('products', 'ProductsController');
 		Route::resource('contacts', 'ContactsController');
+
 		Route::resource('quotations', 'QuotationsController');
+		Route::resource('quotations.services', 'QuotationServiceController');
+
 		Route::resource('services', 'ServicesController');
 		Route::resource('activities', 'ActivitiesController');
 		Route::resource('notifications', 'NotificationsController');

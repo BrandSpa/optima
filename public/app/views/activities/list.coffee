@@ -11,7 +11,6 @@ $ ->
       pubsub.on("activity:pull", @pull, @)
 
     pull: (quotation_id)->
-      console.log "pull quo"
       @collection.fetch()
 
     addOne: (model) ->
@@ -19,17 +18,23 @@ $ ->
       $(@el).find('table').prepend view.render().el
       $(@el).find('span.timeago').timeago()
 
+    addPlugins: () ->
+      $(@el).find('span.timeago').timeago()
+      $(@el).find('.table-responsive').slimScroll
+        height: '475px'
+
     render: ->
-      table = $(@el).find('table')
-      table.empty()
+      $table = $(@el).find('table')
+      html = []
+
       @collection.each (model) ->
         view = new optima.views.ActivityView model: model
-        table.append view.render().el
-        $(@el).find('span.timeago').timeago()
-        $(@el).find('.table-responsive').slimScroll
-          height: '475px'
+        html.push(view.render().el)
       , @
 
+      $table.empty().append(html)
+      @addPlugins()
+      
     seeMore: (e) ->
       e.preventDefault()
       el = e.currentTarget

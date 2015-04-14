@@ -19,7 +19,7 @@ $ ->
       template = optima.templates.quotation_service
       $(@el).html template( @model.toJSON() )
       @
-
+      
     openEdit: (e) ->
       e.preventDefault()
       edit = new optima.views.ServiceEdit model: @model
@@ -28,11 +28,11 @@ $ ->
     detach: (e) ->
       e.preventDefault()
       
-      id = @model.get('id')
+      serviceId = @model.get('id')
       $.ajax
         method: 'DELETE'
-        url: "/api/v1/services/#{id}"
-        data: quotation_id: @quotation_id
+        url: "/api/v1/quotations/#{@quotation_id}/services/#{serviceId}"
+
       socket.emit "quotation-service", @quotation_id
       @storeActivity @quotation_id, "elimino un servicio"
       @remove()

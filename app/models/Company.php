@@ -16,7 +16,7 @@ class Company extends \Eloquent {
 		'comment'
 	];
 
-	protected static $rules = [
+	public $rules = [
 		'name' => 'required', 
 		'nit' => 'min:9',
 		'phone' => 'min:7',

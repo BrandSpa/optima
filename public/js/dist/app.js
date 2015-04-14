@@ -386,7 +386,6 @@ $(function() {
     };
 
     ActivitiesView.prototype.pull = function(quotation_id) {
-      console.log("pull quo");
       return this.collection.fetch();
     };
 
@@ -399,21 +398,26 @@ $(function() {
       return $(this.el).find('span.timeago').timeago();
     };
 
+    ActivitiesView.prototype.addPlugins = function() {
+      $(this.el).find('span.timeago').timeago();
+      return $(this.el).find('.table-responsive').slimScroll({
+        height: '475px'
+      });
+    };
+
     ActivitiesView.prototype.render = function() {
-      var table;
-      table = $(this.el).find('table');
-      table.empty();
-      return this.collection.each(function(model) {
+      var $table, html;
+      $table = $(this.el).find('table');
+      html = [];
+      this.collection.each(function(model) {
         var view;
         view = new optima.views.ActivityView({
           model: model
         });
-        table.append(view.render().el);
-        $(this.el).find('span.timeago').timeago();
-        return $(this.el).find('.table-responsive').slimScroll({
-          height: '475px'
-        });
+        return html.push(view.render().el);
       }, this);
+      $table.empty().append(html);
+      return this.addPlugins();
     };
 
     ActivitiesView.prototype.seeMore = function(e) {
@@ -621,16 +625,20 @@ $(function() {
     };
 
     CompaniesView.prototype.render = function() {
-      return this.collection.each(function(model) {
-        var companyView;
-        companyView = new optima.views.CompanyView({
+      var $table, html;
+      $table = $(this.el).find('table tbody');
+      html = [];
+      this.collection.each(function(model) {
+        var view;
+        view = new optima.views.CompanyView({
           model: model
         });
-        $(this.el).find('table').append(companyView.render().el);
+        html.push(view.render().el);
         return $(this.el).find('.table-responsive').slimScroll({
           height: '400px'
         });
       }, this);
+      return $table.empty().append(html);
     };
 
     CompaniesView.prototype.seeMore = function(e) {
@@ -1140,9 +1148,10 @@ $(function() {
       });
     };
 
-    ContactQuoteCreate.prototype.store = function(e) {
-      var dataForm;
-      e.preventDefault();
+    ContactQuoteCreate.prototype.store = function(evt) {
+      var _evt, dataForm;
+      _evt = evt;
+      _evt.preventDefault();
       dataForm = $('#contact-create-form').serializeJSON();
       return this.model.save(dataForm, {
         wait: true
@@ -1204,8 +1213,6 @@ $(function() {
 
     ContactCreate.prototype.el = $('#contact-create-modal');
 
-    ContactCreate.prototype.template = $('#contact-create-template');
-
     ContactCreate.prototype.events = {
       'click a.contact-create-store': 'store',
       'click a.contacts-see': 'CompanyContacts',
@@ -1231,11 +1238,14 @@ $(function() {
     };
 
     ContactCreate.prototype.store = function(e) {
-      var dataForm;
+      var $el, dataForm;
       e.preventDefault();
+      $el = $(e.currentTarget);
       dataForm = $('#contact-create-form').serializeJSON();
       return this.model.save(dataForm, {
-        wait: true
+        beforeSend: function() {
+          return alertify.log('guardando...');
+        }
       });
     };
 
@@ -1651,11 +1661,11 @@ $(function() {
         coll = this.collection;
       }
       coll.each(function(model) {
-        var quotationView;
-        quotationView = new optima.views.QuotationView({
+        var view;
+        view = new optima.views.QuotationView({
           model: model
         });
-        return html.push(quotationView.render().el);
+        return html.push(view.render().el);
       }, this);
       this.$el.find('tbody').html(html);
       this.$el.find('.table-responsive').slimScroll();
@@ -1908,7 +1918,9 @@ $(function() {
       'click .open-comment': 'openComment',
       'click .open-no-send': 'openNoSend',
       'click .open-mail': 'openMail',
-      'click .send': 'send'
+      'click .send': 'send',
+      'click .service-approval-remove': "serviceApprovalRemove",
+      'click .service-approval-add': "serviceApprovalAdd"
     };
 
     QuotationOptions.prototype.initialize = function() {
@@ -2082,6 +2094,20 @@ $(function() {
       } else {
         return true;
       }
+    };
+
+    QuotationOptions.prototype.serviceApprovalRemove = function(evt) {
+      evt.preventDefault();
+      return this.model.save({
+        service_approval: 1
+      });
+    };
+
+    QuotationOptions.prototype.serviceApprovalAdd = function(evt) {
+      evt.preventDefault();
+      return this.model.save({
+        service_approval: 0
+      });
     };
 
     return QuotationOptions;
@@ -2986,15 +3012,12 @@ $(function() {
     };
 
     QuotationServiceView.prototype.detach = function(e) {
-      var id;
+      var serviceId;
       e.preventDefault();
-      id = this.model.get('id');
+      serviceId = this.model.get('id');
       $.ajax({
         method: 'DELETE',
-        url: "/api/v1/services/" + id,
-        data: {
-          quotation_id: this.quotation_id
-        }
+        url: "/api/v1/quotations/" + this.quotation_id + "/services/" + serviceId
       });
       socket.emit("quotation-service", this.quotation_id);
       this.storeActivity(this.quotation_id, "elimino un servicio");
@@ -3035,12 +3058,11 @@ $(function() {
       return _.delay(this.pull(id), 3000);
     };
 
-    QuotationServicesView.prototype.pull = function(id) {
-      return this.collection.fetch({
-        reset: true,
-        data: {
-          quotation_id: id
-        }
+    QuotationServicesView.prototype.pull = function(quotationId) {
+      var _this;
+      _this = this;
+      return $.get("/api/v1/quotations/" + quotationId + "/services").done(function(models) {
+        return _this.collection.reset(models);
       });
     };
 
@@ -3076,17 +3098,12 @@ $(function() {
       var service_id;
       e.preventDefault();
       service_id = $('#quotation-service-list').find('select').val();
-      this.collection.create({
-        quotation_id: this.quotation_id,
+      $.post("/api/v1/quotations/" + this.quotation_id + "/services", {
         service_id: service_id
-      }, {
-        success: this.notify
+      }).done(function(res) {
+        return socket.emit("quotation-service", res.id);
       });
       return this.storeActivity(this.quotation_id, "agrego un servicio");
-    };
-
-    QuotationServicesView.prototype.notify = function(res) {
-      return socket.emit("quotation-service", res.toJSON().quotation_id);
     };
 
     return QuotationServicesView;
@@ -3352,24 +3369,18 @@ $(function() {
       });
     };
 
-    TodosView.prototype.addOne = function(model) {
-      var view;
-      view = new optima.views.TodoView({
-        model: model
-      });
-      view.mailing();
-      return $(this.el).find('.last-tracking').prepend(view.render().el);
-    };
-
     TodosView.prototype.render = function() {
-      $(this.el).find('#pending > table tbody').empty();
-      return this.collection.each(function(model) {
+      var $tbody, html;
+      html = [];
+      $tbody = $(this.el).find('table tbody');
+      this.collection.each(function(model) {
         var view;
         view = new optima.views.TodoView({
           model: model
         });
-        return $(this.el).find('table').append(view.render().el);
+        return html.push(view.render().el);
       }, this);
+      return $tbody.empty().append(html);
     };
 
     TodosView.prototype.showMoreInfo = function(field) {
@@ -3516,15 +3527,17 @@ $(function() {
     };
 
     TodoMailNew.prototype.render = function(model) {
-      var template, view;
-      template = optima.templates.todo_new;
-      view = template(model.toJSON());
+      var modelAttributes, template, view;
+      template = optima.templates.todo_mail;
+      modelAttributes = model.toJSON();
+      view = template(modelAttributes);
+      console.log(modelAttributes);
       return $.post(optima.mail_api_url, {
         message: view,
         subject: 'Nueva Tarea Asignada',
         to: [
           {
-            "email": optima.user_email
+            "email": modelAttributes.user.email
           }
         ]
       });
@@ -3838,7 +3851,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
-  optima.views.ReportsFilters = (function(superClass) {
+  return optima.views.ReportsFilters = (function(superClass) {
     extend(ReportsFilters, superClass);
 
     function ReportsFilters() {
@@ -3947,7 +3960,13 @@ $(function() {
     return ReportsFilters;
 
   })(Backbone.View);
-  optima.views.ReportByStatus = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ReportByStatus = (function(superClass) {
     extend(ReportByStatus, superClass);
 
     function ReportByStatus() {
@@ -3987,7 +4006,13 @@ $(function() {
     return ReportByStatus;
 
   })(Backbone.View);
-  optima.views.ReportByFindUs = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ReportByFindUs = (function(superClass) {
     extend(ReportByFindUs, superClass);
 
     function ReportByFindUs() {
@@ -4027,7 +4052,13 @@ $(function() {
     return ReportByFindUs;
 
   })(Backbone.View);
-  optima.views.ReportByAdvisor = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ReportByAdvisor = (function(superClass) {
     extend(ReportByAdvisor, superClass);
 
     function ReportByAdvisor() {
@@ -4067,7 +4098,13 @@ $(function() {
     return ReportByAdvisor;
 
   })(Backbone.View);
-  optima.views.ReportByType = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ReportByType = (function(superClass) {
     extend(ReportByType, superClass);
 
     function ReportByType() {
@@ -4107,7 +4144,13 @@ $(function() {
     return ReportByType;
 
   })(Backbone.View);
-  optima.views.ReportByNoEffective = (function(superClass) {
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ReportByNoEffective = (function(superClass) {
     extend(ReportByNoEffective, superClass);
 
     function ReportByNoEffective() {
@@ -4148,6 +4191,12 @@ $(function() {
     return ReportByNoEffective;
 
   })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   return optima.views.ReportByDiffSent = (function(superClass) {
     extend(ReportByDiffSent, superClass);
 
@@ -4346,15 +4395,10 @@ $(function() {
         collection: optima.quotationProducts
       });
       optima.quotationServices = new optima.collections.Services;
-      optima.quotationServices.fetch({
-        reset: true,
-        data: {
-          quotation_id: id
-        }
-      });
       optima.quotationServicesView = new optima.views.QuotationServicesView({
         collection: optima.quotationServices
       });
+      pubsub.trigger("services:pull", id);
       optima.quotationActivities = new optima.collections.Activities;
       optima.quotationActivities.fetch({
         reset: true,

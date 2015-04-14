@@ -60,14 +60,14 @@ $ ->
       optima.activities.fetch reset: true
       optima.activitiesView = new optima.views.ActivitiesView collection: optima.activities
 
-    startQuotation: (id) ->    
+    startQuotation: (id) ->
       optima.quotationProducts = new optima.collections.QuotationProducts
       optima.quotationProducts.fetch reset: true, data: quotation_id: id
       optima.quotationProductsView =  new optima.views.QuotationProductsView collection: optima.quotationProducts
 
       optima.quotationServices = new optima.collections.Services
-      optima.quotationServices.fetch reset: true, data: quotation_id: id
       optima.quotationServicesView =  new optima.views.QuotationServicesView collection: optima.quotationServices
+      pubsub.trigger("services:pull", id)
 
       optima.quotationActivities = new optima.collections.Activities
       optima.quotationActivities.fetch reset: true, data: quotation_id: id

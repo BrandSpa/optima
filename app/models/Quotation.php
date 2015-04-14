@@ -27,12 +27,12 @@ class Quotation extends \Eloquent {
 		'mail_recipient_2',
 		'sent_at',
 		'sent_in',
-		'ordered'
+		'ordered',
+		'service_approval'
 	];
 
-	public static $rules = [
-		'recipient_1' => 'email',
-		'recipient_2' => 'email'
+	public $rules = [
+	
 	];
 
 	public function company()
@@ -183,21 +183,21 @@ class Quotation extends \Eloquent {
 
 	public static function search($query) 
 	{
-			$byQuotation = self::search_by_quotation($query);
+		$byQuotation = self::search_by_quotation($query);
 
-			if (!$byQuotation->isEmpty()) {
-				return $byQuotation;
-			}
+		if (!$byQuotation->isEmpty()) {
+			return $byQuotation;
+		}
 
-			$byContact = self::search_by_contact($query);
-			if (!$byContact->isEmpty()) {
-				return $byContact;
-			}
-			
-			$byCompany = self::search_by_company($query);
-			if (!$byCompany->isEmpty()) {
-				return $byCompany;
-			}
+		$byContact = self::search_by_contact($query);
+		if (!$byContact->isEmpty()) {
+			return $byContact;
+		}
+		
+		$byCompany = self::search_by_company($query);
+		if (!$byCompany->isEmpty()) {
+			return $byCompany;
+		}
 	}
 
 	public static function search_by_quotation($query)

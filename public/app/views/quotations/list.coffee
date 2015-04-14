@@ -37,9 +37,10 @@ $ ->
         coll = @collection
 
       coll.each (model) ->
-        quotationView = new optima.views.QuotationView model: model
-        html.push quotationView.render().el
+        view = new optima.views.QuotationView model: model
+        html.push view.render().el
       , @
+      
       @$el.find('tbody').html html
 
       @$el.find('.table-responsive').slimScroll()

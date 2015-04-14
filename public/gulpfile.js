@@ -69,7 +69,7 @@ gulp.task('coffee', function() {
     'app/models/service.coffee',
     'app/models/todo.coffee',
     'app/models/tracking.coffee',
-    'app/views/users.coffee',
+    'app/models/users.coffee',
     
     //Views
 

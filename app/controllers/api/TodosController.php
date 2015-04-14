@@ -17,7 +17,7 @@ class TodosController extends \BaseController {
     if (isset($where)) {
     	$collection = Todo::with(['user', 'assigned'])->whereRaw($where)->orderBy('id', 'DESC')->get();
     } else {
-    	$collection = Todo::with(['user', 'tracking', 'assigned'])->where('user_id', $user_id)->orderBy('id', 'DESC')->get();
+    	$collection = Todo::with(['user', 'tracking', 'assigned'])->where('user_id', $user_id)->where('completed', NULL)->orderBy('id', 'DESC')->get();
     }
     
     return Response::json($collection, 200);
@@ -25,7 +25,7 @@ class TodosController extends \BaseController {
 
   public function show($id) 
   {
-    return Todo::with('user')->find($id);
+    return Todo::with('user')->with('user')->find($id);
   }
 
   public function store() 
@@ -34,7 +34,9 @@ class TodosController extends \BaseController {
     $model = Todo::store($data);
 
     if (isset($model->id)) {
-        return Response::json($model, 200);
+    	$id = $model->id;
+    	$modelNew = Todo::with('user')->find($id);
+        return Response::json($modelNew, 201);
     }
 
     return Response::json($model, 400);

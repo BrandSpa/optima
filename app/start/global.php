@@ -92,8 +92,8 @@ Blade::setEscapedContentTags('[[[', ']]]');
 |-------------------------------------------------------------------------
 */
 
-function priceFormat($price) 
-{
-	return number_format($price, null, ',',',');
-}
+// function priceFormat($price) 
+// {
+// 	return number_format($price, null, ',',',');
+// }
 

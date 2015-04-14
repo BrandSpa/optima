@@ -1,5 +1,43 @@
 this["optima"] = this["optima"] || {};
 this["optima"]["templates"] = this["optima"]["templates"] || {};
+this["optima"]["templates"]["activity"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return " en <a href=\"/quotations/"
+    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
+    + "</a>";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
+
+  return "<td>\n<span class=\"timeago\" title=\""
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "</span>\n<br>\n	"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
+    + " "
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.lastname : stack1), depth0))
+    + " "
+    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
+    + "\n	"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.quotation_id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "<br>\n	\n</td>";
+},"useData":true});
+this["optima"]["templates"]["activity_quotation"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<td><span class=\"timeago\" title=\""
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "</span> <br> "
+    + alias3(this.lambda(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
+    + " "
+    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
+    + "</td>";
+},"useData":true});
 this["optima"]["templates"]["company"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -122,44 +160,6 @@ this["optima"]["templates"]["company_edit"] = Handlebars.template({"1":function(
     + alias3(((helper = (helper = helpers.comment || (depth0 != null ? depth0.comment : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"comment","hash":{},"data":data}) : helper)))
     + "</textarea>\n    </div>\n    </div>\n  </form>\n  </div>\n    <div class=\"modal-footer\">\n        <a href=\"#\" class=\"company-save-update btn btn-primary btn-sm\">Guardar</a>\n        <a href=\"#\" class=\"btn btn-default btn-sm modal-close\">Cancelar</a>\n      </div>";
 },"usePartial":true,"useData":true});
-this["optima"]["templates"]["activity"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return " en <a href=\"/quotations/"
-    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
-    + "</a>";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
-
-  return "<td>\n<span class=\"timeago\" title=\""
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "</span>\n<br>\n	"
-    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
-    + " "
-    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.lastname : stack1), depth0))
-    + " "
-    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
-    + "\n	"
-    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.quotation_id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "<br>\n	\n</td>";
-},"useData":true});
-this["optima"]["templates"]["activity_quotation"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return "<td><span class=\"timeago\" title=\""
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "</span> <br> "
-    + alias3(this.lambda(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
-    + " "
-    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
-    + "</td>";
-},"useData":true});
 this["optima"]["templates"]["contact"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
@@ -574,8 +574,12 @@ this["optima"]["templates"]["quotation_options"] = Handlebars.template({"1":func
 },"23":function(depth0,helpers,partials,data) {
     return "        <option value=\"\">Asesor</option>\n";
 },"25":function(depth0,helpers,partials,data) {
-    return "\n";
+    return "    <a href=\"#\" class=\"btn btn-default btn-xs service-approval-add\">Agregar aprobación de servicio</a>\n";
 },"27":function(depth0,helpers,partials,data) {
+    return "    <a href=\"#\" class=\"btn btn-danger btn-xs service-approval-remove\">Quitar aprobación de servicio</a>\n";
+},"29":function(depth0,helpers,partials,data) {
+    return "\n";
+},"31":function(depth0,helpers,partials,data) {
     var helper;
 
   return "  <div class=\"labels pull-right\">\n    <a href=\"#\" class=\"btn btn-warning btn-xs send\">Enviar</a>\n    <a href=\"#\" class=\"btn btn-warning btn-xs change-delivered btn-hidden\">Entregada</a>\n    <a href=\"#\" class=\"btn btn-danger btn-xs open-no-send btn-hidden\">No enviada</a>\n    \n    <a href=\"/quotations/"
@@ -605,8 +609,10 @@ this["optima"]["templates"]["quotation_options"] = Handlebars.template({"1":func
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
     + "/pdflogos\" target=\"_blank\">Con logos </a> </li>\n      <li> <a href=\"/quotations/"
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
-    + "/pdfbn\" target=\"_blank\">Blanco y negro </a> </li>\n    </ul>\n  </div>\n  \n  <a href=\"#\" class=\"open-comment btn btn-default btn-xs\">Agregar Comentario</a>\n  <a href=\"#\" class=\"btn btn-default btn-xs open-mail\">Agregar email</a>\n  <hr class=\"visible-xs\">\n\n"
-    + ((stack1 = (helpers.isEffective || (depth0 && depth0.isEffective) || alias1).call(depth0,(depth0 != null ? depth0.status : depth0),{"name":"isEffective","hash":{},"fn":this.program(25, data, 0),"inverse":this.program(27, data, 0),"data":data})) != null ? stack1 : "")
+    + "/pdfbn\" target=\"_blank\">Blanco y negro </a> </li>\n    </ul>\n  </div>\n  \n  <a href=\"#\" class=\"open-comment btn btn-default btn-xs\">Agregar Comentario</a>\n  <a href=\"#\" class=\"btn btn-default btn-xs open-mail\">Agregar email</a>\n\n"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.service_approval : depth0),{"name":"if","hash":{},"fn":this.program(25, data, 0),"inverse":this.program(27, data, 0),"data":data})) != null ? stack1 : "")
+    + "\n  <hr class=\"visible-xs\">\n\n"
+    + ((stack1 = (helpers.isEffective || (depth0 && depth0.isEffective) || alias1).call(depth0,(depth0 != null ? depth0.status : depth0),{"name":"isEffective","hash":{},"fn":this.program(29, data, 0),"inverse":this.program(31, data, 0),"data":data})) != null ? stack1 : "")
     + "</div>";
 },"usePartial":true,"useData":true});
 this["optima"]["templates"]["quotation_product"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
@@ -813,6 +819,19 @@ this["optima"]["templates"]["todo"] = Handlebars.template({"1":function(depth0,h
     var stack1;
 
   return ((stack1 = (helpers.check_completed || (depth0 && depth0.check_completed) || helpers.helperMissing).call(depth0,(depth0 != null ? depth0.completed : depth0),{"name":"check_completed","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "");
+},"useData":true});
+this["optima"]["templates"]["todo_mail"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n<!-- If you delete this meta tag, Half Life 3 will never be released. -->\n<meta name=\"viewport\" content=\"width=device-width\" />\n\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n<title></title>\n  \n<style>\n  /* ------------------------------------- \n    GLOBAL \n------------------------------------- */\n* { \n  margin:0;\n  padding:0;\n}\n* { font-family: \"Helvetica Neue\", \"Helvetica\", Helvetica, Arial, sans-serif; }\n\nimg { \n  max-width: 100%; \n}\n.collapse {\n  margin:0;\n  padding:0;\n}\nbody {\n  -webkit-font-smoothing:antialiased; \n  -webkit-text-size-adjust:none; \n  width: 100%!important; \n  height: 100%;\n}\n\n\n/* ------------------------------------- \n    ELEMENTS \n------------------------------------- */\na { color: #2BA6CB;}\n\n.btn {\n  text-decoration:none;\n  color: #FFF;\n  background-color: #666;\n  padding:10px 16px;\n  font-weight:bold;\n  margin-right:10px;\n  text-align:center;\n  cursor:pointer;\n  display: inline-block;\n}\n\np.callout {\n  padding:15px;\n  background-color:#F5F5F5;\n  margin-bottom: 15px;\n}\n.callout a {\n  font-weight:bold;\n  color: #333;\n}\n\ntable.social {\n/*  padding:15px; */\n  background-color: #ebebeb;\n  \n}\n.social .soc-btn {\n  padding: 3px 7px;\n  font-size:12px;\n  margin-bottom:10px;\n  text-decoration:none;\n  color: #FFF;font-weight:bold;\n  display:block;\n  text-align:center;\n}\na.fb { background-color: #3B5998!important; }\na.tw { background-color: #1daced!important; }\na.gp { background-color: #DB4A39!important; }\na.ms { background-color: #000!important; }\n\n.sidebar .soc-btn { \n  display:block;\n  width:100%;\n}\n\n/* ------------------------------------- \n    HEADER \n------------------------------------- */\ntable.head-wrap { width: 100%;}\n\n.header.container table td.logo { padding: 15px; }\n.header.container table td.label { padding: 15px; padding-left:0px;}\n\n\n/* ------------------------------------- \n    BODY \n------------------------------------- */\ntable.body-wrap { width: 100%;}\n\n\n/* ------------------------------------- \n    FOOTER \n------------------------------------- */\ntable.footer-wrap { width: 100%;  clear:both!important;\n}\n.footer-wrap .container td.content  p { border-top: 1px solid rgb(215,215,215); padding-top:15px;}\n.footer-wrap .container td.content p {\n  font-size:10px;\n  font-weight: bold;\n  \n}\n\n/* ------------------------------------- \n    TYPOGRAPHY \n------------------------------------- */\nh1,h2,h3,h4,h5,h6 {\nfont-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif; line-height: 1.1; margin-bottom:15px; color:#000;\n}\nh1 small, h2 small, h3 small, h4 small, h5 small, h6 small { font-size: 60%; color: #6f6f6f; line-height: 0; text-transform: none; }\n\nh1 { font-weight:200; font-size: 44px;}\nh2 { font-weight:200; font-size: 37px;}\nh3 { font-weight:500; font-size: 27px;}\nh4 { font-weight:500; font-size: 23px;}\nh5 { font-weight:900; font-size: 17px;}\nh6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#444;}\n\n.collapse { margin:0!important;}\n\np, ul { \n  margin-bottom: 10px; \n  font-weight: normal; \n  font-size:14px; \n  line-height:1.6;\n}\np.lead { font-size:17px; }\np.last { margin-bottom:0px;}\n\nul li {\n  margin-left:5px;\n  list-style-position: inside;\n}\n\n/* ------------------------------------- \n    SIDEBAR \n------------------------------------- */\nul.sidebar {\n  background:#ebebeb;\n  display:block;\n  list-style-type: none;\n}\nul.sidebar li { display: block; margin:0;}\nul.sidebar li a {\n  text-decoration:none;\n  color: #666;\n  padding:10px 16px;\n/*  font-weight:bold; */\n  margin-right:10px;\n/*  text-align:center; */\n  cursor:pointer;\n  border-bottom: 1px solid #777777;\n  border-top: 1px solid #FFFFFF;\n  display:block;\n  margin:0;\n}\nul.sidebar li a.last { border-bottom-width:0px;}\nul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.sidebar li a h5,ul.sidebar li a h6,ul.sidebar li a p { margin-bottom:0!important;}\n\n\n\n/* --------------------------------------------------- \n    RESPONSIVENESS\n    Nuke it from orbit. It's the only way to be sure. \n------------------------------------------------------ */\n\n/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */\n.container {\n  display:block!important;\n  max-width:600px!important;\n  margin:0 auto!important; /* makes it centered */\n  clear:both!important;\n}\n\n/* This should also be a block element, so that it will fill 100% of the .container */\n.content {\n  padding:15px;\n  max-width:600px;\n  margin:0 auto;\n  display:block; \n}\n\n/* Let's make sure tables in the content area are 100% wide */\n.content table { width: 100%; }\n\n\n/* Odds and ends */\n.column {\n  width: 300px;\n  float:left;\n}\n.column tr td { padding: 15px; }\n.column-wrap { \n  padding:0!important; \n  margin:0 auto; \n  max-width:600px!important;\n}\n.column table { width:100%;}\n.social .column {\n  width: 280px;\n  min-width: 279px;\n  float:left;\n}\n\n/* Be sure to place a .clear element after each set of columns, just to be safe */\n.clear { display: block; clear: both; }\n\n\n/* ------------------------------------------- \n    PHONE\n    For clients that support media queries.\n    Nothing fancy. \n-------------------------------------------- */\n@media only screen and (max-width: 600px) {\n  \n  a[class=\"btn\"] { display:block!important; margin-bottom:10px!important; background-image:none!important; margin-right:0!important;}\n\n  div[class=\"column\"] { width: auto!important; float:none!important;}\n  \n  table.social div[class=\"column\"] {\n    width:auto!important;\n  }\n\n}\n</style>\n\n</head>\n \n<body bgcolor=\"#FFFFFF\">\n\n<!-- HEADER -->\n<table class=\"head-wrap\" bgcolor=\"#1D2127\">\n  <tr>\n    <td></td>\n    <td class=\"header container\" >\n        \n        <div class=\"content\">\n        <table bgcolor=\"#1D2127\">\n          <tr>\n            <td><img src=\"http://optima.avante.cc/img/logo-home.png\" alt=\"Optima logo\" /></td>\n          </tr>\n        </table>\n        </div>\n        \n    </td>\n    <td></td>\n  </tr>\n</table><!-- /HEADER -->\n\n\n<!-- BODY -->\n<table class=\"body-wrap\">\n  <tr>\n    <td></td>\n    <td class=\"container\" bgcolor=\"#FFFFFF\">\n\n      <div class=\"content\">\n      <table>\n        <tr>\n          <td>\n            <h4>Nueva tarea</h4>\n            <p><b>Fecha vencimiento:</b> "
+    + alias3(((helper = (helper = helpers.expires_date || (depth0 != null ? depth0.expires_date : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"expires_date","hash":{},"data":data}) : helper)))
+    + " - "
+    + alias3(((helper = (helper = helpers.expires_time || (depth0 != null ? depth0.expires_time : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"expires_time","hash":{},"data":data}) : helper)))
+    + "</p>\n            <b>"
+    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
+    + "</b>\n            <p>"
+    + alias3(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
+    + "</p>\n            <!-- Callout Panel -->\n            <p class=\"callout\">\n              <a href=\"http://optima.avante.cc\">Click aquí</a> para ver mas tareas asignadas.\n            </p><!-- /Callout Panel -->         \n\n          </td>\n        </tr>\n      </table>\n      </div><!-- /content -->\n                  \n    </td>\n    <td></td>\n  </tr>\n</table><!-- /BODY -->\n\n\n\n</body>\n</html>";
 },"useData":true});
 this["optima"]["templates"]["todo_tracking"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;

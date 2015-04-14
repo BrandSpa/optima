@@ -12,17 +12,21 @@ $ ->
     pull: ->
       @collection.fetch reset: true
 
-    addOne: (model) ->
-      view = new optima.views.TodoView model: model
-      view.mailing()
-      $(@el).find('.last-tracking').prepend view.render().el
+    # addOne: (model) ->
+    #   view = new optima.views.TodoView model: model
+    #   view.mailing()
+    #   $(@el).find('.last-tracking').prepend view.render().el
 
     render: ->
-      $(@el).find('#pending > table tbody').empty()
+      html = []
+      $tbody = $(@el).find('table tbody')
+      
       @collection.each (model) ->
         view = new optima.views.TodoView model: model
-        $(@el).find('table').append view.render().el
+        html.push(view.render().el)
       , @
+
+      $tbody.empty().append html
 
     showMoreInfo: (field) ->
       unless optima.user_id == 3

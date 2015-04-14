@@ -20,7 +20,8 @@ class QuotationMailer extends Mailer {
 			"url" => $quotation->id."/pdf/".Crypt::encrypt($quotation->id), 
 			"user" => $quotation->user->name." ".$quotation->user->lastname,
 			"message" => $quotation->mail_message,
-			"type" => $quotation->type
+			"type" => $quotation->type,
+			"service_approval" => $quotation->service_approval
 		];
 
 		if($email) {

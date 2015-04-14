@@ -1,7 +1,5 @@
 @section('content')
-
 <div class="col-lg-9">
-
 		<div class="panel panel-default" id="quotations">
 			<div class="panel-heading">
 			<div class="row">
@@ -98,7 +96,6 @@
 					</table>
 				</div>
 		</div>
-	
 	</div>
 </div> <!-- end row -->
 

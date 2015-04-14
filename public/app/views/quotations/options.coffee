@@ -14,6 +14,8 @@ $ ->
       'click .open-no-send': 'openNoSend'
       'click .open-mail': 'openMail'
       'click .send': 'send'
+      'click .service-approval-remove': "serviceApprovalRemove"
+      'click .service-approval-add': "serviceApprovalAdd"
       
     initialize: ->
       @listenTo(@model, 'change', @render)
@@ -132,3 +134,14 @@ $ ->
         return false
       else
         return true
+   
+    serviceApprovalRemove: (evt) ->
+      evt.preventDefault()
+      @model.save service_approval: 1
+
+    serviceApprovalAdd: (evt) ->
+      evt.preventDefault()
+      @model.save service_approval: 0
+
+
+

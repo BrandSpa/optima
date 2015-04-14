@@ -15,12 +15,17 @@ $ ->
       $(@el).find('table .thead').after companyView.render().el
 
     render: ->
+      $table = $(@el).find('table tbody')
+      html = []
       @collection.each (model) ->
-        companyView = new optima.views.CompanyView model: model
-        $(@el).find('table').append companyView.render().el
+        view = new optima.views.CompanyView model: model
+        html.push(view.render().el)
+
         $(@el).find('.table-responsive').slimScroll
           height: '400px'
       , @
+
+      $table.empty().append(html)
 
     seeMore: (e) ->
       e.preventDefault()

@@ -443,13 +443,16 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <h3>Para su aprobación por favor especificar:</h3>
-                                               Fecha de entrega
-                                               <br />
-                                               Nombre y teléfono de contacto
-                                               <br />
-                                               Dirección de entrega
-                                               <br />
+												@if($data['service_approval'] != 1)
+	                                               <h3>Para su aprobación por favor especificar:</h3>
+	                                               Fecha de entrega
+	                                               <br />
+	                                               Nombre y teléfono de contacto
+	                                               <br />
+	                                               Dirección de entrega
+	                                               <br />
+												@endif
+												
                                                Por favor tenga en cuenta los términos del servicio consignados en esta guía 
                                                @if(isset($data['type']) && $data['type'] == "Servicio")
                                                		<a href="http://www.avante.cc/it.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>

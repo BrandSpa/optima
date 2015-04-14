@@ -18,11 +18,12 @@ $ ->
       $(@el).find('.modal-content').html template( company )
       $(@el).modal({backdrop: 'static'})
 
-    store: (e) ->
-      e.preventDefault()
+    store: (evt) ->
+      _evt = evt;
+      _evt.preventDefault()
       dataForm = $('#contact-create-form').serializeJSON()
       @model.save dataForm, wait: true
-      
+
     added: ->
       id = @model.get('id')
       company_id = @model.get('company_id')

@@ -6,3 +6,5 @@
 .env.*.php
 .env.php
 
+
+tests/_output/*

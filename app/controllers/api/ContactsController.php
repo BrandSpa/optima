@@ -7,9 +7,14 @@ use Optima\Quotation;
 use Input;
 
 class ContactsController extends \BaseController {
-
 	
+	protected $entity;
 
+	public function __construct(Contact $model)
+	{
+		$this->entity = $model;
+	}
+	
 	public function index()
 	{
 		$company = Input::get('company_id');

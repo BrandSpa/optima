@@ -18,7 +18,7 @@
 		<div class="table-responsive">
 			<table class="table table-condensed">
 				<thead>
-						<tr class="thead">
+					<tr class="thead">
 					<th>Empresa</th>
 					<th></th>
 					<th>NIT</th>
@@ -28,6 +28,7 @@
 					<th></th>
 				</tr>
 				</thead>
+				<tbody></tbody>
 			
 			</table>
 			</div>
