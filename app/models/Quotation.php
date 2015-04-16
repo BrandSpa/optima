@@ -202,7 +202,7 @@ class Quotation extends \Eloquent {
 
 	public static function search_by_quotation($query)
 	{
-		$quotations = Quotation::with('company', 'contact')->where("id", "like", "$query%")->orderBy('created_at', 'asc')->take(25)->get();
+		$quotations = Quotation::with('company', 'contact')->where("id", "like", "$query%")->orderBy('id', 'DESC')->take(50)->get();
 		return $quotations;
 	}
 
@@ -210,25 +210,27 @@ class Quotation extends \Eloquent {
 	{
 		$quotations = Quotation::with(array('company', 'contact' => function($query) use($q) {
 			$query->where('name', 'like', "%$q%");
-		}))->whereHas('contact', function($query) use($q) {
+		}))
+		->whereHas('contact', function($query) use($q) {
 			$query->where('name', 'like', "%$q%");
-		})->orderBy('created_at', 'asc')->take(25)->get();
+		})
+		->orderBy('id', 'DESC')->take(50)->get();
 
 		return $quotations;
 	}
 
 	public static function search_by_company($q)
 	{
-		$quotations = Quotation::with(array('contact', 'company' => function($query) use($q)
+		$collection = Quotation::with(array('contact', 'company' => function($query) use($q)
 		{
 			$query->where('name', 'like', "%$q%");
 		}))
-		->whereHas('company', function($query) use($q)
-		{
+		->whereHas('company', function($query) use($q) {
 			$query->where('name', 'like', "%$q%");
-		})->orderBy('created_at', 'asc')->take(25)->get();
+		})
+		->take(50)->orderBy('id', 'DESC')->get();
 
-		return $quotations;
+		return $collection;
 	}
 
 	public static function rethinked($id)

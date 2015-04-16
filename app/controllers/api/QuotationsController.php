@@ -25,10 +25,10 @@ class QuotationsController extends \BaseController {
 		if (Input::has('query')) {
 			$collection = $this->entity->search($query);
 			return Response::json($collection, 200);
+		} else {
+			$collection = $this->entity->takeAndSkip(10, $skip);
+			return Response::json($collection, 200);
 		}
-
-		$collection = $this->entity->takeAndSkip(10, $skip);
-		return Response::json($collection, 200);
 	}
 
 	public function show($id)

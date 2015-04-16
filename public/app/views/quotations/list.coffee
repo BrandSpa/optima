@@ -66,7 +66,7 @@ $ ->
     search: (e) ->
       e.preventDefault()
       query = $('.quotation-query').val()
-      @collection.fetch data: query: query
+      @collection.fetch reset: true, data: query: query
 
     openQuote: (e) ->
       e.preventDefault()

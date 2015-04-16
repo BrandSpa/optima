@@ -1701,6 +1701,7 @@ $(function() {
       e.preventDefault();
       query = $('.quotation-query').val();
       return this.collection.fetch({
+        reset: true,
         data: {
           query: query
         }
