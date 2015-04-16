@@ -50,30 +50,6 @@ class ContactsController extends \BaseController {
 		return Response::json($model, 200);
 	}
 
-	public function store()
-	{
-		$data = Input::all();
-		$model = Contact::store($data);
-		
-		if (isset($model->id)) {
-			return Response::json($model, 200);
-		}
-
-		return Response::json($model, 400);
-	}
-
-	public function update($id)
-	{
-		$data = Input::all();
-		$model = Contact::findAndupdate($id, $data);
-
-		if ($model->id) {
-			return Response::json($model, 200);
-		}
-
-		return Response::json($model, 304);
-		
-	}
 
 	public function search($query) 
 	{

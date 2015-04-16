@@ -23,7 +23,7 @@ class Contact extends \Eloquent {
 		'comment'
 		];
 
-	public static $rules = [
+	public $rules = [
 		'name' => 'required', 
 		'email' => 'required|email'
 	];

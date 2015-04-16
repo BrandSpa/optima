@@ -9,6 +9,7 @@ class QuotationServiceResourceCest
 
     public function _before(ApiTester $I)
     {
+    	$I->amLoggedAs(['email' => 'alejandro@brandspa.com', 'password' => '0PT1M4.cc']);
     	$dataQuotation = [
     		'user_id' => 1,
     		'contact_id' => 1,

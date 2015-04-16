@@ -8,6 +8,13 @@ class CompanyResourceCest
 
     }
 
+    public function _after()
+    {
+
+    	DB::table('companies')->truncate();
+    	DB::table('contacts')->truncate();
+    }
+
   	public function storeCompany(ApiTester $I)
   	{
   		
