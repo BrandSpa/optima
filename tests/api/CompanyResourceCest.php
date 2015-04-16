@@ -72,11 +72,63 @@ class CompanyResourceCest
 
   	public function searchCompany(ApiTester $I)
   	{	
-  		$data = ["query" => "avantel"];
+  		$companyData1 = [
+	        'name' => 'Brand Spa 1',
+	        'nit' => '123456789',
+	        'sector' => 'Publicidad',
+	        'city' => 'Bogotá',
+	        'address' => 'cr 7 # 100 - 89',
+	        'phone' => '1234567',
+	        'type' => 'Nueva',
+	        'web' => 'brandspa.com',
+	        'comment' => 'lorem ipsom'
+        ];
+
+        $companyData2 = [
+	        'name' => 'Brand Spa 2',
+	        'nit' => '123456789',
+	        'sector' => 'Publicidad',
+	        'city' => 'Bogotá',
+	        'address' => 'cr 7 # 100 - 89',
+	        'phone' => '1234567',
+	        'type' => 'Nueva',
+	        'web' => 'brandspa.com',
+	        'comment' => 'lorem ipsom'
+        ];
+
+        $I->sendPOST('/api/v1/companies', $companyData1);
+        $I->sendPOST('/api/v1/companies', $companyData2);
+
+  		$data = ["query" => "brand"];
   		$I->sendGET("/api/v1/companies", $data);
   		$I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(["name" => "brand spa"]);
+        $I->seeResponseContainsJson([
+        	[
+        		'id' => 1,
+		        'name' => 'Brand Spa 1',
+		        'nit' => '123456789',
+		        'sector' => 'Publicidad',
+		        'city' => 'Bogotá',
+		        'address' => 'cr 7 # 100 - 89',
+		        'phone' => '1234567',
+		        'type' => 'Nueva',
+		        'web' => 'brandspa.com',
+		        'comment' => 'lorem ipsom'
+        	],
+        	[
+        		'id' => 2,
+		        'name' => 'Brand Spa 2',
+		        'nit' => '123456789',
+		        'sector' => 'Publicidad',
+		        'city' => 'Bogotá',
+		        'address' => 'cr 7 # 100 - 89',
+		        'phone' => '1234567',
+		        'type' => 'Nueva',
+		        'web' => 'brandspa.com',
+		        'comment' => 'lorem ipsom'
+        	]
+        ]);
 
   	}
 

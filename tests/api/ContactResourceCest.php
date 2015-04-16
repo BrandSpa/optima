@@ -26,7 +26,7 @@ class ContactResourceCest
     		'lastname' => 'Sanabria',
     		'email' => 'alejandro@brandspa.com',
     		'gender' => 'Masculino',
-    		'title' => 'Developer',
+    		'title' => 'Developer'
     	];
 
     	$I->sendPOST($this->endpoint, $contactData);
@@ -36,4 +36,52 @@ class ContactResourceCest
         $dataStored = array_merge($contactData, ['id' => $contactId]);
         $I->seeResponseContainsJson($dataStored);
     }
+
+    	public function searchCompany(ApiTester $I)
+  	{	
+  		$contactData1 = [
+	        'company_id' => 1,
+    		'name' => 'Alejandro 1',
+    		'lastname' => 'Sanabria',
+    		'email' => 'alejandro@brandspa.com',
+    		'gender' => 'Masculino',
+    		'title' => 'Developer'
+        ];
+
+        $contactData2 = [
+	       	'company_id' => 1,
+    		'name' => 'Alejandro 2',
+    		'lastname' => 'Sanabria',
+    		'email' => 'alejandro@brandspa.com',
+    		'gender' => 'Masculino',
+    		'title' => 'Developer'
+        ];
+
+        $I->sendPOST('/api/v1/contacts', $contactData1);
+        $I->sendPOST('/api/v1/contacts', $contactData2);
+
+  		$data = ["query" => "ale"];
+  		$I->sendGET("/api/v1/contacts", $data);
+  		$I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson([
+        	[
+	        'company_id' => 1,
+    		'name' => 'Alejandro 1',
+    		'lastname' => 'Sanabria',
+    		'email' => 'alejandro@brandspa.com',
+    		'gender' => 'Masculino',
+    		'title' => 'Developer'
+        	],
+        	[
+		        'company_id' => 1,
+	    		'name' => 'Alejandro 2',
+	    		'lastname' => 'Sanabria',
+	    		'email' => 'alejandro@brandspa.com',
+	    		'gender' => 'Masculino',
+	    		'title' => 'Developer'
+        	]
+        ]);
+
+  	}
 }
