@@ -21,12 +21,12 @@ class CompaniesController extends \BaseController {
 		$query = Input::get('query');
 		
 		if ($query) {
-			$this->search($query);
+			$collection = $this->entity->search($query);
+			return Response::json($collection, 200);
+		} else {
+			$collection = Company::takeAndSkip(10, $offset);
+			return Response::json($collection, 200);
 		}
-		
-		$collection = Company::takeAndSkip(10, $offset);
-
-		return Response::json($collection, 200);
 	}
 
 	public function show($id) 
@@ -35,9 +35,5 @@ class CompaniesController extends \BaseController {
 		return Response::json($model, 200);
 	}
 
-	public function search($query) 
-	{
-		$collection = Company::search($query);
-		return Response::json($collection, 200);
-	}
+
 }

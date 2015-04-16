@@ -20,11 +20,9 @@ $ ->
       @collection.each (model) ->
         view = new optima.views.CompanyView model: model
         html.push(view.render().el)
-
-        $(@el).find('.table-responsive').slimScroll
-          height: '400px'
       , @
-
+      $(@el).find('.table-responsive').slimScroll
+        height: '400px'
       $table.empty().append(html)
 
     seeMore: (e) ->
@@ -38,7 +36,7 @@ $ ->
     search: (e) ->
       e.preventDefault()
       query = $('.company-query').val()
-      @collection.fetch data: query: query
+      @collection.fetch reset: true, data: query: query
 
     openCreate: (e) ->
       e.preventDefault()

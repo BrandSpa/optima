@@ -70,5 +70,15 @@ class CompanyResourceCest
         $I->seeResponseContainsJson($companyDataUpdate);
   	}
 
+  	public function searchCompany(ApiTester $I)
+  	{	
+  		$data = ["query" => "avantel"];
+  		$I->sendGET("/api/v1/companies", $data);
+  		$I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(["name" => "brand spa"]);
+
+  	}
+
   	
 }

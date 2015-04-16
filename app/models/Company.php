@@ -36,7 +36,7 @@ class Company extends \Eloquent {
 	{
 		return self::where("name", "LIKE", "%$query%")
 							->orWhere("nit", "LIKE", "$query%")
-							->take(10)->get();
+							->take(50)->orderBy('id', 'DESC')->get();
 	}
 
 	public static function takeAndSkip($take = 10, $skip = 0)

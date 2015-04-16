@@ -633,11 +633,11 @@ $(function() {
         view = new optima.views.CompanyView({
           model: model
         });
-        html.push(view.render().el);
-        return $(this.el).find('.table-responsive').slimScroll({
-          height: '400px'
-        });
+        return html.push(view.render().el);
       }, this);
+      $(this.el).find('.table-responsive').slimScroll({
+        height: '400px'
+      });
       return $table.empty().append(html);
     };
 
@@ -660,6 +660,7 @@ $(function() {
       e.preventDefault();
       query = $('.company-query').val();
       return this.collection.fetch({
+        reset: true,
         data: {
           query: query
         }

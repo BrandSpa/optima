@@ -1,43 +1,5 @@
 this["optima"] = this["optima"] || {};
 this["optima"]["templates"] = this["optima"]["templates"] || {};
-this["optima"]["templates"]["activity"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return " en <a href=\"/quotations/"
-    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
-    + "</a>";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
-
-  return "<td>\n<span class=\"timeago\" title=\""
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "</span>\n<br>\n	"
-    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
-    + " "
-    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.lastname : stack1), depth0))
-    + " "
-    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
-    + "\n	"
-    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.quotation_id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "<br>\n	\n</td>";
-},"useData":true});
-this["optima"]["templates"]["activity_quotation"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return "<td><span class=\"timeago\" title=\""
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "</span> <br> "
-    + alias3(this.lambda(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
-    + " "
-    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
-    + "</td>";
-},"useData":true});
 this["optima"]["templates"]["company"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -301,6 +263,44 @@ this["optima"]["templates"]["found_us_options"] = Handlebars.template({"compiler
 },"useData":true});
 this["optima"]["templates"]["sectors_options"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<option value=\"Administración gubernamental\">Administración gubernamental</option>\n<option value=\"Alimentación y bebidas\">Alimentación y bebidas</option>\n<option value=\"Almacenamiento\">Almacenamiento</option>\n<option value=\"Animación\">Animación</option>\n<option value=\"Apuestas y casinos\">Apuestas y casinos</option>\n<option value=\"Arquitectura y planificación\">Arquitectura y planificación</option>\n<option value=\"Artículos de consumo\">Artículos de consumo</option>\n<option value=\"Asuntos internacionales\">Asuntos internacionales</option>\n<option value=\"Atención sanitaria y hospitalaria\">Atención sanitaria y hospitalaria</option>\n<option value=\"Automatización industrial\">Automatización industrial</option>\n<option value=\"Banca\">Banca</option>\n<option value=\"Banca de inversiones\">Banca de inversiones</option>\n<option value=\"Bienes inmobiliarios\">Bienes inmobiliarios</option>\n<option value=\"Construcción\">Construcción</option>\n<option value=\"Comercializadora\">Comercializadora</option>\n<option value=\"Consultores\">Consultores</option>\n<option value=\"Derecho\">Derecho</option>\n<option value=\"Desarrollo de programación\">Desarrollo de programación</option>\n<option value=\"Desarrollo de software\">Desarrollo de software</option>\n<option value=\"Diseño\">Diseño</option>\n<option value=\"Dotación y selección de personal\">Dotación y selección de personal</option>\n<option value=\"Educación primaria secundaria\">Educación primaria/secundaria</option>\n<option value=\"Electrónica de consumo\">Electrónica de consumo</option>\n<option value=\"Enseñanza superior\">Enseñanza superior</option>\n<option value=\"Entretenimiento\">Entretenimiento</option>\n<option value=\"Eventos\">Eventos</option>\n<option value=\"Financiero\">Financiero</option>\n<option value=\"Hostelería\">Hostelería</option>\n<option value=\"Marketing y publicidad\">Marketing y publicidad</option>\n<option value=\"Ingeniería\">Ingeniería</option>\n<option value=\"Ocio viajes y turismo\">Ocio, viajes y turismo</option>\n<option value=\"Organización política\">Organización política</option>\n<option value=\"Recursos humanos\">Recursos humanos</option>\n<option value=\"Restaurantes\">Restaurantes</option>\n<option value=\"Salud\">Salud</option>\n<option value=\"Seguridad\">Seguridad</option>\n<option value=\"Sistemas\">Sistemas</option>\n<option value=\"Soluciones de software\">Soluciones de software</option>\n<option value=\"Telecomunicaciones\">Telecomunicaciones</option>";
+},"useData":true});
+this["optima"]["templates"]["activity"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return " en <a href=\"/quotations/"
+    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
+    + "</a>";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
+
+  return "<td>\n<span class=\"timeago\" title=\""
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "</span>\n<br>\n	"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
+    + " "
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.lastname : stack1), depth0))
+    + " "
+    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
+    + "\n	"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.quotation_id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "<br>\n	\n</td>";
+},"useData":true});
+this["optima"]["templates"]["activity_quotation"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<td><span class=\"timeago\" title=\""
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "</span> <br> "
+    + alias3(this.lambda(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
+    + " "
+    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
+    + "</td>";
 },"useData":true});
 this["optima"]["templates"]["pdf"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<link rel=\"stylesheet\" href=\"/css/pdf/pdf.css\">\n\n<div class=\"footer\">Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6</div>\n<div id=\"header\">\n	@section('header')\n	@show\n	<span>[[ $quotation->id ]]</span>\n</div>\n\n<div id=\"content\">\n	<div id=\"contact\">\n		<p class=\"date\">Bogotá D.C. [[ date_format($quotation->created_at, 'd/m/Y')  ]]</p>\n		<p></p>\n		<p>[[ $quotation->company->name ]]</p>\n		<p>@if( $quotation->contact->title )[[ $quotation->contact->title ]], @endif [[ $quotation->contact->name ]] [[ $quotation->contact->lastname ]]</p>\n		<p>[[ $quotation->contact->position ]]</p>\n		<p>[[ $quotation->company->address ]]</p>\n		<p>[[ $quotation->contact->phone_1 ]]</p>\n		<p>[[ $quotation->contact->phone_2 ]]</p>\n	</div>\n	\n	<div id=\"intro\">\n		<p>\n			En Avante trabajamos para que usted y su compañía tengan a mano herramientas tecnológicas siempre actualizadas.\n			Nuestro modelo de Renting le permite contar con equipos de última tecnología a su medida,\n			en las principales marcas del mundo, por los periodos que su compañía los necesite,\n			ofreciéndole grandes ventajas tributarias y valores agregados fundamentales como nuestro Servicio Técnico 24/7®,\n			Discos Duros Seguros®, Rescate Online® entre otros, <br>(adjunto encontrará nuestro portafolio de soluciones).\n		</p>\n\n		<p>\n			Atendiendo a su solicitud nos complace enviar la cotización de los productos y servicios solicitados,\n			estamos dispuestos a atender cualquier inquietud y por supuesto a presentarle todo nuestro portafolio,\n			en el que de seguro encontrará nuevas herramientas para su empresa.\n</p>\n	</div>\n</div>\n<br>\n<br>\n<br>\n@yield('content')\n";
@@ -674,7 +674,7 @@ this["optima"]["templates"]["quotation_options"] = Handlebars.template({"1":func
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.offer : depth0),{"name":"if","hash":{},"fn":this.program(17, data, 0),"inverse":this.program(19, data, 0),"data":data})) != null ? stack1 : "")
     + "      <option value=\"Desktops\">Desktops</option>\n      <option value=\"Laptops\">Laptops</option>\n      <option value=\"Apple\">Apple</option>\n      <option value=\"Servers\">Servers</option>\n      <option value=\"IT Service\">IT Service</option>\n      <option value=\"IT Service 24/7\">IT  Service 24/7</option>\n      <option value=\"Rescate Online\">Rescate Online</option>\n      <option value=\"Discos Duros Seguros\">Discos Duros Seguros</option>\n      <option value=\"Networks\">Networks</option>\n      <option value=\"Complements\">Complements</option>\n      <option value=\"Printers\">Printers</option>\n    </select>\n</div>\n<div class=\"col-lg-2\">\n    <select class=\"select-advisor form-control  select-xs\">\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.advisor : depth0),{"name":"if","hash":{},"fn":this.program(21, data, 0),"inverse":this.program(23, data, 0),"data":data})) != null ? stack1 : "")
-    + "      <option value=\"Andrés Rojas\">Andrés Rojas</option>\n      <option value=\"Diego Peña\">Diego Peña</option>\n      <option value=\"No aplica\">No aplica</option>\n      <option value=\"Otros\">Otros</option>\n    </select>\n</div>\n</div>\n<hr class=\"btn-hidden\">\n  <div class=\"btn-group btn-md\">\n    <button class=\"btn btn-default btn-xs  dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\n      PDF <span class=\"caret\"></span>\n    </button>\n\n    <ul class=\"dropdown-menu\" role=\"menu\">\n      <li> <a href=\"/quotations/"
+    + "      <option value=\"Andrés Rojas\">Andrés Rojas</option>\n      <option value=\"Diego Peña\">Diego Peña</option>\n      <option value=\"No aplica\">No aplica</option>\n      <option value=\"Otros\">Otros</option>\n    </select>\n</div>\n\n</div>\n<hr class=\"btn-hidden\">\n  <div class=\"btn-group btn-md\">\n    <button class=\"btn btn-default btn-xs  dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\n      PDF <span class=\"caret\"></span>\n    </button>\n\n    <ul class=\"dropdown-menu\" role=\"menu\">\n      <li> <a href=\"/quotations/"
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
     + "/pdf/"
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
