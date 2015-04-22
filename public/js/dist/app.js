@@ -3049,6 +3049,7 @@ $(function() {
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.add, this);
       this.quotation_id = optima.pathArray[2];
+      console.log(this.quotation_id);
       return pubsub.on("services:pull", this.getMore, this);
     };
 
@@ -3093,15 +3094,26 @@ $(function() {
     };
 
     QuotationServicesView.prototype.attach = function(e) {
-      var service_id;
+      var _this, service_id;
       e.preventDefault();
       service_id = $('#quotation-service-list').find('select').val();
-      $.post("/api/v1/quotations/" + this.quotation_id + "/services", {
-        service_id: service_id
-      }).done(function(res) {
-        return socket.emit("quotation-service", res.id);
+      _this = this;
+      return $.ajax({
+        type: "POST",
+        url: "/api/v1/quotations/" + this.quotation_id + "/services",
+        data: {
+          service_id: service_id
+        },
+        success: function(res) {
+          socket.emit("quotation-service", res.id);
+          return _this.storeActivity(_this.quotation_id, "agrego un servicio");
+        },
+        error: function(xhr, status, err) {
+          var error;
+          error = JSON.parse(xhr.responseText);
+          return alertify.error(error.error);
+        }
       });
-      return this.storeActivity(this.quotation_id, "agrego un servicio");
     };
 
     return QuotationServicesView;
@@ -3126,6 +3138,7 @@ $(function() {
 
     QuotationServiceCreate.prototype.events = {
       'submit #service-search-form': 'search',
+      'keydown .service-query': 'autocomplete',
       'click .modal-close': 'close'
     };
 
@@ -3142,10 +3155,10 @@ $(function() {
       });
     };
 
-    QuotationServiceCreate.prototype.search = function(e) {
-      var collection, query, results;
-      e.preventDefault();
-      query = $('.service-query').val();
+    QuotationServiceCreate.prototype.autocomplete = function(e) {
+      var $el, collection, query, results;
+      $el = $(e.currentTarget);
+      query = $el.val();
       collection = new optima.collections.Services;
       collection.fetch({
         reset: true,
@@ -3156,6 +3169,24 @@ $(function() {
       return results = new optima.views.ServiceResults({
         collection: collection
       });
+    };
+
+    QuotationServiceCreate.prototype.search = function(e) {
+      var collection, query, results;
+      e.preventDefault();
+      query = $('.service-query').val();
+      if (query.length > 2) {
+        collection = new optima.collections.Services;
+        collection.fetch({
+          reset: true,
+          data: {
+            query: query
+          }
+        });
+        return results = new optima.views.ServiceResults({
+          collection: collection
+        });
+      }
     };
 
     QuotationServiceCreate.prototype.close = function(e) {
@@ -3233,16 +3264,16 @@ $(function() {
     };
 
     ServiceResults.prototype.render = function() {
-      var el;
-      $(el).find('table').html('');
-      el = $(this.el);
-      return this.collection.each(function(model) {
+      var html;
+      html = [];
+      this.collection.each(function(model) {
         var view;
         view = new optima.views.ServiceResult({
           model: model
         });
-        return $(el).find('table').append(view.render().el);
-      });
+        return html.push(view.render().el);
+      }, this);
+      return $(this.el).find('table').empty().append(html);
     };
 
     ServiceResults.prototype.close = function() {

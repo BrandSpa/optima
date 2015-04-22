@@ -23,17 +23,17 @@ class CreateProductsTable extends Migration {
 			$table->string('burner', 150);
 			$table->string('network_card', 150);
 			$table->string('battery', 150);
-			$table->string('monitor', 150);  
+			$table->string('monitor', 150); 
 			$table->string('keyboard', 150);  
-			$table->string('os', 150);  
+			$table->string('os', 150);
 			$table->string('office', 150);  
 			$table->string('antivirus', 150);
-			$table->string('additional_1', 150);  
-			$table->string('additional_2', 150);  
+			$table->string('additional_1', 150);
+			$table->string('additional_2', 150); 
 			$table->string('additional_3', 150);  
 			$table->string('additional_4', 150);  
 			$table->string('additional_5', 150);  
-			$table->string('additional_6', 150);    
+			$table->string('additional_6', 150);   
 			$table->integer('lapse')->unsigned();  
 			$table->string('period', 50);
 			$table->integer('quantity')->unsigned();  
@@ -41,7 +41,10 @@ class CreateProductsTable extends Migration {
 			$table->integer('total')->unsigned();  
 			$table->boolean('show');
 			$table->boolean('iva');
-			$table->text('note');			
+			$table->text('note');
+			$table->string('spaces');		
+			$table->string('ordered');		
+			$table->string('position');		
 			$table->timestamps();
 		});
 	}

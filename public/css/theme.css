@@ -454,7 +454,8 @@ select .form-control {
     #lawyer-finish .lawyer-header h1 {
       font-size: 1.4em;
       margin-top: 0;
-      margin-bottom: 30px; }
+      margin-bottom: 30px;
+      color: #fff; }
     #lawyer-finish .lawyer-header p {
       margin: 0;
       font-size: 1.1em; }
@@ -1171,6 +1172,9 @@ select .form-control {
         font-size: 1.1em;
         line-height: 150%; }
         @media (max-width: 767px) {
+          .post-main-featured-item .content h3 a {
+            font-size: 0.8em; } }
+        @media (max-width: 480px) {
           .post-main-featured-item .content h3 a {
             font-size: 0.8em; } }
     .post-main-featured-item .content p {

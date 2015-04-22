@@ -109,7 +109,6 @@ class AcceptanceTester extends \Codeception\Actor
     public function amOnPage($page) {
         return $this->scenario->runStep(new \Codeception\Step\Condition('amOnPage', func_get_args()));
     }
-
  
     /**
      * [!] Method is generated. Documentation taken from corresponding module.

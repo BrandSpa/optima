@@ -9,6 +9,7 @@ $ ->
       @listenTo(@collection, 'reset', @render)
       @listenTo(@collection, 'add', @add, @)
       @quotation_id = optima.pathArray[2]
+      console.log @quotation_id
 
       pubsub.on("services:pull", @getMore, @)
 
@@ -43,10 +44,19 @@ $ ->
     attach: (e) ->
       e.preventDefault()
       service_id = $('#quotation-service-list').find('select').val()
+      _this = @
+      $.ajax
+        type: "POST",
+        url: "/api/v1/quotations/#{ @quotation_id }/services", 
+        data: {service_id: service_id},
+        success: (res) ->
+          socket.emit "quotation-service", res.id
+          _this.storeActivity _this.quotation_id, "agrego un servicio"
 
-      $.post "/api/v1/quotations/#{ @quotation_id }/services", service_id: service_id
-      .done (res) ->
-        socket.emit "quotation-service", res.id
+        error: (xhr, status, err) ->
+          error = JSON.parse(xhr.responseText)
+          alertify.error(error.error)
 
-      @storeActivity @quotation_id, "agrego un servicio"
+
+      
       

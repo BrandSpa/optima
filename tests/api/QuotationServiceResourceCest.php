@@ -77,10 +77,31 @@ class QuotationServiceResourceCest
     	$I->seeResponseCodeIs(201);
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson([
-        	'id' => $this->quotationId,
-        	'services' => [
-        		['id' => $this->serviceId ],
-        	]
+        	'id' => $this->quotationId
+        ]);
+    }
+
+    public function duplicateQuotationService(ApiTester $I)
+    {
+    	$data1 = ['service_id' => $this->serviceId ];
+    	$data2 = ['service_id' => $this->serviceId];
+
+    	$I->sendPOST("/api/v1/quotations/$this->quotationId/services", $data1);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+        $I->sendPOST("/api/v1/quotations/$this->quotationId/services", $data2);
+        $I->seeResponseCodeIs(400);
+        $I->seeResponseIsJson();
+         $I->seeResponseContainsJson(
+ 			["error" => "servicio ya fue agregado"]
+     	);
+
+        $I->sendGET("/api/v1/quotations/$this->quotationId/services");
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson([
+ 			['id' => $this->serviceId ]
         ]);
     }
 

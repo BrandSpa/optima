@@ -6,11 +6,14 @@ $ ->
       @listenTo(@collection, 'reset', @render)
 
     render: ->
-      $(el).find('table').html('')
-      el = $(@el)
+      html = []
       @collection.each (model) ->
         view = new optima.views.ServiceResult model: model
-        $(el).find('table').append view.render().el
+        html.push(view.render().el)
+      , @
+      
+      $(@el).find('table').empty().append(html)
+
 
     close: ->
       @remove()

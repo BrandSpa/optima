@@ -31,11 +31,20 @@ class QuotationServiceController extends \Controller {
   {
   	$serviceId = Input::get('service_id');
 
-    $quotation = $this->entity->find($quoationId);
-    $quotation->services()->attach($serviceId);
-    $model = $quotation->services->contains($serviceId);
+  	if (Input::has('service_id')) {
+  	
+	    $quotation = $this->entity->find($quoationId);
+	    $model = $quotation->services->contains($serviceId);
 
-    return Response::json($quotation, 201);
+	    if (!$model) {
+	    	$quotation->services()->attach($serviceId);
+	    	return Response::json($quotation, 201);
+	    } else {
+	    	return Response::json(["error" => "servicio ya fue agregado"], 400);
+	    }	    
+    }
+    
+    return Response::json(["error" => 'service id not present'], 400);
   }
 
   public function destroy($quoationId, $serviceId)

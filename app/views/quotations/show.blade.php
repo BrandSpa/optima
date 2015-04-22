@@ -44,6 +44,7 @@
 				&nbsp;
 				<a href="#" class="btn btn-primary btn-xs quotation-service-attach btn-hidden">Agregar</a>
 				<a href="#" class="quotation-product-open-create btn btn-default btn-xs btn-hidden">Buscar servicio</a>
+				<br>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">

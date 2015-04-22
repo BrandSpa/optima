@@ -40,7 +40,7 @@ class Service extends \Eloquent {
 
 	public static function search($query)
 	{
-		 $collection = self::where("title", "LIKE", "%$query%")->take(5)->get();
+		 $collection = self::where("title", "LIKE", "%$query%")->take(25)->get();
 		 return $collection;
 	}
 
