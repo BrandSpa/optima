@@ -37,7 +37,7 @@
 				</div>
 				<div class="col-lg-4">
 					<select name="" class="form-control filter-client-type">
-						<option value="*">Selecionar tipo de cliente</option>
+						<option value="">Selecionar tipo de cliente</option>
 						<option value="Activo">Activo</option>
 						<option value="Inactivo">Inactivo</option>
 						<option value="Nuevo">Nuevo</option>
