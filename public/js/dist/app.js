@@ -3593,7 +3593,7 @@ $(function() {
       template = optima.templates.todo_mail;
       modelAttributes = model.toJSON();
       view = template(modelAttributes);
-      return $.post("http://192.241.251.220:3000/todos/sendmail", {
+      return $.post("http://127.0.0.1:3000/todos/sendmail", {
         message: view,
         subject: 'Nueva Tarea Asignada',
         to: [

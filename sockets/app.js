@@ -46,7 +46,6 @@ app.post('/todos/sendmail', function(req, res){
     ]
   };
 
-
   mandrill_client.messages.send({"message": message, "async": false}, function(result) {
     res.json(req.body);
       }, function(e) {
