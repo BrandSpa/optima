@@ -10,7 +10,10 @@ $ ->
 
     render: ->
       t = optima.templates.quotation
-      $(@el).html t(@model.toJSON())
+      if @model.attributes
+        $(@el).html t(@model.toJSON())
+      else
+        $(@el).html t(@model)
       @
 
     openEdit: (e) ->

@@ -1,10 +1,10 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var bodyParser = require('body-parser')
-
+var bodyParser = require('body-parser');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('2ylANHE6ZPUq4YGcoNNUpw');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
@@ -27,11 +27,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-
-app.get('/sockets/notifications', function(req, res, next){
-	res.send(req.body);
-});
-
 app.post('/sendmail', function(req, res){
 
   var message = {
@@ -50,10 +45,8 @@ app.post('/sendmail', function(req, res){
     ]
   };
 
-  var async = false;
 
-
-  mandrill_client.messages.send({"message": message, "async": async}, function(result) {
+  mandrill_client.messages.send({"message": message, "async": false}, function(result) {
     res.json(req.body);
       }, function(e) {
     res.json('A mandrill error occurred: ' + e.name + ' - ' + e.message);

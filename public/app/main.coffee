@@ -11,6 +11,12 @@ _.extend(pubsub, Backbone.Events)
 
 $ ->
 
+  $(document).ajaxStart (t) ->
+    NProgress.start()
+
+  $(document).ajaxStop () ->
+    NProgress.done()
+
   optima.pathArray = window.location.pathname.split( '/' )
   
   optima.summernote = (el) ->

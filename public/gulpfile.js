@@ -18,6 +18,7 @@ gulp.task('concat-css', function(){
     'css/classic.css',
     'css/classic.date.css',
     'css/classic.time.css',
+    'node_modules/nprogress/nprogress.css'
   ])
   .pipe(concat('app.css'))
   .pipe(gulp.dest('css/dist/'));
@@ -36,6 +37,7 @@ gulp.task('dependencies', function(){
     'node_modules/alertify/lib/alertify.min.js',
     'node_modules/summernote/dist/summernote.min.js',
     'node_modules/chart.js/Chart.min.js',
+    'node_modules/nprogress/nprogress.js',
 
     // Bower
     'bower_components/sidr/jquery.sidr.min.js', //need to change to Slideout.js
@@ -103,6 +105,7 @@ gulp.task('coffee', function() {
     //quotations
     'app/views/quotations/item.coffee',
     'app/views/quotations/list.coffee',
+    'app/views/quotations/list_filters.coffee',
     'app/views/quotations/results.coffee',
     'app/views/quotations/create.coffee',
     'app/views/quotations/app.coffee',

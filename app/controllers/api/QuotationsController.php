@@ -38,11 +38,11 @@ class QuotationsController extends \BaseController {
 			});
 		}
 
-		if( Input::has('status') ) $collection = $collection->where("status", $status);
-		if( Input::has('advisor') ) $collection = $collection->where("advisor", $advisor);
-		if( Input::has('client_type') ) $collection = $collection->where("client_type", $client_type);
+		if( Input::has('status') && $status != "") $collection = $collection->where("status", $status);
+		if( Input::has('advisor') && $advisor != "") $collection = $collection->where("advisor", $advisor);
+		if( Input::has('client_type') && $client_type != "") $collection = $collection->where("client_type", $client_type);
 
-		$collection = $collection->take(100)->skip($skip)->orderBy('id', 'DESC')->get();
+		$collection = $collection->with('company', 'contact')->take(100)->skip($skip)->orderBy('id', 'DESC')->get();
 
 		return Response::json($collection, 200);
 	}

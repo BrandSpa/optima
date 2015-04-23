@@ -1,9 +1,8 @@
 var socket = io('http://192.241.251.220:3000');
+//var socket = io('http://127.0.0.1:3000');
 
 socket.on('quotations', function(msg){
-	if (optima.quotations) {
-		optima.quotations.add(msg);
-	};
+	pubsub.trigger("quotation:added", msg);
 });
 
 socket.on('quotation:change', function(msg){
@@ -25,17 +24,17 @@ socket.on('todos', function(msg){
 socket.on('activities', function(msg){
   if (optima.activities) {
     pubsub.trigger("activity:pull", msg);
-  };
+  }
 
   if (optima.quotationActivities) {
     pubsub.trigger("quotation-activity:pull", msg);
-  };
+  }
 });
 
 socket.on('trackings', function(quotation_id){
   if (optima.trackings) {
     pubsub.trigger("trackings:pull", quotation_id);
-  };
+  }
 });
 
 

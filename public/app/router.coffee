@@ -32,9 +32,10 @@ $ ->
 
     dashboard: (query) ->
       optima.quotations = new optima.collections.Quotations
-      optima.quotations.fetch reset: true
       optima.quotationsView = new optima.views.QuotationsView collection: optima.quotations
-
+      optima.listFilters = new optima.views.QuotationsFilters()
+      optima.quotations.fetch reset: true
+       
       optima.activities.fetch reset: true
 
       optima.todos = new optima.collections.Todos
