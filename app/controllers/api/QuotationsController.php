@@ -20,15 +20,31 @@ class QuotationsController extends \BaseController {
 	public function index()
 	{
 		$skip = Input::get('offset');
-		$query = Input::get('query');
+		$q = Input::get('query');
+		$status = Input::get('status');
+		$advisor = Input::get('advisor');
+		$client_type = Input::get('client_type');
 
-		if (Input::has('query')) {
-			$collection = $this->entity->search($query);
-			return Response::json($collection, 200);
-		} else {
-			$collection = $this->entity->takeAndSkip(10, $skip);
-			return Response::json($collection, 200);
+		$collection = new Quotation;
+
+		if(Input::has('query')) {
+			$collection = $collection->with('company', 'contact')
+			->where("id", "like", "$q%")
+			->orWhereHas('contact', function($query) use($q) {
+				$query->where('name', 'like', "%$q%");
+			})
+			->orWhereHas('company', function($query) use($q) {
+				$query->where('name', 'like', "%$q%");
+			});
 		}
+
+		if( Input::has('status') ) $collection = $collection->where("status", $status);
+		if( Input::has('advisor') ) $collection = $collection->where("advisor", $advisor);
+		if( Input::has('client_type') ) $collection = $collection->where("client_type", $client_type);
+
+		$collection = $collection->take(100)->skip($skip)->orderBy('id', 'DESC')->get();
+
+		return Response::json($collection, 200);
 	}
 
 	public function show($id)

@@ -289,5 +289,218 @@ class QuotationResourceCest
 		]);
     }
 
+    public function FilterResults(ApiTester $I)
+    {
+    	//add some quotations with differents labels, advisors and client type.
+    	$quotationData1 = [
+    		'company_id' => '1',
+    		'contact_id' => '1',
+    		'status' => 'Borrador',
+    		'advisor' => 'Andrés Rojas',
+    		'client_type' => 'Activo'
+    	];
+
+    	$I->sendPOST($this->endpoint, $quotationData1);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+    	$quotationData2 = [
+    		'company_id' => '1',
+    		'contact_id' => '1',
+    		'status' => 'Seguimiento',
+    		'advisor' => 'Diego Peña',
+    		'client_type' => 'Nuevo'
+    	];
+
+    	$I->sendPOST($this->endpoint, $quotationData2);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+    	$quotationData3 = [
+    		'company_id' => '1',
+    		'contact_id' => '1',
+    		'status' => 'No enviada',
+    		'advisor' => 'Andrés Rojas',
+    		'client_type' => 'Activo'
+    	];
+    	$I->sendPOST($this->endpoint, $quotationData3);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+    	$quotationData4 = [
+    		'company_id' => '1',
+    		'contact_id' => '1',
+    		'status' => 'Efectiva',
+    		'advisor' => 'Diego Peña',
+    		'client_type' => 'Inactivo'
+    	];
+    	$I->sendPOST($this->endpoint, $quotationData4);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+    	$quotationData5 = [
+    		'company_id' => '1',
+    		'contact_id' => '1',
+    		'status' => 'No efectiva',
+    		'advisor' => 'Andrés Rojas',
+    		'client_type' => 'Nuevo'
+    	];
+    	$I->sendPOST($this->endpoint, $quotationData5);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+    	$quotationData6 = [
+    		'company_id' => '1',
+    		'contact_id' => '1',
+    		'status' => 'Enviada',
+    		'advisor' => 'Diego Peña',
+    		'client_type' => 'Activo'
+    	];
+    	$I->sendPOST($this->endpoint, $quotationData6);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+
+        $quotationData7 = [
+    		'company_id' => '1',
+    		'contact_id' => '1',
+    		'status' => 'Replanteada',
+    		'advisor' => 'Otros',
+    		'client_type' => 'Inactivo'
+    	];
+    	$I->sendPOST($this->endpoint, $quotationData7);
+    	$I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+
+    	//filter by label
+    	$filterStatus1 = ['status' => 'Borrador'];
+    	$I->sendGET($this->endpoint, $filterStatus1);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatus1);
+
+        $filterStatus2 = ['status' => 'Enviada'];
+    	$I->sendGET($this->endpoint, $filterStatus2);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatus2);
+
+        $filterStatus3 = ['status' => 'Seguimiento'];
+    	$I->sendGET($this->endpoint, $filterStatus3);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson( $filterStatus3);
+
+        $filterStatus4 = ['status' => 'Efectiva'];
+    	$I->sendGET($this->endpoint, $filterStatus4);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatus4);
+
+        $filterStatus5 = ['status' => 'No enviada'];
+    	$I->sendGET($this->endpoint, $filterStatus5);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatus5);
+
+        $filterStatus6 = ['status' => 'No efectiva'];
+    	$I->sendGET($this->endpoint, $filterStatus6);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatus6);
+
+        $filterStatus7 = ['status' => 'Replanteada'];
+    	$I->sendGET($this->endpoint, $filterStatus7);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatus7);
+
+    	//filter by advisor
+    	$filterAdvisor1 = ['advisor' => 'Andrés Rojas'];
+    	$I->sendGET($this->endpoint, $filterAdvisor1);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+        	$filterAdvisor1,
+        	$filterAdvisor1,
+        	$filterAdvisor1
+        ]);
+
+        $filterAdvisor2 = ['advisor' => 'Diego Peña'];
+    	$I->sendGET($this->endpoint, $filterAdvisor2);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+        	$filterAdvisor2,
+        	$filterAdvisor2,
+        	$filterAdvisor2
+        ]);
+
+    	//filter by client type
+        $filterAdvisor3 = ['client_type' => 'Activo'];
+    	$I->sendGET($this->endpoint, $filterAdvisor3);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+        	$filterAdvisor3,
+        	$filterAdvisor3
+        ]);
+
+        $filterAdvisor4 = ['client_type' => 'Inactivo'];
+    	$I->sendGET($this->endpoint, $filterAdvisor4);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+        	$filterAdvisor4
+        ]);
+
+        $filterAdvisor5 = ['client_type' => 'Nuevo'];
+    	$I->sendGET($this->endpoint, $filterAdvisor5);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+        	$filterAdvisor5,
+        	$filterAdvisor5
+        ]);
+
+    	//filter by status and advisor
+    	$filterStatusAdvisor1 = ['status' => 'Borrador', 'advisor' => 'Andrés Rojas'];
+    	$I->sendGET($this->endpoint, $filterStatusAdvisor1);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([$filterStatusAdvisor1]);
+
+        $filterStatusAdvisor2 = ['status' => 'Enviada', 'advisor' => 'Diego Peña'];
+    	$I->sendGET($this->endpoint, $filterStatusAdvisor2);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatusAdvisor2);
+
+        $filterStatusAdvisor3 = ['status' => 'Seguimiento', 'advisor' => 'Diego Peña'];
+    	$I->sendGET($this->endpoint, $filterStatusAdvisor3);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([$filterStatusAdvisor3]);
+
+        $filterStatusAdvisor4 = ['status' => 'No enviada', 'advisor' => 'Andrés Rojas'];
+    	$I->sendGET($this->endpoint, $filterStatusAdvisor4);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatusAdvisor4);
+
+        $filterStatusAdvisor5 = ['status' => 'No efectiva', 'advisor' => 'Andrés Rojas'];
+    	$I->sendGET($this->endpoint, $filterStatusAdvisor5);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson($filterStatusAdvisor5);
+
+        $filterStatusAdvisor6 = ['status' => 'Replanteada', 'advisor' => 'Otros'];
+    	$I->sendGET($this->endpoint, $filterStatusAdvisor6);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([$filterStatusAdvisor6]);
+
+    	//filter by status, advisor and client type
+    	$filterStatusAdvisorClientType1 = array_merge($filterStatusAdvisor1, ['client_type' => 'Activo']);
+    	$I->sendGET($this->endpoint, $filterStatusAdvisorClientType1);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([$filterStatusAdvisorClientType1]);
+
+    	$filterStatusAdvisorClientType2 = array_merge($filterStatusAdvisor2, ['client_type' => 'Activo']);
+    	$I->sendGET($this->endpoint, $filterStatusAdvisorClientType2);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([$filterStatusAdvisorClientType2]);
+
+        $filterStatusAdvisorClientType3 = array_merge($filterStatusAdvisor3, ['client_type' => 'Nuevo']);
+    	$I->sendGET($this->endpoint, $filterStatusAdvisorClientType3);
+    	$I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([$filterStatusAdvisorClientType3]);
+
+    	//filter by client type, advisor, status
+    	//filter by client type, advisor, status and search
+    }
+
 
 }

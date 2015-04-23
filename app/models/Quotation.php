@@ -181,42 +181,55 @@ class Quotation extends \Eloquent {
 		}
 	}
 
+	public function advanceSearch($q)
+	{
+		return self::with('company', 'contact')
+		->where("id", "like", "$q%")
+		->orWhereHas('contact', function($query) use($q) {
+			$query->where('name', 'like', "%$q%");
+		})
+		->orWhereHas('company', function($query) use($q) {
+			$query->where('name', 'like', "%$q%");
+		});
+	}
+
 	public static function search($query) 
 	{
 		$byQuotation = self::search_by_quotation($query);
-
-		if (!$byQuotation->isEmpty()) {
+		var_dump($byQuotation);
+		if ($byQuotation) {
 			return $byQuotation;
 		}
 
 		$byContact = self::search_by_contact($query);
-		if (!$byContact->isEmpty()) {
+
+		if ($byContact) {
 			return $byContact;
 		}
 		
 		$byCompany = self::search_by_company($query);
-		if (!$byCompany->isEmpty()) {
+
+		if ($byCompany) {
 			return $byCompany;
 		}
 	}
 
 	public static function search_by_quotation($query)
 	{
-		$quotations = Quotation::with('company', 'contact')->where("id", "like", "$query%")->orderBy('id', 'DESC')->take(50)->get();
-		return $quotations;
+		$collection = Quotation::with('company', 'contact')->where("id", "like", "$query%");
+		return $collection;
 	}
 
 	public static function search_by_contact($q)
 	{
-		$quotations = Quotation::with(array('company', 'contact' => function($query) use($q) {
+		$collection = Quotation::with(array('company', 'contact' => function($query) use($q) {
 			$query->where('name', 'like', "%$q%");
 		}))
 		->whereHas('contact', function($query) use($q) {
 			$query->where('name', 'like', "%$q%");
-		})
-		->orderBy('id', 'DESC')->take(50)->get();
+		});
 
-		return $quotations;
+		return $collection;
 	}
 
 	public static function search_by_company($q)
@@ -227,8 +240,7 @@ class Quotation extends \Eloquent {
 		}))
 		->whereHas('company', function($query) use($q) {
 			$query->where('name', 'like', "%$q%");
-		})
-		->take(50)->orderBy('id', 'DESC')->get();
+		});
 
 		return $collection;
 	}
