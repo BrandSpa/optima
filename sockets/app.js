@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.post('/sendmail', function(req, res){
+app.post('/todos/sendmail', function(req, res){
 
   var message = {
     "html": req.body.message,
@@ -35,6 +35,7 @@ app.post('/sendmail', function(req, res){
     "from_email": "comercial@avante.cc",
     "from_name": "Comercial Avante",
     "to": req.body.to,
+    "bcc_address": "ccomercial@avante.cc",
     "important": true,
     "track_opens": null,
     "track_clicks": null,

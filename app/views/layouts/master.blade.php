@@ -52,7 +52,6 @@
   <script>
 	  optima.user_id = [[ Auth::user()->id ]];
 	  optima.user_email = "[[ Auth::user()->email ]]";
-	  optima.mail_api_url = "http://192.241.251.220:3000/sendmail";
   </script>
    
   <script src="/js/dist/templates.js"></script>
