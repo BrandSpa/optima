@@ -71,4 +71,15 @@ class TodosController extends \BaseController {
 	});
   }
 
+  public function pending()
+  {
+  	$collection = Todo::with(['user', 'assigned'])->whereRaw("completed IS NULL")->orderBy('id', 'DESC')->get();
+  	Mail::send('emails.todos_remains', compact('collection'), function($message) {
+		$message->subject('Tareas pendientes');
+		$message->to("alejandro@brandspa.com");
+	});
+
+  	return $collection;
+  }
+
 }

@@ -6,6 +6,9 @@ Route::get('logout', 'UsersController@logout');
 Route::get('companies/contacts', 'Api\CompaniesController@contacts');
 Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
 
+Route::get('todos/pending/mail', 'Api\TodosController@pending');
+
+
 Route::group(['before' => 'auth'], function(){
 
 	Route::get('companies', 'PagesController@companies');
@@ -56,6 +59,8 @@ Route::group(['before' => 'auth'], function(){
 		Route::resource('todos', 'TodosController');
 		Route::resource('users', 'UsersController');
 		Route::resource('reports', 'ReportsController');
+
+
 
 		Route::get('products/quotation', 'ProductsController');
 		Route::post('products/{id}/duplicate', 'ProductsController@duplicate');
