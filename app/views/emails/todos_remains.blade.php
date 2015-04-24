@@ -272,6 +272,7 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
             @foreach($collection as $todo)
             <div style="border-top:1px solid #ccc; background: #f1f1f1; padding: 15px">
               <p><b>Vence: </b>[[ $todo->expires_date ]] - [[ $todo->expires_time ]]</p>
+              <p><b>Asesor:</b> [[ $todo->user['name'] ]] [[ $todo->user['lastname'] ]]</p>
               <p>[[ $todo->title ]]</p>
               <p>[[ $todo->description ]]</p>
             </div>
