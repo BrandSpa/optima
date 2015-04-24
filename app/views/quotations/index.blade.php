@@ -113,11 +113,21 @@
 </div> <!-- end col -->
 
 <!-- includes -->
-@include('quotations/partials/_quotation')
-@include('quotations/partials/_activity')
-@include('quotations/partials/_quotations_results')
-@include('todos/partials/_todo')
-@include('todos/partials/_create')
-@include('todos/partials/_edit')
+
+<div class="modal fade" id="todo-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="todo-edit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+
+
 
 @stop

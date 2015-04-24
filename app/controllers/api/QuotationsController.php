@@ -42,7 +42,7 @@ class QuotationsController extends \BaseController {
 		if( Input::has('advisor') && $advisor != "") $collection = $collection->where("advisor", $advisor);
 		if( Input::has('client_type') && $client_type != "") $collection = $collection->where("client_type", $client_type);
 
-		$collection = $collection->with('company', 'contact')->take(100)->skip($skip)->orderBy('id', 'DESC')->get();
+		$collection = $collection->with('company', 'contact')->take(50)->skip($skip)->orderBy('id', 'DESC')->get();
 
 		return Response::json($collection, 200);
 	}

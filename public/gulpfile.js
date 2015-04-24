@@ -74,6 +74,9 @@ gulp.task('coffee', function() {
     'app/models/users.coffee',
     
     //Views
+    
+    //pages
+    'app/views/pages/dashboard.coffee',
 
     //activities    
     'app/views/activities/item.coffee',
@@ -106,6 +109,7 @@ gulp.task('coffee', function() {
     'app/views/quotations/item.coffee',
     'app/views/quotations/list.coffee',
     'app/views/quotations/list_filters.coffee',
+    'app/views/quotations/list_paginate.coffee',
     'app/views/quotations/results.coffee',
     'app/views/quotations/create.coffee',
     'app/views/quotations/app.coffee',

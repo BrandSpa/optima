@@ -1,7 +1,5 @@
 $ ->
   class optima.views.TodoCreateView extends Backbone.View
-    el: $ '#todo-create-modal'
-    template: $ '#todo-create-template'
     events:
       'click .todo-save-store' : 'store'
       'click .modal-close' : 'cancel'
@@ -9,17 +7,20 @@ $ ->
     initialize: ->
       @listenTo(@model, 'sync', @stored)
       @listenTo(@model, 'error', @showErrors)
-    
+      @container = $("#todo-create-modal")
 
     render: (users, tracking_id) ->
-      el = $(@el)
-      source = $(@template).html()
-      template = Handlebars.compile(source)
+      $el = $(@el)
+      template = optima.templates.todo_create
       data = users: users, tracking_id: tracking_id
-      el.find('.modal-content').html template( data )
-      el.find('.datepicker').pickadate formatSubmit: 'yyyy/mm/dd'
-      el.find('.timepicker').pickatime formatSubmit: 'HH:i', hiddenName = true
-      el.modal backdrop: 'static'
+      $el.html(template( data ))
+      @openModal()
+      
+    openModal: ->
+      @container.html(@el)
+      @container.find('.datepicker').pickadate formatSubmit: 'yyyy/mm/dd'
+      @container.find('.timepicker').pickatime formatSubmit: 'HH:i', hiddenName = true
+      @container.modal backdrop: 'static'
 
     serializeData: (dataForm) ->
       dataForm['quotation_id'] = optima.pathArray[2]
@@ -49,13 +50,16 @@ $ ->
       if model.id && optima.todos
         optima.todos.add(model)
         @notify(model)
+        @container.modal('hide')
         @closeModal()
       else
         @notify(model)
+        @container.modal('hide')
         @closeModal()
 
       pubsub.trigger("todos:mail", model)
 
     cancel: (e) ->
       e.preventDefault()
+      @container.modal('hide')
       @closeModal()

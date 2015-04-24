@@ -15,7 +15,7 @@ class PagesController extends BaseController {
 
   public function quotations()
   {
-    $this->layout->content = View::make('quotations.index');
+    return View::make('layouts.master');
   }
 
   public function quotation($id)

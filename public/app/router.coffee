@@ -31,9 +31,17 @@ $ ->
       optima.servicesView = new optima.views.ServicesView collection: optima.services
 
     dashboard: (query) ->
+      page = new optima.views.DashboardPage
+      $("#main-content").append(page.render().el);
+
       optima.quotations = new optima.collections.Quotations
       optima.quotationsView = new optima.views.QuotationsView collection: optima.quotations
       optima.listFilters = new optima.views.QuotationsFilters()
+      $('.quotations-filters-container').append(optima.listFilters.render().el)
+
+      quotationsPaginate = new optima.views.QuotationsPaginate()
+      $('.quotation-paginate-container').append(quotationsPaginate.render().el)
+
       optima.quotations.fetch reset: true
        
       optima.activities.fetch reset: true

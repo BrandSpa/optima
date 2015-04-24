@@ -25,6 +25,7 @@ $ ->
 
   $(document).ajaxStop () ->
     NProgress.done()
+    
   optima.pathArray = window.location.pathname.split( '/' )
   
   optima.summernote = (el) ->

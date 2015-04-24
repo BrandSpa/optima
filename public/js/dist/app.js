@@ -334,6 +334,58 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 $(function() {
+  return optima.views.DashboardPage = (function(superClass) {
+    extend(DashboardPage, superClass);
+
+    function DashboardPage() {
+      return DashboardPage.__super__.constructor.apply(this, arguments);
+    }
+
+    DashboardPage.prototype.events = {
+      'click .quotation-open-quote': 'openQuote',
+      'click .todo-open-create': 'openTodo'
+    };
+
+    DashboardPage.prototype.render = function() {
+      var template;
+      template = optima.templates.page_dashboard;
+      $(this.el).html(template);
+      return this;
+    };
+
+    DashboardPage.prototype.openQuote = function(e) {
+      var model;
+      e.preventDefault();
+      model = new optima.models.Company;
+      optima.companyQuoteCreate = new optima.views.CompanyQuoteCreate({
+        model: model
+      });
+      return optima.companyQuoteCreate.render();
+    };
+
+    DashboardPage.prototype.openTodo = function(e) {
+      var model, users, view;
+      e.preventDefault();
+      users = new optima.collections.Users;
+      model = new optima.models.Todo;
+      view = new optima.views.TodoCreateView({
+        model: model
+      });
+      console.log(view);
+      return users.fetch().done(function(users) {
+        return view.render(users);
+      });
+    };
+
+    return DashboardPage;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
   return optima.views.ActivityView = (function(superClass) {
     extend(ActivityView, superClass);
 
@@ -372,8 +424,6 @@ $(function() {
       return ActivitiesView.__super__.constructor.apply(this, arguments);
     }
 
-    ActivitiesView.prototype.el = $('#activities');
-
     ActivitiesView.prototype.events = {
       'click .service-see-more': 'seeMore'
     };
@@ -394,20 +444,19 @@ $(function() {
       view = new optima.views.ActivityView({
         model: model
       });
-      $(this.el).find('table').prepend(view.render().el);
-      return $(this.el).find('span.timeago').timeago();
+      $('.activities table').prepend(view.render().el);
+      return $('.activities span.timeago').timeago();
     };
 
     ActivitiesView.prototype.addPlugins = function() {
-      $(this.el).find('span.timeago').timeago();
-      return $(this.el).find('.table-responsive').slimScroll({
+      $('.activities span.timeago').timeago();
+      return $('.activities .table-responsive').slimScroll({
         height: '475px'
       });
     };
 
     ActivitiesView.prototype.render = function() {
-      var $table, html;
-      $table = $(this.el).find('table');
+      var html;
       html = [];
       this.collection.each(function(model) {
         var view;
@@ -416,22 +465,8 @@ $(function() {
         });
         return html.push(view.render().el);
       }, this);
-      $table.empty().append(html);
+      $('.activities table').html(html);
       return this.addPlugins();
-    };
-
-    ActivitiesView.prototype.seeMore = function(e) {
-      var el, more, offset;
-      e.preventDefault();
-      el = e.currentTarget;
-      offset = $(el).data('offset');
-      more = offset + 10;
-      this.collection.fetch({
-        data: {
-          offset: more
-        }
-      });
-      return $(el).data('offset', more);
     };
 
     ActivitiesView.prototype.store = function(data) {
@@ -1611,14 +1646,13 @@ $(function() {
       return QuotationsView.__super__.constructor.apply(this, arguments);
     }
 
-    QuotationsView.prototype.el = $('#quotations');
-
     QuotationsView.prototype.initialize = function() {
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.renderOne);
       pubsub.on('quotations:filter', this.filter, this);
       pubsub.on('quotations:paginate', this.paginate, this);
-      return pubsub.on("quotation:added", this.addOne, this);
+      pubsub.on("quotation:added", this.addOne, this);
+      return this.filters = {};
     };
 
     QuotationsView.prototype.addPlugins = function() {
@@ -1636,16 +1670,15 @@ $(function() {
         trigger: 'hover',
         placement: 'left'
       });
-      return $(this.el).find('span.timeago').timeago();
+      return $('.quotations').find('span.timeago').timeago();
     };
 
     QuotationsView.prototype.addOne = function(model) {
       var view;
-      console.log('addOne', model);
       view = new optima.views.QuotationView({
         model: model
       });
-      this.$el.find('tbody').prepend(view.render().el);
+      $('.quotations tbody').prepend(view.render().el);
       return this.addPlugins();
     };
 
@@ -1654,7 +1687,7 @@ $(function() {
       view = new optima.views.QuotationView({
         model: model
       });
-      this.$el.find('tbody').append(view.render().el);
+      $('.quotations tbody').append(view.render().el);
       return this.addPlugins();
     };
 
@@ -1668,21 +1701,25 @@ $(function() {
         });
         return html.push(view.render().el);
       }, this);
-      this.$el.find('tbody').html(html);
-      this.$el.find('.table-responsive').slimScroll({
+      $('.quotations tbody').html(html);
+      $('.quotations .table-responsive').slimScroll({
         height: '305px'
       });
       return this.addPlugins();
     };
 
     QuotationsView.prototype.filter = function(filters) {
-      return this.collection.fetch({
+      this.filters = filters;
+      this.collection.fetch({
         reset: true,
         data: filters
       });
+      return console.log(this.filters);
     };
 
     QuotationsView.prototype.paginate = function(filters) {
+      console.log(this.filters);
+      filters = _.extend(this.filters, filters);
       this.collection.fetch({
         data: filters
       });
@@ -1691,7 +1728,7 @@ $(function() {
 
     QuotationsView.prototype.scrollToBottom = function() {
       var container, h;
-      container = this.$el.find('.table-responsive');
+      container = $('.quotations .table-responsive');
       h = container.prop('scrollHeight') + 'px';
       return container.slimScroll({
         scrollTo: h
@@ -1714,10 +1751,7 @@ $(function() {
       return QuotationsFilters.__super__.constructor.apply(this, arguments);
     }
 
-    QuotationsFilters.prototype.el = $('.quotations-filters');
-
     QuotationsFilters.prototype.events = {
-      'click .quotation-open-quote': 'openQuote',
       'click .quotation-see-more': 'seeMore',
       'submit .quotation-search': 'filterByQuery',
       'change .filter-status': 'filterByStatus',
@@ -1726,33 +1760,15 @@ $(function() {
     };
 
     QuotationsFilters.prototype.initialize = function() {
-      this.filters = {
-        offset: 0
-      };
+      this.filters = {};
       return this.offset = 0;
     };
 
-    QuotationsFilters.prototype.seeMore = function(e) {
-      var el, filters, more, that;
-      that = this;
-      e.preventDefault();
-      el = e.currentTarget;
-      more = this.offset + 10;
-      filters = _.extend(this.filters, {
-        offset: more
-      });
-      pubsub.trigger('quotations:paginate', filters);
-      return this.offset = more;
-    };
-
-    QuotationsFilters.prototype.openQuote = function(e) {
-      var model;
-      e.preventDefault();
-      model = new optima.models.Company;
-      optima.companyQuoteCreate = new optima.views.CompanyQuoteCreate({
-        model: model
-      });
-      return optima.companyQuoteCreate.render();
+    QuotationsFilters.prototype.render = function() {
+      var template;
+      template = optima.templates.quotations_list_filters;
+      $(this.el).html(template);
+      return this;
     };
 
     QuotationsFilters.prototype.filter = function(filter) {
@@ -1800,6 +1816,49 @@ $(function() {
     };
 
     return QuotationsFilters;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.QuotationsPaginate = (function(superClass) {
+    extend(QuotationsPaginate, superClass);
+
+    function QuotationsPaginate() {
+      return QuotationsPaginate.__super__.constructor.apply(this, arguments);
+    }
+
+    QuotationsPaginate.prototype.events = {
+      'click': 'seeMore'
+    };
+
+    QuotationsPaginate.prototype.initialize = function() {
+      return this.offset = 0;
+    };
+
+    QuotationsPaginate.prototype.render = function() {
+      var template;
+      template = optima.templates.quotation_paginate_btn;
+      $(this.el).html(template);
+      return this;
+    };
+
+    QuotationsPaginate.prototype.seeMore = function(e) {
+      var el, more, that;
+      that = this;
+      e.preventDefault();
+      el = e.currentTarget;
+      more = this.offset + 10;
+      pubsub.trigger('quotations:paginate', {
+        offset: more
+      });
+      return this.offset = more;
+    };
+
+    return QuotationsPaginate;
 
   })(Backbone.View);
 });
@@ -3413,12 +3472,6 @@ $(function() {
       return TodosView.__super__.constructor.apply(this, arguments);
     }
 
-    TodosView.prototype.el = $("#todos");
-
-    TodosView.prototype.events = {
-      'click .todo-open-create': 'openCreate'
-    };
-
     TodosView.prototype.initialize = function() {
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.addOne);
@@ -3434,7 +3487,7 @@ $(function() {
     TodosView.prototype.render = function() {
       var $tbody, html;
       html = [];
-      $tbody = $(this.el).find('table tbody');
+      $tbody = $('#todos table tbody');
       this.collection.each(function(model) {
         var view;
         view = new optima.views.TodoView({
@@ -3442,26 +3495,13 @@ $(function() {
         });
         return html.push(view.render().el);
       }, this);
-      return $tbody.empty().append(html);
+      return $tbody.html(html);
     };
 
     TodosView.prototype.showMoreInfo = function(field) {
       if (optima.user_id !== 3) {
         return $().addClass('hidden');
       }
-    };
-
-    TodosView.prototype.openCreate = function(e) {
-      var model, users, view;
-      e.preventDefault();
-      users = new optima.collections.Users;
-      model = new optima.models.Todo;
-      view = new optima.views.TodoCreateView({
-        model: model
-      });
-      return users.fetch().done(function(users) {
-        return view.render(users);
-      });
     };
 
     return TodosView;
@@ -3480,10 +3520,6 @@ $(function() {
       return TodoCreateView.__super__.constructor.apply(this, arguments);
     }
 
-    TodoCreateView.prototype.el = $('#todo-create-modal');
-
-    TodoCreateView.prototype.template = $('#todo-create-template');
-
     TodoCreateView.prototype.events = {
       'click .todo-save-store': 'store',
       'click .modal-close': 'cancel'
@@ -3491,26 +3527,32 @@ $(function() {
 
     TodoCreateView.prototype.initialize = function() {
       this.listenTo(this.model, 'sync', this.stored);
-      return this.listenTo(this.model, 'error', this.showErrors);
+      this.listenTo(this.model, 'error', this.showErrors);
+      return this.container = $("#todo-create-modal");
     };
 
     TodoCreateView.prototype.render = function(users, tracking_id) {
-      var data, el, hiddenName, source, template;
-      el = $(this.el);
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
+      var $el, data, template;
+      $el = $(this.el);
+      template = optima.templates.todo_create;
       data = {
         users: users,
         tracking_id: tracking_id
       };
-      el.find('.modal-content').html(template(data));
-      el.find('.datepicker').pickadate({
+      $el.html(template(data));
+      return this.openModal();
+    };
+
+    TodoCreateView.prototype.openModal = function() {
+      var hiddenName;
+      this.container.html(this.el);
+      this.container.find('.datepicker').pickadate({
         formatSubmit: 'yyyy/mm/dd'
       });
-      el.find('.timepicker').pickatime({
+      this.container.find('.timepicker').pickatime({
         formatSubmit: 'HH:i'
       }, hiddenName = true);
-      return el.modal({
+      return this.container.modal({
         backdrop: 'static'
       });
     };
@@ -3555,9 +3597,11 @@ $(function() {
       if (model.id && optima.todos) {
         optima.todos.add(model);
         this.notify(model);
+        this.container.modal('hide');
         this.closeModal();
       } else {
         this.notify(model);
+        this.container.modal('hide');
         this.closeModal();
       }
       return pubsub.trigger("todos:mail", model);
@@ -3565,6 +3609,7 @@ $(function() {
 
     TodoCreateView.prototype.cancel = function(e) {
       e.preventDefault();
+      this.container.modal('hide');
       return this.closeModal();
     };
 
@@ -4389,11 +4434,17 @@ $(function() {
     };
 
     Workspace.prototype.dashboard = function(query) {
+      var page, quotationsPaginate;
+      page = new optima.views.DashboardPage;
+      $("#main-content").append(page.render().el);
       optima.quotations = new optima.collections.Quotations;
       optima.quotationsView = new optima.views.QuotationsView({
         collection: optima.quotations
       });
       optima.listFilters = new optima.views.QuotationsFilters();
+      $('.quotations-filters-container').append(optima.listFilters.render().el);
+      quotationsPaginate = new optima.views.QuotationsPaginate();
+      $('.quotation-paginate-container').append(quotationsPaginate.render().el);
       optima.quotations.fetch({
         reset: true
       });

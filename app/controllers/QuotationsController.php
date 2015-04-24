@@ -29,7 +29,7 @@ class QuotationsController extends BaseController {
 
 	public function index()
 	{
-		$this->layout->content = View::make('quotations.index');
+		return View::make('layouts.master');
 	}
 
 	public function show($id)

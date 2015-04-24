@@ -1,29 +1,28 @@
 $ ->
   class optima.views.QuotationsView extends Backbone.View
-    el: $ '#quotations'
-      
+
     initialize: ->
       @listenTo(@collection, 'reset', @render)
       @listenTo(@collection, 'add', @renderOne)
       pubsub.on('quotations:filter', @filter, @)
       pubsub.on('quotations:paginate', @paginate, @)
       pubsub.on("quotation:added", @addOne, @);
+      @filters = {}
 
     addPlugins: ->
       $('.contact-popover').popover html: true, trigger: 'hover', placement: 'left'
       $('.company-popover').popover html: true, trigger: 'hover'
       $('.timeago-popover').popover html: true, trigger: 'hover', placement: 'left'
-      $(@el).find('span.timeago').timeago()
+      $('.quotations').find('span.timeago').timeago()
 
     addOne: (model) ->
-      console.log('addOne', model);
       view = new optima.views.QuotationView model: model
-      @$el.find('tbody').prepend view.render().el
+      $('.quotations tbody').prepend view.render().el
       @addPlugins()
 
     renderOne: (model)->
       view = new optima.views.QuotationView model: model
-      @$el.find('tbody').append view.render().el
+      $('.quotations tbody').append view.render().el
       @addPlugins()
 
     render: (collection) ->
@@ -31,20 +30,25 @@ $ ->
 
       @collection.each (model) ->
         view = new optima.views.QuotationView model: model
-        html.push view.render().el
+        html.push(view.render().el)
       , @
-      @$el.find('tbody').html html
-      @$el.find('.table-responsive').slimScroll({height: '305px'})
+
+      $('.quotations tbody').html(html)
+      $('.quotations .table-responsive').slimScroll({height: '305px'})
       @addPlugins()
 
     filter: (filters)->
+      @filters = filters
       @collection.fetch reset: true, data: filters
+      console.log(@filters)
 
     paginate: (filters)->
+      console.log(@filters)
+      filters = _.extend(@filters, filters)
       @collection.fetch data: filters
       @scrollToBottom()
 
     scrollToBottom: ->
-      container =  @$el.find('.table-responsive')
+      container = $('.quotations .table-responsive')
       h = container.prop('scrollHeight') + 'px'
       container.slimScroll scrollTo : h
