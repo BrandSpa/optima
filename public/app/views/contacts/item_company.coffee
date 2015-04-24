@@ -1,13 +1,11 @@
 $ ->
   class optima.views.QuoteCompanyContact extends Backbone.View
-    template: $ '#company-contact-template'
     tagName: 'tr'
     events: 
       'click a.contact-quote' : 'quote'
 
     render: ->
-      source = $(@template).html()
-      template = Handlebars.compile(source)
+      template = optima.templates.contact_company_quote
       $(@el).html template( @model.toJSON() )
       @
 

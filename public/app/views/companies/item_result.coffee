@@ -1,13 +1,11 @@
 $ ->
   class optima.views.CompanyResult extends Backbone.View
-    template: $ '#company-result-template'
     tagName: 'tr'
     events: 
       'click a.company-result-quote': 'quote'
 
     render: ->
-      source = $(@template).html()
-      template = Handlebars.compile(source)
+      template = optima.templates.company_result
       $(@el).html template( @model.toJSON() )
       @
 

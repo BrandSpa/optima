@@ -1,7 +1,7 @@
 $ ->
    class optima.views.CompanyQuoteCreate extends Backbone.View
     el: $ '#company-quote-create-modal'
-    template: $ '#company-quote-create-template'
+
     events:
       'click a.company-quote-store': 'store'
       'click .modal-close': 'cancel'
@@ -12,8 +12,7 @@ $ ->
       @listenTo(@model, 'error', @showErrors)
 
     render: ->
-      source = $(@template).html()
-      template = Handlebars.compile(source)
+      template = optima.templates.company_quote
       $(@el).find('.modal-content').html template( @model.toJSON() )
       $(@el).modal({backdrop: 'static'})
 

@@ -25,25 +25,16 @@
     <td>$ {{formatCurrency total }}</td>
     <td>
       <a class="btn btn-xs btn-default btn-hidden duplicate" data-product="{{ id }}"> Duplicar </a>
-      <div class="btn-group">
-        <button class="btn btn-default btn-xs btn-hidden dropdown-toggle" type="button" data-toggle="dropdown">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li>
-            <a href="#" class="delete ">Eliminar</a>
-          </li>
-        </ul>
-
-      </div>
     </td>
     <td>
-
     {{#if ordered}}
     <a href="#" class="unordered btn btn-success btn-xs">Pedido</a>
     {{else}}
       <a href="#" class="order btn btn-default btn-xs">Pedir</a>
     {{/if}}
  
+    </td>
+    <td>
+      <a href="#" class="delete btn btn-danger btn-xs">Eliminar</a>
     </td>
  

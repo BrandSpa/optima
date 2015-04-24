@@ -13,8 +13,3 @@
   </div>
 </script>
 
-<div class="modal fade" id="contact-quote-create-modal">
-  <div class="modal-dialog">
-    <div class="modal-content"></div>
-  </div>
-</div>

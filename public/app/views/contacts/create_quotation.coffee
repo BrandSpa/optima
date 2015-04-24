@@ -1,7 +1,6 @@
 $ ->
   class optima.views.ContactQuoteCreate extends Backbone.View
     el: $ '#contact-quote-create-modal'
-    template: $ '#contact-quote-create-template'
     events:
       'click a.contact-create-store': 'store'
       'click a.contacts-see': 'CompanyContacts'
@@ -12,8 +11,7 @@ $ ->
       @listenTo(@model, 'error', @showErrors)
 
     render: (company_id) ->
-      source = $(@template).html()
-      template = Handlebars.compile(source)
+      template = optima.templates.contact_quote
       company = company_id: company_id
       $(@el).find('.modal-content').html template( company )
       $(@el).modal({backdrop: 'static'})

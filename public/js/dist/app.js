@@ -873,8 +873,6 @@ $(function() {
 
     CompanyQuoteCreate.prototype.el = $('#company-quote-create-modal');
 
-    CompanyQuoteCreate.prototype.template = $('#company-quote-create-template');
-
     CompanyQuoteCreate.prototype.events = {
       'click a.company-quote-store': 'store',
       'click .modal-close': 'cancel',
@@ -887,9 +885,8 @@ $(function() {
     };
 
     CompanyQuoteCreate.prototype.render = function() {
-      var source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
+      var template;
+      template = optima.templates.company_quote;
       $(this.el).find('.modal-content').html(template(this.model.toJSON()));
       return $(this.el).modal({
         backdrop: 'static'
@@ -954,8 +951,6 @@ $(function() {
       return CompanyResult.__super__.constructor.apply(this, arguments);
     }
 
-    CompanyResult.prototype.template = $('#company-result-template');
-
     CompanyResult.prototype.tagName = 'tr';
 
     CompanyResult.prototype.events = {
@@ -963,9 +958,8 @@ $(function() {
     };
 
     CompanyResult.prototype.render = function() {
-      var source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
+      var template;
+      template = optima.templates.company_result;
       $(this.el).html(template(this.model.toJSON()));
       return this;
     };
@@ -1158,8 +1152,6 @@ $(function() {
 
     ContactQuoteCreate.prototype.el = $('#contact-quote-create-modal');
 
-    ContactQuoteCreate.prototype.template = $('#contact-quote-create-template');
-
     ContactQuoteCreate.prototype.events = {
       'click a.contact-create-store': 'store',
       'click a.contacts-see': 'CompanyContacts',
@@ -1172,9 +1164,8 @@ $(function() {
     };
 
     ContactQuoteCreate.prototype.render = function(company_id) {
-      var company, source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
+      var company, template;
+      template = optima.templates.contact_quote;
       company = {
         company_id: company_id
       };
@@ -1374,8 +1365,6 @@ $(function() {
       return QuoteCompanyContact.__super__.constructor.apply(this, arguments);
     }
 
-    QuoteCompanyContact.prototype.template = $('#company-contact-template');
-
     QuoteCompanyContact.prototype.tagName = 'tr';
 
     QuoteCompanyContact.prototype.events = {
@@ -1383,9 +1372,8 @@ $(function() {
     };
 
     QuoteCompanyContact.prototype.render = function() {
-      var source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
+      var template;
+      template = optima.templates.contact_company_quote;
       $(this.el).html(template(this.model.toJSON()));
       return this;
     };

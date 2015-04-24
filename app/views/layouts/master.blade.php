@@ -11,33 +11,73 @@
 </head>
 
 <body id="optima-app">
-  @include('layouts/partials/_nav')
+	<nav class="navbar top-bar navbar-fixed-top">
+		<a href="#sidr" class="navbar-brand open-menu"><img src="[[asset('img/logo-home.png')]]" class="img-responsive"></a>
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li class="hidden-lg"> 
+					<a class="navbar-toggle open-menu"  href="#sidr">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
 	<!-- Menu -->
 	<div class="hidden-sm hidden-xs" id="sidebar-nav">
 	    <ul>
-	    <li class="user-link">[[ Auth::user()->name ]] [[ Auth::user()->lastname ]]</li>
-	      [[ HTML::navlink("/".Request::segment(1), "/", "Dashboard") ]]
-	      [[ HTML::navlink("/".Request::segment(1), "/companies", "Empresas") ]]
-	      [[ HTML::navlink("/".Request::segment(1), "/contacts", "Contactos") ]] 
-	      [[ HTML::navlink("/".Request::segment(1), "/services", "Servicios") ]]
-	      [[ HTML::navlink("/".Request::segment(1), "/results", "Resultados") ]]
-	      <li><a href="/logout">Cerrar Sesion</a></li>
+		    <li class="user-link">[[ Auth::user()->name ]] [[ Auth::user()->lastname ]]</li>
+		    <li><a href="/">Dashboard</a></li>
+		    <li><a href="/companies">Empresas</a></li>
+		    <li><a href="/contacts">Contactos</a></li>
+		    <li><a href="/services">servicios</a></li>
+		    <li><a href="/results">Resultados</a></li>
+		    <li><a href="/logout">Cerrar Sesion</a></li>
 	    </ul>
 	</div>
 
 <section id="main-content">
+	
 	@yield('content')
+
   <div class="hide-menu hide">
-    @include('layouts/partials/_menu')
+    <div id="sidr" >
+	<h2>Menu</h2>
+	<!-- Your content -->
+	<ul>
+		<li class="user-link">[[ Auth::user()->name ]] [[ Auth::user()->lastname ]]</li>
+		<li class="divider"></li>
+		<li><a href="/">Dashboard</a></li>
+		<li class="divider"></li>
+		<li><a href="/companies">Empresas</a></li>
+		<li class="divider"></li>
+		<li><a href="/contacts">Contactos</a></li>
+		<li class="divider"></li>
+		<li><a href="/services">servicios</a></li>
+		<li class="divider"></li>
+		<li><a href="/results">Resultados</a></li>
+		<li class="divider"></li>
+		<li><a href="/logout">Cerrar Sesion</a></li>
+	</ul>
+</div>
   </div>
 
 </section>
 
-  @include('companies/partials/_quote')
-  @include('companies/partials/_search_result')
-  @include('contacts/partials/_quote')
-  @include('contacts/partials/_company_contact')
-  @include('quotations/partials/_quotations_template')
+<div class="modal fade" id="company-quote-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="contact-quote-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
  
 <script src="/js/dist/dependencies.js"></script>
 <script src="/public/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>

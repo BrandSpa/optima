@@ -1,10 +1,13 @@
- <h4 class="quotation-labelable">
+ <span class="quotation-labelable">
   Cotización {{ id }}
+  </span>
+
   {{#if rethink_from }}
     <a href="/quotations/{{ rethink_from }}"><span class="label label-default">{{ rethink_from }}</span></a>
   {{/if}}
+  
   <span class="label label-{{ status }}">{{ status }}</span>
   <span class="label label-{{ status }}">{{ no_effective }}</span>
   <a href="/quotations/{{ id }}/duplicate" class="btn btn-default btn-xs">Duplicar</a>
-</h4>
+
 
