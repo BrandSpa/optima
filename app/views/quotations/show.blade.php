@@ -5,7 +5,7 @@
 		<div class="panel panel-default" id="quotation-options">
 			<div class="panel-heading"> </div>
 			<div class="panel-body"> </div>
-		</div>		
+		</div>
 
 		<div class="panel panel-default" id="quotation-products">
 			<div class="panel-heading btn-hidden">
@@ -46,6 +46,7 @@
 				<a href="#" class="quotation-product-open-create btn btn-default btn-xs btn-hidden">Buscar servicio</a>
 				<br>
 			</div>
+
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table table-condensed services-added">
@@ -60,7 +61,7 @@
 						</thead>
 					</table>
 				</div>
-				@include('quotations/partials/_services')
+
 			</div>
 		</div>
 
@@ -168,21 +169,63 @@
 </div><!-- /.modal -->
 
 
-<!-- includes -->
-@include('contacts/partials/_edit')
-@include('services/partials/_attach')
-@include('services/partials/_service_result')
-@include('quotations/partials/_comment')
-@include('quotations/partials/_no_effective')
-@include('quotations/partials/_no_send')
-@include('quotations/partials/_mail')
-@include('products/partials/_edit')
-@include('quotations/partials/_times')
-@include('quotations/partials/_tracking')
-@include('trackings/partials/_create')
-@include('quotations/partials/_company_contacts')
-@include('services/partials/_edit')
-@include('todos/partials/_create')
-@include('contacts/partials/_create')
+<!-- modals containers -->
+<div class="modal fade" id="contact-edit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="quotation-service-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="quotation-comment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"> </div>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="product-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"> </div>
+  </div>
+</div>
+
+<div class="modal fade" id="tracking-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="quotation-company-contacts-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-body">
+      <div class="select"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="quotation-contact-change btn btn-primary btn-sm">Guardar</a>
+      <a href="#" class="btn btn-default btn-sm modal-close" >Cancelar</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="service-edit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="contact-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
 
 @stop

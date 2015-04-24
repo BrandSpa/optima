@@ -11,7 +11,7 @@ $ ->
 
     render: ->
       source = $(@template).html()
-      template = Handlebars.compile(source)
+      template = optima.templates.service_item_result
       $(@el).html template( @model.toJSON() )
       @
 

@@ -1525,8 +1525,6 @@ $(function() {
 
     QuotationCompanyContacts.prototype.el = $("#quotation-company-contacts-modal");
 
-    QuotationCompanyContacts.prototype.template = $('#quotation-company-contact-template');
-
     QuotationCompanyContacts.prototype.events = {
       'click .modal-close': 'close',
       'click a.quotation-contact-change': 'changeContact'
@@ -1538,9 +1536,8 @@ $(function() {
     };
 
     QuotationCompanyContacts.prototype.render = function() {
-      var source, template;
-      source = $(this.template).html();
-      template = Handlebars.compile(source);
+      var template;
+      template = optima.templates.contacts_company_select;
       $(this.el).find('.select').html(template(this.collection.toJSON()));
       return $(this.el).modal({
         backdrop: 'static'
@@ -3226,8 +3223,6 @@ $(function() {
 
     QuotationServiceCreate.prototype.el = $('#quotation-service-create-modal');
 
-    QuotationServiceCreate.prototype.template = $('#quotation-service-create-template');
-
     QuotationServiceCreate.prototype.events = {
       'submit #service-search-form': 'search',
       'keydown .service-query': 'autocomplete',
@@ -3240,7 +3235,7 @@ $(function() {
         quotation_id: quotation_id
       };
       source = $(this.template).html();
-      template = Handlebars.compile(source);
+      template = optima.templates.service_attach;
       $(this.el).find('.modal-content').html(template(data));
       return $(this.el).modal({
         backdrop: 'static'
@@ -3318,7 +3313,7 @@ $(function() {
     ServiceResult.prototype.render = function() {
       var source, template;
       source = $(this.template).html();
-      template = Handlebars.compile(source);
+      template = optima.templates.service_item_result;
       $(this.el).html(template(this.model.toJSON()));
       return this;
     };

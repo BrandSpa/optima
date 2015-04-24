@@ -19,7 +19,7 @@ class UsersController extends BaseController{
 
 	public function logout() 
 	{
-			if (Auth::check())
+		if (Auth::check())
 		{
     	Auth::logout();
     	return Redirect::to('/login');

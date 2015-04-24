@@ -235,8 +235,9 @@ td img{
   font-style: normal;
 }
 
-.comment {
-  line-height: 11pt;
+.comment-content p{
+  margin:0;
+  padding: 0;
 }
 
 .price {

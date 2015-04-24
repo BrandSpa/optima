@@ -1,7 +1,7 @@
 $ ->
   class optima.views.QuotationServiceCreate extends Backbone.View
     el: $ '#quotation-service-create-modal'
-    template: $ '#quotation-service-create-template'
+    
     events:
       'submit #service-search-form': 'search'
       'keydown .service-query': 'autocomplete'
@@ -10,7 +10,7 @@ $ ->
     render: (quotation_id) ->
       data = {quotation_id: quotation_id}
       source = $(@template).html()
-      template = Handlebars.compile(source)
+      template = optima.templates.service_attach
       $(@el).find('.modal-content').html template( data )
       $(@el).modal({backdrop: 'static'})    
 

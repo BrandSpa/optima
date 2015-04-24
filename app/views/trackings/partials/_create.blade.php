@@ -9,11 +9,6 @@
   </div>
 </script>
 
-<div class="modal fade" id="tracking-create-modal">
-  <div class="modal-dialog">
-    <div class="modal-content"></div>
-  </div>
-</div>
 
 
 

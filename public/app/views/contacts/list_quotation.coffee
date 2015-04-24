@@ -1,7 +1,7 @@
 $ ->
   class optima.views.QuotationCompanyContacts extends Backbone.View
     el: $ "#quotation-company-contacts-modal"
-    template: $ '#quotation-company-contact-template'
+
     events: 
       'click .modal-close': 'close'
       'click a.quotation-contact-change': 'changeContact'
@@ -11,8 +11,7 @@ $ ->
       @quotation_id = optima.pathArray[2]
 
     render: ->
-      source = $(@template).html()
-      template = Handlebars.compile(source)
+      template = optima.templates.contacts_company_select
       $(@el).find('.select').html template( @collection.toJSON() )
       $(@el).modal({backdrop: 'static'})
 
