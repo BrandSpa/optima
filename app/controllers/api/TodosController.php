@@ -76,7 +76,9 @@ class TodosController extends \BaseController {
   	$collection = Todo::with(['user', 'assigned'])->whereRaw("completed IS NULL")->orderBy('id', 'DESC')->get();
   	Mail::send('emails.todos_remains', compact('collection'), function($message) {
 		$message->subject('Tareas pendientes');
-		$message->to("alejandro@brandspa.com");
+		$message->to("ccomercial@avante.cc");
+		$message->cc("alejandro@brandspa.com");
+		
 	});
 
   	return $collection;

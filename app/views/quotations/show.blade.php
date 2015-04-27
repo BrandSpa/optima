@@ -227,5 +227,11 @@
   </div>
 </div>
 
+<div class="modal fade" id="todo-create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
 
 @stop
