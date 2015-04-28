@@ -11,8 +11,8 @@ class ReportsController extends \BaseController {
 	public function index()
 	{
 		$now = Carbon::now();
-		$date_start = Input::get('date_start') ? Input::get('date_start') : $now->year."-".$now->month;
-		$date_end = Input::get('date_end') ? Input::get('date_end') : $now->year."-".$now->month;
+		$date_start = Input::get('date_start') ? Input::get('date_start') : $now->year."-".$now->month."-1";
+		$date_end = Input::get('date_end') ? Input::get('date_end') : $now->year."-".$now->month."-31";
 		$type = Input::get('type') ? Input::get('type') : '%';
 		$client_type = Input::get('client_type') ? Input::get('client_type') : '%';
 
@@ -167,7 +167,7 @@ class ReportsController extends \BaseController {
 		$collection = quotation::where('quotations.status', '=', $status)
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
-			->whereBetween('quotations.created_at', [$date_start."-1", $date_end."-31"])
+			->whereBetween('quotations.created_at', [$date_start, $date_end])
 			->join('products', 'quotations.id', '=', 'products.quotation_id')
 			->where('products.ordered', '=', true)
 			->select(DB::raw("SUM(total) AS products_total"))->get();
@@ -181,7 +181,7 @@ class ReportsController extends \BaseController {
 			->where('quotations.status_cause', '=', $cause)
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
-			->whereBetween('quotations.created_at', [$date_start."-1", $date_end."-31"])
+			->whereBetween('quotations.created_at', [$date_start, $date_end])
 			->join('products', 'quotations.id', '=', 'products.quotation_id')
 			->where('products.ordered', '=', true)
 			->select(DB::raw("SUM(total) AS products_total"))->get();
@@ -192,7 +192,7 @@ class ReportsController extends \BaseController {
 	public function getTotalFoundUs($found_us, $type, $client_type, $date_start, $date_end)
 	{
 		$collection = quotation::where('quotations.found_us', $found_us)
-			->whereBetween('quotations.created_at', [$date_start."-1", $date_end."-31"])
+			->whereBetween('quotations.created_at', [$date_start, $date_end])
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
 			->whereNotIn('status', ['Replanteada'])
@@ -206,7 +206,7 @@ class ReportsController extends \BaseController {
 	public function getTotalAdvisors($advisor, $type, $client_type, $date_start, $date_end)
 	{
 		$collection = quotation::where('quotations.advisor', $advisor)
-			->whereBetween('quotations.created_at', [$date_start."-1", $date_end."-31"])
+			->whereBetween('quotations.created_at', [$date_start, $date_end])
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
 			->whereNotIn('status', ['Replanteada'])
@@ -218,7 +218,7 @@ class ReportsController extends \BaseController {
 	public function getTotalClientType($client_type, $date_start, $date_end)
 	{
 		$collection = quotation::where('quotations.client_type', $client_type)
-			->whereBetween('quotations.created_at', [$date_start."-1", $date_end."-31"])
+			->whereBetween('quotations.created_at', [$date_start, $date_end])
 			->whereNotIn('status', ['Replanteada'])
 			->count();
 
@@ -229,7 +229,7 @@ class ReportsController extends \BaseController {
 		$collection = quotation::where('quotations.status', '=', 'Efectiva')
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
-			->whereBetween('quotations.created_at', [$date_start."-1", $date_end."-31"])
+			->whereBetween('quotations.created_at', [$date_start, $date_end])
 			->join('products', 'quotations.id', '=', 'products.quotation_id')
 			->where('products.ordered', '=', true)
 			->select(DB::raw("SUM(total) AS products_total"))->get();
@@ -243,7 +243,7 @@ class ReportsController extends \BaseController {
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
 			->where('type_category', '=', $type_category)
-			->whereBetween('quotations.created_at', [$date_start."-1", $date_end."-31"])
+			->whereBetween('quotations.created_at', [$date_start, $date_end])
 			->whereRaw("created_sent_diff ". $comparison)->count();
 
 		return $collection;
