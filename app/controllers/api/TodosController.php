@@ -2,6 +2,7 @@
 
 use Auth;
 use Todo;
+Use Optima\User;
 use Response;
 use Session;
 use Input;
@@ -9,7 +10,7 @@ use Mail;
 
 class TodosController extends \BaseController {
 
-  public function index() 
+  public function index()
   {
     $user_id = Auth::user()->id;
     $where = Input::get('where');
@@ -19,18 +20,18 @@ class TodosController extends \BaseController {
     } else {
     	$collection = Todo::with(['user', 'tracking', 'assigned'])->where('user_id', $user_id)->where('completed', NULL)->orderBy('id', 'DESC')->get();
     }
-    
+
     return Response::json($collection, 200);
   }
 
-  public function show($id) 
+  public function show($id)
   {
     return Todo::with('user')->with('user')->find($id);
   }
 
-  public function store() 
+  public function store()
   {
-    $data = Input::all(); 
+    $data = Input::all();
     $model = Todo::store($data);
 
     if (isset($model->id)) {
@@ -42,7 +43,7 @@ class TodosController extends \BaseController {
     return Response::json($model, 400);
   }
 
-  public function update($id) 
+  public function update($id)
   {
     $data = Input::all();
     $Todo = Todo::find_and_update($id, $data);
@@ -54,7 +55,7 @@ class TodosController extends \BaseController {
     return Response::json($Todo, 400);
   }
 
-  public function search($query) 
+  public function search($query)
   {
     $companies = Todo::search($query);
     return Response::json($companies, 200);
@@ -73,15 +74,31 @@ class TodosController extends \BaseController {
 
   public function pending()
   {
-  	$collection = Todo::with(['user', 'assigned'])->whereRaw("completed IS NULL")->orderBy('id', 'DESC')->get();
+  	$collection = Todo::with(['user', 'assigned'])
+      ->whereRaw("completed IS NULL")
+      ->orderBy('id', 'DESC')->get();
+
   	Mail::send('emails.todos_remains', compact('collection'), function($message) {
-		$message->subject('Tareas pendientes');
-		$message->to("ccomercial@avante.cc");
-		$message->cc("alejandro@brandspa.com");
-		
-	});
+  		$message->subject('Tareas pendientes');
+  		$message->to("ccomercial@avante.cc");
+  		$message->cc("alejandro@brandspa.com");
+	  });
 
   	return $collection;
+  }
+
+  public function pendingByUser()
+  {
+    $users = User::all();
+    foreach ($users as $user) {
+      $collection = Todo::where('user_id', $user->id)->where('completed', NULL)->get();
+
+      Mail::send('emails.todos_remains', compact('collection'), function($message) use($user) {
+        $message->subject('Tareas pendientes');
+        $message->cc($user->email);
+      });
+
+    }
   }
 
 }

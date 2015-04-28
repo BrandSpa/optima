@@ -7,6 +7,7 @@ Route::get('companies/contacts', 'Api\CompaniesController@contacts');
 Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
 
 Route::get('todos/pending/mail', 'Api\TodosController@pending');
+Route::get('todos/pendinguser/mail', 'Api\TodosController@pendingByUser');
 
 
 Route::group(['before' => 'auth'], function(){
@@ -30,11 +31,11 @@ Route::group(['before' => 'auth'], function(){
 
 	Route::get('quotations/{id}/pdfbn', 'QuotationsController@getPdfBn');
 	Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
-	
+
 	Route::post('quotations/replicate/{id}', 'QuotationsController@getDuplicate');
 	Route::get('quotations/{id}/rethink', 'QuotationsController@rethink');
 	Route::get('quotations/{id}/duplicate', 'QuotationsController@duplicate');
-	
+
 	Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
 
 	/*
@@ -51,7 +52,7 @@ Route::group(['before' => 'auth'], function(){
 		Route::resource('quotations', 'QuotationsController');
 		Route::resource('quotations.services', 'QuotationServiceController');
 		Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
-		
+
 		Route::resource('services', 'ServicesController');
 		Route::resource('activities', 'ActivitiesController');
 		Route::resource('notifications', 'NotificationsController');
@@ -59,8 +60,6 @@ Route::group(['before' => 'auth'], function(){
 		Route::resource('todos', 'TodosController');
 		Route::resource('users', 'UsersController');
 		Route::resource('reports', 'ReportsController');
-
-
 
 		Route::get('products/quotation', 'ProductsController');
 		Route::post('products/{id}/duplicate', 'ProductsController@duplicate');
