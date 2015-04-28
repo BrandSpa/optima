@@ -8,7 +8,7 @@ use Crypt;
 use Mail;
 
 class QuotationsController extends \BaseController {
-	
+
 	protected $entity;
 	protected $relationships = ['company', 'company.contacts', 'user'];
 
@@ -42,7 +42,7 @@ class QuotationsController extends \BaseController {
 		if( Input::has('advisor') && $advisor != "") $collection = $collection->where("advisor", $advisor);
 		if( Input::has('client_type') && $client_type != "") $collection = $collection->where("client_type", $client_type);
 
-		$collection = $collection->with('company', 'contact')->take(50)->skip($skip)->orderBy('id', 'DESC')->get();
+		$collection = $collection->with('company', 'contact', 'user')->take(50)->skip($skip)->orderBy('id', 'DESC')->get();
 
 		return Response::json($collection, 200);
 	}
@@ -53,7 +53,7 @@ class QuotationsController extends \BaseController {
 		return Response::json($model, 200);
 	}
 
-	public function search($type, $query) 
+	public function search($type, $query)
 	{
 		$collection = Quotation::search($type, $query);
 		return Response::json($collection, 200);
@@ -74,7 +74,7 @@ class QuotationsController extends \BaseController {
 			$model = Quotation::attachService($id, $service_id);
 			return Response::json($model, 201);
 		}
-		
+
 		$modelStored = $this->entity->store($data);
 		$storedId = $modelStored->id;
 		$model = Quotation::with(['company', 'contact'])->find($storedId);
@@ -92,7 +92,7 @@ class QuotationsController extends \BaseController {
 	 * POST send mail to contact mail
 	 * @return Response json object
 	 */
-	
+
 	public function sendMail($id)
 	{
 		$quotation = $this->entity->find($id);
@@ -105,7 +105,7 @@ class QuotationsController extends \BaseController {
 	 * @param  object $quotation
 	 * @return false
 	 */
-	public function sendQuotation($quotation) 
+	public function sendQuotation($quotation)
 	{
 		$email = $quotation->contact->email;
 		$recipient_1 = $quotation->mail_recipient_1;
@@ -113,9 +113,9 @@ class QuotationsController extends \BaseController {
 		$id = $quotation->id;
 
 		$data = [
-			"name" => $quotation->contact->name, 
-			"lastname" => $quotation->contact->lastname, 
-			"url" => $quotation->id."/pdf/".Crypt::encrypt($quotation->id), 
+			"name" => $quotation->contact->name,
+			"lastname" => $quotation->contact->lastname,
+			"url" => $quotation->id."/pdf/".Crypt::encrypt($quotation->id),
 			"user" => $quotation->user->name." ".$quotation->user->lastname,
 			"message" => $quotation->mail_message,
 			"type" => $quotation->type,
@@ -125,12 +125,12 @@ class QuotationsController extends \BaseController {
 		if($email) {
 			Mail::send('emails.quotation', compact('data'), function($message) use($email, $recipient_1, $recipient_2, $id) {
 				$message->subject('Avante cotización '.$id);
-				$message->to($email);	
-			
+				$message->to($email);
+
 				if (!empty($recipient_1)) $message->cc($recipient_1);
 				if (!empty($recipient_2)) $message->cc($recipient_2);
 			});
-		}	
+		}
 	}
 
 	public function duplicate()
@@ -144,7 +144,7 @@ class QuotationsController extends \BaseController {
 		$model = Quotation::duplicate($id);
 		$model->rethink_from = $id;
 		$model->save();
-		
+
 		return Redirect::to('/quotations/'.$model->id);
 	}
 
