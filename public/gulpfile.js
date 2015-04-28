@@ -10,15 +10,17 @@ var declare = require('gulp-declare');
 
 gulp.task('concat-css', function(){
   gulp.src([
+
     'bower_components/bootstrap/dist/css/bootstrap.min.css',
-    'css/main.css',
     'css/improve.css',
     'css/fancySelect.css',
     'css/summernote.css',
     'css/classic.css',
     'css/classic.date.css',
     'css/classic.time.css',
-    'node_modules/nprogress/nprogress.css'
+    'node_modules/nprogress/nprogress.css',
+    'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
+    'bower_components/sidr/stylesheets/jquery.sidr.dark.css'
   ])
   .pipe(concat('app.css'))
   .pipe(gulp.dest('css/dist/'));
@@ -49,11 +51,13 @@ gulp.task('dependencies', function(){
     'bower_components/pickadate/lib/picker.date.js',
     'bower_components/pickadate/lib/picker.time.js',
     'bower_components/pickadate/lib/translations/es_ES.js',
+    'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+    'bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js',
 
     // Plugins folder
     'js/plugins/curry-0.8.min.js',
     'js/plugins/socket.io.min.js',
-    
+
     ])
   .pipe(concat('dependencies.js'))
   .pipe(gulp.dest('js/dist/'));
@@ -72,13 +76,13 @@ gulp.task('coffee', function() {
     'app/models/todo.coffee',
     'app/models/tracking.coffee',
     'app/models/users.coffee',
-    
+
     //Views
-    
+
     //pages
     'app/views/pages/dashboard.coffee',
 
-    //activities    
+    //activities
     'app/views/activities/item.coffee',
     'app/views/activities/list.coffee',
     'app/views/activities/item_quotation.coffee',
@@ -174,7 +178,7 @@ gulp.task('coffee', function() {
 });
 
 gulp.task('sass', function() {
-  return sass('sass/') 
+  return sass('sass/')
   .on('error', function (err) {
     console.error('Error!', err.message);
   })
@@ -184,7 +188,7 @@ gulp.task('sass', function() {
 //compile templates
 gulp.task('templates', function () {
   gulp.src([
-    'app/templates/*.hbs', 
+    'app/templates/*.hbs',
     'app/templates/*/*.hbs',
     'app/templates/*/*/*.hbs'
   ])
@@ -201,12 +205,12 @@ gulp.task('templates', function () {
 gulp.task('watch', ['sass', 'coffee'], function(){
   gulp.watch('sass/*.sass', ['sass']);
   gulp.watch([
-    'app/*.coffee', 
+    'app/*.coffee',
     'app/*/*.coffee',
     'app/**/**/*.coffee'
     ], ['coffee']);
   gulp.watch([
-    'app/templates/*.hbs', 
+    'app/templates/*.hbs',
     'app/templates/*/*.hbs',
     'app/templates/*/*/*.hbs',
     ], ['templates']);

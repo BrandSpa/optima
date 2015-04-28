@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Optima by Avante</title>
 	<!-- STYLES -->
-  	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
-  	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/dist/app.css">
 </head>
 
@@ -15,7 +15,7 @@
 		<a href="#sidr" class="navbar-brand open-menu"><img src="[[asset('img/logo-home.png')]]" class="img-responsive"></a>
 		<div class="container">
 			<ul class="nav navbar-nav">
-				<li class="hidden-lg"> 
+				<li class="hidden-lg">
 					<a class="navbar-toggle open-menu"  href="#sidr">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -40,7 +40,7 @@
 	</div>
 
 <section id="main-content">
-	
+
 	@yield('content')
 
   <div class="hide-menu hide">
@@ -78,10 +78,8 @@
     <div class="modal-content"></div>
   </div>
 </div>
- 
+
 <script src="/js/dist/dependencies.js"></script>
-<script src="/public/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="/public/vendor/bootstrap-datepicker/js/locale/bootstrap-datepicker.es.js"></script>
 <script src="/js/app/helpers.js"></script>
 <script src="/js/helpers/helper-compare.js"></script>
 <script src="/js/helpers/backbone_helpers.js"></script>
@@ -93,13 +91,13 @@
 	  optima.user_id = [[ Auth::user()->id ]];
 	  optima.user_email = "[[ Auth::user()->email ]]";
   </script>
-   
+
   <script src="/js/dist/templates.js"></script>
  <script src="/js/helpers/handlebars_partials.js"></script>
 
   <script src="/js/sockets.js"></script>
   <script src="/js/dist/app.js"></script>
-  
+
    <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -112,4 +110,3 @@
 </body>
 
 </html>
-

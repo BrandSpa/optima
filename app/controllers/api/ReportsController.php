@@ -39,7 +39,8 @@ class ReportsController extends \BaseController {
 			'average_confirmed'      => $averageConfirmedTime,
 			'total_quotations_money' => $TotalQuotationsMoney,
 			'now'                    => $now,
-			'date_start'             => $date_start
+			'date_start'             => $date_start,
+			'date_end'               => $date_end
 		]);
 	}
 

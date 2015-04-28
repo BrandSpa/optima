@@ -9,6 +9,9 @@ body, html {
   height: 100%;
   padding-top: 40px; }
 
+a {
+  color: #555; }
+
 .container-fluid {
   height: 100%; }
 

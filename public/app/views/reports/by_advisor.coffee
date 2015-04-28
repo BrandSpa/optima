@@ -10,6 +10,7 @@ $ ->
         "Andrés Rojas",
         "Diego Peña"
       ],
+      
       datasets: [
           label: "My First dataset",
           fillColor: "rgba(231, 161, 31, .7)",

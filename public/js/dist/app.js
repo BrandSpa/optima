@@ -3959,11 +3959,11 @@ $(function() {
     ReportsFilters.prototype.initialize = function() {
       this.filters = {};
       $(this.el).find('.datepicker_start').datepicker({
-        format: "yyyy-mm",
+        format: "yyyy-mm-dd",
         language: "es"
       });
       return $(this.el).find('.datepicker_end').datepicker({
-        format: "yyyy-mm",
+        format: "yyyy-mm-dd",
         language: "es"
       });
     };
@@ -3978,7 +3978,7 @@ $(function() {
       var el;
       el = $(e.currentTarget).val();
       this.filters = _.extend(this.filters, {
-        date_start: el
+        date_start: "'" + el + "'"
       });
       return this.filter();
     };
@@ -3987,7 +3987,7 @@ $(function() {
       var el;
       el = $(e.currentTarget).val();
       this.filters = _.extend(this.filters, {
-        date_end: el
+        date_end: "'" + el + "'"
       });
       return this.filter();
     };

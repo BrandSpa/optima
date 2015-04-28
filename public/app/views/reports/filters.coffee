@@ -11,11 +11,11 @@ $ ->
     initialize: ->
       @filters = {}
       $(@el).find('.datepicker_start').datepicker
-        format: "yyyy-mm",
+        format: "yyyy-mm-dd",
         language: "es"
 
       $(@el).find('.datepicker_end').datepicker
-        format: "yyyy-mm",
+        format: "yyyy-mm-dd",
         language: "es"
 
     filter: ->
@@ -23,12 +23,12 @@ $ ->
 
     byDateStart: (e) ->
       el = $(e.currentTarget).val()
-      @filters = _.extend @filters, date_start: el
+      @filters = _.extend @filters, date_start: "'"+el+"'"
       @filter()
-    
+
     byDateEnd: (e) ->
       el = $(e.currentTarget).val()
-      @filters = _.extend @filters, date_end: el
+      @filters = _.extend @filters, date_end: "'"+el+"'"
       @filter()
 
     byType: (e) ->
