@@ -128,8 +128,8 @@ class ReportsController extends \BaseController {
 
 	public function allByAdvisors($type, $client_type, $date_start, $date_end)
 	{
-		$andres = $this->getTotalAdvisors('Andres Rojas', $type, $client_type, $date_start, $date_end);
-		$diego = $this->getTotalAdvisors('Diego Rojas', $type, $client_type, $date_start, $date_end);
+		$andres = $this->getTotalAdvisors('Andrés Rojas', $type, $client_type, $date_start, $date_end);
+		$diego = $this->getTotalAdvisors('Diego Peña', $type, $client_type, $date_start, $date_end);
 
 		return [$andres, $diego];
 	}

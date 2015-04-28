@@ -4163,7 +4163,7 @@ $(function() {
     ReportByAdvisor.prototype.setData = function() {
       var ctx, data, view;
       data = {
-        labels: ["Andres Rojas", "Diego Rojas"],
+        labels: ["Andrés Rojas", "Diego Peña"],
         datasets: [
           {
             label: "My First dataset",

@@ -7,8 +7,8 @@ $ ->
 
     setData: ->
       data = labels: [
-        "Andres Rojas", 
-        "Diego Rojas"
+        "Andrés Rojas",
+        "Diego Peña"
       ],
       datasets: [
           label: "My First dataset",
