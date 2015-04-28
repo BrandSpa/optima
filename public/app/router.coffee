@@ -24,7 +24,7 @@ $ ->
       optima.contacts = new optima.collections.Contacts
       optima.contacts.fetch reset: true
       optima.contactsView = new optima.views.ContactsView collection: optima.contacts
-      
+
     startServices: ->
       optima.services = new optima.collections.Services
       optima.services.fetch reset: true
@@ -43,7 +43,7 @@ $ ->
       $('.quotation-paginate-container').append(quotationsPaginate.render().el)
 
       optima.quotations.fetch reset: true
-       
+
       optima.activities.fetch reset: true
 
       optima.todos = new optima.collections.Todos
@@ -59,7 +59,7 @@ $ ->
       optima.views.quotationCreate = new optima.views.QuotationCreate model: new optima.models.Quotation
 
     startQuotationsSearch: (query) ->
-      optima.quotations = new optima.collections.Quotations 
+      optima.quotations = new optima.collections.Quotations
       optima.quotations.fetch reset: true, data: query: query
 
       optima.quotationsView = new optima.views.QuotationsView collection: optima.quotations
@@ -110,10 +110,13 @@ $ ->
       viewByType = new optima.views.ReportByType model: coll
       viewByNoEffective = new optima.views.ReportByNoEffective model: coll
       viewByDiffSent = new optima.views.ReportByDiffSent model: coll
-      coll.fetch()
+      now = new Date()
+      console.log now
+      month = now.getMonth()
+      year = now.getFullYear()
+      coll.fetch(data: date_start: year+"-"+month+"-1")
       new optima.views.ReportsFilters model: coll
-      
-      
+
+
   optima.workspace = new optima.routers.Workspace
   Backbone.history.start({pushState: true})
-

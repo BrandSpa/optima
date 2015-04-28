@@ -7,13 +7,13 @@
     "require": {
         "laravel/framework": "4.2.*",
         "thujohn/pdf": "1.0.5",
-        "pusher/pusher-php-server": "2.1.3"
+        "pusher/pusher-php-server": "2.1.3",
+        "codeception/codeception": "~2.1@dev"
     },
 
     "require-dev": {
         "way/generators": "~2.0",
-        "guzzle/guzzle": "~3.7",
-        "codeception/codeception": "*"
+        "guzzle/guzzle": "~3.7"
     },
     
     "autoload": {

@@ -4553,7 +4553,7 @@ $(function() {
     };
 
     Workspace.prototype.startReports = function() {
-      var coll, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType;
+      var coll, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType, year;
       coll = new optima.models.Report;
       viewByStatus = new optima.views.ReportByStatus({
         model: coll
@@ -4573,7 +4573,15 @@ $(function() {
       viewByDiffSent = new optima.views.ReportByDiffSent({
         model: coll
       });
-      coll.fetch();
+      now = new Date();
+      console.log(now);
+      month = now.getMonth();
+      year = now.getFullYear();
+      coll.fetch({
+        data: {
+          date_start: year + "-" + month + "-1"
+        }
+      });
       return new optima.views.ReportsFilters({
         model: coll
       });
