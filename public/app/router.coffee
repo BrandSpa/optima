@@ -111,8 +111,7 @@ $ ->
       viewByNoEffective = new optima.views.ReportByNoEffective model: coll
       viewByDiffSent = new optima.views.ReportByDiffSent model: coll
       now = new Date()
-      console.log now
-      month = now.getMonth()
+      month = (now.getMonth()+1)
       year = now.getFullYear()
       date = year+"-"+month+"-1"
       coll.fetch(data: date_start: "'"+date+"'")
