@@ -1,6 +1,8 @@
 <?php namespace Optima;
 
 use Validator;
+use DateTime;
+use Auth;
 
 class Tracking extends \Eloquent {
 
@@ -34,6 +36,16 @@ class Tracking extends \Eloquent {
   public function todos()
   {
     return $this->hasMany('Todo');
+  }
+
+  public static function boot()
+  {
+    parent::boot();
+
+    static::creating(function($model)
+    {
+      $model->user_id = Auth::user()->id;
+    });
   }
 
   public static function takeAndSkip($take = 10, $skip = 0)

@@ -23,7 +23,7 @@ class TrackingsController extends \BaseController {
       return Response::json($collection, 200);
     }
 
-    $collection = Tracking::with('user')->takeAndSkip(10, $offset);
+    $collection = Tracking::takeAndSkip(10, $offset);
     return Response::json($collection, 200);
   }
 
