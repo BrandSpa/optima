@@ -167,7 +167,7 @@ class ReportsController extends \BaseController {
 		$collection = quotation::where('quotations.status', '=', $status)
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
-			->whereBetween('quotations.created_at', [$date_start, $date_end])
+			->whereBetween('quotations.created_at', ["$date_start", "$date_end"])
 			->join('products', 'quotations.id', '=', 'products.quotation_id')
 			->where('products.ordered', '=', true)
 			->select(DB::raw("SUM(total) AS products_total"))->get();
