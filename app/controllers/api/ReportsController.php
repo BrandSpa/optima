@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Input;
 
 class ReportsController extends \BaseController {
-	
+
 	public function index()
 	{
 		$now = Carbon::now();
@@ -16,28 +16,30 @@ class ReportsController extends \BaseController {
 		$type = Input::get('type') ? Input::get('type') : '%';
 		$client_type = Input::get('client_type') ? Input::get('client_type') : '%';
 
-		$byStatus = $this->allByStatus($type, $client_type, $date_start, $date_end);
-		$byFindUs = $this->allByFindUs($type, $client_type, $date_start, $date_end);
-		$byAdvisor = $this->allByAdvisors($type, $client_type, $date_start, $date_end);
-		$byClientType = $this->allByClientType($date_start, $date_end);
-		$byNoEffective = $this->allByNoEffective($type, $client_type, $date_start, $date_end);
-		$TotalQuotations = $this->getTotalQuotations($type, $client_type, $date_start, $date_end);
+		$byStatus             = $this->allByStatus($type, $client_type, $date_start, $date_end);
+		$byFindUs             = $this->allByFindUs($type, $client_type, $date_start, $date_end);
+		$byAdvisor            = $this->allByAdvisors($type, $client_type, $date_start, $date_end);
+		$byClientType         = $this->allByClientType($date_start, $date_end);
+		$byNoEffective        = $this->allByNoEffective($type, $client_type, $date_start, $date_end);
+		$TotalQuotations      = $this->getTotalQuotations($type, $client_type, $date_start, $date_end);
 		$TotalQuotationsMoney = $this->TotalQuotationsMoney($type, $client_type, $date_start, $date_end);
-		$averageSentTime = $this->averageSentTime($date_start, $date_end, $type, $client_type);
+		$averageSentTime      = $this->averageSentTime($date_start, $date_end, $type, $client_type);
 		$averageConfirmedTime = $this->averageConfirmedTime();
-		$byDiff = $this->allByDiff($type, $client_type, $date_start, $date_end);
+		$byDiff               = $this->allByDiff($type, $client_type, $date_start, $date_end);
 
 		return Response::json([
-			"status" => $byStatus, 
-			"findUS" => $byFindUs,
-			"advisors" => $byAdvisor,
-			"client_type" => $byClientType,
-			"no_effective" => $byNoEffective,
-			'total_quotations' => $TotalQuotations,
-			'sent_diff' => $byDiff,
-			'average_sent' => $averageSentTime,
-			'average_confirmed' => $averageConfirmedTime,
-			'total_quotations_money' => $TotalQuotationsMoney
+			"status"                 => $byStatus,
+			"findUS"                 => $byFindUs,
+			"advisors"               => $byAdvisor,
+			"client_type"            => $byClientType,
+			"no_effective"           => $byNoEffective,
+			'total_quotations'       => $TotalQuotations,
+			'sent_diff'              => $byDiff,
+			'average_sent'           => $averageSentTime,
+			'average_confirmed'      => $averageConfirmedTime,
+			'total_quotations_money' => $TotalQuotationsMoney,
+			'now'                    => $now,
+			'date_start'             => $date_start
 		]);
 	}
 
@@ -76,7 +78,7 @@ class ReportsController extends \BaseController {
 		return [
 			$draft,
 			$sent,
-			$effective, 
+			$effective,
 			$not_effective
 		];
 	}
@@ -154,7 +156,7 @@ class ReportsController extends \BaseController {
 		return [
 			$stock,
 			$outStock,
-			$order, 
+			$order,
 			$outOrder
 		];
 
