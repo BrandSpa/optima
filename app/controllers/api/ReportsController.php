@@ -16,16 +16,16 @@ class ReportsController extends \BaseController {
 		$type = Input::get('type') ? Input::get('type') : '%';
 		$client_type = Input::get('client_type') ? Input::get('client_type') : '%';
 
-		$byStatus             = $this->allByStatus($type, $client_type, $date_start, $date_end);
-		$byFindUs             = $this->allByFindUs($type, $client_type, $date_start, $date_end);
-		$byAdvisor            = $this->allByAdvisors($type, $client_type, $date_start, $date_end);
-		$byClientType         = $this->allByClientType($date_start, $date_end);
-		$byNoEffective        = $this->allByNoEffective($type, $client_type, $date_start, $date_end);
-		$TotalQuotations      = $this->getTotalQuotations($type, $client_type, $date_start, $date_end);
-		$TotalQuotationsMoney = $this->TotalQuotationsMoney($type, $client_type, $date_start, $date_end);
-		$averageSentTime      = $this->averageSentTime($date_start, $date_end, $type, $client_type);
+		$byStatus             = $this->allByStatus($type, $client_type, "$date_start", $date_end);
+		$byFindUs             = $this->allByFindUs($type, $client_type, "$date_start", $date_end);
+		$byAdvisor            = $this->allByAdvisors($type, $client_type, "$date_start", $date_end);
+		$byClientType         = $this->allByClientType("$date_start", $date_end);
+		$byNoEffective        = $this->allByNoEffective($type, $client_type, "$date_start", $date_end);
+		$TotalQuotations      = $this->getTotalQuotations($type, $client_type, "$date_start", $date_end);
+		$TotalQuotationsMoney = $this->TotalQuotationsMoney($type, $client_type, "$date_start", $date_end);
+		$averageSentTime      = $this->averageSentTime("$date_start", $date_end, $type, $client_type);
 		$averageConfirmedTime = $this->averageConfirmedTime();
-		$byDiff               = $this->allByDiff($type, $client_type, $date_start, $date_end);
+		$byDiff               = $this->allByDiff($type, $client_type, "$date_start", $date_end);
 
 		return Response::json([
 			"status"                 => $byStatus,
