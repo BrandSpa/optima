@@ -16,7 +16,12 @@ class Tracking extends \Eloquent {
     'report' => 'required',
   ];
 
-  public function quotation() 
+  public function user()
+  {
+    return $this->belongsTo('Optima\\User');
+  }
+
+  public function quotation()
   {
     return $this->belongsTo('Optima\\Quotation');
   }
