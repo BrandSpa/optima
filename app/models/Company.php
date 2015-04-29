@@ -5,36 +5,37 @@ use Validator;
 class Company extends \Eloquent {
 
 	protected $fillable = [
-		'name', 
-		'nit', 
-		'sector', 
-		'city', 
-		'address', 
-		'phone', 
-		'type', 
-		'web', 
+		'name',
+		'nit',
+		'sector',
+		'city',
+		'address',
+		'phone',
+		'type',
+		'web',
 		'comment'
 	];
 
 	public $rules = [
-		'name' => 'required', 
+		'name' => 'required',
 		'nit' => 'min:9',
 		'phone' => 'min:7',
 	];
 
-	public function contacts() 
+	public function contacts()
 	{
 		return $this->hasMany('Optima\\Contact');
 	}
 
-	public function quotations() 
+	public function quotations()
 	{
 		return $this->hasMany('Optima\\Quotation');
 	}
 
 	public static function search($query)
 	{
-		return self::where("name", "LIKE", "%$query%")
+		return self::with('contacts')
+							->where("name", "LIKE", "%$query%")
 							->orWhere("nit", "LIKE", "$query%")
 							->take(50)->orderBy('id', 'DESC')->get();
 	}

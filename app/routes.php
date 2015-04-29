@@ -9,7 +9,6 @@ Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
 Route::get('todos/pending/mail', 'Api\TodosController@pending');
 Route::get('todos/pendinguser/mail', 'Api\TodosController@pendingByUser');
 
-
 Route::group(['before' => 'auth'], function(){
 
 	Route::get('companies', 'PagesController@companies');
