@@ -4579,7 +4579,7 @@ $(function() {
         month = "0" + month;
       }
       year = now.getFullYear();
-      date = year + "-" + month + "-1";
+      date = year + "-" + month + "-01";
       date_end = year + "-" + month + "-31";
       coll.fetch({
         data: {
