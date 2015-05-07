@@ -3978,7 +3978,7 @@ $(function() {
       var el;
       el = $(e.currentTarget).val();
       this.filters = _.extend(this.filters, {
-        date_start: "'" + el + "'"
+        date_start: el
       });
       return this.filter();
     };
@@ -3987,7 +3987,7 @@ $(function() {
       var el;
       el = $(e.currentTarget).val();
       this.filters = _.extend(this.filters, {
-        date_end: "'" + el + "'"
+        date_end: el
       });
       return this.filter();
     };
@@ -4577,11 +4577,7 @@ $(function() {
       month = now.getMonth() + 1;
       year = now.getFullYear();
       date = year + "-" + month + "-1";
-      coll.fetch({
-        data: {
-          date_start: "'" + date + "'"
-        }
-      });
+      coll.fetch();
       return new optima.views.ReportsFilters({
         model: coll
       });

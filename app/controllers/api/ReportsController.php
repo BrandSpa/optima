@@ -10,22 +10,25 @@ class ReportsController extends \BaseController {
 
 	public function index()
 	{
+
 		$now = Carbon::now();
 		$date_start = Input::get('date_start') ? Input::get('date_start') : $now->year."-".$now->month."-1";
 		$date_end = Input::get('date_end') ? Input::get('date_end') : $now->year."-".$now->month."-31";
-		$type = Input::get('type') ? Input::get('type') : '%';
+
+		$type = Input::get('type') ? Input::get('type') : "%";
 		$client_type = Input::get('client_type') ? Input::get('client_type') : '%';
 
-		$byStatus             = $this->allByStatus($type, $client_type, "$date_start", $date_end);
-		$byFindUs             = $this->allByFindUs($type, $client_type, "$date_start", $date_end);
-		$byAdvisor            = $this->allByAdvisors($type, $client_type, "$date_start", $date_end);
-		$byClientType         = $this->allByClientType("$date_start", $date_end);
-		$byNoEffective        = $this->allByNoEffective($type, $client_type, "$date_start", $date_end);
-		$TotalQuotations      = $this->getTotalQuotations($type, $client_type, "$date_start", $date_end);
-		$TotalQuotationsMoney = $this->TotalQuotationsMoney($type, $client_type, "$date_start", $date_end);
-		$averageSentTime      = $this->averageSentTime("$date_start", $date_end, $type, $client_type);
+		$byStatus             = $this->allByStatus($type, $client_type, $date_start, $date_end);
+
+		$byFindUs             = $this->allByFindUs($type, $client_type, $date_start, $date_end);
+		$byAdvisor            = $this->allByAdvisors($type, $client_type, $date_start, $date_end);
+		$byClientType         = $this->allByClientType($date_start, $date_end);
+		$byNoEffective        = $this->allByNoEffective($type, $client_type, $date_start, $date_end);
+		$TotalQuotations      = $this->getTotalQuotations($type, $client_type, $date_start, $date_end);
+		$TotalQuotationsMoney = $this->TotalQuotationsMoney($type, $client_type, $date_start, $date_end);
+		$averageSentTime      = $this->averageSentTime($date_start, $date_end, $type, $client_type);
 		$averageConfirmedTime = $this->averageConfirmedTime();
-		$byDiff               = $this->allByDiff($type, $client_type, "$date_start", $date_end);
+		$byDiff               = $this->allByDiff($type, $client_type, $date_start, $date_end);
 
 		return Response::json([
 			"status"                 => $byStatus,
@@ -39,8 +42,9 @@ class ReportsController extends \BaseController {
 			'average_confirmed'      => $averageConfirmedTime,
 			'total_quotations_money' => $TotalQuotationsMoney,
 			'now'                    => $now,
-			'date_start'             => $date_start,
-			'date_end'               => $date_end
+			'type'        => $type,
+			'date_start'  => $date_start,
+			'date_end'    => $date_end
 		]);
 	}
 
@@ -69,47 +73,6 @@ class ReportsController extends \BaseController {
 		return Quotation::avg('sent_confirmed_diff');
 	}
 
-	public function allByStatus($type, $client_type, $date_start, $date_end)
-	{
-		$effective = $this->getTotalStatus('Efectiva', $type, $client_type, $date_start, $date_end);
-		$draft = $this->getTotalStatus('Borrador', $type, $client_type, $date_start, $date_end);
-		$sent = $this->getTotalStatus('Enviada', $type, $client_type, $date_start, $date_end);
-		$not_effective = $this->getTotalStatus('No efectiva', $type, $client_type, $date_start, $date_end);
-
-		return [
-			$draft,
-			$sent,
-			$effective,
-			$not_effective
-		];
-	}
-
-	public function allByFindUs($type, $client_type, $date_start, $date_end)
-	{
-		$advisors = $this->getTotalFoundUs('Asesores comerciales', $type, $client_type, $date_start, $date_end);
-		$client = $this->getTotalFoundUs('Cliente', $type, $client_type, $date_start, $date_end);
-		$web = $this->getTotalFoundUs('Página Web Avante', $type, $client_type, $date_start, $date_end);
-		$adwords = $this->getTotalFoundUs('Google Adwords', $type, $client_type, $date_start, $date_end);
-		$referred = $this->getTotalFoundUs('Referido', $type, $client_type, $date_start, $date_end);
-		$promotion = $this->getTotalFoundUs('Promoción', $type, $client_type, $date_start, $date_end);
-		$yellow_pages = $this->getTotalFoundUs('Paginas Amarilladas', $type, $client_type, $date_start, $date_end);
-		$yellow_pages_web = $this->getTotalFoundUs('Paginas Amarilladas Web', $type, $client_type, $date_start, $date_end);
-		$phone = $this->getTotalFoundUs('Teléfono', $type, $client_type, $date_start, $date_end);
-		$social_network = $this->getTotalFoundUs('Redes Sociales', $type, $client_type, $date_start, $date_end);
-
-		return [
-			$advisors,
-			$client,
-			$web,
-			$adwords,
-			$referred,
-			$promotion,
-			$yellow_pages,
-			$yellow_pages_web,
-			$phone,
-			$social_network
-		];
-	}
 
 	public function allByNoEffective($type, $client_type, $date_start, $date_end)
 	{
@@ -162,44 +125,216 @@ class ReportsController extends \BaseController {
 		];
 
 	}
-
-	public function getTotalStatus($status, $type, $client_type, $date_start, $date_end)
+	/**
+	 * All by status
+	 *
+	 * @return array
+	 */
+	public function allByStatus($type, $client_type, $date_start, $date_end)
 	{
-		$collection = quotation::where('quotations.status', '=', $status)
-			->where('quotations.type', 'like', $type)
-			->where('quotations.client_type', 'like', $client_type)
-			->whereBetween('quotations.created_at', ["$date_start", "$date_end"])
-			->join('products', 'quotations.id', '=', 'products.quotation_id')
-			->where('products.ordered', '=', true)
-			->select(DB::raw("SUM(total) AS products_total"))->get();
 
-		return $collection[0]->products_total;
+		$effective = $this->getTotalStatus(
+			'Efectiva',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$draft = $this->getTotalStatus(
+			'Borrador',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$sent = $this->getTotalStatus(
+			'Enviada',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$not_effective = $this->getTotalStatus(
+			'No efectiva',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		return [
+			$draft,
+			$sent,
+			$effective,
+			$not_effective
+		];
 	}
 
-	public function getTotalNoEffective($cause, $type, $client_type, $date_start, $date_end)
-	{
+	/**
+	 * get total products by status
+	 * @return int
+	 */
+	public function getTotalStatus(
+		$status,
+		$type,
+		$client_type,
+		$date_start,
+		$date_end
+	) {
+
+		$collection =  Quotation::where('quotations.status', $status)
+			->where('quotations.type', 'LIKE', $type)
+			->where('quotations.client_type', 'LIKE', $client_type)
+			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
+			->join('products', 'quotations.id', '=', 'products.quotation_id')
+			//->where('products.ordered', true)
+			->select( DB::raw("SUM(total) AS products_total") )
+			->get();
+
+			return $collection[0]->products_total;
+
+	}
+
+	/**
+	 * get total products by No effective
+	 * @return int
+	 */
+	public function getTotalNoEffective(
+		$cause,
+		$type,
+		$client_type,
+		$date_start,
+		$date_end
+	) {
+
 		$collection = quotation::where('quotations.status', '=', 'No efectiva')
 			->where('quotations.status_cause', '=', $cause)
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
-			->whereBetween('quotations.created_at', [$date_start, $date_end])
+			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->join('products', 'quotations.id', '=', 'products.quotation_id')
-			->where('products.ordered', '=', true)
-			->select(DB::raw("SUM(total) AS products_total"))->get();
+			->select(DB::raw("SUM(total) AS products_total"))
+			->get();
 
 		return $collection[0]->products_total;
 	}
 
-	public function getTotalFoundUs($found_us, $type, $client_type, $date_start, $date_end)
+
+	public function allByFindUs($type, $client_type, $date_start, $date_end)
 	{
+		$advisors = $this->getTotalFoundUs(
+			'Asesores comerciales',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$client = $this->getTotalFoundUs(
+			'Cliente',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$web = $this->getTotalFoundUs(
+			'Página Web Avante',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$adwords = $this->getTotalFoundUs(
+			'Google Adwords',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$referred = $this->getTotalFoundUs(
+			'Referido',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$promotion = $this->getTotalFoundUs(
+			'Promoción',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$yellow_pages = $this->getTotalFoundUs(
+			'Paginas Amarilladas',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$yellow_pages_web = $this->getTotalFoundUs(
+			'Paginas Amarilladas Web',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$phone = $this->getTotalFoundUs(
+			'Teléfono',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$social_network = $this->getTotalFoundUs(
+			'Redes Sociales',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		return [
+			$advisors,
+			$client,
+			$web,
+			$adwords,
+			$referred,
+			$promotion,
+			$yellow_pages,
+			$yellow_pages_web,
+			$phone,
+			$social_network
+		];
+	}
+
+	public function getTotalFoundUs(
+		$found_us,
+		$type,
+		$client_type,
+		$date_start,
+		$date_end
+	) {
+
 		$collection = quotation::where('quotations.found_us', $found_us)
-			->whereBetween('quotations.created_at', [$date_start, $date_end])
-			->where('quotations.type', 'like', $type)
-			->where('quotations.client_type', 'like', $client_type)
-			->whereNotIn('status', ['Replanteada'])
-			->join('products', 'quotations.id', '=', 'products.quotation_id')
-			->where('products.ordered', '=', true)
-			->select(DB::raw("SUM(total) AS products_total"))->get();
+		->where('quotations.type', 'like', $type)
+		->where('quotations.client_type', 'like', $client_type)
+		->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
+		->whereNotIn('quotations.status', ['Replanteada'])
+		->join('products', 'quotations.id', '=', 'products.quotation_id')
+		->select(DB::raw("SUM(total) AS products_total"))
+		->get();
 
 		return $collection[0]->products_total;
 	}
@@ -207,7 +342,7 @@ class ReportsController extends \BaseController {
 	public function getTotalAdvisors($advisor, $type, $client_type, $date_start, $date_end)
 	{
 		$collection = quotation::where('quotations.advisor', $advisor)
-			->whereBetween('quotations.created_at', [$date_start, $date_end])
+		->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
 			->whereNotIn('status', ['Replanteada'])
@@ -219,7 +354,7 @@ class ReportsController extends \BaseController {
 	public function getTotalClientType($client_type, $date_start, $date_end)
 	{
 		$collection = quotation::where('quotations.client_type', $client_type)
-			->whereBetween('quotations.created_at', [$date_start, $date_end])
+			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->whereNotIn('status', ['Replanteada'])
 			->count();
 
@@ -230,7 +365,7 @@ class ReportsController extends \BaseController {
 		$collection = quotation::where('quotations.status', '=', 'Efectiva')
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
-			->whereBetween('quotations.created_at', [$date_start, $date_end])
+			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->join('products', 'quotations.id', '=', 'products.quotation_id')
 			->where('products.ordered', '=', true)
 			->select(DB::raw("SUM(total) AS products_total"))->get();
@@ -244,7 +379,7 @@ class ReportsController extends \BaseController {
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
 			->where('type_category', '=', $type_category)
-			->whereBetween('quotations.created_at', [$date_start, $date_end])
+			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->whereRaw("created_sent_diff ". $comparison)->count();
 
 		return $collection;

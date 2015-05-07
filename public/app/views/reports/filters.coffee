@@ -23,12 +23,12 @@ $ ->
 
     byDateStart: (e) ->
       el = $(e.currentTarget).val()
-      @filters = _.extend @filters, date_start: "'"+el+"'"
+      @filters = _.extend @filters, date_start: el
       @filter()
 
     byDateEnd: (e) ->
       el = $(e.currentTarget).val()
-      @filters = _.extend @filters, date_end: "'"+el+"'"
+      @filters = _.extend @filters, date_end: el
       @filter()
 
     byType: (e) ->

@@ -7,6 +7,7 @@ $ ->
 
     setData: ->
       data = labels: ["Borrador", "Enviada", "Efectiva", "No Efectiva"],
+      
       datasets: [
 
           label: "My First dataset",
