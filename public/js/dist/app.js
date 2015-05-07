@@ -4577,7 +4577,11 @@ $(function() {
       month = now.getMonth() + 1;
       year = now.getFullYear();
       date = year + "-" + month + "-1";
-      coll.fetch();
+      coll.fetch({
+        data: {
+          date_start: date
+        }
+      });
       return new optima.views.ReportsFilters({
         model: coll
       });

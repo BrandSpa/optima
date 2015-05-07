@@ -294,7 +294,7 @@ class ReportsController extends \BaseController {
 		$date_end
 	) {
 
-		$collection = quotation::where('quotations.status', '=', 'No efectiva')
+		$collection = quotation::where('quotations.status',  'No efectiva')
 			->where('quotations.status_cause', '=', $cause)
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
