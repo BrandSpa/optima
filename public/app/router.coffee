@@ -114,7 +114,8 @@ $ ->
       month = (now.getMonth()+1)
       year = now.getFullYear()
       date = year+"-"+month+"-1"
-      coll.fetch(data: date_start: date)
+      date_end = year+"-"+month+"-31"
+      coll.fetch(data: date_start: date, date_end: date_end)
       new optima.views.ReportsFilters model: coll
 
 
