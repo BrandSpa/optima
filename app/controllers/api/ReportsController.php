@@ -76,10 +76,37 @@ class ReportsController extends \BaseController {
 
 	public function allByNoEffective($type, $client_type, $date_start, $date_end)
 	{
-		$no_disponible = $this->getTotalNoEffective("No disponible", $type, $client_type, $date_start, $date_end);
-		$no_confiable = $this->getTotalNoEffective("No confiable", $type, $client_type, $date_start, $date_end);
-		$competencia = $this->getTotalNoEffective("Competencia", $type, $client_type, $date_start, $date_end);
-		$por_cliente = $this->getTotalNoEffective("Por cliente", $type, $client_type, $date_start, $date_end);
+		$no_disponible = $this->getTotalNoEffective(
+			"No disponible",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$no_confiable = $this->getTotalNoEffective(
+			"No confiable",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$competencia = $this->getTotalNoEffective(
+			"Competencia",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$por_cliente = $this->getTotalNoEffective(
+			"Por cliente",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
 
 		return [
 			$no_disponible,
@@ -92,17 +119,44 @@ class ReportsController extends \BaseController {
 
 	public function allByAdvisors($type, $client_type, $date_start, $date_end)
 	{
-		$andres = $this->getTotalAdvisors('Andrés Rojas', $type, $client_type, $date_start, $date_end);
-		$diego = $this->getTotalAdvisors('Diego Peña', $type, $client_type, $date_start, $date_end);
+		$andres = $this->getTotalAdvisors(
+			'Andrés Rojas',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$diego = $this->getTotalAdvisors(
+			'Diego Peña',
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
 
 		return [$andres, $diego];
 	}
 
 	public function allByClientType($date_start, $date_end)
 	{
-		$active = $this->getTotalClientType('Activo', $date_start, $date_end);
-		$inactive = $this->getTotalClientType('Inactivo', $date_start, $date_end);
-		$new = $this->getTotalClientType('nuevo', $date_start, $date_end);
+		$active = $this->getTotalClientType(
+			'Activo',
+			$date_start,
+			$date_end
+		);
+
+		$inactive = $this->getTotalClientType(
+			'Inactivo',
+			$date_start,
+			$date_end
+		);
+
+		$new = $this->getTotalClientType(
+			'nuevo',
+			$date_start,
+			$date_end
+		);
 
 		return [
 			$active,
@@ -112,10 +166,40 @@ class ReportsController extends \BaseController {
 	}
 
 	public function allByDiff($type, $client_type, $date_start, $date_end){
-		$stock = $this->diff_sent_total("<= 30", "Inventario", $type, $client_type, $date_start, $date_end);
-		$order = $this->diff_sent_total("<= 120", "Pedido", $type, $client_type, $date_start, $date_end);
-		$outStock = $this->diff_sent_total("> 30", "Inventario", $type, $client_type, $date_start, $date_end);
-		$outOrder = $this->diff_sent_total("> 120", "Pedido", $type, $client_type, $date_start, $date_end);
+		$stock = $this->diff_sent_total(
+			"<= 30", "Inventario",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$order = $this->diff_sent_total(
+			"<= 120",
+			"Pedido",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$outStock = $this->diff_sent_total(
+			"> 30",
+			"Inventario",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
+
+		$outOrder = $this->diff_sent_total(
+			"> 120",
+			"Pedido",
+			$type,
+			$client_type,
+			$date_start,
+			$date_end
+		);
 
 		return [
 			$stock,
