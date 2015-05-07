@@ -112,8 +112,13 @@ $ ->
       viewByDiffSent = new optima.views.ReportByDiffSent model: coll
       now = new Date()
       month = (now.getMonth()+1)
+      if(month < 10) {
+        month = ("0" + month)
+      }
+
       year = now.getFullYear()
       date = year+"-"+month+"-1"
+
       date_end = year+"-"+month+"-31"
       coll.fetch(data: date_start: date, date_end: date_end)
       new optima.views.ReportsFilters model: coll
