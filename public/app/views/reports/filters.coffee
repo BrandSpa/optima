@@ -9,7 +9,20 @@ $ ->
       'changeDate .datepicker_end': 'byDateEnd'
 
     initialize: ->
-      @filters = {}
+      now = new Date()
+      month = (now.getMonth()+1)
+
+      if month < 10
+        month = ("0" + month)
+
+      year = now.getFullYear()
+
+      date_start = year+"-"+month+"-01"
+
+      date_end = year+"-"+month+"-31"
+
+      @filters = {date_start: date_start, date_end: date_end}
+
       $(@el).find('.datepicker_start').datepicker
         format: "yyyy-mm-dd",
         language: "es"
