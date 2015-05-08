@@ -22,7 +22,7 @@ class ReportsController extends \BaseController {
 
 		$byFindUs             = $this->allByFindUs($type, $client_type, $date_start, $date_end);
 		$byAdvisor            = $this->allByAdvisors($type, $client_type, $date_start, $date_end);
-		$byClientType         = $this->allByClientType($date_start, $date_end);
+		$byClientType         = $this->allByClientType($type, $date_start, $date_end);
 		$byNoEffective        = $this->allByNoEffective($type, $client_type, $date_start, $date_end);
 		$TotalQuotations      = $this->getTotalQuotations($type, $client_type, $date_start, $date_end);
 		$TotalQuotationsMoney = $this->TotalQuotationsMoney($type, $client_type, $date_start, $date_end);
@@ -138,22 +138,25 @@ class ReportsController extends \BaseController {
 		return [$andres, $diego];
 	}
 
-	public function allByClientType($date_start, $date_end)
+	public function allByClientType($type, $date_start, $date_end)
 	{
 		$active = $this->getTotalClientType(
 			'Activo',
+			$type,
 			$date_start,
 			$date_end
 		);
 
 		$inactive = $this->getTotalClientType(
 			'Inactivo',
+			$type,
 			$date_start,
 			$date_end
 		);
 
 		$new = $this->getTotalClientType(
 			'nuevo',
+			$type,
 			$date_start,
 			$date_end
 		);
@@ -435,9 +438,10 @@ class ReportsController extends \BaseController {
 		return $collection;
 	}
 
-	public function getTotalClientType($client_type, $date_start, $date_end)
+	public function getTotalClientType($client_type, $type, $date_start, $date_end)
 	{
 		$collection = quotation::where('quotations.client_type', $client_type)
+			->where('quotations.type', 'like', $type)
 			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->whereNotIn('status', ['Replanteada'])
 			->count();
