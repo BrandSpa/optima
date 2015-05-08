@@ -3957,7 +3957,19 @@ $(function() {
     };
 
     ReportsFilters.prototype.initialize = function() {
-      this.filters = {};
+      var date_end, date_start, month, now, year;
+      now = new Date();
+      month = now.getMonth() + 1;
+      if (month < 10) {
+        month = "0" + month;
+      }
+      year = now.getFullYear();
+      date_start = year + "-" + month + "-01";
+      date_end = year + "-" + month + "-31";
+      this.filters = {
+        date_start: date_start,
+        date_end: date_end
+      };
       $(this.el).find('.datepicker_start').datepicker({
         format: "yyyy-mm-dd",
         language: "es"
@@ -4553,7 +4565,7 @@ $(function() {
     };
 
     Workspace.prototype.startReports = function() {
-      var coll, date, date_end, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType, year;
+      var coll, date_end, date_start, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType, year;
       coll = new optima.models.Report;
       viewByStatus = new optima.views.ReportByStatus({
         model: coll
@@ -4579,11 +4591,11 @@ $(function() {
         month = "0" + month;
       }
       year = now.getFullYear();
-      date = year + "-" + month + "-01";
+      date_start = year + "-" + month + "-01";
       date_end = year + "-" + month + "-31";
       coll.fetch({
         data: {
-          date_start: date,
+          date_start: date_start,
           date_end: date_end
         }
       });
