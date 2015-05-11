@@ -25,6 +25,11 @@ $ ->
       dataForm = $('#contact-create-form').serializeJSON()
       @model.save dataForm, beforeSend: ->
         alertify.log('guardando...')
+
+    showErrors: (model, response) ->
+      errors = JSON.parse(response.responseText)
+      _.each errors, (message, row) ->
+        alertify.error(message)
       
     added: ->
       id = @model.get('id')

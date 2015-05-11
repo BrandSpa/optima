@@ -1,3 +1,24 @@
+Backbone.View.prototype.closeModal = function() {
+  this.remove();
+  $('.modal-backdrop').remove();
+  return $('body').removeClass('modal-open');
+};
+
+Backbone.View.prototype.showErrors = function(model, response) {
+  var errors;
+  errors = JSON.parse(response.responseText);
+  _.each(errors, function(message, row) {
+    console.log(message);
+    return alertify.error(message);
+  });
+  return Backbone.View.prototype.storeActivity = function(quotation_id, message) {
+    return pubsub.trigger("activity:store", {
+      quotation_id: quotation_id,
+      message: message
+    });
+  };
+};
+
 var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -758,6 +779,14 @@ $(function() {
       });
     };
 
+    CompanyCreate.prototype.showErrors = function(model, response) {
+      var errors;
+      errors = JSON.parse(response.responseText);
+      return _.each(errors, function(message, row) {
+        return alertify.error(message);
+      });
+    };
+
     CompanyCreate.prototype.added = function(model) {
       var id;
       if (model.id) {
@@ -1273,6 +1302,14 @@ $(function() {
         beforeSend: function() {
           return alertify.log('guardando...');
         }
+      });
+    };
+
+    ContactCreate.prototype.showErrors = function(model, response) {
+      var errors;
+      errors = JSON.parse(response.responseText);
+      return _.each(errors, function(message, row) {
+        return alertify.error(message);
       });
     };
 

@@ -2,7 +2,6 @@ $ ->
   class optima.views.CompanyCreate extends Backbone.View
     el: $ '#company-create-modal'
 
-
     events:
       'click a.company-save-store': 'store'
       'click .modal-close': 'cancel'
@@ -12,7 +11,6 @@ $ ->
       @listenTo(@model, 'error', @showErrors)
 
     render: ->
-      
       template = optima.templates.company_create
       $(@el).find('.modal-content').html template( @model.toJSON() )
       $(@el).find('.modal-content').html template( @model.toJSON() )
@@ -22,6 +20,11 @@ $ ->
       e.preventDefault()
       dataForm = $('#company-create-form').serializeJSON()
       @model.save dataForm, wait: true
+
+    showErrors: (model, response) ->
+      errors = JSON.parse(response.responseText)
+      _.each errors, (message, row) ->
+        alertify.error(message)
   
     added: (model) ->
       if model.id

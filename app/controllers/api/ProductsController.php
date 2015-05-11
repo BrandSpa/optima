@@ -12,11 +12,12 @@ class ProductsController extends \BaseController {
 	{
 		if (Input::has('quotation_id')) {
 			$id = Input::get('quotation_id');
-			$collection = Product::where('quotation_id', $id)->orderBy('position', 'asc')->get();
+			$collection = Product::where('quotation_id', $id)
+									->orderBy('position', 'asc')->get();
 			return Response::json($collection, 200);
 		}
 
-		return Response::json("", 200);
+		return Response::json("not quotation_id", 400);
 	}
 
 	public function show($id)

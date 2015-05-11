@@ -172,7 +172,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     background: #f3f3f3; }
 
 #main-content {
-  margin-left: 215px;
+  margin-left: 180px;
   padding: 0; }
   @media (max-width: 767px), (max-width: 480px) {
     #main-content {

@@ -10,7 +10,6 @@ var declare = require('gulp-declare');
 
 gulp.task('concat-css', function(){
   gulp.src([
-
     'bower_components/bootstrap/dist/css/bootstrap.min.css',
     'css/improve.css',
     'css/fancySelect.css',
@@ -20,7 +19,9 @@ gulp.task('concat-css', function(){
     'css/classic.time.css',
     'node_modules/nprogress/nprogress.css',
     'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
-    'bower_components/sidr/stylesheets/jquery.sidr.dark.css'
+    'bower_components/sidr/stylesheets/jquery.sidr.dark.css',
+    'node_modules/alertify/themes/alertify.core.css',
+    'node_modules/alertify/themes/alertify.bootstrap.css'
   ])
   .pipe(concat('app.css'))
   .pipe(gulp.dest('css/dist/'));
@@ -65,6 +66,10 @@ gulp.task('dependencies', function(){
 
 gulp.task('coffee', function() {
   gulp.src([
+
+    //Helpers
+    'app/helpers/backbone_helpers.coffee',
+
     //Models
     'app/models/activity.coffee',
     'app/models/company.coffee',
