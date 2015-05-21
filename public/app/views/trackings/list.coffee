@@ -31,7 +31,9 @@ $ ->
 
     openCreate: (e) ->
       e.preventDefault()
+
       collection = new optima.collections.Contacts
+      
       collection.fetch data: quotation_id: optima.pathArray[2]
         .done (response) ->
           view = new optima.views.TrackingCreateView model: new optima.models.Tracking

@@ -96,11 +96,11 @@ class QuotationsController extends \BaseController {
 		$model->created_sent_diff = $model->diffCreateAndSent();
 		return Response::json($model, 200);
 	}
+	
 	/**
 	 * POST send mail to contact mail
 	 * @return Response json object
 	 */
-
 	public function sendMail($id)
 	{
 		$quotation = $this->entity->find($id);

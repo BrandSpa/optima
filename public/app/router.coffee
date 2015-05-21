@@ -110,7 +110,7 @@ $ ->
       viewByType = new optima.views.ReportByType model: coll
       viewByNoEffective = new optima.views.ReportByNoEffective model: coll
       viewByDiffSent = new optima.views.ReportByDiffSent model: coll
-
+      viewTotal = new optima.views.ReportsTotal model: coll
       now = new Date()
       month = (now.getMonth()+1)
 

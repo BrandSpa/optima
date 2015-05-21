@@ -1603,7 +1603,7 @@ $(function() {
     QuotationView.prototype.events = {
       'click .quotation-open-edit': 'openquotationEdit',
       'click .quotation-open-contacts': 'openContacts',
-      'click .quotation-company- lect': 'companySelect',
+      'click .quotation-company-select': 'companySelect',
       'click .quotation-contact-select': 'contactSelect'
     };
 
@@ -4350,7 +4350,6 @@ $(function() {
 
     ReportByDiffSent.prototype.setData = function() {
       var ctx, data, view;
-      console.log(this.model.toJSON().sent_diff);
       data = {
         labels: ["Dentro - Inventario", "Fuera - Inventario", "Dentro - Pedido", "Fuera - Pedido"],
         datasets: [
@@ -4374,6 +4373,34 @@ $(function() {
     };
 
     return ReportByDiffSent;
+
+  })(Backbone.View);
+});
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+$(function() {
+  return optima.views.ReportsTotal = (function(superClass) {
+    extend(ReportsTotal, superClass);
+
+    function ReportsTotal() {
+      return ReportsTotal.__super__.constructor.apply(this, arguments);
+    }
+
+    ReportsTotal.prototype.el = "#total";
+
+    ReportsTotal.prototype.initialize = function() {
+      return this.listenTo(this.model, 'change', this.render);
+    };
+
+    ReportsTotal.prototype.render = function() {
+      var template;
+      template = optima.templates.reports_total;
+      return $(this.el).html(template(this.model.toJSON()));
+    };
+
+    return ReportsTotal;
 
   })(Backbone.View);
 });
@@ -4602,7 +4629,7 @@ $(function() {
     };
 
     Workspace.prototype.startReports = function() {
-      var coll, date_end, date_start, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType, year;
+      var coll, date_end, date_start, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType, viewTotal, year;
       coll = new optima.models.Report;
       viewByStatus = new optima.views.ReportByStatus({
         model: coll
@@ -4620,6 +4647,9 @@ $(function() {
         model: coll
       });
       viewByDiffSent = new optima.views.ReportByDiffSent({
+        model: coll
+      });
+      viewTotal = new optima.views.ReportsTotal({
         model: coll
       });
       now = new Date();

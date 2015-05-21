@@ -74,7 +74,12 @@ Handlebars.registerHelper('isRethink', function(conditional, options) {
 });
 
 Handlebars.registerHelper('formatCurrency', function(value) {
+  if (value) {
     return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+  } else {
+    return 0;
+  }
+    
 });
 
 

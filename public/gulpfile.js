@@ -169,6 +169,7 @@ gulp.task('coffee', function() {
     'app/views/reports/by_type.coffee',
     'app/views/reports/by_no_effective.coffee',
     'app/views/reports/by_diff_sent.coffee',
+    'app/views/reports/total.coffee',
 
     'app/views/app.coffee',
 

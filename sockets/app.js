@@ -55,6 +55,7 @@ app.post('/todos/sendmail', function(req, res){
 
 io.on('connection', function(socket){
   console.log(socket);
+  
   socket.on('pubsub', function(msg){
     io.emit('pubsub', msg);
   });

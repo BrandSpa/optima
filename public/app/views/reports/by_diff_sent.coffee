@@ -6,7 +6,6 @@ $ ->
       @listenTo(@model, 'change', @setData)
 
     setData: ->
-      console.log @model.toJSON().sent_diff
       data = labels: [
         "Dentro - Inventario", 
         "Fuera - Inventario",

@@ -4,8 +4,7 @@ $ ->
     events: 
       'click .quotation-open-edit': 'openquotationEdit'
       'click .quotation-open-contacts': 'openContacts'
-      'click .quotation-company-
-      lect': 'companySelect'
+      'click .quotation-company-select': 'companySelect'
       'click .quotation-contact-select': 'contactSelect'
 
     render: ->

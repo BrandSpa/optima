@@ -27,7 +27,7 @@ class ReportsController extends \BaseController {
 		$TotalQuotations      = $this->getTotalQuotations($type, $client_type, $date_start, $date_end);
 		$TotalQuotationsMoney = $this->TotalQuotationsMoney($type, $client_type, $date_start, $date_end);
 		$averageSentTime      = $this->averageSentTime($date_start, $date_end, $type, $client_type);
-		$averageConfirmedTime = $this->averageConfirmedTime();
+		$averageConfirmedTime = $this->averageConfirmedTime($date_start, $date_end, $type, $client_type);
 		$byDiff               = $this->allByDiff($type, $client_type, $date_start, $date_end);
 
 		return Response::json([
@@ -53,26 +53,26 @@ class ReportsController extends \BaseController {
 		$collection = Quotation::whereNotIn('status', ['Replanteada'])
 			->where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
-			->whereRaw('MONTH(created_at) = ? AND YEAR(created_at) = ?', [$date_start, $date_end])
+			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->count();
 		return $collection;
 	}
 
 	public function averageSentTime($date_start, $date_end, $type, $client_type)
 	{
-		$r = Quotation::whereRaw('MONTH(created_at) = ? AND YEAR(created_at) = ?', [$date_start, $date_end])
-			->where('type', 'like', $type)
-			->where('client_type', 'like', $client_type)
-			->select( DB::raw('round(avg(created_sent_diff)) as averageSent') )->get();
+		$r = Quotation::whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
+			->avg('created_sent_diff');
 
-		return $r[0]->averageSent;
+		return round($r);
 	}
 
-	public function averageConfirmedTime()
+	public function averageConfirmedTime($date_start, $date_end)
 	{
-		return Quotation::avg('sent_confirmed_diff');
-	}
+		$r = Quotation::whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
+			->avg('sent_confirmed_diff');
 
+		return round($r);
+	}
 
 	public function allByNoEffective($type, $client_type, $date_start, $date_end)
 	{
@@ -449,13 +449,12 @@ class ReportsController extends \BaseController {
 		return $collection;
 	}
 
-	public function TotalQuotationsMoney($type, $client_type, $date_start, $date_end){
-		$collection = quotation::where('quotations.status', '=', 'Efectiva')
-			->where('quotations.type', 'like', $type)
+	public function TotalQuotationsMoney($type, $client_type, $date_start, $date_end) {
+
+		$collection = quotation::where('quotations.type', 'like', $type)
 			->where('quotations.client_type', 'like', $client_type)
 			->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
 			->join('products', 'quotations.id', '=', 'products.quotation_id')
-			->where('products.ordered', '=', true)
 			->select(DB::raw("SUM(total) AS products_total"))->get();
 
 		return $collection[0]->products_total;

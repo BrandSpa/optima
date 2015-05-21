@@ -1,5 +1,5 @@
 @section('content')
-
+	
 	<div class="col-lg-12">
 
 		<div class="panel panel-default" id="reports-filters">
@@ -35,8 +35,11 @@
 			</div>
 		</div>
 		</div>
+		
+		<div class="row" id="total"> </div>
 
 		<div class="row">
+
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
