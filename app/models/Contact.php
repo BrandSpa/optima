@@ -45,30 +45,6 @@ class Contact extends \Eloquent {
 								->take($take)->skip($skip)->get();
 	}
 
-	public static function store($data)
-	{
-		$validator = Validator::make($data, self::$rules);
-
-		if ($validator->passes()) {
-			$model = self::create($data);
-			return $model;
-		}
-
-		return $validator->messages();
-	}
-
-	public static function findAndUpdate($id = null, $data)
-	{
-		$validator = Validator::make($data, self::$rules);
-
-		if ($validator->passes()) {
-			$model = self::find($id);
-			$model->update($data);
-			return $model;
-		}
-
-		return $validator->messages();
-	}
 
 	public static function search($query)
 	{

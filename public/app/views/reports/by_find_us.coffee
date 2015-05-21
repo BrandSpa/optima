@@ -31,4 +31,14 @@ $ ->
 
       @$el.html('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>')
       ctx = $("#byFindUsCanvas").get(0).getContext("2d")
-      view = new Chart(ctx).Bar(data, {responsive: true})
+
+      options = 
+        responsive: true,
+        tooltipCornerRadius: 0,
+        scaleLabel: (label) ->
+          return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+        tooltipTemplate: (label) ->
+          return label.label + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+
+
+      view = new Chart(ctx).Bar(data, options)

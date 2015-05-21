@@ -504,17 +504,6 @@ this["optima"]["templates"]["product_create"] = Handlebars.template({"1":functio
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":this.program(21, data, 0),"inverse":this.program(23, data, 0),"data":data})) != null ? stack1 : "")
     + "</div>\n";
 },"useData":true});
-this["optima"]["templates"]["reports_total"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return "<div class=\"col-lg-2\">\n  <div class=\"panel panel-default\">\n    <div class=\"panel-body\" style=\"text-align: center\">\n      <h2>"
-    + alias3(((helper = (helper = helpers.total_quotations || (depth0 != null ? depth0.total_quotations : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"total_quotations","hash":{},"data":data}) : helper)))
-    + "</h2>\n      <h4>Cotizaciones</h4>\n    </div>\n  </div>\n</div>\n\n<div class=\"col-lg-4\">\n  <div class=\"panel panel-default\">\n    <div class=\"panel-body\" style=\"text-align: center\">\n      <h2>$ "
-    + alias3((helpers.formatCurrency || (depth0 && depth0.formatCurrency) || alias1).call(depth0,(depth0 != null ? depth0.total_quotations_money : depth0),{"name":"formatCurrency","hash":{},"data":data}))
-    + "</h2>\n      <h4>Cotizaciones Total</h4>\n    </div>\n  </div>\n</div>\n\n<div class=\"col-lg-2\">\n  <div class=\"panel panel-default\">\n    <div class=\"panel-body\" style=\"text-align: center\">\n      <h2>"
-    + alias3(((helper = (helper = helpers.average_sent || (depth0 != null ? depth0.average_sent : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"average_sent","hash":{},"data":data}) : helper)))
-    + " mins</h2>\n      <h4>Promedio de enviada</h4>\n    </div>\n  </div>\n</div>";
-},"useData":true});
 this["optima"]["templates"]["quotation"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
@@ -920,6 +909,17 @@ this["optima"]["templates"]["quotation_time"] = Handlebars.template({"1":functio
 },"useData":true});
 this["optima"]["templates"]["quotations_list_filters"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"col-lg-12\">\n   <form action=\"#\" class=\"quotation-search\" method=\"POST\">\n    <div class=\"form-group\">\n      <input type=\"text\" name=\"query\" class=\"form-control quotation-query\" placeholder=\"Buscar Cotización\">\n    </div>\n  </form>\n</div>\n\n<div class=\"col-lg-4\" >\n  <select name=\"\" class=\"form-control filter-status\">\n    <option value=\"\">Selecionar Estado</option>\n    <option value=\"Borrador\">Borrador</option>\n    <option value=\"Enviada\">Enviada</option>\n    <option value=\"Seguimiento\">Seguimiento</option>\n    <option value=\"No enviada\">No enviada</option>\n    <option value=\"Efectiva\">Efectiva</option>\n    <option value=\"No efectiva\">No efectiva</option>\n    <option value=\"Replanteada\">Replanteada</option>  \n  </select>\n</div>\n<div class=\"col-lg-4\">\n  <select name=\"\" class=\"form-control filter-advisor\">\n    <option value=\"\">Selecionar Asesor</option>\n    <option value=\"Andrés Rojas\">Andrés Rojas</option>\n    <option value=\"Diego Peña\">Diego Peña</option>\n    <option value=\"Otros\">Otros</option>\n  </select>\n</div>\n<div class=\"col-lg-4\">\n  <select name=\"\" class=\"form-control filter-client-type\">\n    <option value=\"\">Selecionar tipo de cliente</option>\n    <option value=\"Activo\">Activo</option>\n    <option value=\"Inactivo\">Inactivo</option>\n    <option value=\"Nuevo\">Nuevo</option>\n  </select>\n</div>\n";
+},"useData":true});
+this["optima"]["templates"]["reports_total"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<div class=\"col-lg-3\">\n  <div class=\"panel panel-default\">\n    <div class=\"panel-body\" style=\"text-align: center\">\n      <h2>"
+    + alias3(((helper = (helper = helpers.total_quotations || (depth0 != null ? depth0.total_quotations : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"total_quotations","hash":{},"data":data}) : helper)))
+    + "</h2>\n      <h4>Cotizaciones</h4>\n    </div>\n  </div>\n</div>\n\n<div class=\"col-lg-3\">\n  <div class=\"panel panel-default\">\n    <div class=\"panel-body\" style=\"text-align: center\">\n      <h2>$ "
+    + alias3((helpers.formatCurrency || (depth0 && depth0.formatCurrency) || alias1).call(depth0,(depth0 != null ? depth0.total_quotations_money : depth0),{"name":"formatCurrency","hash":{},"data":data}))
+    + "</h2>\n      <h4>Cotizaciones Total</h4>\n    </div>\n  </div>\n</div>\n\n<div class=\"col-lg-3\">\n  <div class=\"panel panel-default\">\n    <div class=\"panel-body\" style=\"text-align: center\">\n      <h2>"
+    + alias3(((helper = (helper = helpers.average_sent || (depth0 != null ? depth0.average_sent : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"average_sent","hash":{},"data":data}) : helper)))
+    + " mins</h2>\n      <h4>Promedio de enviada</h4>\n    </div>\n  </div>\n</div>";
 },"useData":true});
 this["optima"]["templates"]["service"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;

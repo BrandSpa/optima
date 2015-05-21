@@ -8,14 +8,16 @@ use Input;
 
 class ReportsController extends \BaseController {
 	use \Traits\Reports\ByStatus;
+	use \Traits\Reports\byStatusCount;
 	use \Traits\Reports\findUs;
+	use \Traits\Reports\findUsCount;
 	use \Traits\Reports\clientType;
 	use \Traits\Reports\byAdvisor;
 	use \Traits\Reports\byNoEffective;
 	use \Traits\Reports\diffSentTotal;
 	use \Traits\Reports\total;
 	use \Traits\Reports\totalMoney;
-	use \Traits\Reports\byStatusCount;
+	
 
 	public function index()
 	{
@@ -41,6 +43,13 @@ class ReportsController extends \BaseController {
 		);
 
 		$byFindUs = $this->allByFindUs(
+			$type, 
+			$client_type, 
+			$date_start, 
+			$date_end
+		);
+
+		$byFindUsCount = $this->allByFindUsCount(
 			$type, 
 			$client_type, 
 			$date_start, 
@@ -104,8 +113,9 @@ class ReportsController extends \BaseController {
 
 		return Response::json([
 			"status"                 => $byStatus,
-			"statusCount"                 => $byStatusCount,
+			"statusCount"            => $byStatusCount,
 			"findUS"                 => $byFindUs,
+			"findUSCount"            => $byFindUsCount,
 			"advisors"               => $byAdvisor,
 			"client_type"            => $byClientType,
 			"no_effective"           => $byNoEffective,
