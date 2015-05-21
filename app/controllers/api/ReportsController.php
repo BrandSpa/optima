@@ -6,26 +6,16 @@ use DB;
 use Carbon\Carbon;
 use Input;
 
-use Traits\Reports\ByStatus;
-use Traits\Reports\findUs;
-use Traits\Reports\clientType;
-use Traits\Reports\byAdvisor;
-use Traits\Reports\byNoEffective;
-use Traits\Reports\diffSentTotal;
-use Traits\Reports\total;
-use Traits\Reports\totalMoney;
-use Traits\Reports\byStatusCount;
-
 class ReportsController extends \BaseController {
-	use byStatus;
-	use findUs;
-	use clientType;
-	use byAdvisor;
-	use byNoEffective;
-	use diffSentTotal;
-	use total;
-	use totalMoney;
-	use byStatusCount;
+	use \Traits\Reports\ByStatus;
+	use \Traits\Reports\findUs;
+	use \Traits\Reports\clientType;
+	use \Traits\Reports\byAdvisor;
+	use \Traits\Reports\byNoEffective;
+	use \Traits\Reports\diffSentTotal;
+	use \Traits\Reports\total;
+	use \Traits\Reports\totalMoney;
+	use \Traits\Reports\byStatusCount;
 
 	public function index()
 	{
