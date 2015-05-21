@@ -43,7 +43,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones por: Etiqueta</h5>
+						<h5>Cotizaciones en pesos por: Etiqueta</h5>
 					</div>
 					<div class="panel-body">
 						<div id="byStatus"></div>
@@ -54,7 +54,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones por: Etiqueta</h5>
+						<h5>Cantidad de cotizaciones por: Etiqueta</h5>
 					</div>
 					<div class="panel-body">
 						<div id="byStatusCount"></div>
