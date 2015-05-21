@@ -3,7 +3,7 @@
 use Optima\Quotation;
 use DB;
 
-trait ByStatus {
+trait byStatus {
 
   /**
    * get total products by status
