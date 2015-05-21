@@ -166,6 +166,7 @@ gulp.task('coffee', function() {
     'app/views/reports/by_status.coffee',
     'app/views/reports/by_status_count.coffee',
     'app/views/reports/by_find_us.coffee',
+    'app/views/reports/by_find_us_count.coffee',
     'app/views/reports/by_advisor.coffee',
     'app/views/reports/by_type.coffee',
     'app/views/reports/by_no_effective.coffee',

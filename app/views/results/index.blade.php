@@ -65,10 +65,22 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones por: ¿Como nos encontro?</h5>
+						<h5>Cotizaciones en pesos por: ¿Como nos encontro?</h5>
 					</div>
 					<div class="panel-body">
 						<div id="byFindUs"></div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5>Cantidad de cotizaciones por: ¿Como nos encontro?</h5>
+					</div>
+					<div class="panel-body">
+						<div id="byFindUsCount"></div>
 					</div>
 				</div>
 			</div>
@@ -95,7 +107,6 @@
 				</div>
 			</div>
 		
-		
 
 			<div class="col-lg-6">
 				<div class="panel panel-default">
@@ -107,6 +118,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
