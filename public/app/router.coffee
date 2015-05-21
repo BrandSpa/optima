@@ -105,6 +105,7 @@ $ ->
     startReports: ->
       coll = new optima.models.Report
       viewByStatus = new optima.views.ReportByStatus model: coll
+      viewByStatus = new optima.views.ReportByStatusCount model: coll
       viewByFindUs = new optima.views.ReportByFindUs model: coll
       viewByAdvisor = new optima.views.ReportByAdvisor model: coll
       viewByType = new optima.views.ReportByType model: coll

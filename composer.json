@@ -21,7 +21,8 @@
             "app/helpers.php"
         ],
         "psr-0": {
-            "Optima": "app/"
+            "Optima": "app/",
+            "Traits": "app/"
         },
         "classmap": [
             "app/commands",
