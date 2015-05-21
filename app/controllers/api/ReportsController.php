@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Input;
 
 class ReportsController extends \BaseController {
-	use \Traits\Reports\ByStatus;
+	use \traits\reports\ByStatus;
 	use \Traits\Reports\findUs;
 	use \Traits\Reports\clientType;
 	use \Traits\Reports\byAdvisor;
