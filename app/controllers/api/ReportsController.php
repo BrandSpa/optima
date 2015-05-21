@@ -6,7 +6,7 @@ use DB;
 use Carbon\Carbon;
 use Input;
 
-use Traits\Reports\byStatus;
+use Traits\Reports\ByStatus;
 use Traits\Reports\findUs;
 use Traits\Reports\clientType;
 use Traits\Reports\byAdvisor;
