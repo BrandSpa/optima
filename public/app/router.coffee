@@ -111,6 +111,7 @@ $ ->
       viewByAdvisor = new optima.views.ReportByAdvisor model: coll
       viewByType = new optima.views.ReportByType model: coll
       viewByNoEffective = new optima.views.ReportByNoEffective model: coll
+      viewByNoEffectiveCount = new optima.views.ReportByNoEffectiveCount model: coll
       viewByDiffSent = new optima.views.ReportByDiffSent model: coll
       viewTotal = new optima.views.ReportsTotal model: coll
 

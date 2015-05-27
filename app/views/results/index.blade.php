@@ -111,10 +111,21 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones por: No efectivas</h5>
+						<h5>Cotizaciones en pesos por: No efectivas</h5>
 					</div>
 					<div class="panel-body">
 						<div id="byNoEffective"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5>Cantidad de cotizaciones por: No efectivas</h5>
+					</div>
+					<div class="panel-body">
+						<div id="byNoEffectiveCount"></div>
 					</div>
 				</div>
 			</div>

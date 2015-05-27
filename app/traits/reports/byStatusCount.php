@@ -58,6 +58,14 @@ trait byStatusCount {
       $date_end
       );
 
+    $tracking = $this->countTotalStatus(
+      'Seguimiento',
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+      );
+
     $not_effective = $this->countTotalStatus(
       'No efectiva',
       $type,
@@ -69,6 +77,7 @@ trait byStatusCount {
     return [
     $draft,
     $sent,
+    $tracking,
     $effective,
     $not_effective
     ];

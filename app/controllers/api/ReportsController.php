@@ -14,6 +14,7 @@ class ReportsController extends \BaseController {
 	use \Traits\Reports\clientType;
 	use \Traits\Reports\byAdvisor;
 	use \Traits\Reports\byNoEffective;
+	use \Traits\Reports\byNoEffectiveCount;
 	use \Traits\Reports\diffSentTotal;
 	use \Traits\Reports\total;
 	use \Traits\Reports\totalMoney;
@@ -76,6 +77,13 @@ class ReportsController extends \BaseController {
 			$date_end
 		);
 
+		$byNoEffectiveCount = $this->allByNoEffectiveCount(
+			$type, 
+			$client_type, 
+			$date_start, 
+			$date_end
+		);
+
 		$TotalQuotations = $this->getTotalQuotations(
 			$type, 
 			$client_type, 
@@ -119,6 +127,7 @@ class ReportsController extends \BaseController {
 			"advisors"               => $byAdvisor,
 			"client_type"            => $byClientType,
 			"no_effective"           => $byNoEffective,
+			"no_effective_count"     => $byNoEffectiveCount,
 			'total_quotations'       => $TotalQuotations,
 			'sent_diff'              => $byDiff,
 			'average_sent'           => $averageSentTime,

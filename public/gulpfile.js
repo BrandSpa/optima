@@ -170,6 +170,7 @@ gulp.task('coffee', function() {
     'app/views/reports/by_advisor.coffee',
     'app/views/reports/by_type.coffee',
     'app/views/reports/by_no_effective.coffee',
+    'app/views/reports/by_no_effective_count.coffee',
     'app/views/reports/by_diff_sent.coffee',
     'app/views/reports/total.coffee',
 
@@ -180,6 +181,7 @@ gulp.task('coffee', function() {
     'app/libs/handlebars_partials.coffee'
 
     ])
+
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(concat('app.js'))
   .pipe(gulp.dest('js/dist/'));

@@ -55,17 +55,26 @@ trait ByStatus {
       $date_end
       );
 
-    $not_effective = $this->getTotalStatus(
-      'No efectiva',
+    $tracking = $this->getTotalStatus(
+      'Seguimiento',
       $type,
       $client_type,
       $date_start,
       $date_end
       );
 
+    $not_effective = $this->getTotalStatus(
+      'No efectiva',
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+     );
+
     return [
     $draft,
     $sent,
+    $tracking,
     $effective,
     $not_effective
     ];
