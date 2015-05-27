@@ -120,7 +120,6 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="todo-edit-modal">
   <div class="modal-dialog">
     <div class="modal-content"></div>

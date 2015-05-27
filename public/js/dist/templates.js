@@ -836,7 +836,7 @@ this["optima"]["templates"]["quotation_product"] = Handlebars.template({"1":func
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
     + "\"> Duplicar </a>\n    </td>\n    <td>\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.ordered : depth0),{"name":"if","hash":{},"fn":this.program(15, data, 0),"inverse":this.program(17, data, 0),"data":data})) != null ? stack1 : "")
-    + " \n    </td>\n    <td>\n      <a href=\"#\" class=\"delete btn btn-danger btn-xs\">Eliminar</a>\n    </td>\n ";
+    + " \n    </td>\n    <td>\n      <a href=\"#\" class=\"delete btn btn-danger btn-xs btn-hidden\">Eliminar</a>\n    </td>\n ";
 },"useData":true});
 this["optima"]["templates"]["quotation_service"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
