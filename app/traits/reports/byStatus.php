@@ -55,6 +55,14 @@ trait ByStatus {
       $date_end
       );
 
+    $delivered = $this->countTotalStatus(
+      'Entregada',
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+      );
+
     $tracking = $this->getTotalStatus(
       'Seguimiento',
       $type,
@@ -79,13 +87,24 @@ trait ByStatus {
       $date_end
      );
 
+    $rethink = $this->getTotalStatus(
+      'Replanteada',
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+     );
+
+
     return [
 	    $draft,
 	    $sent,
+	    $delivered,
 	    $tracking,
 	    $effective,
 	    $not_effective,
-	    $not_sended
+	    $not_sended,
+	    $rethink
     ];
   }
 

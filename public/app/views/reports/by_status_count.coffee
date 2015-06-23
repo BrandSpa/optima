@@ -6,7 +6,7 @@ $ ->
       @listenTo(@model, 'change', @setData)
 
     setData: ->
-      data = labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada"],
+      data = labels: ["Borrador", "Enviada", "Entregada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada", "Replanteada"],
 
       datasets: [
         label: "My First dataset",

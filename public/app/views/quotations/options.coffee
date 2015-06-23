@@ -1,7 +1,7 @@
 $ ->
   class optima.views.QuotationOptions extends Backbone.View
     el: $ '#quotation-options'
-    
+
     events:
       'change .select-type': 'changeType'
       'change .select-type-category': 'changeTypeCategory'
@@ -16,7 +16,7 @@ $ ->
       'click .send': 'send'
       'click .service-approval-remove': "serviceApprovalRemove"
       'click .service-approval-add': "serviceApprovalAdd"
-      
+
     initialize: ->
       @listenTo(@model, 'change', @render)
       @listenTo(@model, 'sync', @updated)
@@ -47,7 +47,7 @@ $ ->
     broadcastChange: (msg) ->
       @storeActivity @id, msg
       socket.emit "quotation:change", @id
-    
+
     changeContact: (contact_id) ->
       @model.save contact_id: contact_id
       @broadcastChange "cambio contacto"
@@ -107,36 +107,36 @@ $ ->
 
     send: (e) ->
       e.preventDefault()
+      $(e.currentTarget).text('enviando...')
       id = @model.get('id')
-      check = @checkResultsFields()
-      if check
-        $.post "/api/v1/quotations/#{id}/sendmail"
-        
+      $.post "/api/v1/quotations/#{id}/sendmail"
+      .done () =>
         alertify.success('Cotización enviada.')
-
         @updateQuotationSent()
         @broadcastChange "cambio estado a enviada"
         optima.quotation.fetch()
-      else
+        $(e.currentTarget).text('enviado')
+      .fail () =>
         alertify.error('Por favor llenar los campos necesarios antes de enviar.')
+        $(e.currentTarget).text('enviar')
 
     updateQuotationSent: ->
       status = @model.get('status')
       created_sent_diff = @model.get('created_sent_diff')
 
       if status != "Efectiva" || status != "Seguimiento"
-        
+
         if !created_sent_diff || created_sent_diff < 0
           now = moment().format()
           diff = moment(now).diff(@model.get('created_at'), 'minutes')
           @model.save status: 'Enviada', no_effective: '', sent_at: now, created_sent_diff: diff
-    
+
     checkResultsFields: ->
       if !@model.get('type') && !@model.get('type_category') && !@model.get('client_type') && !@model.get('advisor') && !@model.get('found_us') && !@model.get('offer')
         return false
       else
         return true
-   
+
     serviceApprovalRemove: (evt) ->
       evt.preventDefault()
       @model.save service_approval: 1

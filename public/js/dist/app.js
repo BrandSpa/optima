@@ -2179,19 +2179,24 @@ $(function() {
     };
 
     QuotationOptions.prototype.send = function(e) {
-      var check, id;
+      var id;
       e.preventDefault();
+      $(e.currentTarget).text('enviando...');
       id = this.model.get('id');
-      check = this.checkResultsFields();
-      if (check) {
-        $.post("/api/v1/quotations/" + id + "/sendmail");
-        alertify.success('Cotización enviada.');
-        this.updateQuotationSent();
-        this.broadcastChange("cambio estado a enviada");
-        return optima.quotation.fetch();
-      } else {
-        return alertify.error('Por favor llenar los campos necesarios antes de enviar.');
-      }
+      return $.post("/api/v1/quotations/" + id + "/sendmail").done((function(_this) {
+        return function() {
+          alertify.success('Cotización enviada.');
+          _this.updateQuotationSent();
+          _this.broadcastChange("cambio estado a enviada");
+          optima.quotation.fetch();
+          return $(e.currentTarget).text('enviado');
+        };
+      })(this)).fail((function(_this) {
+        return function() {
+          alertify.error('Por favor llenar los campos necesarios antes de enviar.');
+          return $(e.currentTarget).text('enviar');
+        };
+      })(this));
     };
 
     QuotationOptions.prototype.updateQuotationSent = function() {
@@ -4129,7 +4134,7 @@ $(function() {
     ReportByStatus.prototype.setData = function() {
       var ctx, data, options, view;
       data = {
-        labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada"],
+        labels: ["Borrador", "Enviada", "Entregada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada", "Replanteada"],
         datasets: [
           {
             label: "Etiquetas",
@@ -4183,7 +4188,7 @@ $(function() {
     ReportByStatusCount.prototype.setData = function() {
       var ctx, data, view;
       data = {
-        labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada"],
+        labels: ["Borrador", "Enviada", "Entregada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada", "Replanteada"],
         datasets: [
           {
             label: "My First dataset",
