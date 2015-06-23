@@ -87,7 +87,8 @@ trait byStatusCount {
 	    $sent,
 	    $tracking,
 	    $effective,
-	    $not_effective
+	    $not_effective,
+	    $not_sended
     ];
   }
 
