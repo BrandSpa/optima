@@ -6,8 +6,8 @@ $ ->
       @listenTo(@model, 'change', @setData)
 
     setData: ->
-      data = labels: ["Borrador", "Enviada","Seguimiento", "Efectiva", "No Efectiva"],
-      
+      data = labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada"],
+
       datasets: [
           label: "Etiquetas",
           fillColor: "rgba(231, 161, 31, .7)",
@@ -20,8 +20,10 @@ $ ->
         ]
 
       @$el.html('<canvas id="byStatusCanvas" width="600" height="400"></canvas>')
+
       ctx = $("#byStatusCanvas").get(0).getContext("2d")
-      options = 
+
+      options =
         responsive: true,
         tooltipCornerRadius: 0,
         scaleLabel: (label) ->

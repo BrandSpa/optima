@@ -6,8 +6,8 @@ $ ->
       @listenTo(@model, 'change', @setData)
 
     setData: ->
-      data = labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva"],
-      
+      data = labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada"],
+
       datasets: [
         label: "My First dataset",
         fillColor: "rgba(231, 161, 31, .7)",

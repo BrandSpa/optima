@@ -66,23 +66,28 @@ trait byStatusCount {
       $date_end
       );
 
-    $not_effective = $this->countTotalStatus(
-      'No efectiva',
+    $not_sended = $this->countTotalStatus(
+      'No enviada',
       $type,
       $client_type,
       $date_start,
       $date_end
       );
 
-    $total = $draft + $sent + $tracking + $effective + $not_effective;
+    $not_effective = $this->countTotalStatus(
+      'No efectiva',
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+     );
 
     return [
 	    $draft,
 	    $sent,
 	    $tracking,
 	    $effective,
-	    $not_effective,
-	    $total
+	    $not_effective
     ];
   }
 

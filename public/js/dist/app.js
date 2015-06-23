@@ -4129,7 +4129,7 @@ $(function() {
     ReportByStatus.prototype.setData = function() {
       var ctx, data, options, view;
       data = {
-        labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva"],
+        labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada"],
         datasets: [
           {
             label: "Etiquetas",
@@ -4183,7 +4183,7 @@ $(function() {
     ReportByStatusCount.prototype.setData = function() {
       var ctx, data, view;
       data = {
-        labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva"],
+        labels: ["Borrador", "Enviada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada"],
         datasets: [
           {
             label: "My First dataset",

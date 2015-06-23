@@ -8,6 +8,7 @@ use Crypt;
 use Mail;
 
 class QuotationsController extends \BaseController {
+	use \Traits\Quotations\checkFields;
 
 	protected $entity;
 	protected $relationships = ['company', 'company.contacts', 'user'];
@@ -101,9 +102,18 @@ class QuotationsController extends \BaseController {
 	public function send($id)
 	{
 		$model = Quotation::find($id);
-		$this->mailer->sendQuotation($model);
-		$model->created_sent_diff = $model->diffCreateAndSent();
-		return Response::json($model, 200);
+
+
+		if ($this->checkFields($fieldsToCheck)) {
+			$this->mailer->sendQuotation($model);
+			$model->created_sent_diff = $model->diffCreateAndSent();
+			return Response::json($fieldsToCheck, 300);
+		} else {
+			return Response::json(["message" => "field empty"], 400);
+		}
+
+
+
 	}
 
 	/**
@@ -113,8 +123,21 @@ class QuotationsController extends \BaseController {
 	public function sendMail($id)
 	{
 		$quotation = $this->entity->find($id);
-		$this->sendQuotation($quotation);
-		return Response::json($quotation, 200);
+		$fieldsToCheck = [
+			$quotation->type,
+			$quotation->type_category,
+			$quotation->client_type,
+			$quotation->found_us,
+			$quotation->offer,
+			$quotation->advisor,
+		];
+
+		if ($this->checkFields($fieldsToCheck)) {
+			$this->sendQuotation($quotation);
+			return Response::json($fieldsToCheck, 200);
+		} else {
+			return Response::json(["message" => "field empty"], 400);
+		}
 	}
 
 	/**

@@ -71,12 +71,21 @@ trait ByStatus {
       $date_end
      );
 
+    $not_sended = $this->getTotalStatus(
+      'No enviada',
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+     );
+
     return [
-    $draft,
-    $sent,
-    $tracking,
-    $effective,
-    $not_effective
+	    $draft,
+	    $sent,
+	    $tracking,
+	    $effective,
+	    $not_effective,
+	    $not_sended
     ];
   }
 
