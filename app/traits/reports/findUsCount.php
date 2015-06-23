@@ -3,6 +3,7 @@
 use Optima\Quotation;
 use DB;
 
+//Its broken open closed principle
 trait findUsCount {
 
   public function getTotalFoundUsCount(
@@ -12,7 +13,6 @@ trait findUsCount {
     $date_start,
     $date_end
   ) {
-
     $total = quotation::where('quotations.found_us', $found_us)
     ->where('quotations.type', 'like', $type)
     ->where('quotations.client_type', 'like', $client_type)
@@ -23,8 +23,12 @@ trait findUsCount {
     return $total;
   }
 
-  public function allByFindUsCount($type, $client_type, $date_start, $date_end)
-  {
+  public function allByFindUsCount(
+  	$type,
+  	$client_type,
+  	$date_start,
+  	$date_end
+  ) {
     $advisors = $this->getTotalFoundUsCount(
       'Asesores comerciales',
       $type,
@@ -103,7 +107,7 @@ trait findUsCount {
       $client_type,
       $date_start,
       $date_end
-      );
+     );
 
     return [
       $advisors,

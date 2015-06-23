@@ -25,7 +25,7 @@ trait byStatusCount {
 
     return $collection;
   }
-  
+
   /**
    * All by status
    *
@@ -74,14 +74,17 @@ trait byStatusCount {
       $date_end
       );
 
+    $total = $draft + $sent + $tracking + $effective + $not_effective;
+
     return [
-    $draft,
-    $sent,
-    $tracking,
-    $effective,
-    $not_effective
+	    $draft,
+	    $sent,
+	    $tracking,
+	    $effective,
+	    $not_effective,
+	    $total
     ];
   }
 
- 
+
 }

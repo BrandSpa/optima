@@ -1,7 +1,7 @@
 $ ->
   class optima.views.QuotationOptions extends Backbone.View
     el: $ '#quotation-options'
-
+    
     events:
       'change .select-type': 'changeType'
       'change .select-type-category': 'changeTypeCategory'

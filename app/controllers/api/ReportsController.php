@@ -18,7 +18,7 @@ class ReportsController extends \BaseController {
 	use \Traits\Reports\diffSentTotal;
 	use \Traits\Reports\total;
 	use \Traits\Reports\totalMoney;
-	
+
 
 	public function index()
 	{
@@ -30,92 +30,92 @@ class ReportsController extends \BaseController {
 		$client_type = Input::get('client_type') ? Input::get('client_type') : '%';
 
 		$byStatus = $this->allByStatus(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$byStatusCount = $this->countAllByStatus(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$byFindUs = $this->allByFindUs(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$byFindUsCount = $this->allByFindUsCount(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$byAdvisor  = $this->allByAdvisors(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$byClientType = $this->allByClientType(
-			$type, 
-			$date_start, 
+			$type,
+			$date_start,
 			$date_end
 		);
 
 		$byNoEffective = $this->allByNoEffective(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$byNoEffectiveCount = $this->allByNoEffectiveCount(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$TotalQuotations = $this->getTotalQuotations(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$TotalQuotationsMoney = $this->TotalQuotationsMoney(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
 		$averageSentTime = $this->averageSentTime(
-			$date_start, 
-			$date_end, 
-			$type, 
+			$date_start,
+			$date_end,
+			$type,
 			$client_type
 		);
 
 		$averageConfirmedTime = $this->averageConfirmedTime(
-			$date_start, 
-			$date_end, 
-			$type, 
+			$date_start,
+			$date_end,
+			$type,
 			$client_type
 		);
 
 		$byDiff = $this->allByDiff(
-			$type, 
-			$client_type, 
-			$date_start, 
+			$type,
+			$client_type,
+			$date_start,
 			$date_end
 		);
 
