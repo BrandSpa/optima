@@ -6,7 +6,8 @@ $ ->
       'change .filter-status': 'filterByStatus'
       'change .filter-advisor': 'filterByAdvisor'
       'change .filter-client-type': 'filterByClientType'
-      
+      'change .filter-quotation-type': 'filterByQuotationType'
+
     initialize: ->
       @filters = {}
       @offset = 0
@@ -38,3 +39,7 @@ $ ->
     filterByClientType: (e) ->
       el = $(e.currentTarget)
       @filter(client_type: el.val())
+
+    filterByQuotationType: (e) ->
+      el = $(e.currentTarget)
+      @filter(quotation_type: el.val())

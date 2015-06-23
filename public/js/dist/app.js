@@ -1778,7 +1778,8 @@ $(function() {
       'submit .quotation-search': 'filterByQuery',
       'change .filter-status': 'filterByStatus',
       'change .filter-advisor': 'filterByAdvisor',
-      'change .filter-client-type': 'filterByClientType'
+      'change .filter-client-type': 'filterByClientType',
+      'change .filter-quotation-type': 'filterByQuotationType'
     };
 
     QuotationsFilters.prototype.initialize = function() {
@@ -1834,6 +1835,14 @@ $(function() {
       el = $(e.currentTarget);
       return this.filter({
         client_type: el.val()
+      });
+    };
+
+    QuotationsFilters.prototype.filterByQuotationType = function(e) {
+      var el;
+      el = $(e.currentTarget);
+      return this.filter({
+        quotation_type: el.val()
       });
     };
 

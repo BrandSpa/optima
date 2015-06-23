@@ -24,6 +24,7 @@ class QuotationsController extends \BaseController {
 		$status = Input::get('status');
 		$advisor = Input::get('advisor');
 		$client_type = Input::get('client_type');
+		$quotation_type = Input::get('quotation_type');
 
 		$collection = new Quotation;
 
@@ -50,7 +51,15 @@ class QuotationsController extends \BaseController {
 			$collection = $collection->where("client_type", $client_type);
 		}
 
-		$collection = $collection->with('company', 'contact', 'user')->take(50)->skip($skip)->orderBy('id', 'DESC')->get();
+		if( Input::has('quotation_type') && $quotation_type != "" ) {
+			$collection = $collection->where("type", $quotation_type);
+		}
+
+		$collection = $collection->with('company', 'contact', 'user')
+			->take(50)
+			->skip($skip)
+			->orderBy('id', 'DESC')
+			->get();
 
 		return Response::json($collection, 200);
 	}
@@ -96,7 +105,7 @@ class QuotationsController extends \BaseController {
 		$model->created_sent_diff = $model->diffCreateAndSent();
 		return Response::json($model, 200);
 	}
-	
+
 	/**
 	 * POST send mail to contact mail
 	 * @return Response json object

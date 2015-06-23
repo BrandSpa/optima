@@ -6,7 +6,7 @@ use Session;
 use Input;
 
 class CompaniesController extends \BaseController {
-	
+
 	protected $entity;
 	protected $relationships = ['contacts'];
 
@@ -15,11 +15,11 @@ class CompaniesController extends \BaseController {
 		$this->entity = $model;
 	}
 
-	public function index() 
+	public function index()
 	{
 		$offset = Input::get('offset');
 		$query = Input::get('query');
-		
+
 		if ($query) {
 			$collection = $this->entity->search($query);
 			return Response::json($collection, 200);
@@ -29,7 +29,7 @@ class CompaniesController extends \BaseController {
 		}
 	}
 
-	public function show($id) 
+	public function show($id)
 	{
 		$model = Company::with($this->relationships)->find($id);
 		return Response::json($model, 200);
