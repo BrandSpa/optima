@@ -12,7 +12,7 @@ $ ->
         "No confiable",
         "Competencia",
         "Por cliente",
-        "sin categoria"
+        "Sin status"
       ],
       datasets: [
           label: "My First dataset",
