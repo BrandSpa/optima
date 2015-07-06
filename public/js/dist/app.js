@@ -4429,7 +4429,7 @@ $(function() {
       var ctx, data, options, view;
       console.log(this.model.toJSON().no_effective);
       data = {
-        labels: ["No disponible", "No confiable", "Competencia", "Por cliente"],
+        labels: ["No disponible", "No confiable", "Competencia", "Por cliente", "sin categoria"],
         datasets: [
           {
             label: "My First dataset",
@@ -4483,7 +4483,7 @@ $(function() {
     ReportByNoEffectiveCount.prototype.setData = function() {
       var ctx, data, options, view;
       data = {
-        labels: ["No disponible", "No confiable", "Competencia", "Por cliente"],
+        labels: ["No disponible", "No confiable", "Competencia", "Por cliente", "sin categoria"],
         datasets: [
           {
             label: "My First dataset",
