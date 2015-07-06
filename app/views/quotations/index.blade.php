@@ -3,6 +3,7 @@
 	<div class="panel panel-default" id="quotations">
 		<div class="panel-heading quotations-filters">
 			<a href="#" class="quotation-open-quote btn btn-primary btn-sm">Nueva Cotización</a>
+			<span class="pull-right">BD-COM-03</span>
 		</div>
 
 		<div class="panel-body">
@@ -24,7 +25,7 @@
 						<option value="No enviada">No enviada</option>
 						<option value="Efectiva">Efectiva</option>
 						<option value="No efectiva">No efectiva</option>
-						<option value="Replanteada">Replanteada</option>	
+						<option value="Replanteada">Replanteada</option>
 					</select>
 				</div>
 				<div class="col-lg-4">
@@ -61,10 +62,12 @@
 					</thead>
 					<tbody></tbody>
 				</table>
-			</div>	
+			</div>
 			<div class="panel-footer quotations-filters">
 				<a href="#" class="btn btn-default quotation-see-more btn-sm" style="width: 100%">Cargar más</a>
 			</div>
+
+			<span class="pull-right">versión 4</span>
 
 		</div>
 
