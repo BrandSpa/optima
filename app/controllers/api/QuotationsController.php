@@ -103,7 +103,6 @@ class QuotationsController extends \BaseController {
 	{
 		$model = Quotation::find($id);
 
-
 		if ($this->checkFields($fieldsToCheck)) {
 			$this->mailer->sendQuotation($model);
 			$model->created_sent_diff = $model->diffCreateAndSent();

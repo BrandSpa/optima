@@ -7,10 +7,11 @@ $ ->
 
     setData: ->
       data = labels: [
-        "No disponible", 
+        "No disponible",
         "No confiable",
         "Competencia",
-        "Por cliente"
+        "Por cliente",
+        "sin categoria"
       ],
 
       datasets: [
@@ -26,7 +27,7 @@ $ ->
 
       @$el.html('<canvas id="byNoEffectiveCanvasCount" width="600" height="400"></canvas>')
       ctx = $("#byNoEffectiveCanvasCount").get(0).getContext("2d")
-      options = 
+      options =
         responsive: true,
         tooltipCornerRadius: 0,
         scaleLabel: (label) ->

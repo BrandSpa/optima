@@ -8,10 +8,11 @@ $ ->
     setData: ->
       console.log @model.toJSON().no_effective
       data = labels: [
-        "No disponible", 
+        "No disponible",
         "No confiable",
         "Competencia",
-        "Por cliente"
+        "Por cliente",
+        "sin categoria"
       ],
       datasets: [
           label: "My First dataset",
@@ -26,7 +27,7 @@ $ ->
 
       @$el.html('<canvas id="byNoEffectiveCanvas" width="600" height="400"></canvas>')
       ctx = $("#byNoEffectiveCanvas").get(0).getContext("2d")
-      options = 
+      options =
         responsive: true,
         tooltipCornerRadius: 0,
         scaleLabel: (label) ->

@@ -63,11 +63,20 @@ trait byNoEffective {
       $date_end
       );
 
+    $sin_status = $this->getTotalNoEffective(
+      '',
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+      );
+
     return [
     $no_disponible,
     $no_confiable,
     $competencia,
-    $por_cliente
+    $por_cliente,
+    $sin_status
     ];
 
   }
