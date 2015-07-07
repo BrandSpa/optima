@@ -6,11 +6,11 @@ use DB;
 trait diffSentTotal {
 
   public function diff_sent_total(
-    $comparison, 
-    $type_category, 
-    $type, 
-    $client_type, 
-    $date_start, 
+    $comparison,
+    $type_category,
+    $type,
+    $client_type,
+    $date_start,
     $date_end
   )
   {
@@ -24,48 +24,44 @@ trait diffSentTotal {
     return $collection;
   }
 
-  public function allByDiff($type, $client_type, $date_start, $date_end){
-    $stock = $this->diff_sent_total(
-      "<= 30", "Inventario",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
+  public function allByDiff($type, $client_type, $date_start, $date_end)
+  {
 
-    $order = $this->diff_sent_total(
-      "<= 120",
-      "Pedido",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
+    $arr = [
+      'stock' => [
+        "<= 30",
+        "Inventario"
+      ],
+      'order' => [
+         "<= 120",
+        "Pedido"
+      ],
 
-    $outStock = $this->diff_sent_total(
-      "> 30",
-      "Inventario",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $outOrder = $this->diff_sent_total(
-      "> 120",
-      "Pedido",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    return [
-    $stock,
-    $outStock,
-    $order,
-    $outOrder
+      'outStock' => [
+        "> 30",
+        "Inventario"
+      ],
+      'outOrder' => [
+        "> 120",
+        "Pedido"
+      ]
     ];
 
+    $result = [];
+
+    foreach ($arr as $value) {
+      $total = $this->diff_sent_total(
+        $value[0],
+        $value[1],
+        $type,
+        $client_type,
+        $date_start,
+        $date_end
+      );
+
+      array_push($result, $total);
+    }
+
+    return $result;
   }
 }

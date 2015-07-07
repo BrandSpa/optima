@@ -4004,7 +4004,8 @@ $(function() {
       'click .btn-primary': 'byType',
       'change .by-client': 'byClientType',
       'changeDate .datepicker_start': 'byDateStart',
-      'changeDate .datepicker_end': 'byDateEnd'
+      'changeDate .datepicker_end': 'byDateEnd',
+      'change .by-status': 'byStatus'
     };
 
     ReportsFilters.prototype.initialize = function() {
@@ -4109,6 +4110,15 @@ $(function() {
       return this.filter();
     };
 
+    ReportsFilters.prototype.byStatus = function(e) {
+      var el;
+      el = $(e.currentTarget).val();
+      this.filters = _.extend(this.filters, {
+        status: el
+      });
+      return this.filter();
+    };
+
     return ReportsFilters;
 
   })(Backbone.View);
@@ -4125,14 +4135,12 @@ $(function() {
       return ReportByStatus.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByStatus.prototype.el = $("#byStatus");
-
     ReportByStatus.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByStatus.prototype.setData = function() {
-      var ctx, data, options, view;
+      var data;
       data = {
         labels: ["Borrador", "Enviada", "Entregada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada", "Replanteada"],
         datasets: [
@@ -4148,7 +4156,12 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byStatusCanvas" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByStatus.prototype.render = function(data) {
+      var ctx, options, view;
+      $("#byStatus").empty().append('<canvas id="byStatusCanvas" width="600" height="400"></canvas>');
       ctx = $("#byStatusCanvas").get(0).getContext("2d");
       options = {
         responsive: true,
@@ -4179,14 +4192,12 @@ $(function() {
       return ReportByStatusCount.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByStatusCount.prototype.el = $("#byStatusCount");
-
     ReportByStatusCount.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByStatusCount.prototype.setData = function() {
-      var ctx, data, view;
+      var data;
       data = {
         labels: ["Borrador", "Enviada", "Entregada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada", "Replanteada"],
         datasets: [
@@ -4202,7 +4213,12 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byStatusCountCanvas" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByStatusCount.prototype.render = function(data) {
+      var ctx, view;
+      $("#byStatusCount").empty().append('<canvas id="byStatusCountCanvas" width="600" height="400"></canvas>');
       ctx = $("#byStatusCountCanvas").get(0).getContext("2d");
       return view = new Chart(ctx).Bar(data, {
         responsive: true
@@ -4225,14 +4241,12 @@ $(function() {
       return ReportByFindUs.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByFindUs.prototype.el = $("#byFindUs");
-
     ReportByFindUs.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByFindUs.prototype.setData = function() {
-      var ctx, data, options, view;
+      var data;
       data = {
         labels: ["Asesores Comerciales", "Cliente", "Página Web Avante", "Google Adwords", "Referido", "Promoción", "Paginas Amarillas", "Paginas Amarillas Web", "Teléfono", "Redes Sociales"],
         datasets: [
@@ -4248,16 +4262,23 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByFindUs.prototype.render = function(data) {
+      var ctx, options, view;
+      $("#byFindUs").empty().append('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>');
       ctx = $("#byFindUsCanvas").get(0).getContext("2d");
       options = {
         responsive: true,
         tooltipCornerRadius: 0,
         scaleLabel: function(label) {
           return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-        },
-        tooltipTemplate: function(label) {
-          return label.label + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return {
+            tooltipTemplate: function(label) {
+              return label.label + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+            }
+          };
         }
       };
       return view = new Chart(ctx).Bar(data, options);
@@ -4278,8 +4299,6 @@ $(function() {
     function ReportByFindUsCount() {
       return ReportByFindUsCount.__super__.constructor.apply(this, arguments);
     }
-
-    ReportByFindUsCount.prototype.el = $("#byFindUsCount");
 
     ReportByFindUsCount.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
@@ -4302,7 +4321,7 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byFindUsCountCanvas" width="600" height="400"></canvas>');
+      $("#byFindUsCount").find('.panel-body').empty().append('<canvas id="byFindUsCountCanvas" width="600" height="400"></canvas>');
       ctx = $("#byFindUsCountCanvas").get(0).getContext("2d");
       options = {
         responsive: true,
@@ -4327,14 +4346,12 @@ $(function() {
       return ReportByAdvisor.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByAdvisor.prototype.el = $("#byAdvisors");
-
     ReportByAdvisor.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByAdvisor.prototype.setData = function() {
-      var ctx, data, view;
+      var data;
       data = {
         labels: ["Andrés Rojas", "Diego Peña"],
         datasets: [
@@ -4350,7 +4367,12 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byAdvisorsCanvas" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByAdvisor.prototype.render = function(data) {
+      var ctx, view;
+      $("#byAdvisors").empty().append('<canvas id="byAdvisorsCanvas" width="600" height="400"></canvas>');
       ctx = $("#byAdvisorsCanvas").get(0).getContext("2d");
       return view = new Chart(ctx).Bar(data, {
         responsive: true
@@ -4373,14 +4395,12 @@ $(function() {
       return ReportByType.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByType.prototype.el = $("#byClientType");
-
     ReportByType.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByType.prototype.setData = function() {
-      var ctx, data, view;
+      var data;
       data = {
         labels: ["Activo", "Inactivo", "Nuevo"],
         datasets: [
@@ -4396,7 +4416,12 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byClientTypeCanvas" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByType.prototype.render = function(data) {
+      var ctx, view;
+      $("#byClientType").empty().append('<canvas id="byClientTypeCanvas" width="600" height="400"></canvas>');
       ctx = $("#byClientTypeCanvas").get(0).getContext("2d");
       return view = new Chart(ctx).Bar(data, {
         responsive: true
@@ -4419,14 +4444,12 @@ $(function() {
       return ReportByNoEffective.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByNoEffective.prototype.el = $("#byNoEffective");
-
     ReportByNoEffective.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByNoEffective.prototype.setData = function() {
-      var ctx, data, options, view;
+      var data;
       console.log(this.model.toJSON().no_effective);
       data = {
         labels: ["No disponible", "No confiable", "Competencia", "Por cliente", "Sin status"],
@@ -4443,7 +4466,12 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byNoEffectiveCanvas" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByNoEffective.prototype.render = function(data) {
+      var ctx, options, view;
+      $('#byNoEffective').empty().append('<canvas id="byNoEffectiveCanvas" width="600" height="400"></canvas>');
       ctx = $("#byNoEffectiveCanvas").get(0).getContext("2d");
       options = {
         responsive: true,
@@ -4474,14 +4502,12 @@ $(function() {
       return ReportByNoEffectiveCount.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByNoEffectiveCount.prototype.el = $("#byNoEffectiveCount");
-
     ReportByNoEffectiveCount.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByNoEffectiveCount.prototype.setData = function() {
-      var ctx, data, options, view;
+      var data;
       data = {
         labels: ["No disponible", "No confiable", "Competencia", "Por cliente", "Sin status"],
         datasets: [
@@ -4497,7 +4523,12 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byNoEffectiveCanvasCount" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByNoEffectiveCount.prototype.render = function(data) {
+      var ctx, options, view;
+      $("#byNoEffectiveCount").empty().append('<canvas id="byNoEffectiveCanvasCount" width="600" height="400"></canvas>');
       ctx = $("#byNoEffectiveCanvasCount").get(0).getContext("2d");
       options = {
         responsive: true,
@@ -4528,14 +4559,12 @@ $(function() {
       return ReportByDiffSent.__super__.constructor.apply(this, arguments);
     }
 
-    ReportByDiffSent.prototype.el = $("#byDiffSent");
-
     ReportByDiffSent.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
     };
 
     ReportByDiffSent.prototype.setData = function() {
-      var ctx, data, view;
+      var data;
       data = {
         labels: ["Dentro - Inventario", "Fuera - Inventario", "Dentro - Pedido", "Fuera - Pedido"],
         datasets: [
@@ -4551,7 +4580,12 @@ $(function() {
           }
         ]
       };
-      this.$el.html('<canvas id="byDiffSentCanvas" width="600" height="400"></canvas>');
+      return this.render(data);
+    };
+
+    ReportByDiffSent.prototype.render = function(data) {
+      var ctx, view;
+      $("#byDiffSent").empty().append('<canvas id="byDiffSentCanvas" width="600" height="400"></canvas>');
       ctx = $("#byDiffSentCanvas").get(0).getContext("2d");
       return view = new Chart(ctx).Bar(data, {
         responsive: true
@@ -4574,8 +4608,6 @@ $(function() {
       return ReportsTotal.__super__.constructor.apply(this, arguments);
     }
 
-    ReportsTotal.prototype.el = "#total";
-
     ReportsTotal.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.render);
     };
@@ -4583,7 +4615,8 @@ $(function() {
     ReportsTotal.prototype.render = function() {
       var template;
       template = optima.templates.reports_total;
-      return $(this.el).html(template(this.model.toJSON()));
+      $(this.el).empty().append(template(this.model.toJSON()));
+      return $("#total").empty().append(this.el);
     };
 
     return ReportsTotal;

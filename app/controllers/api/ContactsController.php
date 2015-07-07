@@ -7,21 +7,21 @@ use Optima\Quotation;
 use Input;
 
 class ContactsController extends \BaseController {
-	
+
 	protected $entity;
 
 	public function __construct(Contact $model)
 	{
 		$this->entity = $model;
 	}
-	
+
 	public function index()
 	{
 		$company = Input::get('company_id');
 		$quotation = Input::get('quotation_id');
 		$query = Input::get('query');
 		$offset = Input::get('offset');
-		
+
 		if (Input::has('company_id')) {
 			$collection = Contact::where('company_id', $company)->get();
 			return Response::json($collection, 200);
@@ -50,8 +50,7 @@ class ContactsController extends \BaseController {
 		return Response::json($model, 200);
 	}
 
-
-	public function search($query) 
+	public function search($query)
 	{
 		$collection = Contact::search($query);
 		return Response::json($collection, 200);

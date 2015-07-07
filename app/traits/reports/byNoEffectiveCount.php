@@ -29,53 +29,29 @@ trait byNoEffectiveCount {
 
   public function allByNoEffectiveCount($type, $client_type, $date_start, $date_end)
   {
-    $no_disponible = $this->getTotalNoEffectiveCount(
+
+    $causes = [
       "No disponible",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $no_confiable = $this->getTotalNoEffectiveCount(
       "No confiable",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $competencia = $this->getTotalNoEffectiveCount(
       "Competencia",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $por_cliente = $this->getTotalNoEffectiveCount(
       "Por cliente",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $sin_status = $this->getTotalNoEffectiveCount(
-      '',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    return [
-    $no_disponible,
-    $no_confiable,
-    $competencia,
-    $por_cliente,
-    $sin_status
+      ""
     ];
 
+    $result = [];
+
+    foreach ($causes as $cause) {
+      $total = $this->getTotalNoEffectiveCount(
+        $cause,
+        $type,
+        $client_type,
+        $date_start,
+        $date_end
+      );
+
+      array_push($result, $total);
+    }
+
+    return $result;
   }
 }

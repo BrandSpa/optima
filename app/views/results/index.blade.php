@@ -1,5 +1,5 @@
 @section('content')
-	
+
 	<div class="col-lg-12">
 
 		<div class="panel panel-default" id="reports-filters">
@@ -18,14 +18,14 @@
 			</div>
 
 			<div class="col-lg-2">
-				<input type="text" class="datepicker_start form-control" placeholder="Desde">	
-			</div>
-			
-			<div class="col-lg-2">
-				<input type="text" class="datepicker_end form-control" placeholder="Hasta">	
+				<input type="text" class="datepicker_start form-control" placeholder="Desde">
 			</div>
 
-				<div class="col-lg-2">
+			<div class="col-lg-2">
+				<input type="text" class="datepicker_end form-control" placeholder="Hasta">
+			</div>
+
+				<div class="col-lg-3">
 					<select name="byClient" class="by-client form-control">
 						<option value="">Seleccionar Tipo Cliente</option>
 						<option value="Activo">Activo</option>
@@ -33,9 +33,22 @@
 						<option value="Nuevo">Nuevo</option>
 					</select>
 			</div>
+
+			<div class="col-lg-2">
+				<select name="" class="form-control by-status">
+					<option value="">Selecionar status</option>
+					<option value="Borrador">Borrador</option>
+					<option value="Enviada">Enviada</option>
+					<option value="Seguimiento">Seguimiento</option>
+					<option value="No enviada">No enviada</option>
+					<option value="Efectiva">Efectiva</option>
+					<option value="No efectiva">No efectiva</option>
+					<option value="Replanteada">Replanteada</option>
+				</select>
+			</div>
 		</div>
 		</div>
-		
+
 		<div class="row" id="total"> </div>
 
 		<div class="row">
@@ -73,14 +86,14 @@
 				</div>
 			</div>
 
-
 			<div class="col-lg-6">
-				<div class="panel panel-default">
+				<div class="panel panel-default" id="byFindUsCount">
 					<div class="panel-heading">
 						<h5>Cantidad de cotizaciones por: ¿Como nos encontro?</h5>
+
 					</div>
 					<div class="panel-body">
-						<div id="byFindUsCount"></div>
+
 					</div>
 				</div>
 			</div>
@@ -106,7 +119,6 @@
 					</div>
 				</div>
 			</div>
-		
 
 			<div class="col-lg-6">
 				<div class="panel panel-default">
@@ -141,5 +153,5 @@
 				</div>
 			</div>
 </div>
-	</div>	
+	</div>
 @stop

@@ -19,7 +19,6 @@ class ReportsController extends \BaseController {
 	use \Traits\Reports\total;
 	use \Traits\Reports\totalMoney;
 
-
 	public function index()
 	{
 		$now = Carbon::now();
@@ -28,6 +27,7 @@ class ReportsController extends \BaseController {
 
 		$type = Input::get('type') ? Input::get('type') : "%";
 		$client_type = Input::get('client_type') ? Input::get('client_type') : '%';
+		$status = Input::get('status') ? Input::get('status') : '%';
 
 		$byStatus = $this->allByStatus(
 			$type,
@@ -44,6 +44,7 @@ class ReportsController extends \BaseController {
 		);
 
 		$byFindUs = $this->allByFindUs(
+			$status,
 			$type,
 			$client_type,
 			$date_start,
@@ -51,6 +52,7 @@ class ReportsController extends \BaseController {
 		);
 
 		$byFindUsCount = $this->allByFindUsCount(
+			$status,
 			$type,
 			$client_type,
 			$date_start,

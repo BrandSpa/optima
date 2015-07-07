@@ -1,13 +1,11 @@
 $ ->
   class optima.views.ReportByType extends Backbone.View
-    el: $ "#byClientType"
-
     initialize: ->
       @listenTo(@model, 'change', @setData)
 
     setData: ->
       data = labels: [
-        "Activo", 
+        "Activo",
         "Inactivo",
         "Nuevo"
       ],
@@ -22,6 +20,11 @@ $ ->
           data: @model.toJSON().client_type
         ]
 
-      @$el.html('<canvas id="byClientTypeCanvas" width="600" height="400"></canvas>')
+      @render(data)
+
+    render: (data) ->
+      $("#byClientType")
+      .empty()
+      .append('<canvas id="byClientTypeCanvas" width="600" height="400"></canvas>')
       ctx = $("#byClientTypeCanvas").get(0).getContext("2d")
       view = new Chart(ctx).Bar(data, {responsive: true})

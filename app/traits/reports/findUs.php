@@ -7,6 +7,7 @@ trait findUs {
 
   public function getTotalFoundUs(
     $found_us,
+    $status,
     $type,
     $client_type,
     $date_start,
@@ -15,6 +16,7 @@ trait findUs {
 
     $collection = quotation::where('quotations.found_us', $found_us)
     ->where('quotations.type', 'like', $type)
+    ->where('quotations.status', 'like', $status)
     ->where('quotations.client_type', 'like', $client_type)
     ->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
     ->whereNotIn('quotations.status', ['Replanteada'])
@@ -25,100 +27,37 @@ trait findUs {
     return $collection[0]->products_total;
   }
 
-  public function allByFindUs($type, $client_type, $date_start, $date_end)
+  public function allByFindUs($status, $type, $client_type, $date_start, $date_end)
   {
-    $advisors = $this->getTotalFoundUs(
+    $found_us_list = [
       'Asesores comerciales',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $client = $this->getTotalFoundUs(
       'Cliente',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $web = $this->getTotalFoundUs(
       'Página Web Avante',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $adwords = $this->getTotalFoundUs(
       'Google Adwords',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $referred = $this->getTotalFoundUs(
       'Referido',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $promotion = $this->getTotalFoundUs(
       'Promoción',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $yellow_pages = $this->getTotalFoundUs(
       'Paginas Amarilladas',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $yellow_pages_web = $this->getTotalFoundUs(
       'Paginas Amarilladas Web',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $phone = $this->getTotalFoundUs(
       'Teléfono',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $social_network = $this->getTotalFoundUs(
       'Redes Sociales',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
+    ];
+
+    $results = [];
+
+    foreach ($found_us_list as $found_us) {
+      $total = $this->getTotalFoundUs(
+        $found_us,
+        $status,
+        $type,
+        $client_type,
+        $date_start,
+        $date_end
       );
 
-    return [
-      $advisors,
-      $client,
-      $web,
-      $adwords,
-      $referred,
-      $promotion,
-      $yellow_pages,
-      $yellow_pages_web,
-      $phone,
-      $social_network
-    ];
+      array_push($results, $total);
+    }
+
+    return $results;
   }
 
 }

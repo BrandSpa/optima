@@ -6,15 +6,18 @@ use DB;
 //Its broken open closed principle
 trait findUsCount {
 
-  public function getTotalFoundUsCount(
+  public function TotalFoundUsCount (
     $found_us,
+    $status,
     $type,
     $client_type,
     $date_start,
     $date_end
   ) {
+
     $total = quotation::where('quotations.found_us', $found_us)
     ->where('quotations.type', 'like', $type)
+    ->where('quotations.status', 'like', $status)
     ->where('quotations.client_type', 'like', $client_type)
     ->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
     ->whereNotIn('quotations.status', ['Replanteada'])
@@ -24,103 +27,42 @@ trait findUsCount {
   }
 
   public function allByFindUsCount(
+    $status,
   	$type,
   	$client_type,
   	$date_start,
   	$date_end
   ) {
-    $advisors = $this->getTotalFoundUsCount(
+
+    $found_us_list = [
       'Asesores comerciales',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $client = $this->getTotalFoundUsCount(
       'Cliente',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $web = $this->getTotalFoundUsCount(
       'Página Web Avante',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $adwords = $this->getTotalFoundUsCount(
       'Google Adwords',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $referred = $this->getTotalFoundUsCount(
       'Referido',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $promotion = $this->getTotalFoundUsCount(
       'Promoción',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $yellow_pages = $this->getTotalFoundUsCount(
       'Paginas Amarilladas',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $yellow_pages_web = $this->getTotalFoundUsCount(
       'Paginas Amarilladas Web',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $phone = $this->getTotalFoundUsCount(
       'Teléfono',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
+      'Redes Sociales',
+    ];
+
+    $results = [];
+
+    foreach ($found_us_list as $found_us) {
+      $total = $this->totalFoundUsCount(
+        $found_us,
+        $status,
+        $type,
+        $client_type,
+        $date_start,
+        $date_end
       );
 
-    $social_network = $this->getTotalFoundUsCount(
-      'Redes Sociales',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-     );
+      array_push($results, $total);
+    }
 
-    return [
-      $advisors,
-      $client,
-      $web,
-      $adwords,
-      $referred,
-      $promotion,
-      $yellow_pages,
-      $yellow_pages_web,
-      $phone,
-      $social_network
-    ];
+    return $results;
   }
 
 }

@@ -1,7 +1,5 @@
 $ ->
   class optima.views.ReportByStatus extends Backbone.View
-    el: $ "#byStatus"
-
     initialize: ->
       @listenTo(@model, 'change', @setData)
 
@@ -18,8 +16,12 @@ $ ->
           pointHighlightStroke: "rgba(220,220,220,1)",
           data: @model.toJSON().status
         ]
+      @render(data)
 
-      @$el.html('<canvas id="byStatusCanvas" width="600" height="400"></canvas>')
+    render: (data) ->
+      $("#byStatus")
+      .empty()
+      .append('<canvas id="byStatusCanvas" width="600" height="400"></canvas>')
 
       ctx = $("#byStatusCanvas").get(0).getContext("2d")
 

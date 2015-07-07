@@ -19,23 +19,21 @@ trait byAdvisor {
 
   public function allByAdvisors($type, $client_type, $date_start, $date_end)
   {
-    $andres = $this->getTotalAdvisors(
-      'Andrés Rojas',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
+    $advisors = ['Andrés Rojas', 'Diego Peña'];
+    $result = [];
 
-    $diego = $this->getTotalAdvisors(
-      'Diego Peña',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
+    foreach ($advisors as $advisor) {
+      $total = $this->getTotalAdvisors(
+        $advisor,
+        $type,
+        $client_type,
+        $date_start,
+        $date_end
       );
+      array_push($result, $total);
+    }
 
-    return [$andres, $diego];
+    return $result;
   }
 
 }

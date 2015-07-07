@@ -1,7 +1,5 @@
 $ ->
   class optima.views.ReportByStatusCount extends Backbone.View
-    el: $ "#byStatusCount"
-
     initialize: ->
       @listenTo(@model, 'change', @setData)
 
@@ -18,7 +16,12 @@ $ ->
         pointHighlightStroke: "rgba(220,220,220,1)",
         data: @model.toJSON().statusCount
       ]
+      @render(data)
 
-      @$el.html('<canvas id="byStatusCountCanvas" width="600" height="400"></canvas>')
+    render: (data) ->
+
+      $("#byStatusCount")
+      .empty()
+      .append('<canvas id="byStatusCountCanvas" width="600" height="400"></canvas>')
       ctx = $("#byStatusCountCanvas").get(0).getContext("2d")
       view = new Chart(ctx).Bar data, responsive: true

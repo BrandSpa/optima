@@ -7,7 +7,6 @@ trait total {
 
   public function getTotalQuotations($type, $client_type, $date_start, $date_end)
   {
-
     $collection = Quotation::
       where('quotations.type', 'like', $type)
       ->where('quotations.client_type', 'like', $client_type)

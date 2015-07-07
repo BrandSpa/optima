@@ -18,31 +18,26 @@ trait clientType {
 
   public function allByClientType($type, $date_start, $date_end)
   {
-    $active = $this->getTotalClientType(
+
+    $client_types = [
       'Activo',
-      $type,
-      $date_start,
-      $date_end
-    );
-
-    $inactive = $this->getTotalClientType(
       'Inactivo',
-      $type,
-      $date_start,
-      $date_end
-    );
-
-    $new = $this->getTotalClientType(
-      'nuevo',
-      $type,
-      $date_start,
-      $date_end
-    );
-
-    return [
-      $active,
-      $inactive,
-      $new
+      'nuevo'
     ];
+
+    $result = [];
+
+    foreach ($client_types as $client_type) {
+      $total = $this->getTotalClientType(
+        $client_type,
+        $type,
+        $date_start,
+        $date_end
+      );
+
+      array_push($result, $total);
+    }
+
+    return $result;
   }
 }

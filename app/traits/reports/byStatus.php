@@ -31,81 +31,31 @@ trait ByStatus {
   public function allByStatus($type, $client_type, $date_start, $date_end)
   {
 
-    $effective = $this->getTotalStatus(
+    $status = [
       'Efectiva',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $draft = $this->getTotalStatus(
       'Borrador',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $sent = $this->getTotalStatus(
       'Enviada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $delivered = $this->countTotalStatus(
       'Entregada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $tracking = $this->getTotalStatus(
       'Seguimiento',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $not_effective = $this->getTotalStatus(
       'No efectiva',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-     );
-
-    $not_sended = $this->getTotalStatus(
       'No enviada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-     );
-
-    $rethink = $this->getTotalStatus(
       'Replanteada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-     );
-
-
-    return [
-	    $draft,
-	    $sent,
-	    $delivered,
-	    $tracking,
-	    $effective,
-	    $not_effective,
-	    $not_sended,
-	    $rethink
     ];
+
+    $result = [];
+
+    foreach ($status as $state) {
+      $total = $this->getTotalStatus(
+        $state,
+        $type,
+        $client_type,
+        $date_start,
+        $date_end
+     );
+      array_push($result, $total);
+    }
+
+    return $result;
   }
 
 }

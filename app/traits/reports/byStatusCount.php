@@ -33,81 +33,31 @@ trait byStatusCount {
    */
   public function countAllByStatus($type, $client_type, $date_start, $date_end)
   {
-
-    $effective = $this->countTotalStatus(
+    $status = [
       'Efectiva',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $draft = $this->countTotalStatus(
       'Borrador',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $sent = $this->countTotalStatus(
       'Enviada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $delivered = $this->countTotalStatus(
       'Entregada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $tracking = $this->countTotalStatus(
       'Seguimiento',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $not_sended = $this->countTotalStatus(
-      'No enviada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $not_effective = $this->countTotalStatus(
       'No efectiva',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-     );
-
-    $rethink = $this->countTotalStatus(
+      'No enviada',
       'Replanteada',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-     );
-
-    return [
-	    $draft,
-	    $sent,
-	    $delivered,
-	    $tracking,
-	    $effective,
-	    $not_effective,
-	    $not_sended,
-	    $rethink
     ];
+
+    $result = [];
+
+    foreach ($status as $state) {
+      $total = $this->countTotalStatus(
+        $state,
+        $type,
+        $client_type,
+        $date_start,
+        $date_end
+     );
+      array_push($result, $total);
+    }
+
+    return $result;
   }
 
 

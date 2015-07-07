@@ -1,7 +1,5 @@
 $ ->
   class optima.views.ReportByNoEffectiveCount extends Backbone.View
-    el: $ "#byNoEffectiveCount"
-
     initialize: ->
       @listenTo(@model, 'change', @setData)
 
@@ -25,7 +23,12 @@ $ ->
         data: @model.toJSON().no_effective_count
       ]
 
-      @$el.html('<canvas id="byNoEffectiveCanvasCount" width="600" height="400"></canvas>')
+      @render(data)
+
+    render: (data) ->
+      $("#byNoEffectiveCount")
+      .empty()
+      .append('<canvas id="byNoEffectiveCanvasCount" width="600" height="400"></canvas>')
       ctx = $("#byNoEffectiveCanvasCount").get(0).getContext("2d")
       options =
         responsive: true,

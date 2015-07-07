@@ -16,7 +16,6 @@ trait byNoEffective {
     $date_start,
     $date_end
     ) {
-
     $collection = quotation::where('quotations.status',  'No efectiva')
     ->where('quotations.status_cause', '=', $cause)
     ->where('quotations.type', 'like', $type)
@@ -31,53 +30,28 @@ trait byNoEffective {
 
   public function allByNoEffective($type, $client_type, $date_start, $date_end)
   {
-    $no_disponible = $this->getTotalNoEffective(
+    $causes = [
       "No disponible",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $no_confiable = $this->getTotalNoEffective(
       "No confiable",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $competencia = $this->getTotalNoEffective(
       "Competencia",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $por_cliente = $this->getTotalNoEffective(
       "Por cliente",
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    $sin_status = $this->getTotalNoEffective(
-      '',
-      $type,
-      $client_type,
-      $date_start,
-      $date_end
-      );
-
-    return [
-    $no_disponible,
-    $no_confiable,
-    $competencia,
-    $por_cliente,
-    $sin_status
+      ""
     ];
 
+    $result = [];
+
+    foreach ($causes as $cause) {
+      $total = $this->getTotalNoEffective(
+      $cause,
+      $type,
+      $client_type,
+      $date_start,
+      $date_end
+      );
+
+      array_push($result, $total);
+    }
+
+    return $result;
   }
 }

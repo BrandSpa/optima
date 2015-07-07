@@ -1,7 +1,5 @@
 $ ->
   class optima.views.ReportByNoEffective extends Backbone.View
-    el: $ "#byNoEffective"
-
     initialize: ->
       @listenTo(@model, 'change', @setData)
 
@@ -25,7 +23,12 @@ $ ->
           data: @model.toJSON().no_effective
         ]
 
-      @$el.html('<canvas id="byNoEffectiveCanvas" width="600" height="400"></canvas>')
+      @render(data)
+
+    render: (data) ->
+      $('#byNoEffective')
+      .empty()
+      .append('<canvas id="byNoEffectiveCanvas" width="600" height="400"></canvas>')
       ctx = $("#byNoEffectiveCanvas").get(0).getContext("2d")
       options =
         responsive: true,

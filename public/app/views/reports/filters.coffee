@@ -7,6 +7,7 @@ $ ->
       'change .by-client': 'byClientType'
       'changeDate .datepicker_start': 'byDateStart'
       'changeDate .datepicker_end': 'byDateEnd'
+      'change .by-status': 'byStatus'
 
     initialize: ->
       now = new Date()
@@ -17,9 +18,9 @@ $ ->
 
       year = now.getFullYear()
 
-      date_start = year+"-"+month+"-01"
+      date_start = year + "-" + month + "-01"
 
-      date_end = year+"-"+month+"-31"
+      date_end = year + "-" + month + "-31"
 
       @filters = {date_start: date_start, date_end: date_end}
 
@@ -72,4 +73,9 @@ $ ->
     byClientType: (e) ->
       el = $(e.currentTarget).val()
       @filters = _.extend @filters, client_type: el
+      @filter()
+
+    byStatus: (e) ->
+      el = $(e.currentTarget).val()
+      @filters = _.extend @filters, status: el
       @filter()
