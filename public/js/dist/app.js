@@ -4010,6 +4010,7 @@ $(function() {
 
     ReportsFilters.prototype.initialize = function() {
       var date_end, date_start, month, now, year;
+      pubsub.on('reports:filter', this.byStatus, this);
       now = new Date();
       month = now.getMonth() + 1;
       if (month < 10) {
@@ -4110,9 +4111,7 @@ $(function() {
       return this.filter();
     };
 
-    ReportsFilters.prototype.byStatus = function(e) {
-      var el;
-      el = $(e.currentTarget).val();
+    ReportsFilters.prototype.byStatus = function(el) {
       this.filters = _.extend(this.filters, {
         status: el
       });
@@ -4136,13 +4135,14 @@ $(function() {
     }
 
     ReportByStatus.prototype.initialize = function() {
-      return this.listenTo(this.model, 'change', this.setData);
+      this.listenTo(this.model, 'change', this.setData);
+      return this.labels = ["Borrador", "Enviada", "Entregada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada", "Replanteada"];
     };
 
     ReportByStatus.prototype.setData = function() {
       var data;
       data = {
-        labels: ["Borrador", "Enviada", "Entregada", "Seguimiento", "Efectiva", "No Efectiva", "No enviada", "Replanteada"],
+        labels: this.labels,
         datasets: [
           {
             label: "Etiquetas",
@@ -4159,18 +4159,25 @@ $(function() {
       return this.render(data);
     };
 
-    ReportByStatus.prototype.render = function(data) {
-      var ctx, options, view;
+    ReportByStatus.prototype.mapCount = function(key) {
+      return _.object(this.labels, this.model.toJSON().statusCount)[key];
+    };
+
+    ReportByStatus.prototype.render = function(data, count) {
+      var _this, ctx, options, view;
       $("#byStatus").empty().append('<canvas id="byStatusCanvas" width="600" height="400"></canvas>');
       ctx = $("#byStatusCanvas").get(0).getContext("2d");
+      _this = this;
       options = {
+        barShowStroke: false,
         responsive: true,
         tooltipCornerRadius: 0,
+        showTooltip: true,
         scaleLabel: function(label) {
           return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
         },
         tooltipTemplate: function(label) {
-          return label.label + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
         }
       };
       return view = new Chart(ctx).Bar(data, options);
@@ -4241,17 +4248,29 @@ $(function() {
       return ReportByFindUs.__super__.constructor.apply(this, arguments);
     }
 
+    ReportByFindUs.prototype.el = "#byFindUs";
+
+    ReportByFindUs.prototype.events = {
+      'change .by-status': 'byStatus'
+    };
+
     ReportByFindUs.prototype.initialize = function() {
-      return this.listenTo(this.model, 'change', this.setData);
+      this.listenTo(this.model, 'change', this.setData);
+      return this.labels = ["Asesores Comerciales", "Cliente", "Página Web Avante", "Google Adwords", "Referido", "Promoción", "Paginas Amarillas", "Paginas Amarillas Web", "Teléfono", "Redes Sociales"];
+    };
+
+    ReportByFindUs.prototype.byStatus = function(e) {
+      var el;
+      el = $(e.currentTarget).val();
+      return pubsub.trigger('reports:filter', el);
     };
 
     ReportByFindUs.prototype.setData = function() {
       var data;
       data = {
-        labels: ["Asesores Comerciales", "Cliente", "Página Web Avante", "Google Adwords", "Referido", "Promoción", "Paginas Amarillas", "Paginas Amarillas Web", "Teléfono", "Redes Sociales"],
+        labels: this.labels,
         datasets: [
           {
-            label: "My First dataset",
             fillColor: "rgba(231, 161, 31, .7)",
             strokeColor: "rgba(231, 161, 31,1)",
             pointColor: "#fff",
@@ -4265,20 +4284,24 @@ $(function() {
       return this.render(data);
     };
 
+    ReportByFindUs.prototype.mapCount = function(key) {
+      return _.object(this.labels, this.model.toJSON().findUSCount)[key];
+    };
+
     ReportByFindUs.prototype.render = function(data) {
-      var ctx, options, view;
-      $("#byFindUs").empty().append('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>');
+      var _this, ctx, options, view;
+      _this = this;
+      $("#byFindUs").find('.panel-body').empty().append('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>');
       ctx = $("#byFindUsCanvas").get(0).getContext("2d");
       options = {
         responsive: true,
+        barShowStroke: false,
         tooltipCornerRadius: 0,
         scaleLabel: function(label) {
           return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-          return {
-            tooltipTemplate: function(label) {
-              return label.label + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-            }
-          };
+        },
+        tooltipTemplate: function(label) {
+          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
         }
       };
       return view = new Chart(ctx).Bar(data, options);
@@ -4445,17 +4468,16 @@ $(function() {
     }
 
     ReportByNoEffective.prototype.initialize = function() {
-      return this.listenTo(this.model, 'change', this.setData);
+      this.listenTo(this.model, 'change', this.setData);
+      return this.labels = ["No disponible", "No confiable", "Competencia", "Por cliente", "Sin status"];
     };
 
     ReportByNoEffective.prototype.setData = function() {
       var data;
-      console.log(this.model.toJSON().no_effective);
       data = {
-        labels: ["No disponible", "No confiable", "Competencia", "Por cliente", "Sin status"],
+        labels: this.labels,
         datasets: [
           {
-            label: "My First dataset",
             fillColor: "rgba(246, 97, 87, 1)",
             strokeColor: "rgba(246, 97, 87, 1)",
             pointColor: "#fff",
@@ -4469,8 +4491,13 @@ $(function() {
       return this.render(data);
     };
 
+    ReportByNoEffective.prototype.mapCount = function(key) {
+      return _.object(this.labels, this.model.toJSON().no_effective_count)[key];
+    };
+
     ReportByNoEffective.prototype.render = function(data) {
-      var ctx, options, view;
+      var _this, ctx, options, view;
+      _this = this;
       $('#byNoEffective').empty().append('<canvas id="byNoEffectiveCanvas" width="600" height="400"></canvas>');
       ctx = $("#byNoEffectiveCanvas").get(0).getContext("2d");
       options = {
@@ -4480,7 +4507,7 @@ $(function() {
           return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
         },
         tooltipTemplate: function(label) {
-          return label.label + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
         }
       };
       return view = new Chart(ctx).Bar(data, options);
@@ -4848,18 +4875,12 @@ $(function() {
     };
 
     Workspace.prototype.startReports = function() {
-      var coll, date_end, date_start, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByFindUsCount, viewByNoEffective, viewByNoEffectiveCount, viewByStatus, viewByStatusCount, viewByType, viewTotal, year;
+      var coll, date_end, date_start, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType, viewTotal, year;
       coll = new optima.models.Report;
       viewByStatus = new optima.views.ReportByStatus({
         model: coll
       });
-      viewByStatusCount = new optima.views.ReportByStatusCount({
-        model: coll
-      });
       viewByFindUs = new optima.views.ReportByFindUs({
-        model: coll
-      });
-      viewByFindUsCount = new optima.views.ReportByFindUsCount({
         model: coll
       });
       viewByAdvisor = new optima.views.ReportByAdvisor({
@@ -4869,9 +4890,6 @@ $(function() {
         model: coll
       });
       viewByNoEffective = new optima.views.ReportByNoEffective({
-        model: coll
-      });
-      viewByNoEffectiveCount = new optima.views.ReportByNoEffectiveCount({
         model: coll
       });
       viewByDiffSent = new optima.views.ReportByDiffSent({

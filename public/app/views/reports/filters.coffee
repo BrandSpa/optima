@@ -10,6 +10,7 @@ $ ->
       'change .by-status': 'byStatus'
 
     initialize: ->
+      pubsub.on('reports:filter', @byStatus, @)
       now = new Date()
       month = (now.getMonth()+1)
 
@@ -75,7 +76,6 @@ $ ->
       @filters = _.extend @filters, client_type: el
       @filter()
 
-    byStatus: (e) ->
-      el = $(e.currentTarget).val()
+    byStatus: (el) ->
       @filters = _.extend @filters, status: el
       @filter()

@@ -33,19 +33,6 @@
 						<option value="Nuevo">Nuevo</option>
 					</select>
 			</div>
-
-			<div class="col-lg-2">
-				<select name="" class="form-control by-status">
-					<option value="">Selecionar status</option>
-					<option value="Borrador">Borrador</option>
-					<option value="Enviada">Enviada</option>
-					<option value="Seguimiento">Seguimiento</option>
-					<option value="No enviada">No enviada</option>
-					<option value="Efectiva">Efectiva</option>
-					<option value="No efectiva">No efectiva</option>
-					<option value="Replanteada">Replanteada</option>
-				</select>
-			</div>
 		</div>
 		</div>
 
@@ -64,13 +51,27 @@
 				</div>
 			</div>
 
-			<div class="col-lg-6">
+			<div class="col-lg-6" id="byFindUs">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cantidad de cotizaciones por: Etiqueta</h5>
+					<div class="row">
+						<div class="col-lg-7"><h5>Cotizaciones por: ¿Como nos encontro?</h5></div>
+						<div class="col-lg-5">
+							<select name="" class="form-control by-status">
+								<option value="">Selecionar status</option>
+								<option value="Borrador">Borrador</option>
+								<option value="Enviada">Enviada</option>
+								<option value="Seguimiento">Seguimiento</option>
+								<option value="No enviada">No enviada</option>
+								<option value="Efectiva">Efectiva</option>
+								<option value="No efectiva">No efectiva</option>
+								<option value="Replanteada">Replanteada</option>
+							</select>
+						</div>
+						</div>
 					</div>
 					<div class="panel-body">
-						<div id="byStatusCount"></div>
+
 					</div>
 				</div>
 			</div>
@@ -78,22 +79,10 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones en pesos por: ¿Como nos encontro?</h5>
+						<h5>Cotizaciones en pesos por: No efectivas</h5>
 					</div>
 					<div class="panel-body">
-						<div id="byFindUs"></div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-6">
-				<div class="panel panel-default" id="byFindUsCount">
-					<div class="panel-heading">
-						<h5>Cantidad de cotizaciones por: ¿Como nos encontro?</h5>
-
-					</div>
-					<div class="panel-body">
-
+						<div id="byNoEffective"></div>
 					</div>
 				</div>
 			</div>
@@ -120,27 +109,6 @@
 				</div>
 			</div>
 
-			<div class="col-lg-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h5>Cotizaciones en pesos por: No efectivas</h5>
-					</div>
-					<div class="panel-body">
-						<div id="byNoEffective"></div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h5>Cantidad de cotizaciones por: No efectivas</h5>
-					</div>
-					<div class="panel-body">
-						<div id="byNoEffectiveCount"></div>
-					</div>
-				</div>
-			</div>
 
 			<div class="col-lg-6">
 				<div class="panel panel-default">
