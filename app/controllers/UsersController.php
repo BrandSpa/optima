@@ -2,12 +2,12 @@
 
 class UsersController extends BaseController{
 
-		public function getLogin() 
+		public function getLogin()
 	{
 		return View::make('users.login');
 	}
 
-	public function postLogin() 
+	public function postLogin()
 	{
 		$credentials = ['email' => Input::get('email'), 'password' => Input::get('password')];
 		if (Auth::Attempt($credentials)) {
@@ -17,7 +17,7 @@ class UsersController extends BaseController{
 		return Redirect::to('/login');
 	}
 
-	public function logout() 
+	public function logout()
 	{
 		if (Auth::check())
 		{

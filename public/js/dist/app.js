@@ -370,7 +370,7 @@ $(function() {
     DashboardPage.prototype.render = function() {
       var template;
       template = optima.templates.page_dashboard;
-      $(this.el).html(template);
+      $(this.el).empty().append(template);
       return this;
     };
 
@@ -4714,7 +4714,7 @@ $(function() {
     Workspace.prototype.dashboard = function(query) {
       var page, quotationsPaginate;
       page = new optima.views.DashboardPage;
-      $("#main-content").append(page.render().el);
+      $("#main-content").empty().append(page.render().el);
       optima.quotations = new optima.collections.Quotations;
       optima.quotationsView = new optima.views.QuotationsView({
         collection: optima.quotations

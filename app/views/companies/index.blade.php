@@ -29,7 +29,7 @@
 				</tr>
 				</thead>
 				<tbody></tbody>
-			
+
 			</table>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
 
 <div class="modal fade" id="company-edit-modal">
   <div class="modal-dialog">
-    <div class="modal-content"> </div> 
+    <div class="modal-content"> </div>
   </div>
 </div>
 
@@ -55,14 +55,9 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="contact-create-modal">
   <div class="modal-dialog">
     <div class="modal-content"></div>
   </div>
 </div>
-
-
-
-
 @stop

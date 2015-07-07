@@ -20,7 +20,6 @@ Route::group(['before' => 'auth'], function(){
 	Route::get('search={query}', 'PagesController@quotations');
 	Route::get('filters={filters}', 'PagesController@quotations');
 	Route::get('quotations/{id}', 'PagesController@quotation');
-	Route::get('companies/{id}/mails', 'CompaniesController@getMails');
 
 	/*
 	|-------------------------------------------------------------------------

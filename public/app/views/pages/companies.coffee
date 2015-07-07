@@ -1,11 +1,11 @@
 $ ->
-  class optima.views.DashboardPage extends Backbone.View
+  class optima.views.CompaniesPage extends Backbone.View
     events:
       'click .quotation-open-quote': 'openQuote'
       'click .todo-open-create': 'openTodo'
 
     render: ->
-      template = optima.templates.page_dashboard
+      template = optima.templates.page_companies
       $(@el).empty().append(template)
       return @
 

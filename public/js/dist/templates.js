@@ -1,5 +1,43 @@
 this["optima"] = this["optima"] || {};
 this["optima"]["templates"] = this["optima"]["templates"] || {};
+this["optima"]["templates"]["activity"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return " en <a href=\"/quotations/"
+    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
+    + "</a>";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
+
+  return "<td>\n<span class=\"timeago\" title=\""
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "</span>\n<br>\n	"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
+    + " "
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.lastname : stack1), depth0))
+    + " "
+    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
+    + "\n	"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.quotation_id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "<br>\n	\n</td>";
+},"useData":true});
+this["optima"]["templates"]["activity_quotation"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<td><span class=\"timeago\" title=\""
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
+    + "</span> <br> "
+    + alias3(this.lambda(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
+    + " "
+    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
+    + "</td>";
+},"useData":true});
 this["optima"]["templates"]["company"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -191,44 +229,6 @@ this["optima"]["templates"]["company_select_contact"] = Handlebars.template({"1"
     + ((stack1 = helpers.each.call(depth0,depth0,{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</select>";
 },"useData":true});
-this["optima"]["templates"]["activity"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return " en <a href=\"/quotations/"
-    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
-    + "</a>";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
-
-  return "<td>\n<span class=\"timeago\" title=\""
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "</span>\n<br>\n	"
-    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
-    + " "
-    + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.lastname : stack1), depth0))
-    + " "
-    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
-    + "\n	"
-    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.quotation_id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "<br>\n	\n</td>";
-},"useData":true});
-this["optima"]["templates"]["activity_quotation"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return "<td><span class=\"timeago\" title=\""
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.created_at || (depth0 != null ? depth0.created_at : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"created_at","hash":{},"data":data}) : helper)))
-    + "</span> <br> "
-    + alias3(this.lambda(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.name : stack1), depth0))
-    + " "
-    + alias3(((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper)))
-    + "</td>";
-},"useData":true});
 this["optima"]["templates"]["contact"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
@@ -379,6 +379,9 @@ this["optima"]["templates"]["contacts_company_select"] = Handlebars.template({"1
   return " <select name=\"contact_id\" class=\"form-control\" id=\"select-company-contact\">\n  <option value=\"\">Seleccionar Contacto</option>\n"
     + ((stack1 = helpers.each.call(depth0,depth0,{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</select>";
+},"useData":true});
+this["optima"]["templates"]["page_companies"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<div class=\"row col-lg-12\">\n  <div class=\"col-lg-12\">\n    <div class=\"panel panel-default\" id=\"companies\">\n      <div class=\"panel-heading\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-sm-4 col-xs-6\">\n            <form action=\"#\" class=\"company-search\" method=\"POST\">\n              <input type=\"text\" name=\"query\" class=\"form-control company-query\" placeholder=\"Buscar Empresa\">\n            </form>\n          </div>\n          <a href=\"#\" class=\"company-see-more btn btn-default btn-sm\" data-offset=\"0\">Ver más</a>\n          <a href=\"#\" class=\"company-open-create btn btn-primary btn-sm\">Nueva empresa</a>\n        </div>\n      </div>\n\n    <div class=\"panel-body\">\n    <div class=\"table-responsive\">\n      <table class=\"table table-condensed\">\n        <thead>\n          <tr class=\"thead\">\n          <th>Empresa</th>\n          <th></th>\n          <th>NIT</th>\n          <th>Dirección</th>\n          <th>Teléfono</th>\n          <th>Sector</th>\n          <th></th>\n        </tr>\n        </thead>\n        <tbody></tbody>\n\n      </table>\n      </div>\n    </div>\n  </div>\n  </div>\n</div> <!-- end row -->\n\n<div class=\"modal fade\" id=\"company-edit-modal\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\"> </div>\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"company-contacts-modal\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\"> </div>\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"company-create-modal\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\"></div>\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"contact-create-modal\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\"></div>\n  </div>\n</div>";
 },"useData":true});
 this["optima"]["templates"]["page_dashboard"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"col-lg-9\">\n  <div class=\"panel panel-default quotations\">\n    <div class=\"panel-heading quotations-filters\">\n      <a href=\"#\" class=\"quotation-open-quote btn btn-primary btn-sm\">Nueva Cotización</a>\n      <span class=\"pull-right\">BD-COM-03</span>\n    </div>\n\n    <div class=\"panel-body\">\n      <div class=\"row quotations-filters-container\"></div>\n      <hr>\n      <div class=\"table-responsive\">\n        <table class=\"table\">\n          <thead>\n            <tr class=\"thead\">\n              <th>#</th>\n              <th></th>\n              <th>Estado</th>\n              <th>Asesor</th>\n              <th>Empresa</th>\n              <th>Contacto</th>\n              <th>Creada</th>\n            </tr>\n          </thead>\n          <tbody></tbody>\n        </table>\n      </div>\n      <div class=\"panel-footer quotation-paginate-container\"> </div>\n      <span class=\"pull-right\">versión 4</span>\n    </div>\n\n  </div> <!-- end col -->\n\n\n  <div class=\"panel panel-default\" id=\"todos\">\n    <div class=\"panel-heading\">\n      <a href=\"#\" class=\"btn btn-primary btn-sm todo-open-create\">Crear tarea</a>\n    </div>\n    <div class=\"panel-body\">\n      <div class=\"table-responsive\">\n        <table class=\"table\">\n          <thead>\n            <tr>\n              <th>Completada</th>\n              <th>Título</th>\n              <th>Descripción</th>\n              <th>Creada</th>\n              <th>Vencimiento</th>\n              <th>Asignada por</th>\n              <th>Para</th>\n              <th>Cotización</th>\n            </tr>\n          </thead>\n          <tbody>\n\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n</div> <!-- end row -->\n\n<div class=\"col-lg-3\" style=\"padding-left: 7px\">\n  <div class=\"panel panel-default activities\">\n    <div class=\"panel-heading\">\n      <h5>Actividad Reciente</h5>\n    </div>\n    <div class=\"panel-body\">\n      <div class=\"table-responsive\">\n        <table class=\"table table-condensed\"></table>\n      </div>\n    </div>\n  </div>\n</div> <!-- end col -->\n\n<!-- includes -->\n\n<div class=\"modal fade\" id=\"todo-create-modal\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\"></div>\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"todo-create-modal\"> </div>\n\n\n";
@@ -921,6 +924,62 @@ this["optima"]["templates"]["reports_total"] = Handlebars.template({"compiler":[
     + alias3(((helper = (helper = helpers.average_sent || (depth0 != null ? depth0.average_sent : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"average_sent","hash":{},"data":data}) : helper)))
     + " mins</h2>\n      <h4>Promedio de enviada</h4>\n    </div>\n  </div>\n</div>";
 },"useData":true});
+this["optima"]["templates"]["service"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<td>"
+    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
+    + " \n<a href=\"#\" class=\"btn btn-default btn-xs service-open-edit\">Editar</a>\n <div class=\"btn-group\">\n    <button class=\"btn btn-default btn-xs dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\n      <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\" role=\"menu\">\n      <li>\n        <a href=\"#\" class=\"service-delete\">Eliminar</a>\n      </li>\n    </ul>\n  </div>\n</td>\n<td>$ "
+    + alias3(((helper = (helper = helpers.price_1 || (depth0 != null ? depth0.price_1 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_1","hash":{},"data":data}) : helper)))
+    + "</td>\n<td>$ "
+    + alias3(((helper = (helper = helpers.price_2 || (depth0 != null ? depth0.price_2 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_2","hash":{},"data":data}) : helper)))
+    + "</td>\n";
+},"useData":true});
+this["optima"]["templates"]["service_attach"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper;
+
+  return "  <div class=\"modal-body\">\n    <input type=\"hidden\" value=\""
+    + this.escapeExpression(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
+    + "\" class=\"quotation-id\">\n    <form action=\"#\" id=\"service-search-form\">\n      <div class=\"form-group\">\n        <input type=\"text\" name=\"query\" class=\"form-control service-query\" placeholder=\"Buscar servicio\">\n      </div>\n    </form>\n    <div class=\"table-responsive\">\n      <table class=\"table table-condensed\">\n        \n      </table>\n    </div>\n  </div>\n\n  <div class=\"modal-footer\">\n    <a href=\"#\" class=\"btn btn-default btn-sm modal-close\">Cerrar</a>\n  </div>";
+},"useData":true});
+this["optima"]["templates"]["service_create"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "  <div class=\"modal-body\">\n    <form class=\"form\">\n        <div class=\"form-group\">\n          <input type=\"text\" name=\"title\" class=\"form-control\" placeholder=\"Titulo\">\n        </div>\n        <div class=\"form-group\">\n         <textarea name=\"text\" class=\"form-control summernote service-text\" placeholder=\"Texto\" rows=\"5\"></textarea>\n       </div>\n       <div class=\"row\">\n        <div class=\"form-group col-lg-6\">\n          <input type=\"text\" name=\"price_1\" class=\"form-control\" placeholder=\"Precio 1\">\n        </div>\n        <div class=\"form-group col-lg-6\">\n          <input type=\"text\" name=\"price_2\" class=\"form-control\" placeholder=\"Precio 2\">\n        </div>\n      </div>\n    </form>\n  </div>\n  <div class=\"modal-footer\">\n     <a href=\"#\" class=\"btn btn-primary btn-sm service-create-store \">Guardar</a>\n     <a href=\"#\" class=\"modal-close btn btn-default btn-sm\">Cancelar</a>\n  </div>\n  ";
+},"useData":true});
+this["optima"]["templates"]["service_edit"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "  <div class=\"modal-body\">\n    <form class=\"form\">\n      <div class=\"form-group\">\n        <input type=\"text\" name=\"title\" class=\"form-control\" placeholder=\"Titulo\" value=\""
+    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
+    + "\">\n      </div>\n      <div class=\"form-group\">\n       <textarea name=\"text\" class=\"form-control summernote service-text\" placeholder=\"Texto\" rows=\"5\">"
+    + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"text","hash":{},"data":data}) : helper)))
+    + "</textarea>\n     </div>\n     <div class=\"row\">\n      <div class=\"form-group col-lg-6\">\n        <input type=\"text\" name=\"price_1\" class=\"form-control\" placeholder=\"Precio 1\" value=\""
+    + alias3(((helper = (helper = helpers.price_1 || (depth0 != null ? depth0.price_1 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_1","hash":{},"data":data}) : helper)))
+    + "\">\n      </div>\n      <div class=\"form-group col-lg-6\">\n        <input type=\"text\" name=\"price_2\" class=\"form-control\" placeholder=\"Precio 2\" value=\""
+    + alias3(((helper = (helper = helpers.price_2 || (depth0 != null ? depth0.price_2 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_2","hash":{},"data":data}) : helper)))
+    + "\">\n      </div>\n    </div>\n  </form>\n</div>\n<div class=\"modal-footer\">\n <a href=\"#\" class=\"btn btn-primary btn-sm service-save-update \">Guardar</a>\n <a href=\"#\" class=\"modal-close btn btn-default btn-sm\">Cancelar</a>\n</div>";
+},"useData":true});
+this["optima"]["templates"]["service_item_result"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper;
+
+  return "<td> \n  "
+    + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
+    + " <a href=\"#\" class=\"quotation-service-attach btn btn-default btn-xs\">Agregar</a>\n</td>";
+},"useData":true});
+this["optima"]["templates"]["service_list"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "        <option value=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return " <div class=\"row col-lg-4\">\n    <select class=\"form-control  select-xs\" name=\"service\">\n      <option value=\"\">Seleccionar Servicio</option>\n"
+    + ((stack1 = helpers.each.call(depth0,depth0,{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "    </select>\n  </div>";
+},"useData":true});
 this["optima"]["templates"]["todo"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
 
@@ -1025,62 +1084,6 @@ this["optima"]["templates"]["todo_tracking"] = Handlebars.template({"compiler":[
     + " "
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.lastname : stack1), depth0))
     + "</td>";
-},"useData":true});
-this["optima"]["templates"]["service"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return "<td>"
-    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + " \n<a href=\"#\" class=\"btn btn-default btn-xs service-open-edit\">Editar</a>\n <div class=\"btn-group\">\n    <button class=\"btn btn-default btn-xs dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\n      <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\" role=\"menu\">\n      <li>\n        <a href=\"#\" class=\"service-delete\">Eliminar</a>\n      </li>\n    </ul>\n  </div>\n</td>\n<td>$ "
-    + alias3(((helper = (helper = helpers.price_1 || (depth0 != null ? depth0.price_1 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_1","hash":{},"data":data}) : helper)))
-    + "</td>\n<td>$ "
-    + alias3(((helper = (helper = helpers.price_2 || (depth0 != null ? depth0.price_2 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_2","hash":{},"data":data}) : helper)))
-    + "</td>\n";
-},"useData":true});
-this["optima"]["templates"]["service_attach"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper;
-
-  return "  <div class=\"modal-body\">\n    <input type=\"hidden\" value=\""
-    + this.escapeExpression(((helper = (helper = helpers.quotation_id || (depth0 != null ? depth0.quotation_id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"quotation_id","hash":{},"data":data}) : helper)))
-    + "\" class=\"quotation-id\">\n    <form action=\"#\" id=\"service-search-form\">\n      <div class=\"form-group\">\n        <input type=\"text\" name=\"query\" class=\"form-control service-query\" placeholder=\"Buscar servicio\">\n      </div>\n    </form>\n    <div class=\"table-responsive\">\n      <table class=\"table table-condensed\">\n        \n      </table>\n    </div>\n  </div>\n\n  <div class=\"modal-footer\">\n    <a href=\"#\" class=\"btn btn-default btn-sm modal-close\">Cerrar</a>\n  </div>";
-},"useData":true});
-this["optima"]["templates"]["service_create"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "  <div class=\"modal-body\">\n    <form class=\"form\">\n        <div class=\"form-group\">\n          <input type=\"text\" name=\"title\" class=\"form-control\" placeholder=\"Titulo\">\n        </div>\n        <div class=\"form-group\">\n         <textarea name=\"text\" class=\"form-control summernote service-text\" placeholder=\"Texto\" rows=\"5\"></textarea>\n       </div>\n       <div class=\"row\">\n        <div class=\"form-group col-lg-6\">\n          <input type=\"text\" name=\"price_1\" class=\"form-control\" placeholder=\"Precio 1\">\n        </div>\n        <div class=\"form-group col-lg-6\">\n          <input type=\"text\" name=\"price_2\" class=\"form-control\" placeholder=\"Precio 2\">\n        </div>\n      </div>\n    </form>\n  </div>\n  <div class=\"modal-footer\">\n     <a href=\"#\" class=\"btn btn-primary btn-sm service-create-store \">Guardar</a>\n     <a href=\"#\" class=\"modal-close btn btn-default btn-sm\">Cancelar</a>\n  </div>\n  ";
-},"useData":true});
-this["optima"]["templates"]["service_edit"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return "  <div class=\"modal-body\">\n    <form class=\"form\">\n      <div class=\"form-group\">\n        <input type=\"text\" name=\"title\" class=\"form-control\" placeholder=\"Titulo\" value=\""
-    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "\">\n      </div>\n      <div class=\"form-group\">\n       <textarea name=\"text\" class=\"form-control summernote service-text\" placeholder=\"Texto\" rows=\"5\">"
-    + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"text","hash":{},"data":data}) : helper)))
-    + "</textarea>\n     </div>\n     <div class=\"row\">\n      <div class=\"form-group col-lg-6\">\n        <input type=\"text\" name=\"price_1\" class=\"form-control\" placeholder=\"Precio 1\" value=\""
-    + alias3(((helper = (helper = helpers.price_1 || (depth0 != null ? depth0.price_1 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_1","hash":{},"data":data}) : helper)))
-    + "\">\n      </div>\n      <div class=\"form-group col-lg-6\">\n        <input type=\"text\" name=\"price_2\" class=\"form-control\" placeholder=\"Precio 2\" value=\""
-    + alias3(((helper = (helper = helpers.price_2 || (depth0 != null ? depth0.price_2 : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"price_2","hash":{},"data":data}) : helper)))
-    + "\">\n      </div>\n    </div>\n  </form>\n</div>\n<div class=\"modal-footer\">\n <a href=\"#\" class=\"btn btn-primary btn-sm service-save-update \">Guardar</a>\n <a href=\"#\" class=\"modal-close btn btn-default btn-sm\">Cancelar</a>\n</div>";
-},"useData":true});
-this["optima"]["templates"]["service_item_result"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper;
-
-  return "<td> \n  "
-    + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + " <a href=\"#\" class=\"quotation-service-attach btn btn-default btn-xs\">Agregar</a>\n</td>";
-},"useData":true});
-this["optima"]["templates"]["service_list"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
-
-  return "        <option value=\""
-    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</option>\n";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1;
-
-  return " <div class=\"row col-lg-4\">\n    <select class=\"form-control  select-xs\" name=\"service\">\n      <option value=\"\">Seleccionar Servicio</option>\n"
-    + ((stack1 = helpers.each.call(depth0,depth0,{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "    </select>\n  </div>";
 },"useData":true});
 this["optima"]["templates"]["tracking"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=this.lambda, alias2=this.escapeExpression, alias3=helpers.helperMissing, alias4="function";

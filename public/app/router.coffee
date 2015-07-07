@@ -32,7 +32,7 @@ $ ->
 
     dashboard: (query) ->
       page = new optima.views.DashboardPage
-      $("#main-content").append(page.render().el);
+      $("#main-content").empty().append(page.render().el);
 
       optima.quotations = new optima.collections.Quotations
       optima.quotationsView = new optima.views.QuotationsView collection: optima.quotations
@@ -122,7 +122,7 @@ $ ->
         month = ("0" + month)
 
       year = now.getFullYear()
-      
+
       date_start = year+"-"+month+"-01"
 
       date_end = year+"-"+month+"-31"
