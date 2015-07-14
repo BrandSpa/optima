@@ -43,7 +43,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones en pesos por: Etiqueta</h5>
+						<b>Cotizaciones por status</b>
 					</div>
 					<div class="panel-body">
 						<div id="byStatus"></div>
@@ -55,7 +55,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 					<div class="row">
-						<div class="col-lg-7"><h5>Cotizaciones por: ¿Como nos encontro?</h5></div>
+						<div class="col-lg-7"><b>Cotizaciones por ¿cómo nos encontro?</b></div>
 						<div class="col-lg-5">
 							<select name="" class="form-control by-status">
 								<option value="">Selecionar status</option>
@@ -79,7 +79,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones en pesos por: No efectivas</h5>
+						<b>Cotizaciones por no efectivas</b>
 					</div>
 					<div class="panel-body">
 						<div id="byNoEffective"></div>
@@ -90,7 +90,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones por: Asesor</h5>
+						<b>Cotizaciones por asesor</b>
 					</div>
 					<div class="panel-body">
 						<div id="byAdvisors"></div>
@@ -101,7 +101,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones por: Tipo de cliente</h5>
+						<b>Cotizaciones por tipo de cliente</b>
 					</div>
 					<div class="panel-body">
 						<div id="byClientType"></div>
@@ -113,7 +113,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Cotizaciones por: tiempo de enviada</h5>
+						<b>Cotizaciones por tiempo de enviada</b>
 					</div>
 					<div class="panel-body">
 						<div id="byDiffSent"></div>
