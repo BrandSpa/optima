@@ -32,15 +32,17 @@ trait diffSentTotal {
         "<= 30",
         "Inventario"
       ],
-      'order' => [
-         "<= 120",
-        "Pedido"
-      ],
 
       'outStock' => [
         "> 30",
         "Inventario"
       ],
+
+      'order' => [
+         "<= 120",
+        "Pedido"
+      ],
+
       'outOrder' => [
         "> 120",
         "Pedido"
