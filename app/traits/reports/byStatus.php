@@ -31,11 +31,11 @@ trait ByStatus {
   {
 
     $status = [
-      'Efectiva',
       'Borrador',
       'Enviada',
       'Entregada',
       'Seguimiento',
+      'Efectiva',
       'No efectiva',
       'No enviada',
       'Replanteada',

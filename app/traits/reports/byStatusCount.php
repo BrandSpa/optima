@@ -34,11 +34,11 @@ trait byStatusCount {
   public function countAllByStatus($type, $client_type, $date_start, $date_end)
   {
     $status = [
-      'Efectiva',
       'Borrador',
       'Enviada',
       'Entregada',
       'Seguimiento',
+      'Efectiva',
       'No efectiva',
       'No enviada',
       'Replanteada',
