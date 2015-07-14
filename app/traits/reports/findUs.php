@@ -39,7 +39,7 @@ trait findUs {
       'Paginas Amarilladas',
       'Paginas Amarilladas Web',
       'Teléfono',
-      'Redes Sociales',
+      'Redes Sociales'
     ];
 
     $results = [];

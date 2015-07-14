@@ -41,6 +41,7 @@ gulp.task('dependencies', function(){
     'node_modules/summernote/dist/summernote.min.js',
     'node_modules/chart.js/Chart.min.js',
     'node_modules/nprogress/nprogress.js',
+    'node_modules/accounting/accounting.js',
 
     // Bower
     'bower_components/sidr/jquery.sidr.min.js', //need to change to Slideout.js

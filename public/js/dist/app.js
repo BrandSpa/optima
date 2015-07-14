@@ -4174,10 +4174,10 @@ $(function() {
         tooltipCornerRadius: 0,
         showTooltip: true,
         scaleLabel: function(label) {
-          return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return accounting.formatMoney(parseInt(label.value.toString()));
         },
         tooltipTemplate: function(label) {
-          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()));
         }
       };
       return view = new Chart(ctx).Bar(data, options);
@@ -4298,10 +4298,10 @@ $(function() {
         barShowStroke: false,
         tooltipCornerRadius: 0,
         scaleLabel: function(label) {
-          return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return accounting.formatMoney(parseInt(label.value.toString()));
         },
         tooltipTemplate: function(label) {
-          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()));
         }
       };
       return view = new Chart(ctx).Bar(data, options);
@@ -4504,10 +4504,10 @@ $(function() {
         responsive: true,
         tooltipCornerRadius: 0,
         scaleLabel: function(label) {
-          return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return accounting.formatMoney(parseInt(label.value.toString()));
         },
         tooltipTemplate: function(label) {
-          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()));
         }
       };
       return view = new Chart(ctx).Bar(data, options);

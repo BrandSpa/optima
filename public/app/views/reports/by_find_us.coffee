@@ -57,8 +57,8 @@ $ ->
         barShowStroke: false,
         tooltipCornerRadius: 0,
         scaleLabel: (label) ->
-          return label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+          return accounting.formatMoney(parseInt(label.value.toString()))
         tooltipTemplate: (label) ->
-          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + label.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+          return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()))
 
       view = new Chart(ctx).Bar(data, options)

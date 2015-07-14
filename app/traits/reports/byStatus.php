@@ -9,15 +9,14 @@ trait ByStatus {
    * get total products by status
    * @return int
    */
-  public function getTotalStatus($status, $type, $client_type, $date_start, $date_end ) {
+  public function getTotalStatus($status, $type, $client_type, $date_start, $date_end) {
 
     $collection =  Quotation::where('quotations.status', $status)
       ->where('quotations.type', 'LIKE', $type)
       ->where('quotations.client_type', 'LIKE', $client_type)
       ->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ")
       ->join('products', 'quotations.id', '=', 'products.quotation_id')
-      //->where('products.ordered', true)
-      ->select( DB::raw("SUM(total) AS products_total") )
+      ->select(DB::raw("SUM(total) AS products_total") )
       ->get();
 
       return $collection[0]->products_total;
