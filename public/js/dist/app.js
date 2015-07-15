@@ -2344,14 +2344,18 @@ $(function() {
       e.preventDefault();
       cause = $('#quotation-no-effective-select').val();
       note = $('#no_effective_note').val();
-      this.model.set({
-        status: "No efectiva",
-        status_cause: cause,
-        status_note: note
-      });
-      this.model.save();
-      $(this.el).modal('hide');
-      return this.broadcastChange("cambio estado a no efectiva");
+      if (cause === '') {
+        return alertify.error('Ingrese la causa de no efectiva');
+      } else {
+        this.model.set({
+          status: "No efectiva",
+          status_cause: cause,
+          status_note: note
+        });
+        this.model.save();
+        $(this.el).modal('hide');
+        return this.broadcastChange("cambio estado a no efectiva");
+      }
     };
 
     return QuotationNoEffective;
@@ -4180,7 +4184,7 @@ $(function() {
           return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()));
         }
       };
-      return view = new Chart(ctx).Bar(data, options);
+      return view = new Chart(ctx).Line(data, options);
     };
 
     return ReportByStatus;
@@ -4291,7 +4295,7 @@ $(function() {
     ReportByFindUs.prototype.render = function(data) {
       var _this, ctx, options, view;
       _this = this;
-      $("#byFindUs").find('.panel-body').empty().append('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>');
+      $('#byFindUsContainer').empty().append('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>');
       ctx = $("#byFindUsCanvas").get(0).getContext("2d");
       options = {
         responsive: true,
@@ -4304,7 +4308,7 @@ $(function() {
           return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()));
         }
       };
-      return view = new Chart(ctx).Bar(data, options);
+      return view = new Chart(ctx).Line(data, options);
     };
 
     return ReportByFindUs;
@@ -4323,8 +4327,20 @@ $(function() {
       return ReportByFindUsCount.__super__.constructor.apply(this, arguments);
     }
 
+    ReportByFindUsCount.prototype.el = "#byFindUsCount";
+
+    ReportByFindUsCount.prototype.events = {
+      'change .by-status': 'byStatus'
+    };
+
     ReportByFindUsCount.prototype.initialize = function() {
       return this.listenTo(this.model, 'change', this.setData);
+    };
+
+    ReportByFindUsCount.prototype.byStatus = function(e) {
+      var el;
+      el = $(e.currentTarget).val();
+      return pubsub.trigger('reports:filter', el);
     };
 
     ReportByFindUsCount.prototype.setData = function() {
@@ -4344,7 +4360,7 @@ $(function() {
           }
         ]
       };
-      $("#byFindUsCount").find('.panel-body').empty().append('<canvas id="byFindUsCountCanvas" width="600" height="400"></canvas>');
+      $("#byFindUsCountContainer").empty().append('<canvas id="byFindUsCountCanvas" width="600" height="400"></canvas>');
       ctx = $("#byFindUsCountCanvas").get(0).getContext("2d");
       options = {
         responsive: true,
@@ -4481,9 +4497,9 @@ $(function() {
             fillColor: "rgba(246, 97, 87, 1)",
             strokeColor: "rgba(246, 97, 87, 1)",
             pointColor: "#fff",
-            pointStrokeColor: "rgba(231, 161, 31,1)",
+            pointStrokeColor: "rgba(246, 97, 87, 1)",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
+            pointHighlightStroke: "rgba(246, 97, 87, 1)",
             data: this.model.toJSON().no_effective
           }
         ]
@@ -4510,7 +4526,7 @@ $(function() {
           return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()));
         }
       };
-      return view = new Chart(ctx).Bar(data, options);
+      return view = new Chart(ctx).Line(data, options);
     };
 
     return ReportByNoEffective;
@@ -4543,9 +4559,9 @@ $(function() {
             fillColor: "rgba(246, 97, 87, 1)",
             strokeColor: "rgba(246, 97, 87, 1)",
             pointColor: "#fff",
-            pointStrokeColor: "rgba(231, 161, 31,1)",
+            pointStrokeColor: "rgba(246, 97, 87, 1)",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
+            pointHighlightStroke: "rgba(246, 97, 87, 1)",
             data: this.model.toJSON().no_effective_count
           }
         ]
@@ -4875,12 +4891,18 @@ $(function() {
     };
 
     Workspace.prototype.startReports = function() {
-      var coll, date_end, date_start, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByNoEffective, viewByStatus, viewByType, viewTotal, year;
+      var coll, date_end, date_start, month, now, viewByAdvisor, viewByDiffSent, viewByFindUs, viewByFindUsCount, viewByNoEffective, viewByStatus, viewByStatusCount, viewByType, viewTotal, year;
       coll = new optima.models.Report;
       viewByStatus = new optima.views.ReportByStatus({
         model: coll
       });
+      viewByStatusCount = new optima.views.ReportByStatusCount({
+        model: coll
+      });
       viewByFindUs = new optima.views.ReportByFindUs({
+        model: coll
+      });
+      viewByFindUsCount = new optima.views.ReportByFindUsCount({
         model: coll
       });
       viewByAdvisor = new optima.views.ReportByAdvisor({
@@ -4890,6 +4912,9 @@ $(function() {
         model: coll
       });
       viewByNoEffective = new optima.views.ReportByNoEffective({
+        model: coll
+      });
+      viewByNoEffective = new optima.views.ReportByNoEffectiveCount({
         model: coll
       });
       viewByDiffSent = new optima.views.ReportByDiffSent({

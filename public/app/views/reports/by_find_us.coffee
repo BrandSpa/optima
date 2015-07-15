@@ -45,8 +45,7 @@ $ ->
     render: (data) ->
       _this = @
 
-      $("#byFindUs")
-      .find('.panel-body')
+      $('#byFindUsContainer')
       .empty()
       .append('<canvas id="byFindUsCanvas" width="600" height="400"></canvas>')
 
@@ -61,4 +60,4 @@ $ ->
         tooltipTemplate: (label) ->
           return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()))
 
-      view = new Chart(ctx).Bar(data, options)
+      view = new Chart(ctx).Line(data, options)

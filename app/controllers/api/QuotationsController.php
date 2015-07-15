@@ -110,9 +110,6 @@ class QuotationsController extends \BaseController {
 		} else {
 			return Response::json(["message" => "field empty"], 400);
 		}
-
-
-
 	}
 
 	/**

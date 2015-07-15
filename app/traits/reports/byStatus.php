@@ -51,6 +51,9 @@ trait ByStatus {
         $date_start,
         $date_end
      );
+      if (is_null($total)) {
+        $total = 0;
+      }
       array_push($result, $total);
     }
 

@@ -24,4 +24,4 @@ $ ->
       .empty()
       .append('<canvas id="byStatusCountCanvas" width="600" height="400"></canvas>')
       ctx = $("#byStatusCountCanvas").get(0).getContext("2d")
-      view = new Chart(ctx).Bar data, responsive: true
+      view = new Chart(ctx).Bar(data, responsive: true)

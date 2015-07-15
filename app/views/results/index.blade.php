@@ -43,7 +43,7 @@
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<b>Cotizaciones por status</b>
+						<b>Cotizaciones por status en pesos</b>
 					</div>
 					<div class="panel-body">
 						<div id="byStatus"></div>
@@ -51,6 +51,18 @@
 				</div>
 			</div>
 
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<b>Cotizaciones por status cantidad</b>
+					</div>
+					<div class="panel-body">
+						<div id="byStatusCount"></div>
+					</div>
+				</div>
+			</div>
+
+		<div class="row" style="padding: 0 15px 0 15px">
 			<div class="col-lg-6" id="byFindUs">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -71,7 +83,32 @@
 						</div>
 					</div>
 					<div class="panel-body">
+						<div id="byFindUsContainer"></div>
+					</div>
+				</div>
+			</div>
 
+			<div class="col-lg-6" id="byFindUsCount">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					<div class="row">
+						<div class="col-lg-7"><b>Cotizaciones por ¿cómo nos encontro?</b></div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="byFindUsCountContainer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<b>Cotizaciones por no efectivas</b>
+					</div>
+					<div class="panel-body">
+						<div id="byNoEffective"></div>
 					</div>
 				</div>
 			</div>
@@ -82,7 +119,7 @@
 						<b>Cotizaciones por no efectivas</b>
 					</div>
 					<div class="panel-body">
-						<div id="byNoEffective"></div>
+						<div id="byNoEffectiveCount"></div>
 					</div>
 				</div>
 			</div>
@@ -109,7 +146,6 @@
 				</div>
 			</div>
 
-
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -120,6 +156,6 @@
 					</div>
 				</div>
 			</div>
-</div>
+	</div>
 	</div>
 @stop

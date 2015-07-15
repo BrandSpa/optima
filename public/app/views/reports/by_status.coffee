@@ -50,4 +50,4 @@ $ ->
         tooltipTemplate: (label) ->
           return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()))
 
-      view = new Chart(ctx).Bar data, options
+      view = new Chart(ctx).Line data, options

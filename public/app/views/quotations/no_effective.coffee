@@ -2,7 +2,7 @@ $ ->
   class optima.views.QuotationNoEffective extends Backbone.View
     el: $ '#quotation-no-effective-modal'
     template: $ '#quotation-no-effective-template'
-    events: 
+    events:
       'click a.quotation-no-effective-save': 'save'
 
     initialize: ->
@@ -24,7 +24,10 @@ $ ->
       e.preventDefault()
       cause = $('#quotation-no-effective-select').val()
       note = $('#no_effective_note').val()
-      @model.set status: "No efectiva", status_cause: cause, status_note: note
-      @model.save()
-      $(@el).modal('hide')
-      @broadcastChange "cambio estado a no efectiva"
+      if cause == ''
+        alertify.error('Ingrese la causa de no efectiva')
+      else
+        @model.set status: "No efectiva", status_cause: cause, status_note: note
+        @model.save()
+        $(@el).modal('hide')
+        @broadcastChange "cambio estado a no efectiva"

@@ -1,7 +1,16 @@
 $ ->
   class optima.views.ReportByFindUsCount extends Backbone.View
+    el: "#byFindUsCount"
+
+    events:
+      'change .by-status': 'byStatus'
+
     initialize: ->
       @listenTo(@model, 'change', @setData)
+
+    byStatus: (e) ->
+      el = $(e.currentTarget).val()
+      pubsub.trigger('reports:filter', el)
 
     setData: ->
       data = labels: [
@@ -27,7 +36,7 @@ $ ->
         data: @model.toJSON().findUSCount
       ]
 
-      $("#byFindUsCount").find('.panel-body')
+      $("#byFindUsCountContainer")
       .empty()
       .append('<canvas id="byFindUsCountCanvas" width="600" height="400"></canvas>')
       ctx = $("#byFindUsCountCanvas").get(0).getContext("2d")

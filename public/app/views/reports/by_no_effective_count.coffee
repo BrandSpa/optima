@@ -17,9 +17,9 @@ $ ->
         fillColor: "rgba(246, 97, 87, 1)",
         strokeColor: "rgba(246, 97, 87, 1)",
         pointColor: "#fff",
-        pointStrokeColor: "rgba(231, 161, 31,1)",
+        pointStrokeColor: "rgba(246, 97, 87, 1)",
         pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
+        pointHighlightStroke: "rgba(246, 97, 87, 1)",
         data: @model.toJSON().no_effective_count
       ]
 

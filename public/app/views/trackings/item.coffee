@@ -1,6 +1,6 @@
 $ ->
   class optima.views.QuotationTracking extends Backbone.View
-    events: 
+    events:
       'click .tracking-open-edit': 'openEdit'
       'click .todo-open-create': 'openTodoCreate'
       'click .tracking-delete': 'delete'
@@ -28,7 +28,7 @@ $ ->
       users = new optima.collections.Users
       view = new optima.views.TodoCreateView model: new optima.models.Todo
       id = @model.get('id')
-      
+
       users.fetch()
         .done (users) ->
           view.render(users, id)

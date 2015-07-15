@@ -67,8 +67,6 @@ gulp.task('dependencies', function(){
 
 gulp.task('coffee', function() {
   gulp.src([
-
-    //Helpers
     'app/helpers/backbone_helpers.coffee',
 
     //Models
@@ -180,12 +178,11 @@ gulp.task('coffee', function() {
     //App
     'app/router.coffee',
     'app/libs/handlebars_partials.coffee'
-
     ])
 
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(concat('app.js'))
-  .pipe(gulp.dest('js/dist/'));
+  .pipe(gulp.dest('js/dist'));
 });
 
 gulp.task('sass', function() {

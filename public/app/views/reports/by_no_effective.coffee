@@ -16,9 +16,9 @@ $ ->
           fillColor: "rgba(246, 97, 87, 1)",
           strokeColor: "rgba(246, 97, 87, 1)",
           pointColor: "#fff",
-          pointStrokeColor: "rgba(231, 161, 31,1)",
+          pointStrokeColor: "rgba(246, 97, 87, 1)",
           pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
+          pointHighlightStroke: "rgba(246, 97, 87, 1)",
           data: @model.toJSON().no_effective
         ]
       }
@@ -42,4 +42,4 @@ $ ->
         tooltipTemplate: (label) ->
           return "Cantidad: " + _this.mapCount(label.label) + ' | Dinero' + ': ' + accounting.formatMoney(parseInt(label.value.toString()))
 
-      view = new Chart(ctx).Bar(data, options)
+      view = new Chart(ctx).Line(data, options)
