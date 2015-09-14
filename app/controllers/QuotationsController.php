@@ -48,7 +48,7 @@ class QuotationsController extends BaseController {
 	{
 		$quotation = $this->quotation->find($id);
 		$html = View::make('pdfs.quotation', compact('quotation'));
-	
+
 		return $this->pdf->show($html);
 	}
 
@@ -73,9 +73,8 @@ class QuotationsController extends BaseController {
 	public function duplicate($id)
 	{
 		$model = Quotation::duplicate($id, "duplicate");
-		return Redirect::to('/quotations/'.$model->id);
+		return Redirect::to('/#quotations/'.$model->id);
 	}
-
 
 	public function rethink($id)
 	{
@@ -85,7 +84,7 @@ class QuotationsController extends BaseController {
 		$model = Quotation::duplicate($id, "rethink");
 		$model->rethink_from = $id;
 		$model->save();
-		
+
 		return Redirect::to('/quotations/'.$model->id);
 	}
 }

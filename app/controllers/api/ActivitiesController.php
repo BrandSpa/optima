@@ -6,10 +6,10 @@ use Response;
 use Optima\Notifies\Notify;
 
 class ActivitiesController extends \BaseController {
-	
+
 	protected $notify;
 
-	public function __construct() 
+	public function __construct()
 	{
 		$this->notify = new Notify;
 	}
@@ -23,7 +23,7 @@ class ActivitiesController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		$collection = Activity::with('user')->take(20)->orderBy('id', 'DESC')->get();
+		$collection = Activity::with('user')->take(10)->orderBy('id', 'DESC')->get();
 		return Response::json($collection, 200);
 	}
 

@@ -1,0 +1,165 @@
+'use strict';
+var React = require('react');
+var request = require('superagent');
+var _ = require('underscore');
+var Contact = require('views/quotation/contact.jsx');
+var Filters = require('views/quotation/filters.jsx');
+var Edit = require('views/quotation/edit.jsx');
+var Status = require('views/quotation/status.jsx');
+var Products = require('views/quotation/products.jsx');
+var Comment = require('views/quotation/comment.jsx');
+var Mail = require('views/quotation/mails.jsx');
+var NoEffective = require('views/quotation/no_effective.jsx');
+var NoSend = require('views/quotation/no_send.jsx');
+
+module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      quotation: {},
+      products: [],
+      showComment: false,
+      showMail: false,
+      showNoEffective: false,
+    }
+  },
+
+  componentWillMount: function() {
+    this.fetchQuotation();
+    this.fetchProducts();
+  },
+
+  fetchQuotation: function() {
+    request
+      .get('/api/v1/quotations/' + this.props.id)
+      .end(function(err, res) {
+        if(err) return console.log(err.response.text);
+        this.setState({quotation: res.body});
+      }.bind(this));
+  },
+
+  fetchProducts: function() {
+    request
+      .get('/api/v1/products/')
+      .query({quotation_id: this.props.id})
+      .end(function(err, res) {
+        if(err) return console.log(err.response.text);
+        this.setState({products: res.body});
+      }.bind(this));
+  },
+
+  handleShowComment: function() {
+    var show = true;
+    if(this.state.showComment) {
+      show = false;
+    }
+
+    this.setState({showComment: show});
+  },
+
+  handleShowMail: function() {
+    var show = true;
+    if(this.state.showMail) {
+      show = false;
+    }
+
+    this.setState({showMail: show});
+  },
+
+  handleOptions: function(filters) {
+    var data = _.extend(this.state.quotation, filters);
+    this._update(data);
+  },
+
+  handleSaveComment: function(comment) {
+    this._update({comment: comment});
+  },
+
+  handleSaveMail: function(mail) {
+    this._update(mail);
+  },
+
+  handleServiceApproval: function(serviceApproval) {
+    this._update({service_approval: serviceApproval})
+  },
+
+  handleSaveNoEffective: function(status) {
+    this._update(status);
+  },
+
+  _update: function(data) {
+    request
+      .put('/api/v1/quotations/' + this.props.id)
+      .send(data)
+      .end(function(err, res) {
+        if(err) console.log();
+        this.setState({quotation: res.body});
+      }.bind(this));
+  },
+
+  handleStatus: function(status) {
+    this._update(status);
+  },
+
+  render: function() {
+    var quotation = this.state.quotation;
+    var products = this.state.products;
+
+    return (
+      <div>
+        <div className="col-md-12">
+        <h4 style={{margin: "0 0 15px 0"}}>Cotización {quotation.id} {quotation.status}</h4>
+        </div>
+
+        <div className="col-md-9">
+          <Filters
+            onChange={this.handleOptions}
+            quotation={quotation}
+          />
+
+          <Edit
+            quotation={quotation}
+            onShowComment={this.handleShowComment}
+            onShowMails={this.handleShowMail}
+            onServiceApproval={this.handleServiceApproval}
+            />
+
+          <Comment
+            show={this.state.showComment}
+            onClose={this.handleShowComment}
+            comment={quotation.comment}
+            OnSaveComment={this.handleSaveComment}
+            />
+
+          <Mail
+            show={this.state.showMail}
+            onClose={this.handleShowMail}
+            quotation={quotation}
+            onSaveMail={this.handleSaveMail}
+            />
+
+          <Status
+            quotation={quotation}
+            onStatusChange={this.handleStatus}
+          />
+
+          <NoEffective
+            quotation={quotation}
+            show={false}
+            onSave={this.handleSaveNoEffective}
+          />
+
+          <NoSend
+            quotation={quotation}
+            show={false}
+            onSave={this.handleSaveNoEffective}
+          />
+
+          <Products products={products}  />
+        </div>
+        <div className="col-md-3">
+          <Contact contact={quotation.contact} />
+        </div>
+      </div>
+    );
+  }
+});

@@ -11,7 +11,7 @@ class QuotationsController extends \BaseController {
 	use \Traits\Quotations\checkFields;
 
 	protected $entity;
-	protected $relationships = ['company', 'company.contacts', 'user'];
+	protected $relationships = ['contact','company', 'company.contacts', 'user'];
 
 	public function __construct(Quotation $model)
 	{
@@ -29,17 +29,6 @@ class QuotationsController extends \BaseController {
 
 		$collection = new Quotation;
 
-		if(Input::has('query')) {
-			$collection = $collection->with('company', 'contact')
-			->where("id", "like", "$q%")
-			->orWhereHas('contact', function($query) use($q) {
-				$query->where('name', 'like', "%$q%");
-			})
-			->orWhereHas('company', function($query) use($q) {
-				$query->where('name', 'like', "%$q%");
-			});
-		}
-
 		if( Input::has('status') && $status != "" ) {
 			$collection = $collection->where("status", $status);
 		}
@@ -56,8 +45,22 @@ class QuotationsController extends \BaseController {
 			$collection = $collection->where("type", $quotation_type);
 		}
 
+		if(Input::has('query') && $q != "") {
+			$collection = $collection
+				->where(function($query) use($q) {
+					$query
+					->where("id", "like", "$q%")
+					->orWhereHas('contact', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					})
+					->orWhereHas('company', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					});
+				});
+		}
+
 		$collection = $collection->with('company', 'contact', 'user')
-			->take(50)
+			->take(10)
 			->skip($skip)
 			->orderBy('id', 'DESC')
 			->get();
@@ -97,6 +100,21 @@ class QuotationsController extends \BaseController {
 		$storedId = $modelStored->id;
 		$model = Quotation::with(['company', 'contact'])->find($storedId);
 		return Response::json($model, 201);
+	}
+
+	public function update($id)
+	{
+		$data = Input::all();
+
+		$validator = Validator::make($data, $this->entity->rules);
+
+		if ($validator->passes()) {
+			$model = $this->entity->with($this->relationships)->find($id);
+			$model->update($data);
+			return Response::json($model, 200);
+		}
+
+		return Response::json($validator->errors()->all(), 400);
 	}
 
 	public function send($id)

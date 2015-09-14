@@ -2,7 +2,7 @@ $ ->
   class optima.views.QuotationComment extends Backbone.View
     el: $ '#quotation-comment-modal'
     template: $ '#quotation-comment-template'
-    events: 
+    events:
       'click a.quotation-comment-save': 'save'
 
     initialize: ->
@@ -13,7 +13,6 @@ $ ->
       @storeActivity @id, msg
 
     render: ->
-
       t = optima.templates.quotation_comment
       $(@el).find('.modal-content').html(t(  @model.toJSON() ))
       $(@el).modal backdrop: 'static'

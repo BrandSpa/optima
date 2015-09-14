@@ -1,0 +1,6 @@
+[
+  {value: "No disponible", label: "No disponible"},
+  {value: "No confiable", label: "No confiable"},
+  {value: "Competencia", label: "Competencia"},
+  {value: "Por cliente", label: "Por cliente"}
+];

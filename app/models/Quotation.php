@@ -7,7 +7,7 @@ class Quotation extends \Eloquent {
 
 	protected $fillable = [
 		'user_id',
-		'company_id', 
+		'company_id',
 		'contact_id',
 		'created_sent_diff',
 		'sent_confirmed_diff',
@@ -17,8 +17,8 @@ class Quotation extends \Eloquent {
 		'advisor',
 		'comment',
 		'offer',
-		'found_us', 
-		'client_type', 
+		'found_us',
+		'client_type',
 		'status',
 		'status_cause',
 		'status_note',
@@ -32,7 +32,7 @@ class Quotation extends \Eloquent {
 	];
 
 	public $rules = [
-	
+
 	];
 
 	public function company()
@@ -116,7 +116,7 @@ class Quotation extends \Eloquent {
 		$activities = $model->activities;
 
 		self::duplicateAssociated($products, $modelNew);
-		
+
 		self::duplicateServices($services, $modelNew);
 		if (isset($type) && $type == "rethink") {
 			self::duplicateAssociated($trackings, $modelNew);
@@ -142,7 +142,7 @@ class Quotation extends \Eloquent {
 	{
 		if ($services) {
 			foreach ($services as $service) {
-				$quotation->services()->attach($service->id);	
+				$quotation->services()->attach($service->id);
 			}
 		}
 	}
@@ -193,7 +193,7 @@ class Quotation extends \Eloquent {
 		});
 	}
 
-	public static function search($query) 
+	public static function search($query)
 	{
 		$byQuotation = self::search_by_quotation($query);
 		var_dump($byQuotation);
@@ -206,7 +206,7 @@ class Quotation extends \Eloquent {
 		if ($byContact) {
 			return $byContact;
 		}
-		
+
 		$byCompany = self::search_by_company($query);
 
 		if ($byCompany) {
@@ -284,7 +284,7 @@ class Quotation extends \Eloquent {
 	{
 		return $query->where('client_type', $client_type);
 	}
-	
+
 	public static function filterBy($status, $advisor, $client_type)
 	{
 		return self::orWhere('status', $status)->orWhere('advisor', $advisor)->orWhere('client_type', $client_type)->get();

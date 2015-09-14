@@ -1,7 +1,6 @@
 $ ->
   class optima.routers.Workspace extends Backbone.Router
     routes:
-      '': 'dashboard'
       'search=:query': 'dashboard'
       'companies': 'startCompanies'
       'contacts': 'startContacts'

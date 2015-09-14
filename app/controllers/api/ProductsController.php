@@ -17,7 +17,7 @@ class ProductsController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		return Response::json("not quotation_id", 400);
+		return Response::json("", 404);
 	}
 
 	public function show($id)

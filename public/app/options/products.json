@@ -1,0 +1,13 @@
+[
+{value:"Desktops", label: "Desktops"},
+{value:"Laptops", label: "Laptops"},
+{value:"Apple", label: "Apple"},
+{value:"Servers", label: "Servers"},
+{value:"IT Service", label: "IT Service"},
+{value:"IT Service 24/7", label: "IT  Service 24/7"},
+{value:"Rescate Online", label: "Rescate Online"},
+{value:"Discos Duros Seguros", label: "Discos Duros Seguros"},
+{value:"Networks", label: "Networks"},
+{value:"Complements", label: "Complements"},
+{value:"Printers", label: "Printers"}
+]

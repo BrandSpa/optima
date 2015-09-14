@@ -1,0 +1,10 @@
+[
+{value: 'Borrador', label: 'Borrador'},
+{value: 'Enviada', label: 'Enviada'},
+{value: 'Entregada', label: 'Entregada'},
+{value: 'Seguimiento', label: 'Seguimiento'},
+{value: 'No enviada', label: 'No enviada'},
+{value: 'Efectiva', label: 'Efectiva'},
+{value: 'No efectiva', label: 'No efectiva'},
+{value: 'Replanteada', label: 'Replanteada'},
+]

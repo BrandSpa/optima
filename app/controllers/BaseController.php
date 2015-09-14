@@ -15,8 +15,8 @@ class BaseController extends Controller {
 		}
 	}
 
-	public function store() 
-	{	
+	public function store()
+	{
 		$data = Input::all();
 
 		$validator = Validator::make($data, $this->entity->rules);
@@ -25,7 +25,7 @@ class BaseController extends Controller {
 			$model = $this->entity->create($data);
 			return Response::json($model, 201);
 		}
-		
+
 		return Response::json($validator->errors()->all(), 400);
 	}
 
@@ -40,7 +40,7 @@ class BaseController extends Controller {
 			$model->update($data);
 			return Response::json($model, 200);
 		}
-		
+
 		return Response::json($validator->errors()->all(), 400);
 	}
 

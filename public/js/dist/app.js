@@ -4706,7 +4706,6 @@ $(function() {
     }
 
     Workspace.prototype.routes = {
-      '': 'dashboard',
       'search=:query': 'dashboard',
       'companies': 'startCompanies',
       'contacts': 'startContacts',
