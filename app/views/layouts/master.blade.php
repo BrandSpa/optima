@@ -12,21 +12,9 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/improve.css">
 </head>
-<body id="optima-app">
-  <div id="app-header"></div>
-  <div id="main-content"></div>
-  <div id="app-menu"></div>
+<body>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/js/dist/main.js"></script>
-   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-42534064-5', 'auto');
-    ga('send', 'pageview');
-  </script>
 </body>
 </html>

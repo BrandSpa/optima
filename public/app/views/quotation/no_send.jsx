@@ -41,6 +41,7 @@ module.exports = React.createClass({
   handleClick: function() {
     this.props.onSave(this.state.quotation);
   },
+
   render: function() {
     return (
       <div className={this.props.show ? "panel" : "hidden"}>

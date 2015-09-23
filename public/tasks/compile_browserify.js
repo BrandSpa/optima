@@ -11,6 +11,7 @@ gulp.task('browserify', function () {
     paths: [
       './node_modules',
       './app/',
+      './app/views',
       './app/utils/',
       './app/controllers/',
       './app/models/',

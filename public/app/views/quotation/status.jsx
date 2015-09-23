@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react');
 var request = require('superagent');
+var moment = require('moment');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -11,7 +12,7 @@ module.exports = React.createClass({
 
   handleClick: function(status, e) {
     e.preventDefault(status, e);
-    this.props.onStatusChange(status);
+    this.props.onStatusChange({status: status});
   },
 
   handleSend: function() {
@@ -23,8 +24,16 @@ module.exports = React.createClass({
     .end(function(err, res) {
       if(err) return console.log(err.body);
       this.setState({sending: false});
-      return this.props.onStatusChange({status: 'Enviada'});
+      return this.props.onStatusChange({
+        status: 'Enviada',
+        created_sent_diff: this._getDiff()
+      });
     }.bind(this));
+  },
+
+  _getDiff: function() {
+    var now = moment().format();
+    return moment(now).diff(this.props.quotation.created_at, 'minutes');
   },
 
   render: function() {
@@ -58,26 +67,29 @@ module.exports = React.createClass({
                 Efectiva
               </button>
             </li>
+
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.handleClick.bind(null, 'No enviada')}>
+                onClick={this.props.handleOpenNoSend}>
                 No enviada
               </button>
             </li>
+
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.handleClick.bind(null, 'No efectiva')}>
+                onClick={this.props.handleOpenNoEffective}>
                 No efectiva
               </button>
             </li>
+
             <li>
-              <button
+              <a
                 className="btn btn-default btn-sm"
-                onClick={this.handleClick.bind(null, 'Replantear')}>
+                href={"/quotations/" + this.props.quotation.id + "/rethink"} >
                 Replantear
-              </button>
+              </a>
             </li>
           </ul>
         </div>

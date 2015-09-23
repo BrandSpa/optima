@@ -9,11 +9,11 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="col-md-9">
+        <div className="col-md-10">
           <List />
           <Todos />
         </div>
-        <div className="col-md-3">
+        <div className="col-md-2">
         <Activities />
         </div>
       </div>

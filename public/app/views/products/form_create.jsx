@@ -1,190 +1,399 @@
 'use strict';
 var React = require('react');
-var _ = require('underscore');
-var Input = require('components/form_input.jsx');
-var Select = require('components/form_select.jsx')
-var Textarea = require('components/form_textarea.jsx')
-var sectors = require('options/sectors.json');
-var cities = require('options/cities.json');
 var productsOptions = require('options/products.json');
+var PeriodsOptions = require('options/periods.json');
+var Select = require('components/form_select.jsx');
+var _ = require('lodash');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      product: {},
+      errorMessages: {}
+    };
+  },
+
+  getDefaultProps: function() {
+    return {
+      product: {}
+    }
+  },
+
+  componentDidMount: function() {
+    this.setState({product: this.props.product});
+  },
+
+  componentWillReceiveProps: function(props) {
+    this.setState({product: props.product});
+  },
+
+  _getValue: function(ref) {
+    return React.findDOMNode(ref).value;
+  },
+
+  handleChange: function() {
+    var ref = this.refs;
+    var show;
+    console.log(this._getValue(ref.show));
+
+    if(this._getValue(ref.show) === 1 || this._getValue(ref.show) === true) {
+      show = true;
+    } else {
+      show = false;
+    }
+
+    var product = _.extend(this.state.product, {
+      quotation_id: this.props.quotationId,
+      name: this._getValue(ref.name.refs.select),
+      type: this._getValue(ref.type.refs.select),
+      processor: this._getValue(ref.processor),
+      ram: this._getValue(ref.ram),
+      hdd: this._getValue(ref.hdd),
+      burner: this._getValue(ref.burner),
+      network_card: this._getValue(ref.network_card),
+      battery: this._getValue(ref.battery),
+      monitor: this._getValue(ref.monitor),
+      keyboard: this._getValue(ref.keyboard),
+      os: this._getValue(ref.os),
+      office: this._getValue(ref.office),
+      antivirus: this._getValue(ref.antivirus),
+      additional_1: this._getValue(ref.additional_1),
+      additional_2: this._getValue(ref.additional_2),
+      additional_3: this._getValue(ref.additional_3),
+      additional_4: this._getValue(ref.additional_4),
+      additional_5: this._getValue(ref.additional_5),
+      additional_6: this._getValue(ref.additional_6),
+      lapse: this._getValue(ref.lapse),
+      period: this._getValue(ref.period.refs.select),
+      quantity: this._getValue(ref.quantity),
+      price: this._getValue(ref.price),
+      total: this._getValue(ref.lapse) * this._getValue(ref.quantity) * this._getValue(ref.price),
+      show: React.findDOMNode(ref.show).checked,
+      iva: React.findDOMNode(ref.iva).checked,
+      note: this._getValue(ref.note),
+      spaces: this._getValue(ref.spaces),
+    });
+
+    this.setState({product: product});
+  },
+
+  handleSubmit: function(e) {
+    e.preventDefault();
+    this.props.onSubmit(this.state.product);
+  },
+
+  close: function() {
+    this.setState({product: {}});
+    this.props.onClose();
+  },
 
   render: function() {
+    var product = this.state.product;
+    var iva;
+    var show;
+
+    var nameOptions = [
+      {value: 'Activo', label: 'Activo'},
+      {value: 'Inactivo', label: 'Inactivo'},
+      {value: 'Nuevo', label: 'Nuevo'}
+    ];
+
+    if(product.iva == 1 || product.iva == true) {
+      iva = true
+    } else {
+      iva = false
+    }
+
+    if(product.show == 1 || product.show == true) {
+      show = true
+    } else {
+      show = false
+    }
+
     return (
-        <div className="modal-body">
- <form className="product-create-form">
-  <input type="hidden" name="quotation_id" value="{{ quotation_id }}">
-  <div className="row">
-  <div className="form-group col-lg-3">
-      <Select
+      <form className="form" onSubmit={this.handleSubmit}>
+        <div className="form-group col-md-6">
+          <label htmlFor="">Producto</label>
+          <Select
             ref="name"
             options={productsOptions}
-            default="Producto"
+            default="Seleccionar producto"
             onSelectChange={this.handleChange}
             value={product.name}
-          />
+            />
+        </div>
 
-    <select name="name" className="form-control select-product-name">
-      <option value="Desktops">Desktops</option>
-      <option value="Laptops">Laptops</option>
-      <option value="Apple">Apple</option>
-      <option value="Servers">Servers</option>
-      <option value="IT Service">IT Service</option>
-      <option value="IT Service 24/7">IT  Service 24/7</option>
-      <option value="Rescate Online">Rescate Online</option>
-      <option value="Discos Duros Seguros">Discos Duros Seguros</option>
-      <option value="Networks">Networks</option>
-      <option value="Complements">Complements</option>
-      <option value="Printers">Printers</option>
-      <option value="Adicional">Adicional</option>
-    </select>
-  </div>
-
-  <div className="form-group col-lg-3">
-    <Select
+        <div className="form-group col-md-6">
+          <label htmlFor="">Tipo</label>
+          <Select
             ref="type"
-            options={productsOptions}
-            default="Producto"
+            options={nameOptions}
+            default="Seleccionar tipo"
             onSelectChange={this.handleChange}
             value={product.type}
-          />
+            />
+        </div>
 
-    <select name="type" className="form-control">
+        <div className="form-group col-md-6">
+          <label htmlFor="">Procesador</label>
+          <input
+            ref="processor"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.processor}/>
+        </div>
 
-      <option value="WorkPro">WorkPro</option>
-      <option value="WorkPlus">WorkPlus</option>
-      <option value="WorkPremium">WorkPremium</option>
-    </select>
-  </div>
+        <div className="form-group col-md-6">
+          <label htmlFor="">RAM</label>
+          <input
+            ref="ram"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.ram}/>
+        </div>
 
-  <div className="config">
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="processor" placeholder="Procesador" value="{{processor}}">
-    </div>
-    <div className="form-group col-lg-6 ">
-      <input type="text" className="form-control" name="ram" placeholder="RAM" value="{{ram}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="hdd" placeholder="Disco Duro" value="{{hdd}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="burner" placeholder="Unidad optica" value="{{burner}}">
-    </div>
-      <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="network_card" placeholder="Tarjeta red" value="{{network_card}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="battery" placeholder="Batería" value="{{battery}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="monitor" placeholder="Monitor" value="{{monitor}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="keyboard" placeholder="Teclado & Mouse" value="{{keyboard}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="os" placeholder="Sistema operativo" value="{{os}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="office" placeholder="Office" value="{{office}}">
-    </div>
-    <div className="form-group col-lg-6">
-      <input type="text" className="form-control" name="antivirus" placeholder="Antivirus" value="{{antivirus}}">
-    </div>
-  </div>
-<div className="form-group col-lg-6">
-  <input type="text" name="additional_1" className="additional form-control" placeholder="Adicional" value="{{ additional_1}}">
-</div>
-<div className="form-group col-lg-6">
-  <input type="text" name="additional_2" className="additional form-control" placeholder="Adicional" value="{{ additional_2 }}">
-</div>
-<div className="form-group col-lg-6">
-  <input type="text" name="additional_3" className="additional form-control" placeholder="Adicional" value="{{ additional_3 }}">
-</div>
-<div className="form-group col-lg-6">
-  <input type="text" name="additional_4" className="additional form-control" placeholder="Adicional" value="{{ additional_4 }}">
-</div>
-<div className="form-group col-lg-6">
-  <input type="text" name="additional_5" className="additional form-control" placeholder="Adicional" value="{{ additional_5 }}">
-</div>
-<div className="form-group col-lg-6">
-  <input type="text" name="additional_6" className="additional form-control" placeholder="Adicional" value="{{ additional_6 }}">
-</div>
+        <div className="form-group col-md-6">
+          <label htmlFor="">Disco duro</label>
+          <input
+            ref="hdd"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.hdd}/>
+        </div>
 
-  <div className="form-group col-lg-3">
-    <input type="text" className="form-control additional" className="form-control" name="lapse" placeholder="Lapso" value="{{lapse}}">
-  </div>
-  <div className="form-group col-lg-3">
-    <select name="period" className="form-control">
-    {{#if period}}
-      <option value="{{period}}">{{period}}</option>
-    {{else}}
-      <option value="">Periodo</option>
-    {{/if}}
+        <div className="form-group col-md-6">
+          <label htmlFor="">Unidad optica</label>
+          <input
+            ref="burner"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.burner}/>
+        </div>
 
-      <option value="Mes">Mes</option>
-      <option value="Semana">Semana</option>
-      <option value="Día">Día</option>
-      <option value="15 días">15 días</option>
-      <option value="a 3 días">3 días</option>
-      <option value="Hora">Hora</option>
-      <option value="Servicio">Servicio</option>
-      <option value="Venta">Venta</option>
-    </select>
-  </div>
-  <div className="form-group col-lg-3">
-    <input type="text" className="form-control"  name="quantity" placeholder="Cantidad" value="{{quantity}}">
-  </div>
-  <div className="form-group col-lg-3">
-    <input type="text" className="form-control"  name="price" placeholder="Precio" value="{{price}}">
-  </div>
-  <div className="form-group col-lg-3">
-    <input type="text" className="form-control"  name="spaces" placeholder="Espacios" value="{{spaces}}">
-  </div>
-<div className="form-group col-lg-6">
-   <div className="checkbox-inline">
-    <label>
-    <input type="hidden" value="{{show}}">
-      {{#is_zero show}}
-        <input type="hidden" name="show" value="0">
-        <input type="checkbox" name="show" value="1" checked> Total
-      {{else}}
-        <input type="hidden" name="show" value="0">
-        <input type="checkbox" name="show" value="1"> Total
-      {{/is_zero}}
+        <div className="form-group col-md-6">
+          <label htmlFor="">Tarjeta de red</label>
+          <input
+            ref="network_card"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.network_card}/>
+        </div>
 
-    </label>
-  </div>
-   <div className="checkbox-inline">
-    <label>
-    <input type="hidden" value="{{iva}}">
-    {{#is_zero iva}}
-      <input type="hidden" name="iva" value="0">
-      <input type="checkbox" className="field-checkbox"  name="iva" value="1" checked> IVA
-    {{else}}
-      <input type="hidden" name="iva" value="0">
-     <input type="checkbox" className="field-checkbox"  name="iva" value="1" > IVA
-    {{/is_zero}}
-    </label>
-  </div>
-  </div>
-</div>
-  <div className="form-group">
-    <textarea name="note" className="form-control" rows="2"  placeholder="Nota">{{note}}</textarea>
-  </div>
-</form>
-</div>
-<div className="modal-footer">
-  {{#if id}}
-    <a href="#" className="quotation-product-update btn btn-primary btn-sm">Guardar</a>
-    <a href="#" className="btn btn-default btn-sm modal-close" >Cancelar</a>
-  {{else}}
-    <a href="#" className="quotation-product-save btn btn-primary btn-sm">Guardar</a>
-    <a href="#" className="btn btn-default btn-sm modal-close" >Cancelar</a>
-  {{/if}}
-</div>
+        <div className="form-group col-md-6">
+          <label htmlFor="">Batería</label>
+          <input
+            ref="battery"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.battery}/>
+        </div>
 
-    );
+        <div className="form-group col-md-6">
+          <label htmlFor="">Monitor</label>
+          <input
+            ref="monitor"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.monitor}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Teclado y mouse</label>
+          <input
+            ref="keyboard"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.keyboard}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Sistema operativo</label>
+          <input
+            ref="os"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.os}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Office</label>
+          <input
+            ref="office"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.office}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Antivirus</label>
+          <input
+            ref="antivirus"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.antivirus}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Adicional</label>
+          <input
+            ref="additional_1"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.additional_1}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Adicional</label>
+          <input
+            ref="additional_2"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.additional_2}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Adicional</label>
+          <input
+            ref="additional_3"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.additional_3}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Adicional</label>
+          <input
+            ref="additional_4"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.additional_4}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Adicional</label>
+          <input
+            ref="additional_5"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.additional_5}/>
+        </div>
+
+        <div className="form-group col-md-6">
+          <label htmlFor="">Adicional</label>
+          <input
+            ref="additional_6"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.additional_6}/>
+        </div>
+
+        <div className="col-md-12"></div>
+
+        <div className="form-group col-md-3">
+          <label htmlFor="">Lapso</label>
+          <input
+            ref="lapse"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.lapse}/>
+        </div>
+
+        <div className="form-group col-md-3">
+          <label htmlFor="">Periodo</label>
+
+           <Select
+            ref="period"
+            options={PeriodsOptions}
+            default="Periodo"
+            onSelectChange={this.handleChange}
+            value={product.period}
+            />
+        </div>
+
+        <div className="form-group col-md-3">
+          <label htmlFor="">Cantidad</label>
+          <input
+            ref="quantity"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.quantity}/>
+        </div>
+
+        <div className="form-group col-md-3">
+          <label htmlFor="">Precio</label>
+          <input
+            ref="price"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.price}/>
+        </div>
+
+        <div className="form-group col-xs-12">
+          <label htmlFor="">Nota</label>
+          <textarea
+            ref="note"
+            cols="4"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.note}></textarea>
+        </div>
+
+        <div className="checkbox col-md-3">
+           <label>
+            <input
+              ref="iva"
+              type="checkbox"
+              onChange={this.handleChange}
+              checked={iva}/> <span>Mostrar IVA</span>
+          </label>
+        </div>
+
+        <div className="checkbox col-md-3" style={{'marginTop': '10px'}}>
+          <label>
+            <input
+              ref="show"
+              type="checkbox"
+              onChange={this.handleChange}
+              checked={show}/> <span>Mostrar total</span>
+          </label>
+        </div>
+
+        <div className="form-group col-md-3">
+          <label htmlFor="">Espacios pdf</label>
+          <input
+            ref="spaces"
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            value={product.spaces} />
+        </div>
+
+        <div className="form-group col-xs-12">
+          <button className="btn btn-primary btn-sm">Guardar</button>
+          <button className="btn btn-default btn-sm pull-right" onClick={this.close}>Cerrar</button>
+        </div>
+
+      </form>
+    )
   }
 });

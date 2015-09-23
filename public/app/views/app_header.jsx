@@ -5,9 +5,11 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <nav className="navbar top-bar">
-        <button className="btn btn-default"><i className="fa fa-bars"></i></button>
-      </nav>
+      <div id="app-header">
+        <nav className="navbar top-bar">
+          <button className="btn btn-default"><i className="fa fa-bars"></i></button>
+        </nav>
+      </div>
     );
   }
 });

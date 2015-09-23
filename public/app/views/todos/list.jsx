@@ -35,11 +35,9 @@ module.exports = React.createClass({
     });
 
     return (
-      <div className="panel panel-default quotations-table">
-        <div className="panel-heading">
-          Tareas
-        </div>
+      <div className="panel">
         <div className="panel-body">
+        <button className="btn btn-primary btn-sm">Nueva tarea</button>
           <div className="table-responsive">
             <table className="table">
                <thead>

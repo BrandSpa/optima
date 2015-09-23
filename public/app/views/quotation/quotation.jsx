@@ -11,6 +11,7 @@ var Comment = require('views/quotation/comment.jsx');
 var Mail = require('views/quotation/mails.jsx');
 var NoEffective = require('views/quotation/no_effective.jsx');
 var NoSend = require('views/quotation/no_send.jsx');
+var Times = require('views/quotation/times.jsx');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -20,30 +21,20 @@ module.exports = React.createClass({
       showComment: false,
       showMail: false,
       showNoEffective: false,
+      showNoSend: false,
     }
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.fetchQuotation();
-    this.fetchProducts();
   },
 
   fetchQuotation: function() {
     request
-      .get('/api/v1/quotations/' + this.props.id)
+      .get('/api/v1/quotations/' + this.props.params.id)
       .end(function(err, res) {
         if(err) return console.log(err.response.text);
         this.setState({quotation: res.body});
-      }.bind(this));
-  },
-
-  fetchProducts: function() {
-    request
-      .get('/api/v1/products/')
-      .query({quotation_id: this.props.id})
-      .end(function(err, res) {
-        if(err) return console.log(err.response.text);
-        this.setState({products: res.body});
       }.bind(this));
   },
 
@@ -63,6 +54,24 @@ module.exports = React.createClass({
     }
 
     this.setState({showMail: show});
+  },
+
+  handleShowNoEffective: function() {
+    var show = true;
+    if(this.state.showNoEffective) {
+      show = false;
+    }
+
+    this.setState({showNoEffective: show});
+  },
+
+  handleShowNoSend: function() {
+    var show = true;
+    if(this.state.showNoSend) {
+      show = false;
+    }
+
+    this.setState({showNoSend: show});
   },
 
   handleOptions: function(filters) {
@@ -86,6 +95,10 @@ module.exports = React.createClass({
     this._update(status);
   },
 
+  handleStatus: function(status) {
+    this._update(status);
+  },
+
   _update: function(data) {
     request
       .put('/api/v1/quotations/' + this.props.id)
@@ -94,10 +107,6 @@ module.exports = React.createClass({
         if(err) console.log();
         this.setState({quotation: res.body});
       }.bind(this));
-  },
-
-  handleStatus: function(status) {
-    this._update(status);
   },
 
   render: function() {
@@ -139,25 +148,31 @@ module.exports = React.createClass({
 
           <Status
             quotation={quotation}
+            handleOpenNoEffective={this.handleShowNoEffective}
+            handleOpenNoSend={this.handleShowNoSend}
             onStatusChange={this.handleStatus}
           />
 
           <NoEffective
             quotation={quotation}
-            show={false}
+            show={this.state.showNoEffective}
             onSave={this.handleSaveNoEffective}
           />
 
           <NoSend
             quotation={quotation}
-            show={false}
+            show={this.state.showNoSend}
             onSave={this.handleSaveNoEffective}
           />
 
-          <Products products={products}  />
+          <Products
+            quotationId={quotation.id}
+          />
+
         </div>
         <div className="col-md-3">
           <Contact contact={quotation.contact} />
+          <Times quotation={quotation} />
         </div>
       </div>
     );
