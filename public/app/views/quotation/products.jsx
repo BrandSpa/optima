@@ -43,7 +43,13 @@ module.exports = React.createClass({
     }
   },
 
-  _update: function() {
+  _update: function(data) {
+    var product = this.state.product;
+
+    if(data) {
+      product = data;
+    }
+
     request
       .put('/api/v1/products/' + this.state.product.id)
       .send(this.state.product)
@@ -77,7 +83,7 @@ module.exports = React.createClass({
     .post('/api/v1/products/' + id  + '/duplicate')
     .end(function(err, res) {
       this.setState({
-          products: this.state.products.concat([res.body])
+        products: this.state.products.concat([res.body])
       });
     }.bind(this));
   },
@@ -90,8 +96,19 @@ module.exports = React.createClass({
   },
 
   handleOrder: function(product) {
-    this.setState({
-      product: _.extend(product, {order: true})
+    var order = true;
+    if(product.ordered && product.ordered == true || product.ordered == 1) {
+      order = false;
+    }
+
+    var product = _.extend(product, {ordered: order});
+    this.setState({product: product});
+
+    request
+    .put('/api/v1/products/' + product.id)
+    .send(product)
+    .end(function(err, res) {
+      this.setState({product: {}});
     });
   },
 
@@ -100,7 +117,7 @@ module.exports = React.createClass({
      var products = _.reject(this.state.products, function(company) {
          return company.id === id
     });
-     console.log(this.state.products, products);
+
     request
     .del('/api/v1/products/' + id)
     .end(function(err, res) {
@@ -143,14 +160,16 @@ module.exports = React.createClass({
           <hr />
             <div className="table-responsive">
               <table className="table table-striped">
-                <tr>
-                  <th>Producto</th>
-                  <th>Tiempo</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Total</th>
-                  <th>Opciones</th>
-                </tr>
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Tiempo</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
                 <tbody>
                   {productNodes}
                 </tbody>

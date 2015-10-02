@@ -11,7 +11,7 @@ class Service extends \Eloquent {
 	{
 		return $this->belongsToMany('Optima\\Quotation','quotation_service');
 	}
- 
+
 	protected $guarded = [];
 
 	public static $rules = [
@@ -50,7 +50,7 @@ class Service extends \Eloquent {
 						->where('quotation_id', $quotation_id)
 						->where('service_id', $id)
 						->first();
-						
+
 		$model = self::find($id);
 
 		if ( count($check) <= 0 ) {
@@ -63,8 +63,11 @@ class Service extends \Eloquent {
 
 	public static function detachToQuotation($id, $quotation_id)
 	{
-			$model = self::find($id);
-			$model->quotations()->detach($quotation_id);
+			$model = DB::table('quotation_service')
+			->where('quotation_id', $quotation_id)
+			->where('service_id', $id)
+			->delete();
+
 			return $model;
 	}
 

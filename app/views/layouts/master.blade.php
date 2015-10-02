@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="/node_modules/react-quill/node_modules/quill/dist/quill.snow.css" />
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/improve.css">
+  <link rel="stylesheet" href="/node_modules/react-select/dist/default.css">
 </head>
+
 <body>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

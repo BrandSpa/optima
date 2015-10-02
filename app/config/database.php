@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'landings',
+			'database'  => 'avante-landing',
 			'username'  => 'root',
-			'password'  => '0PT1M4.cc',
+			'password'  => 'R3ntAdV1sor_DB+',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

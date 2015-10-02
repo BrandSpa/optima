@@ -19,7 +19,7 @@ module.exports = React.createClass({
   fetchContacts: function() {
     request
       .get('api/v1/contacts')
-      .query({'company_id': this.props.companyId})
+      .query({'company_id': this.props.params.companyId})
       .end(function(err, res) {
         this.setState({contacts: res.body});
       }.bind(this));
@@ -38,12 +38,12 @@ module.exports = React.createClass({
 
   handleQuote: function(id, e) {
     if(e) e.preventDefault();
-    var quotationData = {company_id: this.props.companyId, contact_id: id};
+    var quotationData = {company_id: this.props.params.companyId, contact_id: id};
     request
       .post('/api/v1/quotations')
       .send(quotationData)
       .end(function(err, res) {
-        location.hash = "#";
+        location.hash = "#/quotations/" + res.body.id;
       });
   },
 

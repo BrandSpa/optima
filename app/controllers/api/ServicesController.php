@@ -12,7 +12,7 @@ class ServicesController extends \BaseController {
 	public function index()
 	{
 		$offset = Input::get('offset');
-		
+
 		if (Input::has('quotation_id')) {
 			$quotation_id = Input::get('quotation_id');
 			$quotation = Quotation::find($quotation_id);
@@ -30,7 +30,7 @@ class ServicesController extends \BaseController {
 		return Response::json($collection, 200);
 	}
 
-	public function allByQuotation() 
+	public function allByQuotation()
 	{
 		$collection = $this->service->byQuotation();
 		return Response::json($collection, 200);
@@ -50,14 +50,14 @@ class ServicesController extends \BaseController {
 			$model = Service::attachToQuotation($service_id, $quotation_id);
 			return Response::json($model, 200);
 		}
-		
+
 		$data = Input::all();
 		$model = Service::create($data);
 		if (isset($model->id)) {
 			return Response::json($model, 200);
 		}
 		return Response::json($model, 400);
-		
+
 	}
 
 	public function update($id)
@@ -71,7 +71,7 @@ class ServicesController extends \BaseController {
 		return Response::json($model, 400);
 	}
 
-	public function updatePrices($id) 
+	public function updatePrices($id)
 	{
 		$service = $this->service->updatePrices($id);
 		return Response::json($service);
@@ -85,10 +85,7 @@ class ServicesController extends \BaseController {
 			return Response::json($model, 200);
 		}
 
-		$model = Service::findAndDestroy($id);
+		// $model = Service::findAndDestroy($id);
 		return Response::json($model, 200);
 	}
-
-
-
 }

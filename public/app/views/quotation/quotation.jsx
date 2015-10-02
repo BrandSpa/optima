@@ -7,11 +7,13 @@ var Filters = require('views/quotation/filters.jsx');
 var Edit = require('views/quotation/edit.jsx');
 var Status = require('views/quotation/status.jsx');
 var Products = require('views/quotation/products.jsx');
+var Services = require('views/quotation/services.jsx');
 var Comment = require('views/quotation/comment.jsx');
 var Mail = require('views/quotation/mails.jsx');
 var NoEffective = require('views/quotation/no_effective.jsx');
 var NoSend = require('views/quotation/no_send.jsx');
 var Times = require('views/quotation/times.jsx');
+var moment = require('moment');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -93,6 +95,10 @@ module.exports = React.createClass({
 
   handleSaveNoEffective: function(status) {
     this._update(status);
+    this.setState({
+      showNoEffective: false,
+      showNoSend: false
+    });
   },
 
   handleStatus: function(status) {
@@ -101,7 +107,7 @@ module.exports = React.createClass({
 
   _update: function(data) {
     request
-      .put('/api/v1/quotations/' + this.props.id)
+      .put('/api/v1/quotations/' + this.props.params.id)
       .send(data)
       .end(function(err, res) {
         if(err) console.log();
@@ -116,7 +122,7 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="col-md-12">
-        <h4 style={{margin: "0 0 15px 0"}}>Cotización {quotation.id} {quotation.status}</h4>
+        <h4 style={{margin: "0 0 15px 0"}}>Cotización {quotation.id} {quotation.status} <small>{moment(quotation.created_at).fromNow()}</small></h4>
         </div>
 
         <div className="col-md-9">
@@ -166,6 +172,10 @@ module.exports = React.createClass({
           />
 
           <Products
+            quotationId={quotation.id}
+          />
+
+          <Services
             quotationId={quotation.id}
           />
 

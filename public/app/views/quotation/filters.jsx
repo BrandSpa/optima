@@ -38,6 +38,7 @@ module.exports = React.createClass({
 
   render: function() {
     var quotation = this.props.quotation;
+
     return (
       <div className="panel panel-default">
         <div className="panel-body">

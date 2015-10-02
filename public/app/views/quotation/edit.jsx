@@ -42,29 +42,40 @@ module.exports = React.createClass({
     return (
       <div className="panel">
         <div className="panel-body">
-            <ul className="list-inline">
-              <li>
-                    <div className="btn-group">
-            <button className="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-              <i className="fa fa-file-pdf-o"></i> <span className="caret"></span>
-            </button>
-
-            <ul className="dropdown-menu" role="menu">
-              <li>
-                <a href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id} target="_blank"> PDF </a>
-              </li>
-              <li>
-                <a href={"/quotations/" + quotation.id + "/pdfbn"} target="_blank" > PDF BN </a>
-              </li>
-              <li>
-                <a href={"/quotations/" + quotation.id + "/pdflogos"}  target="_blank" > PDF con logos </a>
-              </li>
-            </ul>
-          </div>
+          <ul className="list-inline">
+            <li>
+              <div className="btn-group">
+                <button
+                  className="btn btn-default btn-sm dropdown-toggle"
+                  type="button"
+                  data-toggle="dropdown">
+                  <i className="fa fa-file-pdf-o"></i> <span className="caret"></span>
+                </button>
+                <ul className="dropdown-menu" role="menu">
+                  <li>
+                    <a
+                    href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id}
+                    target="_blank"> PDF </a>
+                  </li>
+                  <li>
+                    <a
+                    href={"/quotations/" + quotation.id + "/pdfbn"}
+                    target="_blank" > PDF BN </a>
+                  </li>
+                  <li>
+                    <a
+                    href={"/quotations/" + quotation.id + "/pdflogos"}
+                    target="_blank" > PDF con logos </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li>
-            <a href={"/quotations/" + quotation.id + "/duplicate"} className="btn btn-default btn-sm">Duplicar</a>
+              <a
+                href={"/quotations/" + quotation.id + "/duplicate"}
+                className="btn btn-default btn-sm">Duplicar</a>
             </li>
+
             <li>
               <button
                 className="btn btn-default btn-sm"
@@ -72,22 +83,23 @@ module.exports = React.createClass({
               Editar Comentario
               </button>
             </li>
-              <li>
-                <button
+
+            <li>
+              <button
                 className="btn btn-default btn-sm"
                 onClick={this.openMails}
               >
-              Editar Mail
+                Editar Mail
               </button>
               </li>
 
               <li>
-              <button
-                className="btn btn-default btn-sm"
-                onClick={this.handleServiceApproval}
-              >
-              {serviceApprovalText}
-              </button>
+                <button
+                  className="btn btn-default btn-sm"
+                  onClick={this.handleServiceApproval}
+                >
+                {serviceApprovalText}
+                </button>
               </li>
             </ul>
         </div>

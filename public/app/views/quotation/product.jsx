@@ -56,7 +56,7 @@ module.exports = React.createClass({
             <button
             className="btn btn-default btn-xs"
             onClick={this.props.onOrder.bind(null, product)}
-            >Pedir
+            >{product.ordered ? "Pedir" : "Pedido" }
           </button>
           </li>
 

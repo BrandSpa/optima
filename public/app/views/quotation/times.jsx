@@ -14,7 +14,7 @@ module.exports = React.createClass({
     return (
       <div className="panel">
         <div className="panel-body">
-          {moment(this.props.quotation.created_at).fromNow()}
+
           <br/>
           {created_sent_diff}
         </div>
