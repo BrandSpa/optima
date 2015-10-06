@@ -35,7 +35,7 @@ class Todo extends \Eloquent {
     $validator = Validator::make($data, self::$rules);
 
     $data['from_user'] = Auth::user()->id;
-    
+
     if ($validator->passes()) {
       $model = self::create($data);
       return $model;

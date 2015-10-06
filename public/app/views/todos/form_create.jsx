@@ -39,7 +39,6 @@ module.exports = React.createClass({
   },
 
   handleContact: function(id) {
-    console.log(id);
     this.handleChange({
       user_id: parseInt(id)
     })
@@ -63,6 +62,10 @@ module.exports = React.createClass({
       trackingId = {tracking_id: this.props.trackingId};
     }
     this.props.onSubmit(_.extend(this.state.todo, trackingId));
+    this.clean();
+  },
+
+  clean: function() {
     this.setState({todo: _.extend(this.state.todo, {
       title: '',
       description: ''

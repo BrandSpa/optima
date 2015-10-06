@@ -3355,7 +3355,6 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   handleContact: function(id) {
-    console.log(id);
     this.handleChange({
       user_id: parseInt(id)
     })
@@ -3379,6 +3378,10 @@ module.exports = React.createClass({displayName: "exports",
       trackingId = {tracking_id: this.props.trackingId};
     }
     this.props.onSubmit(_.extend(this.state.todo, trackingId));
+    this.clean();
+  },
+
+  clean: function() {
     this.setState({todo: _.extend(this.state.todo, {
       title: '',
       description: ''
@@ -3471,11 +3474,13 @@ module.exports = React.createClass({displayName: "exports",
 var React = require('react');
 var Timeago = require('components/timeago.jsx');
 var request = require('superagent');
+var Form = require('views/todos/form_create.jsx');
 
 module.exports = React.createClass({displayName: "exports",
   getInitialState: function() {
     return {
-      todos: []
+      todos: [],
+      showForm: false
     }
   },
 
@@ -3492,9 +3497,20 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   linkQuotation: function(tracking) {
-    if(trackig) {
+    if(tracking) {
       return React.createElement("a", {href: "/quotations/" + tracking.quotation_id}, tracking.quotation_id);
     }
+  },
+
+  handleSubmit: function(todo) {
+    request
+      .post('/api/v1/todos')
+      .send(todo)
+      .end(function(err, res) {
+        this.setState({
+          todos: this.state.todos.concat([res.body])
+        });
+      }.bind(this));
   },
 
   render: function() {
@@ -3516,7 +3532,8 @@ module.exports = React.createClass({displayName: "exports",
     return (
       React.createElement("div", {className: "panel"}, 
         React.createElement("div", {className: "panel-body"}, 
-        React.createElement("button", {className: "btn btn-primary btn-sm"}, "Nueva tarea"), 
+         React.createElement("button", {className: "btn btn-primary btn-sm", onClick: this.showForm}, "Nueva tarea"), 
+         React.createElement(Form, {onSubmit: this.handleSubmit}), 
           React.createElement("div", {className: "table-responsive"}, 
             React.createElement("table", {className: "table"}, 
                React.createElement("thead", null, 
@@ -3543,7 +3560,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/todos/list.jsx","/app/views/todos")
-},{"_process":56,"buffer":52,"components/timeago.jsx":5,"react":563,"superagent":564}],50:[function(require,module,exports){
+},{"_process":56,"buffer":52,"components/timeago.jsx":5,"react":563,"superagent":564,"views/todos/form_create.jsx":48}],50:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');

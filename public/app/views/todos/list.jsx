@@ -2,11 +2,13 @@
 var React = require('react');
 var Timeago = require('components/timeago.jsx');
 var request = require('superagent');
+var Form = require('views/todos/form_create.jsx');
 
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      todos: []
+      todos: [],
+      showForm: false
     }
   },
 
@@ -23,9 +25,20 @@ module.exports = React.createClass({
   },
 
   linkQuotation: function(tracking) {
-    if(trackig) {
+    if(tracking) {
       return <a href={"/quotations/" + tracking.quotation_id}>{tracking.quotation_id}</a>;
     }
+  },
+
+  handleSubmit: function(todo) {
+    request
+      .post('/api/v1/todos')
+      .send(todo)
+      .end(function(err, res) {
+        this.setState({
+          todos: this.state.todos.concat([res.body])
+        });
+      }.bind(this));
   },
 
   render: function() {
@@ -47,7 +60,8 @@ module.exports = React.createClass({
     return (
       <div className="panel">
         <div className="panel-body">
-        <button className="btn btn-primary btn-sm">Nueva tarea</button>
+         <button className="btn btn-primary btn-sm" onClick={this.showForm}>Nueva tarea</button>
+         <Form onSubmit={this.handleSubmit}/>
           <div className="table-responsive">
             <table className="table">
                <thead>
