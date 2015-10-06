@@ -14,7 +14,7 @@ var NoEffective = require('views/quotation/no_effective.jsx');
 var NoSend = require('views/quotation/no_send.jsx');
 var Times = require('views/quotation/times.jsx');
 var Trackings = require('views/quotation/trackings.jsx');
-
+var Activities = require('views/quotation/activity.jsx');
 var moment = require('moment');
 
 module.exports = React.createClass({
@@ -130,7 +130,7 @@ module.exports = React.createClass({
       <div>
         <div className="col-md-12">
         <h4 style={{margin: "0 0 15px 0"}}>
-          Cotización {quotation.id} {quotation.status} <small>{moment(quotation.created_at).fromNow(true)}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada: {moment(quotation.sent_at).fromNow(true)}</small>
+          Cotización {quotation.id} {quotation.status} <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
         </h4>
         </div>
 
@@ -189,7 +189,8 @@ module.exports = React.createClass({
           />
 
           <Trackings
-            quotationId={quotation.id} />
+            quotationId={quotation.id}
+          />
 
         </div>
 
@@ -198,6 +199,9 @@ module.exports = React.createClass({
             contact={quotation.contact}
             company={quotation.company}
             changeContact={this.changeContact}
+            />
+            <Activities
+              quotationId={quotation.id}
             />
         </div>
       </div>
