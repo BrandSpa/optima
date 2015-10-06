@@ -23,7 +23,7 @@ module.exports = React.createClass({
   render: function() {
     var activityNodes = this.state.activities.map(function(activity) {
       return (
-        <li>{activity.user.name} {activity.message} {moment(activity.created_at).fromNow()}</li>
+        <li><hr/>{activity.user.name} {activity.message} {moment(activity.created_at).fromNow()}</li>
       );
     });
 

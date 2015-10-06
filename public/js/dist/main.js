@@ -1405,7 +1405,7 @@ module.exports = React.createClass({displayName: "exports",
   render: function() {
     var activityNodes = this.state.activities.map(function(activity) {
       return (
-        React.createElement("li", null, activity.user.name, " ", activity.message, " ", moment(activity.created_at).fromNow())
+        React.createElement("li", null, React.createElement("hr", null), activity.user.name, " ", activity.message, " ", moment(activity.created_at).fromNow())
       );
     });
 
