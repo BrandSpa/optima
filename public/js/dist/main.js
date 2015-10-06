@@ -3498,7 +3498,7 @@ module.exports = React.createClass({displayName: "exports",
 
   linkQuotation: function(tracking) {
     if(tracking) {
-      return React.createElement("a", {href: "/quotations/" + tracking.quotation_id}, tracking.quotation_id);
+      return React.createElement("a", {href: "#quotations/" + tracking.quotation_id}, tracking.quotation_id);
     }
   },
 

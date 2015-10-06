@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
   linkQuotation: function(tracking) {
     if(tracking) {
-      return <a href={"/quotations/" + tracking.quotation_id}>{tracking.quotation_id}</a>;
+      return <a href={"#quotations/" + tracking.quotation_id}>{tracking.quotation_id}</a>;
     }
   },
 
