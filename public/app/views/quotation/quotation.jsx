@@ -130,8 +130,7 @@ module.exports = React.createClass({
       <div>
         <div className="col-md-12">
         <h4 style={{margin: "0 0 15px 0"}}>
-          Cotización {quotation.id} {quotation.status} <small>{moment(quotation.created_at).fromNow()}</small>
-          <small>{moment(quotation.sent_at).fromNow(true)}</small>
+          Cotización {quotation.id} {quotation.status} <small>{moment(quotation.created_at).fromNow(true)}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada: {moment(quotation.sent_at).fromNow(true)}</small>
         </h4>
         </div>
 

@@ -2471,8 +2471,7 @@ module.exports = React.createClass({displayName: "exports",
       React.createElement("div", null, 
         React.createElement("div", {className: "col-md-12"}, 
         React.createElement("h4", {style: {margin: "0 0 15px 0"}}, 
-          "Cotización ", quotation.id, " ", quotation.status, " ", React.createElement("small", null, moment(quotation.created_at).fromNow()), 
-          React.createElement("small", null, moment(quotation.sent_at).fromNow(true))
+          "Cotización ", quotation.id, " ", quotation.status, " ", React.createElement("small", null, moment(quotation.created_at).fromNow(true)), " ", React.createElement("small", {className: quotation.sent_at ? "" : "hidden"}, "enviada: ", moment(quotation.sent_at).fromNow(true))
         )
         ), 
 
