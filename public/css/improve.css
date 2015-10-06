@@ -43,6 +43,16 @@ hr {
   padding: 0;
   border-radius: 0; }
 
+.navbar-brand {
+  color: #fff; }
+
+.navbar-nav > li > a {
+  color: #fff; }
+  .navbar-nav > li > a:hover {
+    color: #333; }
+  .navbar-nav > li > a.active {
+    color: #333; }
+
 .user-link {
   color: #fff;
   padding: 30px; }
@@ -50,8 +60,8 @@ hr {
 .row {
   height: 100%; }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Source Sans Pro"; }
+ul {
+  padding-left: 15px; }
 
 .nav-user {
   color: #fff;

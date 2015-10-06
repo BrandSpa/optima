@@ -38,8 +38,8 @@ class TrackingsController extends \BaseController {
     $model = Tracking::store($data);
 
     if (isset($model->id)) {
-      $model = Tracking::with('contact')->find($model->id);
-      return Response::json($model, 200);
+      $model = Tracking::with(['contact', 'user'])->find($model->id);
+      return Response::json($model, 201);
     }
 
     return Response::json($model, 400);

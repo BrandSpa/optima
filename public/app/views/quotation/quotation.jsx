@@ -13,6 +13,8 @@ var Mail = require('views/quotation/mails.jsx');
 var NoEffective = require('views/quotation/no_effective.jsx');
 var NoSend = require('views/quotation/no_send.jsx');
 var Times = require('views/quotation/times.jsx');
+var Trackings = require('views/quotation/trackings.jsx');
+
 var moment = require('moment');
 
 module.exports = React.createClass({
@@ -179,10 +181,12 @@ module.exports = React.createClass({
             quotationId={quotation.id}
           />
 
+          <Trackings
+            quotationId={quotation.id} />
+
         </div>
         <div className="col-md-3">
           <Contact contact={quotation.contact} />
-          <Times quotation={quotation} />
         </div>
       </div>
     );

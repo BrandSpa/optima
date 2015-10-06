@@ -1,5 +1,12 @@
 <?php
 
+Route::filter('etags', function($route, $request, $response)
+{
+  $response->setEtag(md5($response->getContent()));
+	$response->isNotModified($request);
+	return;
+});
+
 Route::get('login', 'UsersController@getLogin');
 Route::post('login', 'UsersController@postLogin');
 Route::get('logout', 'UsersController@logout');
@@ -9,7 +16,8 @@ Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
 Route::get('todos/pending/mail', 'Api\TodosController@pending');
 Route::get('todos/pendinguser/mail', 'Api\TodosController@pendingByUser');
 
-Route::group(['before' => 'auth'], function(){
+Route::group(['before' => ['auth'], 'after' => 'etags'], function()
+{
 
 	Route::get('companies', 'PagesController@companies');
 	Route::get('contacts', 'PagesController@contacts');
@@ -41,6 +49,7 @@ Route::group(['before' => 'auth'], function(){
 	|	API v1
 	|-------------------------------------------------------------------------
 	*/
+
 	Route::group(['prefix' => 'api/v1', 'namespace' => 'Api'], function(){
 
 		Route::resource('companies', 'CompaniesController');
