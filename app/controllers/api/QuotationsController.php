@@ -109,9 +109,10 @@ class QuotationsController extends \BaseController {
 		$validator = Validator::make($data, $this->entity->rules);
 
 		if ($validator->passes()) {
-			$model = $this->entity->with($this->relationships)->find($id);
+			$model = $this->entity->find($id);
 			$model->update($data);
-			return Response::json($model, 200);
+			$modelUpdated = $this->entity->with($this->relationships)->find($id);
+			return Response::json($modelUpdated, 200);
 		}
 
 		return Response::json($validator->errors()->all(), 400);

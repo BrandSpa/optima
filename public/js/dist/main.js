@@ -817,17 +817,19 @@ module.exports = React.createClass({displayName: "exports",
 
   handleSubmit: function(e) {
     e.preventDefault();
-    console.log(this.state.contact);
     this.props.onSubmit(this.state.contact);
+    this.setState({contact: {}});
   },
 
   render: function() {
     var contact = this.state.contact;
+    var size = this.props.size || 'col-md-6';
+    var btnText = this.props.btnText || React.createElement("i", {className: "fa fa-chevron-right"});
 
     return (
     React.createElement("form", {onSubmit: this.handleSubmit}, 
         React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Input, {
               ref: "name", 
               onInputChange: this.handleChange, 
@@ -836,7 +838,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Input, {
               ref: "lastname", 
               onInputChange: this.handleChange, 
@@ -845,7 +847,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Select, {
               ref: "gender", 
               options: genderOptions, 
@@ -855,7 +857,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
              React.createElement(Input, {
               ref: "email", 
               onInputChange: this.handleChange, 
@@ -864,7 +866,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
              React.createElement(Input, {
               ref: "title", 
               onInputChange: this.handleChange, 
@@ -873,7 +875,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
              React.createElement(Input, {
               ref: "position", 
               onInputChange: this.handleChange, 
@@ -882,7 +884,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
              React.createElement(Input, {
               ref: "phone_1", 
               onInputChange: this.handleChange, 
@@ -891,7 +893,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Input, {
               ref: "phone_2", 
               onInputChange: this.handleChange, 
@@ -900,7 +902,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Input, {
               ref: "mobile_1", 
               onInputChange: this.handleChange, 
@@ -909,7 +911,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Input, {
               ref: "mobile_2", 
               onInputChange: this.handleChange, 
@@ -918,7 +920,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Input, {
               ref: "fax", 
               onInputChange: this.handleChange, 
@@ -927,7 +929,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Select, {
               ref: "pay_method", 
               options: payMethodOptions, 
@@ -937,7 +939,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Select, {
               ref: "found_us", 
               options: foundUsOptions, 
@@ -947,7 +949,7 @@ module.exports = React.createClass({displayName: "exports",
             )
           ), 
 
-          React.createElement("div", {className: "form-group col-lg-6"}, 
+          React.createElement("div", {className: "form-group " + size}, 
             React.createElement(Select, {
               ref: "how_call", 
               options: howCallOptions, 
@@ -966,7 +968,7 @@ module.exports = React.createClass({displayName: "exports",
             placeholder: "Comentario"}
           )
         ), 
-        React.createElement("button", {className: "btn btn-primary pull-right"}, React.createElement("i", {className: "fa fa-chevron-right"}))
+        React.createElement("button", {className: "btn btn-primary btn-sm pull-right"}, btnText)
       )
     );
   }
@@ -1440,35 +1442,124 @@ module.exports = React.createClass({displayName: "exports",
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
+var Select = require('react-select');
+var request = require('superagent');
+var _  = require('lodash');
+var Form = require('views/contacts/form_create.jsx');
 
 module.exports = React.createClass({displayName: "exports",
   getDefaultProps: function() {
     return {
-      contact: {}
+      company: {}
     }
   },
 
+  getInitialState: function() {
+    return {
+      contact: {},
+      contacts: [],
+      contactSelected: null,
+      showForm: false
+    }
+  },
+
+  componentDidMount: function() {
+    this.fetchContacts();
+  },
+
+  fetchContacts: function() {
+    request
+      .get('/api/v1/contacts')
+      .query({quotation_id: this.props.quotationId})
+      .end(function(err, res) {
+        this.setState({contacts: res.body});
+      }.bind(this));
+  },
+
+  componentWillReceiveProps: function(props) {
+    console.log('receive', props);
+    this.setState({contact: props.contact});
+  },
+
+  handleContact: function(id) {
+    this.setState({
+      contactSelected: parseInt(id)
+    });
+  },
+
+  changeContact: function() {
+    var contact = this.state.contactSelected;
+    this.props.changeContact(contact);
+  },
+
+  showForm: function() {
+    var show;
+    if(this.state.showForm) {
+      show = false;
+    } else {
+      show = true;
+    }
+    this.setState({showForm: show});
+  },
+
+  handleSubmit: function(contact) {
+    var contactData = _.extend({company_id: this.props.company.id}, contact);
+    request
+      .post('/api/v1/contacts')
+      .send(contactData)
+      .end(function(err, res) {
+        if(err) return this.setState({errorMessages: err.response.body});
+        this.fetchContacts();
+        this.showForm();
+      }.bind(this));
+  },
+
   render: function() {
-    var contact = this.props.contact;
+    var contact = this.state.contact;
+    var company = this.props.company;
+    var contactSelect;
+    var contactValue;
+    contactSelect = _.findWhere(this.state.contacts, {id: this.state.contactSelected});
+
+    if(contactSelect) {
+      contactValue = contactSelect.name +" "+ contactSelect.lastname;
+    }
+
+    var contactOptions = this.state.contacts.map(function(contact, i) {
+      return {value: contact.id, label: contact.name +" "+ contact.lastname}
+    });
 
     return (
       React.createElement("div", {className: "panel"}, 
         React.createElement("div", {className: "panel-body"}, 
-        React.createElement("button", {className: "btn btn-default btn-sm"}, "Editar"), 
-        React.createElement("button", {className: "btn btn-default btn-sm"}, "Cambiar contacto"), 
+          React.createElement("button", {className: "btn btn-primary btn-sm", onClick: this.showForm}, "Agregar contacto"), 
+          React.createElement("hr", null), 
+          React.createElement("div", {className: this.state.showForm ? "" : "hidden"}, 
+            React.createElement(Form, {
+              size: "col-md-12", 
+              btnText: "Guardar", 
+              onSubmit: this.handleSubmit}
+              )
+          ), 
+          React.createElement("div", {className: "row"}, " "), 
+          React.createElement("span", {className: company.name ?  "": "hidden"}, company.name, React.createElement("hr", null)), 
+          React.createElement("b", {className: contact.name ?  "": "hidden"}, contact.name, " ", contact.lastname, React.createElement("hr", null)), 
+          React.createElement("span", {className: contact.email ?  "": "hidden"}, contact.email, React.createElement("hr", null)), 
+          React.createElement("span", {className: contact.phone_1 ?  "": "hidden"}, contact.phone_1, React.createElement("hr", null)), 
+          React.createElement("span", {className: contact.phone_2 ?  "": "hidden"}, " ", contact.phone_2, React.createElement("hr", null)), 
+          React.createElement("span", {className: contact.mobile_1 ?  "": "hidden"}, contact.mobile_1, React.createElement("hr", null)), 
+          React.createElement("span", {className: contact.mobile_2 ? "" : "hidden"}, " ", contact.mobile_2), 
 
-          React.createElement("hr", null), 
-          React.createElement("b", null, contact.name, " ", contact.lastname), 
-          React.createElement("hr", null), 
-          contact.email, 
-          React.createElement("hr", null), 
-          contact.phone_1, 
-          React.createElement("span", {className: contact.phone_2 ? "hidden" : ""}, "| ", contact.phone_2), 
-          React.createElement("hr", null), 
-          contact.mobile_1, 
-          React.createElement("span", {className: contact.mobile_2 ? "hidden" : ""}, "| ", contact.mobile_2), 
-          React.createElement("hr", null), 
-          React.createElement("button", {className: "btn btn-primary btn-sm"}, "Agregar contacto")
+          React.createElement("div", {className: "form-group"}, 
+            React.createElement(Select, {
+              options: contactOptions, 
+              placeholder: "Seleccionar contacto", 
+              onChange: this.handleContact, 
+              value: contactValue}
+            )
+
+          ), 
+          React.createElement("button", {className: "btn btn-default btn-sm pull-right", onClick: this.changeContact}, "Cambiar contacto")
         )
       )
     );
@@ -1476,7 +1567,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/quotation/contact.jsx","/app/views/quotation")
-},{"_process":55,"buffer":51,"react":562}],31:[function(require,module,exports){
+},{"_process":55,"buffer":51,"lodash":57,"react":562,"react-select":395,"superagent":563,"views/contacts/form_create.jsx":27}],31:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
@@ -2184,7 +2275,8 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   render: function() {
-    var productNodes = this.state.products.map(function(product) {
+    var products = this.state.products;
+    var productNodes = products.map(function(product) {
       return (
         React.createElement(Product, {
           key: product.id, 
@@ -2196,14 +2288,19 @@ module.exports = React.createClass({displayName: "exports",
           )
       )
     }.bind(this));
+    var showTable = false;
+    if(products.length > 0) {
+      showTable = true;
+    }
 
     return (
       React.createElement("div", null, 
       React.createElement("div", {className: "panel panel-default"}, 
         React.createElement("div", {className: "panel-body"}, 
           React.createElement("button", {className: "btn btn-primary btn-sm", onClick: this.showForm}, "Agregar producto"), 
-          React.createElement("hr", null), 
-            React.createElement("div", {className: "table-responsive"}, 
+
+            React.createElement("div", {className: showTable ? "table-responsive" : "hidden"}, 
+            React.createElement("hr", null), 
               React.createElement("table", {className: "table table-striped"}, 
                 React.createElement("thead", null, 
                   React.createElement("tr", null, 
@@ -2351,12 +2448,17 @@ module.exports = React.createClass({displayName: "exports",
     this._update(status);
   },
 
+  changeContact: function(contactId) {
+    this._update({contact_id: contactId});
+  },
+
   _update: function(data) {
     request
       .put('/api/v1/quotations/' + this.props.params.id)
       .send(data)
       .end(function(err, res) {
-        if(err) console.log();
+        if(err) console.log(err.body);
+        console.log('quotation:', res.body);
         this.setState({quotation: res.body});
       }.bind(this));
   },
@@ -2429,8 +2531,13 @@ module.exports = React.createClass({displayName: "exports",
             quotationId: quotation.id})
 
         ), 
+
         React.createElement("div", {className: "col-md-3"}, 
-          React.createElement(Contact, {contact: quotation.contact})
+          React.createElement(Contact, {
+            contact: quotation.contact, 
+            company: quotation.company, 
+            changeContact: this.changeContact}
+            )
         )
       )
     );
@@ -2767,22 +2874,31 @@ module.exports = React.createClass({displayName: "exports",
 
   render: function() {
     var tracking = this.props.tracking;
+    var todos = this.state.todos;
+    var showTable = false;
     var contact;
     var by;
-    var todoNodes = this.state.todos.map(function(todo) {
+
+    var todoNodes = todos.map(function(todo) {
       if(todo.user && todo.user.name) {
         by = todo.user.name +" "+ todo.user.lastname;
       }
 
       return (
-        React.createElement("tr", {key: todo.id}, 
-          React.createElement("td", null, React.createElement("b", null, todo.title), " : ", todo.description), 
-          React.createElement("td", null, todo.created_at), 
-          React.createElement("td", null, todo.expires_date), 
-          React.createElement("td", null, by)
+        React.createElement("div", {key: todo.id}, 
+          React.createElement("hr", null), 
+          React.createElement("b", null, "Tarea ", todo.title, React.createElement("br", null)), 
+          React.createElement("span", null, todo.description, React.createElement("br", null)), 
+          React.createElement("span", null, React.createElement("b", null, "Creada:"), " ", todo.created_at, React.createElement("br", null)), 
+          React.createElement("span", null, React.createElement("b", null, "vence: "), todo.expires_date, React.createElement("br", null)), 
+          React.createElement("span", null, React.createElement("b", null, "Usuario: "), by)
         )
       );
     });
+
+    if(todos.length > 0) {
+      showTable = true;
+    }
 
     if(tracking.contact.name) {
       contact = tracking.contact.name +" "+ tracking.contact.lastname;
@@ -2811,20 +2927,9 @@ module.exports = React.createClass({displayName: "exports",
           )
         ), 
 
-        React.createElement("table", {className: "table"}, 
-          React.createElement("thead", null, 
-            React.createElement("tr", null, 
-              React.createElement("th", null, "Tarea"), 
-              React.createElement("th", null, "Creada"), 
-              React.createElement("th", null, "Vence"), 
-              React.createElement("th", null, "Usuario")
-            )
-        ), 
-          React.createElement("tbody", null, 
-            todoNodes
-          )
+        React.createElement("div", {className: "table-responsive"}, 
+          todoNodes
         )
-
       )
     )
   }
@@ -2984,13 +3089,12 @@ module.exports = React.createClass({displayName: "exports",
     };
 
     this.setState({query: query});
-     request
-        .get('/api/v1/quotations')
-        .query(query)
-        .end(function(err, resp) {
-
-          this._onChange(resp.body);
-        }.bind(this));
+    request
+      .get('/api/v1/quotations')
+      .query(query)
+      .end(function(err, resp) {
+        this._onChange(resp.body);
+      }.bind(this));
   },
 
   loadMore: function(){

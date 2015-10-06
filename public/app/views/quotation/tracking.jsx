@@ -58,22 +58,31 @@ module.exports = React.createClass({
 
   render: function() {
     var tracking = this.props.tracking;
+    var todos = this.state.todos;
+    var showTable = false;
     var contact;
     var by;
-    var todoNodes = this.state.todos.map(function(todo) {
+
+    var todoNodes = todos.map(function(todo) {
       if(todo.user && todo.user.name) {
         by = todo.user.name +" "+ todo.user.lastname;
       }
 
       return (
-        <tr key={todo.id}>
-          <td><b>{todo.title}</b> : {todo.description}</td>
-          <td>{todo.created_at}</td>
-          <td>{todo.expires_date}</td>
-          <td>{by}</td>
-        </tr>
+        <div key={todo.id}>
+          <hr/>
+          <b>Tarea {todo.title}<br/></b>
+          <span>{todo.description}<br/></span>
+          <span><b>Creada:</b> {todo.created_at}<br/></span>
+          <span><b>vence: </b>{todo.expires_date}<br/></span>
+          <span><b>Usuario: </b>{by}</span>
+        </div>
       );
     });
+
+    if(todos.length > 0) {
+      showTable = true;
+    }
 
     if(tracking.contact.name) {
       contact = tracking.contact.name +" "+ tracking.contact.lastname;
@@ -102,20 +111,9 @@ module.exports = React.createClass({
           />
         </div>
 
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Tarea</th>
-              <th>Creada</th>
-              <th>Vence</th>
-              <th>Usuario</th>
-            </tr>
-        </thead>
-          <tbody>
-            {todoNodes}
-          </tbody>
-        </table>
-
+        <div className="table-responsive">
+          {todoNodes}
+        </div>
       </div>
     )
   }

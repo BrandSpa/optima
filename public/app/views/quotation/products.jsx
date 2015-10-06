@@ -139,7 +139,8 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var productNodes = this.state.products.map(function(product) {
+    var products = this.state.products;
+    var productNodes = products.map(function(product) {
       return (
         <Product
           key={product.id}
@@ -151,14 +152,19 @@ module.exports = React.createClass({
           />
       )
     }.bind(this));
+    var showTable = false;
+    if(products.length > 0) {
+      showTable = true;
+    }
 
     return (
       <div>
       <div className="panel panel-default">
         <div className="panel-body">
           <button className="btn btn-primary btn-sm" onClick={this.showForm}>Agregar producto</button>
-          <hr />
-            <div className="table-responsive">
+
+            <div className={showTable ? "table-responsive" : "hidden"}>
+            <hr />
               <table className="table table-striped">
                 <thead>
                   <tr>

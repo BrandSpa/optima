@@ -55,13 +55,12 @@ module.exports = React.createClass({
     };
 
     this.setState({query: query});
-     request
-        .get('/api/v1/quotations')
-        .query(query)
-        .end(function(err, resp) {
-
-          this._onChange(resp.body);
-        }.bind(this));
+    request
+      .get('/api/v1/quotations')
+      .query(query)
+      .end(function(err, resp) {
+        this._onChange(resp.body);
+      }.bind(this));
   },
 
   loadMore: function(){

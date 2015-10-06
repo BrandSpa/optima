@@ -42,17 +42,19 @@ module.exports = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    console.log(this.state.contact);
     this.props.onSubmit(this.state.contact);
+    this.setState({contact: {}});
   },
 
   render: function() {
     var contact = this.state.contact;
+    var size = this.props.size || 'col-md-6';
+    var btnText = this.props.btnText || <i className="fa fa-chevron-right"></i>;
 
     return (
     <form onSubmit={this.handleSubmit}>
         <div className="row">
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Input
               ref="name"
               onInputChange={this.handleChange}
@@ -61,7 +63,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Input
               ref="lastname"
               onInputChange={this.handleChange}
@@ -70,7 +72,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Select
               ref="gender"
               options={genderOptions}
@@ -80,7 +82,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
              <Input
               ref="email"
               onInputChange={this.handleChange}
@@ -89,7 +91,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
              <Input
               ref="title"
               onInputChange={this.handleChange}
@@ -98,7 +100,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
              <Input
               ref="position"
               onInputChange={this.handleChange}
@@ -107,7 +109,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
              <Input
               ref="phone_1"
               onInputChange={this.handleChange}
@@ -116,7 +118,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Input
               ref="phone_2"
               onInputChange={this.handleChange}
@@ -125,7 +127,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Input
               ref="mobile_1"
               onInputChange={this.handleChange}
@@ -134,7 +136,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Input
               ref="mobile_2"
               onInputChange={this.handleChange}
@@ -143,7 +145,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Input
               ref="fax"
               onInputChange={this.handleChange}
@@ -152,7 +154,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Select
               ref="pay_method"
               options={payMethodOptions}
@@ -162,7 +164,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Select
               ref="found_us"
               options={foundUsOptions}
@@ -172,7 +174,7 @@ module.exports = React.createClass({
             />
           </div>
 
-          <div className="form-group col-lg-6">
+          <div className={"form-group " + size}>
             <Select
               ref="how_call"
               options={howCallOptions}
@@ -191,7 +193,7 @@ module.exports = React.createClass({
             placeholder="Comentario"
           />
         </div>
-        <button className="btn btn-primary pull-right"><i className="fa fa-chevron-right"></i></button>
+        <button className="btn btn-primary btn-sm pull-right">{btnText}</button>
       </form>
     );
   }

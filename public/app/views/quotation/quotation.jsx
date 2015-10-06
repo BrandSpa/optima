@@ -107,12 +107,17 @@ module.exports = React.createClass({
     this._update(status);
   },
 
+  changeContact: function(contactId) {
+    this._update({contact_id: contactId});
+  },
+
   _update: function(data) {
     request
       .put('/api/v1/quotations/' + this.props.params.id)
       .send(data)
       .end(function(err, res) {
-        if(err) console.log();
+        if(err) console.log(err.body);
+        console.log('quotation:', res.body);
         this.setState({quotation: res.body});
       }.bind(this));
   },
@@ -185,8 +190,13 @@ module.exports = React.createClass({
             quotationId={quotation.id} />
 
         </div>
+
         <div className="col-md-3">
-          <Contact contact={quotation.contact} />
+          <Contact
+            contact={quotation.contact}
+            company={quotation.company}
+            changeContact={this.changeContact}
+            />
         </div>
       </div>
     );
