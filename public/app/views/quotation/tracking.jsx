@@ -74,7 +74,7 @@ module.exports = React.createClass({
           <b>Tarea {todo.title}<br/></b>
           <span>{todo.description}<br/></span>
           <span><b>Creada:</b> {todo.created_at}<br/></span>
-          <span><b>vence: </b>{todo.expires_date}<br/></span>
+          <span><b>vence: </b> {todo.expires_date} {todo.expires_time}<br/></span>
           <span><b>Usuario: </b>{by}</span>
         </div>
       );
