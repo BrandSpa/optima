@@ -63,6 +63,9 @@ hr {
 ul {
   padding-left: 15px; }
 
+.open > .dropdown-menu {
+  position: relative; }
+
 .nav-user {
   color: #fff;
   padding: 15px 0;

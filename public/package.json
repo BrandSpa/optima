@@ -24,7 +24,7 @@
     "money": "^0.2.0",
     "nprogress": "^0.1.6",
     "react": "^0.13.3",
-    "react-bootstrap": "^0.24.2",
+    "react-bootstrap": "^0.24.5",
     "react-bootstrap-datetimepicker": "0.0.20",
     "react-datepicker": "^0.13.0",
     "react-intl": "^1.2.0",
