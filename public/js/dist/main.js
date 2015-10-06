@@ -3487,6 +3487,10 @@ module.exports = React.createClass({displayName: "exports",
       }.bind(this));
   },
 
+  todoCompleted: function() {
+
+  },
+
   render: function() {
     var todoNodes = this.state.todos.map(function(todo) {
       return (
@@ -3501,7 +3505,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("td", null, React.createElement("a", {href: "/quotations/"}, todo.tracking.quotation_id))
         )
       );
-    });
+    }.bind(this));
 
     return (
       React.createElement("div", {className: "panel"}, 

@@ -18,6 +18,10 @@ module.exports = React.createClass({
       }.bind(this));
   },
 
+  todoCompleted: function() {
+
+  },
+
   render: function() {
     var todoNodes = this.state.todos.map(function(todo) {
       return (
@@ -32,7 +36,7 @@ module.exports = React.createClass({
           <td><a href={"/quotations/"}>{todo.tracking.quotation_id}</a></td>
         </tr>
       );
-    });
+    }.bind(this));
 
     return (
       <div className="panel">
