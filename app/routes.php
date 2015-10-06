@@ -19,15 +19,7 @@ Route::get('todos/pendinguser/mail', 'Api\TodosController@pendingByUser');
 Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 {
 
-	Route::get('companies', 'PagesController@companies');
-	Route::get('contacts', 'PagesController@contacts');
-	Route::get('services', 'PagesController@services');
-	Route::get('results', 'PagesController@results');
 	Route::get('', 'PagesController@quotations');
-	Route::get('quotations', 'PagesController@quotations');
-	Route::get('search={query}', 'PagesController@quotations');
-	Route::get('filters={filters}', 'PagesController@quotations');
-	Route::get('quotations/{id}', 'PagesController@quotation');
 
 	/*
 	|-------------------------------------------------------------------------

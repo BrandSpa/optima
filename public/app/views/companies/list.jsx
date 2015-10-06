@@ -60,6 +60,7 @@ module.exports = React.createClass({
           </div>
         </div>
       </div>
+
       <div className="col-md-4">
         <div className="panel">
           <div className="panel-body">
@@ -70,6 +71,7 @@ module.exports = React.createClass({
               />
           </div>
         </div>
+
       </div>
       </div>
 
