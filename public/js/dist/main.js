@@ -3491,6 +3491,12 @@ module.exports = React.createClass({displayName: "exports",
 
   },
 
+  linkQuotation: function(tracking) {
+    if(trackig) {
+      return React.createElement("a", {href: "/quotations/" + tracking.quotation_id}, tracking.quotation_id);
+    }
+  },
+
   render: function() {
     var todoNodes = this.state.todos.map(function(todo) {
       return (
@@ -3502,7 +3508,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("td", null, React.createElement(Timeago, {date: todo.expires_time})), 
           React.createElement("td", null, todo.assigned.name, " ", todo.assigned.lastname), 
           React.createElement("td", null, todo.user.name, " ", todo.user.lastname), 
-          React.createElement("td", null, React.createElement("a", {href: "/quotations/"}, todo.tracking.quotation_id))
+          React.createElement("td", null, this.linkQuotation(todo.tracking))
         )
       );
     }.bind(this));

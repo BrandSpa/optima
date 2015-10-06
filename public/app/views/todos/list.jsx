@@ -22,6 +22,12 @@ module.exports = React.createClass({
 
   },
 
+  linkQuotation: function(tracking) {
+    if(trackig) {
+      return <a href={"/quotations/" + tracking.quotation_id}>{tracking.quotation_id}</a>;
+    }
+  },
+
   render: function() {
     var todoNodes = this.state.todos.map(function(todo) {
       return (
@@ -33,7 +39,7 @@ module.exports = React.createClass({
           <td><Timeago date={todo.expires_time} /></td>
           <td>{todo.assigned.name} {todo.assigned.lastname}</td>
           <td>{todo.user.name} {todo.user.lastname}</td>
-          <td><a href={"/quotations/"}>{todo.tracking.quotation_id}</a></td>
+          <td>{this.linkQuotation(todo.tracking)}</td>
         </tr>
       );
     }.bind(this));
