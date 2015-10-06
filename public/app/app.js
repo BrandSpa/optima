@@ -7,6 +7,8 @@ var App = require('views/app.jsx');
 var CompanyCreate = require('views/companies/create_panel.jsx');
 var ContactCreate = require('views/contacts/create_panel.jsx');
 var Quotation = require('views/quotation/quotation.jsx');
+var Companies = require('views/companies/list.jsx');
+var Contacts = require('views/contacts/list.jsx');
 
 React.render((
   <Router>
@@ -14,6 +16,8 @@ React.render((
       <Route path="company/create" component={CompanyCreate} />
       <Route path="company/:companyId/contact/create" component={ContactCreate} />
       <Route path="quotations/:id" component={Quotation} />
+      <Route path="companies" component={Companies} />
+      <Route path="contacts" component={Contacts} />
     </Route>
   </Router>
 ), document.body);

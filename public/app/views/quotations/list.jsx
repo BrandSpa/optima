@@ -81,7 +81,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div className="panel panel-default quotations-table">
+      <div className="panel quotations-table">
         <div className="panel-body">
           <a href="#company/create" className="btn btn-primary btn-sm">Nueva cotización</a>
           <span className="pull-right">BD-COM-03</span>
@@ -133,15 +133,23 @@ module.exports = React.createClass({
           </div>
 
            <div className="btn-group" role="group">
-            <button className="btn btn-default btn-sm"  onClick={this.loadLess}><i className="fa fa-chevron-left"></i></button>
-            <button className="btn btn-default btn-sm" onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
+            <button
+              className="btn btn-default btn-sm"
+              onClick={this.loadLess}><i className="fa fa-chevron-left"></i></button>
+            <button
+              className="btn btn-default btn-sm"
+              onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
             </div>
 
           <ListTable quotations={this.state.quotations} />
 
           <div className="btn-group" role="group">
-            <button className="btn btn-default btn-sm"  onClick={this.loadLess}><i className="fa fa-chevron-left"></i></button>
-            <button className="btn btn-default btn-sm" onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
+            <button
+            className="btn btn-default btn-sm"
+            onClick={this.loadLess}><i className="fa fa-chevron-left"></i></button>
+            <button
+              className="btn btn-default btn-sm"
+              onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
             </div>
 
         </div>

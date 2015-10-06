@@ -21,8 +21,14 @@ module.exports = React.createClass({
     } else if (localStorage.getItem('company')) {
       company = JSON.parse(localStorage.getItem('company'));
     }
-    console.log(company);
+
     this.setState({company: company});
+  },
+
+  componentWillReceiveProps: function(props) {
+    if(props.company) {
+      this.setState({company: props.company});
+    }
   },
 
   handleChange: function() {
@@ -54,6 +60,9 @@ module.exports = React.createClass({
 
   render: function() {
     var company = this.state.company;
+
+    var btnCleanText = this.props.btnCleanText || 'limpiar';
+    var btnStoreText = this.props.btnStoreText || (<i className="fa fa-chevron-right"></i>);
 
     return (
      <form onSubmit={this.handleSubmit}>
@@ -135,8 +144,8 @@ module.exports = React.createClass({
           placeholder="Comentario"
         />
        </div>
-       <button className="btn btn-primary pull-right"><i className="fa fa-chevron-right"></i></button>
-       <a href="#" className="btn btn-warning" onClick={this.clean}>Borrar</a>
+       <button className="btn btn-primary btn-sm pull-right">{btnStoreText}</button>
+       <a href="#" className="btn btn-default btn-sm" onClick={this.clean}>{btnCleanText}</a>
      </form>
     );
   }

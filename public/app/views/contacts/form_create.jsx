@@ -40,6 +40,12 @@ module.exports = React.createClass({
     this.setState({contact: contact});
   },
 
+  componentWillReceiveProps: function(props) {
+    if(props.contact) {
+      this.setState({contact: props.contact});
+    }
+  },
+
   handleSubmit: function(e) {
     e.preventDefault();
     this.props.onSubmit(this.state.contact);
