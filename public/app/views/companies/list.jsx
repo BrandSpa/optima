@@ -54,11 +54,11 @@ module.exports = React.createClass({
               className="btn btn-default btn-sm"
               onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
             </div>
-          <ul className="companies-list">
-            {companyNodes}
-          </ul>
           </div>
         </div>
+        <div className="companies-list">
+            {companyNodes}
+          </div>
       </div>
 
       <div className="col-md-4">

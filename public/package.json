@@ -26,6 +26,7 @@
     "react": "^0.13.3",
     "react-bootstrap": "^0.24.5",
     "react-bootstrap-datetimepicker": "0.0.20",
+    "react-chartjs": "^0.6.0",
     "react-datepicker": "^0.13.0",
     "react-intl": "^1.2.0",
     "react-quill": "^0.2.2",

@@ -3,7 +3,7 @@ var React = require('react');
 var List = require('views/quotations/list.jsx');
 var Activities = require('views/activities/list.jsx');
 var Todos = require('views/todos/list.jsx');
-
+var Graphs = require('views/quotations/graphs.jsx');
 module.exports = React.createClass({
 
   render: function() {
@@ -12,6 +12,7 @@ module.exports = React.createClass({
         <div className="col-md-10">
           <List />
           <Todos />
+          <Graphs />
         </div>
         <div className="col-md-2">
         <Activities />

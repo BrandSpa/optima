@@ -15,7 +15,6 @@ module.exports = React.createClass({
                   <li><a href="#companies">Empresas</a></li>
                   <li><a href="#contacts">Contactos</a></li>
                   <li><a href="#services">Servicios</a></li>
-                  <li><a href="#results">Resultados</a></li>
                </ul>
           </div>
         </nav>

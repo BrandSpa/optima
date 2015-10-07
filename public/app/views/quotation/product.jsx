@@ -1,7 +1,6 @@
 'use strict';
 var React = require('react');
-var ReactIntl = require('react-intl');
-var FormattedNumber = ReactIntl.FormattedNumber;
+var FormattedNumber = require('react-intl').FormattedNumber;
 
 module.exports = React.createClass({
   getDefaultProps: function() {

@@ -56,4 +56,11 @@ class ContactsController extends \BaseController {
 		return Response::json($collection, 200);
 	}
 
+	public function destroy($id)
+	{
+		$model = Contact::find($id);
+		$model->delete();
+		return Response::json(['message' => 'deleted']);
+	}
+
 }
