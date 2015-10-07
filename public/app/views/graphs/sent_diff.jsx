@@ -10,7 +10,6 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function(props) {
-    console.log('nea');
     if(props.graphsData.sent_diff) {
       this.setState({
         sent_diff: props.graphsData.sent_diff
