@@ -11,6 +11,7 @@ var ClientType = require('views/graphs/client_type.jsx');
 var SentDiff = require('views/graphs/sent_diff.jsx');
 var DateTimeField = require('react-bootstrap-datetimepicker');
 var clientOptions = require('options/client_type.json');
+var typeOptions = require('options/type.json');
 var Select = require('components/form_select.jsx');
 
 module.exports = React.createClass({
@@ -30,12 +31,16 @@ module.exports = React.createClass({
     this.fetch();
   },
 
-  fetch: function() {
+  fetch: function(filters) {
+    var filters = filters || this.state.filters;
     request
       .get('/api/v1/reports')
-      .query(this.state.filters)
+      .query(filters)
       .end(function(err, res) {
-        this.setState({graphsData: res.body});
+        this.setState({
+          graphsData: res.body,
+          filters: filters
+        });
       }.bind(this));
   },
 
@@ -52,9 +57,13 @@ module.exports = React.createClass({
     this.handleFilters({client_type: val});
   },
 
+  handleType: function() {
+    var val = React.findDOMNode(this.refs.type.refs.select).value;
+    this.handleFilters({type: val});
+  },
+
   handleFilters: function(filter) {
-    this.setState({filters: _.extend(this.state.filters, filter)});
-    this.fetch();
+    this.fetch(_.extend(this.state.filters, filter));
   },
 
   render: function() {
@@ -98,6 +107,16 @@ module.exports = React.createClass({
               />
             </div>
 
+            <div className="form-group col-sm-3">
+              <label htmlFor="">Tipo</label>
+              <Select
+                ref="type"
+                options={typeOptions}
+                default="Seleccionar tipo"
+                value={this.state.filters.type}
+                onSelectChange={this.handleType}
+              />
+            </div>
           </div>
         </div>
       </div>

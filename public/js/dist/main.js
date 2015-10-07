@@ -1571,8 +1571,7 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   componentWillReceiveProps: function(props) {
-    console.log(props.graphsData.no_effective);
-    if(props.graphsData.no_effective && props.graphsData.no_effectiveCount) {
+    if(props.graphsData.no_effective && props.graphsData.no_effective_count) {
       this.setState({
         no_effective: props.graphsData.no_effective,
         count: props.graphsData.no_effective_count
@@ -3921,6 +3920,7 @@ var ClientType = require('views/graphs/client_type.jsx');
 var SentDiff = require('views/graphs/sent_diff.jsx');
 var DateTimeField = require('react-bootstrap-datetimepicker');
 var clientOptions = require('options/client_type.json');
+var typeOptions = require('options/type.json');
 var Select = require('components/form_select.jsx');
 
 module.exports = React.createClass({displayName: "exports",
@@ -3940,12 +3940,16 @@ module.exports = React.createClass({displayName: "exports",
     this.fetch();
   },
 
-  fetch: function() {
+  fetch: function(filters) {
+    var filters = filters || this.state.filters;
     request
       .get('/api/v1/reports')
-      .query(this.state.filters)
+      .query(filters)
       .end(function(err, res) {
-        this.setState({graphsData: res.body});
+        this.setState({
+          graphsData: res.body,
+          filters: filters
+        });
       }.bind(this));
   },
 
@@ -3962,9 +3966,13 @@ module.exports = React.createClass({displayName: "exports",
     this.handleFilters({client_type: val});
   },
 
+  handleType: function() {
+    var val = React.findDOMNode(this.refs.type.refs.select).value;
+    this.handleFilters({type: val});
+  },
+
   handleFilters: function(filter) {
-    this.setState({filters: _.extend(this.state.filters, filter)});
-    this.fetch();
+    this.fetch(_.extend(this.state.filters, filter));
   },
 
   render: function() {
@@ -4006,8 +4014,18 @@ module.exports = React.createClass({displayName: "exports",
                 value: this.state.filters.client_type, 
                 onSelectChange: this.handleClientType}
               )
-            )
+            ), 
 
+            React.createElement("div", {className: "form-group col-sm-3"}, 
+              React.createElement("label", {htmlFor: ""}, "Tipo"), 
+              React.createElement(Select, {
+                ref: "type", 
+                options: typeOptions, 
+                default: "Seleccionar tipo", 
+                value: this.state.filters.type, 
+                onSelectChange: this.handleType}
+              )
+            )
           )
         )
       ), 
@@ -4060,7 +4078,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/quotations/graphs.jsx","/app/views/quotations")
-},{"_process":67,"buffer":63,"components/form_select.jsx":3,"lodash":70,"moment":96,"options/client_type.json":9,"react":583,"react-bootstrap-datetimepicker":98,"superagent":584,"views/graphs/advisor.jsx":32,"views/graphs/client_type.jsx":33,"views/graphs/how_find_us.jsx":34,"views/graphs/no_effective.jsx":35,"views/graphs/sent_diff.jsx":36,"views/graphs/status.jsx":37}],57:[function(require,module,exports){
+},{"_process":67,"buffer":63,"components/form_select.jsx":3,"lodash":70,"moment":96,"options/client_type.json":9,"options/type.json":20,"react":583,"react-bootstrap-datetimepicker":98,"superagent":584,"views/graphs/advisor.jsx":32,"views/graphs/client_type.jsx":33,"views/graphs/how_find_us.jsx":34,"views/graphs/no_effective.jsx":35,"views/graphs/sent_diff.jsx":36,"views/graphs/status.jsx":37}],57:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');

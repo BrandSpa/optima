@@ -11,8 +11,7 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function(props) {
-    console.log(props.graphsData.no_effective);
-    if(props.graphsData.no_effective && props.graphsData.no_effectiveCount) {
+    if(props.graphsData.no_effective && props.graphsData.no_effective_count) {
       this.setState({
         no_effective: props.graphsData.no_effective,
         count: props.graphsData.no_effective_count
