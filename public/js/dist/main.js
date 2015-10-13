@@ -4533,6 +4533,7 @@ module.exports = React.createClass({displayName: "exports",
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
+var ReactQuill = require('react-quill');
 
 module.exports = React.createClass({displayName: "exports",
   getInitialState: function() {
@@ -4586,7 +4587,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/services/form_create.jsx","/app/views/services")
-},{"_process":71,"buffer":67,"react":587}],61:[function(require,module,exports){
+},{"_process":71,"buffer":67,"react":587,"react-quill":375}],61:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
