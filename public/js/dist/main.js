@@ -3354,7 +3354,8 @@ module.exports = React.createClass({displayName: "exports",
     var disabled = false;
     var quotation = this.state.quotation;
     console.log(quotation.status);
-    if(quotation.status !== 'Borrador') {
+
+    if(quotation.status && quotation.status !== 'Borrador') {
       disabled = true;
     }
     this.setState({disabled: disabled});
