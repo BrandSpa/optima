@@ -9,7 +9,7 @@ module.exports = React.createClass({
         <nav className="navbar top-bar">
           <div className="container-fluid">
               <a className="navbar-brand" href="#">OPTIMA</a>
-               <ul className="nav navbar-nav collapse">
+               <ul className="nav navbar-nav navbar-collapse">
                   <li><a href="#company/create">Nueva cotización</a></li>
                   <li><a href="#">Dashboard</a></li>
                   <li><a href="#companies">Empresas</a></li>
