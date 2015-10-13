@@ -102,10 +102,12 @@ module.exports = React.createClass({
           <div className="row">
             <div className="form-group col-sm-12">
              <Select
-              placeholder="Servicios"
-              value={this.state.optionSelected}
-              options={this.state.options}
-              onChange={this.handleChange} />
+                placeholder="Servicios"
+                value={this.state.optionSelected}
+                options={this.state.options}
+                onChange={this.handleChange}
+                disabled={this.props.disabled ? true : false}
+              />
              <br/>
              <button
               className="btn btn-primary btn-sm"
@@ -125,7 +127,6 @@ module.exports = React.createClass({
                   {serviceNodes}
                 </tbody>
               </table>
-
           </div>
           </div>
         </div>

@@ -3568,10 +3568,12 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "form-group col-sm-12"}, 
              React.createElement(Select, {
-              placeholder: "Servicios", 
-              value: this.state.optionSelected, 
-              options: this.state.options, 
-              onChange: this.handleChange}), 
+                placeholder: "Servicios", 
+                value: this.state.optionSelected, 
+                options: this.state.options, 
+                onChange: this.handleChange, 
+                disabled: this.props.disabled ? true : false}
+              ), 
              React.createElement("br", null), 
              React.createElement("button", {
               className: "btn btn-primary btn-sm", 
@@ -3591,7 +3593,6 @@ module.exports = React.createClass({displayName: "exports",
                   serviceNodes
                 )
               )
-
           )
           )
         )
