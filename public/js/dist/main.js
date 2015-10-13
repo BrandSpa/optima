@@ -3637,7 +3637,7 @@ module.exports = React.createClass({displayName: "exports",
     .end(function(err, res) {
       // if(err) return alertify.error("complete primero los filtros");
       if(err) {
-        console.log(err);
+        return console.log(err.body);
       }
       this.setState({sending: false});
       return this.props.onStatusChange({
