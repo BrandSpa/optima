@@ -150,6 +150,7 @@ module.exports = React.createClass({
           onDuplicate={this.handleDuplicate}
           onOrder={this.handleOrder}
           onDelete={this.handleDelete}
+          disabled={this.props.disabled}
           />
       )
     }.bind(this));

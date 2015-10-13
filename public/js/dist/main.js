@@ -2975,14 +2975,20 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("li", null, 
             React.createElement("button", {
               className: "btn btn-default btn-xs", 
-              onClick: this.props.onEdit.bind(null, product)}, "Editar"
+              onClick: this.props.onEdit.bind(null, product), 
+              disabled: this.props.disabled ? true : false
+            }, 
+              "Editar"
             )
           ), 
 
           React.createElement("li", null, 
             React.createElement("button", {
               className: "btn btn-default btn-xs", 
-              onClick: this.props.onDuplicate.bind(null, product.id)}, "Duplicar"
+              onClick: this.props.onDuplicate.bind(null, product.id), 
+              disabled: this.props.disabled ? true : false
+            }, 
+              "Duplicar"
             )
           ), 
 
@@ -2997,8 +3003,10 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("li", null, 
             React.createElement("button", {
               className: "btn btn-default btn-xs", 
-              onClick: this.props.onDelete.bind(null, product.id)
-              }, "Eliminar"
+              onClick: this.props.onDelete.bind(null, product.id), 
+              disabled: this.props.disabled ? true : false
+            }, 
+              "Eliminar"
             )
           )
         )
@@ -3162,7 +3170,8 @@ module.exports = React.createClass({displayName: "exports",
           onEdit: this.handleEdit, 
           onDuplicate: this.handleDuplicate, 
           onOrder: this.handleOrder, 
-          onDelete: this.handleDelete}
+          onDelete: this.handleDelete, 
+          disabled: this.props.disabled}
           )
       )
     }.bind(this));

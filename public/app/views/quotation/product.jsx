@@ -40,14 +40,20 @@ module.exports = React.createClass({
           <li>
             <button
               className="btn btn-default btn-xs"
-              onClick={this.props.onEdit.bind(null, product)}>Editar
+              onClick={this.props.onEdit.bind(null, product)}
+              disabled={this.props.disabled ? true : false}
+            >
+              Editar
             </button>
           </li>
 
           <li>
             <button
               className="btn btn-default btn-xs"
-              onClick={this.props.onDuplicate.bind(null, product.id)}>Duplicar
+              onClick={this.props.onDuplicate.bind(null, product.id)}
+              disabled={this.props.disabled ? true : false}
+            >
+              Duplicar
             </button>
           </li>
 
@@ -63,7 +69,9 @@ module.exports = React.createClass({
             <button
               className="btn btn-default btn-xs"
               onClick={this.props.onDelete.bind(null, product.id)}
-              >Eliminar
+              disabled={this.props.disabled ? true : false}
+            >
+              Eliminar
             </button>
           </li>
         </ul>
