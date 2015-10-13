@@ -44,31 +44,23 @@ module.exports = React.createClass({
         <div className="panel-body">
           <ul className="list-inline">
             <li>
-              <div className="btn-group">
-                <button
-                  className="btn btn-default btn-sm dropdown-toggle"
-                  type="button"
-                  data-toggle="dropdown">
-                  <i className="fa fa-file-pdf-o"></i> <span className="caret"></span>
-                </button>
-                <ul className="dropdown-menu" role="menu">
-                  <li>
-                    <a
-                    href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id}
-                    target="_blank"> PDF </a>
-                  </li>
-                  <li>
-                    <a
-                    href={"/quotations/" + quotation.id + "/pdfbn"}
-                    target="_blank" > PDF BN </a>
-                  </li>
-                  <li>
-                    <a
-                    href={"/quotations/" + quotation.id + "/pdflogos"}
-                    target="_blank" > PDF con logos </a>
-                  </li>
-                </ul>
-              </div>
+              <DropdownButton
+                bsStyle="default"
+                bsSize="small"
+                title={<i className="fa fa-file-pdf-o"></i>}
+              >
+                <MenuItem
+                eventKey="1"
+                href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id}
+                target="_new"
+                >
+                PDF
+                </MenuItem>
+                <MenuItem eventKey="2" href={"/quotations/" + quotation.id + "/pdfbn"} target="_blank" > PDF BN
+                </MenuItem>
+                <MenuItem eventKey="3" href={"/quotations/" + quotation.id + "/pdflogos"}  target="_blank"> PDF con logos
+                </MenuItem>
+              </DropdownButton>
             </li>
             <li>
               <a
