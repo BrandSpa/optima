@@ -11,14 +11,20 @@ module.exports = React.createClass({
     }
   },
 
-  componentDidMount: function() {
-    request
-    .get('/api/v1/activities')
-    .query({quotation_id: this.props.quotationId})
-    .end(function(err, res) {
-      this.setState({activities: res.body})
-    }.bind(this));
+  componentWillReceiveProps: function(props) {
+    console.log(props.quotationId);
+    if(props.quotationId) {
+     request
+        .get('/api/v1/activities')
+        .query({quotation_id: props.quotationId})
+        .end(function(err, res) {
+          this.setState({activities: res.body})
+        }.bind(this));
+    }
+
   },
+
+
 
   render: function() {
     var activityNodes = this.state.activities.map(function(activity) {

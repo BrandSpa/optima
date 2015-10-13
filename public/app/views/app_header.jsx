@@ -13,7 +13,6 @@ module.exports = React.createClass({
                   <li><a href="#company/create">Nueva cotización</a></li>
                   <li><a href="#">Dashboard</a></li>
                   <li><a href="#companies">Empresas</a></li>
-                  <li><a href="#contacts">Contactos</a></li>
                   <li><a href="#services">Servicios</a></li>
                </ul>
           </div>

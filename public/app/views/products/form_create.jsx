@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react');
 var productsOptions = require('options/products.json');
+var productsTypesOptions = require('options/product_type.json');
 var PeriodsOptions = require('options/periods.json');
 var Select = require('components/form_select.jsx');
 var _ = require('lodash');
@@ -92,12 +93,6 @@ module.exports = React.createClass({
     var iva;
     var show;
 
-    var nameOptions = [
-      {value: 'Activo', label: 'Activo'},
-      {value: 'Inactivo', label: 'Inactivo'},
-      {value: 'Nuevo', label: 'Nuevo'}
-    ];
-
     if(product.iva == 1 || product.iva == true) {
       iva = true
     } else {
@@ -127,7 +122,7 @@ module.exports = React.createClass({
           <label htmlFor="">Tipo</label>
           <Select
             ref="type"
-            options={nameOptions}
+            options={productsTypesOptions}
             default="Seleccionar tipo"
             onSelectChange={this.handleChange}
             value={product.type}
@@ -322,7 +317,7 @@ module.exports = React.createClass({
            <Select
             ref="period"
             options={PeriodsOptions}
-            default="Periodo"
+            default="Seleccionar periodo"
             onSelectChange={this.handleChange}
             value={product.period}
             />

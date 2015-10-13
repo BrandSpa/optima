@@ -3,9 +3,7 @@ var sass = require('gulp-ruby-sass');
 var gutil = require('gulp-util');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
-var declare = require('gulp-declare');
 var requireDir = require('require-dir');
 var tasks = requireDir('./tasks');
 

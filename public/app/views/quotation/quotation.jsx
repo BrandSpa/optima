@@ -85,6 +85,7 @@ module.exports = React.createClass({
 
   handleSaveComment: function(comment) {
     this._update({comment: comment});
+    this.setState({showComment: false});
   },
 
   handleSaveMail: function(mail) {

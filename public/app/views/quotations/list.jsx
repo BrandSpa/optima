@@ -8,6 +8,8 @@ var statusOptions = require('options/status.json');
 var advisorOptions = require('options/advisors.json');
 var typeOptions = require('options/type.json');
 var clientOptions = require('options/client_type.json');
+var DateTimeField = require('react-bootstrap-datetimepicker');
+var moment = require('moment');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -19,7 +21,9 @@ module.exports = React.createClass({
         status: '',
         advisor: '',
         client_type: '',
-        quotation_type: ''
+        quotation_type: '',
+        from: null,
+        until: null
       },
     }
   },
@@ -86,10 +90,33 @@ module.exports = React.createClass({
           <a href="#company/create" className="btn btn-primary btn-sm">Nueva cotización</a>
           <span className="pull-right">BD-COM-03</span>
           <hr />
-          <div className="form-group">
+          <div className="row">
+          <div className="form-group col-md-6">
             <input placeholder="Buscar cotizaciones" ref="query" className="form-control" onChange={this.search} />
           </div>
 
+          <div className="form-group col-md-3">
+              <DateTimeField
+                defaultText="Seleccionar desde"
+                format="YYYY-MM-DD"
+                inputFormat="DD-MM-YYYY"
+                mode="date"
+                onChange={this.handleFrom}
+                value={this.state.query.from}
+                />
+            </div>
+
+            <div className="form-group col-md-3">
+              <DateTimeField
+                defaultText="Seleccionar hasta"
+                format="YYYY-MM-DD"
+                inputFormat="DD-MM-YYYY"
+                mode="date"
+                onChange={this.handleUntil}
+                value={this.state.query.until}
+              />
+            </div>
+          </div>
           <div className="row">
             <div className="form-group col-sm-3">
               <Select

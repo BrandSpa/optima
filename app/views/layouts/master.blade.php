@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/node_modules/react-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/improve.css">
-  <link rel="stylesheet" href="/node_modules/react-select/dist/default.css">
+  <link rel="stylesheet" href="/css/react-select.css">
 </head>
 
 <body>

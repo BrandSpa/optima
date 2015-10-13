@@ -17,7 +17,6 @@ React.render((
       <Route path="company/:companyId/contact/create" component={ContactCreate} />
       <Route path="quotations/:id" component={Quotation} />
       <Route path="companies" component={Companies} />
-      <Route path="contacts" component={Contacts} />
     </Route>
   </Router>
 ), document.body);

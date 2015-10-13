@@ -5,6 +5,7 @@ var Typeahead = require('react-typeahead').Typeahead;
 var request = require('superagent');
 var _ = require('underscore');
 var Activities = require('views/activities/list.jsx');
+
 module.exports = React.createClass({
 
   getInitialState: function() {
@@ -61,13 +62,10 @@ module.exports = React.createClass({
   },
 
   handleSubmit: function(company) {
-    console.log(company.id);
 
     if (company && company.id) {
-      console.log('update');
       return this.update(company);
     } else {
-      console.log('store');
       // return this.store(company);
     }
   },

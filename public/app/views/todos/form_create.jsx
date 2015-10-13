@@ -90,7 +90,7 @@ module.exports = React.createClass({
     return (
       <form onSubmit={this.handleSubmit}>
         <br/>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-4">
           <label htmlFor="">Fecha vencimiento</label>
           <DateTimeField
             defaultText="Seleccionar fecha"
@@ -102,7 +102,7 @@ module.exports = React.createClass({
             />
         </div>
 
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-4">
           <label htmlFor="">Hora vencimiento</label>
           <DateTimeField
             defaultText="Seleccionar hora"
@@ -112,7 +112,7 @@ module.exports = React.createClass({
           />
         </div>
 
-        <div className="form-group col-md-12">
+        <div className="form-group col-md-4">
           <label htmlFor="">Seleccionar o buscar usuario</label>
           <Select
             options={userOptions}
