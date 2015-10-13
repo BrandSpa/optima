@@ -1,5 +1,7 @@
 'use strict';
 var React = require('react');
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
 
 module.exports = React.createClass({
   getDefaultProps: function() {

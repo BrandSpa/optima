@@ -1,7 +1,5 @@
 'use strict';
 var React = require('react');
-var DropdownButton = require('react-bootstrap').DropdownButton;
-var MenuItem = require('react-bootstrap').MenuItem;
 var request = require('superagent');
 var _ = require('underscore');
 var Contact = require('views/quotation/contact.jsx');

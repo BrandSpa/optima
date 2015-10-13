@@ -2448,6 +2448,8 @@ module.exports = React.createClass({displayName: "exports",
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
 
 module.exports = React.createClass({displayName: "exports",
   getDefaultProps: function() {
@@ -2549,7 +2551,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/quotation/edit.jsx","/app/views/quotation")
-},{"_process":68,"buffer":64,"react":584}],44:[function(require,module,exports){
+},{"_process":68,"buffer":64,"react":584,"react-bootstrap":278}],44:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
@@ -3216,8 +3218,6 @@ module.exports = React.createClass({displayName: "exports",
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
-var DropdownButton = require('react-bootstrap').DropdownButton;
-var MenuItem = require('react-bootstrap').MenuItem;
 var request = require('superagent');
 var _ = require('underscore');
 var Contact = require('views/quotation/contact.jsx');
@@ -3444,7 +3444,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/quotation/quotation.jsx","/app/views/quotation")
-},{"_process":68,"buffer":64,"moment":97,"react":584,"react-bootstrap":278,"superagent":585,"underscore":588,"views/quotation/activity.jsx":40,"views/quotation/comment.jsx":41,"views/quotation/contact.jsx":42,"views/quotation/edit.jsx":43,"views/quotation/filters.jsx":44,"views/quotation/mails.jsx":45,"views/quotation/no_effective.jsx":46,"views/quotation/no_send.jsx":47,"views/quotation/products.jsx":49,"views/quotation/services.jsx":51,"views/quotation/status.jsx":52,"views/quotation/times.jsx":53,"views/quotation/trackings.jsx":55}],51:[function(require,module,exports){
+},{"_process":68,"buffer":64,"moment":97,"react":584,"superagent":585,"underscore":588,"views/quotation/activity.jsx":40,"views/quotation/comment.jsx":41,"views/quotation/contact.jsx":42,"views/quotation/edit.jsx":43,"views/quotation/filters.jsx":44,"views/quotation/mails.jsx":45,"views/quotation/no_effective.jsx":46,"views/quotation/no_send.jsx":47,"views/quotation/products.jsx":49,"views/quotation/services.jsx":51,"views/quotation/status.jsx":52,"views/quotation/times.jsx":53,"views/quotation/trackings.jsx":55}],51:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
