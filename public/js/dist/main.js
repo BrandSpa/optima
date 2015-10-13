@@ -82,7 +82,7 @@ module.exports = React.createClass({displayName: "exports",
         onChange: this.handleChange, 
         className: "form-control", 
         value: this.props.value, 
-        disabled: this.disabled ? true : false}, 
+        disabled: this.props.disabled ? true : false}, 
       React.createElement("option", {value: ""}, this.props.default), 
         optionNodes
       )
