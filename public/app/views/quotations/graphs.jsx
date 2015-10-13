@@ -129,6 +129,10 @@ module.exports = React.createClass({
                 onSelectChange={this.handleType}
               />
             </div>
+            <div className="form-group col-sm-3">
+              <label htmlFor="">Visualización</label>
+              <button className="btn btn-default" onClick={this.handleShape}>Lineas</button>
+            </div>
           </div>
         </div>
       </div>
@@ -159,10 +163,6 @@ module.exports = React.createClass({
           </div>
         </div>
       </div>
-      <div className="row">
-        <button className="btn btn-default" onClick={this.handleShape}>Lineas</button>
-      </div>
-
 
         <Status
           graphsData={this.state.graphsData}

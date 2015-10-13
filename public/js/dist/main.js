@@ -4184,6 +4184,10 @@ module.exports = React.createClass({displayName: "exports",
                 value: this.state.filters.type, 
                 onSelectChange: this.handleType}
               )
+            ), 
+            React.createElement("div", {className: "form-group col-sm-3"}, 
+              React.createElement("label", {htmlFor: ""}, "Visualización"), 
+              React.createElement("button", {className: "btn btn-default", onClick: this.handleShape}, "Lineas")
             )
           )
         )
@@ -4215,10 +4219,6 @@ module.exports = React.createClass({displayName: "exports",
           )
         )
       ), 
-      React.createElement("div", {className: "row"}, 
-        React.createElement("button", {className: "btn btn-default", onClick: this.handleShape}, "Lineas")
-      ), 
-
 
         React.createElement(Status, {
           graphsData: this.state.graphsData, 
