@@ -4597,10 +4597,38 @@ module.exports = React.createClass({displayName: "exports",
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
+var request = require('superagent');
 
 module.exports = React.createClass({displayName: "exports",
+  getInitialState: function() {
+    return {
+      services: []
+    }
+  },
+
+  componentDidMount: function() {
+    request
+    .get('/api/v1/services')
+    .end(function(err, res) {
+      if(err) return console.log(err.body);
+      this.setState({services: res.body});
+    }.bind(this));
+  },
 
   render: function() {
+    var serviceNodes = this.state.services.map(function(service) {
+      return (
+        React.createElement("tr", {key: service.id}, 
+          React.createElement("td", null, service.title), 
+          React.createElement("td", null, service.price_1), 
+          React.createElement("td", null, service.price_2), 
+          React.createElement("td", null, 
+            React.createElement("button", {onClick: this.props.handleEdit.bind(null, service)}, "Editar")
+          )
+        )
+      )
+    }.bind(this));
+
     return (
       React.createElement("div", {className: "table-responsive"}, 
         React.createElement("table", {className: "table"}, 
@@ -4619,7 +4647,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/services/list.jsx","/app/views/services")
-},{"_process":72,"buffer":68,"react":588}],62:[function(require,module,exports){
+},{"_process":72,"buffer":68,"react":588,"superagent":589}],62:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
