@@ -129,13 +129,11 @@ module.exports = React.createClass({
                 onSelectChange={this.handleType}
               />
             </div>
-            <div className="form-group col-sm-3">
-              <label htmlFor="">Visualización</label>
-              <div className="form-control">
-                <button className="btn btn-default" onClick={this.handleShape}>Lineas</button>
-              </div>
 
+            <div className="form-group col-sm-3">
+                <button className="btn btn-default" onClick={this.handleShape}>Cambiar Visualización</button>
             </div>
+
           </div>
         </div>
       </div>
