@@ -3353,10 +3353,10 @@ module.exports = React.createClass({displayName: "exports",
   handleDisabled: function(status) {
     var disabled = false;
     console.log(status);
-    // if(status !== 'Borrador') {
-    //   disabled = true;
-    // }
-    // this.setState({disabled: disabled});
+    if(status !== 'Borrador') {
+      disabled = true;
+    }
+    this.setState({disabled: disabled});
   },
 
   render: function() {
