@@ -3264,6 +3264,7 @@ module.exports = React.createClass({displayName: "exports",
       .end(function(err, res) {
         if(err) return console.log(err.response.text);
         this.setState({quotation: res.body});
+        this.handleDisabled(res.body.status);
       }.bind(this));
   },
 
@@ -3345,16 +3346,14 @@ module.exports = React.createClass({displayName: "exports",
       .end(function(err, res) {
         if(err) console.log(err.body);
         this.setState({quotation: res.body});
+        this.handleDisabled(res.body.status);
       }.bind(this));
-      this.handleDisabled();
   },
 
-  handleDisabled: function() {
+  handleDisabled: function(status) {
     var disabled = false;
-    var quotation = this.state.quotation;
-    console.log(quotation.status);
-
-    // if(quotation.status && quotation.status !== 'Borrador') {
+    console.log(status);
+    // if(status !== 'Borrador') {
     //   disabled = true;
     // }
     // this.setState({disabled: disabled});
