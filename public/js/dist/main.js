@@ -4187,7 +4187,10 @@ module.exports = React.createClass({displayName: "exports",
             ), 
             React.createElement("div", {className: "form-group col-sm-3"}, 
               React.createElement("label", {htmlFor: ""}, "Visualización"), 
-              React.createElement("button", {className: "btn btn-default", onClick: this.handleShape}, "Lineas")
+              React.createElement("div", {className: "form-control"}, 
+                React.createElement("button", {className: "btn btn-default", onClick: this.handleShape}, "Lineas")
+              )
+
             )
           )
         )

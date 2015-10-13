@@ -131,7 +131,10 @@ module.exports = React.createClass({
             </div>
             <div className="form-group col-sm-3">
               <label htmlFor="">Visualización</label>
-              <button className="btn btn-default" onClick={this.handleShape}>Lineas</button>
+              <div className="form-control">
+                <button className="btn btn-default" onClick={this.handleShape}>Lineas</button>
+              </div>
+
             </div>
           </div>
         </div>
