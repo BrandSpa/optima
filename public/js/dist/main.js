@@ -4337,7 +4337,12 @@ module.exports = React.createClass({displayName: "exports",
       return (
         React.createElement("tr", {key: quotation.id}, 
         React.createElement("td", null, React.createElement("a", {href: "/#quotations/" + quotation.id}, quotation.id)), 
-        React.createElement("td", null, React.createElement("span", {className: "label label-" + quotation.status}, quotation.status)), 
+        React.createElement("td", null, 
+          React.createElement("span", {className: "label label-" + quotation.status}, 
+            quotation.status
+          ), 
+          quotation.rethink_from ? React.createElement("a", {href: "/#quotations/" + quotation.rethink_from}, quotation.rethink_from) : ""
+        ), 
         React.createElement("td", null, quotation.advisor), 
         React.createElement("td", null, quotation.client_type), 
         React.createElement("td", null, quotation.type), 

@@ -22,7 +22,7 @@ module.exports = React.createClass({
           <span className={"label label-" + quotation.status}>
             {quotation.status}
           </span>
-          {quotation.rethink_from ? <a href={"/#quotations/" + quotation.rethink_from}>{quotation.rethink_from}</a>}
+          {quotation.rethink_from ? <a href={"/#quotations/" + quotation.rethink_from}>{quotation.rethink_from}</a> : ""}
         </td>
         <td>{quotation.advisor}</td>
         <td>{quotation.client_type}</td>
