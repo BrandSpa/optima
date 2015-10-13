@@ -4156,7 +4156,8 @@ module.exports = React.createClass({displayName: "exports",
         ), 
 
         React.createElement(Advisors, {
-          graphsData: this.state.graphsData}
+          graphsData: this.state.graphsData, 
+          shape: this.state.shape}
         ), 
 
         React.createElement(ClientType, {

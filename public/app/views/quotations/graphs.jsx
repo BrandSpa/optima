@@ -171,6 +171,7 @@ module.exports = React.createClass({
 
         <Advisors
           graphsData={this.state.graphsData}
+          shape={this.state.shape}
         />
 
         <ClientType
