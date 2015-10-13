@@ -26,6 +26,7 @@ module.exports = React.createClass({
       showMail: false,
       showNoEffective: false,
       showNoSend: false,
+      disabled: false
     }
   },
 
@@ -119,9 +120,18 @@ module.exports = React.createClass({
       .send(data)
       .end(function(err, res) {
         if(err) console.log(err.body);
-        console.log('quotation:', res.body);
         this.setState({quotation: res.body});
       }.bind(this));
+      this.handleDisabled();
+  },
+
+  handleDisabled: function() {
+    var disabled = false;
+    var quotation = this.state.quotation;
+    if(quotation.status !== 'Borrador') {
+      disabled = true;
+    }
+    this.setState({disabled: disabled});
   },
 
   render: function() {
@@ -137,9 +147,11 @@ module.exports = React.createClass({
         </div>
 
         <div className="col-md-9">
+
           <Filters
             onChange={this.handleOptions}
             quotation={quotation}
+            disabled={this.state.disabled}
           />
 
           <Edit

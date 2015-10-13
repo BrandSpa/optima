@@ -3250,6 +3250,7 @@ module.exports = React.createClass({displayName: "exports",
       showMail: false,
       showNoEffective: false,
       showNoSend: false,
+      disabled: false
     }
   },
 
@@ -3343,9 +3344,18 @@ module.exports = React.createClass({displayName: "exports",
       .send(data)
       .end(function(err, res) {
         if(err) console.log(err.body);
-        console.log('quotation:', res.body);
         this.setState({quotation: res.body});
       }.bind(this));
+      this.handleDisabled();
+  },
+
+  handleDisabled: function() {
+    var disabled = false;
+    var quotation = this.state.quotation;
+    if(quotation.status !== 'Borrador') {
+      disabled = true;
+    }
+    this.setState({disabled: disabled});
   },
 
   render: function() {
@@ -3361,9 +3371,11 @@ module.exports = React.createClass({displayName: "exports",
         ), 
 
         React.createElement("div", {className: "col-md-9"}, 
+
           React.createElement(Filters, {
             onChange: this.handleOptions, 
-            quotation: quotation}
+            quotation: quotation, 
+            disabled: this.state.disabled}
           ), 
 
           React.createElement(Edit, {
