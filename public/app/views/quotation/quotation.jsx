@@ -181,6 +181,7 @@ module.exports = React.createClass({
             handleOpenNoEffective={this.handleShowNoEffective}
             handleOpenNoSend={this.handleShowNoSend}
             onStatusChange={this.handleStatus}
+            disabled={this.state.disabled}
           />
 
           <NoEffective

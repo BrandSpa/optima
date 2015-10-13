@@ -3404,7 +3404,8 @@ module.exports = React.createClass({displayName: "exports",
             quotation: quotation, 
             handleOpenNoEffective: this.handleShowNoEffective, 
             handleOpenNoSend: this.handleShowNoSend, 
-            onStatusChange: this.handleStatus}
+            onStatusChange: this.handleStatus, 
+            disabled: this.state.disabled}
           ), 
 
           React.createElement(NoEffective, {
@@ -3593,6 +3594,12 @@ var request = require('superagent');
 var moment = require('moment');
 
 module.exports = React.createClass({displayName: "exports",
+  getDefaultProps: function() {
+    return {
+      disabled: false
+    }
+  },
+
   getInitialState: function() {
     return {
       sending: false
@@ -3636,7 +3643,8 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("li", null, 
               React.createElement("button", {
                 className: "btn btn-default btn-sm", 
-                onClick: this.handleSend, disabled: sending}, 
+                onClick: this.handleSend, disabled: sending
+                }, 
                 messageSend
               )
             ), 
@@ -3644,7 +3652,9 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("li", null, 
               React.createElement("button", {
                 className: "btn btn-default btn-sm", 
-                onClick: this.handleClick.bind(null, 'Entregada')}, 
+                onClick: this.handleClick.bind(null, 'Entregada'), 
+                disabled: this.props.disabled ? true : false
+                }, 
                 "Entregada"
               )
             ), 
@@ -3652,7 +3662,9 @@ module.exports = React.createClass({displayName: "exports",
              React.createElement("li", null, 
               React.createElement("button", {
                 className: "btn btn-default btn-sm", 
-                onClick: this.handleClick.bind(null, 'Efectiva')}, 
+                onClick: this.handleClick.bind(null, 'Efectiva'), 
+                disabled: this.props.disabled ? true : false
+                }, 
                 "Efectiva"
               )
             ), 
@@ -3660,7 +3672,9 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("li", null, 
               React.createElement("button", {
                 className: "btn btn-default btn-sm", 
-                onClick: this.props.handleOpenNoSend}, 
+                onClick: this.props.handleOpenNoSend, 
+                disabled: this.props.disabled ? true : false
+              }, 
                 "No enviada"
               )
             ), 
@@ -3668,7 +3682,9 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("li", null, 
               React.createElement("button", {
                 className: "btn btn-default btn-sm", 
-                onClick: this.props.handleOpenNoEffective}, 
+                onClick: this.props.handleOpenNoEffective, 
+                disabled: this.props.disabled ? true : false
+              }, 
                 "No efectiva"
               )
             ), 
@@ -3676,7 +3692,9 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("li", null, 
               React.createElement("a", {
                 className: "btn btn-default btn-sm", 
-                href: "/quotations/" + this.props.quotation.id + "/rethink"}, 
+                href: "/quotations/" + this.props.quotation.id + "/rethink", 
+                disabled: this.props.disabled ? true : false
+              }, 
                 "Replantear"
               )
             )

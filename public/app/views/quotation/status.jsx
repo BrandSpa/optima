@@ -4,6 +4,12 @@ var request = require('superagent');
 var moment = require('moment');
 
 module.exports = React.createClass({
+  getDefaultProps: function() {
+    return {
+      disabled: false
+    }
+  },
+
   getInitialState: function() {
     return {
       sending: false
@@ -47,7 +53,8 @@ module.exports = React.createClass({
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.handleSend} disabled={sending}>
+                onClick={this.handleSend} disabled={sending}
+                >
                 {messageSend}
               </button>
             </li>
@@ -55,7 +62,9 @@ module.exports = React.createClass({
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.handleClick.bind(null, 'Entregada')}>
+                onClick={this.handleClick.bind(null, 'Entregada')}
+                disabled={this.props.disabled ? true : false}
+                >
                 Entregada
               </button>
             </li>
@@ -63,7 +72,9 @@ module.exports = React.createClass({
              <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.handleClick.bind(null, 'Efectiva')}>
+                onClick={this.handleClick.bind(null, 'Efectiva')}
+                disabled={this.props.disabled ? true : false}
+                >
                 Efectiva
               </button>
             </li>
@@ -71,7 +82,9 @@ module.exports = React.createClass({
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.props.handleOpenNoSend}>
+                onClick={this.props.handleOpenNoSend}
+                disabled={this.props.disabled ? true : false}
+              >
                 No enviada
               </button>
             </li>
@@ -79,7 +92,9 @@ module.exports = React.createClass({
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.props.handleOpenNoEffective}>
+                onClick={this.props.handleOpenNoEffective}
+                disabled={this.props.disabled ? true : false}
+              >
                 No efectiva
               </button>
             </li>
@@ -87,7 +102,9 @@ module.exports = React.createClass({
             <li>
               <a
                 className="btn btn-default btn-sm"
-                href={"/quotations/" + this.props.quotation.id + "/rethink"} >
+                href={"/quotations/" + this.props.quotation.id + "/rethink"}
+                disabled={this.props.disabled ? true : false}
+              >
                 Replantear
               </a>
             </li>
