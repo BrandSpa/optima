@@ -151,7 +151,7 @@ module.exports = React.createClass({
           onOrder={this.handleOrder}
           onDelete={this.handleDelete}
           disabled={this.props.disabled}
-          />
+        />
       )
     }.bind(this));
     var showTable = false;

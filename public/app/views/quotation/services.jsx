@@ -87,7 +87,10 @@ module.exports = React.createClass({
             <button
               className="btn btn-default btn-xs"
               onClick={this.handleDelete.bind(null, service.id)}
-              >Eliminar</button>
+              disabled={this.props.disabled ? true : false}
+            >
+              Eliminar
+            </button>
           </td>
         </tr>
       )

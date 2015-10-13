@@ -3172,7 +3172,7 @@ module.exports = React.createClass({displayName: "exports",
           onOrder: this.handleOrder, 
           onDelete: this.handleDelete, 
           disabled: this.props.disabled}
-          )
+        )
       )
     }.bind(this));
     var showTable = false;
@@ -3436,7 +3436,8 @@ module.exports = React.createClass({displayName: "exports",
           ), 
 
           React.createElement(Services, {
-            quotationId: quotation.id}
+            quotationId: quotation.id, 
+            disabled: this.state.disabled}
           ), 
 
           React.createElement(Trackings, {
@@ -3551,8 +3552,11 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("td", null, 
             React.createElement("button", {
               className: "btn btn-default btn-xs", 
-              onClick: this.handleDelete.bind(null, service.id)
-              }, "Eliminar")
+              onClick: this.handleDelete.bind(null, service.id), 
+              disabled: this.props.disabled ? true : false
+            }, 
+              "Eliminar"
+            )
           )
         )
       )

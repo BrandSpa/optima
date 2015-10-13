@@ -203,6 +203,7 @@ module.exports = React.createClass({
 
           <Services
             quotationId={quotation.id}
+            disabled={this.state.disabled}
           />
 
           <Trackings
