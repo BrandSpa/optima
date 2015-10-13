@@ -3609,7 +3609,7 @@ var React = require('react');
 var request = require('superagent');
 var moment = require('moment');
 var alertify = require('alertifyjs');
-
+alertify.set('notifier','position', 'top-right');
 module.exports = React.createClass({displayName: "exports",
   getDefaultProps: function() {
     return {

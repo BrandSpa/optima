@@ -13,9 +13,8 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/improve.css">
   <link rel="stylesheet" href="/css/react-select.css">
-  <style>
-
-  </style>
+  <link rel="stylesheet" href="/node_modules/alertifyjs/build/css/alertify.css">
+  <link rel="stylesheet" href="/node_modules/alertifyjs/build/css/themes/bootstrap.css">
 </head>
 
 <body>
