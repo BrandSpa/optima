@@ -4341,7 +4341,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("span", {className: "label label-" + quotation.status}, 
             quotation.status
           ), 
-          quotation.rethink_from ? React.createElement("a", {href: "/#quotations/" + quotation.rethink_from}, quotation.rethink_from) : ""
+          quotation.rethink_from ? React.createElement("a", {className: "label label-Replanteada", href: "/#quotations/" + quotation.rethink_from}, quotation.rethink_from) : ""
         ), 
         React.createElement("td", null, quotation.advisor), 
         React.createElement("td", null, quotation.client_type), 
