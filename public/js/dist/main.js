@@ -4567,7 +4567,7 @@ module.exports = React.createClass({displayName: "exports",
         ), 
 
 
-          React.createElement("div", {className: "form-group"}, 
+          React.createElement("div", {className: "form-group col-md-6"}, 
             React.createElement("label", {htmlFor: ""}, "Precio 1"), 
           React.createElement("input", {
             ref: "price_1", 
@@ -4577,7 +4577,7 @@ module.exports = React.createClass({displayName: "exports",
           )
         ), 
 
-        React.createElement("div", {className: "form-group"}, 
+        React.createElement("div", {className: "form-group col-md-6"}, 
         React.createElement("label", {htmlFor: ""}, "Precio 2"), 
           React.createElement("input", {
             ref: "price_2", 
