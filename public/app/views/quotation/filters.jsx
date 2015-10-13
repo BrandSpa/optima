@@ -12,7 +12,8 @@ var productOptions = require('options/products.json');
 module.exports = React.createClass({
   getDefaultProps: function() {
     return {
-      quotation: {}
+      quotation: {},
+      disabled: false
     }
   },
 
@@ -49,6 +50,7 @@ module.exports = React.createClass({
                 default="Seleccionar tipo"
                 onSelectChange={this.update}
                 value={quotation.type}
+                disabled={this.props.disabled}
               />
             </div>
 
@@ -59,6 +61,7 @@ module.exports = React.createClass({
                 default="Seleccionar categoría de tipo"
                 onSelectChange={this.update}
                 value={quotation.type_category}
+                disabled={this.props.disabled}
               />
             </div>
 
@@ -69,6 +72,7 @@ module.exports = React.createClass({
                 default="Seleccionar tipo de cliente"
                 onSelectChange={this.update}
                 value={quotation.client_type}
+                disabled={this.props.disabled}
               />
             </div>
 
@@ -79,6 +83,7 @@ module.exports = React.createClass({
                 default="Seleccionar como llegó"
                 onSelectChange={this.update}
                 value={quotation.found_us}
+                disabled={this.props.disabled}
               />
             </div>
 
@@ -89,6 +94,7 @@ module.exports = React.createClass({
                 default="Seleccionar ofrecer producto"
                 onSelectChange={this.update}
                 value={quotation.offer}
+                disabled={this.props.disabled}
               />
             </div>
 
@@ -99,6 +105,7 @@ module.exports = React.createClass({
                 default="Seleccionar asesor"
                 onSelectChange={this.update}
                 value={quotation.advisor}
+                disabled={this.props.disabled}
               />
             </div>
 

@@ -23,7 +23,12 @@ module.exports = React.createClass({
     });
 
     return (
-      <select ref="select" onChange={this.handleChange} className="form-control" value={this.props.value} disabled={false}>
+      <select
+        ref="select"
+        onChange={this.handleChange}
+        className="form-control"
+        value={this.props.value}
+        disabled={this.disabled ? true : false}>
       <option value="">{this.props.default}</option>
         {optionNodes}
       </select>

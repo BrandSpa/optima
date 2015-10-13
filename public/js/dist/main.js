@@ -77,7 +77,12 @@ module.exports = React.createClass({displayName: "exports",
     });
 
     return (
-      React.createElement("select", {ref: "select", onChange: this.handleChange, className: "form-control", value: this.props.value, disabled: false}, 
+      React.createElement("select", {
+        ref: "select", 
+        onChange: this.handleChange, 
+        className: "form-control", 
+        value: this.props.value, 
+        disabled: this.disabled ? true : false}, 
       React.createElement("option", {value: ""}, this.props.default), 
         optionNodes
       )
@@ -2568,7 +2573,8 @@ var productOptions = require('options/products.json');
 module.exports = React.createClass({displayName: "exports",
   getDefaultProps: function() {
     return {
-      quotation: {}
+      quotation: {},
+      disabled: false
     }
   },
 
@@ -2604,7 +2610,8 @@ module.exports = React.createClass({displayName: "exports",
                 options: typeOptions, 
                 default: "Seleccionar tipo", 
                 onSelectChange: this.update, 
-                value: quotation.type}
+                value: quotation.type, 
+                disabled: this.props.disabled}
               )
             ), 
 
@@ -2614,7 +2621,8 @@ module.exports = React.createClass({displayName: "exports",
                 options: categoryTypeOptions, 
                 default: "Seleccionar categoría de tipo", 
                 onSelectChange: this.update, 
-                value: quotation.type_category}
+                value: quotation.type_category, 
+                disabled: this.props.disabled}
               )
             ), 
 
@@ -2624,7 +2632,8 @@ module.exports = React.createClass({displayName: "exports",
                 options: clientOptions, 
                 default: "Seleccionar tipo de cliente", 
                 onSelectChange: this.update, 
-                value: quotation.client_type}
+                value: quotation.client_type, 
+                disabled: this.props.disabled}
               )
             ), 
 
@@ -2634,7 +2643,8 @@ module.exports = React.createClass({displayName: "exports",
                 options: foundUsOptions, 
                 default: "Seleccionar como llegó", 
                 onSelectChange: this.update, 
-                value: quotation.found_us}
+                value: quotation.found_us, 
+                disabled: this.props.disabled}
               )
             ), 
 
@@ -2644,7 +2654,8 @@ module.exports = React.createClass({displayName: "exports",
                 options: productOptions, 
                 default: "Seleccionar ofrecer producto", 
                 onSelectChange: this.update, 
-                value: quotation.offer}
+                value: quotation.offer, 
+                disabled: this.props.disabled}
               )
             ), 
 
@@ -2654,7 +2665,8 @@ module.exports = React.createClass({displayName: "exports",
                 options: advisorOptions, 
                 default: "Seleccionar asesor", 
                 onSelectChange: this.update, 
-                value: quotation.advisor}
+                value: quotation.advisor, 
+                disabled: this.props.disabled}
               )
             )
 
