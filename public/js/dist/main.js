@@ -4548,6 +4548,7 @@ module.exports = React.createClass({displayName: "exports",
     return (
       React.createElement("form", {onSubmit: this.handleSubmit}, 
         React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {htmlFor: ""}, "Título"), 
           React.createElement("input", {
             ref: "title", 
             type: "text", 
@@ -4555,15 +4556,19 @@ module.exports = React.createClass({displayName: "exports",
             value: service.title}
           )
         ), 
+        React.createElement("div", {className: "form-group"}, 
+        React.createElement("label", {htmlFor: ""}, "Contenido"), 
+          React.createElement(ReactQuill, {
+              ref: "text", 
+              theme: "snow", 
+              value: service.text, 
+              onChange: this.handleTextChange}
+            )
+        ), 
 
-        React.createElement(ReactQuill, {
-            ref: "text", 
-            theme: "snow", 
-            value: service.text, 
-            onChange: this.handleTextChange}
-          ), 
 
           React.createElement("div", {className: "form-group"}, 
+            React.createElement("label", {htmlFor: ""}, "Precio 1"), 
           React.createElement("input", {
             ref: "price_1", 
             type: "text", 
@@ -4573,6 +4578,7 @@ module.exports = React.createClass({displayName: "exports",
         ), 
 
         React.createElement("div", {className: "form-group"}, 
+        React.createElement("label", {htmlFor: ""}, "Precio 2"), 
           React.createElement("input", {
             ref: "price_2", 
             type: "text", 
