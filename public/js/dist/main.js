@@ -4602,13 +4602,15 @@ module.exports = React.createClass({displayName: "exports",
 
   render: function() {
     return (
-      React.createElement("table", {className: "table"}, 
-        React.createElement("thead", null, 
-          React.createElement("tr", null, 
-            React.createElement("th", null, "Título"), 
-            React.createElement("th", null, "Precio 1"), 
-            React.createElement("th", null, "Precio 2"), 
-            React.createElement("th", null, "Opciones")
+      React.createElement("div", {className: "table-responsive"}, 
+        React.createElement("table", {className: "table"}, 
+          React.createElement("thead", null, 
+            React.createElement("tr", null, 
+              React.createElement("th", null, "Título"), 
+              React.createElement("th", null, "Precio 1"), 
+              React.createElement("th", null, "Precio 2"), 
+              React.createElement("th", null, "Opciones")
+            )
           )
         )
       )
