@@ -23,7 +23,8 @@ module.exports = React.createClass({
         date_end: moment().endOf('month').format('YYYY-MM-DD'),
         client_type: null,
         type: null
-      }
+      },
+      shape: 'Bar'
     }
   },
 
@@ -64,6 +65,10 @@ module.exports = React.createClass({
 
   handleFilters: function(filter) {
     this.fetch(_.extend(this.state.filters, filter));
+  },
+
+  handleShape: function() {
+
   },
 
   render: function() {
@@ -147,8 +152,10 @@ module.exports = React.createClass({
           </div>
         </div>
       </div>
-      <button className="btn btn-default">Lineas</button>
-      <button className="btn btn-default">Barras</button>
+      <div className="row">
+        <button className="btn btn-default" onClick={this.handleShape}>Lineas</button>
+      </div>
+
 
         <Status
           graphsData={this.state.graphsData}

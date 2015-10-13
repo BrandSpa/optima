@@ -44,18 +44,30 @@ module.exports = React.createClass({
       responsive: true,
       legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
+    var chart;
 
-    return (
-      <div className="col-md-6">
-        <div className="panel">
-          <div className="panel-body">
-             <div className="col-md-12">
-              <BarChart
+    if(this.props.shape === 'Bar') {
+      chart = <BarChart
                 data={data}
                 options={options}
                 height="200"
                 redraw
               />
+    } else {
+      chart = <LineChart
+        data={data}
+        options={options}
+        height="200"
+        redraw
+      />
+    }
+
+    return (
+      <div className="col-md-6">
+        <div className="panel">
+          <div className="panel-body">
+            <div className="col-md-12">
+              {chart}
             </div>
           </div>
         </div>

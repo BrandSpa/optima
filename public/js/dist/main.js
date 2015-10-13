@@ -1379,18 +1379,30 @@ module.exports = React.createClass({displayName: "exports",
       responsive: true,
       legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
+    var chart;
 
-    return (
-      React.createElement("div", {className: "col-md-6"}, 
-        React.createElement("div", {className: "panel"}, 
-          React.createElement("div", {className: "panel-body"}, 
-             React.createElement("div", {className: "col-md-12"}, 
-              React.createElement(BarChart, {
+    if(this.props.shape === 'Bar') {
+      chart = React.createElement(BarChart, {
                 data: data, 
                 options: options, 
                 height: "200", 
                 redraw: true}
               )
+    } else {
+      chart = React.createElement(LineChart, {
+        data: data, 
+        options: options, 
+        height: "200", 
+        redraw: true}
+      )
+    }
+
+    return (
+      React.createElement("div", {className: "col-md-6"}, 
+        React.createElement("div", {className: "panel"}, 
+          React.createElement("div", {className: "panel-body"}, 
+            React.createElement("div", {className: "col-md-12"}, 
+              chart
             )
           )
         )
@@ -3997,7 +4009,8 @@ module.exports = React.createClass({displayName: "exports",
         date_end: moment().endOf('month').format('YYYY-MM-DD'),
         client_type: null,
         type: null
-      }
+      },
+      shape: 'Bar'
     }
   },
 
@@ -4038,6 +4051,10 @@ module.exports = React.createClass({displayName: "exports",
 
   handleFilters: function(filter) {
     this.fetch(_.extend(this.state.filters, filter));
+  },
+
+  handleShape: function() {
+
   },
 
   render: function() {
@@ -4121,8 +4138,10 @@ module.exports = React.createClass({displayName: "exports",
           )
         )
       ), 
-      React.createElement("button", {className: "btn btn-default"}, "Lineas"), 
-      React.createElement("button", {className: "btn btn-default"}, "Barras"), 
+      React.createElement("div", {className: "row"}, 
+        React.createElement("button", {className: "btn btn-default", onClick: this.handleShape}, "Lineas")
+      ), 
+
 
         React.createElement(Status, {
           graphsData: this.state.graphsData}
