@@ -12,6 +12,7 @@ var SentDiff = require('views/graphs/sent_diff.jsx');
 var DateTimeField = require('react-bootstrap-datetimepicker');
 var clientOptions = require('options/client_type.json');
 var typeOptions = require('options/type.json');
+var statusOptions = require('options/status.json');
 var Select = require('components/form_select.jsx');
 
 module.exports = React.createClass({
@@ -22,7 +23,8 @@ module.exports = React.createClass({
         date_start: moment().startOf('month').format('YYYY-MM-DD'),
         date_end: moment().endOf('month').format('YYYY-MM-DD'),
         client_type: null,
-        type: null
+        type: null,
+        status: null
       },
       shape: 'Bar'
     }
@@ -61,6 +63,11 @@ module.exports = React.createClass({
   handleType: function() {
     var val = React.findDOMNode(this.refs.type.refs.select).value;
     this.handleFilters({type: val});
+  },
+
+  handleStatus: function() {
+    var val = React.findDOMNode(this.refs.status.refs.select).value;
+    this.handleFilters({status: val});
   },
 
   handleFilters: function(filter) {
@@ -127,6 +134,17 @@ module.exports = React.createClass({
                 default="Seleccionar tipo"
                 value={this.state.filters.type}
                 onSelectChange={this.handleType}
+              />
+            </div>
+
+            <div className="form-group col-sm-3">
+              <label htmlFor="">Status</label>
+              <Select
+                ref="status"
+                options={statusOptions}
+                default="Seleccionar status"
+                value={this.state.filters.type}
+                onSelectChange={this.handleStatus}
               />
             </div>
 
