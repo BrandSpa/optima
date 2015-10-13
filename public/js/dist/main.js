@@ -4639,7 +4639,8 @@ module.exports = React.createClass({displayName: "exports",
               React.createElement("th", null, "Precio 2"), 
               React.createElement("th", null, "Opciones")
             )
-          )
+          ), 
+          serviceNodes
         )
       )
     );
