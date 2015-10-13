@@ -2,6 +2,7 @@
 var React = require('react');
 var request = require('superagent');
 var moment = require('moment');
+var alertify = require('alertifyjs');
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -28,7 +29,7 @@ module.exports = React.createClass({
     request
     .post('/api/v1/quotations/' + id + '/sendmail')
     .end(function(err, res) {
-      if(err) return console.log(err.body);
+      if(err) return alertify.error("complete primero los filtros");
       this.setState({sending: false});
       return this.props.onStatusChange({
         status: 'Enviada',
