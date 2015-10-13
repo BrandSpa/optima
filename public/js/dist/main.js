@@ -1609,6 +1609,7 @@ module.exports = React.createClass({displayName: "exports",
 'use strict';
 var React = require('react');
 var BarChart = require("react-chartjs").Bar;
+var LineChart = require("react-chartjs").Line;
 
 module.exports = React.createClass({displayName: "exports",
   getInitialState: function() {
@@ -1668,18 +1669,30 @@ module.exports = React.createClass({displayName: "exports",
       responsive: true,
       legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
+    var chart;
+
+    if(this.props.shape === 'Bar') {
+      chart = React.createElement(BarChart, {
+                data: data, 
+                options: options, 
+                height: "200", 
+                redraw: true}
+              )
+    } else {
+      chart = React.createElement(LineChart, {
+        data: data, 
+        options: options, 
+        height: "200", 
+        redraw: true}
+      )
+    }
 
     return (
       React.createElement("div", {className: "col-md-6"}, 
         React.createElement("div", {className: "panel"}, 
           React.createElement("div", {className: "panel-body"}, 
              React.createElement("div", {className: "col-md-12"}, 
-              React.createElement(BarChart, {
-                data: data, 
-                options: options, 
-                height: "200", 
-                redraw: true}
-              )
+              chart
             )
           )
         )
@@ -1764,6 +1777,7 @@ module.exports = React.createClass({displayName: "exports",
 'use strict';
 var React = require('react');
 var BarChart = require("react-chartjs").Bar;
+var LineChart = require("react-chartjs").Line;
 
 module.exports = React.createClass({displayName: "exports",
   getInitialState: function() {
@@ -1827,17 +1841,30 @@ module.exports = React.createClass({displayName: "exports",
       legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
 
-    return (
-      React.createElement("div", {className: "col-md-6"}, 
-        React.createElement("div", {className: "panel"}, 
-          React.createElement("div", {className: "panel-body"}, 
-             React.createElement("div", {className: "col-md-12"}, 
-              React.createElement(BarChart, {
+    var chart;
+
+    if(this.props.shape === 'Bar') {
+      chart = React.createElement(BarChart, {
                 data: data, 
                 options: options, 
                 height: "200", 
                 redraw: true}
               )
+    } else {
+      chart = React.createElement(LineChart, {
+        data: data, 
+        options: options, 
+        height: "200", 
+        redraw: true}
+      )
+    }
+
+    return (
+      React.createElement("div", {className: "col-md-6"}, 
+        React.createElement("div", {className: "panel"}, 
+          React.createElement("div", {className: "panel-body"}, 
+             React.createElement("div", {className: "col-md-12"}, 
+              chart
             )
           )
         )

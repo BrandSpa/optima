@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react');
 var BarChart = require("react-chartjs").Bar;
+var LineChart = require("react-chartjs").Line;
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -60,18 +61,30 @@ module.exports = React.createClass({
       responsive: true,
       legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
+    var chart;
+
+    if(this.props.shape === 'Bar') {
+      chart = <BarChart
+                data={data}
+                options={options}
+                height="200"
+                redraw
+              />
+    } else {
+      chart = <LineChart
+        data={data}
+        options={options}
+        height="200"
+        redraw
+      />
+    }
 
     return (
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
              <div className="col-md-12">
-              <BarChart
-                data={data}
-                options={options}
-                height="200"
-                redraw
-              />
+              {chart}
             </div>
           </div>
         </div>
