@@ -3351,14 +3351,14 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   handleDisabled: function() {
-    var disabled = false;
-    var quotation = this.state.quotation;
-    console.log(quotation.status);
+    // var disabled = false;
+    // var quotation = this.state.quotation;
+    // console.log(quotation.status);
 
-    if(quotation.status && quotation.status !== 'Borrador') {
-      disabled = true;
-    }
-    this.setState({disabled: disabled});
+    // if(quotation.status && quotation.status !== 'Borrador') {
+    //   disabled = true;
+    // }
+    // this.setState({disabled: disabled});
   },
 
   render: function() {
