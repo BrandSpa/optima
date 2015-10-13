@@ -8,7 +8,8 @@ var _ = require('underscore');
 module.exports = React.createClass({
   getDefaultProps: function() {
     return {
-      id: null
+      id: null,
+      disabled: false
     }
   },
 
@@ -161,7 +162,13 @@ module.exports = React.createClass({
       <div>
       <div className="panel panel-default">
         <div className="panel-body">
-          <button className="btn btn-primary btn-sm" onClick={this.showForm}>Agregar producto</button>
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={this.showForm}
+            disabled={this.props.disabled}
+          >
+            Agregar producto
+          </button>
 
             <div className={showTable ? "table-responsive" : "hidden"}>
             <hr />

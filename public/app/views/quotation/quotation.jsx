@@ -198,6 +198,7 @@ module.exports = React.createClass({
 
           <Products
             quotationId={quotation.id}
+            disabled={this.state.disabled}
           />
 
           <Services

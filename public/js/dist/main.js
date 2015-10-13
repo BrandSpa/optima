@@ -3021,7 +3021,8 @@ var _ = require('underscore');
 module.exports = React.createClass({displayName: "exports",
   getDefaultProps: function() {
     return {
-      id: null
+      id: null,
+      disabled: false
     }
   },
 
@@ -3174,7 +3175,13 @@ module.exports = React.createClass({displayName: "exports",
       React.createElement("div", null, 
       React.createElement("div", {className: "panel panel-default"}, 
         React.createElement("div", {className: "panel-body"}, 
-          React.createElement("button", {className: "btn btn-primary btn-sm", onClick: this.showForm}, "Agregar producto"), 
+          React.createElement("button", {
+            className: "btn btn-primary btn-sm", 
+            onClick: this.showForm, 
+            disabled: this.props.disabled
+          }, 
+            "Agregar producto"
+          ), 
 
             React.createElement("div", {className: showTable ? "table-responsive" : "hidden"}, 
             React.createElement("hr", null), 
@@ -3415,7 +3422,8 @@ module.exports = React.createClass({displayName: "exports",
           ), 
 
           React.createElement(Products, {
-            quotationId: quotation.id}
+            quotationId: quotation.id, 
+            disabled: this.state.disabled}
           ), 
 
           React.createElement(Services, {
