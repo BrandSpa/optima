@@ -3302,6 +3302,7 @@ module.exports = React.createClass({displayName: "exports",
 
   handleSaveMail: function(mail) {
     this._update(mail);
+    this.setState({showMail: false});
   },
 
   handleServiceApproval: function(serviceApproval) {

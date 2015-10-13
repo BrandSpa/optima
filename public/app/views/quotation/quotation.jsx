@@ -90,6 +90,7 @@ module.exports = React.createClass({
 
   handleSaveMail: function(mail) {
     this._update(mail);
+    this.setState({showMail: false});
   },
 
   handleServiceApproval: function(serviceApproval) {
