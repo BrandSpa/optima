@@ -4121,22 +4121,32 @@ module.exports = React.createClass({displayName: "exports",
           )
         )
       ), 
+      React.createElement("button", {className: "btn btn-default"}, "Lineas"), 
+      React.createElement("button", {className: "btn btn-default"}, "Barras"), 
+
         React.createElement(Status, {
-          graphsData: this.state.graphsData}), 
+          graphsData: this.state.graphsData}
+        ), 
 
         React.createElement(FindUs, {
-          graphsData: this.state.graphsData}), 
+          graphsData: this.state.graphsData}
+        ), 
 
          React.createElement(NoEffective, {
-          graphsData: this.state.graphsData}), 
+          graphsData: this.state.graphsData}
+        ), 
 
         React.createElement(Advisors, {
-          graphsData: this.state.graphsData}), 
+          graphsData: this.state.graphsData}
+        ), 
 
         React.createElement(ClientType, {
-          graphsData: this.state.graphsData}), 
+          graphsData: this.state.graphsData}
+        ), 
+
         React.createElement(SentDiff, {
-          graphsData: this.state.graphsData})
+          graphsData: this.state.graphsData}
+        )
       )
     )
   }

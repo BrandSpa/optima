@@ -147,22 +147,32 @@ module.exports = React.createClass({
           </div>
         </div>
       </div>
+      <button className="btn btn-default">Lineas</button>
+      <button className="btn btn-default">Barras</button>
+
         <Status
-          graphsData={this.state.graphsData} />
+          graphsData={this.state.graphsData}
+        />
 
         <FindUs
-          graphsData={this.state.graphsData} />
+          graphsData={this.state.graphsData}
+        />
 
          <NoEffective
-          graphsData={this.state.graphsData} />
+          graphsData={this.state.graphsData}
+        />
 
         <Advisors
-          graphsData={this.state.graphsData} />
+          graphsData={this.state.graphsData}
+        />
 
         <ClientType
-          graphsData={this.state.graphsData} />
+          graphsData={this.state.graphsData}
+        />
+
         <SentDiff
-          graphsData={this.state.graphsData} />
+          graphsData={this.state.graphsData}
+        />
       </div>
     )
   }
