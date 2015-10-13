@@ -4623,7 +4623,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("td", null, service.price_1), 
           React.createElement("td", null, service.price_2), 
           React.createElement("td", null, 
-            React.createElement("button", {onClick: this.props.handleEdit.bind(null, service)}, "Editar")
+            React.createElement("button", null, "Editar")
           )
         )
       )
