@@ -77,7 +77,7 @@ module.exports = React.createClass({displayName: "exports",
     });
 
     return (
-      React.createElement("select", {ref: "select", onChange: this.handleChange, className: "form-control", value: this.props.value}, 
+      React.createElement("select", {ref: "select", onChange: this.handleChange, className: "form-control", value: this.props.value, disabled: true}, 
       React.createElement("option", {value: ""}, this.props.default), 
         optionNodes
       )
