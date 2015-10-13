@@ -4108,7 +4108,7 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   handleUntil: function(date) {
-    this.handleFilters({date_start: date});
+    this.handleFilters({date_end: date});
   },
 
   handleClientType: function() {
