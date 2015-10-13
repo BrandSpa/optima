@@ -4640,7 +4640,10 @@ module.exports = React.createClass({displayName: "exports",
               React.createElement("th", null, "Opciones")
             )
           ), 
-          serviceNodes
+          React.createElement("tbody", null, 
+            serviceNodes
+          )
+
         )
       )
     );
