@@ -25,26 +25,26 @@ module.exports = React.createClass({
     });
 
     var data = {
-        labels: [
-          'Andrés Rojas',
-          'Diego Peña'
-        ],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: data1
-            }
-        ]
+      labels: [
+        'Andrés Rojas',
+        'Diego Peña'
+      ],
+      datasets: [
+        {
+          fillColor: "rgba(220,220,220,0.5)",
+          strokeColor: "rgba(220,220,220,0.8)",
+          highlightFill: "rgba(220,220,220,0.75)",
+          highlightStroke: "rgba(220,220,220,1)",
+          data: data1
+        }
+      ]
     };
 
     var options = {
       responsive: true,
       legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
+
     var chart;
 
     if(this.props.shape === 'Bar') {
