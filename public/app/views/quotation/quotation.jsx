@@ -32,6 +32,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     this.fetchQuotation();
+    this.handleDisabled();
   },
 
   fetchQuotation: function() {
@@ -128,6 +129,7 @@ module.exports = React.createClass({
   handleDisabled: function() {
     var disabled = false;
     var quotation = this.state.quotation;
+    console.log(quotation.status);
     if(quotation.status !== 'Borrador') {
       disabled = true;
     }
