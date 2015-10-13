@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react');
 var BarChart = require("react-chartjs").Bar;
+var LineChart = require("react-chartjs").Line;
 
 module.exports = React.createClass({
   getInitialState: function() {
