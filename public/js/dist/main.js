@@ -4586,7 +4586,7 @@ module.exports = React.createClass({displayName: "exports",
             value: service.price_2}
           )
         ), 
-        React.createElement("button", {className: "btn btn-primary"}, "Guardar")
+        React.createElement("button", {className: "btn btn-primary btn-sm"}, "Guardar")
       )
     );
   }
