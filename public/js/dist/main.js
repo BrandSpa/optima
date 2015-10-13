@@ -3635,11 +3635,9 @@ module.exports = React.createClass({displayName: "exports",
     request
     .post('/api/v1/quotations/' + id + '/sendmail')
     .end(function(err, res) {
-      // if(err) return alertify.error("complete primero los filtros");
-      if(err) {
-        return alertify.error("complete primero los filtros");
-      }
       this.setState({sending: false});
+      if(err) return alertify.error("complete primero los filtros");
+
       return this.props.onStatusChange({
         status: 'Enviada',
         created_sent_diff: this._getDiff()
