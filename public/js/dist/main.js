@@ -4054,7 +4054,14 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   handleShape: function() {
+    var shape;
+    if(this.state.shape == "Bar") {
+      shape = "Line";
+    } else {
+      shape = "Bar"
+    }
 
+    this.setState({shape: shape});
   },
 
   render: function() {
