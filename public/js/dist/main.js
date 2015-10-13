@@ -2600,7 +2600,7 @@ module.exports = React.createClass({displayName: "exports",
 
   render: function() {
     var quotation = this.props.quotation;
-
+    console.log(this.props.disabled);
     return (
       React.createElement("div", {className: "panel panel-default"}, 
         React.createElement("div", {className: "panel-body"}, 
