@@ -166,14 +166,17 @@ module.exports = React.createClass({
 
         <Status
           graphsData={this.state.graphsData}
+          shape={this.state.shape}
         />
 
         <FindUs
           graphsData={this.state.graphsData}
+          shape={this.state.shape}
         />
 
          <NoEffective
           graphsData={this.state.graphsData}
+          shape={this.state.shape}
         />
 
         <Advisors
@@ -183,10 +186,12 @@ module.exports = React.createClass({
 
         <ClientType
           graphsData={this.state.graphsData}
+          shape={this.state.shape}
         />
 
         <SentDiff
           graphsData={this.state.graphsData}
+          shape={this.state.shape}
         />
       </div>
     )

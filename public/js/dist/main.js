@@ -4180,15 +4180,18 @@ module.exports = React.createClass({displayName: "exports",
 
 
         React.createElement(Status, {
-          graphsData: this.state.graphsData}
+          graphsData: this.state.graphsData, 
+          shape: this.state.shape}
         ), 
 
         React.createElement(FindUs, {
-          graphsData: this.state.graphsData}
+          graphsData: this.state.graphsData, 
+          shape: this.state.shape}
         ), 
 
          React.createElement(NoEffective, {
-          graphsData: this.state.graphsData}
+          graphsData: this.state.graphsData, 
+          shape: this.state.shape}
         ), 
 
         React.createElement(Advisors, {
@@ -4197,11 +4200,13 @@ module.exports = React.createClass({displayName: "exports",
         ), 
 
         React.createElement(ClientType, {
-          graphsData: this.state.graphsData}
+          graphsData: this.state.graphsData, 
+          shape: this.state.shape}
         ), 
 
         React.createElement(SentDiff, {
-          graphsData: this.state.graphsData}
+          graphsData: this.state.graphsData, 
+          shape: this.state.shape}
         )
       )
     )
