@@ -3692,8 +3692,7 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("li", null, 
               React.createElement("a", {
                 className: "btn btn-default btn-sm", 
-                href: "/quotations/" + this.props.quotation.id + "/rethink", 
-                disabled: this.props.disabled ? true : false
+                href: "/quotations/" + this.props.quotation.id + "/rethink"
               }, 
                 "Replantear"
               )

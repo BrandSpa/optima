@@ -103,7 +103,6 @@ module.exports = React.createClass({
               <a
                 className="btn btn-default btn-sm"
                 href={"/quotations/" + this.props.quotation.id + "/rethink"}
-                disabled={this.props.disabled ? true : false}
               >
                 Replantear
               </a>
