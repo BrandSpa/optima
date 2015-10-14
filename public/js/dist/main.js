@@ -856,26 +856,93 @@ var React = require('react');
 var request = require('superagent');
 var Company = require('views/companies/company.jsx');
 var Form = require('views/companies/form_create.jsx');
+var _ = require('lodash');
 
 module.exports = React.createClass({displayName: "exports",
   getInitialState: function() {
     return {
       companies: [],
-      company: {}
+      company: {},
+      filters: {
+        query: null,
+        offset: 0
+      }
     }
   },
 
   componentDidMount: function() {
+    this.fetch();
+  },
+
+  fetch: function(filters) {
+    var query;
+    if(filters) {
+      query = filters;
+    } else {
+      query = this.state.filters;
+    }
+
     request
     .get('/api/v1/companies')
+    .query(query)
     .end(function(err, res) {
       this.setState({companies: res.body});
     }.bind(this));
   },
 
+  loadMore: function() {
+    var offset = parseInt(this.state.filters.offset) + 30;
+
+    this.setState({
+      filters: {offset: offset}
+    });
+
+    this.fetch({offset: offset});
+  },
+
+  loadLess: function() {
+    var offset = parseInt(this.state.filters.offset) - 30;
+    if(offset >= -30) {
+      this.setState({
+      filters: {offset: offset}
+      });
+
+      this.fetch({offset: offset});
+    }
+  },
+
   handleEdit: function(company, e) {
     e.preventDefault();
     this.setState({company: company});
+  },
+
+  handleSubmit: function(company) {
+    if(company.id) {
+      request
+      .put('/api/v1/companies/' + company.id)
+      .send(company)
+      .end(function(err, res){
+        if(err) return console.log(err.body);
+        this.setState({
+          companies: [res.body].concat(this.state.companies)
+        });
+      }.bind(this));
+    } else {
+      request
+      .post('/api/v1/companies')
+      .send(company)
+      .end(function(err, res){
+        this.setState({
+          companies: [res.body].concat(this.state.companies)
+        });
+      }.bind(this));
+    }
+  },
+
+  handleSearch: function() {
+    var val = React.findDOMNode(this.refs.query).value;
+    this.setState({filters: {query: val }});
+    this.fetch({query: val});
   },
 
   render: function() {
@@ -897,7 +964,13 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement("div", {className: "panel"}, 
           React.createElement("div", {className: "panel-body"}, 
           React.createElement("div", {className: "form-group"}, 
-            React.createElement("input", {type: "text", className: "form-control", placeholder: "Buscar"})
+            React.createElement("input", {
+              ref: "query", 
+              type: "text", 
+              className: "form-control", 
+              placeholder: "Buscar empresas o contactos", 
+              onChange: this.handleSearch}
+              )
           ), 
           React.createElement("div", {className: "btn-group", role: "group"}, 
             React.createElement("button", {
@@ -920,7 +993,8 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement(Form, {
               company: this.state.company, 
               btnCleanText: "Cancelar", 
-              btnStoreText: "Guardar"}
+              btnStoreText: "Guardar", 
+              onSubmit: this.handleSubmit}
               )
           )
         )
@@ -933,7 +1007,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/companies/list.jsx","/app/views/companies")
-},{"_process":72,"buffer":68,"react":588,"superagent":589,"views/companies/company.jsx":25,"views/companies/form_create.jsx":27}],29:[function(require,module,exports){
+},{"_process":72,"buffer":68,"lodash":75,"react":588,"superagent":589,"views/companies/company.jsx":25,"views/companies/form_create.jsx":27}],29:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
@@ -3722,7 +3796,7 @@ module.exports = React.createClass({displayName: "exports",
     .post('/api/v1/quotations/' + id + '/sendmail')
     .end(function(err, res) {
       this.setState({sending: false});
-      if(err) return alertify.error("complete primero los filtros");
+      if(err) return alertify.error("complete los filtros");
 
       return this.props.onStatusChange({
         status: 'Enviada',
