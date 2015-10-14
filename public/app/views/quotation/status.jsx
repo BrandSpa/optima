@@ -30,7 +30,7 @@ module.exports = React.createClass({
     .post('/api/v1/quotations/' + id + '/sendmail')
     .end(function(err, res) {
       this.setState({sending: false});
-      if(err) return alertify.error("complete primero los filtros");
+      if(err) return alertify.error("complete los filtros");
 
       return this.props.onStatusChange({
         status: 'Enviada',

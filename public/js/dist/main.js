@@ -3320,6 +3320,8 @@ module.exports = React.createClass({displayName: "exports",
 var React = require('react');
 var request = require('superagent');
 var _ = require('underscore');
+var alertify = require('alertifyjs');
+alertify.set('notifier','position', 'top-right');
 var Contact = require('views/quotation/contact.jsx');
 var Filters = require('views/quotation/filters.jsx');
 var Edit = require('views/quotation/edit.jsx');
@@ -3438,7 +3440,7 @@ module.exports = React.createClass({displayName: "exports",
       .put('/api/v1/quotations/' + this.props.params.id)
       .send(data)
       .end(function(err, res) {
-        if(err) console.log(err.body);
+        if(err) return alertify.error(res.body.message);
         this.setState({quotation: res.body});
         this.handleDisabled(res.body.status);
       }.bind(this));
@@ -3546,7 +3548,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/views/quotation/quotation.jsx","/app/views/quotation")
-},{"_process":72,"buffer":68,"moment":101,"react":588,"superagent":589,"underscore":592,"views/quotation/activity.jsx":40,"views/quotation/comment.jsx":41,"views/quotation/contact.jsx":42,"views/quotation/edit.jsx":43,"views/quotation/filters.jsx":44,"views/quotation/mails.jsx":45,"views/quotation/no_effective.jsx":46,"views/quotation/no_send.jsx":47,"views/quotation/products.jsx":49,"views/quotation/services.jsx":51,"views/quotation/status.jsx":52,"views/quotation/times.jsx":53,"views/quotation/trackings.jsx":55}],51:[function(require,module,exports){
+},{"_process":72,"alertifyjs":66,"buffer":68,"moment":101,"react":588,"superagent":589,"underscore":592,"views/quotation/activity.jsx":40,"views/quotation/comment.jsx":41,"views/quotation/contact.jsx":42,"views/quotation/edit.jsx":43,"views/quotation/filters.jsx":44,"views/quotation/mails.jsx":45,"views/quotation/no_effective.jsx":46,"views/quotation/no_send.jsx":47,"views/quotation/products.jsx":49,"views/quotation/services.jsx":51,"views/quotation/status.jsx":52,"views/quotation/times.jsx":53,"views/quotation/trackings.jsx":55}],51:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 var React = require('react');
@@ -4329,6 +4331,18 @@ module.exports = React.createClass({displayName: "exports",
     }
   },
 
+  handleFrom: function(date) {
+    var dateEnd = moment().endOf('month').format('YYYY-MM-DD', date);
+
+    var query = _.extend(this.state.query, {date_start: date});
+    this.filter(query);
+  },
+
+  handleUntil: function(date) {
+    var query = _.extend(this.state.query, {date_end: date});
+    this.filter(query);
+  },
+
   search: function() {
     var query = {
       query: React.findDOMNode(this.refs.query).value,
@@ -4339,6 +4353,10 @@ module.exports = React.createClass({displayName: "exports",
     };
 
     this.setState({query: query});
+    this.filter(query);
+  },
+
+  filter: function(query) {
     request
       .get('/api/v1/quotations')
       .query(query)
@@ -4382,7 +4400,7 @@ module.exports = React.createClass({displayName: "exports",
                 inputFormat: "DD-MM-YYYY", 
                 mode: "date", 
                 onChange: this.handleFrom, 
-                value: this.state.query.from}
+                value: this.state.query.date_start}
                 )
             ), 
 
@@ -4393,7 +4411,7 @@ module.exports = React.createClass({displayName: "exports",
                 inputFormat: "DD-MM-YYYY", 
                 mode: "date", 
                 onChange: this.handleUntil, 
-                value: this.state.query.until}
+                value: this.state.query.date_end}
               )
             )
           ), 

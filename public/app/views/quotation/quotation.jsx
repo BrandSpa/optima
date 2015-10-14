@@ -2,6 +2,8 @@
 var React = require('react');
 var request = require('superagent');
 var _ = require('underscore');
+var alertify = require('alertifyjs');
+alertify.set('notifier','position', 'top-right');
 var Contact = require('views/quotation/contact.jsx');
 var Filters = require('views/quotation/filters.jsx');
 var Edit = require('views/quotation/edit.jsx');
@@ -120,7 +122,7 @@ module.exports = React.createClass({
       .put('/api/v1/quotations/' + this.props.params.id)
       .send(data)
       .end(function(err, res) {
-        if(err) console.log(err.body);
+        if(err) return alertify.error(res.body.message);
         this.setState({quotation: res.body});
         this.handleDisabled(res.body.status);
       }.bind(this));

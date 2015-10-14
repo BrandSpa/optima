@@ -26,6 +26,8 @@ class QuotationsController extends \BaseController {
 		$advisor = Input::get('advisor');
 		$client_type = Input::get('client_type');
 		$quotation_type = Input::get('quotation_type');
+		$date_start = Input::get('$date_start');
+		$date_end = Input::get('$date_end');
 
 		$collection = new Quotation;
 
@@ -43,6 +45,10 @@ class QuotationsController extends \BaseController {
 
 		if( Input::has('quotation_type') && $quotation_type != "" ) {
 			$collection = $collection->where("type", $quotation_type);
+		}
+
+		if(Input::has('date_start') && Input::has('date_end')) {
+			$collection = $collection->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ");
 		}
 
 		if(Input::has('query') && $q != "") {
@@ -107,10 +113,27 @@ class QuotationsController extends \BaseController {
 		$data = Input::all();
 
 		$validator = Validator::make($data, $this->entity->rules);
+		$model = $this->entity->find($id);
+		$fieldsToCheck = [
+			$model->type,
+			$model->type_category,
+			$model->client_type,
+			$model->found_us,
+			$model->offer,
+			$model->advisor,
+		];
 
 		if ($validator->passes()) {
-			$model = $this->entity->find($id);
-			$model->update($data);
+			if($data['status'] != "Borrador") {
+				if ($this->checkFields($fieldsToCheck)) {
+					$model->update($data);
+				} else {
+					return Response::json(['message' => 'complete los filtros'], 400);
+				}
+			} else {
+				$model->update($data);
+			}
+
 			$modelUpdated = $this->entity->with($this->relationships)->find($id);
 			return Response::json($modelUpdated, 200);
 		}
@@ -146,8 +169,7 @@ class QuotationsController extends \BaseController {
 			$quotation->offer,
 			$quotation->advisor,
 		];
-
-		if ($this->checkFields($fieldsToCheck)) {
+		if ($this->checkFields($this->$fieldsToCheck)) {
 			$this->sendQuotation($quotation);
 			return Response::json($fieldsToCheck, 200);
 		} else {

@@ -1,0 +1,1 @@
+console.error("Error: Cannot find module 'views/app.jsx' from '/Users/ale/apps/avante-optima/public/app'");

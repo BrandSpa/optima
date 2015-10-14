@@ -49,6 +49,18 @@ module.exports = React.createClass({
     }
   },
 
+  handleFrom: function(date) {
+    var dateEnd = moment().endOf('month').format('YYYY-MM-DD', date);
+
+    var query = _.extend(this.state.query, {date_start: date});
+    this.filter(query);
+  },
+
+  handleUntil: function(date) {
+    var query = _.extend(this.state.query, {date_end: date});
+    this.filter(query);
+  },
+
   search: function() {
     var query = {
       query: React.findDOMNode(this.refs.query).value,
@@ -59,6 +71,10 @@ module.exports = React.createClass({
     };
 
     this.setState({query: query});
+    this.filter(query);
+  },
+
+  filter: function(query) {
     request
       .get('/api/v1/quotations')
       .query(query)
@@ -102,7 +118,7 @@ module.exports = React.createClass({
                 inputFormat="DD-MM-YYYY"
                 mode="date"
                 onChange={this.handleFrom}
-                value={this.state.query.from}
+                value={this.state.query.date_start}
                 />
             </div>
 
@@ -113,7 +129,7 @@ module.exports = React.createClass({
                 inputFormat="DD-MM-YYYY"
                 mode="date"
                 onChange={this.handleUntil}
-                value={this.state.query.until}
+                value={this.state.query.date_end}
               />
             </div>
           </div>

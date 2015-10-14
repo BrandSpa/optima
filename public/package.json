@@ -4,7 +4,8 @@
   "description": "app for avante",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "watchify -v -d -t [ reactify --es6 ] ./app/app.js -o ./js/compiled.js"
   },
   "author": "Alejandro Sanabria alejandro@brandspa.com",
   "license": "ISC",
