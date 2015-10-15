@@ -4,7 +4,7 @@ var request = require('superagent');
 var Company = require('views/companies/company.jsx');
 var Form = require('views/companies/form_create.jsx');
 var _ = require('lodash');
-
+var Sticky = require('react-sticky');
 module.exports = React.createClass({
   getInitialState: function() {
     return {
@@ -107,7 +107,19 @@ module.exports = React.createClass({
 
     return (
       <div>
-        <div className="col-md-8">
+        <div className="col-md-12">
+        <div className="panel">
+          <div className="panel-body">
+            <Form
+              company={this.state.company}
+              btnCleanText="Cancelar"
+              btnStoreText="Guardar"
+              onSubmit={this.handleSubmit}
+              />
+          </div>
+        </div>
+
+        <Sticky>
         <div className="panel">
           <div className="panel-body">
           <div className="form-group">
@@ -129,24 +141,14 @@ module.exports = React.createClass({
             </div>
           </div>
         </div>
+        </Sticky>
+
         <div className="companies-list">
             {companyNodes}
           </div>
       </div>
 
-      <div className="col-md-4">
-        <div className="panel">
-          <div className="panel-body">
-            <Form
-              company={this.state.company}
-              btnCleanText="Cancelar"
-              btnStoreText="Guardar"
-              onSubmit={this.handleSubmit}
-              />
-          </div>
-        </div>
 
-      </div>
       </div>
 
     );

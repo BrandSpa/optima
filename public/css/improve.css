@@ -180,10 +180,7 @@ ul {
         color: #F1F1F1; }
         #sidebar-nav ul li a:hover {
           color: #DE9822; }
-
-.active {
-  border-left: 4px solid #DE9822; }
-  .active a {
+  #sidebar-nav a {
     color: #333 !important; }
 
 #activities .timeago {

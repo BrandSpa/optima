@@ -18,15 +18,22 @@ class CompaniesController extends \BaseController {
 	public function index()
 	{
 		$offset = Input::get('offset');
-		$query = Input::get('query');
+		$q = Input::get('query');
+		$collection = new Company;
 
-		if ($query) {
-			$collection = $this->entity->search($query);
-			return Response::json($collection, 200);
-		} else {
-			$collection = Company::takeAndSkip(10, $offset);
-			return Response::json($collection, 200);
+		if (Input::has('query')) {
+			$collection = $collection->where(function($query) use($q) {
+				$query
+				->where('name', 'like', "%$q%")
+				->orWhereHas('contacts', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					});
+			});
 		}
+
+		$collection = $collection->take(30)->skip($offset)->get();
+		return Response::json($collection, 200);
+
 	}
 
 	public function show($id)

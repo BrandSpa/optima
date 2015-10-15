@@ -28,6 +28,7 @@
     "react-quill": "^0.2.2",
     "react-router": "^1.0.0-rc1",
     "react-select": "^0.5.6",
+    "react-sticky": "^2.5.2",
     "react-typeahead": "^1.1.4",
     "superagent": "^1.2.0",
     "underscore": "^1.8.3"

@@ -7,12 +7,14 @@ module.exports = React.createClass({
 
   render: function() {
     return (
+      <div className="col-md-12">
       <div className="panel">
         <div className="panel-body">
           <Form />
           <List />
         </div>
       </div>
+    </div>
     );
   }
 });

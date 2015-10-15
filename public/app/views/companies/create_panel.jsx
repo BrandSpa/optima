@@ -4,7 +4,6 @@ var Form = require('views/companies/form_create.jsx');
 var Typeahead = require('react-typeahead').Typeahead;
 var request = require('superagent');
 var _ = require('underscore');
-var Activities = require('views/activities/list.jsx');
 
 module.exports = React.createClass({
 
@@ -80,10 +79,11 @@ module.exports = React.createClass({
 
     return (
       <div>
-      <div className="col-md-9">
+      <div className="col-md-12">
       <div className="panel panel-default">
         <div className="panel-body">
           <div className="form-group">
+
             <Typeahead
               customClasses={classes}
               options={this.state.companyOptions}
@@ -98,9 +98,7 @@ module.exports = React.createClass({
         </div>
       </div>
       </div>
-      <div className="col-md-3">
-        <Activities />
-      </div>
+
       </div>
     );
   }
