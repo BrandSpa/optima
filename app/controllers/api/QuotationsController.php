@@ -26,8 +26,8 @@ class QuotationsController extends \BaseController {
 		$advisor = Input::get('advisor');
 		$client_type = Input::get('client_type');
 		$quotation_type = Input::get('quotation_type');
-		$date_start = Input::get('$date_start');
-		$date_end = Input::get('$date_end');
+		$date_start = Input::get('date_start');
+		$date_end = Input::get('date_end');
 
 		$collection = new Quotation;
 
@@ -48,7 +48,7 @@ class QuotationsController extends \BaseController {
 		}
 
 		if(Input::has('date_start') && Input::has('date_end')) {
-			$collection = $collection->whereRaw("DATE(quotations.created_at) BETWEEN '$date_start' AND '$date_end' ");
+			$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
 		}
 
 		if(Input::has('query') && $q != "") {

@@ -18,6 +18,6 @@
 </head>
 
 <body>
-  <script src="/js/dist/main.js"></script>
+  <script src="/dist/bundle.js"></script>
 </body>
 </html>

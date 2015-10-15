@@ -15,13 +15,13 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       quotations: [],
-      offset: 0,
       query: {
-        query: '',
-        status: '',
-        advisor: '',
-        client_type: '',
-        quotation_type: '',
+        offset: 0,
+        query: null,
+        status: null,
+        advisor: null,
+        client_type: null,
+        quotation_type: null,
         from: null,
         until: null
       },
@@ -35,29 +35,13 @@ module.exports = React.createClass({
     }.bind(this));
   },
 
-  sendRequest: function() {
-    var query = _.extend(this.state.query, {offset: this.state.offset});
-
-    if ( this.state.offset >= 0) {
-      request
-        .get('/api/v1/quotations')
-        .query(query)
-        .end(function(err, resp) {
-
-          this._onChange(resp.body);
-        }.bind(this));
-    }
-  },
-
   handleFrom: function(date) {
-    var dateEnd = moment().endOf('month').format('YYYY-MM-DD', date);
-
-    var query = _.extend(this.state.query, {date_start: date});
+    var query = _.extend(this.state.query, {date_start: date + " 00:00:00", offset: 0});
     this.filter(query);
   },
 
   handleUntil: function(date) {
-    var query = _.extend(this.state.query, {date_end: date});
+    var query = _.extend(this.state.query, {date_end: date + " 00:00:00", offset: 0});
     this.filter(query);
   },
 
@@ -67,7 +51,8 @@ module.exports = React.createClass({
       status: React.findDOMNode(this.refs.selectStatus.refs.select).value,
       advisor: React.findDOMNode(this.refs.advisor.refs.select).value,
       client_type: React.findDOMNode(this.refs.client.refs.select).value,
-      quotation_type: React.findDOMNode(this.refs.type.refs.select).value
+      quotation_type: React.findDOMNode(this.refs.type.refs.select).value,
+      offset: 0
     };
 
     this.setState({query: query});
@@ -83,20 +68,33 @@ module.exports = React.createClass({
       }.bind(this));
   },
 
-  loadMore: function(){
-    this.state.offset = this.state.offset + 10;
-    this.sendRequest();
+  loadMore: function() {
+    var offset = this.state.query.offset + 10;
+    var query = _.extend(this.state.query, {offset: offset});
+    this.setState({
+      query: query
+    });
+
+    this.filter(query);
   },
 
   loadLess: function() {
-    if ( this.state.offset >= 10) {
-      this.state.offset = this.state.offset - 10;
+    var offset = this.state.query.offset - 10;
+
+    if ( offset >= 0) {
+      var query = _.extend(this.state.query, {offset: offset});
+      this.setState({
+        query: query
+      });
+
+      this.filter(query);
     }
-    this.sendRequest();
   },
 
   _onChange: function(quotations) {
-    this.setState({quotations: quotations});
+    this.setState({
+      quotations: quotations
+    });
   },
 
   render: function() {
@@ -114,25 +112,28 @@ module.exports = React.createClass({
           <div className="form-group col-md-3">
               <DateTimeField
                 defaultText="Seleccionar desde"
+                dateTime={moment().format('YYYY-MM-DD')}
                 format="YYYY-MM-DD"
                 inputFormat="DD-MM-YYYY"
                 mode="date"
                 onChange={this.handleFrom}
-                value={this.state.query.date_start}
+                value={this.state.query.from}
                 />
             </div>
 
             <div className="form-group col-md-3">
               <DateTimeField
                 defaultText="Seleccionar hasta"
+                dateTime={moment().format('YYYY-MM-DD')}
                 format="YYYY-MM-DD"
                 inputFormat="DD-MM-YYYY"
                 mode="date"
                 onChange={this.handleUntil}
-                value={this.state.query.date_end}
+                value={this.state.query.until}
               />
             </div>
           </div>
+
           <div className="row">
             <div className="form-group col-sm-3">
               <Select

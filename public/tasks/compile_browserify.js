@@ -13,13 +13,10 @@ gulp.task('browserify', function () {
       './app/',
       './app/views',
       './app/utils/',
-      './app/controllers/',
-      './app/models/',
       './app/views/',
-      './app/templates/',
-      './app/helpers/',
       './app/config/'
-    ]
+    ],
+    extensions: ['.jsx']
   };
 
  browserify('./app/app.js', options)
