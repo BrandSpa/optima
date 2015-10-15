@@ -15,6 +15,12 @@
   <link rel="stylesheet" href="/css/react-select.css">
   <link rel="stylesheet" href="/node_modules/alertifyjs/build/css/alertify.css">
   <link rel="stylesheet" href="/node_modules/alertifyjs/build/css/themes/bootstrap.css">
+  <style>
+    body {
+      background: url(https://images.unsplash.com/32/Mc8kW4x9Q3aRR3RkP5Im_IMG_4417.jpg?q=80&fm=jpg&s=eb2a21cc0655327e3295d3426e805607);
+      background-size: contain
+    }
+  </style>
 </head>
 
 <body>

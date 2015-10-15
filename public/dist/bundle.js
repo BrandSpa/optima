@@ -342,7 +342,9 @@ module.exports = React.createClass({displayName: "exports",
     });
 
     return (
-      React.createElement("div", {className: "quotations-table"}, 
+      React.createElement("div", {className: "panel"}, 
+        React.createElement("div", {className: "panel-body"}, 
+          React.createElement("div", {className: "quotations-table"}, 
           React.createElement("h5", null, "Actividad"), 
           React.createElement("div", {className: "table-responsive"}, 
             React.createElement("table", {className: "table"}, 
@@ -352,6 +354,9 @@ module.exports = React.createClass({displayName: "exports",
             )
           )
         )
+        )
+      )
+
     );
   }
 });

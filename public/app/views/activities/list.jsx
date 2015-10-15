@@ -30,7 +30,9 @@ module.exports = React.createClass({
     });
 
     return (
-      <div className="quotations-table">
+      <div className="panel">
+        <div className="panel-body">
+          <div className="quotations-table">
           <h5>Actividad</h5>
           <div className="table-responsive">
             <table className="table">
@@ -40,6 +42,9 @@ module.exports = React.createClass({
             </table>
           </div>
         </div>
+        </div>
+      </div>
+
     );
   }
 });
