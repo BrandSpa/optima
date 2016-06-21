@@ -170,7 +170,8 @@ class QuotationsController extends \BaseController {
 			$quotation->advisor,
 		];
 		if ($this->checkFields($this->$fieldsToCheck)) {
-			$this->sendQuotation($quotation);
+			$this->mailer->sendQuotation($model);
+                        $model->created_sent_diff = $model->diffCreateAndSent();
 			return Response::json($fieldsToCheck, 200);
 		} else {
 			return Response::json(["message" => "field empty"], 400);

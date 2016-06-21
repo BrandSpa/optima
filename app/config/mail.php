@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mandrillapp.com',
+	'host' => 'smtp.sendgrid.net',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => ['address' => 'comercial@avante.cc', 'name' => 'Avante'],
+	'from' => ['address' => 'comercial@rentadvisor.com.co', 'name' => 'RentAdvisor'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => "alejandro@thebrandspa.co",
+	'username' => Â'alejandro@brandspa.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => '2ylANHE6ZPUq4YGcoNNUpw',
+	'password' => 'g73AdHj3QBS88zxLdbiXLw',
 
 	/*
 	|--------------------------------------------------------------------------

@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'avante-landing',
+			'database'  => 'optima_tracking',
 			'username'  => 'root',
 			'password'  => 'R3ntAdV1sor_DB+',
 			'charset'   => 'utf8',
