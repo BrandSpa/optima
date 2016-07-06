@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'optima_tracking',
 			'username'  => 'root',
-			'password'  => 'R3ntAdV1sor_DB+',
+			'password'  => '',//R3ntAdV1sor_DB+
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
