@@ -1,7 +1,6 @@
 'use strict';
-const React = require('react');
-const BarChart = require("react-chartjs").Bar;
-const LineChart = require("react-chartjs").Line;
+import React from 'react';
+import Bar from 'components/chart_bar';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -19,59 +18,30 @@ module.exports = React.createClass({
   },
 
   render: function() {
-     const data1 = this.state.sent_diff.map(function(num) {
-      return parseInt(num)
-    });
+    const data1 = this.state.sent_diff.map((num) => parseInt(num));
 
-    const data = {
-        labels: [
-          "Dentro - Inventario",
-          "Fuera - Inventario",
-          "Dentro - Pedido",
-          "Fuera - Pedido"
-        ],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: data1
-            }
-        ]
+    let labels = [
+      "Dentro - Inventario",
+      "Fuera - Inventario",
+      "Dentro - Pedido",
+      "Fuera - Pedido"
+    ];
+
+    let dataSet1 = {
+      label: 'Cotizaciones',
+      data: data1
     };
 
-    const options = {
-      responsive: true,
-      legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+    let chartData = {
+      labels: labels,
+      datasets: [dataSet1]
     };
-
-    let chart;
-
-    if(this.props.shape === 'Bar') {
-      chart = <BarChart
-                data={data}
-                options={options}
-                height="200"
-                redraw
-              />
-    } else {
-      chart = <LineChart
-        data={data}
-        options={options}
-        height="200"
-        redraw
-      />
-    }
 
     return (
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
-             <div className="col-md-12">
-              {chart}
-            </div>
+            <Bar data={chartData} />
           </div>
         </div>
       </div>

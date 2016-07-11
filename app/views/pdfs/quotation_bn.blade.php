@@ -54,7 +54,7 @@
 		<div class="message">
 		<p>
 			Para hacer los mantenimientos preventivos el cliente debe enviar solicitud a nuestro departamento 
-			de Infraestructura Y Tecnología a los correos  tecnico@avante.cc y/o ctecnico@avante.net.co
+			de Infraestructura Y Tecnología a los correos  tecnicorentadvisor.com.co y/o ctecnico@rentadvisor.com.co
 		</p>
 	</div>
 	<img src="[[ public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png' ]]" id="firm" alt="">

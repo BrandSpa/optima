@@ -37,6 +37,7 @@ module.exports = React.createClass({
 
   fetch: function(filters) {
     var filters = filters || this.state.filters;
+    
     request
       .get('/api/v1/reports')
       .query(filters)

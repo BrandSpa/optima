@@ -3,7 +3,7 @@ import React from 'react';
 import List from 'views/quotations/list';
 import Activities from 'views/activities/list';
 import Todos from 'views/todos/section';
-import Graphs from 'views/quotations/graphs';
+import Graphs from 'views/graphs/section';
 
 module.exports = React.createClass({
 
@@ -13,6 +13,7 @@ module.exports = React.createClass({
         <div className="col-md-10">
           <List />
           <Todos />
+          <Graphs/>
         </div>
         <div className="col-md-2">
         <Activities />

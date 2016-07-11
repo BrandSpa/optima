@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Timeago from 'components/timeago';
+import Item from 'views/quotations/item';
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -10,31 +10,7 @@ module.exports = React.createClass({
   },
 
   render() {
-    var count = this.props.quotations.length;
-
-    var quotationNodes = this.props.quotations.map(function(quotation) {
-      return (
-        <tr key={quotation.id}>
-        <td><a href={`/#quotations/${quotation.id}`}>{quotation.id}</a></td>
-        <td>
-          <span className={`label label-${quotation.status}`}>
-            {quotation.status}
-          </span>
-          {quotation.rethink_from ? <a className="label label-Replanteada" href={`/#quotations/${quotation.rethink_from}`}>{quotation.rethink_from}</a> : ""}
-        </td>
-        <td>{quotation.advisor}</td>
-        <td>{quotation.client_type}</td>
-        <td>{quotation.type}</td>
-        <td>{quotation.company.name}</td>
-        <td>{`${quotation.contact.name} ${quotation.contact.lastname}`}</td>
-        <td><Timeago date={quotation.created_at} /> por {quotation.user.name}</td>
-        <td>
-          <a href={`/quotations/${quotation.id}/pdf/${quotation.id}`} target="_new">PDF</a>
-          <a href={`/quotations/${quotation.id}/pdfbn`} target="_blank" > PDF BN</a>
-          <a href={`/quotations/${quotation.id}/pdflogos`} target="_blank"> PDF con logos</a>
-        </td>
-      </tr>);
-    });
+    var quotationNodes = this.props.quotations.map(quotation => <Item quotation={quotation} />);
 
     return (
       <div className="table-responsive">

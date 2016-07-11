@@ -1,7 +1,6 @@
 'use strict';
-const React = require('react');
-const BarChart = require("react-chartjs").Bar;
-const LineChart = require("react-chartjs").Line;
+import React from 'react';
+import Bar from 'components/chart_bar';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -12,9 +11,6 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function(props) {
-    console.log();
-    console.log(props.graphsData.findUSCount);
-
     if(props.graphsData.findUS && props.graphsData.findUSCount) {
       this.setState({
         findUs: props.graphsData.findUS,
@@ -24,17 +20,11 @@ module.exports = React.createClass({
   },
 
   render: function() {
-     const data1 = this.state.findUs.map(function(num) {
-      return parseInt(num)
-    });
+    let data1 = this.state.findUs.map(num => parseInt(num) );
+    let data2 = this.state.count.map(num => parseInt(num) );
 
-     const data2 = this.state.count.map(function(num) {
-      return parseInt(num)
-    });
-
-    const data = {
-        labels: [
-          'Asesores comerciales',
+    const labels = [
+      'Asesores comerciales',
       'Cliente',
       'Página Web Avante',
       'Google Adwords',
@@ -44,57 +34,39 @@ module.exports = React.createClass({
       'Paginas Amarilladas Web',
       'Teléfono',
       'Redes Sociales'
-        ],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: data1
-            },
-              {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0)",
-                strokeColor: "rgba(220,220,220,0)",
-                highlightFill: "rgba(220,220,220,0)",
-                highlightStroke: "rgba(220,220,220, 0)",
-                data: data2
-            }
-        ]
+    ];
+
+    let dataSet1 = {
+      label: 'Dinero',
+      data: data1,
+      backgroundColor: [
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)',
+        'rgba(255, 136, 124, 0.5)'
+      ]
     };
 
-    const options = {
-      responsive: true,
-      legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+    let dataSet2 = {
+      label: 'Número',
+      data: data2
     };
 
-    let chart;
-
-    if(this.props.shape === 'Bar') {
-      chart = <BarChart
-                data={data}
-                options={options}
-                height="200"
-                redraw
-              />
-    } else {
-      chart = <LineChart
-        data={data}
-        options={options}
-        height="200"
-        redraw
-      />
-    }
+    let chartData = {
+      labels: labels,
+      datasets: [dataSet1, dataSet2]
+    };
 
     return (
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
-             <div className="col-md-12">
-              {chart}
-            </div>
+            <Bar data={chartData} />
           </div>
         </div>
       </div>

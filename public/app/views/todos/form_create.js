@@ -12,7 +12,7 @@ module.exports = React.createClass({
     return {
       todo: {
         expires_date: '',
-        expires_time: '',
+        expires_time: ''
       },
       users: []
     }
@@ -22,12 +22,16 @@ module.exports = React.createClass({
     request
     .get('api/v1/users')
     .end((err, res) => {
+      if(err) return console.log(err.body);
       this.setState({users: res.body});
     });
   },
 
+  /**
+   * Divide datetime and set it.
+   */
   handleDateTime(dateObj, dateStr) {
-    let datetime = moment(dateObj).format('YYYY-MM-DD HH:mm:ss').split(' ');
+    let datetime = moment(dateObj).format('YYYY/MM/DD HH:mm:ss').split(' ');
     let date = datetime[0];
     let time = datetime[1];
     this.handleChange({expires_date: date, expires_time: time});
@@ -39,38 +43,31 @@ module.exports = React.createClass({
     })
   },
 
-
   handleChange(data) {
     this.setState({todo: _.extend(this.state.todo, data)});
-  },
-
-  setValue() {
-
   },
 
   handleSubmit(e) {
     e.preventDefault();
     let trackingId = {};
+
     if(this.props.trackingId) {
       trackingId = {tracking_id: this.props.trackingId};
     }
+
     this.props.onSubmit(_.extend(this.state.todo, trackingId));
     this.clean();
   },
 
   clean() {
-    this.setState({todo: _.extend(this.state.todo, {
-      title: '',
-      description: ''
-    })});
+    let todo = _.extend(this.state.todo, { title: '', description: ''});
+    this.setState({todo: todo});
   },
 
   render() {
     const todo = this.state.todo;
     let contactSelect;
     let contactValue;
-
-    console.log(todo);
 
     const userOptions = this.state.users.map(user => {
       return {value: user.id, label: user.name +" "+ user.lastname}
@@ -91,8 +88,8 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
+          <label htmlFor="">Usuario</label>
           <Select
-            default="Usuario"
             value={todo.user_id}
             options={userOptions}
             onSelectChange={(e) => this.handleChange({user_id: e.currentTarget.value})}
@@ -111,14 +108,19 @@ module.exports = React.createClass({
 
         <div className="form-group col-md-12">
           <label htmlFor="">Descripción</label>
-          <Editor
+          <textarea
+            className="form-control"
             onChange={html => this.handleChange({description: html})}
             value={todo.description}
-          />
+          ></textarea>
         </div>
 
         <div className="form-group col-md-12">
-          <button className="btn btn-primary btn-sm pull-right" onClick={this.handleSubmit}>Guardar</button>
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={this.handleSubmit}>
+            Guardar
+          </button>
         </div>
 
       </form>

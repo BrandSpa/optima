@@ -18,7 +18,6 @@ function root(component) {
 }
 
 function checkAuth(ctx, next) {
-  console.log('checkAuth', ctx);
   return next();
 }
 
@@ -32,6 +31,10 @@ page('/companies', () => {
 
 page('/company/create', () => {
   return root(<CompanyCreate/>);
+});
+
+page('/services', () => {
+  return root(<Services/>);
 });
 
 page({hashbang: true});

@@ -1,0 +1,302 @@
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'Stratum2-Regular';
+  src: url('stratum2regular.ttf') format('truetype');
+}
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'Stratum2-Medium';
+  src: url('stratum2medium.ttf') format('truetype');
+}
+
+body {
+  padding: 0;
+  height: 100%;
+  font-size: 10pt;
+  font-family: 'Stratum2-Regular';
+  line-height: 12pt;
+}
+
+b, h1, h2, h3, h4 {
+  color: #111111;
+  font-family: "Stratum2-Medium";
+}
+
+#header img {
+  width: 100%;
+}
+
+#header span {
+  position: absolute;
+  top: 206pt;
+  right: 65px;
+  display: block;
+  color: white;
+  font-size: 27pt;
+}
+
+#contact {
+  margin: 15px 0 0 15px;
+  padding-bottom: 15px;
+  font-family: 'Stratum2-Medium';
+}
+
+#contact p {
+  margin: 5px;
+  font-weight: normal;
+   font-size: 16px;
+  line-height: 20px;
+}
+
+#intro {
+  margin: 0 0 0 20px;
+  width: 500pt;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+#intro p{
+  padding-bottom: 15px;
+}
+
+#content {
+  display: block;
+  margin: 0 15px 0 15px;
+  font: 11pt/9pt 'Stratum2-Regular';
+  line-height: 8pt;
+}
+
+table {
+  margin: 0 3px 25px 23px;
+  padding-bottom: 0;
+  width: 520pt;
+  border-top: 1px solid #fff;
+  border-bottom: none;
+  empty-cells: show;
+}
+
+
+table td {
+  margin: 0;
+  padding: 3pt;
+  border-top: 1px solid #eaab20;
+  border-right: 1px solid #eaab20;
+  color: black;
+  font-size: 10pt;
+  line-height: 13px;
+}
+
+td.img-product {
+  padding: 15px 5pt 7pt 0;
+  font-size: 16px;
+  font-family: 'Stratum2-Regular';
+
+}
+
+td img{
+  width: 160px;
+  border-top: 1px #fff solid;
+}
+.img-product{
+    border-top: 1px #fff solid;
+}
+.img-product img {
+
+  width: 160px;
+}
+
+
+
+.title {
+  color: #111111;
+  font-family: "Stratum2-Medium";
+  padding-bottom: 15px;
+}
+
+.no-border {
+  border-right: none;
+}
+
+
+#banner_includes{
+  margin: 15px 0 15px 15px;
+  width: 520pt;
+}
+
+#banner {
+  margin: 15px 0 15px 20px;
+  width: 510pt;
+}
+
+#firm{
+
+ margin-left: 30px;
+}
+
+.firm{
+  display: block;
+  margin-left: 30px;
+}
+
+#final {
+  width: 100%;
+  height: 950px;
+}
+
+#observacion {
+  margin: 15px 0 15px 15pt;
+  padding: 0 0 0 15px;
+  width: 510pt;
+}
+
+#observacion span {
+  display: block;
+  margin: 0 0 15px -15px;
+  padding: 0 0 25px 0;
+  width: 505pt;
+  border-bottom: 1px solid #eaab20;
+  font-size: 14pt;
+  line-height: 15pt;
+}
+
+.services {
+  margin: 0 10pt 15px 15pt;
+  width: 515pt;
+ font-size: 14px;
+}
+
+.service_title {
+  margin: 0;
+  font-size: 12pt;
+}
+
+.divide {
+  display: block;
+  clear: both;
+  margin-bottom: 15px;
+  width: 100%;
+  height: 30px;
+}
+
+.date {
+  padding-bottom: 30px;
+  font-family: "Stratum2-Medium";
+}
+
+.divider {
+  display: block;
+  width: 500pt;
+  height: 15px;
+  margin-bottom: 15px;
+  margin-left: 30px;
+  border-bottom: 1px solid #ebab21;
+}
+
+.service-title{
+  font-family: "Stratum2-Medium"
+}
+
+.service-img{
+  width: 160px;
+  margin-left: 30px;
+}
+
+.service-title span{
+  display: inline-block;
+  width: 500px;
+  height: auto;
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+.service-content{
+  width: 500pt;
+  display: block;
+ margin: 0 0 0 30px;
+}
+
+.service-content ul, ol{
+  padding: 0;
+  margin-left: 10px;
+}
+
+.service-content b{
+  font-family: "Stratum2-Medium";
+  font-weight: normal;
+}
+
+.service-content p > span{
+  font-family: "Stratum2-Regular";
+  font-weight: normal;
+  font-style: normal;
+}
+
+.comment-content p{
+  margin:0;
+  padding: 0;
+}
+
+.price {
+  font-family: "Stratum2-Medium";
+}
+
+.text-right{
+  text-align:right;
+}
+
+.container-conf{
+  clear: both;
+  width: 100%;
+}
+
+.clearfix{
+    display: block;
+  clear: both;
+}
+
+.conf{
+margin-bottom: 5px;
+background: #ddd;
+
+}
+
+.spaces{
+    border-bottom: 1px solid #fff;
+}
+
+.comment-title{
+  margin-left: 30px;
+  font-family: "Stratum2-Medium"
+}
+
+.comment-content{
+  font-family: "Stratum2-Regular" !important;
+  margin-left: 30px;
+}
+
+.comment-content ul, .comment-content ol{
+  padding: 0;
+  margin-left: 10px;
+}
+
+.comment-content b{
+  font-family: "Stratum2-Medium";
+  font-weight: normal;
+}
+
+.message{
+  display: block;
+  margin: 0 15px 0 15px;
+    font-weight: normal;
+   font-size: 16px;
+  line-height: 20px;
+}
+
+.footer{
+  position: fixed;
+  bottom: 15px;
+  left: 420px;
+  margin-top: 15px;
+}

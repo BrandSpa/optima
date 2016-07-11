@@ -26,10 +26,6 @@ export default React.createClass({
     }
   },
 
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps');
-  },
-
   triggerChange(query) {
     if(typeof this.props.onChange === 'function') {
       this.props.onChange(query);
