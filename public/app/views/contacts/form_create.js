@@ -1,9 +1,9 @@
 'use strict';
 const React = require('react');
 const _ = require('underscore');
-const Input = require('components/form_input.jsx');
-const Select = require('components/form_select.jsx');
-const Textarea = require('components/form_textarea.jsx');
+const Input = require('components/form_input');
+const Select = require('components/form_select');
+const Textarea = require('components/form_textarea');
 const payMethodOptions = require('options/pay_methods.json');
 const foundUsOptions = require('options/found_us.json');
 const howCallOptions = require('options/how_call.json');

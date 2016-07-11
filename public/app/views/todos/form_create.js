@@ -1,61 +1,54 @@
 'use strict';
-const React = require('react');
-const request = require('superagent');
-const DateTimeField = require('react-bootstrap-datetimepicker');
-const Select = require('react-select');
-const _ = require('lodash');
-const moment = require('moment');
+import React from 'react';
+import request from 'superagent';
+import _ from 'lodash';
+import moment from 'moment';
+import DateTime from 'components/datetime';
+import Editor from 'components/editor';
+import Select from 'components/form_select';
 
 module.exports = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {
       todo: {
-        expires_date: moment().format('YYYY-MM-DD'),
-        expires_time: moment().format('HH:mm:ss'),
+        expires_date: '',
+        expires_time: '',
       },
       users: []
     }
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     request
     .get('api/v1/users')
-    .end(function(err, res) {
+    .end((err, res) => {
       this.setState({users: res.body});
-    }.bind(this));
-  },
-
-  handleDate: function(date) {
-    this.handleChange({
-      expires_date: date
     });
   },
 
-   handleTime: function(time) {
-    this.handleChange({
-      expires_time: moment(time, 'x').format('HH:mm:ss'),
-      time: time
-    })
+  handleDateTime(dateObj, dateStr) {
+    let datetime = moment(dateObj).format('YYYY-MM-DD HH:mm:ss').split(' ');
+    let date = datetime[0];
+    let time = datetime[1];
+    this.handleChange({expires_date: date, expires_time: time});
   },
 
-  handleContact: function(id) {
+  handleContact(id) {
     this.handleChange({
       user_id: parseInt(id)
     })
   },
 
-  handleRefs: function() {
-    this.handleChange({
-      title: React.findDOMNode(this.refs.title).value,
-      description: React.findDOMNode(this.refs.description).value
-    });
-  },
 
-  handleChange: function(data) {
+  handleChange(data) {
     this.setState({todo: _.extend(this.state.todo, data)});
   },
 
-  handleSubmit: function(e) {
+  setValue() {
+
+  },
+
+  handleSubmit(e) {
     e.preventDefault();
     let trackingId = {};
     if(this.props.trackingId) {
@@ -65,87 +58,69 @@ module.exports = React.createClass({
     this.clean();
   },
 
-  clean: function() {
+  clean() {
     this.setState({todo: _.extend(this.state.todo, {
       title: '',
       description: ''
     })});
   },
 
-  render: function() {
+  render() {
     const todo = this.state.todo;
     let contactSelect;
     let contactValue;
-    let time;
 
-    const userOptions = this.state.users.map(function(user, i) {
+    console.log(todo);
+
+    const userOptions = this.state.users.map(user => {
       return {value: user.id, label: user.name +" "+ user.lastname}
     });
 
-    if(todo.user_id) {
-      contactSelect = _.findWhere(this.state.users, {id: todo.user_id});
-      contactValue = contactSelect.name +" "+ contactSelect.lastname;
-    }
-
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="form" onSubmit={ e => e.preventDefault() }>
         <br/>
-        <div className="form-group col-md-4">
+
+        <div className="form-group col-md-6">
           <label htmlFor="">Fecha vencimiento</label>
-          <DateTimeField
-            defaultText="Seleccionar fecha"
-            mode="date"
-            dateTime={moment().format('YYYY-MM-DD')}
-            format="YYYY-MM-DD"
-            onChange={this.handleDate}
-            value={todo.expires_date}
+          <DateTime
+            styles="form-control"
+            altFormat="Y-d-m H:i:s"
+            onChange={this.handleDateTime}
+            enableTime
             />
         </div>
 
-        <div className="form-group col-md-4">
-          <label htmlFor="">Hora vencimiento</label>
-          <DateTimeField
-            defaultText="Seleccionar hora"
-            mode="time"
-            onChange={this.handleTime}
-            value={todo.time}
-          />
-        </div>
-
-        <div className="form-group col-md-4">
-          <label htmlFor="">Seleccionar o buscar usuario</label>
+        <div className="form-group col-md-6">
           <Select
+            default="Usuario"
+            value={todo.user_id}
             options={userOptions}
-            placeholder="Seleccionar usario"
-            onChange={this.handleContact}
-            value={contactValue}
+            onSelectChange={(e) => this.handleChange({user_id: e.currentTarget.value})}
           />
         </div>
 
         <div className="form-group col-md-12">
-        <label htmlFor="">Título</label>
+          <label htmlFor="">Título</label>
           <input
             type="text"
-            ref="title"
             className="form-control"
-            onChange={this.handleRefs}
+            onChange={(e) => this.handleChange({title: e.currentTarget.value})}
             value={todo.title}
             />
         </div>
 
         <div className="form-group col-md-12">
-          <label htmlFor="">descripción</label>
-          <textarea
-            ref="description"
-            rows="2"
-            className="form-control"
-            onChange={this.handleRefs}
+          <label htmlFor="">Descripción</label>
+          <Editor
+            onChange={html => this.handleChange({description: html})}
             value={todo.description}
-            ></textarea>
+          />
         </div>
 
-        <button className="btn btn-primary btn-sm">Guardar</button>
-        <a href="#" className="btn btn-default btn-sm pull-right" onClick={this.props.hideForm}>Cerrar</a>
+        <div className="form-group col-md-12">
+          <button className="btn btn-primary btn-sm pull-right" onClick={this.handleSubmit}>Guardar</button>
+        </div>
+
       </form>
     );
   }

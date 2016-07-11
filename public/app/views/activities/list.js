@@ -1,6 +1,6 @@
 'use strict';
 const React = require('react');
-const Timeago = require('components/timeago.jsx');
+const Timeago = require('components/timeago');
 const request = require('superagent');
 
 module.exports = React.createClass({

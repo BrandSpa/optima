@@ -2,7 +2,7 @@
 const React = require('react');
 const moment = require('moment');
 const request = require('superagent');
-const Form = require('views/todos/form_create.jsx');
+const Form = require('views/todos/form_create');
 require('moment/locale/es');
 
 module.exports = React.createClass({

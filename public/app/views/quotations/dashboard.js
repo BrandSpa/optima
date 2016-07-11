@@ -1,9 +1,10 @@
 'use strict';
-const React = require('react');
-const List = require('views/quotations/list.jsx');
-const Activities = require('views/activities/list.jsx');
-const Todos = require('views/todos/list.jsx');
-const Graphs = require('views/quotations/graphs.jsx');
+import React from 'react';
+import List from 'views/quotations/list';
+import Activities from 'views/activities/list';
+import Todos from 'views/todos/section';
+import Graphs from 'views/quotations/graphs';
+
 module.exports = React.createClass({
 
   render: function() {
@@ -12,7 +13,6 @@ module.exports = React.createClass({
         <div className="col-md-10">
           <List />
           <Todos />
-          <Graphs />
         </div>
         <div className="col-md-2">
         <Activities />

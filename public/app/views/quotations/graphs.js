@@ -3,17 +3,18 @@ const React = require('react');
 const _ = require('lodash');
 const request = require('superagent');
 const moment = require('moment');
-const Status = require('views/graphs/status.jsx');
-const FindUs = require('views/graphs/how_find_us.jsx');
-const NoEffective = require('views/graphs/no_effective.jsx');
-const Advisors = require('views/graphs/advisor.jsx');
-const ClientType = require('views/graphs/client_type.jsx');
-const SentDiff = require('views/graphs/sent_diff.jsx');
 const DateTimeField = require('react-bootstrap-datetimepicker');
+
 const clientOptions = require('options/client_type.json');
 const typeOptions = require('options/type.json');
 const statusOptions = require('options/status.json');
-const Select = require('components/form_select.jsx');
+const Status = require('views/graphs/status');
+const FindUs = require('views/graphs/how_find_us');
+const NoEffective = require('views/graphs/no_effective');
+const Advisors = require('views/graphs/advisor');
+const ClientType = require('views/graphs/client_type');
+const SentDiff = require('views/graphs/sent_diff');
+const Select = require('components/form_select');
 
 module.exports = React.createClass({
   getInitialState: function() {

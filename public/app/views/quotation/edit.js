@@ -1,7 +1,5 @@
 'use strict';
-const React = require('react');
-const DropdownButton = require('react-bootstrap').DropdownButton;
-const MenuItem = require('react-bootstrap').MenuItem;
+import React from 'react';
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -46,23 +44,9 @@ module.exports = React.createClass({
         <div className="panel-body">
           <ul className="list-inline">
             <li>
-              <DropdownButton
-                bsStyle="default"
-                bsSize="small"
-                title={<i className="fa fa-file-pdf-o"></i>}
-              >
-                <MenuItem
-                eventKey="1"
-                href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id}
-                target="_new"
-                >
-                PDF
-                </MenuItem>
-                <MenuItem eventKey="2" href={"/quotations/" + quotation.id + "/pdfbn"} target="_blank" > PDF BN
-                </MenuItem>
-                <MenuItem eventKey="3" href={"/quotations/" + quotation.id + "/pdflogos"}  target="_blank"> PDF con logos
-                </MenuItem>
-              </DropdownButton>
+                <a href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id} target="_new" >PDF</a>
+                <a href={"/quotations/" + quotation.id + "/pdfbn"} target="_blank" > PDF BN</a>
+                <a href={"/quotations/" + quotation.id + "/pdflogos"}  target="_blank"> PDF con logos</a>
             </li>
             <li>
               <a

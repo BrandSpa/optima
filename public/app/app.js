@@ -1,24 +1,49 @@
 'use strict';
-var React = require('react');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var App = require('views/app.jsx');
-var CompanyCreate = require('views/companies/create_panel.jsx');
-var ContactCreate = require('views/contacts/create_panel.jsx');
-var Quotation = require('views/quotation/quotation.jsx');
-var Companies = require('views/companies/list.jsx');
-var Contacts = require('views/contacts/list.jsx');
-var Services = require('views/services/section.jsx');
+import React from 'react';
+import page from 'page';
+import {render} from 'react-dom';
+import App from 'views/app';
+import CompanyCreate from 'views/companies/create_panel';
+import ContactCreate from 'views/contacts/create_panel';
+import Quotation from 'views/quotation/quotation';
+import Companies from 'views/companies/list';
+import Contacts from 'views/contacts/list';
+import Services from 'views/services/section';
 
-React.render((
-  <Router>
-    <Route path="/" component={App}>
-      <Route path="company/create" component={CompanyCreate} />
-      <Route path="company/:companyId/contact/create" component={ContactCreate} />
-      <Route path="quotations/:id" component={Quotation} />
-      <Route path="companies" component={Companies} />
-      <Route path="services" component={Services} />
-    </Route>
-  </Router>
-), document.body);
+function root(component) {
+  return render(
+    <App>{component}</App>,
+    document.getElementById("app")
+  );
+}
+
+function checkAuth(ctx, next) {
+  console.log('checkAuth', ctx);
+  return next();
+}
+
+page('/', checkAuth, () => {
+  return root();
+});
+
+page('/companies', () => {
+  return root(<Companies/>);
+});
+
+page('/company/create', () => {
+  return root(<CompanyCreate/>);
+});
+
+page({hashbang: true});
+
+// render((
+//   <Router history={ hashHistory }>
+//     <Route path="/" component={App}>
+//       <Route path="company/create" component={CompanyCreate} />
+//       <Route path="company/:companyId/contact/create" component={ContactCreate} />
+//       <Route path="quotations/:id" component={Quotation} />
+//       <Route path="companies" component={Companies} />
+//       <Route path="services" component={Services} />
+//     </Route>
+//   </Router>
+// ), document.getElementById("app"));

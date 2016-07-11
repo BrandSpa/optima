@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react');
+import React from 'react';
+import _ from 'lodash';
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -7,29 +8,41 @@ module.exports = React.createClass({
       options: [],
       value: '',
       default: '',
-      onSelectChange: function() {
+      onSelectChange() {
         console.error('onSelectChange not implemented');
       }
     }
   },
 
-  handleChange: function() {
-    this.props.onSelectChange();
+  handleChange: function(e) {
+    if(typeof this.props.onSelectChange === 'function') {
+      this.props.onSelectChange(e);
+    }
   },
 
   render: function() {
-    var optionNodes = this.props.options.map(function(option, i) {
+    let optionNodes = this.props.options.map(function(option, i) {
       return (<option key={i} value={option.value}>{option.label}</option>);
     });
+
+    let value = this.props.value;
+    value = parseInt(value) ? parseInt(value) : value;
+
+    // let selected = _.findWhere(this.props.options, {value: value});
+    //
+    // console.log(value, typeof selected === "object");
+    //
+    // if(typeof selected === "object") selected = selected.label;
+    // console.log(selected);
 
     return (
       <select
         ref="select"
-        onChange={this.handleChange}
+        onChange={e => this.handleChange(e)}
         className="form-control"
-        value={this.props.value}
+        value={value}
         disabled={this.props.disabled ? true : false}>
-      <option value="">{this.props.default}</option>
+        <option value="">{this.props.default}</option>
         {optionNodes}
       </select>
     );

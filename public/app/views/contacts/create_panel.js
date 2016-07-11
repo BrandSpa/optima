@@ -1,6 +1,6 @@
 'use strict';
 const React = require('react');
-const Form = require('views/contacts/form_create.jsx');
+const Form = require('views/contacts/form_create');
 const request = require('superagent');
 const _ = require('underscore');
 

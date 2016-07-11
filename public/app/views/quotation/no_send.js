@@ -1,7 +1,7 @@
 'use strict';
 var React = require('react');
 var reasonsOptions = require('options/no_send_reasons.json');
-var Select = require('components/form_select.jsx');
+var Select = require('components/form_select');
 
 module.exports = React.createClass({
   getDefaultProps() {

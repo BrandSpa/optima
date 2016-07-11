@@ -1,7 +1,7 @@
 'use strict';
 const React = require('react');
-const Tracking = require('views/quotation/tracking.jsx');
-const Form = require('views/trackings/form_create.jsx');
+const Tracking = require('views/quotation/tracking');
+const Form = require('views/trackings/form_create');
 const request = require('superagent');
 const _ = require('lodash');
 

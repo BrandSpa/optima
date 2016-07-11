@@ -1,7 +1,7 @@
 'use strict';
 const React = require('react');
-const Form = require('views/services/form_create.jsx');
-const List = require('views/services/list.jsx');
+const Form = require('views/services/form_create');
+const List = require('views/services/list');
 
 module.exports = React.createClass({
 

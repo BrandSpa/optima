@@ -1,7 +1,7 @@
 'use strict';
 const React = require('react');
 const request = require('superagent');
-const Contact = require('views/contacts/contact.jsx');
+const Contact = require('views/contacts/contact');
 
 module.exports = React.createClass({
   getInitialState() {

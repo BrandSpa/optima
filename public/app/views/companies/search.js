@@ -1,6 +1,6 @@
 'use strict';
 const React = require('react');
-const Input = require('components/form_input.jsx');
+const Input = require('components/form_input');
 
 module.exports = React.createClass({
 

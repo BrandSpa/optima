@@ -3,7 +3,7 @@ const React = require('react');
 const Select = require('react-select');
 const request = require('superagent');
 const _  = require('lodash');
-const Form = require('views/contacts/form_create.jsx');
+const Form = require('views/contacts/form_create');
 
 module.exports = React.createClass({
   getDefaultProps: function() {

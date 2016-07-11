@@ -1,7 +1,7 @@
 'use strict';
 const React = require('react');
-const Product = require('views/quotation/product.jsx');
-const FormCreate = require('views/products/form_create.jsx');
+const Product = require('views/quotation/product');
+const FormCreate = require('views/products/form_create');
 const request = require('superagent');
 const _ = require('underscore');
 

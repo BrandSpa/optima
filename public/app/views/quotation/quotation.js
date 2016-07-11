@@ -1,23 +1,25 @@
 'use strict';
-const React = require('react');
-const request = require('superagent');
-const _ = require('underscore');
+import React from 'react';
+import request from 'superagent';
+import _ from 'underscore';
+
 const alertify = require('alertifyjs');
 alertify.set('notifier','position', 'top-right');
-const Contact = require('views/quotation/contact.jsx');
-const Filters = require('views/quotation/filters.jsx');
-const Edit = require('views/quotation/edit.jsx');
-const Status = require('views/quotation/status.jsx');
-const Products = require('views/quotation/products.jsx');
-const Services = require('views/quotation/services.jsx');
-const Comment = require('views/quotation/comment.jsx');
-const Mail = require('views/quotation/mails.jsx');
-const NoEffective = require('views/quotation/no_effective.jsx');
-const NoSend = require('views/quotation/no_send.jsx');
-const Times = require('views/quotation/times.jsx');
-const Trackings = require('views/quotation/trackings.jsx');
-const Activities = require('views/quotation/activity.jsx');
-const moment = require('moment');
+
+import Contact from 'views/quotation/contact';
+import Filters from 'views/quotation/filters';
+import Edit from 'views/quotation/edit';
+import Status from 'views/quotation/status';
+import Products from 'views/quotation/products';
+import Services from 'views/quotation/services';
+import Comment from 'views/quotation/comment';
+import Mail from 'views/quotation/mails';
+import NoEffective from 'views/quotation/no_effective';
+import NoSend from 'views/quotation/no_send';
+import Times from 'views/quotation/times';
+import Trackings from 'views/quotation/trackings';
+import Activities from 'views/quotation/activity';
+import moment from 'moment';
 
 module.exports = React.createClass({
   getInitialState: function() {

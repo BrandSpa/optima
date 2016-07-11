@@ -3,7 +3,7 @@ const React = require('react');
 const productsOptions = require('options/products.json');
 const productsTypesOptions = require('options/product_type.json');
 const PeriodsOptions = require('options/periods.json');
-const Select = require('components/form_select.jsx');
+const Select = require('components/form_select');
 const _ = require('lodash');
 
 module.exports = React.createClass({

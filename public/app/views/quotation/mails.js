@@ -1,7 +1,7 @@
 'use strict';
 const React = require('react');
 const ReactQuill = require('react-quill');
-const Input = require('components/form_input.jsx');
+const Input = require('components/form_input');
 const _ = require('underscore');
 
 module.exports = React.createClass({
@@ -36,8 +36,8 @@ module.exports = React.createClass({
   handleChange: function() {
     this.setState(_.extend(this.state.quotation, {
       quotation: {
-        'mail_recipient_1': React.findDOMNode(this.refs.mail_recipient_1).value,
-        'mail_recipient_2': React.findDOMNode(this.refs.mail_recipient_2).value
+        'mail_recipient_1': this.refs.mail_recipient_1.value,
+        'mail_recipient_2': this.refs.mail_recipient_2.value
       }
     }));
   },

@@ -1,9 +1,10 @@
 'use strict';
 const React = require('react');
 const request = require('superagent');
-const Company = require('views/companies/company.jsx');
-const Form = require('views/companies/form_create.jsx');
+const Company = require('views/companies/company');
+const Form = require('views/companies/form_create');
 const Sticky = require('react-sticky');
+
 module.exports = React.createClass({
   getInitialState: function() {
     return {

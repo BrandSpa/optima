@@ -1,9 +1,9 @@
 'use strict';
 const React = require('react');
 const _ = require('underscore');
-const Input = require('components/form_input.jsx');
-const Select = require('components/form_select.jsx');
-const Textarea = require('components/form_textarea.jsx');
+const Input = require('components/form_input');
+const Select = require('components/form_select');
+const Textarea = require('components/form_textarea');
 const sectors = require('options/sectors.json');
 const cities = require('options/cities.json');
 
@@ -34,14 +34,14 @@ module.exports = React.createClass({
   handleChange() {
     const ref = this.refs;
     const company = _.extend(this.state.company, {
-      name: React.findDOMNode(ref.name.refs.input).value,
-      nit: React.findDOMNode(ref.nit.refs.input).value,
-      sector: React.findDOMNode(ref.sector.refs.select).value,
-      city: React.findDOMNode(ref.city.refs.select).value,
-      address: React.findDOMNode(ref.address.refs.input).value,
-      phone: React.findDOMNode(ref.phone.refs.input).value,
-      web: React.findDOMNode(ref.web.refs.input).value,
-      comment: React.findDOMNode(ref.comment.refs.textarea).value,
+      name: ref.name.refs.input.value,
+      nit: ref.nit.refs.input.value,
+      sector: ref.sector.refs.select.value,
+      city: ref.city.refs.select.value,
+      address: ref.address.refs.input.value,
+      phone: ref.phone.refs.input.value,
+      web: ref.web.refs.input.value,
+      comment: ref.comment.refs.textarea.value,
     });
 
     this.setState({company});

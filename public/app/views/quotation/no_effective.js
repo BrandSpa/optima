@@ -1,6 +1,6 @@
 'use strict';
 var React = require('react');
-var Select = require('components/form_select.jsx');
+var Select = require('components/form_select');
 var reasonsOptions = require('options/no_effective_reasons.json');
 
 module.exports = React.createClass({
