@@ -1,15 +1,9 @@
 'use strict';
-const React = require('react');
-const AppHeader = require('views/app_header');
-const Dashboard = require('views/quotations/dashboard');
+import React from 'react';
+import AppHeader from 'views/app_header';
+import Dashboard from 'views/quotations/dashboard';
 
 module.exports = React.createClass({
-  getInitialState() {
-    return {
-      sidebarOpen: true
-    }
-  },
-
   render() {
     return (
       <div id="app">

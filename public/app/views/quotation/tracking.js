@@ -19,7 +19,7 @@ module.exports = React.createClass({
     }
   },
 
-  componentWillRecieveProps: function(props) {
+  componentWillReceiveProps: function(props) {
      if(props.tracking.todos) {
       this.setState({todos: props.tracking.todos});
     }

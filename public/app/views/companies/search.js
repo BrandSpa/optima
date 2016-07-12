@@ -1,12 +1,11 @@
 'use strict';
 const React = require('react');
-const Input = require('components/form_input');
 
-module.exports = React.createClass({
-
+export default React.createClass({
   render() {
     return (
-      <Input
+      <input
+        className="form-control"
         ref="search"
         onInputChange={this.handleChange}
         placeholder="Buscar empresas"

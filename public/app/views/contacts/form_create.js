@@ -1,13 +1,13 @@
 'use strict';
-const React = require('react');
-const _ = require('underscore');
-const Input = require('components/form_input');
-const Select = require('components/form_select');
-const Textarea = require('components/form_textarea');
-const payMethodOptions = require('options/pay_methods.json');
-const foundUsOptions = require('options/found_us.json');
-const howCallOptions = require('options/how_call.json');
-const genderOptions = require('options/gender.json');
+import React from 'react';
+import _ from 'underscore';
+import Input from 'components/form_input';
+import Select from 'components/form_select';
+import Textarea from 'components/form_textarea';
+import payMethodOptions from 'options/pay_methods.json';
+import foundUsOptions from 'options/found_us.json';
+import howCallOptions from 'options/how_call.json';
+import genderOptions from 'options/gender.json';
 
 module.exports = React.createClass({
   getInitialState() {
@@ -20,21 +20,21 @@ module.exports = React.createClass({
     const ref = this.refs;
 
     const contact = _.extend(this.state.contact, {
-      name: React.findDOMNode(ref.name).value,
-      lastname: React.findDOMNode(ref.lastname).value,
-      gender: React.findDOMNode(ref.gender.refs.select).value,
-      email: React.findDOMNode(ref.email).value,
-      title: React.findDOMNode(ref.title).value,
-      position: React.findDOMNode(ref.position).value,
-      phone_1: React.findDOMNode(ref.phone_1).value,
-      phone_2: React.findDOMNode(ref.phone_2).value,
-      mobile_1: React.findDOMNode(ref.mobile_1).value,
-      mobile_2: React.findDOMNode(ref.mobile_2).value,
-      fax: React.findDOMNode(ref.fax).value,
-      pay_method: React.findDOMNode(ref.pay_method.refs.select).value,
-      found_us: React.findDOMNode(ref.found_us.refs.select).value,
-      how_call: React.findDOMNode(ref.how_call.refs.select).value,
-      comment: React.findDOMNode(ref.comment.refs.textarea).value,
+      name: ref.name.value,
+      lastname: ref.lastname.value,
+      gender: ref.gender.refs.select.value,
+      email: ref.email.value,
+      title: ref.title.value,
+      position: ref.position.value,
+      phone_1: ref.phone_1.value,
+      phone_2: ref.phone_2.value,
+      mobile_1: ref.mobile_1.value,
+      mobile_2: ref.mobile_2.value,
+      fax: ref.fax.value,
+      pay_method: ref.pay_method.refs.select.value,
+      found_us: ref.found_us.refs.select.value,
+      who_call: ref.how_call.refs.select.value,
+      comment: ref.comment.refs.textarea.value,
     });
 
     this.setState({contact});
@@ -61,18 +61,20 @@ module.exports = React.createClass({
     <form onSubmit={this.handleSubmit}>
         <div className="row">
           <div className={"form-group " + size}>
-            <Input
+            <input
+              className="form-control"
               ref="name"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.name}
               placeholder="Nombre"
             />
           </div>
 
           <div className={"form-group " + size}>
-            <Input
+            <input
+              className="form-control"
               ref="lastname"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.lastname}
               placeholder="Apellido"
             />
@@ -89,72 +91,80 @@ module.exports = React.createClass({
           </div>
 
           <div className={"form-group " + size}>
-             <Input
+             <input
+              className="form-control"
               ref="email"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.email}
               placeholder="Correo"
             />
           </div>
 
           <div className={"form-group " + size}>
-             <Input
+             <input
+              className="form-control"
               ref="title"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.title}
               placeholder="Título"
             />
           </div>
 
           <div className={"form-group " + size}>
-             <Input
+             <input
+              className="form-control"
               ref="position"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.position}
               placeholder="Posición"
             />
           </div>
 
           <div className={"form-group " + size}>
-             <Input
+             <input
+              className="form-control"
               ref="phone_1"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.phone_1}
               placeholder="Teléfono"
             />
           </div>
 
           <div className={"form-group " + size}>
-            <Input
+            <input
+              className="form-control"
               ref="phone_2"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.phone_2}
               placeholder="Teléfono"
             />
           </div>
 
           <div className={"form-group " + size}>
-            <Input
+            <input
+              className="form-control"
               ref="mobile_1"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.mobile_1}
               placeholder="Celular"
             />
           </div>
 
           <div className={"form-group " + size}>
-            <Input
+            <input
+              className="form-control"
               ref="mobile_2"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.mobile_2}
               placeholder="Celular"
             />
           </div>
 
           <div className={"form-group " + size}>
-            <Input
+            <input
+              className="form-control"
               ref="fax"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={contact.fax}
               placeholder="Fax"
             />
@@ -182,7 +192,7 @@ module.exports = React.createClass({
 
           <div className={"form-group " + size}>
             <Select
-              ref="how_call"
+              ref="who_call"
               options={howCallOptions}
               default="Seleccionar quien llamó"
               onSelectChange={this.handleChange}
@@ -199,6 +209,7 @@ module.exports = React.createClass({
             placeholder="Comentario"
           />
         </div>
+
         <button className="btn btn-primary btn-sm pull-right">{btnText}</button>
       </form>
     );

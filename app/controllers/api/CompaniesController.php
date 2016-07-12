@@ -31,7 +31,12 @@ class CompaniesController extends \BaseController {
 			});
 		}
 
-		$collection = $collection->take(30)->skip($offset)->get();
+		$collection = $collection
+			->take(15)
+			->skip($offset)
+			->orderBy('id', 'DESC')
+			->get();
+
 		return Response::json($collection, 200);
 
 	}

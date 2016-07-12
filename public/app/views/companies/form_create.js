@@ -39,7 +39,8 @@ module.exports = React.createClass({
       address: ref.address.value,
       phone: ref.phone.value,
       web: ref.web.value,
-      comment: ref.comment.refs.textarea.value,
+      comment: ref.comment.value,
+      type: ''
     });
 
     this.setState({company});
@@ -48,22 +49,29 @@ module.exports = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     const company = this.state.company;
-    this.props.onSubmit(company);
+    if(typeof this.props.onSubmit === 'function') {
+      this.props.onSubmit(company);
+    }
   },
 
   clean(e) {
-    e.preventDefault();
-    this.setState({company: {}});
+    if(e) e.preventDefault();
+
+    let cleanOb = Object.keys(this.state.company).reduce((ob, key) => {
+      ob[key] = '';
+      return _.extend(ob, ob);
+    }, {});
+
+    this.setState({ company: cleanOb });
   },
 
   render() {
-    const company = this.state.company;
-
-    const btnCleanText = this.props.btnCleanText || 'limpiar';
-    const btnStoreText = this.props.btnStoreText || (<i className="fa fa-chevron-right"></i>);
+    let company = this.state.company;
+    let btnCleanText = this.props.btnCleanText || 'limpiar';
+    let btnStoreText = this.props.btnStoreText || (<i className="fa fa-chevron-right"></i>);
 
     return (
-     <form onSubmit={this.handleSubmit}>
+     <form onSubmit={e => e.preventDefault() }>
         <div className="row">
 
          <div className="form-group col-sm-6">
@@ -140,16 +148,25 @@ module.exports = React.createClass({
        </div>
 
         <div className="form-group">
-        <textarea
-          className="form-control"
-          ref="comment"
-          onChange={this.handleChange}
-          value={company.comment}
-          placeholder="Comentario"
-        />
+          <textarea
+            className="form-control"
+            ref="comment"
+            onChange={this.handleChange}
+            value={company.comment}
+            placeholder="Comentario"
+          />
        </div>
-       <button className="btn btn-primary btn-sm pull-right">{btnStoreText}</button>
-       <a href="#" className="btn btn-default btn-sm" onClick={this.clean}>{btnCleanText}</a>
+
+      <button
+        className="btn btn-primary btn-sm pull-right"
+        onClick={this.handleSubmit}>
+        {btnStoreText}
+      </button>
+      <button
+        className="btn btn-default btn-sm"
+        onClick={this.clean}>
+        {btnCleanText}
+      </button>
      </form>
     );
   }
