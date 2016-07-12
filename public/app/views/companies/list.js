@@ -3,7 +3,6 @@ const React = require('react');
 const request = require('superagent');
 const Company = require('views/companies/company');
 const Form = require('views/companies/form_create');
-const Sticky = require('react-sticky');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -91,27 +90,19 @@ module.exports = React.createClass({
   render: function() {
     const companies = this.state.companies;
 
-    const companyNodes = companies.map(company => <Company
-      key={company.id}
-      company={company}
-      onEdit={this.handleEdit}
-    />);
+    const companyNodes = companies.map(company =>
+      <Company
+        key={company.id}
+        company={company}
+        onEdit={this.handleEdit}
+      />
+    );
 
     return (
       <div>
-        <div className="col-md-12">
-        <div className="panel">
-          <div className="panel-body">
-            <Form
-              company={this.state.company}
-              btnCleanText="Cancelar"
-              btnStoreText="Guardar"
-              onSubmit={this.handleSubmit}
-              />
-          </div>
-        </div>
 
-        <Sticky>
+        <div className="col-md-8">
+
         <div className="panel">
           <div className="panel-body">
           <div className="form-group">
@@ -133,13 +124,24 @@ module.exports = React.createClass({
             </div>
           </div>
         </div>
-        </Sticky>
 
         <div className="companies-list">
-            {companyNodes}
-          </div>
+          {companyNodes}
+        </div>
       </div>
 
+      <div className="col-md-4">
+        <div className="panel" style={{position: 'fixed', margin: '0 30px 0 0'}}>
+          <div className="panel-body">
+            <Form
+              company={this.state.company}
+              btnCleanText="Cancelar"
+              btnStoreText="Guardar"
+              onSubmit={this.handleSubmit}
+              />
+          </div>
+        </div>
+      </div>
 
       </div>
 

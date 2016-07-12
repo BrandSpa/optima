@@ -1,9 +1,7 @@
 'use strict';
 const React = require('react');
 const _ = require('underscore');
-const Input = require('components/form_input');
 const Select = require('components/form_select');
-const Textarea = require('components/form_textarea');
 const sectors = require('options/sectors.json');
 const cities = require('options/cities.json');
 
@@ -34,13 +32,13 @@ module.exports = React.createClass({
   handleChange() {
     const ref = this.refs;
     const company = _.extend(this.state.company, {
-      name: ref.name.refs.input.value,
-      nit: ref.nit.refs.input.value,
+      name: ref.name.value,
+      nit: ref.nit.value,
       sector: ref.sector.refs.select.value,
       city: ref.city.refs.select.value,
-      address: ref.address.refs.input.value,
-      phone: ref.phone.refs.input.value,
-      web: ref.web.refs.input.value,
+      address: ref.address.value,
+      phone: ref.phone.value,
+      web: ref.web.value,
       comment: ref.comment.refs.textarea.value,
     });
 
@@ -69,18 +67,20 @@ module.exports = React.createClass({
         <div className="row">
 
          <div className="form-group col-sm-6">
-          <Input
+          <input
+            className="form-control"
             ref="name"
-            onInputChange={this.handleChange}
+            onChange={this.handleChange}
             value={company.name}
-            placeholder="Nombre"
+            placeholder="Razón social"
           />
          </div>
 
          <div className="form-group col-sm-6">
-          <Input
+          <input
+            className="form-control"
             ref="nit"
-            onInputChange={this.handleChange}
+            onChange={this.handleChange}
             value={company.nit}
             placeholder="Nit"
           />
@@ -108,9 +108,10 @@ module.exports = React.createClass({
 
         </div>
        <div className="form-group">
-       <Input
+       <input
+        className="form-control"
           ref="address"
-          onInputChange={this.handleChange}
+          onChange={this.handleChange}
           value={company.address}
           placeholder="Dirección"
         />
@@ -118,18 +119,20 @@ module.exports = React.createClass({
 
        <div className="row">
          <div className="form-group col-lg-6">
-           <Input
+           <input
+            className="form-control"
               ref="phone"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={company.phone}
               placeholder="Teléfono"
             />
          </div>
 
          <div className="form-group col-lg-6">
-            <Input
+            <input
+              className="form-control"
               ref="web"
-              onInputChange={this.handleChange}
+              onChange={this.handleChange}
               value={company.web}
               placeholder="Web"
             />
@@ -137,9 +140,10 @@ module.exports = React.createClass({
        </div>
 
         <div className="form-group">
-        <Textarea
+        <textarea
+          className="form-control"
           ref="comment"
-          onTextareaChange={this.handleChange}
+          onChange={this.handleChange}
           value={company.comment}
           placeholder="Comentario"
         />

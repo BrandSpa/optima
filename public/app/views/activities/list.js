@@ -1,7 +1,7 @@
 'use strict';
-const React = require('react');
-const Timeago = require('components/timeago');
-const request = require('superagent');
+import React from 'react';
+import request from 'superagent';
+import Item from 'views/activities/item';
 
 module.exports = React.createClass({
   getInitialState() {
@@ -17,14 +17,10 @@ module.exports = React.createClass({
   },
 
   render() {
-    const activityNodes = this.state.activities.map(activity => <tr key={activity.id}>
-                <td>
-          {activity.user.name} {activity.user.lastname} {activity.message} <Timeago date={activity.created_at} />
-      </td>
-                </tr>);
+    const activityNodes = this.state.activities.map(activity => <Item key={activity.id} activity={activity} />);
 
     return (
-      <div className="panel">
+      <div className="panel" style={{position: 'fixed', margin: '0 30px 0 0'}}>
         <div className="panel-body">
           <div className="quotations-table">
           <h5>Actividad</h5>

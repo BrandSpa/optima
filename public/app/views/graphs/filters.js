@@ -54,11 +54,10 @@ export default React.createClass({
 
   render() {
     let {query} = this.state;
+
     return (
       <div className="panel">
         <div className="panel-body">
-
-
             <div className="form-group col-md-3">
               <DataTime
                 placeholder="Seleccionar desde"
@@ -86,15 +85,6 @@ export default React.createClass({
 
             <div className="form-group col-sm-3">
               <Select
-                options={advisorOptions}
-                default="Seleccionar asesor"
-                value={query.advisor}
-                onSelectChange={e => this.handleChange('advisor', e)}
-              />
-            </div>
-
-            <div className="form-group col-sm-3">
-              <Select
                 options={clientOptions}
                 default="Seleccionar cliente"
                 value={query.client_type}
@@ -107,7 +97,6 @@ export default React.createClass({
                 ref="type"
                 options={typeOptions}
                  default="Seleccionar tipo"
-
                  value={query.quotation_type}
                  onSelectChange={e => this.handleChange('quotation_type', e)}
               />

@@ -18,19 +18,30 @@ export default React.createClass({
   },
 
   componentDidMount() {
+    this.fetch();
+  },
+
+  fetch(query) {
+    let filters = query ? query : {};
+
     request
-      .get('/api/v1/reports')
-      .end((err, res) => {
-        this.setState({ graphsData: res.body });
-      });
+    .get('/api/v1/reports')
+    .query(filters)
+    .end((err, res) => {
+      this.setState({ graphsData: res.body });
+    });
+  },
+
+  handleFilters(query) {
+    this.fetch(query);
   },
 
   render() {
     return (
       <div className="row">
-      <div className="col-md-12">
-        <Filters/>
-      </div>
+        <div className="col-md-12">
+          <Filters onChange={this.handleFilters}/>
+        </div>
 
         <Status graphsData={this.state.graphsData}/>
         <HowFindUs graphsData={this.state.graphsData}/>
