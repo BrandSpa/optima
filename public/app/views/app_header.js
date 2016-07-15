@@ -11,8 +11,9 @@ module.exports = React.createClass({
               <a className="navbar-brand" href="#">OPTIMA</a>
                <ul className="nav navbar-nav navbar-collapse">
                   <li><a href="">Dashboard</a></li>
-                  <li><a href="company/create">Nueva Cotización</a></li>
+                  <li><a href="quotation/create">Nueva Cotización</a></li>
                   <li><a href="companies">Empresas</a></li>
+                  <li><a href="contacts">Contactos</a></li>
                   <li><a href="services">Servicios</a></li>
                </ul>
           </div>

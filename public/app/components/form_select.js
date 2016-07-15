@@ -28,6 +28,7 @@ module.exports = React.createClass({
     let value = this.props.value;
     value = parseInt(value) ? parseInt(value) : value;
 
+
     // let selected = _.findWhere(this.props.options, {value: value});
     //
     // console.log(value, typeof selected === "object");

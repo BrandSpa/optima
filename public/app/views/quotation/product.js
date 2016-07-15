@@ -1,6 +1,6 @@
 'use strict';
 const React = require('react');
-const FormattedNumber = require('react-intl').FormattedNumber;
+
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -33,13 +33,13 @@ module.exports = React.createClass({
         <td>{product.name}</td>
         <td>{product.lapse} {period}</td>
         <td>{product.quantity}</td>
-        <td><FormattedNumber value={product.price}/></td>
-        <td><FormattedNumber value={product.total}/></td>
+        <td>{product.price}</td>
+        <td>{product.total}</td>
         <td>
         <ul className="list-inline">
           <li>
             <button
-              className="btn btn-default btn-xs"
+              className="btn btn-default btn-sm"
               onClick={this.props.onEdit.bind(null, product)}
               disabled={this.props.disabled ? true : false}
             >
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 
           <li>
             <button
-              className="btn btn-default btn-xs"
+              className="btn btn-default btn-sm"
               onClick={this.props.onDuplicate.bind(null, product.id)}
               disabled={this.props.disabled ? true : false}
             >
@@ -59,7 +59,7 @@ module.exports = React.createClass({
 
           <li>
             <button
-            className="btn btn-default btn-xs"
+            className="btn btn-default btn-sm"
             onClick={this.props.onOrder.bind(null, product)}
             >{product.ordered ? "Pedir" : "Pedido" }
           </button>
@@ -67,7 +67,7 @@ module.exports = React.createClass({
 
           <li>
             <button
-              className="btn btn-default btn-xs"
+              className="btn btn-default btn-sm"
               onClick={this.props.onDelete.bind(null, product.id)}
               disabled={this.props.disabled ? true : false}
             >

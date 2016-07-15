@@ -17,6 +17,7 @@ var customOpts = {
    paths: [
       './node_modules',
       './app',
+      './app/lib',
       './app/components',
       './app/options/'
     ],

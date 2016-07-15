@@ -19,8 +19,20 @@ class ContactsController extends \BaseController {
 	{
 		$company = Input::get('company_id');
 		$quotation = Input::get('quotation_id');
-		$query = Input::get('query');
+		$q = Input::get('query');
 		$offset = Input::get('offset');
+
+		$collection = new Contact;
+
+		if (Input::has('query')) {
+			$collection = $collection->where(function($query) use($q) {
+				$query
+				->where('name', 'like', "%$q%")
+				->orWhereHas('company', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					});
+			});
+		}
 
 		if (Input::has('company_id')) {
 			$collection = Contact::where('company_id', $company)->get();
@@ -32,7 +44,11 @@ class ContactsController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		$collection = Contact::takeAndSkip(10, $offset);
+		$collection = $collection
+		->with(['company'])
+		->take(15)
+		->skip($offset)
+		->get();
 		return Response::json($collection);
 	}
 

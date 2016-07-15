@@ -26,7 +26,7 @@ class ServicesController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		$collection = Service::all();
+		$collection = Service::orderBy('id', 'DESC')->get();
 		return Response::json($collection, 200);
 	}
 

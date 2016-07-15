@@ -72,7 +72,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <div className="col-md-12">
+      <div className="col-md-6">
 
       <div className={contactNodes ? "panel panel-default" : "hidden"}>
           <div className="panel-body">

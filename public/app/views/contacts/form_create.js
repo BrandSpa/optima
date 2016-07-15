@@ -33,7 +33,7 @@ module.exports = React.createClass({
       fax: ref.fax.value,
       pay_method: ref.pay_method.refs.select.value,
       found_us: ref.found_us.refs.select.value,
-      who_call: ref.how_call.refs.select.value,
+      who_call: ref.who_call.refs.select.value,
       comment: ref.comment.refs.textarea.value,
     });
 
@@ -48,8 +48,9 @@ module.exports = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit(this.state.contact);
-    this.setState({contact: {}});
+    if(typeof this.props.onSubmit === 'function') {
+      this.props.onSubmit(this.state.contact);
+    }
   },
 
   render() {
@@ -196,7 +197,7 @@ module.exports = React.createClass({
               options={howCallOptions}
               default="Seleccionar quien llamó"
               onSelectChange={this.handleChange}
-              value={contact.how_call}
+              value={contact.who_call}
             />
           </div>
         </div>
@@ -210,6 +211,7 @@ module.exports = React.createClass({
           />
         </div>
 
+        <button className="btn btn-default btn-sm pull-left">Cancelar</button>
         <button className="btn btn-primary btn-sm pull-right">{btnText}</button>
       </form>
     );

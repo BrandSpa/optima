@@ -5,9 +5,9 @@ import {render} from 'react-dom';
 import App from 'views/app';
 import CompanyCreate from 'views/companies/create_panel';
 import ContactCreate from 'views/contacts/create_panel';
-import Quotation from 'views/quotation/quotation';
+import Quotation from 'views/quotation/section';
 import Companies from 'views/companies/list';
-import Contacts from 'views/contacts/list';
+import Contacts from 'views/contacts/section';
 import Services from 'views/services/section';
 
 function root(component) {
@@ -29,12 +29,24 @@ page('/companies', () => {
   return root(<Companies/>);
 });
 
-page('/company/create', () => {
-  return root(<CompanyCreate/>);
+page('/quotation/create', () => {
+  return root(
+    <div>
+    <CompanyCreate/>
+    </div>
+  );
+});
+
+page('/contacts', () => {
+  return root(<Contacts/>);
 });
 
 page('/services', () => {
   return root(<Services/>);
+});
+
+page('/quotations/:id', (ctx) => {
+  return root(<Quotation params={ctx.params}/>)
 });
 
 page({hashbang: true});

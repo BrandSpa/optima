@@ -1,9 +1,10 @@
 'use strict';
-const React = require('react');
-const Product = require('views/quotation/product');
-const FormCreate = require('views/products/form_create');
-const request = require('superagent');
-const _ = require('underscore');
+import React from 'react';
+import Product from 'views/quotation/product';
+import FormCreate from 'views/products/form_create';
+import request from 'superagent';
+import _ from 'underscore';
+import cleanObject from 'lib/clean_object';
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -13,29 +14,30 @@ module.exports = React.createClass({
     }
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       products: [],
       product: {},
-      showForm: false
+      showForm: false,
+      errors: []
     }
   },
 
-  componentWillReceiveProps: function(props) {
+  componentWillReceiveProps(props) {
     this._fetch(props.quotationId);
   },
 
-  _fetch: function(id) {
+  _fetch(id) {
     request
       .get('/api/v1/products/')
       .query({quotation_id: id})
-      .end(function(err, res) {
+      .end((err, res) => {
         if(err) return console.log(err.response.text);
         this.setState({products: res.body});
-      }.bind(this));
+      });
   },
 
-  _handleSubmit: function(product) {
+  _handleSubmit(product) {
     this.setState({product: product});
     if(product.id) {
       this._update();
@@ -45,36 +47,41 @@ module.exports = React.createClass({
   },
 
   _update: function(data) {
-    let product = this.state.product;
-
-    if(data) {
-      product = data;
-    }
+    let product = data ? data : this.state.product;
 
     request
       .put('/api/v1/products/' + this.state.product.id)
       .send(this.state.product)
-      .end(function(err, res) {
-        if(err) return console.log(err.body);
-       this.setState({
-          product: {},
-          showForm: false
-        });
-      }.bind(this));
+      .end((err, res) => {
+        if(err) {
+          let errors = Object.keys(res.body).map(key => res.body[key]);
+          this.setState({ errors: errors });
+        } else {
+          this.cleanProduct();
+          this.setState({ showForm: false });
+        }
+      });
   },
 
   _store: function() {
     request
       .post('/api/v1/products')
       .send(this.state.product)
-      .end(function(err, res) {
-        if(err) return console.log(err.body);
-        this.setState({
-          products: this.state.products.concat([res.body]),
-          product: {},
-          showForm: false
-        });
-      }.bind(this));
+      .end(this.handleStoreReponse);
+  },
+
+  handleStoreReponse(err ,res) {
+    if(err) {
+      let errors = Object.keys(res.body).map(key => res.body[key]);
+      this.setState({ errors: errors });
+    } else {
+      this.cleanProduct();
+      this.setState({
+        products: this.state.products.concat([res.body]),
+        showForm: false
+      });
+    }
+
   },
 
   handleDuplicate: function(id, e) {
@@ -82,11 +89,11 @@ module.exports = React.createClass({
 
     request
     .post('/api/v1/products/' + id  + '/duplicate')
-    .end(function(err, res) {
+    .end((err, res) => {
       this.setState({
         products: this.state.products.concat([res.body])
       });
-    }.bind(this));
+    });
   },
 
   handleEdit: function(product) {
@@ -98,6 +105,7 @@ module.exports = React.createClass({
 
   handleOrder: function(product) {
     let order = true;
+
     if(product.ordered && product.ordered == true || product.ordered == 1) {
       order = false;
     }
@@ -108,7 +116,7 @@ module.exports = React.createClass({
     request
     .put('/api/v1/products/' + product.id)
     .send(product)
-    .end(function(err, res) {
+    .end((err, res) => {
       this.setState({product: {}});
     });
   },
@@ -121,28 +129,29 @@ module.exports = React.createClass({
 
     request
     .del('/api/v1/products/' + id)
-    .end(function(err, res) {
+    .end((err, res) => {
       this.setState({
         products: products
       });
-    }.bind(this));
+    });
   },
 
   showForm: function(e) {
-    let show;
-    if(this.state.showForm === true) {
-      show = false
-      this.setState({product: {}});
-    } else {
-      show = true;
-    }
+    let show = !this.state.showForm;
+    if(show) this.cleanProduct();
     this.setState({showForm: show});
   },
 
+  cleanProduct() {
+    this.setState({
+      product: cleanObject(this.state.product),
+      errors: []
+    });
+  },
+
   render: function() {
-    const products = this.state.products;
-    const productNodes = products.map(function(product) {
-      return (
+    let products = this.state.products;
+    let productNodes = products.map(product =>
         <Product
           key={product.id}
           product={product}
@@ -152,9 +161,10 @@ module.exports = React.createClass({
           onDelete={this.handleDelete}
           disabled={this.props.disabled}
         />
-      )
-    }.bind(this));
+    );
+
     let showTable = false;
+
     if(products.length > 0) {
       showTable = true;
     }
@@ -171,7 +181,7 @@ module.exports = React.createClass({
             Agregar producto
           </button>
 
-            <div className={showTable ? "table-responsive" : "hidden"}>
+            <div className="table-responsive">
             <hr />
               <table className="table table-striped">
                 <thead>
@@ -194,12 +204,13 @@ module.exports = React.createClass({
 
       <div className={this.state.showForm ? "panel panel-default" : "hidden"}>
         <div className="panel-body">
-        <h5>Producto</h5>
           <FormCreate
             onSubmit={this._handleSubmit}
             product={this.state.product}
             quotationId={this.props.quotationId}
-            onClose={this.showForm} />
+            onClose={this.showForm}
+            errors={this.state.errors}
+            />
         </div>
       </div>
 

@@ -1,6 +1,5 @@
 'use strict';
 var React = require('react');
-var Select = require('react-select');
 var request = require('superagent');
 var _ = require('lodash');
 
@@ -73,30 +72,31 @@ module.exports = React.createClass({
 
   render: function() {
     var serviceNodes = this.state.services.map(service => <tr key={service.id}>
-                <td>{service.title}</td>
-                <td>
+      <td>{service.title}</td>
+      <td>
         <button
-          className="btn btn-default btn-xs"
+          className="btn btn-default btn-sm"
           onClick={this.handleDelete.bind(null, service.id)}
           disabled={this.props.disabled ? true : false}
         >
-          Eliminar
+        Eliminar
         </button>
       </td>
-              </tr>);
+      </tr>
+    );
 
     return (
       <div className="panel">
         <div className="panel-body">
           <div className="row">
             <div className="form-group col-sm-12">
-             <Select
+             {/*<Select
                 placeholder="Servicios"
                 value={this.state.optionSelected}
                 options={this.state.options}
                 onChange={this.handleChange}
                 disabled={this.props.disabled ? true : false}
-              />
+              />*/}
              <br/>
              <button
               className="btn btn-primary btn-sm"

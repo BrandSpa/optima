@@ -4,6 +4,8 @@ import _ from 'lodash';
 import request from 'superagent';
 import Company from 'views/companies/company';
 import Form from 'views/companies/form_create';
+import Filters from 'views/companies/filters';
+import updateItem from 'lib/update_item';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -25,6 +27,7 @@ module.exports = React.createClass({
 
   fetch: function(filters) {
     let query;
+
     if(filters) {
       query = filters;
     } else {
@@ -37,9 +40,12 @@ module.exports = React.createClass({
     .end((err, res) => this.setState({companies: res.body}));
   },
 
-  loadMore: function() {
-    const offset = parseInt(this.state.filters.offset) + 30;
+  handleSearch: function(val) {
+    this.setState({filters: {query: val }});
+    this.fetch({query: val});
+  },
 
+  loadMore: function(offset) {
     this.setState({
       filters: {offset: offset}
     });
@@ -47,15 +53,9 @@ module.exports = React.createClass({
     this.fetch({offset: offset});
   },
 
-  loadLess: function() {
-    const offset = parseInt(this.state.filters.offset) - 30;
-    if(offset >= 0) {
-      this.setState({
-      filters: {offset: offset}
-      });
-
-      this.fetch({offset: offset});
-    }
+  loadLess: function(offset) {
+    this.setState({ filters: {offset: offset} });
+    this.fetch({offset: offset});
   },
 
   handleEdit: function(company, e) {
@@ -71,14 +71,27 @@ module.exports = React.createClass({
     }
   },
 
+  updateItem(companyUpdated) {
+    let companies = this.state.companies.map(company => {
+      if(company.id == companyUpdated.id) {
+        return _.extend(company, companyUpdated);
+      } else {
+        return company;
+      }
+    });
+
+    return companies;
+  },
+
   update(company) {
     request
     .put(`/api/v1/companies/${company.id}`)
     .send(company)
     .end((err, res) => {
       if(err) return console.log(err.body);
+      let companies = updateItem(this.state.companies, res.body, 'id');
       this.setState({
-        companies: [res.body].concat(this.state.companies)
+        companies: companies
       });
     });
   },
@@ -110,11 +123,6 @@ module.exports = React.createClass({
     });
   },
 
-  handleSearch: function() {
-    const val = this.refs.query.value;
-    this.setState({filters: {query: val }});
-    this.fetch({query: val});
-  },
 
   render: function() {
     let companies = this.state.companies;
@@ -130,50 +138,34 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="col-md-8">
-        <div className="panel">
-          <div className="panel-body">
-          <div className="form-group">
-            <input
-              ref="query"
-              type="text"
-              className="form-control"
-              placeholder="Buscar empresas o contactos"
-              onChange={this.handleSearch}
-              />
+          <Filters
+            onSearch={this.handleSearch}
+            onNext={this.loadMore}
+            onPrev={this.loadLess}
+            offset={this.state.filters.offset}
+          />
+
+          <div className="companies-list">
+            {companyNodes}
           </div>
-          <div className="btn-group" role="group">
-            <button
-              className="btn btn-default btn-sm"
-              onClick={this.loadLess}
-              disabled={!this.state.filters.offset}
-              ><i className="fa fa-chevron-left"></i></button>
-            <button
-              className="btn btn-default btn-sm"
-              onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
+
+        </div>
+
+        <div className="col-md-4">
+          <div className="panel sidebar__right-fixed">
+            <div className="panel-body">
+            <div className={this.state.errors ? "alert alert-danger" : ""}>
+            {this.state.errors}
+            </div>
+              <Form
+                company={this.state.company}
+                btnCleanText="Cancelar"
+                btnStoreText="Guardar"
+                onSubmit={this.handleSubmit}
+              />
             </div>
           </div>
         </div>
-
-        <div className="companies-list">
-          {companyNodes}
-        </div>
-      </div>
-
-      <div className="col-md-4">
-        <div className="panel" style={{position: 'fixed', margin: '0 30px 0 0'}}>
-          <div className="panel-body">
-          <div className="alert alert-danger">
-          {this.state.errors}
-          </div>
-            <Form
-              company={this.state.company}
-              btnCleanText="Cancelar"
-              btnStoreText="Guardar"
-              onSubmit={this.handleSubmit}
-            />
-          </div>
-        </div>
-      </div>
 
       </div>
 

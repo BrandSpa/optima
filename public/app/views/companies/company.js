@@ -106,7 +106,7 @@ module.exports = React.createClass({
           </tbody>
         </table>
 
-        <button onClick={this.props.onEdit.bind(null, company)} className="btn btn-primary btn-sm">Editar</button>
+        <button onClick={this.props.onEdit.bind(null, company)} className="btn btn-sm">Editar</button>
 
         <div className={this.state.showForm ? "" : "hidden"}>
         <br/>

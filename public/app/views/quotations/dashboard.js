@@ -10,12 +10,12 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="col-md-10">
+        <div className="col-md-9">
           <List />
           <Todos />
           <Graphs/>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-3">
         <Activities />
         </div>
       </div>

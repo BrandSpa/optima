@@ -44,9 +44,11 @@ module.exports = React.createClass({
         <div className="panel-body">
           <ul className="list-inline">
             <li>
-                <a href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id} target="_new" >PDF</a>
-                <a href={"/quotations/" + quotation.id + "/pdfbn"} target="_blank" > PDF BN</a>
-                <a href={"/quotations/" + quotation.id + "/pdflogos"}  target="_blank"> PDF con logos</a>
+                <a className="btn btn-default btn-sm" href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id} target="_new" >PDF</a>
+            </li>
+            <li><a className="btn btn-default btn-sm" href={"/quotations/" + quotation.id + "/pdfbn"} target="_blank" > PDF BN</a></li>
+            <li>
+              <a className="btn btn-default btn-sm" href={"/quotations/" + quotation.id + "/pdflogos"}  target="_blank"> PDF con logos</a>
             </li>
             <li>
               <a

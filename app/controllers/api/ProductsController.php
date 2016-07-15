@@ -40,7 +40,10 @@ class ProductsController extends \BaseController {
 	{
 		$data = Input::all();
 		$model = Product::findAndUpdate($id, $data);
-		return Response::json($model, 200);
+		if (isset($model->id)) {
+			return Response::json($model, 200);
+		}
+		return Response::json($model, 400);
 	}
 
 	public function destroy($id)

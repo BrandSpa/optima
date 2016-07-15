@@ -1,32 +1,21 @@
 'use strict';
 var React = require('react');
 var request = require('superagent');
-
+import Item from 'views/services/item';
 module.exports = React.createClass({
-  getInitialState() {
+
+  getDefaultProps() {
     return {
       services: []
     }
   },
 
-  componentDidMount() {
-    request
-    .get('/api/v1/services')
-    .end((err, res) => {
-      if(err) return console.log(err.body);
-      this.setState({services: res.body});
-    });
+  handleEdit(service) {
+    this.props.onEdit(service);
   },
 
   render() {
-    var serviceNodes = this.state.services.map(service => <tr key={service.id}>
-                <td>{service.title}</td>
-                <td>{service.price_1}</td>
-                <td>{service.price_2}</td>
-                <td>
-        <button >Editar</button>
-      </td>
-              </tr>);
+    var serviceNodes = this.props.services.map(service => <Item key={service.id} service={service} onEdit={this.handleEdit} />);
 
     return (
       <div className="table-responsive">

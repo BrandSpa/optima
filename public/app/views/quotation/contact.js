@@ -1,6 +1,5 @@
 'use strict';
 const React = require('react');
-const Select = require('react-select');
 const request = require('superagent');
 const _  = require('lodash');
 const Form = require('views/contacts/form_create');
@@ -62,6 +61,7 @@ module.exports = React.createClass({
 
   handleSubmit: function(contact) {
     const contactData = _.extend({company_id: this.props.company.id}, contact);
+    
     request
       .post('/api/v1/contacts')
       .send(contactData)
@@ -109,12 +109,12 @@ module.exports = React.createClass({
           <span className={contact.mobile_2 ? "" : "hidden" }> {contact.mobile_2}</span>
 
           <div className="form-group">
-            <Select
+            {/*<Select
               options={contactOptions}
               placeholder="Seleccionar contacto"
               onChange={this.handleContact}
               value={contactValue}
-            />
+            />*/}
 
           </div>
           <button className="btn btn-default btn-sm pull-right" onClick={this.changeContact}>Cambiar contacto</button>

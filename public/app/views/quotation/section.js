@@ -17,7 +17,6 @@ import Mail from 'views/quotation/mails';
 import NoEffective from 'views/quotation/no_effective';
 import NoSend from 'views/quotation/no_send';
 import Times from 'views/quotation/times';
-import Trackings from 'views/quotation/trackings';
 import Activities from 'views/quotation/activity';
 import moment from 'moment';
 
@@ -146,9 +145,14 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="col-md-12">
-        <h4 style={{margin: "0 0 15px 0"}}>
-          Cotización {quotation.id} {quotation.status} <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
-        </h4>
+        <div className="panel">
+          <div className="panel-body">
+          <h4 style={{margin: "0 0 15px 0"}}>
+            Cotización {quotation.id} | {quotation.status} | <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
+          </h4>
+          </div>
+        </div>
+
         </div>
 
         <div className="col-md-9">
@@ -180,14 +184,6 @@ module.exports = React.createClass({
             onSaveMail={this.handleSaveMail}
             />
 
-          <Status
-            quotation={quotation}
-            handleOpenNoEffective={this.handleShowNoEffective}
-            handleOpenNoSend={this.handleShowNoSend}
-            onStatusChange={this.handleStatus}
-            disabled={this.state.disabled}
-          />
-
           <NoEffective
             quotation={quotation}
             show={this.state.showNoEffective}
@@ -210,21 +206,27 @@ module.exports = React.createClass({
             disabled={this.state.disabled}
           />
 
-          <Trackings
-            quotationId={quotation.id}
+          <Status
+            quotation={quotation}
+            handleOpenNoEffective={this.handleShowNoEffective}
+            handleOpenNoSend={this.handleShowNoSend}
+            onStatusChange={this.handleStatus}
+            disabled={this.state.disabled}
           />
 
         </div>
 
         <div className="col-md-3">
-          <Contact
-            contact={quotation.contact}
-            company={quotation.company}
-            changeContact={this.changeContact}
-            />
-            <Activities
-              quotationId={quotation.id}
-            />
+          <div className="sidebar__right-fixed" style={{width: '100%'}}>
+            <Contact
+              contact={quotation.contact}
+              company={quotation.company}
+              changeContact={this.changeContact}
+              />
+              <Activities
+                quotationId={quotation.id}
+              />
+            </div>
         </div>
       </div>
     );

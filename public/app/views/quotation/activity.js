@@ -22,9 +22,8 @@ module.exports = React.createClass({
   },
 
 
-
   render() {
-    var activityNodes = this.state.activities.map(activity => <li><hr/>{activity.user.name} {activity.message} {moment(activity.created_at).fromNow()}</li>);
+    var activityNodes = this.state.activities.map(activity => <li><hr/><b>{activity.user.name}</b> {activity.message} {moment(activity.created_at).fromNow()}</li>);
 
     return (
       <div className="panel">

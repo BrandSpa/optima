@@ -1,28 +1,35 @@
 'use strict';
 import React from 'react';
 import Form from 'views/companies/form_create';
-import {Typeahead} from 'react-typeahead';
+import ListContacts from 'views/contacts/list';
+import Loader from 'components/loader';
+import Autocomplete from 'components/autocomplete';
 import request from 'superagent';
 import _ from 'underscore';
+import page from 'page';
 
 module.exports = React.createClass({
 
   getInitialState() {
     return {
       companyOptions: [],
-      companies: []
+      companies: [],
+      contacts: [],
+      loading: false
     }
   },
 
-  searchCompanies(e) {
-    const query = e.target.value;
-    request
-    .get('/api/v1/companies')
-    .query({query})
-    .end((err, res) => this.setState({
-      companies: res.body,
-      companyOptions: _.pluck(res.body, 'name'),
-    }));
+  searchCompanies(name) {
+    this.setState({loading: true});
+
+      request
+      .get('/api/v1/companies')
+      .query({query_name: name})
+      .end((err, res) => this.setState({
+        companies: res.body,
+        loading: false
+        })
+      )
   },
 
   continue(company) {
@@ -30,10 +37,13 @@ module.exports = React.createClass({
     location.hash = `#company/${company.id}/contact/create`;
   },
 
-  storeSelected(e) {
-    const name = e;
-    const company = _.where(this.state.companies, {name});
-    this.continue(company[0]);
+  storeSelected(result) {
+    request
+    .get('/api/v1/contacts')
+    .query({company_id: result[0].id})
+    .end((err, res) => {
+      this.setState({contacts: res.body});
+    });
   },
 
   store(company) {
@@ -43,28 +53,17 @@ module.exports = React.createClass({
       .end((err, res) => {
         if(err) return console.log(err.response.text);
         console.log("store", res.body);
-        // this.continue(res.body);
       });
   },
 
-  update(company) {
+  createQuotation(contact, e) {
+    e.preventDefault();
     request
-      .put(`/api/v1/companies/${company.id}`)
-      .send(company)
-      .end((err, res) => {
-        if(err) return console.log(err.response.text);
-        console.log("update", res.body);
-        return this.continue(res.body);
-      });
-  },
-
-  handleSubmit(company) {
-
-    if (company && company.id) {
-      return this.update(company);
-    } else {
-      // return this.store(company);
-    }
+    .post('/api/v1/quotations')
+    .send({company_id: contact.company_id, contact_id: contact.id})
+    .end((err, res) => {
+      page(`/quotations/${res.body.id}`);
+    });
   },
 
   render() {
@@ -75,24 +74,53 @@ module.exports = React.createClass({
       token: 'btn btn-primary btn-sm'
     };
 
-    return (
-      <div>
-      <div className="col-md-6">
-      <div className="panel panel-default">
-        <div className="panel-body">
-          <div className="form-group">
-            <Typeahead
-              customClasses={classes}
-              options={this.state.companyOptions}
-              maxVisible={10}
-              placeholder="Buscar empresas"
-              onKeyUp={this.searchCompanies}
-              onOptionSelected={this.storeSelected}
-            />
-          </div>
+    let companiesOptions = this.state.companyOptions.map((name, i) =>
+      <li key={i} className="list-group-item" onClick={this.storeSelected.bind(this, name)}>
+        {name}
+      </li>
+    );
 
-          <hr/>
-          <Form onSubmit={this.handleSubmit} />
+    return (
+      <div className="col-md-6" style={{float: 'none',margin: '0 auto'}}>
+        <div className="col-md-12">
+        <div className="panel">
+          <div className="panel-body">
+
+            <Autocomplete
+              collection={this.state.companies}
+              search={this.searchCompanies}
+              selected={this.storeSelected}
+              loading={this.state.loading}
+            />
+
+            <buttton className="btn btn-default pull-right btn-sm">Nueva Empresa</buttton>
+          </div>
+        </div>
+
+      <div className="panel" style={this.state.contacts.length ? {display: 'block'} : {display: 'none'}}>
+        <div className="panel-body">
+        <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {this.state.contacts.map(contact =>
+                  <tr key={contact.id}>
+                    <td>{`${contact.name} ${contact.lastname}`}</td>
+                    <td>{contact.email}</td>
+                    <td><button className="btn btn-primary btn-sm" onClick={this.createQuotation.bind(this, contact)}>Crear Cotización</button></td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+          <buttton className="btn btn-default pull-right btn-sm">Nuevo Contacto</buttton>
         </div>
       </div>
       </div>

@@ -8,7 +8,7 @@ export default React.createClass({
 
     return (
       <tr key={quotation.id}>
-      <td><a href={`/#quotations/${quotation.id}`}>{quotation.id}</a></td>
+      <td><a href={`/quotations/${quotation.id}`}>{quotation.id}</a></td>
       <td>
         <span className={`label label-${quotation.status}`}>
           {quotation.status}

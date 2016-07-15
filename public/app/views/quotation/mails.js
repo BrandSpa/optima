@@ -1,8 +1,7 @@
 'use strict';
-const React = require('react');
-const ReactQuill = require('react-quill');
-const Input = require('components/form_input');
-const _ = require('underscore');
+import React from 'react';
+import _ from 'underscore';
+import Editor from 'components/editor';
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -80,9 +79,8 @@ module.exports = React.createClass({
             </div>
 
           </div>
-          <ReactQuill
-            ref="mail_message"
-            theme="snow"
+
+          <Editor
             value={quotation.mail_message}
             onChange={this.handleTextChange}
           />

@@ -1,16 +1,16 @@
 'use strict';
-const React = require('react');
-const productsOptions = require('options/products.json');
-const productsTypesOptions = require('options/product_type.json');
-const PeriodsOptions = require('options/periods.json');
-const Select = require('components/form_select');
-const _ = require('lodash');
+import React from 'react';
+import productsOptions from 'options/products.json';
+import productsTypesOptions from 'options/product_type.json';
+import PeriodsOptions from 'options/periods.json';
+import Select from 'components/form_select';
+import _ from 'lodash';
 
 module.exports = React.createClass({
   getInitialState() {
     return {
       product: {},
-      errorMessages: {}
+      errors: []
     };
   },
 
@@ -29,13 +29,12 @@ module.exports = React.createClass({
   },
 
   _getValue(ref) {
-    return React.findDOMNode(ref).value;
+    return ref.value;
   },
 
   handleChange() {
     const ref = this.refs;
     let show;
-    console.log(this._getValue(ref.show));
 
     if(this._getValue(ref.show) === 1 || this._getValue(ref.show) === true) {
       show = true;
@@ -45,34 +44,34 @@ module.exports = React.createClass({
 
     const product = _.extend(this.state.product, {
       quotation_id: this.props.quotationId,
-      name: this._getValue(ref.name.refs.select),
-      type: this._getValue(ref.type.refs.select),
-      processor: this._getValue(ref.processor),
-      ram: this._getValue(ref.ram),
-      hdd: this._getValue(ref.hdd),
-      burner: this._getValue(ref.burner),
-      network_card: this._getValue(ref.network_card),
-      battery: this._getValue(ref.battery),
-      monitor: this._getValue(ref.monitor),
-      keyboard: this._getValue(ref.keyboard),
-      os: this._getValue(ref.os),
-      office: this._getValue(ref.office),
-      antivirus: this._getValue(ref.antivirus),
-      additional_1: this._getValue(ref.additional_1),
-      additional_2: this._getValue(ref.additional_2),
-      additional_3: this._getValue(ref.additional_3),
-      additional_4: this._getValue(ref.additional_4),
-      additional_5: this._getValue(ref.additional_5),
-      additional_6: this._getValue(ref.additional_6),
-      lapse: this._getValue(ref.lapse),
-      period: this._getValue(ref.period.refs.select),
-      quantity: this._getValue(ref.quantity),
-      price: this._getValue(ref.price),
-      total: this._getValue(ref.lapse) * this._getValue(ref.quantity) * this._getValue(ref.price),
-      show: React.findDOMNode(ref.show).checked,
-      iva: React.findDOMNode(ref.iva).checked,
-      note: this._getValue(ref.note),
-      spaces: this._getValue(ref.spaces),
+      name: ref.name.refs.select.value,
+      type: ref.type.refs.select.value,
+      processor: ref.processor.value,
+      ram: ref.ram.value,
+      hdd: ref.hdd.value,
+      burner: ref.burner.value,
+      network_card: ref.network_card.value,
+      battery: ref.battery.value,
+      monitor: ref.monitor.value,
+      keyboard: ref.keyboard.value,
+      os: ref.os.value,
+      office: ref.office.value,
+      antivirus: ref.antivirus.value,
+      additional_1: ref.additional_1.value,
+      additional_2: ref.additional_2.value,
+      additional_3: ref.additional_3.value,
+      additional_4: ref.additional_4.value,
+      additional_5: ref.additional_5.value,
+      additional_6: ref.additional_6.value,
+      lapse: ref.lapse.value,
+      period: ref.period.refs.select.value,
+      quantity: ref.quantity.value,
+      price: ref.price.value,
+      total: ref.lapse.value * ref.quantity.value * ref.price.value,
+      show: ref.show.checked,
+      iva: ref.iva.checked,
+      note: ref.note.value,
+      spaces: ref.spaces.value,
     });
 
     this.setState({product});
@@ -83,10 +82,11 @@ module.exports = React.createClass({
     this.props.onSubmit(this.state.product);
   },
 
-  close() {
-    this.setState({product: {}});
+  close(e) {
+    e.preventDefault();
     this.props.onClose();
   },
+
 
   render() {
     const product = this.state.product;
@@ -305,7 +305,7 @@ module.exports = React.createClass({
           <label htmlFor="">Lapso</label>
           <input
             ref="lapse"
-            type="text"
+            type="number"
             className="form-control"
             onChange={this.handleChange}
             value={product.lapse}/>
@@ -327,7 +327,7 @@ module.exports = React.createClass({
           <label htmlFor="">Cantidad</label>
           <input
             ref="quantity"
-            type="text"
+            type="number"
             className="form-control"
             onChange={this.handleChange}
             value={product.quantity}/>
@@ -337,7 +337,7 @@ module.exports = React.createClass({
           <label htmlFor="">Precio</label>
           <input
             ref="price"
-            type="text"
+            type="number"
             className="form-control"
             onChange={this.handleChange}
             value={product.price}/>
@@ -377,11 +377,14 @@ module.exports = React.createClass({
           <label htmlFor="">Espacios pdf</label>
           <input
             ref="spaces"
-            type="text"
+            type="number"
             className="form-control"
             onChange={this.handleChange}
             value={product.spaces} />
         </div>
+          <div className="alert alert-danger col-md-12" style={this.props.errors.length ? {} : {display: 'none'}}>
+            {this.props.errors}
+          </div>
 
         <div className="form-group col-xs-12">
           <button className="btn btn-primary btn-sm">Guardar</button>

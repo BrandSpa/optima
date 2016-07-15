@@ -4,6 +4,7 @@ const request = require('superagent');
 const moment = require('moment');
 const alertify = require('alertifyjs');
 alertify.set('notifier','position', 'top-right');
+
 module.exports = React.createClass({
   getDefaultProps: function() {
     return {

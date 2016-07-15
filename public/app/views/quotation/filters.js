@@ -25,12 +25,12 @@ module.exports = React.createClass({
 
   update: function() {
     const filters = {
-      type: React.findDOMNode(this.refs.type.refs.select).value,
-      type_category: React.findDOMNode(this.refs.type_category.refs.select).value,
-      client_type: React.findDOMNode(this.refs.client_type.refs.select).value,
-      found_us: React.findDOMNode(this.refs.found_us.refs.select).value,
-      offer: React.findDOMNode(this.refs.offer.refs.select).value,
-      advisor: React.findDOMNode(this.refs.advisor.refs.select).value,
+      type: this.refs.type.refs.select.value,
+      type_category: this.refs.type_category.refs.select.value,
+      client_type: this.refs.client_type.refs.select.value,
+      found_us: this.refs.found_us.refs.select.value,
+      offer: this.refs.offer.refs.select.value,
+      advisor: this.refs.advisor.refs.select.value,
     };
 
     this.props.onChange(filters);

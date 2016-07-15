@@ -19,7 +19,12 @@ class CompaniesController extends \BaseController {
 	{
 		$offset = Input::get('offset');
 		$q = Input::get('query');
+		$qName = Input::get('query_name');
 		$collection = new Company;
+
+		if (Input::has('query_name')) {
+			$collection = $collection->where('name', 'like', "%$qName%");
+		}
 
 		if (Input::has('query')) {
 			$collection = $collection->where(function($query) use($q) {

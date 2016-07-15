@@ -1,6 +1,6 @@
 'use strict';
 const React = require('react');
-const ReactQuill = require('react-quill');
+import Editor from 'components/editor';
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -41,12 +41,11 @@ module.exports = React.createClass({
       <div className={this.props.show ? "panel" : "hidden"}>
         <div className="panel-body">
         <h5>Comentario</h5>
-          <ReactQuill
-            theme="snow"
+          <Editor
             value={this.state.comment}
             onChange={this.handleChange}
           />
-
+      
           <button className="btn btn-sm btn-primary" onClick={this.handleClick}>Guardar</button>
           <button className="btn btn-sm btn-default pull-right" onClick={this.handleClose}>Cerrar</button>
         </div>

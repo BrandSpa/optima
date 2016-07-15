@@ -92,7 +92,7 @@ class Quotation extends \Eloquent {
 		$model = self::create($data);
 		return $model;
 	}
-
+	
 	public static function findAndUpdate($id, $data)
 	{
 		$model = Quotation::find($id);
