@@ -653,11 +653,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = updateItem;
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function updateItem(collection, newModel, field) {
 
   var arr = collection.map(function (model) {
     if (model[field] == newModel[field]) {
-      return _.extend(model, newModel);
+      return _underscore2.default.extend(model, newModel);
     } else {
       return model;
     }
@@ -666,7 +673,7 @@ function updateItem(collection, newModel, field) {
   return arr;
 }
 
-},{}],13:[function(require,module,exports){
+},{"underscore":308}],13:[function(require,module,exports){
 module.exports=[
   {value: 'Andrés Rojas', label: 'Andrés Rojas'},
   {value: 'Diego Peña', label: 'Diego Peña'},
@@ -6423,8 +6430,6 @@ module.exports = _react2.default.createClass({
   getInitialState: function getInitialState() {
     return {
       service: {
-        title: '',
-        text: '',
         price_1: '',
         price_2: ''
       }
@@ -6448,6 +6453,10 @@ module.exports = _react2.default.createClass({
     ob[field] = e.currentTarget.value;
     ob = _underscore2.default.extend(this.state.service, ob);
     this.setState({ service: ob });
+  },
+  handleCancel: function handleCancel(e) {
+    e.preventDefault();
+    this.props.onCancel();
   },
   render: function render() {
     var service = this.state.service;
@@ -6517,7 +6526,7 @@ module.exports = _react2.default.createClass({
       ),
       _react2.default.createElement(
         'button',
-        { className: 'btn btn-default btn-sm' },
+        { className: 'btn btn-default btn-sm', onClick: this.handleCancel },
         'Cancelar'
       ),
       _react2.default.createElement(
@@ -6609,7 +6618,11 @@ module.exports = React.createClass({
     var _this = this;
 
     var serviceNodes = this.props.services.map(function (service) {
-      return React.createElement(_item2.default, { key: service.id, service: service, onEdit: _this.handleEdit });
+      return React.createElement(_item2.default, {
+        key: service.id,
+        service: service,
+        onEdit: _this.handleEdit
+      });
     });
 
     return React.createElement(
@@ -6659,29 +6672,43 @@ module.exports = React.createClass({
 },{"react":301,"superagent":303,"views/services/item":73}],75:[function(require,module,exports){
 'use strict';
 
-var _superagent = require('superagent');
+var _react = require('react');
 
-var _superagent2 = _interopRequireDefault(_superagent);
+var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
+var _superagent = require('superagent');
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+var _form_create = require('views/services/form_create');
+
+var _form_create2 = _interopRequireDefault(_form_create);
+
+var _list = require('views/services/list');
+
+var _list2 = _interopRequireDefault(_list);
+
+var _update_item = require('lib/update_item');
+
+var _update_item2 = _interopRequireDefault(_update_item);
+
+var _clean_object = require('lib/clean_object');
+
+var _clean_object2 = _interopRequireDefault(_clean_object);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var React = require('react');
-var Form = require('views/services/form_create');
-var List = require('views/services/list');
-
-module.exports = React.createClass({
+module.exports = _react2.default.createClass({
   displayName: 'exports',
   getInitialState: function getInitialState() {
     return {
       allServices: [],
       services: [],
       service: {
-        title: '',
-        text: '',
         price_1: '',
         price_2: ''
       }
@@ -6720,6 +6747,7 @@ module.exports = React.createClass({
         console.log(res.body);
       } else {
         _this2.setState({
+          service: (0, _clean_object2.default)(res.body),
           services: [res.body].concat(_this2.state.services)
         });
       }
@@ -6732,37 +6760,41 @@ module.exports = React.createClass({
       if (err) {
         console.log(res.body);
       } else {
-        _this3.setState({ service: res.body });
+        _this3.setState({ services: (0, _update_item2.default)(_this3.state.services, res.body, 'id') });
       }
     });
   },
   search: function search(e) {
-    var q = new RegExp(e.currentTarget.value, 'i');
+    var val = e.currentTarget.value;
+    var q = new RegExp(val, 'i');
     var services = _underscore2.default.filter(this.state.services, function (service) {
       return service.title.match(q);
     });
-    if (services.length <= 0) {
+    if (val.length == 0) {
       this.setState({ services: this.state.allServices });
     } else {
       this.setState({ services: services });
     }
   },
+  clean: function clean() {
+    this.setState({ service: (0, _clean_object2.default)(this.state.service) });
+  },
 
 
   render: function render() {
-    return React.createElement(
+    return _react2.default.createElement(
       'div',
       null,
-      React.createElement(
+      _react2.default.createElement(
         'div',
         { className: 'col-md-8' },
-        React.createElement(
+        _react2.default.createElement(
           'div',
           { className: 'panel' },
-          React.createElement(
+          _react2.default.createElement(
             'div',
             { className: 'panel-body' },
-            React.createElement('input', {
+            _react2.default.createElement('input', {
               type: 'text',
               className: 'form-control',
               placeholder: 'Buscar',
@@ -6770,31 +6802,32 @@ module.exports = React.createClass({
             })
           )
         ),
-        React.createElement(
+        _react2.default.createElement(
           'div',
           { className: 'panel' },
-          React.createElement(
+          _react2.default.createElement(
             'div',
             { className: 'panel-body' },
-            React.createElement(List, {
+            _react2.default.createElement(_list2.default, {
               services: this.state.services,
               onEdit: this.handleEdit
             })
           )
         )
       ),
-      React.createElement(
+      _react2.default.createElement(
         'div',
         { className: 'col-md-4' },
-        React.createElement(
+        _react2.default.createElement(
           'div',
           { className: 'panel sidebar__right-fixed' },
-          React.createElement(
+          _react2.default.createElement(
             'div',
             { className: 'panel-body' },
-            React.createElement(Form, {
+            _react2.default.createElement(_form_create2.default, {
               service: this.state.service,
-              onSubmit: this.handleSubmit
+              onSubmit: this.handleSubmit,
+              onCancel: this.clean
             })
           )
         )
@@ -6803,7 +6836,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"react":301,"superagent":303,"underscore":308,"views/services/form_create":72,"views/services/list":74}],76:[function(require,module,exports){
+},{"lib/clean_object":11,"lib/update_item":12,"react":301,"superagent":303,"underscore":308,"views/services/form_create":72,"views/services/list":74}],76:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');

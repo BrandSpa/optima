@@ -7,8 +7,6 @@ module.exports = React.createClass({
   getInitialState() {
     return {
       service: {
-        title: '',
-        text: '',
         price_1: '',
         price_2: '',
       }
@@ -36,6 +34,11 @@ module.exports = React.createClass({
     ob[field] = e.currentTarget.value;
     ob = _.extend(this.state.service, ob);
     this.setState({service: ob});
+  },
+
+  handleCancel(e) {
+    e.preventDefault();
+    this.props.onCancel();
   },
 
   render() {
@@ -84,7 +87,7 @@ module.exports = React.createClass({
             />
         </div>
 
-        <button className="btn btn-default btn-sm">Cancelar</button>
+        <button className="btn btn-default btn-sm" onClick={this.handleCancel}>Cancelar</button>
         <button className="btn btn-primary btn-sm pull-right">Guardar</button>
       </form>
     );

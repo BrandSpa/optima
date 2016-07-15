@@ -1,4 +1,5 @@
 'use strict';
+import _ from 'underscore';
 
 export default function updateItem(collection, newModel, field) {
 

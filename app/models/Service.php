@@ -14,7 +14,7 @@ class Service extends \Eloquent {
 
 	protected $guarded = [];
 
-	public static $rules = [
+	public $rules = [
 		'title' => 'required',
 		'text' => 'required'
 	];

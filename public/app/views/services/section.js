@@ -1,9 +1,12 @@
 'use strict';
-const React = require('react');
-const Form = require('views/services/form_create');
-const List = require('views/services/list');
-import request from 'superagent';
+import React from 'react';
 import _ from 'underscore';
+import request from 'superagent';
+import Form from 'views/services/form_create';
+import List from 'views/services/list';
+import updateItem from 'lib/update_item';
+import cleanObject from 'lib/clean_object';
+
 module.exports = React.createClass({
 
   getInitialState() {
@@ -11,8 +14,6 @@ module.exports = React.createClass({
       allServices: [],
       services: [],
       service: {
-        title: '',
-        text: '',
         price_1: '',
         price_2: '',
       }
@@ -57,6 +58,7 @@ module.exports = React.createClass({
         console.log(res.body);
       } else {
         this.setState({
+          service: cleanObject(res.body),
           services: [res.body].concat(this.state.services)
         })
       }
@@ -72,21 +74,24 @@ module.exports = React.createClass({
       if(err) {
         console.log(res.body);
       } else {
-        this.setState({service: res.body});
+        this.setState({services: updateItem(this.state.services, res.body, 'id')});
       }
     });
   },
 
   search(e) {
-    let q = new RegExp(e.currentTarget.value, 'i');
+    let val = e.currentTarget.value;
+    let q = new RegExp(val, 'i');
     let services = _.filter(this.state.services, service => service.title.match(q));
-    if(services.length <= 0) {
+    if(val.length == 0) {
       this.setState({services: this.state.allServices});
     } else {
       this.setState({services});
     }
+  },
 
-
+  clean() {
+    this.setState({service: cleanObject(this.state.service)});
   },
 
   render: function() {
@@ -119,6 +124,7 @@ module.exports = React.createClass({
               <Form
                 service={this.state.service}
                 onSubmit={this.handleSubmit}
+                onCancel={this.clean}
               />
             </div>
           </div>

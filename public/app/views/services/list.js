@@ -15,7 +15,13 @@ module.exports = React.createClass({
   },
 
   render() {
-    var serviceNodes = this.props.services.map(service => <Item key={service.id} service={service} onEdit={this.handleEdit} />);
+    var serviceNodes = this.props.services.map(service =>
+      <Item
+        key={service.id}
+        service={service}
+        onEdit={this.handleEdit}
+      />
+    );
 
     return (
       <div className="table-responsive">

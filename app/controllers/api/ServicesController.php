@@ -6,8 +6,13 @@ use Optima\Quotation;
 use Response;
 use Input;
 use DB;
-
+use Validator;
 class ServicesController extends \BaseController {
+
+	public function __construct(Service $model)
+	{
+		$this->entity = $model;
+	}
 
 	public function index()
 	{
@@ -52,11 +57,16 @@ class ServicesController extends \BaseController {
 		}
 
 		$data = Input::all();
-		$model = Service::create($data);
-		if (isset($model->id)) {
+
+
+		$validator = Validator::make($data, $this->entity->rules);
+
+		if($validator->passes()) {
+			$model = Service::create($data);
 			return Response::json($model, 200);
 		}
-		return Response::json($model, 400);
+
+		return Response::json($validator->errors()->all(), 400);
 
 	}
 
