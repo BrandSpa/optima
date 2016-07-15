@@ -1,7 +1,6 @@
 'use strict';
 const React = require('react');
 const Select = require('components/form_select');
-const statusOptions = require('options/status.json');
 const categoryTypeOptions = require('options/category_type.json');
 const advisorOptions = require('options/advisors.json');
 const typeOptions = require('options/type.json');

@@ -28,9 +28,7 @@ module.exports = React.createClass({
     request
       .get('/api/v1/contacts')
       .query({quotation_id: this.props.quotationId})
-      .end(function(err, res) {
-        this.setState({contacts: res.body});
-      }.bind(this));
+      .end((err, res) => this.setState({contacts: res.body}));
   },
 
   componentWillReceiveProps: function(props) {
@@ -65,11 +63,11 @@ module.exports = React.createClass({
     request
       .post('/api/v1/contacts')
       .send(contactData)
-      .end(function(err, res) {
+      .end((err, res) => {
         if(err) return this.setState({errorMessages: err.response.body});
         this.fetchContacts();
         this.showForm();
-      }.bind(this));
+      });
   },
 
   render: function() {
@@ -80,11 +78,11 @@ module.exports = React.createClass({
     contactSelect = _.findWhere(this.state.contacts, {id: this.state.contactSelected});
 
     if(contactSelect) {
-      contactValue = contactSelect.name +" "+ contactSelect.lastname;
+      contactValue = `${contactSelect.name} ${contactSelect.lastname}`;
     }
 
     const contactOptions = this.state.contacts.map(function(contact, i) {
-      return {value: contact.id, label: contact.name +" "+ contact.lastname}
+      return {value: contact.id, label: `${contact.name} ${contact.lastname}`}
     });
 
     return (

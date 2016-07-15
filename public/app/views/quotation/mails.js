@@ -4,7 +4,7 @@ import _ from 'underscore';
 import Editor from 'components/editor';
 
 module.exports = React.createClass({
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       quotation: {
         mail_message: '',
@@ -15,41 +15,41 @@ module.exports = React.createClass({
     }
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       quotation: {},
       show: false
     }
   },
 
-  handleClose: function() {
+  handleClose() {
     this.props.onClose();
   },
 
-  handleTextChange: function(text) {
+  handleTextChange(text) {
     this.setState({
       quotation: _.extend(this.state.quotation, {mail_message: text})
     });
   },
 
-  handleChange: function() {
+  handleChange() {
     this.setState(_.extend(this.state.quotation, {
       quotation: {
-        'mail_recipient_1': this.refs.mail_recipient_1.value,
-        'mail_recipient_2': this.refs.mail_recipient_2.value
+        mail_recipient_1: this.refs.mail_recipient_1.value,
+        mail_recipient_2: this.refs.mail_recipient_2.value
       }
     }));
   },
 
-  handleClick: function() {
+  handleClick() {
     this.props.onSaveMail(this.state.quotation);
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState(nextProps);
   },
 
-  render: function() {
+  render() {
     const quotation = this.state.quotation;
 
     return (

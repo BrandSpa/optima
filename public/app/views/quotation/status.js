@@ -6,29 +6,29 @@ const alertify = require('alertifyjs');
 alertify.set('notifier','position', 'top-right');
 
 module.exports = React.createClass({
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       disabled: false
     }
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       sending: false
     }
   },
 
-  handleClick: function(status, e) {
+  handleClick(status, e) {
     e.preventDefault(status, e);
-    this.props.onStatusChange({status: status});
+    this.props.onStatusChange({status});
   },
 
-  handleSend: function() {
+  handleSend() {
     const id = this.props.quotation.id;
     this.setState({sending: true});
 
     request
-    .post('/api/v1/quotations/' + id + '/sendmail')
+    .post(`/api/v1/quotations/${id}/sendmail`)
     .end(function(err, res) {
       this.setState({sending: false});
       if(err) return alertify.error("complete los filtros");
@@ -40,12 +40,12 @@ module.exports = React.createClass({
     }.bind(this));
   },
 
-  _getDiff: function() {
+  _getDiff() {
     const now = moment().format();
     return moment(now).diff(this.props.quotation.created_at, 'minutes');
   },
 
-  render: function() {
+  render() {
     const sending = this.state.sending ? "disabled" : "";
     const messageSend = this.state.sending ? "Enviando..." : "Enviar";
 
@@ -105,7 +105,7 @@ module.exports = React.createClass({
             <li>
               <a
                 className="btn btn-default btn-sm"
-                href={"/quotations/" + this.props.quotation.id + "/rethink"}
+                href={`/quotations/${this.props.quotation.id}/rethink`}
               >
                 Replantear
               </a>

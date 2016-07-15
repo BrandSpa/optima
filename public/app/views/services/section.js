@@ -16,7 +16,8 @@ module.exports = React.createClass({
       service: {
         price_1: '',
         price_2: '',
-      }
+      },
+      errors: []
     }
   },
 
@@ -55,10 +56,11 @@ module.exports = React.createClass({
     .send(service)
     .end((err, res) => {
       if(err) {
-        console.log(res.body);
+        return this.setState({errors: res.body});
       } else {
         this.setState({
           service: cleanObject(res.body),
+          errors: [],
           services: [res.body].concat(this.state.services)
         })
       }
@@ -74,7 +76,10 @@ module.exports = React.createClass({
       if(err) {
         console.log(res.body);
       } else {
-        this.setState({services: updateItem(this.state.services, res.body, 'id')});
+        this.setState({
+          services: updateItem(this.state.services, res.body, 'id'),
+          errors: []
+        });
       }
     });
   },
@@ -91,7 +96,10 @@ module.exports = React.createClass({
   },
 
   clean() {
-    this.setState({service: cleanObject(this.state.service)});
+    this.setState({
+      service: cleanObject(this.state.service),
+      errors: []
+    });
   },
 
   render: function() {
@@ -123,6 +131,7 @@ module.exports = React.createClass({
             <div className="panel-body">
               <Form
                 service={this.state.service}
+                errors={this.state.errors}
                 onSubmit={this.handleSubmit}
                 onCancel={this.clean}
               />

@@ -2,7 +2,7 @@
 import React from 'react';
 
 module.exports = React.createClass({
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       quotation: {
         id: 0
@@ -10,20 +10,20 @@ module.exports = React.createClass({
     }
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       quotation: {}
     }
   },
 
-  openComment: function() {
+  openComment() {
     this.props.onShowComment();
   },
-  openMails: function() {
+  openMails() {
     this.props.onShowMails();
   },
 
-  handleServiceApproval: function() {
+  handleServiceApproval() {
     const quotation = this.props.quotation;
     if(quotation.service_approval === 0) {
       this.props.onServiceApproval(1);
@@ -32,7 +32,7 @@ module.exports = React.createClass({
     }
   },
 
-  render: function() {
+  render() {
     const quotation = this.props.quotation;
     let serviceApprovalText = 'Quitar aprobación de servicio';
     if(quotation.service_approval === 0) {
@@ -44,15 +44,15 @@ module.exports = React.createClass({
         <div className="panel-body">
           <ul className="list-inline">
             <li>
-                <a className="btn btn-default btn-sm" href={"/quotations/" + quotation.id + "/pdf/"+ quotation.id} target="_new" >PDF</a>
+                <a className="btn btn-default btn-sm" href={`/quotations/${quotation.id}/pdf/${quotation.id}`} target="_new" >PDF</a>
             </li>
-            <li><a className="btn btn-default btn-sm" href={"/quotations/" + quotation.id + "/pdfbn"} target="_blank" > PDF BN</a></li>
+            <li><a className="btn btn-default btn-sm" href={`/quotations/${quotation.id}/pdfbn`} target="_blank" > PDF BN</a></li>
             <li>
-              <a className="btn btn-default btn-sm" href={"/quotations/" + quotation.id + "/pdflogos"}  target="_blank"> PDF con logos</a>
+              <a className="btn btn-default btn-sm" href={`/quotations/${quotation.id}/pdflogos`}  target="_blank"> PDF con logos</a>
             </li>
             <li>
               <a
-                href={"/quotations/" + quotation.id + "/duplicate"}
+                href={`/quotations/${quotation.id}/duplicate`}
                 className="btn btn-default btn-sm">Duplicar</a>
             </li>
 

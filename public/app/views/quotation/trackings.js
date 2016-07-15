@@ -22,21 +22,19 @@ module.exports = React.createClass({
     request
       .get('/api/v1/trackings')
       .query({quotation_id: id})
-      .end(function(err, res) {
-        this.setState({trackings: res.body})
-      }.bind(this));
+      .end((err, res) => this.setState({trackings: res.body}));
   },
 
   handleSubmit(tracking) {
     request
       .post('/api/v1/trackings')
       .send(_.extend(tracking, {quotation_id: this.props.quotationId}))
-      .end(function(err, res) {
+      .end((err, res) => {
         if(err) return console.log(err.body);
         this.setState({
           trackings: this.state.trackings.concat([res.body])
         });
-      }.bind(this));
+      });
   },
 
   render() {

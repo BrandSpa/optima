@@ -65,7 +65,7 @@ module.exports = React.createClass({
 
     const todoNodes = todos.map(function(todo) {
       if(todo.user && todo.user.name) {
-        by = todo.user.name +" "+ todo.user.lastname;
+        by = `${todo.user.name} ${todo.user.lastname}`;
       }
 
       return (
@@ -85,11 +85,11 @@ module.exports = React.createClass({
     }
 
     if(tracking.contact.name) {
-      contact = tracking.contact.name +" "+ tracking.contact.lastname;
+      contact = `${tracking.contact.name} ${tracking.contact.lastname}`;
     }
 
     if(tracking.user.name) {
-      by = tracking.user.name +" "+ tracking.user.lastname;
+      by = `${tracking.user.name} ${tracking.user.lastname}`;
     }
 
     return (
@@ -98,7 +98,7 @@ module.exports = React.createClass({
             <li><b>Reporte:</b> {tracking.report}</li>
             <li><b>Contacto:</b> {contact}</li>
             <li><b>Por:</b> {by}</li>
-            <li><b>Creado:</b> {moment(tracking.register_date +" " +tracking.register_time ).fromNow()}</li>
+            <li><b>Creado:</b> {moment(`${tracking.register_date} ${tracking.register_time}` ).fromNow()}</li>
         </ul>
         <br/>
         <button className="btn btn-primary btn-sm" onClick={this.showForm}>Agregar tarea</button><br/>

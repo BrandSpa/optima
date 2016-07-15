@@ -1,7 +1,7 @@
 'use strict';
-var React = require('react');
-var request = require('superagent');
-var moment = require('moment');
+const React = require('react');
+const request = require('superagent');
+const moment = require('moment');
 
 module.exports = React.createClass({
   getInitialState() {
@@ -23,7 +23,7 @@ module.exports = React.createClass({
 
 
   render() {
-    var activityNodes = this.state.activities.map(activity => <li><hr/><b>{activity.user.name}</b> {activity.message} {moment(activity.created_at).fromNow()}</li>);
+    const activityNodes = this.state.activities.map(activity => <li><hr/><b>{activity.user.name}</b> {activity.message} {moment(activity.created_at).fromNow()}</li>);
 
     return (
       <div className="panel">

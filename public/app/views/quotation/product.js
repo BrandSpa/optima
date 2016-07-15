@@ -3,25 +3,25 @@ const React = require('react');
 
 
 module.exports = React.createClass({
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       product: {}
     }
   },
 
-  render: function() {
+  render() {
     const product = this.props.product;
     let period = product.period;
 
     const plural = {
-      "Mes": "Meses",
-      "Semana": "Semanas",
-      "Día": "Días",
+      Mes: "Meses",
+      Semana: "Semanas",
+      Día: "Días",
       "15 días": "15 días",
       "a 3 días": "a 3 días",
-      "Hora": "Horas",
-      "Servicio": "Servicios",
-      "Venta": "Ventas"
+      Hora: "Horas",
+      Servicio: "Servicios",
+      Venta: "Ventas"
     };
 
     if(product.lapse > 1) {

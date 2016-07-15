@@ -1,7 +1,8 @@
 'use strict';
-var React = require('react');
-var request = require('superagent');
+import React from 'react';
+import request from 'superagent';
 import Item from 'views/services/item';
+
 module.exports = React.createClass({
 
   getDefaultProps() {

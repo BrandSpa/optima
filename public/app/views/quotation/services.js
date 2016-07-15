@@ -1,10 +1,10 @@
 'use strict';
-var React = require('react');
-var request = require('superagent');
-var _ = require('lodash');
+import React from 'react';
+import request from 'superagent';
+import _ from 'lodash';
 
 module.exports = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {
       options: [],
       services: [],
@@ -15,30 +15,30 @@ module.exports = React.createClass({
     }
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.fetchOptions();
   },
 
-  componentWillReceiveProps: function(props) {
+  componentWillReceiveProps(props) {
     this.setState(props);
     this.fetchServices(props.quotationId);
   },
 
-  fetchOptions: function() {
+  fetchOptions() {
     request
       .get('/api/v1/services')
       .end((err, res) => {
-        var options = res.body.map(opt => ({
+        const options = res.body.map(opt => ({
           value: opt.id,
           label: opt.title
         }));
 
-       this.setState({options: options});
+       this.setState({options});
 
       });
   },
 
-  fetchServices: function(id) {
+  fetchServices(id) {
     request
       .get(`/api/v1/quotations/${id}/services`)
       .end((err, res) => this.setState({
@@ -46,7 +46,7 @@ module.exports = React.createClass({
     }));
   },
 
-  handleChange: function(id, option) {
+  handleChange(id, option) {
     this.setState({
       serviceId: id,
       disableAdd: false,
@@ -54,14 +54,14 @@ module.exports = React.createClass({
     });
   },
 
-  store: function(id) {
+  store(id) {
     request
       .post(`/api/v1/quotations/${this.state.quotationId}/services`)
       .send({service_id: this.state.serviceId})
       .end((err, res) => this.fetchServices(this.state.quotationId));
   },
 
-  handleDelete: function(id) {
+  handleDelete(id) {
     request
       .del(`/api/v1/services/${id}`)
       .send({quotation_id: this.state.quotationId})
@@ -70,8 +70,8 @@ module.exports = React.createClass({
     }));
   },
 
-  render: function() {
-    var serviceNodes = this.state.services.map(service => <tr key={service.id}>
+  render() {
+    const serviceNodes = this.state.services.map(service => <tr key={service.id}>
       <td>{service.title}</td>
       <td>
         <button
@@ -90,13 +90,13 @@ module.exports = React.createClass({
         <div className="panel-body">
           <div className="row">
             <div className="form-group col-sm-12">
-             {/*<Select
+             <Select
                 placeholder="Servicios"
                 value={this.state.optionSelected}
                 options={this.state.options}
                 onChange={this.handleChange}
                 disabled={this.props.disabled ? true : false}
-              />*/}
+              />
              <br/>
              <button
               className="btn btn-primary btn-sm"

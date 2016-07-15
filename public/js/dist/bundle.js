@@ -4063,9 +4063,11 @@ module.exports = React.createClass({
   },
 
   fetchContacts: function fetchContacts() {
+    var _this = this;
+
     request.get('/api/v1/contacts').query({ quotation_id: this.props.quotationId }).end(function (err, res) {
-      this.setState({ contacts: res.body });
-    }.bind(this));
+      return _this.setState({ contacts: res.body });
+    });
   },
 
   componentWillReceiveProps: function componentWillReceiveProps(props) {
@@ -4095,13 +4097,15 @@ module.exports = React.createClass({
   },
 
   handleSubmit: function handleSubmit(contact) {
+    var _this2 = this;
+
     var contactData = _.extend({ company_id: this.props.company.id }, contact);
 
     request.post('/api/v1/contacts').send(contactData).end(function (err, res) {
-      if (err) return this.setState({ errorMessages: err.response.body });
-      this.fetchContacts();
-      this.showForm();
-    }.bind(this));
+      if (err) return _this2.setState({ errorMessages: err.response.body });
+      _this2.fetchContacts();
+      _this2.showForm();
+    });
   },
 
   render: function render() {
@@ -4112,11 +4116,11 @@ module.exports = React.createClass({
     contactSelect = _.findWhere(this.state.contacts, { id: this.state.contactSelected });
 
     if (contactSelect) {
-      contactValue = contactSelect.name + " " + contactSelect.lastname;
+      contactValue = contactSelect.name + ' ' + contactSelect.lastname;
     }
 
     var contactOptions = this.state.contacts.map(function (contact, i) {
-      return { value: contact.id, label: contact.name + " " + contact.lastname };
+      return { value: contact.id, label: contact.name + ' ' + contact.lastname };
     });
 
     return React.createElement(
@@ -4212,7 +4216,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 module.exports = _react2.default.createClass({
   displayName: 'exports',
-
   getDefaultProps: function getDefaultProps() {
     return {
       quotation: {
@@ -4220,20 +4223,17 @@ module.exports = _react2.default.createClass({
       }
     };
   },
-
   getInitialState: function getInitialState() {
     return {
       quotation: {}
     };
   },
-
   openComment: function openComment() {
     this.props.onShowComment();
   },
   openMails: function openMails() {
     this.props.onShowMails();
   },
-
   handleServiceApproval: function handleServiceApproval() {
     var quotation = this.props.quotation;
     if (quotation.service_approval === 0) {
@@ -4242,7 +4242,6 @@ module.exports = _react2.default.createClass({
       this.props.onServiceApproval(0);
     }
   },
-
   render: function render() {
     var quotation = this.props.quotation;
     var serviceApprovalText = 'Quitar aprobación de servicio';
@@ -4264,7 +4263,7 @@ module.exports = _react2.default.createClass({
             null,
             _react2.default.createElement(
               'a',
-              { className: 'btn btn-default btn-sm', href: "/quotations/" + quotation.id + "/pdf/" + quotation.id, target: '_new' },
+              { className: 'btn btn-default btn-sm', href: '/quotations/' + quotation.id + '/pdf/' + quotation.id, target: '_new' },
               'PDF'
             )
           ),
@@ -4273,7 +4272,7 @@ module.exports = _react2.default.createClass({
             null,
             _react2.default.createElement(
               'a',
-              { className: 'btn btn-default btn-sm', href: "/quotations/" + quotation.id + "/pdfbn", target: '_blank' },
+              { className: 'btn btn-default btn-sm', href: '/quotations/' + quotation.id + '/pdfbn', target: '_blank' },
               ' PDF BN'
             )
           ),
@@ -4282,7 +4281,7 @@ module.exports = _react2.default.createClass({
             null,
             _react2.default.createElement(
               'a',
-              { className: 'btn btn-default btn-sm', href: "/quotations/" + quotation.id + "/pdflogos", target: '_blank' },
+              { className: 'btn btn-default btn-sm', href: '/quotations/' + quotation.id + '/pdflogos', target: '_blank' },
               ' PDF con logos'
             )
           ),
@@ -4292,7 +4291,7 @@ module.exports = _react2.default.createClass({
             _react2.default.createElement(
               'a',
               {
-                href: "/quotations/" + quotation.id + "/duplicate",
+                href: '/quotations/' + quotation.id + '/duplicate',
                 className: 'btn btn-default btn-sm' },
               'Duplicar'
             )
@@ -4343,7 +4342,6 @@ module.exports = _react2.default.createClass({
 
 var React = require('react');
 var Select = require('components/form_select');
-var statusOptions = require('options/status.json');
 var categoryTypeOptions = require('options/category_type.json');
 var advisorOptions = require('options/advisors.json');
 var typeOptions = require('options/type.json');
@@ -4467,7 +4465,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"components/form_select":7,"options/advisors.json":13,"options/category_type.json":14,"options/client_type.json":16,"options/found_us.json":17,"options/products.json":25,"options/status.json":27,"options/type.json":28,"react":301}],58:[function(require,module,exports){
+},{"components/form_select":7,"options/advisors.json":13,"options/category_type.json":14,"options/client_type.json":16,"options/found_us.json":17,"options/products.json":25,"options/type.json":28,"react":301}],58:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -4518,8 +4516,8 @@ module.exports = _react2.default.createClass({
   handleChange: function handleChange() {
     this.setState(_underscore2.default.extend(this.state.quotation, {
       quotation: {
-        'mail_recipient_1': this.refs.mail_recipient_1.value,
-        'mail_recipient_2': this.refs.mail_recipient_2.value
+        mail_recipient_1: this.refs.mail_recipient_1.value,
+        mail_recipient_2: this.refs.mail_recipient_2.value
       }
     }));
   },
@@ -4776,26 +4774,24 @@ var React = require('react');
 
 module.exports = React.createClass({
   displayName: 'exports',
-
   getDefaultProps: function getDefaultProps() {
     return {
       product: {}
     };
   },
-
   render: function render() {
     var product = this.props.product;
     var period = product.period;
 
     var plural = {
-      "Mes": "Meses",
-      "Semana": "Semanas",
-      "Día": "Días",
+      Mes: "Meses",
+      Semana: "Semanas",
+      Día: "Días",
       "15 días": "15 días",
       "a 3 días": "a 3 días",
-      "Hora": "Horas",
-      "Servicio": "Servicios",
-      "Venta": "Ventas"
+      Hora: "Horas",
+      Servicio: "Servicios",
+      Venta: "Ventas"
     };
 
     if (product.lapse > 1) {
@@ -5271,11 +5267,13 @@ module.exports = _react2.default.createClass({
   },
 
   fetchQuotation: function fetchQuotation() {
+    var _this = this;
+
     _superagent2.default.get('/api/v1/quotations/' + this.props.params.id).end(function (err, res) {
       if (err) return console.log(err.response.text);
-      this.setState({ quotation: res.body });
-      this.handleDisabled(res.body.status);
-    }.bind(this));
+      _this.setState({ quotation: res.body });
+      _this.handleDisabled(res.body.status);
+    });
   },
 
   handleShowComment: function handleShowComment() {
@@ -5350,11 +5348,13 @@ module.exports = _react2.default.createClass({
   },
 
   _update: function _update(data) {
+    var _this2 = this;
+
     _superagent2.default.put('/api/v1/quotations/' + this.props.params.id).send(data).end(function (err, res) {
       if (err) return alertify.error(res.body.message);
-      this.setState({ quotation: res.body });
-      this.handleDisabled(res.body.status);
-    }.bind(this));
+      _this2.setState({ quotation: res.body });
+      _this2.handleDisabled(res.body.status);
+    });
   },
 
   handleDisabled: function handleDisabled(status) {
@@ -5481,13 +5481,22 @@ module.exports = _react2.default.createClass({
 },{"alertifyjs":80,"moment":154,"react":301,"superagent":303,"underscore":308,"views/quotation/activity":53,"views/quotation/comment":54,"views/quotation/contact":55,"views/quotation/edit":56,"views/quotation/filters":57,"views/quotation/mails":58,"views/quotation/no_effective":59,"views/quotation/no_send":60,"views/quotation/products":62,"views/quotation/services":64,"views/quotation/status":65,"views/quotation/times":66}],64:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-var request = require('superagent');
-var _ = require('lodash');
+var _react = require('react');
 
-module.exports = React.createClass({
+var _react2 = _interopRequireDefault(_react);
+
+var _superagent = require('superagent');
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = _react2.default.createClass({
   displayName: 'exports',
-
   getInitialState: function getInitialState() {
     return {
       options: [],
@@ -5498,20 +5507,17 @@ module.exports = React.createClass({
       optionSelected: ''
     };
   },
-
   componentDidMount: function componentDidMount() {
     this.fetchOptions();
   },
-
   componentWillReceiveProps: function componentWillReceiveProps(props) {
     this.setState(props);
     this.fetchServices(props.quotationId);
   },
-
   fetchOptions: function fetchOptions() {
     var _this = this;
 
-    request.get('/api/v1/services').end(function (err, res) {
+    _superagent2.default.get('/api/v1/services').end(function (err, res) {
       var options = res.body.map(function (opt) {
         return {
           value: opt.id,
@@ -5522,17 +5528,15 @@ module.exports = React.createClass({
       _this.setState({ options: options });
     });
   },
-
   fetchServices: function fetchServices(id) {
     var _this2 = this;
 
-    request.get('/api/v1/quotations/' + id + '/services').end(function (err, res) {
+    _superagent2.default.get('/api/v1/quotations/' + id + '/services').end(function (err, res) {
       return _this2.setState({
         services: res.body
       });
     });
   },
-
   handleChange: function handleChange(id, option) {
     this.setState({
       serviceId: id,
@@ -5540,43 +5544,40 @@ module.exports = React.createClass({
       optionSelected: option[0].label
     });
   },
-
   store: function store(id) {
     var _this3 = this;
 
-    request.post('/api/v1/quotations/' + this.state.quotationId + '/services').send({ service_id: this.state.serviceId }).end(function (err, res) {
+    _superagent2.default.post('/api/v1/quotations/' + this.state.quotationId + '/services').send({ service_id: this.state.serviceId }).end(function (err, res) {
       return _this3.fetchServices(_this3.state.quotationId);
     });
   },
-
   handleDelete: function handleDelete(id) {
     var _this4 = this;
 
-    request.del('/api/v1/services/' + id).send({ quotation_id: this.state.quotationId }).end(function (err, res) {
+    _superagent2.default.del('/api/v1/services/' + id).send({ quotation_id: this.state.quotationId }).end(function (err, res) {
       return _this4.setState({
-        services: _.reject(_this4.state.services, function (service) {
+        services: _lodash2.default.reject(_this4.state.services, function (service) {
           return service.id == id;
         })
       });
     });
   },
-
   render: function render() {
     var _this5 = this;
 
     var serviceNodes = this.state.services.map(function (service) {
-      return React.createElement(
+      return _react2.default.createElement(
         'tr',
         { key: service.id },
-        React.createElement(
+        _react2.default.createElement(
           'td',
           null,
           service.title
         ),
-        React.createElement(
+        _react2.default.createElement(
           'td',
           null,
-          React.createElement(
+          _react2.default.createElement(
             'button',
             {
               className: 'btn btn-default btn-sm',
@@ -5589,20 +5590,27 @@ module.exports = React.createClass({
       );
     });
 
-    return React.createElement(
+    return _react2.default.createElement(
       'div',
       { className: 'panel' },
-      React.createElement(
+      _react2.default.createElement(
         'div',
         { className: 'panel-body' },
-        React.createElement(
+        _react2.default.createElement(
           'div',
           { className: 'row' },
-          React.createElement(
+          _react2.default.createElement(
             'div',
             { className: 'form-group col-sm-12' },
-            React.createElement('br', null),
-            React.createElement(
+            _react2.default.createElement(Select, {
+              placeholder: 'Servicios',
+              value: this.state.optionSelected,
+              options: this.state.options,
+              onChange: this.handleChange,
+              disabled: this.props.disabled ? true : false
+            }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
               'button',
               {
                 className: 'btn btn-primary btn-sm',
@@ -5611,32 +5619,32 @@ module.exports = React.createClass({
               'Agregar Servicio'
             )
           ),
-          React.createElement('hr', null),
-          React.createElement(
+          _react2.default.createElement('hr', null),
+          _react2.default.createElement(
             'div',
             { className: 'table-responsive col-sm-12' },
-            React.createElement(
+            _react2.default.createElement(
               'table',
               { className: 'table table-striped' },
-              React.createElement(
+              _react2.default.createElement(
                 'thead',
                 null,
-                React.createElement(
+                _react2.default.createElement(
                   'tr',
                   null,
-                  React.createElement(
+                  _react2.default.createElement(
                     'th',
                     null,
                     'Servicio'
                   ),
-                  React.createElement(
+                  _react2.default.createElement(
                     'th',
                     null,
                     'Opciones'
                   )
                 )
               ),
-              React.createElement(
+              _react2.default.createElement(
                 'tbody',
                 null,
                 serviceNodes
@@ -5660,24 +5668,20 @@ alertify.set('notifier', 'position', 'top-right');
 
 module.exports = React.createClass({
   displayName: 'exports',
-
   getDefaultProps: function getDefaultProps() {
     return {
       disabled: false
     };
   },
-
   getInitialState: function getInitialState() {
     return {
       sending: false
     };
   },
-
   handleClick: function handleClick(status, e) {
     e.preventDefault(status, e);
     this.props.onStatusChange({ status: status });
   },
-
   handleSend: function handleSend() {
     var id = this.props.quotation.id;
     this.setState({ sending: true });
@@ -5692,12 +5696,10 @@ module.exports = React.createClass({
       });
     }.bind(this));
   },
-
   _getDiff: function _getDiff() {
     var now = moment().format();
     return moment(now).diff(this.props.quotation.created_at, 'minutes');
   },
-
   render: function render() {
     var sending = this.state.sending ? "disabled" : "";
     var messageSend = this.state.sending ? "Enviando..." : "Enviar";
@@ -5782,7 +5784,7 @@ module.exports = React.createClass({
               'a',
               {
                 className: 'btn btn-default btn-sm',
-                href: "/quotations/" + this.props.quotation.id + "/rethink"
+                href: '/quotations/' + this.props.quotation.id + '/rethink'
               },
               'Replantear'
             )
@@ -5801,7 +5803,7 @@ var React = require('react');
 module.exports = React.createClass({
   displayName: 'exports',
   render: function render() {
-    var created_sent_diff;
+    var created_sent_diff = void 0;
 
     if (this.props.quotation.created_sent_diff) {
       created_sent_diff = this.props.quotation.created_sent_diff + ' minutos';
@@ -6525,6 +6527,11 @@ module.exports = _react2.default.createClass({
         })
       ),
       _react2.default.createElement(
+        'div',
+        { className: 'alert alert-danger col-md-12', style: this.props.errors.length ? {} : { display: 'none' } },
+        this.props.errors
+      ),
+      _react2.default.createElement(
         'button',
         { className: 'btn btn-default btn-sm', onClick: this.handleCancel },
         'Cancelar'
@@ -6595,16 +6602,21 @@ exports.default = _React2.default.createClass({
 },{"React":301}],74:[function(require,module,exports){
 'use strict';
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _superagent = require('superagent');
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
 var _item = require('views/services/item');
 
 var _item2 = _interopRequireDefault(_item);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var React = require('react');
-var request = require('superagent');
-
-module.exports = React.createClass({
+module.exports = _react2.default.createClass({
   displayName: 'exports',
   getDefaultProps: function getDefaultProps() {
     return {
@@ -6618,48 +6630,48 @@ module.exports = React.createClass({
     var _this = this;
 
     var serviceNodes = this.props.services.map(function (service) {
-      return React.createElement(_item2.default, {
+      return _react2.default.createElement(_item2.default, {
         key: service.id,
         service: service,
         onEdit: _this.handleEdit
       });
     });
 
-    return React.createElement(
+    return _react2.default.createElement(
       'div',
       { className: 'table-responsive' },
-      React.createElement(
+      _react2.default.createElement(
         'table',
         { className: 'table' },
-        React.createElement(
+        _react2.default.createElement(
           'thead',
           null,
-          React.createElement(
+          _react2.default.createElement(
             'tr',
             null,
-            React.createElement(
+            _react2.default.createElement(
               'th',
               null,
               'Título'
             ),
-            React.createElement(
+            _react2.default.createElement(
               'th',
               null,
               'Precio 1'
             ),
-            React.createElement(
+            _react2.default.createElement(
               'th',
               null,
               'Precio 2'
             ),
-            React.createElement(
+            _react2.default.createElement(
               'th',
               null,
               'Opciones'
             )
           )
         ),
-        React.createElement(
+        _react2.default.createElement(
           'tbody',
           null,
           serviceNodes
@@ -6711,7 +6723,8 @@ module.exports = _react2.default.createClass({
       service: {
         price_1: '',
         price_2: ''
-      }
+      },
+      errors: []
     };
   },
   componentDidMount: function componentDidMount() {
@@ -6744,10 +6757,11 @@ module.exports = _react2.default.createClass({
 
     _superagent2.default.post('/api/v1/services').send(service).end(function (err, res) {
       if (err) {
-        console.log(res.body);
+        return _this2.setState({ errors: res.body });
       } else {
         _this2.setState({
           service: (0, _clean_object2.default)(res.body),
+          errors: [],
           services: [res.body].concat(_this2.state.services)
         });
       }
@@ -6760,7 +6774,10 @@ module.exports = _react2.default.createClass({
       if (err) {
         console.log(res.body);
       } else {
-        _this3.setState({ services: (0, _update_item2.default)(_this3.state.services, res.body, 'id') });
+        _this3.setState({
+          services: (0, _update_item2.default)(_this3.state.services, res.body, 'id'),
+          errors: []
+        });
       }
     });
   },
@@ -6777,7 +6794,10 @@ module.exports = _react2.default.createClass({
     }
   },
   clean: function clean() {
-    this.setState({ service: (0, _clean_object2.default)(this.state.service) });
+    this.setState({
+      service: (0, _clean_object2.default)(this.state.service),
+      errors: []
+    });
   },
 
 
@@ -6826,6 +6846,7 @@ module.exports = _react2.default.createClass({
             { className: 'panel-body' },
             _react2.default.createElement(_form_create2.default, {
               service: this.state.service,
+              errors: this.state.errors,
               onSubmit: this.handleSubmit,
               onCancel: this.clean
             })

@@ -1,7 +1,7 @@
 var fs = require('fs');
 var exec = require('child_process').exec;
 
-var folder = __dirname + '/app/views/';
+var folder = __dirname + '/app/views/quotation/';
 
 fs
 .readdir(folder, function(err, files) {

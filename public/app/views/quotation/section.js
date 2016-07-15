@@ -39,12 +39,12 @@ module.exports = React.createClass({
 
   fetchQuotation: function() {
     request
-      .get('/api/v1/quotations/' + this.props.params.id)
-      .end(function(err, res) {
+      .get(`/api/v1/quotations/${this.props.params.id}`)
+      .end((err, res) => {
         if(err) return console.log(err.response.text);
         this.setState({quotation: res.body});
         this.handleDisabled(res.body.status);
-      }.bind(this));
+      });
   },
 
   handleShowComment: function() {
@@ -120,13 +120,13 @@ module.exports = React.createClass({
 
   _update: function(data) {
     request
-      .put('/api/v1/quotations/' + this.props.params.id)
+      .put(`/api/v1/quotations/${this.props.params.id}`)
       .send(data)
-      .end(function(err, res) {
+      .end((err, res) => {
         if(err) return alertify.error(res.body.message);
         this.setState({quotation: res.body});
         this.handleDisabled(res.body.status);
-      }.bind(this));
+      });
   },
 
   handleDisabled: function(status) {

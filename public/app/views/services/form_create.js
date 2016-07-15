@@ -86,7 +86,7 @@ module.exports = React.createClass({
               value={service.price_2}
             />
         </div>
-
+        <div className="alert alert-danger col-md-12" style={this.props.errors.length ? {} : {display: 'none'}}>{this.props.errors}</div>
         <button className="btn btn-default btn-sm" onClick={this.handleCancel}>Cancelar</button>
         <button className="btn btn-primary btn-sm pull-right">Guardar</button>
       </form>

@@ -50,7 +50,7 @@ module.exports = React.createClass({
     let product = data ? data : this.state.product;
 
     request
-      .put('/api/v1/products/' + this.state.product.id)
+      .put(`/api/v1/products/${this.state.product.id}`)
       .send(this.state.product)
       .end((err, res) => {
         if(err) {
@@ -88,7 +88,7 @@ module.exports = React.createClass({
     e.preventDefault();
 
     request
-    .post('/api/v1/products/' + id  + '/duplicate')
+    .post(`/api/v1/products/${id}/duplicate`)
     .end((err, res) => {
       this.setState({
         products: this.state.products.concat([res.body])
@@ -114,7 +114,7 @@ module.exports = React.createClass({
     this.setState({product: product});
 
     request
-    .put('/api/v1/products/' + product.id)
+    .put(`/api/v1/products/${product.id}`)
     .send(product)
     .end((err, res) => {
       this.setState({product: {}});
@@ -128,7 +128,7 @@ module.exports = React.createClass({
     });
 
     request
-    .del('/api/v1/products/' + id)
+    .del(`/api/v1/products/${id}`)
     .end((err, res) => {
       this.setState({
         products: products

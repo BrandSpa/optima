@@ -1,7 +1,7 @@
 'use strict';
-var React = require('react');
-var Select = require('components/form_select');
-var reasonsOptions = require('options/no_effective_reasons.json');
+const React = require('react');
+const Select = require('components/form_select');
+const reasonsOptions = require('options/no_effective_reasons.json');
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -25,7 +25,7 @@ module.exports = React.createClass({
   },
 
   handleChange() {
-    var reason = {
+    const reason = {
       status: 'No efectiva',
       status_cause: React.findDOMNode(this.refs.cause.refs.select).value,
       status_note: React.findDOMNode(this.refs.note).value

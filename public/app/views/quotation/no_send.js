@@ -1,7 +1,7 @@
 'use strict';
-var React = require('react');
-var reasonsOptions = require('options/no_send_reasons.json');
-var Select = require('components/form_select');
+const React = require('react');
+const reasonsOptions = require('options/no_send_reasons.json');
+const Select = require('components/form_select');
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -25,7 +25,7 @@ module.exports = React.createClass({
   },
 
   handleChange() {
-    var reason = {
+    const reason = {
       status: 'No enviada',
       status_cause: React.findDOMNode(this.refs.cause.refs.select).value,
       status_note: React.findDOMNode(this.refs.note).value
