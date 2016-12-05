@@ -55839,7 +55839,7 @@
 	          { 'for': '' },
 	          'Cotizaci\xF3n'
 	        ),
-	        _react2.default.createElement('input', { type: 'text', placeholder: 'Cotizaci\xF3n num' })
+	        _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Cotizaci\xF3n num' })
 	      ),
 	      _react2.default.createElement(
 	        'div',

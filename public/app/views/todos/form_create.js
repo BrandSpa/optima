@@ -89,7 +89,7 @@ module.exports = React.createClass({
 
         <div class="form-group col-md-12">
           <label for="">Cotización</label>
-          <input type="text" placeholder="Cotización num" />
+          <input type="text" className="form-control" placeholder="Cotización num" />
         </div>
 
         <div className="form-group col-md-6">
