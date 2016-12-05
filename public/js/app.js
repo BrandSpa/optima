@@ -55769,6 +55769,10 @@
 	      return _this2.setState({ quotations: res.body });
 	    });
 	  },
+	  setQuo: function setQuo(e, q) {
+	    e.preventDefault();
+	    console.log(q);
+	  },
 	  render: function render() {
 	    var _this3 = this;
 
@@ -55830,7 +55834,7 @@
 	          className: 'form-control',
 	          placeholder: 'Cotizaci\xF3n num',
 	          onChange: function onChange(e) {
-	            return _this3.searchQuo(e.currentTarget.value);
+	            return _this3.searchQuo(e, e.currentTarget.value);
 	          }
 	        }),
 	        _react2.default.createElement(
@@ -55840,7 +55844,11 @@
 	            return _react2.default.createElement(
 	              'li',
 	              { className: 'list-group-item' },
-	              quo.id
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#', onClick: 'this.setQuo.bind(null, quo)' },
+	                quo.id
+	              )
 	            );
 	          })
 	        )

@@ -72,6 +72,11 @@ module.exports = React.createClass({
     .end((err, res) => this.setState({quotations: res.body}));
   },
 
+  setQuo(e, q) {
+    e.preventDefault();
+    console.log(q);
+  },
+
   render() {
     const todo = this.state.todo;
     let contactSelect;
@@ -111,10 +116,17 @@ module.exports = React.createClass({
             type="text" 
             className="form-control" 
             placeholder="Cotización num"
-            onChange={e => this.searchQuo(e.currentTarget.value)}
+            onChange={e => this.searchQuo(e, e.currentTarget.value)}
           />
+
           <ul className="list-group">
-            {this.state.quotations.map(quo => <li className="list-group-item">{quo.id}</li>)}
+            {
+              this.state.quotations.map(quo =>
+                <li className="list-group-item">
+                  <a href="#" onClick="this.setQuo.bind(null, quo)">{quo.id}</a>
+                </li>
+              )
+            }
           </ul>
         </div>
 
