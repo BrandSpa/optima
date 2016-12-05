@@ -12,7 +12,8 @@ module.exports = React.createClass({
     return {
       todo: {
         expires_date: '',
-        expires_time: ''
+        expires_time: '',
+        quotation_id: ''
       },
       users: [],
       quotations: []
@@ -75,7 +76,7 @@ module.exports = React.createClass({
   setQuo(q, e) {
     console.log(q, e);
     e.preventDefault();
-    console.log(q);
+    this.setState({quotation_id: q.id});
   },
 
   render() {
@@ -101,7 +102,6 @@ module.exports = React.createClass({
             />
         </div>
 
-      
         <div className="form-group col-md-6">
           <label htmlFor="">Usuario</label>
           <Select
@@ -117,14 +117,15 @@ module.exports = React.createClass({
             type="text" 
             className="form-control" 
             placeholder="Cotización num"
+            value={todo.quotation_id}
             onChange={e => this.searchQuo(e.currentTarget.value)}
           />
 
           <ul className="list-group">
             {
               this.state.quotations.map(quo =>
-                <li className="list-group-item">
-                  <a href="#" onClick="this.setQuo.bind(this, quo)">{quo.id}</a>
+                <li className="list-group-item" key={quo.id}>
+                  <a href="#" onClick={this.setQuo.bind(null, quo)}>{quo.id}</a>
                 </li>
               )
             }

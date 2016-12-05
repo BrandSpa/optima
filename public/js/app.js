@@ -55714,7 +55714,8 @@
 	    return {
 	      todo: {
 	        expires_date: '',
-	        expires_time: ''
+	        expires_time: '',
+	        quotation_id: ''
 	      },
 	      users: [],
 	      quotations: []
@@ -55772,7 +55773,7 @@
 	  setQuo: function setQuo(q, e) {
 	    console.log(q, e);
 	    e.preventDefault();
-	    console.log(q);
+	    this.setState({ quotation_id: q.id });
 	  },
 	  render: function render() {
 	    var _this3 = this;
@@ -55834,6 +55835,7 @@
 	          type: 'text',
 	          className: 'form-control',
 	          placeholder: 'Cotizaci\xF3n num',
+	          value: todo.quotation_id,
 	          onChange: function onChange(e) {
 	            return _this3.searchQuo(e.currentTarget.value);
 	          }
@@ -55844,10 +55846,10 @@
 	          this.state.quotations.map(function (quo) {
 	            return _react2.default.createElement(
 	              'li',
-	              { className: 'list-group-item' },
+	              { className: 'list-group-item', key: quo.id },
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#', onClick: 'this.setQuo.bind(this, quo)' },
+	                { href: '#', onClick: _this3.setQuo.bind(null, quo) },
 	                quo.id
 	              )
 	            );
