@@ -55769,7 +55769,7 @@
 	      return _this2.setState({ quotations: res.body });
 	    });
 	  },
-	  setQuo: function setQuo(e, q) {
+	  setQuo: function setQuo(q, e) {
 	    e.preventDefault();
 	    console.log(q);
 	  },
@@ -55834,7 +55834,7 @@
 	          className: 'form-control',
 	          placeholder: 'Cotizaci\xF3n num',
 	          onChange: function onChange(e) {
-	            return _this3.searchQuo(e, e.currentTarget.value);
+	            return _this3.searchQuo(e.currentTarget.value);
 	          }
 	        }),
 	        _react2.default.createElement(

@@ -72,7 +72,7 @@ module.exports = React.createClass({
     .end((err, res) => this.setState({quotations: res.body}));
   },
 
-  setQuo(e, q) {
+  setQuo(q, e) {
     e.preventDefault();
     console.log(q);
   },
@@ -116,7 +116,7 @@ module.exports = React.createClass({
             type="text" 
             className="form-control" 
             placeholder="Cotización num"
-            onChange={e => this.searchQuo(e, e.currentTarget.value)}
+            onChange={e => this.searchQuo(e.currentTarget.value)}
           />
 
           <ul className="list-group">
