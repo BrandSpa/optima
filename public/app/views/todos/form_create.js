@@ -76,7 +76,7 @@ module.exports = React.createClass({
   setQuo(q, e) {
     console.log(q, e);
     e.preventDefault();
-    this.setState({quotation_id: q.id});
+    this.setState({todo, _.extend( this.state.todo {quotation_id: q.id}} );
   },
 
   render() {
