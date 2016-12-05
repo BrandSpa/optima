@@ -55832,7 +55832,18 @@
 	          onChange: function onChange(e) {
 	            return _this3.searchQuo(e.currentTarget.value);
 	          }
-	        })
+	        }),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.state.quotations.map(function (quo) {
+	            return _react2.default.createElement(
+	              'li',
+	              null,
+	              quo.id
+	            );
+	          })
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
