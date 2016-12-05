@@ -5,8 +5,6 @@ import request from 'superagent';
 import _ from 'underscore';
 import Filters from 'views/quotations/filters';
 import ListTable from 'views/quotations/list_table';
-import emmiter from 'lib/emitter';
-const Emmiter = emmiter();
 
 module.exports = React.createClass({
   
@@ -68,7 +66,6 @@ module.exports = React.createClass({
   },
 
   render() {
-    Emmiter.emit('quotations_dashboard_render');
 
     return (
       <div>

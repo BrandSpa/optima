@@ -70,6 +70,11 @@ class Quotation extends \Eloquent {
 		return $this->hasMany('Activity');
 	}
 
+	public function todos()
+  {
+    return $this->hasMany('Todo');
+  }
+
 	public static function boot()
 	{
 		parent::boot();

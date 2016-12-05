@@ -75,10 +75,12 @@ module.exports = React.createClass({
   },
 
   setQuo(q, e) {
-    console.log(q, e);
     e.preventDefault();
 
-    this.setState({todo:_.extend( this.state.todo, {quotation_id: q.id}), quotations: [] });
+    this.setState({
+      todo:_.extend( this.state.todo, {quotation_id: q.id}), 
+      quotations: [] 
+    });
   },
 
   render() {

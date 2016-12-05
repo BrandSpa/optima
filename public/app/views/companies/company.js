@@ -8,11 +8,11 @@ import Contact from 'views/companies/contact';
 module.exports = React.createClass({
   getDefaultProps() {
     return {
-      company: {},
+      company: {}
     }
   },
 
-  getInitialState() {
+  getInitialstate() {
     return {
       contact: {},
       contacts: [],
@@ -64,11 +64,6 @@ module.exports = React.createClass({
 
   handleEditContact(contact, e) {
     if(e) e.preventDefault();
-
-    // this.setState({
-    //   contact,
-    //   showForm: true
-    // });
   },
 
   handleDeleteContact(contact, e) {
