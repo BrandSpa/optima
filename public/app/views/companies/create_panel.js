@@ -1,12 +1,12 @@
 'use strict';
 import React from 'react';
+import request from 'superagent';
+import _ from 'underscore';
+import page from 'page';
 import Form from 'views/companies/form_create';
 import ListContacts from 'views/contacts/list';
 import Loader from 'components/loader';
 import Autocomplete from 'components/autocomplete';
-import request from 'superagent';
-import _ from 'underscore';
-import page from 'page';
 
 module.exports = React.createClass({
 

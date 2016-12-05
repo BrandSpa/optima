@@ -1,8 +1,12 @@
 'use strict';
-const React = require('react');
-const moment = require('moment');
-const request = require('superagent');
-const Form = require('views/todos/form_create');
+import React from 'react';
+import _ from 'lodash';
+import moment from 'moment';
+import request from 'superagent';
+import updateItem from 'lib/update_item';
+import TodoForm from 'views/todos/form_create';
+import Todos from 'views/todos/list';
+
 require('moment/locale/es');
 
 module.exports = React.createClass({
@@ -37,31 +41,38 @@ module.exports = React.createClass({
     request
       .post('/api/v1/todos')
       .send(todo)
-      .end(function(err, res) {
+      .end((err, res) => {
         this.setState({
           todos: this.state.todos.concat([res.body])
         });
-      }.bind(this));
+      });
   },
 
   showForm: function(e) {
     if(e) e.preventDefault();
-    let show = this.state.showForm;
-    if(show) {
-      show = false;
-    } else {
-      show = true;
-    }
 
-    this.setState({showForm: show});
+
+    this.setState({showForm: !this.state.showForm});
+  },
+
+  handleCompleted(todo) {
+    todo = _.extend(todo, {completed: !todo.completed});
+    console.log(todo);
+    request
+    .put(`/api/v1/todos/${todo.id}`)
+    .send(todo)
+    .end((err, res) => {
+      let todos = updateItem(this.state.todos, res.body, 'id');
+      this.setState({todos});
+    });
   },
 
   render: function() {
     const tracking = this.props.tracking;
-    const todos = this.state.todos;
     let showTable = false;
     let contact;
     let by;
+    let todos = this.state.todos;
 
     const todoNodes = todos.map(function(todo) {
       if(todo.user && todo.user.name) {
@@ -92,29 +103,28 @@ module.exports = React.createClass({
       by = `${tracking.user.name} ${tracking.user.lastname}`;
     }
 
+    // todos = this.state.todos.map(todo => _.extend(todo, {tracking: tracking}));
+
     return (
-      <div>
-        <ul>
-            <li><b>Reporte:</b> {tracking.report}</li>
-            <li><b>Contacto:</b> {contact}</li>
-            <li><b>Por:</b> {by}</li>
-            <li><b>Creado:</b> {moment(`${tracking.register_date} ${tracking.register_time}` ).fromNow()}</li>
-        </ul>
-        <br/>
-        <button className="btn btn-primary btn-sm" onClick={this.showForm}>Agregar tarea</button><br/>
-        <br/>
+      <li className="list-item">
+        <hr/>
+        <b>Reporte:</b> {tracking.report} • <b>Contacto:</b> {contact} • <b>Por:</b> {by} {moment(`${tracking.register_date} ${tracking.register_time}` ).fromNow()}
+
+        <p></p>
+
         <div className={this.state.showForm ? "" : "hidden"}>
-          <Form
+          <TodoForm
             trackingId={tracking.id}
             onSubmit={this.handleSubmit}
             hideForm={this.showForm}
           />
         </div>
 
-        <div className="table-responsive">
-          {todoNodes}
-        </div>
-      </div>
+        <Todos todos={todos} onCompleted={this.handleCompleted} />
+        <p></p>
+
+        <button className="btn btn-primary btn-sm" onClick={this.showForm}>Agregar tarea</button>
+      </li>
     )
   }
 });

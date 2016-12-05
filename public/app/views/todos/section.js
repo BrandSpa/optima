@@ -1,6 +1,7 @@
 'use strict';
 import React from 'React';
 import request from 'superagent';
+import updateItem from 'lib/update_item';
 import Form from 'views/todos/form_create';
 import List from 'views/todos/list';
 import _ from 'lodash';
@@ -33,25 +34,15 @@ export default React.createClass({
       });
   },
 
-  updateTodos(td) {
-    let todos = this.state.todos.map(todo => {
-      if(td.id == todo.id) return _.extend(todo, td);
-      return todo;
-    });
-
-    this.setState({todos: todos});
-  },
-
   handleCompleted(todo) {
     request
     .put(`/api/v1/todos/${todo.id}`)
     .send(_.extend(todo, {completed: !todo.completed}))
     .end((err, res) => {
-      this.updateTodos(res.body);
+      let todos = updateItem(this.state.todos, res.body, 'id');
+      this.setState({todos: todos});
     });
   },
-
-
 
   render() {
     return (

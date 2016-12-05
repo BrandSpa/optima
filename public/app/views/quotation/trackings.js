@@ -1,9 +1,9 @@
 'use strict';
-const React = require('react');
-const Tracking = require('views/quotation/tracking');
-const Form = require('views/trackings/form_create');
-const request = require('superagent');
-const _ = require('lodash');
+import React from 'react';
+import Tracking from 'views/quotation/tracking';
+import Form from 'views/trackings/form_create';
+import request from 'superagent';
+import _ from 'lodash';
 
 module.exports = React.createClass({
   getInitialState() {
@@ -14,6 +14,7 @@ module.exports = React.createClass({
       trackings: [],
     }
   },
+
   componentWillReceiveProps(props) {
     this._fetch(props.quotationId);
   },
@@ -38,14 +39,9 @@ module.exports = React.createClass({
   },
 
   render() {
-    const trackingNodes = this.state.trackings.map(function(tracking) {
-
-      return (
-         <li className="list-group-item">
-          <Tracking  key={tracking.id} tracking={tracking} />
-        </li>
-      );
-    });
+    const trackingNodes = this.state.trackings.map(tracking =>
+      <Tracking key={tracking.id} tracking={tracking} />
+    );
 
     return (
       <div className="panel">

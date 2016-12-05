@@ -1,6 +1,6 @@
 'use strict';
-const React = require('react');
-
+import React from 'react';
+import numeral from 'numeral';
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -33,8 +33,8 @@ module.exports = React.createClass({
         <td>{product.name}</td>
         <td>{product.lapse} {period}</td>
         <td>{product.quantity}</td>
-        <td>{product.price}</td>
-        <td>{product.total}</td>
+        <td>{numeral(product.price).format('0,0')}</td>
+        <td>{numeral(product.total).format('0,0')}</td>
         <td>
         <ul className="list-inline">
           <li>

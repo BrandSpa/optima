@@ -2,13 +2,14 @@
 import React from 'react';
 import page from 'page';
 import {render} from 'react-dom';
-import App from 'views/app';
-import CompanyCreate from 'views/companies/create_panel';
-import ContactCreate from 'views/contacts/create_panel';
-import Quotation from 'views/quotation/section';
-import Companies from 'views/companies/list';
-import Contacts from 'views/contacts/section';
-import Services from 'views/services/section';
+import App from './views/app';
+import CompanyCreate from './views/companies/create_panel';
+import ContactCreate from './views/contacts/create_panel';
+import Quotation from './views/quotation/section';
+import Companies from './views/companies/list';
+import Contacts from './views/contacts/section';
+import Services from './views/services/section';
+import Todos from './views/todos/section';
 
 function root(component) {
   return render(
@@ -36,6 +37,10 @@ page('/quotation/create', () => {
     </div>
   );
 });
+
+page('/todos', () => {
+  return root(<div className="col-md-8"><Todos /></div>);
+})
 
 page('/contacts', () => {
   return root(<Contacts/>);

@@ -1,9 +1,9 @@
 'use strict';
-const React = require('react');
-const _ = require('underscore');
-const Select = require('components/form_select');
-const sectors = require('options/sectors.json');
-const cities = require('options/cities.json');
+import React from 'react';
+import _ from 'underscore';
+import Select from 'components/form_select';
+import sectors from 'options/sectors.json';
+import cities from 'options/cities.json';
 
 module.exports = React.createClass({
   getInitialState() {

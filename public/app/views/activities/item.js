@@ -1,6 +1,6 @@
 'use strict';
 import React from 'React';
-import Timeago from 'components/timeago';
+import Timeago from '../../components/timeago';
 
 export default React.createClass({
   

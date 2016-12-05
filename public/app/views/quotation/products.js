@@ -5,6 +5,7 @@ import FormCreate from 'views/products/form_create';
 import request from 'superagent';
 import _ from 'underscore';
 import cleanObject from 'lib/clean_object';
+import {storeActivity} from 'lib/activity';
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -76,9 +77,15 @@ module.exports = React.createClass({
       this.setState({ errors: errors });
     } else {
       this.cleanProduct();
+
       this.setState({
         products: this.state.products.concat([res.body]),
         showForm: false
+      });
+
+      storeActivity({
+        message: 'Agrego un producto',
+        quotation_id: res.body.quotation_id
       });
     }
 

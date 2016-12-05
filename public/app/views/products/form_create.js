@@ -71,7 +71,7 @@ module.exports = React.createClass({
       show: ref.show.checked,
       iva: ref.iva.checked,
       note: ref.note.value,
-      spaces: ref.spaces.value,
+      spaces: ref.spaces.value || 0,
     });
 
     this.setState({product});

@@ -1,8 +1,8 @@
 'use strict';
-const React = require('react');
-const Form = require('views/contacts/form_create');
-const _ = require('lodash');
-const request = require('superagent');
+import React from 'react';
+import _ from 'lodash';
+import request from 'superagent';
+import Form from 'views/contacts/form_create';
 import Contact from 'views/companies/contact';
 
 module.exports = React.createClass({
@@ -82,7 +82,8 @@ module.exports = React.createClass({
   },
 
   render() {
-    let company = this.props.company;
+    const {company} = this.props;
+    const {name, nit, address, phone} = company;
 
     return (
       <div className="panel">
@@ -98,10 +99,10 @@ module.exports = React.createClass({
           </thead>
           <tbody>
             <tr>
-              <td>{company.name}</td>
-              <td>{company.nit}</td>
-              <td>{company.address}</td>
-              <td>{company.phone}</td>
+              <td>{name}</td>
+              <td>{nit}</td>
+              <td>{address}</td>
+              <td>{phone}</td>
             </tr>
           </tbody>
         </table>

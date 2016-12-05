@@ -38,7 +38,7 @@ module.exports = React.createClass({
 
   render: function() {
     const quotation = this.props.quotation;
-    console.log(this.props.disabled);
+
     return (
       <div className="panel panel-default">
         <div className="panel-body">

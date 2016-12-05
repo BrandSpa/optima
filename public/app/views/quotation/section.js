@@ -2,10 +2,7 @@
 import React from 'react';
 import request from 'superagent';
 import _ from 'underscore';
-
-const alertify = require('alertifyjs');
-alertify.set('notifier','position', 'top-right');
-
+import moment from 'moment';
 import Contact from 'views/quotation/contact';
 import Filters from 'views/quotation/filters';
 import Edit from 'views/quotation/edit';
@@ -18,7 +15,11 @@ import NoEffective from 'views/quotation/no_effective';
 import NoSend from 'views/quotation/no_send';
 import Times from 'views/quotation/times';
 import Activities from 'views/quotation/activity';
-import moment from 'moment';
+import Trackings from 'views/quotation/trackings';
+
+const alertify = require('alertifyjs');
+alertify.set('notifier','position', 'top-right');
+
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -56,31 +57,16 @@ module.exports = React.createClass({
     this.setState({showComment: show});
   },
 
-  handleShowMail: function() {
-    let show = true;
-    if(this.state.showMail) {
-      show = false;
-    }
-
-    this.setState({showMail: show});
+  handleShowMail() {
+    this.setState({showMail: !this.state.showMail});
   },
 
-  handleShowNoEffective: function() {
-    let show = true;
-    if(this.state.showNoEffective) {
-      show = false;
-    }
-
-    this.setState({showNoEffective: show});
+  handleShowNoEffective() {
+    this.setState({showNoEffective: !this.state.showNoEffective});
   },
 
-  handleShowNoSend: function() {
-    let show = true;
-    if(this.state.showNoSend) {
-      show = false;
-    }
-
-    this.setState({showNoSend: show});
+  handleShowNoSend() {
+    this.setState({showNoSend: !this.state.showNoSend});
   },
 
   handleOptions: function(filters) {
@@ -118,7 +104,8 @@ module.exports = React.createClass({
     this._update({contact_id: contactId});
   },
 
-  _update: function(data) {
+  _update(data) {
+    data = _.extend(this.state.quotation, data);
     request
       .put(`/api/v1/quotations/${this.props.params.id}`)
       .send(data)
@@ -129,18 +116,18 @@ module.exports = React.createClass({
       });
   },
 
-  handleDisabled: function(status) {
+  handleDisabled(status) {
     let disabled = false;
-    console.log(status);
+
     if(status !== 'Borrador') {
       disabled = true;
     }
     this.setState({disabled: disabled});
   },
 
-  render: function() {
-    const quotation = this.state.quotation;
-    const products = this.state.products;
+  render() {
+    let quotation = this.state.quotation;
+    let products = this.state.products;
 
     return (
       <div>
@@ -148,7 +135,7 @@ module.exports = React.createClass({
         <div className="panel">
           <div className="panel-body">
           <h4 style={{margin: "0 0 15px 0"}}>
-            Cotización {quotation.id} | {quotation.status} | <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
+            Cotización {quotation.id} • {quotation.status} • <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
           </h4>
           </div>
         </div>
@@ -184,17 +171,6 @@ module.exports = React.createClass({
             onSaveMail={this.handleSaveMail}
             />
 
-          <NoEffective
-            quotation={quotation}
-            show={this.state.showNoEffective}
-            onSave={this.handleSaveNoEffective}
-          />
-
-          <NoSend
-            quotation={quotation}
-            show={this.state.showNoSend}
-            onSave={this.handleSaveNoEffective}
-          />
 
           <Products
             quotationId={quotation.id}
@@ -214,10 +190,24 @@ module.exports = React.createClass({
             disabled={this.state.disabled}
           />
 
+          <NoEffective
+            quotation={quotation}
+            show={this.state.showNoEffective}
+            onSave={this.handleSaveNoEffective}
+          />
+
+          <NoSend
+            quotation={quotation}
+            show={this.state.showNoSend}
+            onSave={this.handleSaveNoEffective}
+          />
+
+          <Trackings quotationId={quotation.id} />
+
         </div>
 
         <div className="col-md-3">
-          <div className="sidebar__right-fixed" style={{width: '100%'}}>
+          <div >
             <Contact
               contact={quotation.contact}
               company={quotation.company}

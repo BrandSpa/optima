@@ -36,7 +36,7 @@ export default React.createClass({
         <td>{todo.description}</td>
         <td><Timeago date={todo.created_at} /></td>
         <td><Timeago date={`${todo.expires_date} ${todo.expires_time}`} /></td>
-        <td>{todo.assigned.name} {todo.assigned.lastname}</td>
+        <td>{todo.assigned ? `${todo.assigned.name} ${todo.assigned.lastname}` : "" }</td>
         <td>{todo.user.name} {todo.user.lastname}</td>
         <td>{this.linkQuotation(todo.tracking)}</td>
         <td><input type="checkbox" onChange={e => this.props.onCompleted(todo)} checked={todo.completed} /></td>

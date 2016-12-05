@@ -1,8 +1,9 @@
 'use strict';
-const React = require('react');
-const request = require('superagent');
-const moment = require('moment');
-const alertify = require('alertifyjs');
+import React from 'react';
+import request from 'superagent';
+import moment from 'moment';
+import alertify from 'alertifyjs';
+import {storeActivity} from 'lib/activity';
 alertify.set('notifier','position', 'top-right');
 
 module.exports = React.createClass({
@@ -20,7 +21,26 @@ module.exports = React.createClass({
 
   handleClick(status, e) {
     e.preventDefault(status, e);
-    this.props.onStatusChange({status});
+
+    storeActivity({
+      message: `Cambio estado a ${status}`,
+      quotation_id: this.props.quotation.id
+    });
+
+    switch (status) {
+      case 'Replanteada':
+         window.location = `/quotations/${this.props.quotation.id}/rethink`;
+        break;
+      case 'No enviada':
+        this.props.handleOpenNoSend();
+        break;
+      case 'No efectiva':
+        this.props.handleOpenNoEffective();
+        break;
+      default:
+        this.props.onStatusChange({status});
+    }
+
   },
 
   handleSend() {
@@ -85,7 +105,7 @@ module.exports = React.createClass({
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.props.handleOpenNoSend}
+                onClick={this.handleClick.bind(this, 'No enviada')}
                 disabled={this.props.disabled ? true : false}
               >
                 No enviada
@@ -95,7 +115,7 @@ module.exports = React.createClass({
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.props.handleOpenNoEffective}
+                onClick={this.handleClick.bind(this, 'No efectiva')}
                 disabled={this.props.disabled ? true : false}
               >
                 No efectiva
@@ -105,11 +125,12 @@ module.exports = React.createClass({
             <li>
               <a
                 className="btn btn-default btn-sm"
-                href={`/quotations/${this.props.quotation.id}/rethink`}
+                onClick={this.handleClick.bind(this, 'Replanteada')}
               >
                 Replantear
               </a>
             </li>
+
           </ul>
         </div>
       </div>

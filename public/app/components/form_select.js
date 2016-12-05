@@ -26,15 +26,8 @@ module.exports = React.createClass({
     });
 
     let value = this.props.value;
+
     value = parseInt(value) ? parseInt(value) : value;
-
-
-    // let selected = _.findWhere(this.props.options, {value: value});
-    //
-    // console.log(value, typeof selected === "object");
-    //
-    // if(typeof selected === "object") selected = selected.label;
-    // console.log(selected);
 
     return (
       <select
@@ -42,6 +35,7 @@ module.exports = React.createClass({
         onChange={e => this.handleChange(e)}
         className="form-control"
         value={value}
+        defaultValue=""
         disabled={this.props.disabled ? true : false}>
         <option value="">{this.props.default}</option>
         {optionNodes}

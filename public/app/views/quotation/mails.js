@@ -77,13 +77,16 @@ module.exports = React.createClass({
                 onChange={this.handleChange}
               />
             </div>
-
           </div>
 
           <Editor
             value={quotation.mail_message}
             onChange={this.handleTextChange}
           />
+
+          <div className="row"></div>
+
+            <p></p>
 
           <button className="btn btn-sm btn-primary" onClick={this.handleClick}>Guardar</button>
           <button className="btn btn-sm btn-default pull-right" onClick={this.handleClose}>Cerrar</button>

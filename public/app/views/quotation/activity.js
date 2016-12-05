@@ -11,19 +11,27 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps(props) {
-    console.log(props.quotationId);
+
     if(props.quotationId) {
-     request
-        .get('/api/v1/activities')
-        .query({quotation_id: props.quotationId})
-        .end((err, res) => this.setState({activities: res.body}));
+
     }
 
   },
 
+  fetch() {
+    request
+    .get('/api/v1/activities')
+    .query({quotation_id: props.quotationId})
+    .end((err, res) => this.setState({activities: res.body}));
+  },
 
   render() {
-    const activityNodes = this.state.activities.map(activity => <li><hr/><b>{activity.user.name}</b> {activity.message} {moment(activity.created_at).fromNow()}</li>);
+    const activityNodes = this.state.activities.map(activity =>
+      <li key={activity.id}>
+        <hr/><b>
+        {activity.user.name}</b> {`${activity.message} ${moment(activity.created_at).fromNow()}` }
+      </li>
+    );
 
     return (
       <div className="panel">

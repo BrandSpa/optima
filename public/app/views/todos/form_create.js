@@ -110,7 +110,7 @@ module.exports = React.createClass({
           <label htmlFor="">Descripción</label>
           <textarea
             className="form-control"
-            onChange={html => this.handleChange({description: html})}
+            onChange={e => this.handleChange({description: e.currentTarget.value})}
             value={todo.description}
           ></textarea>
         </div>

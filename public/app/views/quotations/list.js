@@ -5,6 +5,8 @@ import request from 'superagent';
 import _ from 'underscore';
 import Filters from 'views/quotations/filters';
 import ListTable from 'views/quotations/list_table';
+import emmiter from 'lib/emitter';
+const Emmiter = emmiter();
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -64,11 +66,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    Emmiter.emit('quotations_dashboard_render');
+
     return (
       <div>
         <Filters onChange={this.handleFilters} />
         <div className="panel quotations-table">
-          <div className="panel-body">
+          <div className="panel-body" style={{minHeight: '600px'}}>
             <a href="#company/create" className="btn btn-primary btn-sm">Nueva cotización</a>
             <span className="pull-right">BD-COM-03</span>
             <hr />

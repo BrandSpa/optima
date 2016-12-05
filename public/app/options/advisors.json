@@ -1,6 +1,6 @@
 [
-  {value: 'Andrés Rojas', label: 'Andrés Rojas'},
-  {value: 'Diego Peña', label: 'Diego Peña'},
-  {value: 'No aplica', label: 'No aplica'},
-  {value: 'Otros', label: 'Otros'}
+  {"value": "Andrés Rojas", "label": "Andrés Rojas"},
+  {"value": "Diego Peña", "label": "Diego Peña"},
+  {"value": "No aplica", "label": "No aplica"},
+  {"value": "Otros", "label": "Otros"}
 ]

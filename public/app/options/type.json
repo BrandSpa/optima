@@ -1,4 +1,4 @@
 [
-  {value: 'Alquiler', label: 'Alquiler'},
-  {value: 'Servicio', label: 'Servicio'}
+  {"value": "Alquiler", "label": "Alquiler"},
+  {"value": "Servicio", "label": "Servicio"}
 ]

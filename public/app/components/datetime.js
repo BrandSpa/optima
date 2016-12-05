@@ -53,7 +53,6 @@ export default React.createClass({
         id={this.state.id}
         placeholder={this.props.placeholder}
         className={`${this.props.styles}`}
-
       />
     )
   }

@@ -1,0 +1,75 @@
+
+function table_sc( $atts, $content = null ) {
+ $at = shortcode_atts( array(), $atts );
+  $args = array(
+  'posts_per_page'   => 5,
+	'offset'           => 0,
+  );
+
+  $posts = get_posts($args);
+  ob_start();
+?>
+
+<post-list posts='<?php echo $posts; ?>' ></post-list>
+
+<template id="posts-template">
+  <h3><?php echo $at['title'] ?></h3>
+  <ul>
+    <li v-for="post in posts">
+      {{ post.post_title }}
+      {{ post.post_content }}
+    </li>
+  </ul>
+  <nav>
+  <ul class="pager">
+    <li><a href="#" v-on:click="prev">Previous</a></li>
+    <li><a href="#" v-on:click="next">Next</a></li>
+  </ul>
+</nav>
+
+</template>
+
+ <?php
+ return ob_get_clean();
+ }
+
+add_shortcode( ‘table’, ‘table_sc’ );
+
+const PostList = Vue.extend({
+  template: '#posts-template',
+  props: ['posts'],
+  data() {
+    return {
+      offset: 0
+    }
+  },
+  methods: {
+    next() {
+      this.offset = this.offset + 5;
+      this.fetch();
+    },
+    prev() {
+      this.offset = this.offset - 5;
+      this.fetch();
+    },
+
+    fetch() {
+      $.ajax({
+        type: 'POST',
+        url: '/wp-admin/admin-ajax.php',
+        data: {
+          offset: this.offset
+        }
+      })
+      .then((res) => {
+        this.posts = res;
+      })
+    }
+  }
+});
+
+Vue.component('post-list', PostList);
+
+const root = new Vue({
+  el: '#app'
+});

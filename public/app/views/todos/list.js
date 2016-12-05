@@ -32,21 +32,24 @@ export default React.createClass({
 
     return (
       <div className="col-md-12">
+      <hr/>
         <div className="btn-group">
           <button
-            className="btn btn-primary btn-xs"
+            className="btn btn-default btn-xs"
             disabled={!this.state.completed}
             onClick={this.toggleCompleted}>
             Sin completar
           </button>
+
           <button
-            className="btn btn-primary btn-xs"
+            className="btn btn-default btn-xs"
             disabled={this.state.completed}
             onClick={this.toggleCompleted}>
             completadas
           </button>
         </div>
 
+        <hr/>
         <div className="table-responsive">
           <table className="table">
             <thead>

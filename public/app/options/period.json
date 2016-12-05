@@ -1,10 +1,10 @@
 [
-{value: "Mes", label:"Mes"},
-{value: "Semana", label:"Semana"},
-{value: "Día", label:"Día"},
-{value: "15 días", label:"15 días"},
-{value: "a 3 días", label:"3 días"},
-{value: "Hora", label:"Hora"},
-{value: "Servicio", label:"Servicio"},
-{value: "Venta", label:"Venta"}
+	{"value": "Mes", "label":"Mes"},
+	{"value": "Semana", "label":"Semana"},
+	{"value": "Día", "label":"Día"},
+	{"value": "15 días", "label":"15 días"},
+	{"value": "a 3 días", "label":"3 días"},
+	{"value": "Hora", "label":"Hora"},
+	{"value": "Servicio", "label":"Servicio"},
+	{"value": "Venta", "label":"Venta"}
 ]

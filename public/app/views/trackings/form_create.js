@@ -1,53 +1,45 @@
 'use strict';
-const React = require('react');
-const request = require('superagent');
-const DateTimeField = require('react-bootstrap-datetimepicker');
-const Select = require('react-select');
-const _ = require('lodash');
-const moment = require('moment');
+import React from 'react';
+import request from 'superagent';
+import Select from 'components/form_select';
+import _ from 'lodash';
+import moment from 'moment';
+import DateTime from 'components/datetime';
 
 module.exports = React.createClass({
   getInitialState: function() {
     return {
       tracking: {
-        contact: {}
+        contact: {},
+        register_date: '',
+        register_time: '',
+        report: '',
+        contact_id: null
       },
       contacts: []
     }
   },
 
   componentDidMount: function() {
+    this.fetch();
+  },
+
+  fetch() {
     request
     .get('/api/v1/contacts')
     .query({quotation_id: this.props.quotationId})
-    .end(function(err, res) {
+    .end((err, res) =>{
       this.setState({contacts: res.body});
-    }.bind(this));
-  },
-
-  handleDate: function(date) {
-    this.handleChange({
-      register_date: date
     });
   },
 
-   handleTime: function(time) {
-    this.handleChange({
-      register_time: moment(time, 'x').format('HH:mm:ss'),
-      time: time
-    });
-  },
-
-  handleContact: function(contact) {
-    this.handleChange({
-      contact_id: parseInt(contact)
-    });
+  handleContact: function(e) {
+    let contact = e.currentTarget.value;
+    this.handleChange({ contact_id: parseInt(contact) });
   },
 
   handleReport: function() {
-    this.handleChange({
-      report: React.findDOMNode(this.refs.report).value
-    });
+    this.handleChange({ report: this.refs.report.value });
   },
 
   handleChange: function(data) {
@@ -59,10 +51,18 @@ module.exports = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     this.handleReport();
+    console.log(this.state.tracking);
     this.props.onSubmit(this.state.tracking);
-    this.setState({tracking: {
-      report: ''
-    }});
+    // this.setState({tracking: {
+    //   report: ''
+    // }});
+  },
+
+  handleDateTime(dateObj, dateStr) {
+    let datetime = moment(dateObj).format('YYYY/MM/DD HH:mm:ss').split(' ');
+    let date = datetime[0];
+    let time = datetime[1];
+    this.handleChange({register_date: date, register_time: time});
   },
 
   render: function() {
@@ -84,33 +84,20 @@ module.exports = React.createClass({
       <br/>
         <div className="form-group col-md-6">
           <label htmlFor="">Fecha</label>
-          <DateTimeField
-            defaultText="Seleccionar fecha"
-            mode="date"
-            dateTime={moment().format('YYYY-MM-DD')}
-            format="YYYY-MM-DD"
-            onChange={this.handleDate}
-            value={tracking.register_date}
-            />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label htmlFor="">Hora</label>
-          <DateTimeField
-            defaultText="Seleccionar hora"
-            mode="time"
-            onChange={this.handleTime}
-            value={tracking.time}
+          <DateTime
+            enableTime
+            styles='form-control'
+            onChange={this.handleDateTime}
           />
         </div>
 
-        <div className="form-group col-md-12">
+        <div className="form-group col-md-6">
           <label htmlFor="">Seleccionar o buscar contacto</label>
           <Select
             options={contactOptions}
             placeholder="Seleccionar contacto"
-            onChange={this.handleContact}
-            value={contactValue}
+            onSelectChange={this.handleContact}
+            value={this.state.tracking.contact_id}
           />
         </div>
 

@@ -27,8 +27,8 @@ module.exports = React.createClass({
   handleChange() {
     const reason = {
       status: 'No enviada',
-      status_cause: React.findDOMNode(this.refs.cause.refs.select).value,
-      status_note: React.findDOMNode(this.refs.note).value
+      status_cause: this.refs.cause.refs.select.value,
+      status_note: this.refs.note.value
     };
 
     this.setState({quotation: reason});
@@ -67,8 +67,16 @@ module.exports = React.createClass({
             </textarea>
 
           </div>
-            <button className="btn btn-sm btn-primary" onClick={this.handleClick}>Guardar</button>
-          <button className="btn btn-sm btn-default pull-right" onClick={this.handleClose}>Cerrar</button>
+            <button
+              className="btn btn-sm btn-primary"
+              onClick={this.handleClick}>
+              Guardar
+            </button>
+            <button
+              className="btn btn-sm btn-default pull-right"
+              onClick={this.handleClose}>
+              Cancelar
+            </button>
         </div>
       </div>
     );

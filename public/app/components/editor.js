@@ -14,9 +14,9 @@ export default React.createClass({
   },
 
   getDefaultProps() {
-      return {
-        style: {}
-      }
+    return {
+      style: {}
+    }
   },
 
   mountQuill() {
@@ -48,12 +48,13 @@ export default React.createClass({
   setContent(html) {
     let editor = this.state.editor;
     var range = editor.getSelection();
+
     editor.setHTML(html)
     editor.setSelection(range);
   },
 
   componentWillReceiveProps(props) {
-    if(this.props.value !== props.value) {
+    if(this.props.value) {
       this.setContent(props.value);
     }
   },
@@ -95,7 +96,7 @@ export default React.createClass({
           </select>
         </div>
 
-        <div id={this.state.id} data-uid={uid()} style={this.props.style}>
+        <div id={this.state.id} style={this.props.style}>
           <div dangerouslySetInnerHTML={{__html: this.state.value}} />
         </div>
       </div>

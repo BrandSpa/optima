@@ -2,6 +2,7 @@
 import React from 'react';
 import request from 'superagent';
 import _ from 'lodash';
+import Select from 'components/form_select';
 
 module.exports = React.createClass({
   getInitialState() {
@@ -46,11 +47,12 @@ module.exports = React.createClass({
     }));
   },
 
-  handleChange(id, option) {
+  handleChange(e) {
+    let id = e.currentTarget.value;
+
     this.setState({
       serviceId: id,
-      disableAdd: false,
-      optionSelected: option[0].label
+      disableAdd: false
     });
   },
 
@@ -94,7 +96,7 @@ module.exports = React.createClass({
                 placeholder="Servicios"
                 value={this.state.optionSelected}
                 options={this.state.options}
-                onChange={this.handleChange}
+                onSelectChange={this.handleChange}
                 disabled={this.props.disabled ? true : false}
               />
              <br/>

@@ -3,6 +3,7 @@ const React = require('react');
 const request = require('superagent');
 const _  = require('lodash');
 const Form = require('views/contacts/form_create');
+import Select from 'components/form_select';
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -16,29 +17,31 @@ module.exports = React.createClass({
       contact: {},
       contacts: [],
       contactSelected: null,
-      showForm: false
+      showForm: false,
+      changeContact: false
     }
   },
 
-  componentDidMount: function() {
-    this.fetchContacts();
-  },
 
   fetchContacts: function() {
+
     request
       .get('/api/v1/contacts')
-      .query({quotation_id: this.props.quotationId})
+      .query({company_id: this.props.company.id})
       .end((err, res) => this.setState({contacts: res.body}));
   },
 
   componentWillReceiveProps: function(props) {
-    console.log('receive', props);
+    this.fetchContacts();
     this.setState({contact: props.contact});
   },
 
-  handleContact: function(id) {
+  handleContact: function(e) {
+    let id = e.currentTarget.value;
+    this.props.changeContact(id);
     this.setState({
-      contactSelected: parseInt(id)
+      contactSelected: parseInt(id),
+      changeContact: true
     });
   },
 
@@ -48,18 +51,12 @@ module.exports = React.createClass({
   },
 
   showForm: function() {
-    let show;
-    if(this.state.showForm) {
-      show = false;
-    } else {
-      show = true;
-    }
-    this.setState({showForm: show});
+    this.setState({showForm: !this.state.showForm});
   },
 
   handleSubmit: function(contact) {
     const contactData = _.extend({company_id: this.props.company.id}, contact);
-    
+
     request
       .post('/api/v1/contacts')
       .send(contactData)
@@ -70,20 +67,34 @@ module.exports = React.createClass({
       });
   },
 
+  getContacts() {
+    let company = this.props.company;
+    request
+    .get('/api/v1/contacts')
+    .query({company_id: company.id})
+    .end((err, res) => {
+      console.log(res.body);
+    });
+  },
+
+  show(field) {
+    if(field && field != "") {
+      return ""
+    }
+
+    return "hidden";
+  },
+
   render: function() {
     const contact = this.state.contact;
     const company = this.props.company;
     let contactSelect;
-    let contactValue;
-    contactSelect = _.findWhere(this.state.contacts, {id: this.state.contactSelected});
-
-    if(contactSelect) {
-      contactValue = `${contactSelect.name} ${contactSelect.lastname}`;
-    }
 
     const contactOptions = this.state.contacts.map(function(contact, i) {
       return {value: contact.id, label: `${contact.name} ${contact.lastname}`}
     });
+
+    let contactNodes = this.state.contacts.map(contact => <li className="list-item">{contact.name}</li>);
 
     return (
       <div className="panel">
@@ -98,24 +109,23 @@ module.exports = React.createClass({
               />
           </div>
           <div className="row"> </div>
-          <span className={company.name ?  "": "hidden"}>{company.name}<hr/></span>
-          <b className={contact.name ?  "": "hidden"}>{contact.name} {contact.lastname}<hr/></b>
-          <span className={contact.email ?  "": "hidden"}>{contact.email}<hr/></span>
-          <span className={contact.phone_1 ?  "": "hidden"}>{contact.phone_1}<hr/></span>
-          <span className={contact.phone_2 ?  "": "hidden"}> {contact.phone_2}<hr/></span>
-          <span className={contact.mobile_1 ?  "": "hidden"}>{contact.mobile_1}<hr/></span>
-          <span className={contact.mobile_2 ? "" : "hidden" }> {contact.mobile_2}</span>
+          <span className={this.show(company.name)}>{company.name}<hr/></span>
+          <b className={this.show(contact.name)}>{contact.name} {contact.lastname}<hr/></b>
+          <span className={this.show(contact.email)}>{contact.email}<hr/></span>
+          <span className={this.show(contact.phone_1)}>{contact.phone_1}<hr/></span>
+          <span className={this.show(contact.phone_2)}> {contact.phone_2}<hr/></span>
+          <span className={this.show(contact.mobile_1)}>{contact.mobile_1}<hr/></span>
+          <span className={this.show(contact.mobile_2)}> {contact.mobile_2}</span>
 
           <div className="form-group">
-            {/*<Select
+            <Select
               options={contactOptions}
-              placeholder="Seleccionar contacto"
-              onChange={this.handleContact}
-              value={contactValue}
-            />*/}
-
+              default="Cambiar Contacto"
+              onSelectChange={this.handleContact}
+              value={this.state.contactSelected}
+            />
           </div>
-          <button className="btn btn-default btn-sm pull-right" onClick={this.changeContact}>Cambiar contacto</button>
+
         </div>
       </div>
     );

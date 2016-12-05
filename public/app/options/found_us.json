@@ -1,14 +1,14 @@
 [
-{value: "Asesores Comerciales", label: "Asesores comerciales"},
-{value: "Cliente", label: "Cliente"},
-{value: "Página Web Avante", label: "Página Web Avante"},
-{value: "Google Adwords", label: "Google Adwords"},
-{value: "Referido", label: "Referido"},
-{value: "Promoción", label: "Promoción"},
-{value: "Paginas Amarillas", label: "Paginas Amarillas"},
-{value: "Paginas Amarillas Web", label: "Paginas Amarillas Web"},
-{value: "Teléfono", label: "Teléfono"},
-{value: "Redes Sociales", label: "Redes Sociales"},
-{value: "Banner", label: "Banner"},
-{value: "Otros", label: "Otros"}
+	{"value": "Asesores Comerciales", "label": "Asesores comerciales"},
+	{"value": "Cliente", "label": "Cliente"},
+	{"value": "Página Web Avante", "label": "Página Web Avante"},
+	{"value": "Google Adwords", "label": "Google Adwords"},
+	{"value": "Referido", "label": "Referido"},
+	{"value": "Promoción", "label": "Promoción"},
+	{"value": "Paginas Amarillas", "label": "Paginas Amarillas"},
+	{"value": "Paginas Amarillas Web", "label": "Paginas Amarillas Web"},
+	{"value": "Teléfono", "label": "Teléfono"},
+	{"value": "Redes Sociales", "label": "Redes Sociales"},
+	{"value": "Banner", "label": "Banner"},
+	{"value": "Otros", "label": "Otros"}
 ]

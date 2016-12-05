@@ -27,8 +27,8 @@ module.exports = React.createClass({
   handleChange() {
     const reason = {
       status: 'No efectiva',
-      status_cause: React.findDOMNode(this.refs.cause.refs.select).value,
-      status_note: React.findDOMNode(this.refs.note).value
+      status_cause: this.refs.cause.refs.select.value,
+      status_note: this.refs.note.value
     };
 
     this.setState({quotation: reason});
