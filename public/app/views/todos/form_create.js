@@ -73,6 +73,7 @@ module.exports = React.createClass({
   },
 
   setQuo(q, e) {
+    console.log(q, e);
     e.preventDefault();
     console.log(q);
   },
@@ -123,7 +124,7 @@ module.exports = React.createClass({
             {
               this.state.quotations.map(quo =>
                 <li className="list-group-item">
-                  <a href="#" onClick="this.setQuo.bind(null, quo)">{quo.id}</a>
+                  <a href="#" onClick="this.setQuo.bind(this, quo)">{quo.id}</a>
                 </li>
               )
             }

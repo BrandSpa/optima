@@ -55770,6 +55770,7 @@
 	    });
 	  },
 	  setQuo: function setQuo(q, e) {
+	    console.log(q, e);
 	    e.preventDefault();
 	    console.log(q);
 	  },
@@ -55846,7 +55847,7 @@
 	              { className: 'list-group-item' },
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#', onClick: 'this.setQuo.bind(null, quo)' },
+	                { href: '#', onClick: 'this.setQuo.bind(this, quo)' },
 	                quo.id
 	              )
 	            );
