@@ -1,8 +1,8 @@
 'use strict';
-const React = require('react');
-const request = require('superagent');
-const _  = require('lodash');
-const Form = require('views/contacts/form_create');
+import React from 'react';
+import request from 'superagent';
+import _  from 'lodash';
+import Form from 'views/contacts/form_create';
 import Select from 'components/form_select';
 
 module.exports = React.createClass({

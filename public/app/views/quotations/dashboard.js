@@ -16,7 +16,7 @@ module.exports = React.createClass({
           <Graphs/>
         </div>
         <div className="col-md-3">
-        <Activities />
+          <Activities />
         </div>
       </div>
     );

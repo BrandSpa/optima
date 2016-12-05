@@ -1,15 +1,22 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 
 export default React.createClass({
   render() {
-    let contact = this.props.contact;
+    const {contact} = this.props;
+    const {
+      name, 
+      lastname, 
+      email, 
+      phone_1, 
+      phone_2
+    } = contact;
     
     return (
       <tr>
-        <td>{contact.name} {contact.lastname}</td>
-        <td>{contact.email}</td>
-        <td>{contact.phone_1} {contact.phone_2}</td>
+        <td>{name} {lastname}</td>
+        <td>{email}</td>
+        <td>{phone_1} {phone_2}</td>
         <td>
         <button
           onClick={this.props.onEdit(contact)}

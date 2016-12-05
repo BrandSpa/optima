@@ -1,5 +1,5 @@
 'use strict';
-const React = require('react');
+import React from 'react';
 import Editor from 'components/editor';
 
 module.exports = React.createClass({

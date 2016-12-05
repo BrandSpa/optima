@@ -1,9 +1,9 @@
 'use strict';
 import React from 'react';
 import request from 'superagent';
-import Select from 'components/form_select';
 import _ from 'lodash';
 import moment from 'moment';
+import Select from 'components/form_select';
 import DateTime from 'components/datetime';
 
 module.exports = React.createClass({

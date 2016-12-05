@@ -1,5 +1,5 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 import _ from 'underscore';
 
 import statusOptions from 'options/status.json';

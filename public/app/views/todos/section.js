@@ -1,5 +1,5 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 import request from 'superagent';
 import updateItem from 'lib/update_item';
 import Form from 'views/todos/form_create';

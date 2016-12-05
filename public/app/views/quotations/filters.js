@@ -1,12 +1,10 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 import _ from 'underscore';
-
 import statusOptions from 'options/status.json';
 import advisorOptions from 'options/advisors.json';
 import typeOptions from 'options/type.json';
 import clientOptions from 'options/client_type.json';
-
 import Select from 'components/form_select';
 import DataTime from 'components/datetime';
 

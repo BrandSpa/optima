@@ -1,5 +1,5 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 
 export default React.createClass({
   handleEdit(service, e) {

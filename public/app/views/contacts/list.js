@@ -1,11 +1,13 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 import Contact from 'views/contacts/contact';
 
 export default React.createClass({
   render() {
-    let contacts = this.props.contacts;
-    let contactNodes = contacts.map(contact => <Contact key={contact.id} contact={contact} onEdit={this.handleEdit} />);
+    let {contacts} = this.props;
+    let contactNodes = contacts.map(contact => 
+      <Contact key={contact.id} contact={contact} onEdit={this.handleEdit} />
+    );
 
     return (
       <div className="table-responsive">

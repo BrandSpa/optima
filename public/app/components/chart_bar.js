@@ -1,5 +1,5 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 import Chart from 'chart.js';
 import uid from 'uid';
 import _ from 'lodash';

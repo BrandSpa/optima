@@ -1,5 +1,5 @@
 'use strict';
-const React = require('react');
+import React from 'react';
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -9,22 +9,39 @@ module.exports = React.createClass({
   },
 
   handleClick() {
-    if (typeof this.props.onEdit === 'function') {
-      this.props.onEdit(this.props.contact);
+    const {onEdit, contact} = this.props;
+    if (typeof onEdit === 'function') {
+      onEdit(contact);
     }
   },
 
   render() {
-    const contact = this.props.contact;
+    const {
+      name, 
+      lastname, 
+      email, 
+      phone_1, 
+      phone_2, 
+      mobile_1, 
+      mobile_2, 
+      company
+    } = this.props.contact;
 
     return (
       <tr>
-        <td>{contact.name} {contact.lastname}</td>
-        <td>{contact.email}</td>
-        <td>{contact.phone_1} {contact.phone_2}</td>
-        <td>{contact.mobile_1} {contact.mobile_2}</td>
-        <td>{contact.company ? contact.company.name : ''}</td>
-        <td><button className="btn btn-sm" onClick={this.handleClick}>Editar</button></td>
+        <td>{name} {lastname}</td>
+        <td>{email}</td>
+        <td>{phone_1} {phone_2}</td>
+        <td>{mobile_1} {mobile_2}</td>
+        <td>{company ? company.name : ''}</td>
+        <td>
+          <button 
+            className="btn btn-sm" 
+            onClick={this.handleClick}
+          >
+            Editar
+          </button>
+        </td>
       </tr>
     );
   }

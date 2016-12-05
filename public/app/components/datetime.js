@@ -1,5 +1,5 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 import flatpickr from 'flatpickr';
 import uid from 'uid';
 

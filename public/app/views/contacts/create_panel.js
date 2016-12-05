@@ -1,8 +1,8 @@
 'use strict';
-const React = require('react');
-const Form = require('views/contacts/form_create');
-const request = require('superagent');
-const _ = require('underscore');
+import React from 'react';
+import Form from 'views/contacts/form_create';
+import request from 'superagent';
+import _ from 'underscore';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -20,9 +20,9 @@ module.exports = React.createClass({
     request
       .get('api/v1/contacts')
       .query({company_id: this.props.params.companyId})
-      .end(function(err, res) {
+      .end((err, res) => {
         this.setState({contacts: res.body});
-      }.bind(this));
+      });
   },
 
   store: function(contact) {
@@ -30,10 +30,10 @@ module.exports = React.createClass({
     request
       .post('/api/v1/contacts')
       .send(contactData)
-      .end(function(err, res) {
+      .end((err, res) => {
         if(err) return this.setState({errorMessages: err.response.body});
         return this.handleQuote(res.body.id);
-      }.bind(this));
+      });
   },
 
   handleQuote: function(id, e) {
@@ -42,7 +42,7 @@ module.exports = React.createClass({
     request
       .post('/api/v1/quotations')
       .send(quotationData)
-      .end(function(err, res) {
+      .end((err, res) => {
         location.hash = `#/quotations/${res.body.id}`;
       });
   },

@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react');
+import React from 'react';
 
 module.exports = React.createClass({
   handleChange: function() {
@@ -8,7 +8,13 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <textarea className="form-control" ref="textarea" placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value}></textarea>
+      <textarea 
+        className="form-control" 
+        ref="textarea" 
+        placeholder={this.props.placeholder} 
+        onChange={this.handleChange} 
+        value={this.props.value}>
+      </textarea>
     );
   }
 });

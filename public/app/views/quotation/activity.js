@@ -1,7 +1,7 @@
 'use strict';
-const React = require('react');
-const request = require('superagent');
-const moment = require('moment');
+import React from 'react';
+import request from 'superagent';
+import moment from 'moment';
 
 module.exports = React.createClass({
   getInitialState() {

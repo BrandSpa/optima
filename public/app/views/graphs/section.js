@@ -1,5 +1,5 @@
 'use strict';
-import React from 'React';
+import React from 'react';
 import request from 'superagent';
 import Advisor from 'views/graphs/advisor';
 import Status from 'views/graphs/status';

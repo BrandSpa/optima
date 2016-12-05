@@ -9,7 +9,8 @@ import emmiter from 'lib/emitter';
 const Emmiter = emmiter();
 
 module.exports = React.createClass({
-  getInitialState: function() {
+  
+  getInitialState() {
     return {
       quotations: [],
       query: {
@@ -27,13 +28,14 @@ module.exports = React.createClass({
       .end((err, resp) => {
         this._onChange(resp.body);
       });
+
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.fetch();
   },
 
-  loadMore: function() {
+  loadMore() {
     let offset = this.state.query.offset + 10;
     var query = _.extend(this.state.query, {offset: offset});
 
@@ -44,7 +46,7 @@ module.exports = React.createClass({
     this.fetch(query);
   },
 
-  loadLess: function() {
+  loadLess() {
     const offset = this.state.query.offset - 10;
 
     if ( offset >= 0) {
@@ -54,7 +56,7 @@ module.exports = React.createClass({
     }
   },
 
-  _onChange: function(quotations) {
+  _onChange(quotations) {
     this.setState({
       quotations: quotations
     });
@@ -65,7 +67,7 @@ module.exports = React.createClass({
     this.setState({query: query});
   },
 
-  render: function() {
+  render() {
     Emmiter.emit('quotations_dashboard_render');
 
     return (
@@ -79,10 +81,14 @@ module.exports = React.createClass({
              <div className="btn-group" role="group">
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.loadLess}><i className="fa fa-chevron-left"></i></button>
+                onClick={this.loadLess}>
+                <i className="fa fa-chevron-left"></i>
+              </button>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
+                onClick={this.loadMore}>
+                <i className="fa fa-chevron-right"></i>
+              </button>
               </div>
 
             <ListTable quotations={this.state.quotations} />
