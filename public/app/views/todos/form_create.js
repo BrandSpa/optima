@@ -113,8 +113,8 @@ module.exports = React.createClass({
             placeholder="Cotización num"
             onChange={e => this.searchQuo(e.currentTarget.value)}
           />
-          <ul>
-            {this.state.quotations.map(quo => <li>{quo.id}</li>)}
+          <ul className="list-group">
+            {this.state.quotations.map(quo => <li className="list-group-item">{quo.id}</li>)}
           </ul>
         </div>
 

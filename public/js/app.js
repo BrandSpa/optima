@@ -55835,11 +55835,11 @@
 	        }),
 	        _react2.default.createElement(
 	          'ul',
-	          null,
+	          { className: 'list-group' },
 	          this.state.quotations.map(function (quo) {
 	            return _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'list-group-item' },
 	              quo.id
 	            );
 	          })
