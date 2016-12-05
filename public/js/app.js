@@ -55766,6 +55766,7 @@
 	  searchQuo: function searchQuo(val) {
 	    var _this2 = this;
 
+	    this.setState({ todo: _lodash2.default.extend(this.state.todo, { quotation_id: val }) });
 	    _superagent2.default.get('/api/v1/quotations/').query({ 'query': val }).end(function (err, res) {
 	      return _this2.setState({ quotations: res.body });
 	    });

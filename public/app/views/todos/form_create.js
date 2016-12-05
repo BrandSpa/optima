@@ -67,6 +67,7 @@ module.exports = React.createClass({
   },
 
   searchQuo(val) {
+    this.setState({todo:_.extend( this.state.todo, {quotation_id: val}) });
     request 
     .get('/api/v1/quotations/')
     .query({'query': val})
