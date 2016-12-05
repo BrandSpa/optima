@@ -14,7 +14,8 @@ module.exports = React.createClass({
         expires_date: '',
         expires_time: ''
       },
-      users: []
+      users: [],
+      quotations: []
     }
   },
 
@@ -68,7 +69,7 @@ module.exports = React.createClass({
     request 
     .get('/api/v1/quotations/')
     .query({'query': val})
-    .end((err, res) => console.log(res.body));
+    .end((err, res) => this.setState({quotations: res.body}));
   },
 
   render() {

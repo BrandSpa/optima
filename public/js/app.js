@@ -55716,7 +55716,8 @@
 	        expires_date: '',
 	        expires_time: ''
 	      },
-	      users: []
+	      users: [],
+	      quotations: []
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
@@ -55762,12 +55763,14 @@
 	    this.setState({ todo: todo });
 	  },
 	  searchQuo: function searchQuo(val) {
+	    var _this2 = this;
+
 	    _superagent2.default.get('/api/v1/quotations/').query({ 'query': val }).end(function (err, res) {
-	      return console.log(res.body);
+	      return _this2.setState({ quotations: res.body });
 	    });
 	  },
 	  render: function render() {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    var todo = this.state.todo;
 	    var contactSelect = void 0;
@@ -55810,7 +55813,7 @@
 	          value: todo.user_id,
 	          options: userOptions,
 	          onSelectChange: function onSelectChange(e) {
-	            return _this2.handleChange({ user_id: e.currentTarget.value });
+	            return _this3.handleChange({ user_id: e.currentTarget.value });
 	          }
 	        })
 	      ),
@@ -55827,7 +55830,7 @@
 	          className: 'form-control',
 	          placeholder: 'Cotizaci\xF3n num',
 	          onChange: function onChange(e) {
-	            return _this2.searchQuo(e.currentTarget.value);
+	            return _this3.searchQuo(e.currentTarget.value);
 	          }
 	        })
 	      ),
@@ -55843,7 +55846,7 @@
 	          type: 'text',
 	          className: 'form-control',
 	          onChange: function onChange(e) {
-	            return _this2.handleChange({ title: e.currentTarget.value });
+	            return _this3.handleChange({ title: e.currentTarget.value });
 	          },
 	          value: todo.title
 	        })
@@ -55859,7 +55862,7 @@
 	        _react2.default.createElement('textarea', {
 	          className: 'form-control',
 	          onChange: function onChange(e) {
-	            return _this2.handleChange({ description: e.currentTarget.value });
+	            return _this3.handleChange({ description: e.currentTarget.value });
 	          },
 	          value: todo.description
 	        })
