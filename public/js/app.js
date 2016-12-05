@@ -55762,7 +55762,7 @@
 	    this.setState({ todo: todo });
 	  },
 	  searchQuo: function searchQuo(val) {
-	    _superagent2.default.get('/api/v1/quoatations/').query({ 'query': val }).end(function (err, res) {
+	    _superagent2.default.get('/api/v1/quotations/').query({ 'query': val }).end(function (err, res) {
 	      return console.log(res);
 	    });
 	  },

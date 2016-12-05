@@ -66,7 +66,7 @@ module.exports = React.createClass({
 
   searchQuo(val) {
     request 
-    .get('/api/v1/quoatations/')
+    .get('/api/v1/quotations/')
     .query({'query': val})
     .end((err, res) => console.log(res));
   },
