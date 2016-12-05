@@ -40,7 +40,7 @@ page('/quotation/create', () => {
 
 page('/todos', () => {
   return root(<div className="col-md-8"><Todos /></div>);
-})
+});
 
 page('/contacts', () => {
   return root(<Contacts/>);
@@ -55,15 +55,3 @@ page('/quotations/:id', (ctx) => {
 });
 
 page({hashbang: true});
-
-// render((
-//   <Router history={ hashHistory }>
-//     <Route path="/" component={App}>
-//       <Route path="company/create" component={CompanyCreate} />
-//       <Route path="company/:companyId/contact/create" component={ContactCreate} />
-//       <Route path="quotations/:id" component={Quotation} />
-//       <Route path="companies" component={Companies} />
-//       <Route path="services" component={Services} />
-//     </Route>
-//   </Router>
-// ), document.getElementById("app"));

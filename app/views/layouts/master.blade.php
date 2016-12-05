@@ -81,6 +81,6 @@
 	<div id="app"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<!-- scripts -->
-  <script src="/js/dist/bundle.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>

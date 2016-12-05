@@ -64,6 +64,13 @@ module.exports = React.createClass({
     this.setState({todo: todo});
   },
 
+  searchQuo(val) {
+    request 
+    .get('/api/v1/quoatations/')
+    .query({'query': val})
+    .end((err, res) => console.log(res));
+  },
+
   render() {
     const todo = this.state.todo;
     let contactSelect;
@@ -87,17 +94,23 @@ module.exports = React.createClass({
             />
         </div>
 
-        <div class="form-group col-md-12">
-          <label for="">Cotización</label>
-          <input type="text" className="form-control" placeholder="Cotización num" />
-        </div>
-
+      
         <div className="form-group col-md-6">
           <label htmlFor="">Usuario</label>
           <Select
             value={todo.user_id}
             options={userOptions}
             onSelectChange={e => this.handleChange({user_id: e.currentTarget.value})}
+          />
+        </div>
+        
+        <div className="form-group col-md-12">
+          <label for="">Cotización</label>
+          <input 
+            type="text" 
+            className="form-control" 
+            placeholder="Cotización num"
+            onChange={e => this.searchQuo(e.currentTarget.value)}
           />
         </div>
 
