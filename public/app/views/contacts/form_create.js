@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import _ from 'underscore';
+import cleanObject from 'lib/clean_object';
 import Input from 'components/form_input';
 import Select from 'components/form_select';
 import Textarea from 'components/form_textarea';
@@ -19,7 +19,7 @@ module.exports = React.createClass({
   handleChange() {
     const ref = this.refs;
 
-    const contact = _.extend(this.state.contact, {
+    const contact = {...this.state.contact,
       name: ref.name.value,
       lastname: ref.lastname.value,
       gender: ref.gender.refs.select.value,
@@ -35,14 +35,16 @@ module.exports = React.createClass({
       found_us: ref.found_us.refs.select.value,
       who_call: ref.who_call.refs.select.value,
       comment: ref.comment.refs.textarea.value,
-    });
+    };
 
     this.setState({contact});
   },
 
   componentWillReceiveProps(props) {
-    if(props.contact) {
+    if(Object.keys(props.contact).length) {
       this.setState({contact: props.contact});
+    } else {
+      this.setState({contact: cleanObject(this.state.contact)});
     }
   },
 

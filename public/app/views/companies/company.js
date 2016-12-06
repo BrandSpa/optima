@@ -21,7 +21,7 @@ module.exports = React.createClass({
   },
 
   handleSubmit(contact) {
-    const contactData = _.extend({company_id: this.props.company.id}, contact);
+    const contactData = {...contact, company_id: this.props.company.id};
 
     if(contact.id) {
       this.updateContact(contactData);

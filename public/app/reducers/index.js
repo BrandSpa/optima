@@ -7,6 +7,7 @@ import activities from './activities';
 import reports from './reports';
 import companies from './companies';
 import contacts from './contacts';
+import services from './services';
 
 export default combineReducers({
 	todos,
@@ -15,5 +16,6 @@ export default combineReducers({
 	activities,
 	reports,
 	companies,
-	contacts
+	contacts,
+	services
 });

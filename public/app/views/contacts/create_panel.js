@@ -2,7 +2,6 @@
 import React from 'react';
 import Form from 'views/contacts/form_create';
 import request from 'superagent';
-import _ from 'underscore';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -26,7 +25,8 @@ module.exports = React.createClass({
   },
 
   store: function(contact) {
-    const contactData = _.extend({company_id: this.props.companyId}, contact);
+    const contactData = {...contact, company_id: this.props.companyId};
+
     request
       .post('/api/v1/contacts')
       .send(contactData)

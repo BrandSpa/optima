@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import request from 'superagent';
 import * as action from 'actions/contacts';
 import Form from 'views/contacts/form_create';
 import Filters from 'views/companies/filters';
@@ -62,13 +61,16 @@ const section = React.createClass({
         />
           <div className="panel">
             <div className="panel-body">
-              <List contacts={contacts}/>
+              <List contacts={contacts} onEdit={this.handleEdit}/>
             </div>
           </div>
         </div>
         <div className="col-md-4">
         <div className="panel sidebar__right-fixed">
           <div className="panel-body">
+            <div className={this.props.errors.length ? "alert alert-danger" : ""}>
+              {this.props.errors}
+            </div>
             <Form 
               contact={this.props.contact}
               onSubmit={this.handleSubmit}

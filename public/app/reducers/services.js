@@ -1,8 +1,8 @@
-const TYPE = 'CONTACTS';
+const TYPE = 'SERVICES';
 const initialState = {
 	items: [],
 	errors: [],
-	contact: {}
+	service: {}
 };
 
 export default function reducer(state = initialState, action) {
@@ -14,19 +14,17 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
-		case `${TYPE}_SET_CONTACT`:
+			case `${TYPE}_SET_SERVICE`:
 			return {
         ...state,
-				errors: [],
-        contact: action.payload
+        service: action.payload
       };
 		break;
 
 		case `${TYPE}_STORE`:
 			return {
         ...state,
-				contact: {},
-				errors: [],
+				service: {},
         items: [action.payload].concat(state.items)
       };
 		break;
@@ -36,8 +34,7 @@ export default function reducer(state = initialState, action) {
 			
 			return {
         ...state,
-				contact: {},
-				errors: [],
+				service: {},
 				items: state.items.map(model => model.id == updated.id ? {...model, ...updated} : model)
       };
 		break;

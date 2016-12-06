@@ -1,93 +1,54 @@
 'use strict';
 import React from 'react';
-import _ from 'underscore';
-import request from 'superagent';
+import {connect} from 'react-redux';
+import * as action from 'actions/services';
 import Form from 'views/services/form_create';
 import List from 'views/services/list';
 import updateItem from 'lib/update_item';
 import cleanObject from 'lib/clean_object';
 
-module.exports = React.createClass({
+const section = React.createClass({
 
   getInitialState() {
     return {
       allServices: [],
-      services: [],
       service: {
         price_1: '',
         price_2: '',
       },
-      errors: []
     }
   },
 
   componentDidMount() {
-    this.fetch();
+   this.fetch();
+  },
+
+  componentWillReceiveProps(props) {
+    if(props.items.length) {
+      this.setState({allServices: props.items});
+    }
   },
 
   fetch() {
-    request
-    .get('/api/v1/services')
-    .end((err, res) => {
-      if(err) return console.log(err.body);
-      let services = res.body;
-      this.setState({
-        services: services,
-        allServices: services,
-      });
-    });
+    this.props.dispatch(action.fetch());
   },
 
   handleEdit(service) {
-    this.setState({service});
+    this.props.dispatch(action.setService(service));
   },
 
   handleSubmit(service) {
     if(service.id) {
-      this.update(service);
+      this.props.dispatch(action.update(service));
     } else {
-      this.store(service);
+      this.props.dispatch(action.store(service));
     }
-  },
-
-  store(service) {
-    request
-    .post('/api/v1/services')
-    .send(service)
-    .end((err, res) => {
-      if(err) {
-        return this.setState({errors: res.body});
-      } else {
-        this.setState({
-          service: cleanObject(res.body),
-          errors: [],
-          services: [res.body].concat(this.state.services)
-        })
-      }
-
-    })
-  },
-
-  update(service) {
-    request
-    .put(`/api/v1/services/${service.id}`)
-    .send(service)
-    .end((err, res) => {
-      if(err) {
-        console.log(res.body);
-      } else {
-        this.setState({
-          services: updateItem(this.state.services, res.body, 'id'),
-          errors: []
-        });
-      }
-    });
   },
 
   search(e) {
     let val = e.currentTarget.value;
     let q = new RegExp(val, 'i');
-    let services = _.filter(this.state.services, service => service.title.match(q));
+    let services = this.state.services.filter(service => service.title.match(q));
     if(val.length == 0) {
       this.setState({services: this.state.allServices});
     } else {
@@ -119,7 +80,7 @@ module.exports = React.createClass({
       <div className="panel">
         <div className="panel-body">
           <List
-            services={this.state.services}
+            services={this.props.items}
             onEdit={this.handleEdit}
           />
         </div>
@@ -130,8 +91,8 @@ module.exports = React.createClass({
           <div className="panel sidebar__right-fixed">
             <div className="panel-body">
               <Form
-                service={this.state.service}
-                errors={this.state.errors}
+                service={this.props.service}
+                errors={this.props.errors}
                 onSubmit={this.handleSubmit}
                 onCancel={this.clean}
               />
@@ -144,3 +105,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default connect(store => store.services)(section);

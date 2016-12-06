@@ -78,19 +78,19 @@
 
 	var _create_panel4 = _interopRequireDefault(_create_panel3);
 
-	var _section = __webpack_require__(457);
+	var _section = __webpack_require__(451);
 
 	var _section2 = _interopRequireDefault(_section);
 
-	var _list = __webpack_require__(485);
+	var _list = __webpack_require__(480);
 
 	var _list2 = _interopRequireDefault(_list);
 
-	var _section3 = __webpack_require__(490);
+	var _section3 = __webpack_require__(485);
 
 	var _section4 = _interopRequireDefault(_section3);
 
-	var _section5 = __webpack_require__(491);
+	var _section5 = __webpack_require__(487);
 
 	var _section6 = _interopRequireDefault(_section5);
 
@@ -25677,6 +25677,10 @@
 
 	var _contacts2 = _interopRequireDefault(_contacts);
 
+	var _services = __webpack_require__(497);
+
+	var _services2 = _interopRequireDefault(_services);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = (0, _redux.combineReducers)({
@@ -25686,7 +25690,8 @@
 		activities: _activities2.default,
 		reports: _reports2.default,
 		companies: _companies2.default,
-		contacts: _contacts2.default
+		contacts: _contacts2.default,
+		services: _services2.default
 	});
 
 /***/ },
@@ -26086,6 +26091,7 @@
 				case TYPE + '_SET_CONTACT':
 					return {
 						v: _extends({}, state, {
+							errors: [],
 							contact: action.payload
 						})
 					};
@@ -26095,6 +26101,7 @@
 					return {
 						v: _extends({}, state, {
 							contact: {},
+							errors: [],
 							items: [action.payload].concat(state.items)
 						})
 					};
@@ -26106,6 +26113,7 @@
 					return {
 						v: _extends({}, state, {
 							contact: {},
+							errors: [],
 							items: state.items.map(function (model) {
 								return model.id == updated.id ? _extends({}, model, updated) : model;
 							})
@@ -83800,13 +83808,17 @@
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'list',
+	  handleEdit: function handleEdit(contact) {
+	    console.log(contact);
+	    this.props.onEdit(contact);
+	  },
 	  render: function render() {
 	    var _this = this;
 
 	    var contacts = this.props.contacts;
 
 	    var contactNodes = contacts.map(function (contact) {
-	      return _react2.default.createElement(_contact2.default, { key: contact.id, contact: contact, onEdit: _this.props.handleEdit });
+	      return _react2.default.createElement(_contact2.default, { key: contact.id, contact: contact, onEdit: _this.handleEdit });
 	    });
 
 	    return _react2.default.createElement(
@@ -84072,6 +84084,8 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -84083,10 +84097,6 @@
 	var _superagent = __webpack_require__(243);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _underscore = __webpack_require__(251);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84115,7 +84125,8 @@
 	  store: function store(contact) {
 	    var _this2 = this;
 
-	    var contactData = _underscore2.default.extend({ company_id: this.props.companyId }, contact);
+	    var contactData = _extends({}, contact, { company_id: this.props.companyId });
+
 	    _superagent2.default.post('/api/v1/contacts').send(contactData).end(function (err, res) {
 	      if (err) return _this2.setState({ errorMessages: err.response.body });
 	      return _this2.handleQuote(res.body.id);
@@ -84235,15 +84246,17 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(251);
+	var _clean_object = __webpack_require__(237);
 
-	var _underscore2 = _interopRequireDefault(_underscore);
+	var _clean_object2 = _interopRequireDefault(_clean_object);
 
-	var _form_input = __webpack_require__(451);
+	var _form_input = __webpack_require__(491);
 
 	var _form_input2 = _interopRequireDefault(_form_input);
 
@@ -84251,23 +84264,23 @@
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _form_textarea = __webpack_require__(452);
+	var _form_textarea = __webpack_require__(492);
 
 	var _form_textarea2 = _interopRequireDefault(_form_textarea);
 
-	var _pay_methods = __webpack_require__(453);
+	var _pay_methods = __webpack_require__(493);
 
 	var _pay_methods2 = _interopRequireDefault(_pay_methods);
 
-	var _found_us = __webpack_require__(454);
+	var _found_us = __webpack_require__(455);
 
 	var _found_us2 = _interopRequireDefault(_found_us);
 
-	var _how_call = __webpack_require__(455);
+	var _how_call = __webpack_require__(494);
 
 	var _how_call2 = _interopRequireDefault(_how_call);
 
-	var _gender = __webpack_require__(456);
+	var _gender = __webpack_require__(495);
 
 	var _gender2 = _interopRequireDefault(_gender);
 
@@ -84283,7 +84296,7 @@
 	  handleChange: function handleChange() {
 	    var ref = this.refs;
 
-	    var contact = _underscore2.default.extend(this.state.contact, {
+	    var contact = _extends({}, this.state.contact, {
 	      name: ref.name.value,
 	      lastname: ref.lastname.value,
 	      gender: ref.gender.refs.select.value,
@@ -84304,8 +84317,10 @@
 	    this.setState({ contact: contact });
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.contact) {
+	    if (Object.keys(props.contact).length) {
 	      this.setState({ contact: props.contact });
+	    } else {
+	      this.setState({ contact: (0, _clean_object2.default)(this.state.contact) });
 	    }
 	  },
 	  handleSubmit: function handleSubmit(e) {
@@ -84510,171 +84525,6 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-
-	module.exports = React.createClass({
-	  displayName: 'exports',
-
-
-	  handleChange: function handleChange() {
-	    this.props.onInputChange();
-	  },
-
-	  render: function render() {
-	    return React.createElement('input', {
-	      type: 'text',
-	      ref: 'input',
-	      className: 'form-control',
-	      placeholder: this.props.placeholder,
-	      value: this.props.value,
-	      onChange: this.handleChange
-	    });
-	  }
-	});
-
-/***/ },
-/* 452 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-	  handleChange: function handleChange() {
-	    this.props.onTextareaChange();
-	  },
-
-	  render: function render() {
-	    return _react2.default.createElement('textarea', {
-	      className: 'form-control',
-	      ref: 'textarea',
-	      placeholder: this.props.placeholder,
-	      onChange: this.handleChange,
-	      value: this.props.value });
-	  }
-	});
-
-/***/ },
-/* 453 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "anticipado",
-			"label": "Anticipado"
-		},
-		{
-			"value": "30",
-			"label": "30 Días"
-		},
-		{
-			"value": "45",
-			"label": "45 Días"
-		},
-		{
-			"value": "60",
-			"label": "60 Días"
-		}
-	];
-
-/***/ },
-/* 454 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Asesores Comerciales",
-			"label": "Asesores comerciales"
-		},
-		{
-			"value": "Cliente",
-			"label": "Cliente"
-		},
-		{
-			"value": "Página Web Avante",
-			"label": "Página Web Avante"
-		},
-		{
-			"value": "Google Adwords",
-			"label": "Google Adwords"
-		},
-		{
-			"value": "Referido",
-			"label": "Referido"
-		},
-		{
-			"value": "Promoción",
-			"label": "Promoción"
-		},
-		{
-			"value": "Paginas Amarillas",
-			"label": "Paginas Amarillas"
-		},
-		{
-			"value": "Paginas Amarillas Web",
-			"label": "Paginas Amarillas Web"
-		},
-		{
-			"value": "Teléfono",
-			"label": "Teléfono"
-		},
-		{
-			"value": "Redes Sociales",
-			"label": "Redes Sociales"
-		},
-		{
-			"value": "Banner",
-			"label": "Banner"
-		},
-		{
-			"value": "Otros",
-			"label": "Otros"
-		}
-	];
-
-/***/ },
-/* 455 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Nosotros",
-			"label": "Nosotros"
-		},
-		{
-			"value": "Cliente",
-			"label": "Cliente"
-		}
-	];
-
-/***/ },
-/* 456 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Masculino",
-			"label": "Masculino"
-		},
-		{
-			"value": "Femenino",
-			"label": "Femenino"
-		}
-	];
-
-/***/ },
-/* 457 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -84691,61 +84541,61 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _contact = __webpack_require__(458);
+	var _contact = __webpack_require__(452);
 
 	var _contact2 = _interopRequireDefault(_contact);
 
-	var _filters = __webpack_require__(459);
+	var _filters = __webpack_require__(453);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
-	var _edit = __webpack_require__(462);
+	var _edit = __webpack_require__(457);
 
 	var _edit2 = _interopRequireDefault(_edit);
 
-	var _status = __webpack_require__(463);
+	var _status = __webpack_require__(458);
 
 	var _status2 = _interopRequireDefault(_status);
 
-	var _products = __webpack_require__(466);
+	var _products = __webpack_require__(461);
 
 	var _products2 = _interopRequireDefault(_products);
 
-	var _services = __webpack_require__(472);
+	var _services = __webpack_require__(467);
 
 	var _services2 = _interopRequireDefault(_services);
 
-	var _comment = __webpack_require__(473);
+	var _comment = __webpack_require__(468);
 
 	var _comment2 = _interopRequireDefault(_comment);
 
-	var _mails = __webpack_require__(474);
+	var _mails = __webpack_require__(469);
 
 	var _mails2 = _interopRequireDefault(_mails);
 
-	var _no_effective = __webpack_require__(475);
+	var _no_effective = __webpack_require__(470);
 
 	var _no_effective2 = _interopRequireDefault(_no_effective);
 
-	var _no_send = __webpack_require__(477);
+	var _no_send = __webpack_require__(472);
 
 	var _no_send2 = _interopRequireDefault(_no_send);
 
-	var _times = __webpack_require__(479);
+	var _times = __webpack_require__(474);
 
 	var _times2 = _interopRequireDefault(_times);
 
-	var _activity = __webpack_require__(480);
+	var _activity = __webpack_require__(475);
 
 	var _activity2 = _interopRequireDefault(_activity);
 
-	var _trackings = __webpack_require__(481);
+	var _trackings = __webpack_require__(476);
 
 	var _trackings2 = _interopRequireDefault(_trackings);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var alertify = __webpack_require__(464);
+	var alertify = __webpack_require__(459);
 	alertify.set('notifier', 'position', 'top-right');
 
 	module.exports = _react2.default.createClass({
@@ -84964,7 +84814,7 @@
 	});
 
 /***/ },
-/* 458 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85172,19 +85022,19 @@
 	});
 
 /***/ },
-/* 459 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var Select = __webpack_require__(256);
-	var categoryTypeOptions = __webpack_require__(460);
+	var categoryTypeOptions = __webpack_require__(454);
 	var advisorOptions = __webpack_require__(253);
 	var typeOptions = __webpack_require__(254);
 	var clientOptions = __webpack_require__(255);
-	var foundUsOptions = __webpack_require__(454);
-	var productOptions = __webpack_require__(461);
+	var foundUsOptions = __webpack_require__(455);
+	var productOptions = __webpack_require__(456);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -85303,7 +85153,7 @@
 	});
 
 /***/ },
-/* 460 */
+/* 454 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -85318,7 +85168,62 @@
 	];
 
 /***/ },
-/* 461 */
+/* 455 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Asesores Comerciales",
+			"label": "Asesores comerciales"
+		},
+		{
+			"value": "Cliente",
+			"label": "Cliente"
+		},
+		{
+			"value": "Página Web Avante",
+			"label": "Página Web Avante"
+		},
+		{
+			"value": "Google Adwords",
+			"label": "Google Adwords"
+		},
+		{
+			"value": "Referido",
+			"label": "Referido"
+		},
+		{
+			"value": "Promoción",
+			"label": "Promoción"
+		},
+		{
+			"value": "Paginas Amarillas",
+			"label": "Paginas Amarillas"
+		},
+		{
+			"value": "Paginas Amarillas Web",
+			"label": "Paginas Amarillas Web"
+		},
+		{
+			"value": "Teléfono",
+			"label": "Teléfono"
+		},
+		{
+			"value": "Redes Sociales",
+			"label": "Redes Sociales"
+		},
+		{
+			"value": "Banner",
+			"label": "Banner"
+		},
+		{
+			"value": "Otros",
+			"label": "Otros"
+		}
+	];
+
+/***/ },
+/* 456 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -85369,7 +85274,7 @@
 	];
 
 /***/ },
-/* 462 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85513,7 +85418,7 @@
 	});
 
 /***/ },
-/* 463 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85530,11 +85435,11 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _alertifyjs = __webpack_require__(464);
+	var _alertifyjs = __webpack_require__(459);
 
 	var _alertifyjs2 = _interopRequireDefault(_alertifyjs);
 
-	var _activity = __webpack_require__(465);
+	var _activity = __webpack_require__(460);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -85688,7 +85593,7 @@
 	});
 
 /***/ },
-/* 464 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -89266,7 +89171,7 @@
 
 
 /***/ },
-/* 465 */
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89294,7 +89199,7 @@
 	}
 
 /***/ },
-/* 466 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89303,11 +89208,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _product = __webpack_require__(467);
+	var _product = __webpack_require__(462);
 
 	var _product2 = _interopRequireDefault(_product);
 
-	var _form_create = __webpack_require__(469);
+	var _form_create = __webpack_require__(464);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -89323,7 +89228,7 @@
 
 	var _clean_object2 = _interopRequireDefault(_clean_object);
 
-	var _activity = __webpack_require__(465);
+	var _activity = __webpack_require__(460);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89589,7 +89494,7 @@
 	});
 
 /***/ },
-/* 467 */
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89598,7 +89503,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _numeral = __webpack_require__(468);
+	var _numeral = __webpack_require__(463);
 
 	var _numeral2 = _interopRequireDefault(_numeral);
 
@@ -89724,7 +89629,7 @@
 	});
 
 /***/ },
-/* 468 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -90574,7 +90479,7 @@
 
 
 /***/ },
-/* 469 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90583,15 +90488,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _products = __webpack_require__(461);
+	var _products = __webpack_require__(456);
 
 	var _products2 = _interopRequireDefault(_products);
 
-	var _product_type = __webpack_require__(470);
+	var _product_type = __webpack_require__(465);
 
 	var _product_type2 = _interopRequireDefault(_product_type);
 
-	var _periods = __webpack_require__(471);
+	var _periods = __webpack_require__(466);
 
 	var _periods2 = _interopRequireDefault(_periods);
 
@@ -91140,7 +91045,7 @@
 	});
 
 /***/ },
-/* 470 */
+/* 465 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -91159,7 +91064,7 @@
 	];
 
 /***/ },
-/* 471 */
+/* 466 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -91198,7 +91103,7 @@
 	];
 
 /***/ },
-/* 472 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91385,7 +91290,7 @@
 	});
 
 /***/ },
-/* 473 */
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91463,7 +91368,7 @@
 	});
 
 /***/ },
-/* 474 */
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91584,14 +91489,14 @@
 	});
 
 /***/ },
-/* 475 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var Select = __webpack_require__(256);
-	var reasonsOptions = __webpack_require__(476);
+	var reasonsOptions = __webpack_require__(471);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -91676,7 +91581,7 @@
 	});
 
 /***/ },
-/* 476 */
+/* 471 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -91699,13 +91604,13 @@
 	];
 
 /***/ },
-/* 477 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var reasonsOptions = __webpack_require__(478);
+	var reasonsOptions = __webpack_require__(473);
 	var Select = __webpack_require__(256);
 
 	module.exports = React.createClass({
@@ -91795,7 +91700,7 @@
 	});
 
 /***/ },
-/* 478 */
+/* 473 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -91814,7 +91719,7 @@
 	];
 
 /***/ },
-/* 479 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91844,7 +91749,7 @@
 	});
 
 /***/ },
-/* 480 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91919,7 +91824,7 @@
 	});
 
 /***/ },
-/* 481 */
+/* 476 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91928,11 +91833,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _tracking = __webpack_require__(482);
+	var _tracking = __webpack_require__(477);
 
 	var _tracking2 = _interopRequireDefault(_tracking);
 
-	var _form_create = __webpack_require__(484);
+	var _form_create = __webpack_require__(479);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -92000,7 +91905,7 @@
 	});
 
 /***/ },
-/* 482 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92021,7 +91926,7 @@
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _update_item = __webpack_require__(483);
+	var _update_item = __webpack_require__(478);
 
 	var _update_item2 = _interopRequireDefault(_update_item);
 
@@ -92227,7 +92132,7 @@
 	});
 
 /***/ },
-/* 483 */
+/* 478 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -92246,7 +92151,7 @@
 	}
 
 /***/ },
-/* 484 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92414,7 +92319,7 @@
 	});
 
 /***/ },
-/* 485 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92433,11 +92338,11 @@
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _companies = __webpack_require__(486);
+	var _companies = __webpack_require__(481);
 
 	var action = _interopRequireWildcard(_companies);
 
-	var _company = __webpack_require__(487);
+	var _company = __webpack_require__(482);
 
 	var _company2 = _interopRequireDefault(_company);
 
@@ -92445,7 +92350,7 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _filters = __webpack_require__(489);
+	var _filters = __webpack_require__(484);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
@@ -92579,7 +92484,7 @@
 	})(list);
 
 /***/ },
-/* 486 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92635,10 +92540,12 @@
 	}
 
 /***/ },
-/* 487 */
+/* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
 
@@ -92656,7 +92563,7 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _contact = __webpack_require__(488);
+	var _contact = __webpack_require__(483);
 
 	var _contact2 = _interopRequireDefault(_contact);
 
@@ -92677,7 +92584,7 @@
 	    };
 	  },
 	  handleSubmit: function handleSubmit(contact) {
-	    var contactData = _lodash2.default.extend({ company_id: this.props.company.id }, contact);
+	    var contactData = _extends({}, contact, { company_id: this.props.company.id });
 
 	    if (contact.id) {
 	      this.updateContact(contactData);
@@ -92825,7 +92732,7 @@
 	});
 
 /***/ },
-/* 488 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92889,7 +92796,7 @@
 	});
 
 /***/ },
-/* 489 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92982,7 +92889,7 @@
 	});
 
 /***/ },
-/* 490 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92999,11 +92906,7 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _superagent = __webpack_require__(243);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _contacts = __webpack_require__(495);
+	var _contacts = __webpack_require__(486);
 
 	var action = _interopRequireWildcard(_contacts);
 
@@ -93011,7 +92914,7 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _filters = __webpack_require__(489);
+	var _filters = __webpack_require__(484);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
@@ -93083,7 +92986,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-body' },
-	            _react2.default.createElement(_list2.default, { contacts: contacts })
+	            _react2.default.createElement(_list2.default, { contacts: contacts, onEdit: this.handleEdit })
 	          )
 	        )
 	      ),
@@ -93096,6 +92999,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-body' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.props.errors.length ? "alert alert-danger" : "" },
+	              this.props.errors
+	            ),
 	            _react2.default.createElement(_form_create2.default, {
 	              contact: this.props.contact,
 	              onSubmit: this.handleSubmit,
@@ -93113,32 +93021,90 @@
 	})(section);
 
 /***/ },
-/* 491 */
+/* 486 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _underscore = __webpack_require__(251);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+	exports.setContact = setContact;
 
 	var _superagent = __webpack_require__(243);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _form_create = __webpack_require__(492);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'CONTACTS';
+	var endpoint = 'api/v1/contacts';
+
+	function fetch() {
+		var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _superagent2.default.get(endpoint).query(query).end(function (err, res) {
+				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
+				return dispatch({ type: TYPE + '_FETCH', payload: res.body });
+			});
+		};
+	}
+
+	function store(contact) {
+		return function (dispatch) {
+			return _superagent2.default.post(endpoint).send(contact).end(function (err, res) {
+				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
+				return dispatch({ type: TYPE + '_FETCH', payload: res.body });
+			});
+		};
+	}
+
+	function update(contact) {
+		return function (dispatch) {
+			return _superagent2.default.put(endpoint + '/' + contact.id).send(contact).end(function (err, res) {
+				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.body });
+			});
+		};
+	}
+
+	function setContact(contact) {
+		return { type: TYPE + '_SET_CONTACT', payload: contact };
+	}
+
+/***/ },
+/* 487 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(35);
+
+	var _services = __webpack_require__(496);
+
+	var action = _interopRequireWildcard(_services);
+
+	var _form_create = __webpack_require__(488);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _list = __webpack_require__(493);
+	var _list = __webpack_require__(489);
 
 	var _list2 = _interopRequireDefault(_list);
 
-	var _update_item = __webpack_require__(483);
+	var _update_item = __webpack_require__(478);
 
 	var _update_item2 = _interopRequireDefault(_update_item);
 
@@ -93146,79 +93112,46 @@
 
 	var _clean_object2 = _interopRequireDefault(_clean_object);
 
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var section = _react2.default.createClass({
+	  displayName: 'section',
 	  getInitialState: function getInitialState() {
 	    return {
 	      allServices: [],
-	      services: [],
 	      service: {
 	        price_1: '',
 	        price_2: ''
-	      },
-	      errors: []
+	      }
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    this.fetch();
 	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.items.length) {
+	      this.setState({ allServices: props.items });
+	    }
+	  },
 	  fetch: function fetch() {
-	    var _this = this;
-
-	    _superagent2.default.get('/api/v1/services').end(function (err, res) {
-	      if (err) return console.log(err.body);
-	      var services = res.body;
-	      _this.setState({
-	        services: services,
-	        allServices: services
-	      });
-	    });
+	    this.props.dispatch(action.fetch());
 	  },
 	  handleEdit: function handleEdit(service) {
-	    this.setState({ service: service });
+	    this.props.dispatch(action.setService(service));
 	  },
 	  handleSubmit: function handleSubmit(service) {
 	    if (service.id) {
-	      this.update(service);
+	      this.props.dispatch(action.update(service));
 	    } else {
-	      this.store(service);
+	      this.props.dispatch(action.store(service));
 	    }
-	  },
-	  store: function store(service) {
-	    var _this2 = this;
-
-	    _superagent2.default.post('/api/v1/services').send(service).end(function (err, res) {
-	      if (err) {
-	        return _this2.setState({ errors: res.body });
-	      } else {
-	        _this2.setState({
-	          service: (0, _clean_object2.default)(res.body),
-	          errors: [],
-	          services: [res.body].concat(_this2.state.services)
-	        });
-	      }
-	    });
-	  },
-	  update: function update(service) {
-	    var _this3 = this;
-
-	    _superagent2.default.put('/api/v1/services/' + service.id).send(service).end(function (err, res) {
-	      if (err) {
-	        console.log(res.body);
-	      } else {
-	        _this3.setState({
-	          services: (0, _update_item2.default)(_this3.state.services, res.body, 'id'),
-	          errors: []
-	        });
-	      }
-	    });
 	  },
 	  search: function search(e) {
 	    var val = e.currentTarget.value;
 	    var q = new RegExp(val, 'i');
-	    var services = _underscore2.default.filter(this.state.services, function (service) {
+	    var services = this.state.services.filter(function (service) {
 	      return service.title.match(q);
 	    });
 	    if (val.length == 0) {
@@ -93263,7 +93196,7 @@
 	            'div',
 	            { className: 'panel-body' },
 	            _react2.default.createElement(_list2.default, {
-	              services: this.state.services,
+	              services: this.props.items,
 	              onEdit: this.handleEdit
 	            })
 	          )
@@ -93279,8 +93212,8 @@
 	            'div',
 	            { className: 'panel-body' },
 	            _react2.default.createElement(_form_create2.default, {
-	              service: this.state.service,
-	              errors: this.state.errors,
+	              service: this.props.service,
+	              errors: this.props.errors,
 	              onSubmit: this.handleSubmit,
 	              onCancel: this.clean
 	            })
@@ -93291,8 +93224,12 @@
 	  }
 	});
 
+	exports.default = (0, _reactRedux.connect)(function (store) {
+	  return store.services;
+	})(section);
+
 /***/ },
-/* 492 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93430,7 +93367,7 @@
 	});
 
 /***/ },
-/* 493 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93443,7 +93380,7 @@
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _item = __webpack_require__(494);
+	var _item = __webpack_require__(490);
 
 	var _item2 = _interopRequireDefault(_item);
 
@@ -93515,7 +93452,7 @@
 	});
 
 /***/ },
-/* 494 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93572,7 +93509,117 @@
 	});
 
 /***/ },
+/* 491 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+
+	  handleChange: function handleChange() {
+	    this.props.onInputChange();
+	  },
+
+	  render: function render() {
+	    return React.createElement('input', {
+	      type: 'text',
+	      ref: 'input',
+	      className: 'form-control',
+	      placeholder: this.props.placeholder,
+	      value: this.props.value,
+	      onChange: this.handleChange
+	    });
+	  }
+	});
+
+/***/ },
+/* 492 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+
+	  handleChange: function handleChange() {
+	    this.props.onTextareaChange();
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement('textarea', {
+	      className: 'form-control',
+	      ref: 'textarea',
+	      placeholder: this.props.placeholder,
+	      onChange: this.handleChange,
+	      value: this.props.value });
+	  }
+	});
+
+/***/ },
+/* 493 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "anticipado",
+			"label": "Anticipado"
+		},
+		{
+			"value": "30",
+			"label": "30 Días"
+		},
+		{
+			"value": "45",
+			"label": "45 Días"
+		},
+		{
+			"value": "60",
+			"label": "60 Días"
+		}
+	];
+
+/***/ },
+/* 494 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Nosotros",
+			"label": "Nosotros"
+		},
+		{
+			"value": "Cliente",
+			"label": "Cliente"
+		}
+	];
+
+/***/ },
 /* 495 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Masculino",
+			"label": "Masculino"
+		},
+		{
+			"value": "Femenino",
+			"label": "Femenino"
+		}
+	];
+
+/***/ },
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93583,7 +93630,7 @@
 	exports.fetch = fetch;
 	exports.store = store;
 	exports.update = update;
-	exports.setContact = setContact;
+	exports.setService = setService;
 
 	var _superagent = __webpack_require__(243);
 
@@ -93591,8 +93638,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var TYPE = 'CONTACTS';
-	var endpoint = 'api/v1/contacts';
+	var TYPE = 'SERVICES';
+	var endpoint = 'api/v1/services';
 
 	function fetch() {
 		var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -93605,26 +93652,111 @@
 		};
 	}
 
-	function store(contact) {
+	function store(service) {
 		return function (dispatch) {
-			return _superagent2.default.post(endpoint).send(contact).end(function (err, res) {
+			return _superagent2.default.post(endpoint).send(service).end(function (err, res) {
 				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
 				return dispatch({ type: TYPE + '_FETCH', payload: res.body });
 			});
 		};
 	}
 
-	function update(contact) {
+	function update(service) {
 		return function (dispatch) {
-			return _superagent2.default.put(endpoint + '/' + contact.id).send(contact).end(function (err, res) {
+			return _superagent2.default.put(endpoint + '/' + service.id).send(service).end(function (err, res) {
 				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
 				return dispatch({ type: TYPE + '_UPDATE', payload: res.body });
 			});
 		};
 	}
 
-	function setContact(contact) {
-		return { type: TYPE + '_SET_CONTACT', payload: contact };
+	function setService(service) {
+		return { type: TYPE + '_SET_SERVICE', payload: service };
+	}
+
+/***/ },
+/* 497 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'SERVICES';
+	var initialState = {
+		items: [],
+		errors: [],
+		service: {}
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		var _ret = function () {
+			switch (action.type) {
+				case TYPE + '_FETCH':
+					return {
+						v: _extends({}, state, {
+							items: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_SET_SERVICE':
+					return {
+						v: _extends({}, state, {
+							service: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_STORE':
+					return {
+						v: _extends({}, state, {
+							service: {},
+							items: [action.payload].concat(state.items)
+						})
+					};
+					break;
+
+				case TYPE + '_UPDATE':
+					var updated = action.payload;
+
+					return {
+						v: _extends({}, state, {
+							service: {},
+							items: state.items.map(function (model) {
+								return model.id == updated.id ? _extends({}, model, updated) : model;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_FAIL':
+					return {
+						v: _extends({}, state, {
+							errors: [action.payload]
+						})
+					};
+					break;
+
+				default:
+					return {
+						v: state
+					};
+					break;
+			}
+		}();
+
+		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	}
 
 /***/ }

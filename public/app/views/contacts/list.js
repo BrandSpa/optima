@@ -3,10 +3,15 @@ import React from 'react';
 import Contact from 'views/contacts/contact';
 
 export default React.createClass({
+  handleEdit(contact) {
+    console.log(contact);
+    this.props.onEdit(contact);
+  },
+
   render() {
     let {contacts} = this.props;
-    let contactNodes = contacts.map(contact => 
-      <Contact key={contact.id} contact={contact} onEdit={this.props.handleEdit} />
+    let contactNodes = contacts.map(contact =>
+      <Contact key={contact.id} contact={contact} onEdit={this.handleEdit} />
     );
 
     return (
