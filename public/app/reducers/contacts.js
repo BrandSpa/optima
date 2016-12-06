@@ -1,0 +1,53 @@
+const TYPE = 'CONTACTS';
+const initialState = {
+	items: [],
+	errors: [],
+	contact: {}
+};
+
+export default function reducer(state = initialState, action) {
+	switch (action.type) {
+		case `${TYPE}_FETCH`:
+			return {
+        ...state,
+        items: action.payload
+      };
+		break;
+
+		case `${TYPE}_SET_CONTACT`:
+			return {
+        ...state,
+        contact: action.payload
+      };
+		break;
+
+		case `${TYPE}_STORE`:
+			return {
+        ...state,
+				contact: {},
+        items: [action.payload].concat(state.items)
+      };
+		break;
+
+		case `${TYPE}_UPDATE`:
+			let updated = action.payload;
+			
+			return {
+        ...state,
+				contact: {},
+				items: state.items.map(model => model.id == updated.id ? {...model, ...updated} : model)
+      };
+		break;
+
+		case `${TYPE}_FAIL`:
+			return {
+        ...state,
+        errors: [action.payload]
+      };
+		break;
+	
+		default:
+			return state;
+		break;
+	}
+}

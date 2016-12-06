@@ -1,23 +1,18 @@
 'use strict';
 import React from 'react';
+import {connect} from 'react-redux';
 import request from 'superagent';
+import * as action from 'actions/activities';
 import Item from 'views/activities/item';
 
-module.exports = React.createClass({
-  getInitialState() {
-    return {
-      activities: []
-    }
-  },
+const activities = React.createClass({
 
   componentDidMount() {
-    request
-      .get('api/v1/activities')
-      .end((err, res) => this.setState({activities: res.body}));
+    this.props.dispatch(action.fetch())
   },
 
   render() {
-    const activityNodes = this.state.activities.map(activity => <Item key={activity.id} activity={activity} />);
+    const activityNodes = this.props.items.map(activity => <Item key={activity.id} activity={activity} />);
 
     return (
       <div className="panel" style={{position: 'fixed', margin: '0 30px 0 0'}}>
@@ -37,3 +32,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default connect(store => store.activities)(activities);

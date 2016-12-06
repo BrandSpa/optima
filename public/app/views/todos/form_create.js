@@ -8,12 +8,14 @@ import Editor from 'components/editor';
 import Select from 'components/form_select';
 
 module.exports = React.createClass({
+  
   getInitialState() {
     return {
       todo: {
         expires_date: '',
         expires_time: '',
-        quotation_id: ''
+        quotation_id: '',
+        quotation_id: 0
       },
       users: [],
       quotations: []
@@ -62,23 +64,26 @@ module.exports = React.createClass({
   },
 
   clean() {
-    let todo = _.extend(this.state.todo, { title: '', description: ''});
+    let todo = {...this.state.todo, title: '', description: ''};
     this.setState({todo: todo});
   },
 
   searchQuo(val) {
-    this.setState({todo:_.extend( this.state.todo, {quotation_id: val}) });
+    this.setState({ 
+      todo: {...this.state.todo, quotation_id: val} 
+    });
+
     request 
     .get('/api/v1/quotations/')
     .query({'query': val})
-    .end((err, res) => this.setState({quotations: res.body}));
+    .end((err, res) => this.setState({quotations: res.body}) );
   },
 
   setQuo(q, e) {
     e.preventDefault();
 
     this.setState({
-      todo:_.extend( this.state.todo, {quotation_id: q.id}), 
+      todo:{...this.state.todo, quotation_id: q.id}, 
       quotations: [] 
     });
   },
@@ -129,7 +134,7 @@ module.exports = React.createClass({
             {
               this.state.quotations.map(quo =>
                 <li className="list-group-item" key={quo.id}>
-                  <a href="#" onClick={this.setQuo.bind(null, quo)}>{quo.id}</a>
+                  <a href="#" onClick={e => { e.preventDefault(); this.setQuo.bind(null, quo) }}>{quo.id}</a>
                 </li>
               )
             }

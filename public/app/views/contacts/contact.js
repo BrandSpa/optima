@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps() {
     return {
       contact: {}
@@ -35,14 +35,10 @@ module.exports = React.createClass({
         <td>{mobile_1} {mobile_2}</td>
         <td>{company ? company.name : ''}</td>
         <td>
-          <button 
-            className="btn btn-sm" 
-            onClick={this.handleClick}
-          >
-            Editar
-          </button>
+          <button className="btn btn-sm" onClick={this.handleClick}>Editar</button>
         </td>
       </tr>
     );
   }
 });
+

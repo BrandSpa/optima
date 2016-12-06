@@ -12,16 +12,12 @@ module.exports = React.createClass({
     }
   },
 
-  getInitialstate() {
+  getInitialState() {
     return {
       contact: {},
       contacts: [],
       showForm: false
     }
-  },
-
-  componentDidMount(props) {
-    const company = this.props.company;
   },
 
   handleSubmit(contact) {
@@ -79,6 +75,7 @@ module.exports = React.createClass({
   render() {
     const {company} = this.props;
     const {name, nit, address, phone} = company;
+    const {showForm} = this.state;
 
     return (
       <div className="panel">
@@ -104,7 +101,7 @@ module.exports = React.createClass({
 
         <button onClick={this.props.onEdit.bind(null, company)} className="btn btn-sm">Editar</button>
 
-        <div className={this.state.showForm ? "" : "hidden"}>
+        <div className={showForm ? "" : "hidden"}>
         <br/>
         <div className={this.state.errorMessages ? 'alert alert-danger' : ''}>{this.state.errorMessages ? this.state.errorMessages : ''}</div>
           <Form

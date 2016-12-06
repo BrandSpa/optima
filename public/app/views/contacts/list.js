@@ -6,7 +6,7 @@ export default React.createClass({
   render() {
     let {contacts} = this.props;
     let contactNodes = contacts.map(contact => 
-      <Contact key={contact.id} contact={contact} onEdit={this.handleEdit} />
+      <Contact key={contact.id} contact={contact} onEdit={this.props.handleEdit} />
     );
 
     return (
@@ -30,3 +30,5 @@ export default React.createClass({
     )
   }
 });
+
+

@@ -1,8 +1,11 @@
 'use strict';
 import React from 'react';
 import page from 'page';
+import {Provider} from 'react-redux';
 import {render} from 'react-dom';
+import store from './store';
 import App from './views/app';
+import Dashboard from 'views/quotations/dashboard';
 import CompanyCreate from './views/companies/create_panel';
 import ContactCreate from './views/contacts/create_panel';
 import Quotation from './views/quotation/section';
@@ -13,7 +16,11 @@ import Todos from './views/todos/section';
 
 function root(component) {
   return render(
-    <App>{component}</App>,
+    <App>
+      <Provider store={store}>
+      {component}
+      </Provider>
+    </App>,
     document.getElementById("app")
   );
 }
@@ -23,7 +30,7 @@ function checkAuth(ctx, next) {
 }
 
 page('/', checkAuth, () => {
-  return root();
+  return root(<Dashboard />);
 });
 
 page('/companies', () => {

@@ -57,7 +57,7 @@ module.exports = React.createClass({
 
   handleCompleted(todo) {
     todo = _.extend(todo, {completed: !todo.completed});
-    console.log(todo);
+    
     request
     .put(`/api/v1/todos/${todo.id}`)
     .send(todo)

@@ -25,7 +25,6 @@ export default React.createClass({
 
   componentDidMount() {
     let data = _.extend({data: this.props.data}, {options: this.props.options}, {type: 'bar'});
-    console.log('data', data);
     let ctx = document.getElementById(this.state.id).getContext("2d");
     let myChart = new Chart(ctx, data);
     this.setState({chart: myChart});
@@ -33,7 +32,6 @@ export default React.createClass({
 
   componentWillReceiveProps(props) {
     if(props.data) {
-      console.log(props.data);
       this.updateChart(props.data);
     };
   },

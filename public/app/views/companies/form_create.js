@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import _ from 'underscore';
+import cleanObject from 'lib/clean_object';
 import Select from 'components/form_select';
 import sectors from 'options/sectors.json';
 import cities from 'options/cities.json';
@@ -16,22 +16,25 @@ module.exports = React.createClass({
     let company = {};
     if (this.props.company) {
       company = this.props.company;
-    } else if (localStorage.getItem('company')) {
-      company = JSON.parse(localStorage.getItem('company'));
     }
 
     this.setState({company});
   },
 
   componentWillReceiveProps(props) {
-    if(props.company) {
-      this.setState({company: props.company});
+    const {company} = props;
+
+    if(Object.keys(company).length) {
+      this.setState({company});
+    } else {
+      this.setState({company: cleanObject(this.state.company) });
     }
   },
 
   handleChange() {
-    const ref = this.refs;
-    const company = _.extend(this.state.company, {
+    const {ref} = this;
+    
+    const company = {...this.state.company,
       name: ref.name.value,
       nit: ref.nit.value,
       sector: ref.sector.refs.select.value,
@@ -41,7 +44,7 @@ module.exports = React.createClass({
       web: ref.web.value,
       comment: ref.comment.value,
       type: ''
-    });
+    };
 
     this.setState({company});
   },
@@ -52,17 +55,6 @@ module.exports = React.createClass({
     if(typeof this.props.onSubmit === 'function') {
       this.props.onSubmit(company);
     }
-  },
-
-  clean(e) {
-    if(e) e.preventDefault();
-
-    let cleanOb = Object.keys(this.state.company).reduce((ob, key) => {
-      ob[key] = '';
-      return _.extend(ob, ob);
-    }, {});
-
-    this.setState({ company: cleanOb });
   },
 
   render() {

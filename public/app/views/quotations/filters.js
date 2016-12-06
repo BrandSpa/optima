@@ -8,7 +8,7 @@ import clientOptions from 'options/client_type.json';
 import Select from 'components/form_select';
 import DataTime from 'components/datetime';
 
-export default React.createClass({
+const quoFilters = React.createClass({
   getInitialState() {
     return {
       query: {
@@ -33,7 +33,7 @@ export default React.createClass({
   changeQuery(field, value) {
     let query = {};
     query[field] = value;
-    query = _.extend(this.state.query, query);
+    query = {...this.state.query, ...query};
     this.triggerChange(query);
     this.setState({query: query});
   },
@@ -126,3 +126,5 @@ export default React.createClass({
     )
   }
 });
+
+export default quoFilters;

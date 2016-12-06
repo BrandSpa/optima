@@ -1,17 +1,15 @@
 'use strict';
 import React from 'react';
-import _ from 'lodash';
+import {connect} from 'react-redux';
 import request from 'superagent';
+import * as action from 'actions/contacts';
 import Form from 'views/contacts/form_create';
 import Filters from 'views/companies/filters';
-import updateItem from 'lib/update_item';
 import List from 'views/contacts/list';
 
-module.exports = React.createClass({
+const section = React.createClass({
   getInitialState() {
     return {
-      contact: {},
-      contacts: [],
       filters: {
         offset: 0
       }
@@ -24,11 +22,7 @@ module.exports = React.createClass({
 
   fetch(filters) {
     let query = filters ? filters : {};
-
-    request
-      .get('/api/v1/contacts')
-      .query(query)
-      .end((err, res) => this.setState({contacts: res.body}));
+    this.props.dispatch(action.fetch(query));
   },
 
   handleSearch: function(val) {
@@ -37,43 +31,25 @@ module.exports = React.createClass({
   },
 
   paginate: function(offset) {
-    let filters = _.extend(this.state.filters, {offset: offset});
-    this.setState({ filters: filters });
+    let filters = {...this.state.filters, offset: offset};
+    this.setState({ filters });
     this.fetch(filters);
   },
 
   handleEdit(contact) {
-    this.setState({contact: contact});
+    this.props.dispatch(action.setContact(contact));
   },
 
   handleSubmit(contact) {
     if(contact.id) {
-      this.update();
+       this.props.dispatch(action.update(contact));
     } else {
-      this.store();
+      this.props.dispatch(action.store(contact));
     }
   },
 
-  update(contact) {
-    request
-    .put(`/api/v1/contacts/${contact.id}`)
-    .end((err, res) => {
-      let contacts = updateItem(this.state.contacts, res.body, 'id');
-      this.setState({contacts: contacts});
-    });
-  },
-
-  store(contact) {
-    request
-    .post('/api/v1/contacts')
-    .end((err, res) => {
-      console.log(res.body);
-    });
-  },
-
   render() {
-    let contacts = this.state.contacts;
-
+    let contacts = this.props.items;
 
     return (
       <div>
@@ -93,7 +69,11 @@ module.exports = React.createClass({
         <div className="col-md-4">
         <div className="panel sidebar__right-fixed">
           <div className="panel-body">
-            <Form contact={this.state.contact} btnText="Guardar" onSubmit={this.handleSubmit} />
+            <Form 
+              contact={this.props.contact}
+              onSubmit={this.handleSubmit}
+               btnText="Guardar" 
+            />
           </div>
         </div>
         </div>
@@ -101,3 +81,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default connect(store => store.contacts)(section);

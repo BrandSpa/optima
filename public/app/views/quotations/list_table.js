@@ -27,6 +27,7 @@ module.exports = React.createClass({
               <th>Empresa</th>
               <th>Contacto</th>
               <th>Creada</th>
+              <th>Prioridad</th>
               <th>Opciones</th>
             </tr>
           </thead>

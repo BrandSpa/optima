@@ -1,58 +1,48 @@
 'use strict';
 import React from 'react';
+import {connect} from 'react-redux';
 import request from 'superagent';
-import updateItem from 'lib/update_item';
+import * as todos from 'actions/todos';
+
 import Form from 'views/todos/form_create';
 import List from 'views/todos/list';
 import _ from 'lodash';
 
-export default React.createClass({
+const section = React.createClass({
+
   getInitialState() {
     return {
-      todos: [],
       showForm: false
     }
   },
 
   componentDidMount() {
-    request
-      .get('api/v1/todos')
-      .end((err, res) => {
-        if(err) console.log(err.body);
-        this.setState({todos: res.body});
-      });
+    this.props.dispatch(todos.fetch());
   },
 
   handleSubmit(todo) {
-    request
-      .post('/api/v1/todos')
-      .send(todo)
-      .end((err, res) => {
-        this.setState({
-          todos: this.state.todos.concat([res.body])
-        });
-      });
+   this.props.dispatch(todos.store(todo));
   },
 
   handleCompleted(todo) {
-    request
-    .put(`/api/v1/todos/${todo.id}`)
-    .send(_.extend(todo, {completed: !todo.completed}))
-    .end((err, res) => {
-      let todos = updateItem(this.state.todos, res.body, 'id');
-      this.setState({todos: todos});
-    });
+    this.props.dispatch(todos.completed(todo));
   },
 
   render() {
+    const todos = this.props.todos.items;
     return (
       <div className="panel">
         <div className="panel-body">
           <Form onSubmit={this.handleSubmit}/>
           <hr/>
-          <List todos={this.state.todos} onCompleted={this.handleCompleted} />
+          <List
+            todos={todos}
+            onCompleted={this.handleCompleted} 
+          />
         </div>
       </div>
     )
   }
 });
+
+export default connect(store => store)(section);

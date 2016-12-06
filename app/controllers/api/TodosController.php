@@ -21,7 +21,7 @@ class TodosController extends \BaseController {
       ->orderBy('id', 'DESC')
       ->get();
     } else {
-    	$collection = Todo::with(['user', 'tracking', 'assigned'])
+    	$collection = Todo::with(['user', 'tracking', 'assigned', 'quotation', 'quotation.company'])
       ->where('user_id', $user_id)
       ->orderBy('id', 'DESC')
       ->take(25)

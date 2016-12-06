@@ -64,6 +64,15 @@
 		li {
 			list-style: none;
 		}
+
+		.priority--1 {
+			display: block;
+			    background: #ACFF12;
+			width: 10px;
+			height: 10px;
+			border-radius: 10px;
+			margin: auto;
+		} 
 	</style>
 
 

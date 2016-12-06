@@ -28,7 +28,8 @@ class Quotation extends \Eloquent {
 		'sent_at',
 		'sent_in',
 		'ordered',
-		'service_approval'
+		'service_approval',
+		'priority'
 	];
 
 	public $rules = [

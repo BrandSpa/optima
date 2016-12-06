@@ -1,67 +1,48 @@
 'use strict';
 import React from 'react';
-import moment from 'moment';
+import {connect} from 'react-redux';
 import request from 'superagent';
-import _ from 'underscore';
+import * as quo from 'actions/quotations';
 import Filters from 'views/quotations/filters';
 import ListTable from 'views/quotations/list_table';
 
-module.exports = React.createClass({
+const quotations = React.createClass({
   
   getInitialState() {
     return {
-      quotations: [],
       query: {
         offset: 0
       },
     }
   },
 
-  fetch(query) {
-    query = query ? query : {};
-
-    request
-      .get('/api/v1/quotations')
-      .query(query)
-      .end((err, resp) => {
-        this._onChange(resp.body);
-      });
-
-  },
-
   componentDidMount() {
-    this.fetch();
+    this.props.dispatch(quo.fetch());
   },
 
   loadMore() {
     let offset = this.state.query.offset + 10;
-    var query = _.extend(this.state.query, {offset: offset});
+    var query = {...this.state.query, offset: offset};
 
     this.setState({
       query: query
     });
-
-    this.fetch(query);
+    
+    this.props.dispatch(quo.fetch(query));
   },
 
   loadLess() {
     const offset = this.state.query.offset - 10;
 
     if ( offset >= 0) {
-      var query = _.extend(this.state.query, {offset: offset});
+      var query = {...this.state.query, offset: offset};
       this.setState({query: query});
-      this.fetch(query);
+      this.props.dispatch(quo.fetch(query));
     }
   },
 
-  _onChange(quotations) {
-    this.setState({
-      quotations: quotations
-    });
-  },
-
   handleFilters(query) {
-    this.fetch(query);
+    this.props.dispatch(quo.fetch(query));
     this.setState({query: query});
   },
 
@@ -72,7 +53,7 @@ module.exports = React.createClass({
         <Filters onChange={this.handleFilters} />
         <div className="panel quotations-table">
           <div className="panel-body" style={{minHeight: '600px'}}>
-            <a href="#company/create" className="btn btn-primary btn-sm">Nueva cotización</a>
+            <a href="/quotation/create" className="btn btn-primary btn-sm">Nueva cotización</a>
             <span className="pull-right">BD-COM-03</span>
             <hr />
              <div className="btn-group" role="group">
@@ -81,22 +62,25 @@ module.exports = React.createClass({
                 onClick={this.loadLess}>
                 <i className="fa fa-chevron-left"></i>
               </button>
+
               <button
                 className="btn btn-default btn-sm"
                 onClick={this.loadMore}>
                 <i className="fa fa-chevron-right"></i>
               </button>
-              </div>
+            </div>
 
-            <ListTable quotations={this.state.quotations} />
+            <ListTable quotations={this.props.items} />
 
             <div className="btn-group" role="group">
               <button
-              className="btn btn-default btn-sm"
-              onClick={this.loadLess}><i className="fa fa-chevron-left"></i></button>
+                className="btn btn-default btn-sm"
+                onClick={this.loadLess}><i className="fa fa-chevron-left"></i>
+              </button>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.loadMore}><i className="fa fa-chevron-right"></i></button>
+                onClick={this.loadMore}><i className="fa fa-chevron-right"></i>
+              </button>
               </div>
           </div>
         </div>
@@ -104,3 +88,5 @@ module.exports = React.createClass({
     )
   }
 });
+
+export default connect(store => store.quotations)(quotations);

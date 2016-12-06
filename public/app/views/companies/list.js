@@ -1,19 +1,15 @@
 'use strict';
 import React from 'react';
-import _ from 'lodash';
+import {connect} from 'react-redux';
 import request from 'superagent';
+import * as action from 'actions/companies';
 import Company from 'views/companies/company';
 import Form from 'views/companies/form_create';
 import Filters from 'views/companies/filters';
-import updateItem from 'lib/update_item';
 
-module.exports = React.createClass({
+const list = React.createClass({
   getInitialState: function() {
     return {
-      companies: [],
-      company: {},
-      errors: null,
-      cleanForm: false,
       filters: {
         query: null,
         offset: 0
@@ -34,10 +30,7 @@ module.exports = React.createClass({
       query = this.state.filters;
     }
 
-    request
-    .get('/api/v1/companies')
-    .query(query)
-    .end((err, res) => this.setState({companies: res.body}));
+    this.props.dispatch(action.fetch(query));
   },
 
   handleSearch: function(val) {
@@ -60,74 +53,21 @@ module.exports = React.createClass({
 
   handleEdit: function(company, e) {
     e.preventDefault();
-    this.setState({company: company});
+    this.props.dispatch(action.setCompany(company));
   },
 
   handleSubmit: function(company) {
     if(company.id) {
-      this.update(company);
+       this.props.dispatch(action.update(company));
     } else {
-      this.store(company);
+      this.props.dispatch(action.store(company));
     }
   },
 
-  updateItem(companyUpdated) {
-    let companies = this.state.companies.map(company => {
-      if(company.id == companyUpdated.id) {
-        return _.extend(company, companyUpdated);
-      } else {
-        return company;
-      }
-    });
-
-    return companies;
-  },
-
-  update(company) {
-    request
-    .put(`/api/v1/companies/${company.id}`)
-    .send(company)
-    .end((err, res) => {
-      if(err) return console.log(err.body);
-      let companies = updateItem(this.state.companies, res.body, 'id');
-      this.setState({
-        companies: companies
-      });
-    });
-  },
-
-  cleanObj(obj) {
-    return Object.keys(obj).reduce((ob, key) => {
-      ob[key] = '';
-      return _.extend(ob, ob);
-    }, {});
-  },
-
-  store(company) {
-    request
-    .post('/api/v1/companies')
-    .send(company)
-    .end((err, res) => {
-      if(err) {
-        let errs = JSON.parse(err.response.text);
-        this.setState({errors: errs});
-      } else {
-        this.setState({
-          companies: [res.body].concat(this.state.companies),
-          company: this.cleanObj(company),
-          errors: null,
-          cleanForm: true
-        });
-      }
-
-    });
-  },
-
-
   render: function() {
-    let companies = this.state.companies;
+    let {errors, items, company} = this.props;
 
-    let companyNodes = companies.map(company =>
+    let companyNodes = items.map(company =>
       <Company
         key={company.id}
         company={company}
@@ -154,11 +94,11 @@ module.exports = React.createClass({
         <div className="col-md-4">
           <div className="panel sidebar__right-fixed">
             <div className="panel-body">
-            <div className={this.state.errors ? "alert alert-danger" : ""}>
-            {this.state.errors}
+            <div className={errors.length ? "alert alert-danger" : ""}>
+              {errors}
             </div>
               <Form
-                company={this.state.company}
+                company={company}
                 btnCleanText="Cancelar"
                 btnStoreText="Guardar"
                 onSubmit={this.handleSubmit}
@@ -172,3 +112,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default connect(store => store.companies)(list);

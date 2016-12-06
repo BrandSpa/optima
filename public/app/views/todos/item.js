@@ -21,24 +21,38 @@ export default React.createClass({
     }
   },
 
-  linkQuotation(tracking) {
-    if(tracking) {
-      return <a href={`#quotations/${tracking.quotation_id}`}>{tracking.quotation_id}</a>;
+  linkQuotation(todo) {
+    if(todo.quotation_id) {
+      return <a href={`/quotations/${todo.quotation_id}`}>{todo.quotation_id}</a>;
+    } else if(todo.tracking && todo.tracking.quotation_id) {
+      return <a href={`/quotations/${todo.tracking.quotation_id}`}>{todo.tracking.quotation_id}</a>;
     }
   },
 
   render() {
-    let todo = this.props.todo;
+    const {todo} = this.props;
+    const {
+      title, 
+      description, 
+      created_at, 
+      expires_date, 
+      expires_time, 
+      assigned, 
+      user, 
+      tracking,
+      quotation
+    } = todo;
 
     return (
       <tr>
-        <td>{todo.title}</td>
-        <td>{todo.description}</td>
-        <td><Timeago date={todo.created_at} /></td>
-        <td><Timeago date={`${todo.expires_date} ${todo.expires_time}`} /></td>
-        <td>{todo.assigned ? `${todo.assigned.name} ${todo.assigned.lastname}` : "" }</td>
-        <td>{todo.user.name} {todo.user.lastname}</td>
-        <td>{this.linkQuotation(todo.tracking)}</td>
+        <td>{title}</td>
+        <td>{description}</td>
+        <td><Timeago date={created_at} /></td>
+        <td><Timeago date={`${expires_date} ${expires_time}`} /></td>
+        <td>{assigned ? `${assigned.name} ${assigned.lastname}` : "" }</td>
+        <td>{user.name} {user.lastname}</td>
+        <td>{quotation ? quotation.company.name : ''}</td>
+        <td>{this.linkQuotation(todo)}</td>
         <td><input type="checkbox" onChange={e => this.props.onCompleted(todo)} checked={todo.completed} /></td>
       </tr>
     )
