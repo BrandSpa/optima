@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import request from 'superagent';
-import _  from 'lodash';
 import Form from 'views/contacts/form_create';
 import Select from 'components/form_select';
 
@@ -55,7 +54,7 @@ module.exports = React.createClass({
   },
 
   handleSubmit: function(contact) {
-    const contactData = _.extend({company_id: this.props.company.id}, contact);
+    const contactData = {...contact, company_id: this.props.company.id};
 
     request
       .post('/api/v1/contacts')

@@ -3,7 +3,6 @@ import React from 'react';
 import Tracking from 'views/quotation/tracking';
 import Form from 'views/trackings/form_create';
 import request from 'superagent';
-import _ from 'lodash';
 
 module.exports = React.createClass({
   getInitialState() {
@@ -29,7 +28,7 @@ module.exports = React.createClass({
   handleSubmit(tracking) {
     request
       .post('/api/v1/trackings')
-      .send(_.extend(tracking, {quotation_id: this.props.quotationId}))
+      .send({...tracking, quotation_id: this.props.quotationId})
       .end((err, res) => {
         if(err) return console.log(err.body);
         this.setState({

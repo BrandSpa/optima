@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import * as action from 'actions/services';
 import Form from 'views/services/form_create';
 import List from 'views/services/list';
-import updateItem from 'lib/update_item';
-import cleanObject from 'lib/clean_object';
+
 
 const section = React.createClass({
 
@@ -59,7 +58,6 @@ const section = React.createClass({
   clean() {
     this.setState({
       service: cleanObject(this.state.service),
-      errors: []
     });
   },
 

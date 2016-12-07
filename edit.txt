@@ -1,0 +1,30 @@
+  <div id={this.state.idToolbar}>
+          <select className="ql-size">
+            <option value="10px">Small</option>
+            <option value="13px" selected>Normal</option>
+            <option value="18px">Large</option>
+            <option value="32px">Huge</option>
+          </select>
+
+          <div className="ql-format-separator"></div>
+          <span className="ql-format-button ql-bold"></span>
+          <div className="ql-format-separator"></div>
+          <div className="ql-format-separator"></div>
+          <span className="ql-format-button ql-italic"></span>
+          <div className="ql-format-separator"></div>
+          <span className="ql-format-button ql-underline"></span>
+          <div className="ql-format-separator"></div>
+          <span className="ql-format-button ql-bullet"></span>
+          <div className="ql-format-separator"></div>
+
+          <select className="ql-align">
+            <option value="left"></option>
+            <option value="center"></option>
+            <option value="right"></option>
+            <option value="justify"></option>
+          </select>
+        </div>
+
+        <div id={this.state.id} style={this.props.style}>
+          <div dangerouslySetInnerHTML={{__html: this.state.value}} />
+        </div>

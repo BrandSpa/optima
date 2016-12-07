@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import request from 'superagent';
-import _ from 'lodash';
 import moment from 'moment';
 import DateTime from 'components/datetime';
 import Editor from 'components/editor';
@@ -48,7 +47,7 @@ module.exports = React.createClass({
   },
 
   handleChange(data) {
-    this.setState({todo: _.extend(this.state.todo, data)});
+    this.setState({todo: {...this.state.todo, ...data}});
   },
 
   handleSubmit(e) {
@@ -59,7 +58,7 @@ module.exports = React.createClass({
       trackingId = {tracking_id: this.props.trackingId};
     }
 
-    this.props.onSubmit(_.extend(this.state.todo, trackingId));
+    this.props.onSubmit({...this.state.todo, ...trackingId});
     this.clean();
   },
 

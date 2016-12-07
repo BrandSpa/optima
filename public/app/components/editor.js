@@ -19,26 +19,29 @@ export default React.createClass({
     }
   },
 
+  componentDidMount() {
+    let editor = this.mountQuill();
+    this.setState({editor});
+  },
+
   mountQuill() {
     let editor = new Quill(`#${this.state.id}`, {
       modules: {toolbar: `#${this.state.idToolbar}`},
        theme: 'snow'
     });
-
-    editor.on('text-change', (delta, source) => {
+    this.getChanges(editor);
+    return editor;
+  },
+  
+  getChanges(editor) {
+     editor.on('text-change', (delta, source) => {
       let html = editor.getHTML();
       this.handleChange(html);
     });
-
-    this.setState({editor: editor});
   },
 
   destroyEditor(editor) {
     editor.destroy();
-  },
-
-  componentDidMount() {
-    this.mountQuill();
   },
 
   componentWillUnmount() {
@@ -47,14 +50,13 @@ export default React.createClass({
 
   setContent(html) {
     let editor = this.state.editor;
-    var range = editor.getSelection();
-
+    let range = editor.getSelection();
     editor.setHTML(html)
     editor.setSelection(range);
   },
 
   componentWillReceiveProps(props) {
-    if(this.props.value) {
+    if(this.props.value !== props.value) {
       this.setContent(props.value);
     }
   },
@@ -64,6 +66,15 @@ export default React.createClass({
       return this.props.onChange(html);
     }
   },
+
+  getEditorContents() {
+		return this.props.value || this.props.defaultValue || ''
+	},
+  
+  shouldComponentUpdate() {
+		// Never re-render or we lose the element.
+		return false
+	},
 
   render() {
 
@@ -97,7 +108,7 @@ export default React.createClass({
         </div>
 
         <div id={this.state.id} style={this.props.style}>
-          <div dangerouslySetInnerHTML={{__html: this.state.value}} />
+          <div dangerouslySetInnerHTML={{__html: this.getEditorContents()}} />
         </div>
       </div>
     )

@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import _ from 'lodash';
 import request from 'superagent';
 import Form from 'views/contacts/form_create';
 import Contact from 'views/companies/contact';
@@ -68,7 +67,7 @@ module.exports = React.createClass({
     request
       .del('/api/v1/contacts/' + id)
       .end((err, res) => this.setState({
-      contacts: _.reject(this.state.contacts, contact => returncontact.id == id )
+      contacts: this.state.contacts.filter(contact => contact.id !== id )
     }));
   },
 

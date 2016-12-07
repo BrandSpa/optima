@@ -1,12 +1,13 @@
 'use strict';
 import React from 'react';
 import Editor from 'components/editor';
-import _ from 'underscore';
 
 module.exports = React.createClass({
   getInitialState() {
     return {
       service: {
+        title: '',
+        text: '',
         price_1: '',
         price_2: '',
       }
@@ -14,6 +15,7 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps(props) {
+    console.log('service receive props ', props);
     this.setState({service: props.service});
   },
 
@@ -25,15 +27,13 @@ module.exports = React.createClass({
   },
 
   handleTextChange(html) {
-    let ob = _.extend(this.state.service, {text: html});
+    let ob = {...this.state.service, text: html};
     this.setState({service: ob});
   },
 
   handleChange(field, e) {
-    let ob = {};
-    ob[field] = e.currentTarget.value;
-    ob = _.extend(this.state.service, ob);
-    this.setState({service: ob});
+    let service = {...this.state.service, [field]: e.currentTarget.value};
+    this.setState({service});
   },
 
   handleCancel(e) {
@@ -44,18 +44,19 @@ module.exports = React.createClass({
   render() {
     let service = this.state.service;
 
+    console.log('render', service);
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group col-md-12">
           <label htmlFor="">Título</label>
           <input
-            onChange={this.handleChange.bind(this, 'title')}
+            onChange={this.handleChange.bind(null, 'title')}
             type="text"
             className="form-control"
             value={service.title}
           />
         </div>
-
 
         <div className="form-group col-md-12">
           <label htmlFor="">Contenido</label>

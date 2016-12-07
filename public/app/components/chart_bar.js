@@ -2,7 +2,6 @@
 import React from 'react';
 import Chart from 'chart.js';
 import uid from 'uid';
-import _ from 'lodash';
 
 export default React.createClass({
   getInitialState() {
@@ -24,7 +23,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    let data = _.extend({data: this.props.data}, {options: this.props.options}, {type: 'bar'});
+    let data = {data: this.props.data, options: this.props.options, type: 'bar'};
     let ctx = document.getElementById(this.state.id).getContext("2d");
     let myChart = new Chart(ctx, data);
     this.setState({chart: myChart});

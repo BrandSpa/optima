@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import request from 'superagent';
-import _ from 'lodash';
 import moment from 'moment';
 import Select from 'components/form_select';
 import DateTime from 'components/datetime';
@@ -44,7 +43,7 @@ module.exports = React.createClass({
 
   handleChange: function(data) {
     this.setState({
-      tracking: _.extend(this.state.tracking, data)
+      tracking: {...this.state.tracking, ...data}
     });
   },
 

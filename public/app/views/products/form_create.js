@@ -4,7 +4,6 @@ import productsOptions from 'options/products.json';
 import productsTypesOptions from 'options/product_type.json';
 import PeriodsOptions from 'options/periods.json';
 import Select from 'components/form_select';
-import _ from 'lodash';
 
 module.exports = React.createClass({
   getInitialState() {
@@ -42,7 +41,7 @@ module.exports = React.createClass({
       show = false;
     }
 
-    const product = _.extend(this.state.product, {
+    const product = {...this.state.product, 
       quotation_id: this.props.quotationId,
       name: ref.name.refs.select.value,
       type: ref.type.refs.select.value,
@@ -72,7 +71,7 @@ module.exports = React.createClass({
       iva: ref.iva.checked,
       note: ref.note.value,
       spaces: ref.spaces.value || 0,
-    });
+    };
 
     this.setState({product});
   },

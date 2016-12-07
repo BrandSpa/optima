@@ -3,10 +3,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import request from 'superagent';
 import * as todos from 'actions/todos';
-
 import Form from 'views/todos/form_create';
 import List from 'views/todos/list';
-import _ from 'lodash';
+
 
 const section = React.createClass({
 

@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import request from 'superagent';
-import _ from 'lodash';
 import Select from 'components/form_select';
 
 module.exports = React.createClass({
@@ -68,7 +67,7 @@ module.exports = React.createClass({
       .del(`/api/v1/services/${id}`)
       .send({quotation_id: this.state.quotationId})
       .end((err, res) => this.setState({
-      services: _.reject(this.state.services, service => service.id == id)
+      services: this.state.services.filter(service => service.id !== id)
     }));
   },
 

@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import _ from 'lodash';
 import moment from 'moment';
 import request from 'superagent';
 import updateItem from 'lib/update_item';
@@ -56,7 +55,7 @@ module.exports = React.createClass({
   },
 
   handleCompleted(todo) {
-    todo = _.extend(todo, {completed: !todo.completed});
+    todo = {...todo, completed: !todo.completed};
     
     request
     .put(`/api/v1/todos/${todo.id}`)
