@@ -21,7 +21,7 @@ export function store(company) {
 		.send(company)
 		.end((err, res) => {
 			if(err) return dispatch({ type: `${TYPE}_FAIL`, payload: res.body});
-			return dispatch({ type: `${TYPE}_FETCH`, payload: res.body});
+			return dispatch({ type: `${TYPE}_STORE`, payload: res.body});
 		});
 	}
 }
@@ -40,4 +40,8 @@ export function update(company) {
 
 export function setCompany(company) {
 	return { type: `${TYPE}_SET_COMPANY`, payload: company};	
+}
+
+export function cleanItems() {
+	return { type: `${TYPE}_CLEAN_ITEMS`, payload: []};	
 }

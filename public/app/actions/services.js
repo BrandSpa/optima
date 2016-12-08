@@ -21,7 +21,7 @@ export function store(service) {
 		.send(service)
 		.end((err, res) => {
 			if(err) return dispatch({ type: `${TYPE}_FAIL`, payload: res.body});
-			return dispatch({ type: `${TYPE}_FETCH`, payload: res.body});
+			return dispatch({ type: `${TYPE}_STORE`, payload: res.body});
 		});
 	}
 }

@@ -1,14 +1,17 @@
 'use strict';
 import React from 'react';
+import {connect} from 'react-redux';
 import request from 'superagent';
-import _ from 'underscore';
 import page from 'page';
+import * as action from 'actions/companies';
+import * as contactAction from 'actions/contacts';
+import * as quoAction from 'actions/quotations';
 import Form from 'views/companies/form_create';
 import ListContacts from 'views/contacts/list';
 import Loader from 'components/loader';
 import Autocomplete from 'components/autocomplete';
 
-module.exports = React.createClass({
+const createPanel = React.createClass({
 
   getInitialState() {
     return {
@@ -21,15 +24,9 @@ module.exports = React.createClass({
 
   searchCompanies(name) {
     this.setState({loading: true});
-
-      request
-      .get('/api/v1/companies')
-      .query({query_name: name})
-      .end((err, res) => this.setState({
-        companies: res.body,
-        loading: false
-        })
-      )
+    let query = {query_name: name};
+    this.props.dispatch(action.fetch(query));
+    this.setState({loading: false});
   },
 
   continue(company) {
@@ -38,12 +35,9 @@ module.exports = React.createClass({
   },
 
   storeSelected(result) {
-    request
-    .get('/api/v1/contacts')
-    .query({company_id: result[0].id})
-    .end((err, res) => {
-      this.setState({contacts: res.body});
-    });
+    let query = {company_id: result[0].id};
+    this.props.dispatch(contactAction.fetch(query));
+    this.props.dispatch(action.cleanItems());
   },
 
   store(company) {
@@ -58,12 +52,13 @@ module.exports = React.createClass({
 
   createQuotation(contact, e) {
     e.preventDefault();
-    request
-    .post('/api/v1/quotations')
-    .send({company_id: contact.company_id, contact_id: contact.id})
-    .end((err, res) => {
-      page(`/quotations/${res.body.id}`);
-    });
+    let quo = {company_id: contact.company_id, contact_id: contact.id};
+    this.props.dispatch(quoAction.store(quo))
+    .then(res => page(`/quotations/${res.payload.id}`) );
+  },
+
+  handleSubmitCompany(company) {
+    this.props.dispatch(action.store(company));
   },
 
   render() {
@@ -74,11 +69,6 @@ module.exports = React.createClass({
       token: 'btn btn-primary btn-sm'
     };
 
-    let companiesOptions = this.state.companyOptions.map((name, i) =>
-      <li key={i} className="list-group-item" onClick={this.storeSelected.bind(this, name)}>
-        {name}
-      </li>
-    );
 
     return (
       <div className="col-md-6" style={{float: 'none',margin: '0 auto'}}>
@@ -87,17 +77,21 @@ module.exports = React.createClass({
           <div className="panel-body">
 
             <Autocomplete
-              collection={this.state.companies}
+              collection={this.props.companies.items}
               search={this.searchCompanies}
               selected={this.storeSelected}
               loading={this.state.loading}
             />
 
             <buttton className="btn btn-default pull-right btn-sm">Nueva Empresa</buttton>
+            <div className="col-sm-12">
+               <Form btnStoreText="Guardar" onSubmit={this.handleSubmitCompany}/>
+            </div>
+           
           </div>
         </div>
 
-      <div className="panel" style={this.state.contacts.length ? {display: 'block'} : {display: 'none'}}>
+      <div className="panel" style={this.props.contacts.items.length ? {display: 'block'} : {display: 'none'}}>
         <div className="panel-body">
         <div className="table-responsive">
             <table className="table">
@@ -110,7 +104,7 @@ module.exports = React.createClass({
               </thead>
 
               <tbody>
-                {this.state.contacts.map(contact =>
+                {this.props.contacts.items.map(contact =>
                   <tr key={contact.id}>
                     <td>{`${contact.name} ${contact.lastname}`}</td>
                     <td>{contact.email}</td>
@@ -129,3 +123,7 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default connect(store => { 
+  return {companies: store.companies, contacts: store.contacts};
+})(createPanel);

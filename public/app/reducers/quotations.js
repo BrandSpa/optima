@@ -1,7 +1,8 @@
 const TYPE = 'QUOTATIONS';
 const initialState = {
 	items: [],
-	errors: []
+	errors: [],
+	quotation: {}
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,6 +11,13 @@ export default function reducer(state = initialState, action) {
 			return {
         ...state,
         items: action.payload
+      };
+		break;
+
+		case `${TYPE}_STORE`:
+			return {
+        ...state,
+        quotation: action.payload
       };
 		break;
 

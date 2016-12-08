@@ -24,25 +24,30 @@ module.exports = React.createClass({
   componentWillReceiveProps(props) {
     const {company} = props;
 
-    if(Object.keys(company).length) {
+    if(company && Object.keys(company).length) {
       this.setState({company});
     } else {
       this.setState({company: cleanObject(this.state.company) });
     }
   },
 
+  clean(e) {
+    e.preventDefault();
+    this.setState({company: cleanObject(this.state.company) });
+  },
+
   handleChange() {
-    const {ref} = this;
-    
+    const {refs} = this;
+
     const company = {...this.state.company,
-      name: ref.name.value,
-      nit: ref.nit.value,
-      sector: ref.sector.refs.select.value,
-      city: ref.city.refs.select.value,
-      address: ref.address.value,
-      phone: ref.phone.value,
-      web: ref.web.value,
-      comment: ref.comment.value,
+      name: refs.name.value,
+      nit: refs.nit.value,
+      sector: refs.sector.refs.select.value,
+      city: refs.city.refs.select.value,
+      address: refs.address.value,
+      phone: refs.phone.value,
+      web: refs.web.value,
+      comment: refs.comment.value,
       type: ''
     };
 

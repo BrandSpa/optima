@@ -68,7 +68,7 @@ export default React.createClass({
   },
 
   getEditorContents() {
-		return this.props.value || this.props.defaultValue || ''
+		return this.props.value || this.props.defaultValue || null
 	},
   
   shouldComponentUpdate() {
@@ -77,7 +77,7 @@ export default React.createClass({
 	},
 
   render() {
-
+    console.log('content', this.getEditorContents());
     return (
       <div className="editor">
         <div id={this.state.idToolbar}>

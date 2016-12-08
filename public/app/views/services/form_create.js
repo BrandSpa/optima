@@ -7,20 +7,21 @@ module.exports = React.createClass({
     return {
       service: {
         title: '',
-        text: '',
         price_1: '',
         price_2: '',
+        text: ''
       }
     }
   },
 
   componentWillReceiveProps(props) {
-    console.log('service receive props ', props);
-    this.setState({service: props.service});
+    const {service} = props;
+    if(Object.keys(service).length) this.setState({service});
   },
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state);
     if(typeof this.props.onSubmit == 'function') {
       this.props.onSubmit(this.state.service);
     }
@@ -87,7 +88,7 @@ module.exports = React.createClass({
               value={service.price_2}
             />
         </div>
-        <div className="alert alert-danger col-md-12" style={this.props.errors.length ? {} : {display: 'none'}}>{this.props.errors}</div>
+        <div className={this.props.errors.length ? "alert alert-danger col-md-12" : "hidden"}>{this.props.errors}</div>
         <button className="btn btn-default btn-sm" onClick={this.handleCancel}>Cancelar</button>
         <button className="btn btn-primary btn-sm pull-right">Guardar</button>
       </form>

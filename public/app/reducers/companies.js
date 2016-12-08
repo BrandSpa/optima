@@ -40,6 +40,13 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
+		case `${TYPE}_CLEAN_ITEMS`:
+			return {
+        ...state,
+				items: []
+      };
+		break;
+
 		case `${TYPE}_FAIL`:
 			return {
         ...state,

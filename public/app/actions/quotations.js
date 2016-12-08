@@ -1,19 +1,21 @@
-import request from 'superagent';
+import request from 'axios';
 const TYPE = 'QUOTATIONS';
 const endpoint = 'api/v1/quotations';
 
-export function fetch(query = {}) {
+export function fetch(params = {}) {
   return dispatch => {
 		  return request
-      .get(endpoint)
-			.query(query)
-      .end((err, res) => {
-        if(err) return dispatch({ type: `${TYPE}_FAIL`, payload: res.body});
-				return dispatch({ type: `${TYPE}_FETCH`, payload: res.body});
-      });
+      .get(endpoint, {params})
+      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
+      .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}
 }
 
-export function paginate(action = {type: 'more', offset: 10}) {
-
+export function store(quotation = {}) {
+  return dispatch => {
+    return request
+      .post('/api/v1/quotations', quotation)
+      .then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
+      .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
+  }
 }
