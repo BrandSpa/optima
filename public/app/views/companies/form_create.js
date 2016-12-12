@@ -34,6 +34,9 @@ module.exports = React.createClass({
   clean(e) {
     e.preventDefault();
     this.setState({company: cleanObject(this.state.company) });
+    if(this.props.onCancel) {
+      this.props.onCancel();
+    }
   },
 
   handleChange() {
@@ -159,6 +162,7 @@ module.exports = React.createClass({
         onClick={this.handleSubmit}>
         {btnStoreText}
       </button>
+
       <button
         className="btn btn-default btn-sm"
         onClick={this.clean}>

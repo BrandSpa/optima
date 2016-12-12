@@ -6,7 +6,8 @@ import page from 'page';
 import * as action from 'actions/companies';
 import * as contactAction from 'actions/contacts';
 import * as quoAction from 'actions/quotations';
-import Form from 'views/companies/form_create';
+import FormCompany from 'views/companies/form_create';
+import FormContact from 'views/contacts/form_create';
 import ListContacts from 'views/contacts/list';
 import Loader from 'components/loader';
 import Autocomplete from 'components/autocomplete';
@@ -18,7 +19,9 @@ const createPanel = React.createClass({
       companyOptions: [],
       companies: [],
       contacts: [],
-      loading: false
+      loading: false,
+      showCompanyForm: false,
+      showContactForm: false
     }
   },
 
@@ -61,6 +64,24 @@ const createPanel = React.createClass({
     this.props.dispatch(action.store(company));
   },
 
+  handleSubmitContact(contact) {
+    this.props.dispatch(contactAction.store(contact));
+  },
+
+  toggleCompanyForm(e) {
+    e.preventDefault();
+
+    this.setState({
+      showCompanyForm: !this.state.showCompanyForm,
+      showContactForm: !this.state.showContactForm
+    });
+  },
+
+  toggleContactForm(e) {
+    e.preventDefault(); 
+    this.setState({showContactForm: !this.state.showContactForm});
+  },
+
   render() {
     const classes = {
       input: "form-control autocomplete",
@@ -68,7 +89,6 @@ const createPanel = React.createClass({
       listItem: 'list-group-item',
       token: 'btn btn-primary btn-sm'
     };
-
 
     return (
       <div className="col-md-6" style={{float: 'none',margin: '0 auto'}}>
@@ -83,16 +103,40 @@ const createPanel = React.createClass({
               loading={this.state.loading}
             />
 
-            <buttton className="btn btn-default pull-right btn-sm">Nueva Empresa</buttton>
-            <div className="col-sm-12">
-               <Form btnStoreText="Guardar" onSubmit={this.handleSubmitCompany}/>
+            <button
+              className="btn btn-default pull-right btn-sm" 
+              onClick={this.toggleCompanyForm}
+            >
+              Nueva Empresa
+            </button>
+
+            <div className={this.state.showCompanyForm ?  'col-sm-12' : 'hidden'}>
+               <FormCompany 
+                btnStoreText="Guardar" 
+                btnCleanText="Cancelar"
+                onSubmit={this.handleSubmitCompany}
+              />
             </div>
            
           </div>
         </div>
 
-      <div className="panel" style={this.props.contacts.items.length ? {display: 'block'} : {display: 'none'}}>
+      <div className="panel">
         <div className="panel-body">
+            <div className={this.state.showContactForm ?  'col-sm-12' : 'hidden'}>
+              <FormContact
+                company={this.props.companies.items.length ? this.props.companies.items[0] : null}
+                btnText="Guardar"
+                onSubmit={this.handleSubmitContact}
+              />
+          </div>
+              <button 
+            onClick={this.toggleContactForm}
+            className="btn btn-default pull-right btn-sm"
+          >Nuevo Contacto</button>
+
+          <div className="row"></div>
+      
         <div className="table-responsive">
             <table className="table">
               <thead>
@@ -114,7 +158,7 @@ const createPanel = React.createClass({
               </tbody>
             </table>
           </div>
-          <buttton className="btn btn-default pull-right btn-sm">Nuevo Contacto</buttton>
+          
         </div>
       </div>
       </div>

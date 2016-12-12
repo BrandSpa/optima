@@ -12,7 +12,9 @@ import genderOptions from 'options/gender.json';
 module.exports = React.createClass({
   getInitialState() {
     return {
-      contact: {}
+      contact: {
+        company_id: null
+      }
     }
   },
 
@@ -41,10 +43,16 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps(props) {
-    if(Object.keys(props.contact).length) {
+    if(props.contact && Object.keys(props.contact).length) {
       this.setState({contact: props.contact});
     } else {
       this.setState({contact: cleanObject(this.state.contact)});
+    }
+
+    if(props.company) {
+      this.setState({
+        contact: {...this.state.contact, company_id: props.company.id}
+      });
     }
   },
 
@@ -52,6 +60,14 @@ module.exports = React.createClass({
     e.preventDefault();
     if(typeof this.props.onSubmit === 'function') {
       this.props.onSubmit(this.state.contact);
+    }
+  },
+
+  clean(e) {
+    e.preventDefault();
+    this.setState({contact: cleanObject(this.state.contact) });
+    if(this.props.onCancel) {
+      this.props.onCancel();
     }
   },
 
@@ -213,8 +229,11 @@ module.exports = React.createClass({
           />
         </div>
 
-        <button className="btn btn-default btn-sm pull-left">Cancelar</button>
-        <button className="btn btn-primary btn-sm pull-right">{btnText}</button>
+        <div className="form-group col-md-12">
+          <button onClick={this.clean} className="btn btn-default btn-sm pull-left">Cancelar</button>
+          <button className="btn btn-primary btn-sm pull-right">{btnText}</button>
+        </div>
+        
       </form>
     );
   }
