@@ -2,13 +2,13 @@
 import React from 'react';
 import moment from 'moment';
 
-const activities = React.createClass({
+export default React.createClass({
 
   render() {
     const activityNodes = this.props.activities.map(activity =>
       <li key={activity.id}>
         <hr/><b>
-        {activity.user.name}</b> {`${activity.message} ${moment(activity.created_at).fromNow()}` }
+        {activity.user ? activity.user.name : this.props.user.name}</b> {activity.message} <i>{moment(activity.created_at).fromNow()}</i>
       </li>
     );
 
@@ -24,5 +24,3 @@ const activities = React.createClass({
     );
   }
 });
-
-export default activities;

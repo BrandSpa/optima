@@ -58,7 +58,7 @@ export function storeService(quotationId, service) {
   }
 }
 
-export function removeService(quotationId) {
+export function removeService(id, quotationId) {
   return dispatch => { 
     return request
     .delete(`/api/v1/services/${id}`, {params: {quotation_id: quotationId}} )

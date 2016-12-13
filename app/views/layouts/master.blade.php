@@ -65,14 +65,45 @@
 			list-style: none;
 		}
 
+		.priority {
+			display: inline-block;
+			width: 12px;
+			height: 12px;
+			border-radius: 12px;
+		}
+
 		.priority--1 {
+			background: #ACFF12;
+		}
+
+		.priority--2 {
+			background: #FFF113;
+		}
+
+		.priority--3 {
+			background: #F20022;
+		}
+
+		.center {
 			display: block;
-			    background: #ACFF12;
-			width: 10px;
-			height: 10px;
-			border-radius: 10px;
 			margin: auto;
-		} 
+		}
+		.quo-header {
+			display: flex;
+			align-items: center;
+		}
+
+		.quo-header h4, .quo-header h5 {
+			margin: 0;
+		}
+
+		.quo-header h5 {
+			align-self: flex-end;
+		}
+
+		.quo-header__priority {
+			padding-left: 30px;
+		}
 	</style>
 
 

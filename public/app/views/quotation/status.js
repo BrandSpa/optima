@@ -21,11 +21,7 @@ module.exports = React.createClass({
 
   handleClick(status, e) {
     e.preventDefault(status, e);
-
-    storeActivity({
-      message: `Cambio estado a ${status}`,
-      quotation_id: this.props.quotation.id
-    });
+    let message = {message: `Cambio estado a ${status}`};
 
     switch (status) {
       case 'Replanteada':

@@ -1,6 +1,6 @@
 import request from 'axios';
-const TYPE = 'PRODUCTS';
-const endpoint = '/api/v1/products';
+const TYPE = 'TRACKINGS';
+const endpoint = '/api/v1/trackings';
 
 export function fetch(params = {}) {
   return dispatch => {
@@ -16,15 +16,6 @@ export function store(product) {
 		return request
 		.post(endpoint, product)
 		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
-}
-
-export function update(product) {
-	return dispatch => {
-		return request
-		.put(`${endpoint}/${product.id}`, product)
-		.then(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
 		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}
 }

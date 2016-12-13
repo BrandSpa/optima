@@ -2,19 +2,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Select from 'components/form_select';
+import * as quoAction from 'actions/quotations';
 
 const quoServices = React.createClass({
   getInitialState() {
     return {
-      options: [],
-      services: [],
       disableAdd: true,
       serviceId: null,
       quotationId: null,
       optionSelected: ''
     }
   },
-
 
   handleChange(e) {
     let id = e.currentTarget.value;
@@ -26,14 +24,15 @@ const quoServices = React.createClass({
     });
   },
 
-  store(id) {
+  store() {
     let service = {service_id: this.state.serviceId};
-    this.props.dispatch( quoAction.storeService(this.props.quotations.quotation.id, service) );
-    console.log(service);
+    let quotationId = this.props.quotations.quotation.id;
+    this.props.dispatch( quoAction.storeService(quotationId, service) );
   },
 
   handleDelete(id) {
- 
+    let quotationId = this.props.quotations.quotation.id;
+    this.props.dispatch( quoAction.removeService(id, quotationId) );
   },
 
   render() {

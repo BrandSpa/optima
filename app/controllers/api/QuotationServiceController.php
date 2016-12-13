@@ -1,6 +1,7 @@
 <?php namespace Api;
 
 use Optima\Quotation;
+use Optima\Service;
 use Response;
 use Input;
 
@@ -34,13 +35,14 @@ class QuotationServiceController extends \Controller {
   	if (Input::has('service_id')) {
   	
 	    $quotation = $this->entity->find($quoationId);
+      $service = Service::find($serviceId);
 	    $model = $quotation->services->contains($serviceId);
 
 	    if (!$model) {
 	    	$quotation->services()->attach($serviceId);
-	    	return Response::json($quotation, 201);
+	    	return Response::json($service, 201);
 	    } else {
-	    	return Response::json(["error" => "servicio ya fue agregado"], 400);
+	    	return Response::json(["servicio ya fue agregado"], 400);
 	    }	    
     }
     

@@ -25754,6 +25754,10 @@
 				});
 				break;
 
+			case TYPE + '_ADDED_SERVICE':
+				return state;
+				break;
+
 			case TYPE + '_ADD_SERVICE':
 				return _extends({}, state, {
 					services: [action.payload].concat(state.services)
@@ -25763,7 +25767,7 @@
 			case TYPE + '_REMOVE_SERVICE':
 				return _extends({}, state, {
 					services: state.services.filter(function (service) {
-						return service.id !== action.payload;
+						return service.id !== action.payload.id;
 					})
 				});
 				break;
@@ -28164,7 +28168,7 @@
 	  };
 	}
 
-	function removeService(quotationId) {
+	function removeService(id, quotationId) {
 	  return function (dispatch) {
 	    return _axios2.default.delete('/api/v1/services/' + id, { params: { quotation_id: quotationId } }).then(function (res) {
 	      return dispatch({ type: TYPE + '_REMOVE_SERVICE', payload: res.data });
@@ -33197,7 +33201,7 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        _react2.default.createElement('span', { className: 'priority--' + (priority ? priority : 1) })
+	        _react2.default.createElement('span', { className: 'center priority priority--' + (priority ? priority : 1) })
 	      ),
 	      _react2.default.createElement(
 	        'td',
@@ -48258,9 +48262,9 @@
 	exports.fetch = fetch;
 	exports.store = store;
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(251);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48271,9 +48275,10 @@
 	  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return _superagent2.default.get(endpoint).end(function (err, res) {
-	      if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-	      return dispatch({ type: TYPE + '_FETCH', payload: res.body });
+	    return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+	      return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err });
 	    });
 	  };
 	}
@@ -48282,9 +48287,10 @@
 	  var activity = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return _superagent2.default.post(endpoint, activity).end(function (err, res) {
-	      if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-	      return dispatch({ type: TYPE + '_STORE', payload: res.body });
+	    return _axios2.default.post(endpoint, activity).then(function (res) {
+	      return dispatch({ type: TYPE + '_STORE', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 	    });
 	  };
 	}
@@ -74248,9 +74254,21 @@
 
 	var action = _interopRequireWildcard(_quotations);
 
+	var _services = __webpack_require__(518);
+
+	var serviceAction = _interopRequireWildcard(_services);
+
 	var _activities = __webpack_require__(401);
 
-	var actionActivity = _interopRequireWildcard(_activities);
+	var activityAction = _interopRequireWildcard(_activities);
+
+	var _products = __webpack_require__(526);
+
+	var productAction = _interopRequireWildcard(_products);
+
+	var _trackings = __webpack_require__(527);
+
+	var trackingAction = _interopRequireWildcard(_trackings);
 
 	var _contact = __webpack_require__(485);
 
@@ -74268,13 +74286,13 @@
 
 	var _status2 = _interopRequireDefault(_status);
 
-	var _products = __webpack_require__(493);
+	var _products2 = __webpack_require__(493);
 
-	var _products2 = _interopRequireDefault(_products);
+	var _products3 = _interopRequireDefault(_products2);
 
-	var _services = __webpack_require__(499);
+	var _services2 = __webpack_require__(499);
 
-	var _services2 = _interopRequireDefault(_services);
+	var _services3 = _interopRequireDefault(_services2);
 
 	var _comment = __webpack_require__(500);
 
@@ -74300,9 +74318,9 @@
 
 	var _activity2 = _interopRequireDefault(_activity);
 
-	var _trackings = __webpack_require__(508);
+	var _trackings2 = __webpack_require__(508);
 
-	var _trackings2 = _interopRequireDefault(_trackings);
+	var _trackings3 = _interopRequireDefault(_trackings2);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -74326,7 +74344,7 @@
 	    };
 	  },
 
-	  componentDidMount: function componentDidMount() {
+	  componentWillMount: function componentWillMount() {
 	    this.fetchQuotation();
 	  },
 
@@ -74340,7 +74358,10 @@
 
 	    dispatch(action.fetchOne(params.id)).then(function (actionRes) {
 	      _this.handleDisabled(actionRes.payload.status);
-	      dispatch(actionActivity.fetch({ quotation_id: params.id }));
+	      dispatch(activityAction.fetch({ quotation_id: params.id }));
+	      dispatch(serviceAction.fetch());
+	      dispatch(productAction.fetch({ quotation_id: params.id }));
+	      dispatch(trackingAction.fetch({ quotation_id: params.id }));
 	      dispatch(action.fetchServices(params.id));
 	    });
 	  },
@@ -74364,9 +74385,22 @@
 	    this.setState({ showNoSend: !this.state.showNoSend });
 	  },
 	  handleOptions: function handleOptions(filters, activity) {
-	    this.props.dispatch(actionActivity.store(activity));
-	    var data = _extends({}, this.props.quotations.quotation, filters);
-	    this._update(data);
+	    var _this2 = this;
+
+	    var _props2 = this.props,
+	        user = _props2.user,
+	        quotations = _props2.quotations;
+
+
+	    activity = _extends({}, activity, {
+	      user_id: user.user.id,
+	      quotation_id: quotations.quotation.id
+	    });
+
+	    this.props.dispatch(activityAction.store(activity)).then(function (actionRes) {
+	      var data = _extends({}, _this2.props.quotations.quotation, filters);
+	      _this2._update(data);
+	    });
 	  },
 
 
@@ -74417,6 +74451,7 @@
 	    if (status !== 'Borrador') {
 	      disabled = true;
 	    }
+
 	    this.setState({ disabled: disabled });
 	  },
 	  render: function render() {
@@ -74435,26 +74470,40 @@
 	          { className: 'panel' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'panel-body' },
+	            { className: 'panel-body quo-header' },
 	            _react2.default.createElement(
-	              'h4',
-	              { style: { margin: "0 0 15px 0" } },
-	              'Cotizaci\xF3n ',
-	              quotation.id,
-	              ' \u2022 ',
-	              quotation.status,
-	              ' \u2022 ',
+	              'div',
+	              null,
 	              _react2.default.createElement(
-	                'small',
+	                'h4',
 	                null,
-	                (0, _moment2.default)(quotation.created_at).fromNow()
-	              ),
-	              ' ',
+	                'Cotizaci\xF3n ',
+	                quotation.id,
+	                ' \u2022 ',
+	                quotation.status,
+	                ' \u2022 ',
+	                _react2.default.createElement(
+	                  'small',
+	                  null,
+	                  (0, _moment2.default)(quotation.created_at).fromNow()
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                  'small',
+	                  { className: quotation.sent_at ? "" : "hidden" },
+	                  'enviada ',
+	                  (0, _moment2.default)(quotation.sent_at).fromNow()
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'quo-header__priority' },
 	              _react2.default.createElement(
-	                'small',
-	                { className: quotation.sent_at ? "" : "hidden" },
-	                'enviada ',
-	                (0, _moment2.default)(quotation.sent_at).fromNow()
+	                'h5',
+	                null,
+	                'Prioridad: ',
+	                _react2.default.createElement('div', { className: 'priority priority--' + quotation.priority })
 	              )
 	            )
 	          )
@@ -74487,11 +74536,11 @@
 	          quotation: quotation,
 	          onSaveMail: this.handleSaveMail
 	        }),
-	        _react2.default.createElement(_products2.default, {
+	        _react2.default.createElement(_products3.default, _extends({}, this.props, {
 	          quotationId: quotation.id,
 	          disabled: this.state.disabled
-	        }),
-	        _react2.default.createElement(_services2.default, {
+	        })),
+	        _react2.default.createElement(_services3.default, {
 	          quotationId: quotation.id,
 	          disabled: this.state.disabled
 	        }),
@@ -74512,7 +74561,7 @@
 	          show: this.state.showNoSend,
 	          onSave: this.handleSaveNoEffective
 	        }),
-	        _react2.default.createElement(_trackings2.default, { quotationId: quotation.id })
+	        _react2.default.createElement(_trackings3.default, _extends({}, this.props, { quotationId: quotation.id }))
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -74527,7 +74576,8 @@
 	          }),
 	          _react2.default.createElement(_activity2.default, {
 	            quotationId: quotation.id,
-	            activities: this.props.activities.items
+	            activities: this.props.activities.items,
+	            user: this.props.user.user
 	          })
 	        )
 	      )
@@ -74593,7 +74643,7 @@
 	  },
 
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this.fetchContacts();
+	    // this.fetchContacts();
 	    this.setState({ contact: props.contact });
 	  },
 
@@ -74751,21 +74801,59 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _form_select = __webpack_require__(282);
+
+	var _form_select2 = _interopRequireDefault(_form_select);
+
+	var _category_type = __webpack_require__(487);
+
+	var _category_type2 = _interopRequireDefault(_category_type);
+
+	var _advisors = __webpack_require__(279);
+
+	var _advisors2 = _interopRequireDefault(_advisors);
+
+	var _type = __webpack_require__(280);
+
+	var _type2 = _interopRequireDefault(_type);
+
+	var _client_type = __webpack_require__(281);
+
+	var _client_type2 = _interopRequireDefault(_client_type);
+
+	var _found_us = __webpack_require__(481);
+
+	var _found_us2 = _interopRequireDefault(_found_us);
+
+	var _products = __webpack_require__(488);
+
+	var _products2 = _interopRequireDefault(_products);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	var React = __webpack_require__(1);
-	var Select = __webpack_require__(282);
-	var categoryTypeOptions = __webpack_require__(487);
-	var advisorOptions = __webpack_require__(279);
-	var typeOptions = __webpack_require__(280);
-	var clientOptions = __webpack_require__(281);
-	var foundUsOptions = __webpack_require__(481);
-	var productOptions = __webpack_require__(488);
+	var messages = {
+	  type: 'cambio tipo',
+	  type_category: 'cambio categoría',
+	  client_type: 'cambio tipo de cliente',
+	  found_us: 'cambio como llegó',
+	  offer: 'cambio ofrecer producto',
+	  advisor: 'cambio asesor'
+	};
 
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	exports.default = _react2.default.createClass({
+	  displayName: 'filters',
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -74785,8 +74873,9 @@
 	    var e = arguments[1];
 
 	    var val = e.currentTarget.value;
-	    var activity = { user_id: this.props.user.id, quotation_id: this.props.quotation.id, message: 'test this' };
+	    var activity = { message: messages[field] };
 	    var filters = _extends({}, this.state.filters, _defineProperty({}, field, val));
+
 	    this.props.onChange(filters, activity);
 	    this.setState({ filters: filters });
 	  },
@@ -74794,7 +74883,7 @@
 
 	  update: function update() {
 	    var filters = {
-	      type: this.refs.type.refs.select.value,
+	      type: 'cambio tipo de cotización',
 	      type_category: this.refs.type_category.refs.select.value,
 	      client_type: this.refs.client_type.refs.select.value,
 	      found_us: this.refs.found_us.refs.select.value,
@@ -74809,80 +74898,80 @@
 	  render: function render() {
 	    var quotation = this.props.quotation;
 
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'panel panel-default' },
-	      React.createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { className: 'panel-body' },
-	        React.createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'form-group col-sm-4' },
-	          React.createElement(Select, {
+	          _react2.default.createElement(_form_select2.default, {
 	            ref: 'type',
-	            options: typeOptions,
+	            options: _type2.default,
 	            'default': 'Seleccionar tipo',
 	            onSelectChange: this.handleChange.bind(null, 'type'),
 	            value: quotation.type,
 	            disabled: this.props.disabled
 	          })
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'form-group col-sm-4' },
-	          React.createElement(Select, {
+	          _react2.default.createElement(_form_select2.default, {
 	            ref: 'type_category',
-	            options: categoryTypeOptions,
+	            options: _category_type2.default,
 	            'default': 'Seleccionar categor\xEDa de tipo',
-	            onSelectChange: this.update,
+	            onSelectChange: this.handleChange.bind(null, 'type_category'),
 	            value: quotation.type_category,
 	            disabled: this.props.disabled
 	          })
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'form-group col-sm-4' },
-	          React.createElement(Select, {
+	          _react2.default.createElement(_form_select2.default, {
 	            ref: 'client_type',
-	            options: clientOptions,
+	            options: _client_type2.default,
 	            'default': 'Seleccionar tipo de cliente',
-	            onSelectChange: this.update,
+	            onSelectChange: this.handleChange.bind(null, 'client_type'),
 	            value: quotation.client_type,
 	            disabled: this.props.disabled
 	          })
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'form-group col-sm-4' },
-	          React.createElement(Select, {
+	          _react2.default.createElement(_form_select2.default, {
 	            ref: 'found_us',
-	            options: foundUsOptions,
+	            options: _found_us2.default,
 	            'default': 'Seleccionar como lleg\xF3',
-	            onSelectChange: this.update,
+	            onSelectChange: this.handleChange.bind(null, 'found_us'),
 	            value: quotation.found_us,
 	            disabled: this.props.disabled
 	          })
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'form-group col-sm-4' },
-	          React.createElement(Select, {
+	          _react2.default.createElement(_form_select2.default, {
 	            ref: 'offer',
-	            options: productOptions,
+	            options: _products2.default,
 	            'default': 'Seleccionar ofrecer producto',
-	            onSelectChange: this.update,
+	            onSelectChange: this.handleChange.bind(null, 'offer'),
 	            value: quotation.offer,
 	            disabled: this.props.disabled
 	          })
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'form-group col-sm-4' },
-	          React.createElement(Select, {
+	          _react2.default.createElement(_form_select2.default, {
 	            ref: 'advisor',
-	            options: advisorOptions,
+	            options: _advisors2.default,
 	            'default': 'Seleccionar asesor',
-	            onSelectChange: this.update,
+	            onSelectChange: this.handleChange.bind(null, 'advisor'),
 	            value: quotation.advisor,
 	            disabled: this.props.disabled
 	          })
@@ -75144,11 +75233,7 @@
 	  },
 	  handleClick: function handleClick(status, e) {
 	    e.preventDefault(status, e);
-
-	    (0, _activity.storeActivity)({
-	      message: 'Cambio estado a ' + status,
-	      quotation_id: this.props.quotation.id
-	    });
+	    var message = { message: 'Cambio estado a ' + status };
 
 	    switch (status) {
 	      case 'Replanteada':
@@ -78889,6 +78974,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -78901,9 +78990,9 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _superagent = __webpack_require__(244);
+	var _products = __webpack_require__(526);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var action = _interopRequireWildcard(_products);
 
 	var _underscore = __webpack_require__(277);
 
@@ -78915,10 +79004,12 @@
 
 	var _activity = __webpack_require__(492);
 
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	exports.default = _react2.default.createClass({
+	  displayName: 'products',
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -78929,86 +79020,41 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      products: [],
 	      product: {},
 	      showForm: false,
 	      errors: []
 	    };
 	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this._fetch(props.quotationId);
-	  },
-	  _fetch: function _fetch(id) {
-	    // request
-	    //   .get('/api/v1/products/')
-	    //   .query({quotation_id: id})
-	    //   .end((err, res) => {
-	    //     if(err) return console.log(err.response.text);
-	    //     this.setState({products: res.body});
-	    //   });
-	  },
 	  _handleSubmit: function _handleSubmit(product) {
 	    this.setState({ product: product });
 	    if (product.id) {
-	      this._update();
+	      this.props.dispatch(action.update(product)).then(this.handleStoreReponse);
 	    } else {
-	      this._store();
+	      this.props.dispatch(action.store(product)).then(this.handleStoreReponse);
 	    }
 	  },
+	  handleStoreReponse: function handleStoreReponse(actionRes) {
+	    var payload = actionRes.payload;
 
-
-	  _update: function _update(data) {
-	    var _this = this;
-
-	    var product = data ? data : this.state.product;
-
-	    _superagent2.default.put('/api/v1/products/' + this.state.product.id).send(this.state.product).end(function (err, res) {
-	      if (err) {
-	        var errors = Object.keys(res.body).map(function (key) {
-	          return res.body[key];
-	        });
-	        _this.setState({ errors: errors });
-	      } else {
-	        _this.cleanProduct();
-	        _this.setState({ showForm: false });
-	      }
-	    });
-	  },
-
-	  _store: function _store() {
-	    _superagent2.default.post('/api/v1/products').send(this.state.product).end(this.handleStoreReponse);
-	  },
-
-	  handleStoreReponse: function handleStoreReponse(err, res) {
-	    if (err) {
-	      var errors = Object.keys(res.body).map(function (key) {
-	        return res.body[key];
+	    if (actionRes.type == "PRODUCTS_FAIL") {
+	      var errors = Object.keys(payload).map(function (key) {
+	        return payload[key];
 	      });
 	      this.setState({ errors: errors });
 	    } else {
 	      this.cleanProduct();
-
-	      this.setState({
-	        products: this.state.products.concat([res.body]),
-	        showForm: false
-	      });
-
-	      (0, _activity.storeActivity)({
-	        message: 'Agrego un producto',
-	        quotation_id: res.body.quotation_id
-	      });
 	    }
 	  },
 
 
 	  handleDuplicate: function handleDuplicate(id, e) {
-	    var _this2 = this;
+	    var _this = this;
 
 	    e.preventDefault();
 
-	    _superagent2.default.post('/api/v1/products/' + id + '/duplicate').end(function (err, res) {
-	      _this2.setState({
-	        products: _this2.state.products.concat([res.body])
+	    request.post('/api/v1/products/' + id + '/duplicate').end(function (err, res) {
+	      _this.setState({
+	        products: _this.state.products.concat([res.body])
 	      });
 	    });
 	  },
@@ -79021,7 +79067,7 @@
 	  },
 
 	  handleOrder: function handleOrder(product) {
-	    var _this3 = this;
+	    var _this2 = this;
 
 	    var order = true;
 
@@ -79032,21 +79078,21 @@
 	    var product = _underscore2.default.extend(product, { ordered: order });
 	    this.setState({ product: product });
 
-	    _superagent2.default.put('/api/v1/products/' + product.id).send(product).end(function (err, res) {
-	      _this3.setState({ product: {} });
+	    request.put('/api/v1/products/' + product.id).send(product).end(function (err, res) {
+	      _this2.setState({ product: {} });
 	    });
 	  },
 
 	  handleDelete: function handleDelete(id, e) {
-	    var _this4 = this;
+	    var _this3 = this;
 
 	    e.preventDefault();
 	    var products = _underscore2.default.reject(this.state.products, function (company) {
 	      return company.id === id;
 	    });
 
-	    _superagent2.default.del('/api/v1/products/' + id).end(function (err, res) {
-	      _this4.setState({
+	    request.del('/api/v1/products/' + id).end(function (err, res) {
+	      _this3.setState({
 	        products: products
 	      });
 	    });
@@ -79067,18 +79113,18 @@
 
 
 	  render: function render() {
-	    var _this5 = this;
+	    var _this4 = this;
 
-	    var products = this.state.products;
+	    var products = this.props.products.items;
 	    var productNodes = products.map(function (product) {
 	      return _react2.default.createElement(_product2.default, {
 	        key: product.id,
 	        product: product,
-	        onEdit: _this5.handleEdit,
-	        onDuplicate: _this5.handleDuplicate,
-	        onOrder: _this5.handleOrder,
-	        onDelete: _this5.handleDelete,
-	        disabled: _this5.props.disabled
+	        onEdit: _this4.handleEdit,
+	        onDuplicate: _this4.handleDuplicate,
+	        onOrder: _this4.handleOrder,
+	        onDelete: _this4.handleDelete,
+	        disabled: _this4.props.disabled
 	      });
 	    });
 
@@ -80806,14 +80852,18 @@
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
+	var _quotations = __webpack_require__(250);
+
+	var quoAction = _interopRequireWildcard(_quotations);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var quoServices = _react2.default.createClass({
 	  displayName: 'quoServices',
 	  getInitialState: function getInitialState() {
 	    return {
-	      options: [],
-	      services: [],
 	      disableAdd: true,
 	      serviceId: null,
 	      quotationId: null,
@@ -80829,12 +80879,15 @@
 	      disableAdd: false
 	    });
 	  },
-	  store: function store(id) {
+	  store: function store() {
 	    var service = { service_id: this.state.serviceId };
-	    this.props.dispatch(quoAction.storeService(this.props.quotations.quotation.id, service));
-	    console.log(service);
+	    var quotationId = this.props.quotations.quotation.id;
+	    this.props.dispatch(quoAction.storeService(quotationId, service));
 	  },
-	  handleDelete: function handleDelete(id) {},
+	  handleDelete: function handleDelete(id) {
+	    var quotationId = this.props.quotations.quotation.id;
+	    this.props.dispatch(quoAction.removeService(id, quotationId));
+	  },
 	  render: function render() {
 	    var _this = this;
 
@@ -81421,9 +81474,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var activities = _react2.default.createClass({
-	  displayName: 'activities',
+	exports.default = _react2.default.createClass({
+	  displayName: 'activity',
 	  render: function render() {
+	    var _this = this;
+
 	    var activityNodes = this.props.activities.map(function (activity) {
 	      return _react2.default.createElement(
 	        'li',
@@ -81432,10 +81487,16 @@
 	        _react2.default.createElement(
 	          'b',
 	          null,
-	          activity.user.name
+	          activity.user ? activity.user.name : _this.props.user.name
 	        ),
 	        ' ',
-	        activity.message + ' ' + (0, _moment2.default)(activity.created_at).fromNow()
+	        activity.message,
+	        ' ',
+	        _react2.default.createElement(
+	          'i',
+	          null,
+	          (0, _moment2.default)(activity.created_at).fromNow()
+	        )
 	      );
 	    });
 
@@ -81460,13 +81521,15 @@
 	  }
 	});
 
-	exports.default = activities;
-
 /***/ },
 /* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -81482,14 +81545,10 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	exports.default = _react2.default.createClass({
+	  displayName: 'trackings',
 	  getInitialState: function getInitialState() {
 	    return {
 	      tracking: {
@@ -81498,28 +81557,18 @@
 	      trackings: []
 	    };
 	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this._fetch(props.quotationId);
-	  },
 	  _fetch: function _fetch(id) {
-	    var _this = this;
-
-	    _superagent2.default.get('/api/v1/trackings').query({ quotation_id: id }).end(function (err, res) {
-	      return _this.setState({ trackings: res.body });
-	    });
+	    // request
+	    //   .get('/api/v1/trackings')
+	    //   .query({quotation_id: id})
+	    //   .end((err, res) => this.setState({trackings: res.body}));
 	  },
 	  handleSubmit: function handleSubmit(tracking) {
-	    var _this2 = this;
-
-	    _superagent2.default.post('/api/v1/trackings').send(_extends({}, tracking, { quotation_id: this.props.quotationId })).end(function (err, res) {
-	      if (err) return console.log(err.body);
-	      _this2.setState({
-	        trackings: _this2.state.trackings.concat([res.body])
-	      });
-	    });
+	    var model = _extends({}, tracking, { quotation_id: this.props.quotationId });
+	    console.log(model);
 	  },
 	  render: function render() {
-	    var trackingNodes = this.state.trackings.map(function (tracking) {
+	    var trackingNodes = this.props.trackings.items.map(function (tracking) {
 	      return _react2.default.createElement(_tracking2.default, { key: tracking.id, tracking: tracking });
 	    });
 
@@ -81838,11 +81887,12 @@
 	  },
 
 	  fetch: function fetch() {
-	    var _this = this;
-
-	    _superagent2.default.get('/api/v1/contacts').query({ quotation_id: this.props.quotationId }).end(function (err, res) {
-	      _this.setState({ contacts: res.body });
-	    });
+	    // request
+	    // .get('/api/v1/contacts')
+	    // .query({quotation_id: this.props.quotationId})
+	    // .end((err, res) =>{
+	    //   this.setState({contacts: res.body});
+	    // });
 	  },
 
 
@@ -83288,6 +83338,103 @@
 		}();
 
 		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+/***/ },
+/* 526 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+
+	var _axios = __webpack_require__(251);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'PRODUCTS';
+	var endpoint = '/api/v1/products';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function store(product) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, product).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function update(product) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + product.id, product).then(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+/***/ },
+/* 527 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+
+	var _axios = __webpack_require__(251);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'TRACKINGS';
+	var endpoint = '/api/v1/trackings';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function store(product) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, product).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
 	}
 
 /***/ }

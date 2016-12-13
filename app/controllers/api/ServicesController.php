@@ -92,10 +92,11 @@ class ServicesController extends \BaseController {
 		if (Input::has('quotation_id')) {
 			$quotation_id = Input::get('quotation_id');
 			$model = Service::detachToQuotation($id, $quotation_id);
-			return Response::json($model, 200);
+			$service = Service::find($id);
+			return Response::json($service, 200);
 		}
 
 		// $model = Service::findAndDestroy($id);
-		return Response::json($model, 200);
+		return Response::json($model, 400);
 	}
 }

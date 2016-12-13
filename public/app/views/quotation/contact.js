@@ -29,7 +29,7 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function(props) {
-    this.fetchContacts();
+    // this.fetchContacts();
     this.setState({contact: props.contact});
   },
 

@@ -36,6 +36,10 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
+		case `${TYPE}_ADDED_SERVICE`:
+			return state
+		break;
+
 		case `${TYPE}_ADD_SERVICE`:
 			return {
         ...state,
@@ -46,7 +50,7 @@ export default function reducer(state = initialState, action) {
 		case `${TYPE}_REMOVE_SERVICE`:
 			return {
         ...state,
-        services: state.services.filter(service => service.id !== action.payload)
+        services: state.services.filter(service => service.id !== action.payload.id)
       };
 		break;
 

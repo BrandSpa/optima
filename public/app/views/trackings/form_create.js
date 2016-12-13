@@ -24,12 +24,12 @@ module.exports = React.createClass({
   },
 
   fetch() {
-    request
-    .get('/api/v1/contacts')
-    .query({quotation_id: this.props.quotationId})
-    .end((err, res) =>{
-      this.setState({contacts: res.body});
-    });
+    // request
+    // .get('/api/v1/contacts')
+    // .query({quotation_id: this.props.quotationId})
+    // .end((err, res) =>{
+    //   this.setState({contacts: res.body});
+    // });
   },
 
   handleContact: function(e) {

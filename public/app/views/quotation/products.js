@@ -2,12 +2,12 @@
 import React from 'react';
 import Product from 'views/quotation/product';
 import FormCreate from 'views/products/form_create';
-import request from 'superagent';
+import * as action from 'actions/products';
 import _ from 'underscore';
 import cleanObject from 'lib/clean_object';
 import {storeActivity} from 'lib/activity';
 
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function() {
     return {
       id: null,
@@ -17,78 +17,31 @@ module.exports = React.createClass({
 
   getInitialState() {
     return {
-      products: [],
       product: {},
       showForm: false,
       errors: []
     }
   },
 
-  componentWillReceiveProps(props) {
-    this._fetch(props.quotationId);
-  },
-
-  _fetch(id) {
-    // request
-    //   .get('/api/v1/products/')
-    //   .query({quotation_id: id})
-    //   .end((err, res) => {
-    //     if(err) return console.log(err.response.text);
-    //     this.setState({products: res.body});
-    //   });
-  },
-
   _handleSubmit(product) {
     this.setState({product: product});
     if(product.id) {
-      this._update();
+      this.props.dispatch(action.update(product))
+      .then(this.handleStoreReponse);
     } else {
-      this._store();
+      this.props.dispatch(action.store(product))
+      .then(this.handleStoreReponse);
     }
   },
 
-  _update: function(data) {
-    let product = data ? data : this.state.product;
-
-    request
-      .put(`/api/v1/products/${this.state.product.id}`)
-      .send(this.state.product)
-      .end((err, res) => {
-        if(err) {
-          let errors = Object.keys(res.body).map(key => res.body[key]);
-          this.setState({ errors: errors });
-        } else {
-          this.cleanProduct();
-          this.setState({ showForm: false });
-        }
-      });
-  },
-
-  _store: function() {
-    request
-      .post('/api/v1/products')
-      .send(this.state.product)
-      .end(this.handleStoreReponse);
-  },
-
-  handleStoreReponse(err ,res) {
-    if(err) {
-      let errors = Object.keys(res.body).map(key => res.body[key]);
+  handleStoreReponse(actionRes) {
+    const {payload} = actionRes;
+    if(actionRes.type == "PRODUCTS_FAIL") {
+      let errors = Object.keys(payload).map(key => payload[key]);
       this.setState({ errors: errors });
     } else {
       this.cleanProduct();
-
-      this.setState({
-        products: this.state.products.concat([res.body]),
-        showForm: false
-      });
-
-      storeActivity({
-        message: 'Agrego un producto',
-        quotation_id: res.body.quotation_id
-      });
     }
-
   },
 
   handleDuplicate: function(id, e) {
@@ -157,7 +110,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    let products = this.state.products;
+    let products = this.props.products.items;
     let productNodes = products.map(product =>
         <Product
           key={product.id}

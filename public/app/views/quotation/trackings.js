@@ -2,9 +2,8 @@
 import React from 'react';
 import Tracking from 'views/quotation/tracking';
 import Form from 'views/trackings/form_create';
-import request from 'superagent';
 
-module.exports = React.createClass({
+export default React.createClass({
   getInitialState() {
     return {
       tracking: {
@@ -14,31 +13,21 @@ module.exports = React.createClass({
     }
   },
 
-  componentWillReceiveProps(props) {
-    this._fetch(props.quotationId);
-  },
 
   _fetch(id) {
-    request
-      .get('/api/v1/trackings')
-      .query({quotation_id: id})
-      .end((err, res) => this.setState({trackings: res.body}));
+    // request
+    //   .get('/api/v1/trackings')
+    //   .query({quotation_id: id})
+    //   .end((err, res) => this.setState({trackings: res.body}));
   },
 
   handleSubmit(tracking) {
-    request
-      .post('/api/v1/trackings')
-      .send({...tracking, quotation_id: this.props.quotationId})
-      .end((err, res) => {
-        if(err) return console.log(err.body);
-        this.setState({
-          trackings: this.state.trackings.concat([res.body])
-        });
-      });
+    let model = {...tracking, quotation_id: this.props.quotationId};
+    console.log(model);
   },
 
   render() {
-    const trackingNodes = this.state.trackings.map(tracking =>
+    const trackingNodes = this.props.trackings.items.map(tracking =>
       <Tracking key={tracking.id} tracking={tracking} />
     );
 

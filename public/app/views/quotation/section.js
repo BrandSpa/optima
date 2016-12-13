@@ -3,7 +3,10 @@ import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import * as action from 'actions/quotations';
-import * as actionActivity from 'actions/activities';
+import * as serviceAction from 'actions/services';
+import * as activityAction from 'actions/activities';
+import * as productAction from 'actions/products';
+import * as trackingAction from 'actions/trackings';
 import Contact from 'views/quotation/contact';
 import Filters from 'views/quotation/filters';
 import Edit from 'views/quotation/edit';
@@ -35,7 +38,7 @@ const quotationSection = React.createClass({
     }
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.fetchQuotation();
   },
 
@@ -45,10 +48,12 @@ const quotationSection = React.createClass({
     dispatch(action.fetchOne(params.id))
     .then(actionRes => { 
       this.handleDisabled(actionRes.payload.status);
-      dispatch(actionActivity.fetch({quotation_id: params.id}));
+      dispatch(activityAction.fetch({quotation_id: params.id}));
+      dispatch(serviceAction.fetch());
+      dispatch(productAction.fetch({quotation_id: params.id}));
+      dispatch(trackingAction.fetch({quotation_id: params.id}));
       dispatch(action.fetchServices(params.id));
     });
-    
   },
 
   handleShowComment: function() {
@@ -73,9 +78,20 @@ const quotationSection = React.createClass({
   },
 
   handleOptions(filters, activity) {
-    this.props.dispatch(actionActivity.store(activity));
-    const data = {...this.props.quotations.quotation, ...filters};
-    this._update(data);
+    let {user, quotations} = this.props;
+
+    activity = {
+      ...activity, 
+      user_id: user.user.id,
+      quotation_id: quotations.quotation.id
+    };
+
+    this.props.dispatch(activityAction.store(activity))
+    .then(actionRes => {
+      const data = {...this.props.quotations.quotation, ...filters};
+      this._update(data);
+    });
+   
   },
 
   handleSaveComment: function(comment) {
@@ -128,6 +144,7 @@ const quotationSection = React.createClass({
     if(status !== 'Borrador') {
       disabled = true;
     }
+
     this.setState({disabled: disabled});
   },
 
@@ -139,10 +156,16 @@ const quotationSection = React.createClass({
       <div>
         <div className="col-md-12">
         <div className="panel">
-          <div className="panel-body">
-          <h4 style={{margin: "0 0 15px 0"}}>
-            Cotización {quotation.id} • {quotation.status} • <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
-          </h4>
+          <div className="panel-body quo-header">
+          <div>
+             <h4>
+              Cotización {quotation.id} • {quotation.status} • <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
+            </h4>
+          </div>
+          <div className="quo-header__priority">
+            <h5>Prioridad: <div className={`priority priority--${quotation.priority}`}></div></h5>
+          </div>
+    
           </div>
         </div>
 
@@ -176,10 +199,10 @@ const quotationSection = React.createClass({
             onClose={this.handleShowMail}
             quotation={quotation}
             onSaveMail={this.handleSaveMail}
-            />
-
+          />
 
           <Products
+            {...this.props}
             quotationId={quotation.id}
             disabled={this.state.disabled}
           />
@@ -209,7 +232,7 @@ const quotationSection = React.createClass({
             onSave={this.handleSaveNoEffective}
           />
 
-          <Trackings quotationId={quotation.id} />
+          <Trackings {...this.props} quotationId={quotation.id} />
 
         </div>
 
@@ -224,6 +247,7 @@ const quotationSection = React.createClass({
               <Activities
                 quotationId={quotation.id}
                 activities={this.props.activities.items}
+                user={this.props.user.user}
               />
 
             </div>
