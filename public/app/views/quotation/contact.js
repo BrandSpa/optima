@@ -21,9 +21,7 @@ module.exports = React.createClass({
     }
   },
 
-
   fetchContacts: function() {
-
     request
       .get('/api/v1/contacts')
       .query({company_id: this.props.company.id})

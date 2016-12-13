@@ -6,35 +6,24 @@ module.exports = React.createClass({
     return {
       options: [],
       value: '',
-      default: '',
-      onSelectChange() {
-        console.error('onSelectChange not implemented');
-      }
-    }
-  },
-
-  handleChange: function(e) {
-    if(typeof this.props.onSelectChange === 'function') {
-      this.props.onSelectChange(e);
+      default: ''
     }
   },
 
   render: function() {
-    let optionNodes = this.props.options.map(function(option, i) {
+    let optionNodes = this.props.options.map((option, i) => {
       return (<option key={i} value={option.value}>{option.label}</option>);
     });
 
-    let value = this.props.value;
+    let value = this.props.value || this.props.default || '';
 
     value = parseInt(value) ? parseInt(value) : value;
-
     return (
       <select
         ref="select"
-        onChange={e => this.handleChange(e)}
+        onChange={e => this.props.onSelectChange(e)}
         className="form-control"
         value={value}
-        defaultValue=""
         disabled={this.props.disabled ? true : false}>
         <option value="">{this.props.default}</option>
         {optionNodes}

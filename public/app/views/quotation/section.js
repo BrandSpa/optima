@@ -1,8 +1,9 @@
 'use strict';
 import React from 'react';
-import request from 'superagent';
-import _ from 'underscore';
 import moment from 'moment';
+import {connect} from 'react-redux';
+import * as action from 'actions/quotations';
+import * as actionActivity from 'actions/activities';
 import Contact from 'views/quotation/contact';
 import Filters from 'views/quotation/filters';
 import Edit from 'views/quotation/edit';
@@ -21,7 +22,7 @@ const alertify = require('alertifyjs');
 alertify.set('notifier','position', 'top-right');
 
 
-module.exports = React.createClass({
+const quotationSection = React.createClass({
   getInitialState: function() {
     return {
       quotation: {},
@@ -39,13 +40,15 @@ module.exports = React.createClass({
   },
 
   fetchQuotation: function() {
-    request
-      .get(`/api/v1/quotations/${this.props.params.id}`)
-      .end((err, res) => {
-        if(err) return console.log(err.response.text);
-        this.setState({quotation: res.body});
-        this.handleDisabled(res.body.status);
-      });
+    const {params, dispatch} = this.props;
+
+    dispatch(action.fetchOne(params.id))
+    .then(actionRes => { 
+      this.handleDisabled(actionRes.payload.status);
+      dispatch(actionActivity.fetch({quotation_id: params.id}));
+      dispatch(action.fetchServices(params.id));
+    });
+    
   },
 
   handleShowComment: function() {
@@ -69,8 +72,9 @@ module.exports = React.createClass({
     this.setState({showNoSend: !this.state.showNoSend});
   },
 
-  handleOptions: function(filters) {
-    const data = _.extend(this.state.quotation, filters);
+  handleOptions(filters, activity) {
+    this.props.dispatch(actionActivity.store(activity));
+    const data = {...this.props.quotations.quotation, ...filters};
     this._update(data);
   },
 
@@ -105,15 +109,17 @@ module.exports = React.createClass({
   },
 
   _update(data) {
-    data = _.extend(this.state.quotation, data);
-    request
-      .put(`/api/v1/quotations/${this.props.params.id}`)
-      .send(data)
-      .end((err, res) => {
-        if(err) return alertify.error(res.body.message);
-        this.setState({quotation: res.body});
-        this.handleDisabled(res.body.status);
-      });
+    let quo = {...this.props.quotations.quotation, ...data};
+    this.props.dispatch(action.update(this.props.params.id, quo))
+    .then(this.handleUpdate);
+  },
+
+  handleUpdate(actionRes) {
+    if(actionRes.type == 'QUOTATIONS_FAIL') {
+      return alertify.error(actionRes.payload);
+    } else {
+      return this.handleDisabled(actionRes.status);
+    }
   },
 
   handleDisabled(status) {
@@ -126,8 +132,8 @@ module.exports = React.createClass({
   },
 
   render() {
-    let quotation = this.state.quotation;
-    let products = this.state.products;
+    let {quotation} = this.props.quotations;
+    let {user} = this.props.user;
 
     return (
       <div>
@@ -147,6 +153,7 @@ module.exports = React.createClass({
           <Filters
             onChange={this.handleOptions}
             quotation={quotation}
+            user={user}
             disabled={this.state.disabled}
           />
 
@@ -213,12 +220,17 @@ module.exports = React.createClass({
               company={quotation.company}
               changeContact={this.changeContact}
               />
+              
               <Activities
                 quotationId={quotation.id}
+                activities={this.props.activities.items}
               />
+
             </div>
         </div>
       </div>
     );
   }
 });
+
+export default connect(store => store)(quotationSection);

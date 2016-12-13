@@ -56,7 +56,7 @@ export default React.createClass({
   },
 
   componentWillReceiveProps(props) {
-    if(this.props.value !== props.value) {
+    if(props.value && this.props.value !== props.value) {
       this.setContent(props.value);
     }
   },
@@ -68,7 +68,7 @@ export default React.createClass({
   },
 
   getEditorContents() {
-		return this.props.value || this.props.defaultValue || null
+		return this.props.value == null ? '' : this.props.value;
 	},
   
   shouldComponentUpdate() {

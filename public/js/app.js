@@ -25653,10 +25653,6 @@
 
 	var _quotations2 = _interopRequireDefault(_quotations);
 
-	var _quotation = __webpack_require__(232);
-
-	var _quotation2 = _interopRequireDefault(_quotation);
-
 	var _todos = __webpack_require__(233);
 
 	var _todos2 = _interopRequireDefault(_todos);
@@ -25681,17 +25677,31 @@
 
 	var _services2 = _interopRequireDefault(_services);
 
+	var _products = __webpack_require__(524);
+
+	var _products2 = _interopRequireDefault(_products);
+
+	var _trackings = __webpack_require__(525);
+
+	var _trackings2 = _interopRequireDefault(_trackings);
+
+	var _user = __webpack_require__(523);
+
+	var _user2 = _interopRequireDefault(_user);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = (0, _redux.combineReducers)({
 		todos: _todos2.default,
 		quotations: _quotations2.default,
-		quotation: _quotation2.default,
 		activities: _activities2.default,
 		reports: _reports2.default,
 		companies: _companies2.default,
 		contacts: _contacts2.default,
-		services: _services2.default
+		services: _services2.default,
+		products: _products2.default,
+		trackings: _trackings2.default,
+		user: _user2.default
 	});
 
 /***/ },
@@ -25711,7 +25721,8 @@
 	var initialState = {
 		items: [],
 		errors: [],
-		quotation: {}
+		quotation: {},
+		services: []
 	};
 
 	function reducer() {
@@ -25731,48 +25742,32 @@
 				});
 				break;
 
-			case TYPE + '_FAIL':
-				return _extends({}, state, {
-					errors: [action.payload]
-				});
-				break;
-
-			default:
-				return state;
-				break;
-		}
-	}
-
-/***/ },
-/* 232 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.default = reducer;
-	var TYPE = 'QUOTATION';
-	var initialState = {
-		quotation: [],
-		errors: []
-	};
-
-	function reducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-		var action = arguments[1];
-
-		switch (action.type) {
-			case TYPE + '_FETCH':
+			case TYPE + '_SET_QUOTATION':
 				return _extends({}, state, {
 					quotation: action.payload
 				});
 				break;
 
+			case TYPE + '_FETCH_SERVICES':
+				return _extends({}, state, {
+					services: action.payload
+				});
+				break;
+
+			case TYPE + '_ADD_SERVICE':
+				return _extends({}, state, {
+					services: [action.payload].concat(state.services)
+				});
+				break;
+
+			case TYPE + '_REMOVE_SERVICE':
+				return _extends({}, state, {
+					services: state.services.filter(function (service) {
+						return service.id !== action.payload;
+					})
+				});
+				break;
+
 			case TYPE + '_FAIL':
 				return _extends({}, state, {
 					errors: [action.payload]
@@ -25786,6 +25781,7 @@
 	}
 
 /***/ },
+/* 232 */,
 /* 233 */
 /***/ function(module, exports) {
 
@@ -25888,6 +25884,12 @@
 			case TYPE + '_FETCH':
 				return _extends({}, state, {
 					items: action.payload
+				});
+				break;
+
+			case TYPE + '_STORE':
+				return _extends({}, state, {
+					items: [action.payload].concat(state.items)
 				});
 				break;
 
@@ -28076,7 +28078,12 @@
 	  value: true
 	});
 	exports.fetch = fetch;
+	exports.fetchOne = fetchOne;
 	exports.store = store;
+	exports.update = update;
+	exports.fetchServices = fetchServices;
+	exports.storeService = storeService;
+	exports.removeService = removeService;
 
 	var _axios = __webpack_require__(251);
 
@@ -28099,12 +28106,68 @@
 	  };
 	}
 
+	function fetchOne(id) {
+	  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	  return function (dispatch) {
+	    return _axios2.default.get(endpoint + '/' + id, { params: params }).then(function (res) {
+	      return dispatch({ type: TYPE + '_SET_QUOTATION', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+	    });
+	  };
+	}
+
 	function store() {
 	  var quotation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
 	    return _axios2.default.post('/api/v1/quotations', quotation).then(function (res) {
 	      return dispatch({ type: TYPE + '_STORE', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+	    });
+	  };
+	}
+
+	function update(id) {
+	  var quotation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	  return function (dispatch) {
+	    return _axios2.default.put('/api/v1/quotations/' + id, quotation).then(function (res) {
+	      return dispatch({ type: TYPE + '_SET_QUOTATION', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+	    });
+	  };
+	}
+
+	//services 
+
+	function fetchServices(quotationId) {
+	  return function (dispatch) {
+	    return _axios2.default.get('/api/v1/quotations/' + quotationId + '/services').then(function (res) {
+	      return dispatch({ type: TYPE + '_FETCH_SERVICES', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+	    });
+	  };
+	}
+
+	function storeService(quotationId, service) {
+	  return function (dispatch) {
+	    return _axios2.default.post('/api/v1/quotations/' + quotationId + '/services', service).then(function (res) {
+	      return dispatch({ type: TYPE + '_ADD_SERVICE', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+	    });
+	  };
+	}
+
+	function removeService(quotationId) {
+	  return function (dispatch) {
+	    return _axios2.default.delete('/api/v1/services/' + id, { params: { quotation_id: quotationId } }).then(function (res) {
+	      return dispatch({ type: TYPE + '_REMOVE_SERVICE', payload: res.data });
 	    }).catch(function (err) {
 	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 	    });
@@ -31462,17 +31525,8 @@
 	    return {
 	      options: [],
 	      value: '',
-	      default: '',
-	      onSelectChange: function onSelectChange() {
-	        console.error('onSelectChange not implemented');
-	      }
+	      default: ''
 	    };
-	  },
-
-	  handleChange: function handleChange(e) {
-	    if (typeof this.props.onSelectChange === 'function') {
-	      this.props.onSelectChange(e);
-	    }
 	  },
 
 	  render: function render() {
@@ -31486,20 +31540,18 @@
 	      );
 	    });
 
-	    var value = this.props.value;
+	    var value = this.props.value || this.props.default || '';
 
 	    value = parseInt(value) ? parseInt(value) : value;
-
 	    return _react2.default.createElement(
 	      'select',
 	      {
 	        ref: 'select',
 	        onChange: function onChange(e) {
-	          return _this.handleChange(e);
+	          return _this.props.onSelectChange(e);
 	        },
 	        className: 'form-control',
 	        value: value,
-	        defaultValue: '',
 	        disabled: this.props.disabled ? true : false },
 	      _react2.default.createElement(
 	        'option',
@@ -48204,6 +48256,7 @@
 	  value: true
 	});
 	exports.fetch = fetch;
+	exports.store = store;
 
 	var _superagent = __webpack_require__(244);
 
@@ -48221,6 +48274,17 @@
 	    return _superagent2.default.get(endpoint).end(function (err, res) {
 	      if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
 	      return dispatch({ type: TYPE + '_FETCH', payload: res.body });
+	    });
+	  };
+	}
+
+	function store() {
+	  var activity = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	  return function (dispatch) {
+	    return _superagent2.default.post(endpoint, activity).end(function (err, res) {
+	      if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
+	      return dispatch({ type: TYPE + '_STORE', payload: res.body });
 	    });
 	  };
 	}
@@ -48715,7 +48779,7 @@
 	    editor.setSelection(range);
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (this.props.value !== props.value) {
+	    if (props.value && this.props.value !== props.value) {
 	      this.setContent(props.value);
 	    }
 	  },
@@ -48725,7 +48789,7 @@
 	    }
 	  },
 	  getEditorContents: function getEditorContents() {
-	    return this.props.value || this.props.defaultValue || null;
+	    return this.props.value == null ? '' : this.props.value;
 	  },
 	  shouldComponentUpdate: function shouldComponentUpdate() {
 	    // Never re-render or we lose the element.
@@ -59931,13 +59995,13 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.fetch = fetch;
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(251);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59945,14 +60009,15 @@
 	var endpoint = 'api/v1/reports';
 
 	function fetch() {
-	  var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-	  return function (dispatch) {
-	    return _superagent2.default.get(endpoint).query(query).end(function (err, res) {
-	      if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-	      return dispatch({ type: TYPE + '_FETCH', payload: res.body });
-	    });
-	  };
+	    return function (dispatch) {
+	        return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+	            return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+	        }).catch(function (err) {
+	            return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+	        });
+	    };
 	}
 
 /***/ },
@@ -72408,15 +72473,14 @@
 	    localStorage.setItem('company', JSON.stringify(company));
 	    location.hash = '#company/' + company.id + '/contact/create';
 	  },
-	  storeSelected: function storeSelected(result) {
-	    var query = { company_id: result[0].id };
-	    this.props.dispatch(contactAction.fetch(query));
-	    this.props.dispatch(action.cleanItems());
-	  },
-	  store: function store(company) {
-	    _superagent2.default.post('/api/v1/companies').send(company).end(function (err, res) {
-	      if (err) return console.log(err.response.text);
-	      console.log("store", res.body);
+	  storeSelected: function storeSelected(company) {
+	    var dispatch = this.props.dispatch;
+
+	    var query = { company_id: company[0].id };
+
+	    dispatch(contactAction.fetch(query)).then(function () {
+	      dispatch(action.setCompany(company[0]));
+	      dispatch(action.cleanItems());
 	    });
 	  },
 	  createQuotation: function createQuotation(contact, e) {
@@ -72427,25 +72491,37 @@
 	    });
 	  },
 	  handleSubmitCompany: function handleSubmitCompany(company) {
-	    this.props.dispatch(action.store(company));
+	    var dispatch = this.props.dispatch;
+
+	    dispatch(action.store(company)).then(this.handleSubmitCompanyResponse);
+	  },
+	  handleSubmitCompanyResponse: function handleSubmitCompanyResponse(actionRes) {
+	    var _this = this;
+
+	    var dispatch = this.props.dispatch;
+
+	    if (actionRes.type == "COMPANIES_STORE") {
+	      dispatch(action.setCompany(actionRes.payload)).then(function () {
+	        return _this.setState({ showCompanyForm: false, showContactForm: true });
+	      });
+	    }
 	  },
 	  handleSubmitContact: function handleSubmitContact(contact) {
 	    this.props.dispatch(contactAction.store(contact));
 	  },
 	  toggleCompanyForm: function toggleCompanyForm(e) {
-	    e.preventDefault();
+	    if (e) e.preventDefault();
 
 	    this.setState({
-	      showCompanyForm: !this.state.showCompanyForm,
-	      showContactForm: !this.state.showContactForm
+	      showCompanyForm: !this.state.showCompanyForm
 	    });
 	  },
 	  toggleContactForm: function toggleContactForm(e) {
-	    e.preventDefault();
+	    if (e) e.preventDefault();
 	    this.setState({ showContactForm: !this.state.showContactForm });
 	  },
 	  render: function render() {
-	    var _this = this;
+	    var _this2 = this;
 
 	    var classes = {
 	      input: "form-control autocomplete",
@@ -72483,9 +72559,15 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: this.state.showCompanyForm ? 'col-sm-12' : 'hidden' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.companies.errors.length ? "alert alert-danger" : "" },
+	                this.props.companies.errors
+	              ),
 	              _react2.default.createElement(_form_create2.default, {
 	                btnStoreText: 'Guardar',
 	                btnCleanText: 'Cancelar',
+	                onCancel: this.toggleCompanyForm,
 	                onSubmit: this.handleSubmitCompany
 	              })
 	            )
@@ -72498,19 +72580,35 @@
 	            'div',
 	            { className: 'panel-body' },
 	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Empresa: ',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                this.props.companies.company.name
+	              )
+	            ),
+	            _react2.default.createElement(
 	              'div',
 	              { className: this.state.showContactForm ? 'col-sm-12' : 'hidden' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.contacts.errors.length ? "alert alert-danger" : "" },
+	                this.props.contacts.errors
+	              ),
 	              _react2.default.createElement(_form_create4.default, {
-	                company: this.props.companies.items.length ? this.props.companies.items[0] : null,
+	                company_id: this.props.companies.company.id ? this.props.companies.company.id : null,
 	                btnText: 'Guardar',
-	                onSubmit: this.handleSubmitContact
+	                onSubmit: this.handleSubmitContact,
+	                onCancel: this.toggleContactForm
 	              })
 	            ),
 	            _react2.default.createElement(
 	              'button',
 	              {
 	                onClick: this.toggleContactForm,
-	                className: 'btn btn-default pull-right btn-sm'
+	                className: this.props.companies.company.id ? "btn btn-default pull-right btn-sm" : "hidden"
 	              },
 	              'Nuevo Contacto'
 	            ),
@@ -72566,7 +72664,7 @@
 	                        null,
 	                        _react2.default.createElement(
 	                          'button',
-	                          { className: 'btn btn-primary btn-sm', onClick: _this.createQuotation.bind(_this, contact) },
+	                          { className: 'btn btn-primary btn-sm', onClick: _this2.createQuotation.bind(_this2, contact) },
 	                          'Crear Cotizaci\xF3n'
 	                        )
 	                      )
@@ -72601,9 +72699,9 @@
 	exports.setCompany = setCompany;
 	exports.cleanItems = cleanItems;
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(251);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72611,36 +72709,45 @@
 	var endpoint = 'api/v1/companies';
 
 	function fetch() {
-		var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 		return function (dispatch) {
-			return _superagent2.default.get(endpoint).query(query).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_FETCH', payload: res.body });
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err });
 			});
 		};
 	}
 
 	function store(company) {
 		return function (dispatch) {
-			return _superagent2.default.post(endpoint).send(company).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_STORE', payload: res.body });
+			return _axios2.default.post(endpoint, company).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 			});
 		};
 	}
 
 	function update(company) {
 		return function (dispatch) {
-			return _superagent2.default.put(endpoint + '/' + company.id).send(company).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.body });
+			return _axios2.default.put(endpoint + '/' + company.id, company).end(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 			});
 		};
 	}
 
 	function setCompany(company) {
-		return { type: TYPE + '_SET_COMPANY', payload: company };
+		return function (dispatch) {
+			return new Promise(function (resolve, reject) {
+				var action = { type: TYPE + '_SET_COMPANY', payload: company };
+				dispatch(action);
+				return resolve(action);
+			});
+		};
 	}
 
 	function cleanItems() {
@@ -72661,9 +72768,9 @@
 	exports.update = update;
 	exports.setContact = setContact;
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(251);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72671,30 +72778,33 @@
 	var endpoint = 'api/v1/contacts';
 
 	function fetch() {
-		var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 		return function (dispatch) {
-			return _superagent2.default.get(endpoint).query(query).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_FETCH', payload: res.body });
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err });
 			});
 		};
 	}
 
 	function store(contact) {
 		return function (dispatch) {
-			return _superagent2.default.post(endpoint).send(contact).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_STORE', payload: res.body });
+			return _axios2.default.post(endpoint, contact).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 			});
 		};
 	}
 
 	function update(contact) {
 		return function (dispatch) {
-			return _superagent2.default.put(endpoint + '/' + contact.id).send(contact).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.body });
+			return _axios2.default.put(endpoint + '/' + contact.id, contact).then(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 			});
 		};
 	}
@@ -72741,12 +72851,10 @@
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
-	    var company = {};
-	    if (this.props.company) {
+	    if (this.props.company && Object.keys(this.props.company).length) {
 	      company = this.props.company;
+	      this.setState({ company: company });
 	    }
-
-	    this.setState({ company: company });
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
 	    var company = props.company;
@@ -72754,12 +72862,11 @@
 
 	    if (company && Object.keys(company).length) {
 	      this.setState({ company: company });
-	    } else {
-	      this.setState({ company: (0, _clean_object2.default)(this.state.company) });
 	    }
 	  },
 	  clean: function clean(e) {
 	    e.preventDefault();
+
 	    this.setState({ company: (0, _clean_object2.default)(this.state.company) });
 	    if (this.props.onCancel) {
 	      this.props.onCancel();
@@ -73735,9 +73842,9 @@
 	      this.setState({ contact: (0, _clean_object2.default)(this.state.contact) });
 	    }
 
-	    if (props.company) {
+	    if (props.company_id) {
 	      this.setState({
-	        contact: _extends({}, this.state.contact, { company_id: props.company.id })
+	        contact: _extends({}, this.state.contact, { company_id: props.company_id })
 	      });
 	    }
 	  },
@@ -73996,12 +74103,14 @@
 	  },
 
 	  render: function render() {
+	    var value = this.props.value || '';
+
 	    return _react2.default.createElement('textarea', {
 	      className: 'form-control',
 	      ref: 'textarea',
 	      placeholder: this.props.placeholder,
 	      onChange: this.handleChange,
-	      value: this.props.value });
+	      value: value });
 	  }
 	});
 
@@ -74119,21 +74228,29 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _underscore = __webpack_require__(277);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
 	var _moment = __webpack_require__(289);
 
 	var _moment2 = _interopRequireDefault(_moment);
+
+	var _reactRedux = __webpack_require__(35);
+
+	var _quotations = __webpack_require__(250);
+
+	var action = _interopRequireWildcard(_quotations);
+
+	var _activities = __webpack_require__(401);
+
+	var actionActivity = _interopRequireWildcard(_activities);
 
 	var _contact = __webpack_require__(485);
 
@@ -74187,13 +74304,15 @@
 
 	var _trackings2 = _interopRequireDefault(_trackings);
 
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var alertify = __webpack_require__(491);
 	alertify.set('notifier', 'position', 'top-right');
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var quotationSection = _react2.default.createClass({
+	  displayName: 'quotationSection',
 
 	  getInitialState: function getInitialState() {
 	    return {
@@ -74214,10 +74333,15 @@
 	  fetchQuotation: function fetchQuotation() {
 	    var _this = this;
 
-	    _superagent2.default.get('/api/v1/quotations/' + this.props.params.id).end(function (err, res) {
-	      if (err) return console.log(err.response.text);
-	      _this.setState({ quotation: res.body });
-	      _this.handleDisabled(res.body.status);
+	    var _props = this.props,
+	        params = _props.params,
+	        dispatch = _props.dispatch;
+
+
+	    dispatch(action.fetchOne(params.id)).then(function (actionRes) {
+	      _this.handleDisabled(actionRes.payload.status);
+	      dispatch(actionActivity.fetch({ quotation_id: params.id }));
+	      dispatch(action.fetchServices(params.id));
 	    });
 	  },
 
@@ -74239,12 +74363,12 @@
 	  handleShowNoSend: function handleShowNoSend() {
 	    this.setState({ showNoSend: !this.state.showNoSend });
 	  },
-
-
-	  handleOptions: function handleOptions(filters) {
-	    var data = _underscore2.default.extend(this.state.quotation, filters);
+	  handleOptions: function handleOptions(filters, activity) {
+	    this.props.dispatch(actionActivity.store(activity));
+	    var data = _extends({}, this.props.quotations.quotation, filters);
 	    this._update(data);
 	  },
+
 
 	  handleSaveComment: function handleSaveComment(comment) {
 	    this._update({ comment: comment });
@@ -74277,14 +74401,15 @@
 	  },
 
 	  _update: function _update(data) {
-	    var _this2 = this;
-
-	    data = _underscore2.default.extend(this.state.quotation, data);
-	    _superagent2.default.put('/api/v1/quotations/' + this.props.params.id).send(data).end(function (err, res) {
-	      if (err) return alertify.error(res.body.message);
-	      _this2.setState({ quotation: res.body });
-	      _this2.handleDisabled(res.body.status);
-	    });
+	    var quo = _extends({}, this.props.quotations.quotation, data);
+	    this.props.dispatch(action.update(this.props.params.id, quo)).then(this.handleUpdate);
+	  },
+	  handleUpdate: function handleUpdate(actionRes) {
+	    if (actionRes.type == 'QUOTATIONS_FAIL') {
+	      return alertify.error(actionRes.payload);
+	    } else {
+	      return this.handleDisabled(actionRes.status);
+	    }
 	  },
 	  handleDisabled: function handleDisabled(status) {
 	    var disabled = false;
@@ -74295,8 +74420,9 @@
 	    this.setState({ disabled: disabled });
 	  },
 	  render: function render() {
-	    var quotation = this.state.quotation;
-	    var products = this.state.products;
+	    var quotation = this.props.quotations.quotation;
+	    var user = this.props.user.user;
+
 
 	    return _react2.default.createElement(
 	      'div',
@@ -74340,6 +74466,7 @@
 	        _react2.default.createElement(_filters2.default, {
 	          onChange: this.handleOptions,
 	          quotation: quotation,
+	          user: user,
 	          disabled: this.state.disabled
 	        }),
 	        _react2.default.createElement(_edit2.default, {
@@ -74399,13 +74526,18 @@
 	            changeContact: this.changeContact
 	          }),
 	          _react2.default.createElement(_activity2.default, {
-	            quotationId: quotation.id
+	            quotationId: quotation.id,
+	            activities: this.props.activities.items
 	          })
 	        )
 	      )
 	    );
 	  }
 	});
+
+	exports.default = (0, _reactRedux.connect)(function (store) {
+	  return store;
+	})(quotationSection);
 
 /***/ },
 /* 485 */
@@ -74619,6 +74751,10 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var React = __webpack_require__(1);
 	var Select = __webpack_require__(282);
 	var categoryTypeOptions = __webpack_require__(487);
@@ -74643,6 +74779,18 @@
 	      filters: {}
 	    };
 	  },
+
+	  handleChange: function handleChange() {
+	    var field = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	    var e = arguments[1];
+
+	    var val = e.currentTarget.value;
+	    var activity = { user_id: this.props.user.id, quotation_id: this.props.quotation.id, message: 'test this' };
+	    var filters = _extends({}, this.state.filters, _defineProperty({}, field, val));
+	    this.props.onChange(filters, activity);
+	    this.setState({ filters: filters });
+	  },
+
 
 	  update: function update() {
 	    var filters = {
@@ -74674,7 +74822,7 @@
 	            ref: 'type',
 	            options: typeOptions,
 	            'default': 'Seleccionar tipo',
-	            onSelectChange: this.update,
+	            onSelectChange: this.handleChange.bind(null, 'type'),
 	            value: quotation.type,
 	            disabled: this.props.disabled
 	          })
@@ -74766,47 +74914,47 @@
 	module.exports = [
 		{
 			"value": "Desktops",
-			" label": "Desktops"
+			"label": "Desktops"
 		},
 		{
 			"value": "Laptops",
-			" label": "Laptops"
+			"label": "Laptops"
 		},
 		{
 			"value": "Apple",
-			" label": "Apple"
+			"label": "Apple"
 		},
 		{
 			"value": "Servers",
-			" label": "Servers"
+			"label": "Servers"
 		},
 		{
 			"value": "IT Service",
-			" label": "IT Service"
+			"label": "IT Service"
 		},
 		{
 			"value": "IT Service 24/7",
-			" label": "IT  Service 24/7"
+			"label": "IT  Service 24/7"
 		},
 		{
 			"value": "Rescate Online",
-			" label": "Rescate Online"
+			"label": "Rescate Online"
 		},
 		{
 			"value": "Discos Duros Seguros",
-			" label": "Discos Duros Seguros"
+			"label": "Discos Duros Seguros"
 		},
 		{
 			"value": "Networks",
-			" label": "Networks"
+			"label": "Networks"
 		},
 		{
 			"value": "Complements",
-			" label": "Complements"
+			"label": "Complements"
 		},
 		{
 			"value": "Printers",
-			" label": "Printers"
+			"label": "Printers"
 		}
 	];
 
@@ -78791,12 +78939,13 @@
 	    this._fetch(props.quotationId);
 	  },
 	  _fetch: function _fetch(id) {
-	    var _this = this;
-
-	    _superagent2.default.get('/api/v1/products/').query({ quotation_id: id }).end(function (err, res) {
-	      if (err) return console.log(err.response.text);
-	      _this.setState({ products: res.body });
-	    });
+	    // request
+	    //   .get('/api/v1/products/')
+	    //   .query({quotation_id: id})
+	    //   .end((err, res) => {
+	    //     if(err) return console.log(err.response.text);
+	    //     this.setState({products: res.body});
+	    //   });
 	  },
 	  _handleSubmit: function _handleSubmit(product) {
 	    this.setState({ product: product });
@@ -78809,7 +78958,7 @@
 
 
 	  _update: function _update(data) {
-	    var _this2 = this;
+	    var _this = this;
 
 	    var product = data ? data : this.state.product;
 
@@ -78818,10 +78967,10 @@
 	        var errors = Object.keys(res.body).map(function (key) {
 	          return res.body[key];
 	        });
-	        _this2.setState({ errors: errors });
+	        _this.setState({ errors: errors });
 	      } else {
-	        _this2.cleanProduct();
-	        _this2.setState({ showForm: false });
+	        _this.cleanProduct();
+	        _this.setState({ showForm: false });
 	      }
 	    });
 	  },
@@ -78853,13 +79002,13 @@
 
 
 	  handleDuplicate: function handleDuplicate(id, e) {
-	    var _this3 = this;
+	    var _this2 = this;
 
 	    e.preventDefault();
 
 	    _superagent2.default.post('/api/v1/products/' + id + '/duplicate').end(function (err, res) {
-	      _this3.setState({
-	        products: _this3.state.products.concat([res.body])
+	      _this2.setState({
+	        products: _this2.state.products.concat([res.body])
 	      });
 	    });
 	  },
@@ -78872,7 +79021,7 @@
 	  },
 
 	  handleOrder: function handleOrder(product) {
-	    var _this4 = this;
+	    var _this3 = this;
 
 	    var order = true;
 
@@ -78884,12 +79033,12 @@
 	    this.setState({ product: product });
 
 	    _superagent2.default.put('/api/v1/products/' + product.id).send(product).end(function (err, res) {
-	      _this4.setState({ product: {} });
+	      _this3.setState({ product: {} });
 	    });
 	  },
 
 	  handleDelete: function handleDelete(id, e) {
-	    var _this5 = this;
+	    var _this4 = this;
 
 	    e.preventDefault();
 	    var products = _underscore2.default.reject(this.state.products, function (company) {
@@ -78897,7 +79046,7 @@
 	    });
 
 	    _superagent2.default.del('/api/v1/products/' + id).end(function (err, res) {
-	      _this5.setState({
+	      _this4.setState({
 	        products: products
 	      });
 	    });
@@ -78918,18 +79067,18 @@
 
 
 	  render: function render() {
-	    var _this6 = this;
+	    var _this5 = this;
 
 	    var products = this.state.products;
 	    var productNodes = products.map(function (product) {
 	      return _react2.default.createElement(_product2.default, {
 	        key: product.id,
 	        product: product,
-	        onEdit: _this6.handleEdit,
-	        onDuplicate: _this6.handleDuplicate,
-	        onOrder: _this6.handleOrder,
-	        onDelete: _this6.handleDelete,
-	        disabled: _this6.props.disabled
+	        onEdit: _this5.handleEdit,
+	        onDuplicate: _this5.handleDuplicate,
+	        onOrder: _this5.handleOrder,
+	        onDelete: _this5.handleDelete,
+	        disabled: _this5.props.disabled
 	      });
 	    });
 
@@ -80643,13 +80792,15 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _reactRedux = __webpack_require__(35);
 
 	var _form_select = __webpack_require__(282);
 
@@ -80657,8 +80808,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var quoServices = _react2.default.createClass({
+	  displayName: 'quoServices',
 	  getInitialState: function getInitialState() {
 	    return {
 	      options: [],
@@ -80669,66 +80820,32 @@
 	      optionSelected: ''
 	    };
 	  },
-	  componentDidMount: function componentDidMount() {
-	    this.fetchOptions();
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this.setState(props);
-	    this.fetchServices(props.quotationId);
-	  },
-	  fetchOptions: function fetchOptions() {
-	    var _this = this;
-
-	    _superagent2.default.get('/api/v1/services').end(function (err, res) {
-	      var options = res.body.map(function (opt) {
-	        return {
-	          value: opt.id,
-	          label: opt.title
-	        };
-	      });
-
-	      _this.setState({ options: options });
-	    });
-	  },
-	  fetchServices: function fetchServices(id) {
-	    var _this2 = this;
-
-	    _superagent2.default.get('/api/v1/quotations/' + id + '/services').end(function (err, res) {
-	      return _this2.setState({
-	        services: res.body
-	      });
-	    });
-	  },
 	  handleChange: function handleChange(e) {
 	    var id = e.currentTarget.value;
 
 	    this.setState({
+	      optionSelected: id,
 	      serviceId: id,
 	      disableAdd: false
 	    });
 	  },
 	  store: function store(id) {
-	    var _this3 = this;
-
-	    _superagent2.default.post('/api/v1/quotations/' + this.state.quotationId + '/services').send({ service_id: this.state.serviceId }).end(function (err, res) {
-	      return _this3.fetchServices(_this3.state.quotationId);
-	    });
+	    var service = { service_id: this.state.serviceId };
+	    this.props.dispatch(quoAction.storeService(this.props.quotations.quotation.id, service));
+	    console.log(service);
 	  },
-	  handleDelete: function handleDelete(id) {
-	    var _this4 = this;
-
-	    _superagent2.default.del('/api/v1/services/' + id).send({ quotation_id: this.state.quotationId }).end(function (err, res) {
-	      return _this4.setState({
-	        services: _this4.state.services.filter(function (service) {
-	          return service.id !== id;
-	        })
-	      });
-	    });
-	  },
+	  handleDelete: function handleDelete(id) {},
 	  render: function render() {
-	    var _this5 = this;
+	    var _this = this;
 
-	    var serviceNodes = this.state.services.map(function (service) {
+	    var options = this.props.services.items.map(function (opt) {
+	      return {
+	        value: opt.id,
+	        label: opt.title
+	      };
+	    });
+
+	    var serviceNodes = this.props.quotations.services.map(function (service) {
 	      return _react2.default.createElement(
 	        'tr',
 	        { key: service.id },
@@ -80744,8 +80861,8 @@
 	            'button',
 	            {
 	              className: 'btn btn-default btn-sm',
-	              onClick: _this5.handleDelete.bind(null, service.id),
-	              disabled: _this5.props.disabled ? true : false
+	              onClick: _this.handleDelete.bind(null, service.id),
+	              disabled: _this.props.disabled ? true : false
 	            },
 	            'Eliminar'
 	          )
@@ -80768,7 +80885,7 @@
 	            _react2.default.createElement(_form_select2.default, {
 	              placeholder: 'Servicios',
 	              value: this.state.optionSelected,
-	              options: this.state.options,
+	              options: options,
 	              onSelectChange: this.handleChange,
 	              disabled: this.props.disabled ? true : false
 	            }),
@@ -80778,7 +80895,8 @@
 	              {
 	                className: 'btn btn-primary btn-sm',
 	                disabled: this.state.disableAdd,
-	                onClick: this.store },
+	                onClick: this.store
+	              },
 	              'Agregar Servicio'
 	            )
 	          ),
@@ -80819,6 +80937,10 @@
 	    );
 	  }
 	});
+
+	exports.default = (0, _reactRedux.connect)(function (store) {
+	  return store;
+	})(quoServices);
 
 /***/ },
 /* 500 */
@@ -81285,13 +81407,13 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
 
 	var _moment = __webpack_require__(289);
 
@@ -81299,26 +81421,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-	  getInitialState: function getInitialState() {
-	    return {
-	      activities: []
-	    };
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-
-	    if (props.quotationId) {}
-	  },
-	  fetch: function fetch() {
-	    var _this = this;
-
-	    _superagent2.default.get('/api/v1/activities').query({ quotation_id: props.quotationId }).end(function (err, res) {
-	      return _this.setState({ activities: res.body });
-	    });
-	  },
+	var activities = _react2.default.createClass({
+	  displayName: 'activities',
 	  render: function render() {
-	    var activityNodes = this.state.activities.map(function (activity) {
+	    var activityNodes = this.props.activities.map(function (activity) {
 	      return _react2.default.createElement(
 	        'li',
 	        { key: activity.id },
@@ -81353,6 +81459,8 @@
 	    );
 	  }
 	});
+
+	exports.default = activities;
 
 /***/ },
 /* 508 */
@@ -81777,7 +81885,9 @@
 	    var contactSelect = void 0;
 
 	    if (tracking.contact_id) {
-	      contactSelect = _.findWhere(this.state.contacts, { id: tracking.contact_id });
+	      contactSelect = this.state.contacts.filter(function (contact) {
+	        return contact.id == tracking.contact_id;
+	      });
 	      contactValue = contactSelect.name + " " + contactSelect.lastname;
 	    }
 
@@ -82968,6 +83078,217 @@
 	    );
 	  }
 	});
+
+/***/ },
+/* 522 */,
+/* 523 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'USER';
+	var initialState = {
+		user: JSON.parse(localStorage.getItem('user')) || {},
+		errors: []
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		switch (action.type) {
+			case TYPE + '_FAIL':
+				return _extends({}, state, {
+					errors: [action.payload]
+				});
+				break;
+
+			default:
+				return state;
+				break;
+		}
+	}
+
+/***/ },
+/* 524 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'PRODUCTS';
+	var initialState = {
+		items: [],
+		errors: [],
+		product: {}
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		var _ret = function () {
+			switch (action.type) {
+				case TYPE + '_FETCH':
+					return {
+						v: _extends({}, state, {
+							items: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_SET_PRODUCT':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							product: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_STORE':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							items: [action.payload].concat(state.items)
+						})
+					};
+					break;
+
+				case TYPE + '_UPDATE':
+					var updated = action.payload;
+
+					return {
+						v: _extends({}, state, {
+							contact: {},
+							errors: [],
+							items: state.items.map(function (model) {
+								return model.id == updated.id ? _extends({}, model, updated) : model;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_FAIL':
+					return {
+						v: _extends({}, state, {
+							errors: [action.payload]
+						})
+					};
+					break;
+
+				default:
+					return {
+						v: state
+					};
+					break;
+			}
+		}();
+
+		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+/***/ },
+/* 525 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'TRACKINGS';
+	var initialState = {
+		items: [],
+		errors: [],
+		tracking: {}
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		var _ret = function () {
+			switch (action.type) {
+				case TYPE + '_FETCH':
+					return {
+						v: _extends({}, state, {
+							items: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_SET_TRACKING':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							product: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_STORE':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							items: [action.payload].concat(state.items)
+						})
+					};
+					break;
+
+				case TYPE + '_UPDATE':
+					var updated = action.payload;
+
+					return {
+						v: _extends({}, state, {
+							contact: {},
+							errors: [],
+							items: state.items.map(function (model) {
+								return model.id == updated.id ? _extends({}, model, updated) : model;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_FAIL':
+					return {
+						v: _extends({}, state, {
+							errors: [action.payload]
+						})
+					};
+					break;
+
+				default:
+					return {
+						v: state
+					};
+					break;
+			}
+		}();
+
+		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
 
 /***/ }
 /******/ ]);

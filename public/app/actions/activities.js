@@ -12,3 +12,14 @@ export function fetch(params = {}) {
       });
 	}
 }
+
+export function store(activity = {}) {
+  return dispatch => {
+		  return request
+      .post(endpoint, activity)
+      .end((err, res) => {
+        if(err) return dispatch({ type: `${TYPE}_FAIL`, payload: res.body});
+				return dispatch({ type: `${TYPE}_STORE`, payload: res.body});
+      });
+	}
+}

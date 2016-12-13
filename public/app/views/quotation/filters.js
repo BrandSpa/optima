@@ -22,6 +22,14 @@ module.exports = React.createClass({
     }
   },
 
+  handleChange(field = '', e) {
+    let val =  e.currentTarget.value;
+    let activity = {user_id: this.props.user.id, quotation_id: this.props.quotation.id, message: 'test this'};
+    let filters = {...this.state.filters, [field]: val};
+    this.props.onChange(filters, activity);
+    this.setState({filters});
+  },
+
   update: function() {
     const filters = {
       type: this.refs.type.refs.select.value,
@@ -47,7 +55,7 @@ module.exports = React.createClass({
                 ref="type"
                 options={typeOptions}
                 default="Seleccionar tipo"
-                onSelectChange={this.update}
+                onSelectChange={this.handleChange.bind(null, 'type')}
                 value={quotation.type}
                 disabled={this.props.disabled}
               />

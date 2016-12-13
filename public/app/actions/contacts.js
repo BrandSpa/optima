@@ -1,40 +1,31 @@
-import request from 'superagent';
+import request from 'axios';
 const TYPE = 'CONTACTS';
 const endpoint = 'api/v1/contacts';
 
-export function fetch(query = {}) {
+export function fetch(params = {}) {
   return dispatch => {
 		  return request
-      .get(endpoint)
-			.query(query)
-      .end((err, res) => {
-        if(err) return dispatch({ type: `${TYPE}_FAIL`, payload: res.body});
-				return dispatch({ type: `${TYPE}_FETCH`, payload: res.body});
-      });
+      .get(endpoint, {params})
+      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
+			.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err}));
 	}
 }
 
 export function store(contact) {
 	return dispatch => {
 		return request
-		.post(endpoint)
-		.send(contact)
-		.end((err, res) => {
-			if(err) return dispatch({ type: `${TYPE}_FAIL`, payload: res.body});
-			return dispatch({ type: `${TYPE}_STORE`, payload: res.body});
-		});
+		.post(endpoint, contact)
+		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
+		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}
 }
 
 export function update(contact) {
 	return dispatch => {
 		return request
-    .put(`${endpoint}/${contact.id}`)
-    .send(contact)
-    .end((err, res) => {
-			if(err) return dispatch({ type: `${TYPE}_FAIL`, payload: res.body});
-			return dispatch({ type: `${TYPE}_UPDATE`, payload: res.body});
-    });
+    .put(`${endpoint}/${contact.id}`, contact)
+    .then(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
+		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}
 }
 

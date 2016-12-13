@@ -70,7 +70,7 @@ module.exports = React.createClass({
     let contactSelect;
 
     if(tracking.contact_id) {
-      contactSelect = _.findWhere(this.state.contacts, {id: tracking.contact_id});
+      contactSelect = this.state.contacts.filter(contact => contact.id == tracking.contact_id);
       contactValue = contactSelect.name +" "+ contactSelect.lastname;
     }
 

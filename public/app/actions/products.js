@@ -1,6 +1,6 @@
 import request from 'axios';
-const TYPE = 'REPORTS';
-const endpoint = 'api/v1/reports';
+const TYPE = 'PRODUCTS';
+const endpoint = '/api/v1/products';
 
 export function fetch(params = {}) {
   return dispatch => {
@@ -10,3 +10,4 @@ export function fetch(params = {}) {
       .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}
 }
+

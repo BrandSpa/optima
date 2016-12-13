@@ -49,9 +49,9 @@ module.exports = React.createClass({
       this.setState({contact: cleanObject(this.state.contact)});
     }
 
-    if(props.company) {
+    if(props.company_id) {
       this.setState({
-        contact: {...this.state.contact, company_id: props.company.id}
+        contact: {...this.state.contact, company_id: props.company_id}
       });
     }
   },

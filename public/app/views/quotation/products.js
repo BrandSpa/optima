@@ -29,13 +29,13 @@ module.exports = React.createClass({
   },
 
   _fetch(id) {
-    request
-      .get('/api/v1/products/')
-      .query({quotation_id: id})
-      .end((err, res) => {
-        if(err) return console.log(err.response.text);
-        this.setState({products: res.body});
-      });
+    // request
+    //   .get('/api/v1/products/')
+    //   .query({quotation_id: id})
+    //   .end((err, res) => {
+    //     if(err) return console.log(err.response.text);
+    //     this.setState({products: res.body});
+    //   });
   },
 
   _handleSubmit(product) {

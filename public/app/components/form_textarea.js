@@ -7,13 +7,15 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    let value = this.props.value || '';
+    
     return (
       <textarea 
         className="form-control" 
         ref="textarea" 
         placeholder={this.props.placeholder} 
         onChange={this.handleChange} 
-        value={this.props.value}>
+        value={value}>
       </textarea>
     );
   }

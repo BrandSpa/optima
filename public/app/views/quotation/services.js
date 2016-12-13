@@ -1,9 +1,9 @@
 'use strict';
 import React from 'react';
-import request from 'superagent';
+import {connect} from 'react-redux';
 import Select from 'components/form_select';
 
-module.exports = React.createClass({
+const quoServices = React.createClass({
   getInitialState() {
     return {
       options: [],
@@ -15,74 +15,45 @@ module.exports = React.createClass({
     }
   },
 
-  componentDidMount() {
-    this.fetchOptions();
-  },
-
-  componentWillReceiveProps(props) {
-    this.setState(props);
-    this.fetchServices(props.quotationId);
-  },
-
-  fetchOptions() {
-    request
-      .get('/api/v1/services')
-      .end((err, res) => {
-        const options = res.body.map(opt => ({
-          value: opt.id,
-          label: opt.title
-        }));
-
-       this.setState({options});
-
-      });
-  },
-
-  fetchServices(id) {
-    request
-      .get(`/api/v1/quotations/${id}/services`)
-      .end((err, res) => this.setState({
-      services: res.body
-    }));
-  },
 
   handleChange(e) {
     let id = e.currentTarget.value;
 
     this.setState({
+      optionSelected: id,
       serviceId: id,
       disableAdd: false
     });
   },
 
   store(id) {
-    request
-      .post(`/api/v1/quotations/${this.state.quotationId}/services`)
-      .send({service_id: this.state.serviceId})
-      .end((err, res) => this.fetchServices(this.state.quotationId));
+    let service = {service_id: this.state.serviceId};
+    this.props.dispatch( quoAction.storeService(this.props.quotations.quotation.id, service) );
+    console.log(service);
   },
 
   handleDelete(id) {
-    request
-      .del(`/api/v1/services/${id}`)
-      .send({quotation_id: this.state.quotationId})
-      .end((err, res) => this.setState({
-      services: this.state.services.filter(service => service.id !== id)
-    }));
+ 
   },
 
   render() {
-    const serviceNodes = this.state.services.map(service => <tr key={service.id}>
-      <td>{service.title}</td>
-      <td>
-        <button
-          className="btn btn-default btn-sm"
-          onClick={this.handleDelete.bind(null, service.id)}
-          disabled={this.props.disabled ? true : false}
-        >
-        Eliminar
-        </button>
-      </td>
+    const options = this.props.services.items.map(opt => ({
+          value: opt.id,
+          label: opt.title
+    }));
+
+    const serviceNodes = this.props.quotations.services.map(service => 
+      <tr key={service.id}>
+        <td>{service.title}</td>
+        <td>
+          <button
+            className="btn btn-default btn-sm"
+            onClick={this.handleDelete.bind(null, service.id)}
+            disabled={this.props.disabled ? true : false}
+          >
+          Eliminar
+          </button>
+        </td>
       </tr>
     );
 
@@ -94,15 +65,18 @@ module.exports = React.createClass({
              <Select
                 placeholder="Servicios"
                 value={this.state.optionSelected}
-                options={this.state.options}
+                options={options}
                 onSelectChange={this.handleChange}
                 disabled={this.props.disabled ? true : false}
               />
              <br/>
-             <button
+            <button
               className="btn btn-primary btn-sm"
               disabled={this.state.disableAdd}
-              onClick={this.store}>Agregar Servicio</button>
+              onClick={this.store}
+            >
+              Agregar Servicio
+            </button>
             </div>
              <hr/>
              <div className="table-responsive col-sm-12">
@@ -124,3 +98,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default connect(store => store)(quoServices);

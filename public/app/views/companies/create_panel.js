@@ -37,20 +37,14 @@ const createPanel = React.createClass({
     location.hash = `#company/${company.id}/contact/create`;
   },
 
-  storeSelected(result) {
-    let query = {company_id: result[0].id};
-    this.props.dispatch(contactAction.fetch(query));
-    this.props.dispatch(action.cleanItems());
-  },
+  storeSelected(company) {
+    const {dispatch} = this.props;
+    let query = {company_id: company[0].id};
 
-  store(company) {
-    request
-      .post('/api/v1/companies')
-      .send(company)
-      .end((err, res) => {
-        if(err) return console.log(err.response.text);
-        console.log("store", res.body);
-      });
+    dispatch(contactAction.fetch(query)).then(() => {
+      dispatch(action.setCompany(company[0]));
+      dispatch(action.cleanItems());
+    });
   },
 
   createQuotation(contact, e) {
@@ -61,7 +55,17 @@ const createPanel = React.createClass({
   },
 
   handleSubmitCompany(company) {
-    this.props.dispatch(action.store(company));
+    const {dispatch} = this.props;
+    dispatch(action.store(company))
+    .then(this.handleSubmitCompanyResponse)
+  },
+
+  handleSubmitCompanyResponse(actionRes) {
+    const {dispatch} = this.props;
+    if(actionRes.type == "COMPANIES_STORE") {
+      dispatch(action.setCompany(actionRes.payload))
+      .then(() => this.setState({ showCompanyForm: false, showContactForm: true }));
+    }
   },
 
   handleSubmitContact(contact) {
@@ -69,16 +73,15 @@ const createPanel = React.createClass({
   },
 
   toggleCompanyForm(e) {
-    e.preventDefault();
+    if(e) e.preventDefault();
 
     this.setState({
-      showCompanyForm: !this.state.showCompanyForm,
-      showContactForm: !this.state.showContactForm
+      showCompanyForm: !this.state.showCompanyForm
     });
   },
 
   toggleContactForm(e) {
-    e.preventDefault(); 
+    if(e) e.preventDefault(); 
     this.setState({showContactForm: !this.state.showContactForm});
   },
 
@@ -111,9 +114,14 @@ const createPanel = React.createClass({
             </button>
 
             <div className={this.state.showCompanyForm ?  'col-sm-12' : 'hidden'}>
+              <div className={this.props.companies.errors.length ? "alert alert-danger" : ""}>
+                {this.props.companies.errors}
+              </div>
+
                <FormCompany 
                 btnStoreText="Guardar" 
                 btnCleanText="Cancelar"
+                onCancel={this.toggleCompanyForm}
                 onSubmit={this.handleSubmitCompany}
               />
             </div>
@@ -123,17 +131,27 @@ const createPanel = React.createClass({
 
       <div className="panel">
         <div className="panel-body">
+          <h4>Empresa: <b>{this.props.companies.company.name}</b></h4>
             <div className={this.state.showContactForm ?  'col-sm-12' : 'hidden'}>
+
+              <div className={this.props.contacts.errors.length ? "alert alert-danger" : ""}>
+                {this.props.contacts.errors}
+              </div>
+
               <FormContact
-                company={this.props.companies.items.length ? this.props.companies.items[0] : null}
+                company_id={this.props.companies.company.id ? this.props.companies.company.id : null}
                 btnText="Guardar"
                 onSubmit={this.handleSubmitContact}
+                onCancel={this.toggleContactForm}
               />
           </div>
-              <button 
+
+          <button
             onClick={this.toggleContactForm}
-            className="btn btn-default pull-right btn-sm"
-          >Nuevo Contacto</button>
+            className={this.props.companies.company.id ? "btn btn-default pull-right btn-sm" : "hidden"}
+          >
+          Nuevo Contacto
+          </button>
 
           <div className="row"></div>
       

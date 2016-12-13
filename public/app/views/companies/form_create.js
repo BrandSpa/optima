@@ -13,12 +13,10 @@ module.exports = React.createClass({
   },
 
   componentDidMount() {
-    let company = {};
-    if (this.props.company) {
+    if (this.props.company && Object.keys(this.props.company).length) {
       company = this.props.company;
-    }
-
-    this.setState({company});
+      this.setState({company});
+    }    
   },
 
   componentWillReceiveProps(props) {
@@ -26,13 +24,12 @@ module.exports = React.createClass({
 
     if(company && Object.keys(company).length) {
       this.setState({company});
-    } else {
-      this.setState({company: cleanObject(this.state.company) });
     }
   },
 
   clean(e) {
     e.preventDefault();
+
     this.setState({company: cleanObject(this.state.company) });
     if(this.props.onCancel) {
       this.props.onCancel();

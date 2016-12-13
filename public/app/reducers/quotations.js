@@ -2,7 +2,8 @@ const TYPE = 'QUOTATIONS';
 const initialState = {
 	items: [],
 	errors: [],
-	quotation: {}
+	quotation: {},
+	services: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,6 +19,34 @@ export default function reducer(state = initialState, action) {
 			return {
         ...state,
         quotation: action.payload
+      };
+		break;
+
+		case `${TYPE}_SET_QUOTATION`:
+			return {
+        ...state,
+        quotation: action.payload
+      };
+		break;
+
+		case `${TYPE}_FETCH_SERVICES`:
+			return {
+        ...state,
+        services: action.payload
+      };
+		break;
+
+		case `${TYPE}_ADD_SERVICE`:
+			return {
+        ...state,
+        services: [action.payload].concat(state.services)
+      };
+		break;
+
+		case `${TYPE}_REMOVE_SERVICE`:
+			return {
+        ...state,
+        services: state.services.filter(service => service.id !== action.payload)
       };
 		break;
 

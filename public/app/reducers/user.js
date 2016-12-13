@@ -1,18 +1,11 @@
-const TYPE = 'QUOTATION';
+const TYPE = 'USER';
 const initialState = {
-	quotation: [],
+	user: JSON.parse(localStorage.getItem('user')) || {},
 	errors: []
 };
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
-		case `${TYPE}_FETCH`:
-			return {
-        ...state,
-        quotation: action.payload
-      };
-		break;
-
 		case `${TYPE}_FAIL`:
 			return {
         ...state,
