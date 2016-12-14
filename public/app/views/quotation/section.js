@@ -2,11 +2,14 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
+
 import * as action from 'actions/quotations';
 import * as serviceAction from 'actions/services';
 import * as activityAction from 'actions/activities';
 import * as productAction from 'actions/products';
 import * as trackingAction from 'actions/trackings';
+import * as contactAction from 'actions/contacts';
+
 import Contact from 'views/quotation/contact';
 import Filters from 'views/quotation/filters';
 import Edit from 'views/quotation/edit';
@@ -20,20 +23,20 @@ import NoSend from 'views/quotation/no_send';
 import Times from 'views/quotation/times';
 import Activities from 'views/quotation/activity';
 import Trackings from 'views/quotation/trackings';
+import Alert from 'components/alert';
 
-const alertify = require('alertifyjs');
-alertify.set('notifier','position', 'top-right');
 
 
 const quotationSection = React.createClass({
+  alert: null,
+
   getInitialState: function() {
     return {
-      quotation: {},
-      products: [],
       showComment: false,
       showMail: false,
       showNoEffective: false,
       showNoSend: false,
+      showErrors: false,
       disabled: false
     }
   },
@@ -42,18 +45,33 @@ const quotationSection = React.createClass({
     this.fetchQuotation();
   },
 
+
   fetchQuotation: function() {
     const {params, dispatch} = this.props;
 
     dispatch(action.fetchOne(params.id))
     .then(actionRes => { 
+      let query = {quotation_id: params.id};
       this.handleDisabled(actionRes.payload.status);
-      dispatch(activityAction.fetch({quotation_id: params.id}));
+      dispatch(productAction.fetch(query));
+       dispatch(action.fetchServices(params.id));
+      dispatch(activityAction.fetch(query));
+      dispatch(trackingAction.fetch(query));
+      dispatch(contactAction.fetch(query));
       dispatch(serviceAction.fetch());
-      dispatch(productAction.fetch({quotation_id: params.id}));
-      dispatch(trackingAction.fetch({quotation_id: params.id}));
-      dispatch(action.fetchServices(params.id));
     });
+  },
+
+  setActivity(message) {
+    let {user, quotations} = this.props;
+
+    let activity = {
+      message,
+      user_id: user.user.id,
+      quotation_id: quotations.quotation.id
+    };
+
+    return this.props.dispatch(activityAction.store(activity));
   },
 
   handleShowComment: function() {
@@ -76,32 +94,30 @@ const quotationSection = React.createClass({
   handleShowNoSend() {
     this.setState({showNoSend: !this.state.showNoSend});
   },
+  
 
-  handleOptions(filters, activity) {
-    let {user, quotations} = this.props;
-
-    activity = {
-      ...activity, 
-      user_id: user.user.id,
-      quotation_id: quotations.quotation.id
-    };
-
-    this.props.dispatch(activityAction.store(activity))
-    .then(actionRes => {
-      const data = {...this.props.quotations.quotation, ...filters};
+  handleOptions(filters, message) {
+    let {quotations} = this.props;
+    
+    this.setActivity(message).then(() => {
+      const data = {...quotations.quotation, ...filters};
       this._update(data);
-    });
-   
+    }) 
   },
 
   handleSaveComment: function(comment) {
-    this._update({comment: comment});
-    this.setState({showComment: false});
+    this.setActivity('edito el comentario').then(() => {
+      this._update({comment: comment});
+      this.setState({showComment: false});
+    });
   },
 
   handleSaveMail: function(mail) {
-    this._update(mail);
-    this.setState({showMail: false});
+    this.setActivity('edito el mail').then(() => {
+      this.alert.show();
+      this._update(mail);
+      this.setState({showMail: false});
+    });
   },
 
   handleServiceApproval: function(serviceApproval) {
@@ -116,8 +132,10 @@ const quotationSection = React.createClass({
     });
   },
 
-  handleStatus: function(status) {
-    this._update(status);
+  handleStatus: function(status, message) {
+    this.setActivity(message).then(() => {
+      this._update(status);
+    });
   },
 
   changeContact: function(contactId) {
@@ -132,9 +150,10 @@ const quotationSection = React.createClass({
 
   handleUpdate(actionRes) {
     if(actionRes.type == 'QUOTATIONS_FAIL') {
-      return alertify.error(actionRes.payload);
+      console.log(actionRes.type);
+      return this.setState({showErrors: true});
     } else {
-      return this.handleDisabled(actionRes.status);
+      return this.handleDisabled(actionRes.payload.status);
     }
   },
 
@@ -145,7 +164,10 @@ const quotationSection = React.createClass({
       disabled = true;
     }
 
-    this.setState({disabled: disabled});
+    this.setState({
+      disabled: disabled,
+      showErrors: false
+    });
   },
 
   render() {
@@ -154,12 +176,17 @@ const quotationSection = React.createClass({
 
     return (
       <div>
+      <Alert 
+        show={this.state.showErrors}
+        message={this.props.quotations.errors} 
+      />
+
         <div className="col-md-12">
         <div className="panel">
           <div className="panel-body quo-header">
           <div>
              <h4>
-              Cotización {quotation.id} • {quotation.status} • <small>{moment(quotation.created_at).fromNow()}</small> <small className={quotation.sent_at ? "" : "hidden"}>enviada {moment(quotation.sent_at).fromNow()}</small>
+              Cotización {quotation.id} • {quotation.status} •
             </h4>
           </div>
           <div className="quo-header__priority">
@@ -213,6 +240,7 @@ const quotationSection = React.createClass({
           />
 
           <Status
+            {...this.props}
             quotation={quotation}
             handleOpenNoEffective={this.handleShowNoEffective}
             handleOpenNoSend={this.handleShowNoSend}
@@ -238,12 +266,12 @@ const quotationSection = React.createClass({
 
         <div className="col-md-3">
           <div >
+
             <Contact
-              contact={quotation.contact}
-              company={quotation.company}
+              {...this.props}
               changeContact={this.changeContact}
-              />
-              
+            />
+            <Times quotation={quotation} />
               <Activities
                 quotationId={quotation.id}
                 activities={this.props.activities.items}

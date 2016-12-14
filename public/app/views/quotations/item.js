@@ -23,7 +23,7 @@ export default React.createClass({
       <tr key={id}>
       <td><a href={`/quotations/${id}`}>{id}</a></td>
       <td>
-        <span className={`label label-${status}`}>
+        <span className={`label label-${status.replace(' ', '_')}`}>
           {status}
         </span>
         {rethink_from ? <a className="label label-Replanteada" href={`/#quotations/${rethink_from}`}>{rethink_from}</a> : ""}

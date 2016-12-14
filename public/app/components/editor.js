@@ -72,12 +72,10 @@ export default React.createClass({
 	},
   
   shouldComponentUpdate() {
-		// Never re-render or we lose the element.
 		return false
 	},
 
   render() {
-    console.log('content', this.getEditorContents());
     return (
       <div className="editor">
         <div id={this.state.idToolbar}>

@@ -1,10 +1,8 @@
 'use strict';
 import React from 'react';
-import request from 'superagent';
+import * as action from 'actions/quotations';
 import moment from 'moment';
-import alertify from 'alertifyjs';
 import {storeActivity} from 'lib/activity';
-alertify.set('notifier','position', 'top-right');
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -34,31 +32,20 @@ module.exports = React.createClass({
         this.props.handleOpenNoEffective();
         break;
       default:
-        this.props.onStatusChange({status});
+        this.props.onStatusChange({status, message});
     }
 
   },
 
   handleSend() {
     const id = this.props.quotation.id;
+    let message = 'Cambio estado a enviada';
     this.setState({sending: true});
-
-    request
-    .post(`/api/v1/quotations/${id}/sendmail`)
-    .end(function(err, res) {
-      this.setState({sending: false});
-      if(err) return alertify.error("complete los filtros");
-
-      return this.props.onStatusChange({
-        status: 'Enviada',
-        created_sent_diff: this._getDiff()
-      });
-    }.bind(this));
-  },
-
-  _getDiff() {
-    const now = moment().format();
-    return moment(now).diff(this.props.quotation.created_at, 'minutes');
+    
+    this.props.dispatch(action.sendMail(id)).then(() => {
+       this.setState({sending: false});
+      return this.props.onStatusChange('Enviada', message);
+    });
   },
 
   render() {
@@ -124,6 +111,26 @@ module.exports = React.createClass({
                 onClick={this.handleClick.bind(this, 'Replanteada')}
               >
                 Replantear
+              </a>
+            </li>
+
+            <li>
+              <a
+                className="btn btn-default btn-sm"
+                disabled={this.props.disabled ? true : false}
+                onClick={this.handleClick.bind(this, 'Nula')}
+              >
+                Anular
+              </a>
+            </li>
+
+             <li>
+              <a
+                className="btn btn-default btn-sm"
+                disabled={this.props.disabled ? true : false}
+                onClick={this.handleClick.bind(this, 'Por confirmar')}
+              >
+                Por confirmar
               </a>
             </li>
 

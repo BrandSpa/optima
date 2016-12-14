@@ -9,8 +9,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/improve.css">
-  <link rel="stylesheet" href="/node_modules/alertifyjs/build/css/alertify.css">
-  <link rel="stylesheet" href="/node_modules/alertifyjs/build/css/themes/bootstrap.css">
 	<link rel="stylesheet" href="/css/quill.base.css">
 	<link rel="stylesheet" href="//cdn.quilljs.com/0.20.1/quill.snow.css" />
 
@@ -103,6 +101,36 @@
 
 		.quo-header__priority {
 			padding-left: 30px;
+		}
+
+		.label-Nula {
+			background: #333;
+		}
+
+		.label-Por_confirmar {
+			background: #CD940C;
+		}
+
+		.label-No_efectiva, .label-No_enviada {
+			background: #FC3938;
+		}
+
+		.alert-message{
+			position: fixed;
+			top: 90px;
+			right: 40px;
+			min-height: 40px;
+			padding: 10px;
+			width: 250px;
+			background: #FC3938;
+			color: #fff;
+			box-shadow: 0 0 5px rgba(0,0,0, .1);
+			z-index: 1010;
+			transition: all 500ms ease;
+		}
+
+		.alert-message--outside {
+			right: -300px;
 		}
 	</style>
 

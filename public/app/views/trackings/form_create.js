@@ -1,11 +1,10 @@
 'use strict';
 import React from 'react';
-import request from 'superagent';
 import moment from 'moment';
 import Select from 'components/form_select';
 import DateTime from 'components/datetime';
 
-module.exports = React.createClass({
+const trackingForm = React.createClass({
   getInitialState: function() {
     return {
       tracking: {
@@ -50,11 +49,7 @@ module.exports = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     this.handleReport();
-    console.log(this.state.tracking);
     this.props.onSubmit(this.state.tracking);
-    // this.setState({tracking: {
-    //   report: ''
-    // }});
   },
 
   handleDateTime(dateObj, dateStr) {
@@ -70,11 +65,11 @@ module.exports = React.createClass({
     let contactSelect;
 
     if(tracking.contact_id) {
-      contactSelect = this.state.contacts.filter(contact => contact.id == tracking.contact_id);
+      contactSelect = this.props.contacts.filter(contact => contact.id == tracking.contact_id);
       contactValue = contactSelect.name +" "+ contactSelect.lastname;
     }
 
-    const contactOptions = this.state.contacts.map(function(contact, i) {
+    const contactOptions = this.props.contacts.map(function(contact, i) {
       return {value: contact.id, label: contact.name +" "+ contact.lastname}
     });
 
@@ -82,7 +77,7 @@ module.exports = React.createClass({
       <form onSubmit={this.handleSubmit} onSubmit={this.handleSubmit}>
       <br/>
         <div className="form-group col-md-6">
-          <label htmlFor="">Fecha</label>
+          <label>Fecha</label>
           <DateTime
             enableTime
             styles='form-control'
@@ -91,7 +86,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Seleccionar o buscar contacto</label>
+          <label>Seleccionar o buscar contacto</label>
           <Select
             options={contactOptions}
             placeholder="Seleccionar contacto"
@@ -101,7 +96,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-12">
-          <label htmlFor="">Reporte</label>
+          <label>Reporte</label>
           <textarea
             ref="report"
             rows="2"
@@ -116,3 +111,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default trackingForm;

@@ -16,7 +16,7 @@ const messages = {
   advisor: 'cambio asesor',
 };
 
-export default React.createClass({
+const quoFilters = React.createClass({
   getDefaultProps: function() {
     return {
       quotation: {},
@@ -32,10 +32,9 @@ export default React.createClass({
 
   handleChange(field = '', e) {
     let val =  e.currentTarget.value;
-    let activity = {message: messages[field]};
     let filters = {...this.state.filters, [field]: val};
-    
-    this.props.onChange(filters, activity);
+    let message = messages[field];
+    this.props.onChange(filters, message);
     this.setState({filters});
   },
 
@@ -130,3 +129,5 @@ export default React.createClass({
     );
   }
 });
+
+export default quoFilters;

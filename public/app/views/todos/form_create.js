@@ -1,33 +1,32 @@
 'use strict';
 import React from 'react';
-import request from 'superagent';
+import request from 'axios';
 import moment from 'moment';
 import DateTime from 'components/datetime';
 import Editor from 'components/editor';
 import Select from 'components/form_select';
 
-module.exports = React.createClass({
+const todoForm = React.createClass({
   
   getInitialState() {
     return {
       todo: {
         expires_date: '',
         expires_time: '',
-        quotation_id: '',
-        quotation_id: 0
+        company_id: '',
+        title: '',
+        description: ''
       },
-      users: [],
-      quotations: []
+      company: {},
+      companies: [],
+      users: []
     }
   },
 
   componentDidMount() {
     request
     .get('api/v1/users')
-    .end((err, res) => {
-      if(err) return console.log(err.body);
-      this.setState({users: res.body});
-    });
+    .then(res => this.setState({users: res.data}));
   },
 
   /**
@@ -67,23 +66,21 @@ module.exports = React.createClass({
     this.setState({todo: todo});
   },
 
-  searchQuo(val) {
-    this.setState({ 
-      todo: {...this.state.todo, quotation_id: val} 
-    });
+  searchQuo(e) {
+    let val = e.currentTarget.value;
 
     request 
-    .get('/api/v1/quotations/')
-    .query({'query': val})
-    .end((err, res) => this.setState({quotations: res.body}) );
+    .get('/api/v1/companies/', {params: {'query': val}})
+    .then(res => this.setState({...this.state, companies: res.data}) );
   },
 
-  setQuo(q, e) {
-    e.preventDefault();
+  setCompany(q, e) {
+    if(e) e.preventDefault();
 
     this.setState({
-      todo:{...this.state.todo, quotation_id: q.id}, 
-      quotations: [] 
+      todo:{...this.state.todo, company_id: q.id}, 
+      companies: [],
+      company: q
     });
   },
 
@@ -101,7 +98,7 @@ module.exports = React.createClass({
         <br/>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Fecha vencimiento</label>
+          <label >Fecha vencimiento</label>
           <DateTime
             styles="form-control"
             altFormat="Y-d-m H:i:s"
@@ -111,7 +108,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Usuario</label>
+          <label >Usuario</label>
           <Select
             value={todo.user_id}
             options={userOptions}
@@ -120,28 +117,26 @@ module.exports = React.createClass({
         </div>
         
         <div className="form-group col-md-12">
-          <label for="">Cotización</label>
+          <label for="">Cliente</label>
           <input 
             type="text" 
             className="form-control" 
-            placeholder="Cotización num"
-            value={todo.quotation_id}
-            onChange={e => this.searchQuo(e.currentTarget.value)}
+            placeholder="Cliente"
+            value={this.state.company.name}
+            onChange={this.searchQuo}
           />
 
           <ul className="list-group">
-            {
-              this.state.quotations.map(quo =>
-                <li className="list-group-item" key={quo.id}>
-                  <a href="#" onClick={e => { e.preventDefault(); this.setQuo.bind(null, quo) }}>{quo.id}</a>
-                </li>
-              )
-            }
+            {this.state.companies.map(company => 
+              <li className="list-group-item" key={company.id}>
+               <a href="#" onClick={this.setCompany.bind(null, company)}>{company.name}</a> 
+              </li> 
+            )}
           </ul>
         </div>
 
         <div className="form-group col-md-12">
-          <label htmlFor="">Título</label>
+          <label >Título</label>
           <input
             type="text"
             className="form-control"
@@ -151,7 +146,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-12">
-          <label htmlFor="">Descripción</label>
+          <label >Descripción</label>
           <textarea
             className="form-control"
             onChange={e => this.handleChange({description: e.currentTarget.value})}
@@ -171,3 +166,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default todoForm;

@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import request from 'superagent';
 import page from 'page';
 import * as action from 'actions/companies';
 import * as contactAction from 'actions/contacts';
@@ -30,11 +29,6 @@ const createPanel = React.createClass({
     let query = {query_name: name};
     this.props.dispatch(action.fetch(query));
     this.setState({loading: false});
-  },
-
-  continue(company) {
-    localStorage.setItem('company', JSON.stringify(company));
-    location.hash = `#company/${company.id}/contact/create`;
   },
 
   storeSelected(company) {

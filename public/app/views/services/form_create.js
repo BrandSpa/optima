@@ -2,7 +2,7 @@
 import React from 'react';
 import Editor from 'components/editor';
 
-module.exports = React.createClass({
+const serviceForm = React.createClass({
   getInitialState() {
     return {
       service: {
@@ -95,3 +95,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default serviceForm;

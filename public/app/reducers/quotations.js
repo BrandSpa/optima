@@ -3,6 +3,8 @@ const initialState = {
 	items: [],
 	errors: [],
 	quotation: {},
+	contact: {},
+	company: {},
 	services: []
 };
 
@@ -25,7 +27,9 @@ export default function reducer(state = initialState, action) {
 		case `${TYPE}_SET_QUOTATION`:
 			return {
         ...state,
-        quotation: action.payload
+        quotation: action.payload,
+				company: action.payload.company,
+				contact: action.payload.contact
       };
 		break;
 

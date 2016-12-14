@@ -6,5 +6,7 @@
 	{"value": "No enviada", "label": "No enviada"},
 	{"value": "Efectiva", "label": "Efectiva"},
 	{"value": "No efectiva", "label": "No efectiva"},
-	{"value": "Replanteada", "label": "Replanteada"}
+	{"value": "Replanteada", "label": "Replanteada"},
+	{"value": "Por confirmar", "label": "Por confirmar"},
+	{"value": "Nula", "label": "Nula"}
 ]

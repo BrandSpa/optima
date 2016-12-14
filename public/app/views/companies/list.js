@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import request from 'superagent';
 import * as action from 'actions/companies';
 import Company from 'views/companies/company';
 import Form from 'views/companies/form_create';

@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import request from 'superagent';
+import request from 'axios';
 import Form from 'views/contacts/form_create';
 import Contact from 'views/companies/contact';
 
@@ -109,7 +109,6 @@ module.exports = React.createClass({
             onSubmit={this.handleSubmit}
           />
         </div>
-
         </div>
       </div>
     );

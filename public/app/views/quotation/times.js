@@ -13,9 +13,11 @@ module.exports = React.createClass({
     return (
       <div className="panel">
         <div className="panel-body">
-
-          <br/>
-          {created_sent_diff}
+          <b>Creada:</b> {this.props.quotation.created_at}
+          <hr/>
+          <b>Enviada:</b> {this.props.quotation.sent_at}
+          <hr/>
+          <b>Tiempo:</b> {created_sent_diff}
         </div>
       </div>
     );

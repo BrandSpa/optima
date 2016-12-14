@@ -7,7 +7,7 @@ import store from './store';
 import App from './views/app';
 import Dashboard from 'views/quotations/dashboard';
 import CompanyCreate from './views/companies/create_panel';
-import ContactCreate from './views/contacts/create_panel';
+
 import Quotation from './views/quotation/section';
 import Companies from './views/companies/list';
 import Contacts from './views/contacts/section';

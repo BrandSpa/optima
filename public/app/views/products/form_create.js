@@ -5,7 +5,7 @@ import productsTypesOptions from 'options/product_type.json';
 import PeriodsOptions from 'options/periods.json';
 import Select from 'components/form_select';
 
-module.exports = React.createClass({
+const productForm = React.createClass({
   getInitialState() {
     return {
       product: {},
@@ -107,7 +107,7 @@ module.exports = React.createClass({
     return (
       <form className="form" onSubmit={this.handleSubmit}>
         <div className="form-group col-md-6">
-          <label htmlFor="">Producto</label>
+          <label >Producto</label>
           <Select
             ref="name"
             options={productsOptions}
@@ -118,7 +118,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Tipo</label>
+          <label >Tipo</label>
           <Select
             ref="type"
             options={productsTypesOptions}
@@ -129,7 +129,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Procesador</label>
+          <label >Procesador</label>
           <input
             ref="processor"
             type="text"
@@ -139,7 +139,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">RAM</label>
+          <label >RAM</label>
           <input
             ref="ram"
             type="text"
@@ -149,7 +149,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Disco duro</label>
+          <label >Disco duro</label>
           <input
             ref="hdd"
             type="text"
@@ -159,7 +159,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Unidad optica</label>
+          <label >Unidad optica</label>
           <input
             ref="burner"
             type="text"
@@ -169,7 +169,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Tarjeta de red</label>
+          <label >Tarjeta de red</label>
           <input
             ref="network_card"
             type="text"
@@ -179,7 +179,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Batería</label>
+          <label >Batería</label>
           <input
             ref="battery"
             type="text"
@@ -189,7 +189,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Monitor</label>
+          <label >Monitor</label>
           <input
             ref="monitor"
             type="text"
@@ -199,7 +199,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Teclado y mouse</label>
+          <label >Teclado y mouse</label>
           <input
             ref="keyboard"
             type="text"
@@ -209,7 +209,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Sistema operativo</label>
+          <label >Sistema operativo</label>
           <input
             ref="os"
             type="text"
@@ -219,7 +219,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Office</label>
+          <label >Office</label>
           <input
             ref="office"
             type="text"
@@ -229,7 +229,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Antivirus</label>
+          <label >Antivirus</label>
           <input
             ref="antivirus"
             type="text"
@@ -239,7 +239,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Adicional</label>
+          <label >Adicional</label>
           <input
             ref="additional_1"
             type="text"
@@ -249,7 +249,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Adicional</label>
+          <label >Adicional</label>
           <input
             ref="additional_2"
             type="text"
@@ -259,7 +259,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Adicional</label>
+          <label >Adicional</label>
           <input
             ref="additional_3"
             type="text"
@@ -269,7 +269,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Adicional</label>
+          <label >Adicional</label>
           <input
             ref="additional_4"
             type="text"
@@ -279,7 +279,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Adicional</label>
+          <label >Adicional</label>
           <input
             ref="additional_5"
             type="text"
@@ -289,7 +289,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="">Adicional</label>
+          <label >Adicional</label>
           <input
             ref="additional_6"
             type="text"
@@ -301,7 +301,7 @@ module.exports = React.createClass({
         <div className="col-md-12"></div>
 
         <div className="form-group col-md-3">
-          <label htmlFor="">Lapso</label>
+          <label >Lapso</label>
           <input
             ref="lapse"
             type="number"
@@ -311,7 +311,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-3">
-          <label htmlFor="">Periodo</label>
+          <label >Periodo</label>
 
            <Select
             ref="period"
@@ -323,7 +323,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-3">
-          <label htmlFor="">Cantidad</label>
+          <label >Cantidad</label>
           <input
             ref="quantity"
             type="number"
@@ -333,7 +333,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-3">
-          <label htmlFor="">Precio</label>
+          <label >Precio</label>
           <input
             ref="price"
             type="number"
@@ -343,7 +343,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-xs-12">
-          <label htmlFor="">Nota</label>
+          <label >Nota</label>
           <textarea
             ref="note"
             cols="4"
@@ -373,7 +373,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="form-group col-md-3">
-          <label htmlFor="">Espacios pdf</label>
+          <label >Espacios pdf</label>
           <input
             ref="spaces"
             type="number"
@@ -394,3 +394,5 @@ module.exports = React.createClass({
     )
   }
 });
+
+export default productForm;

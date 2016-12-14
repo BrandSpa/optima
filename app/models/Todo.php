@@ -4,8 +4,8 @@ class Todo extends \Eloquent {
 
 	protected $fillable = [
     'user_id',
-    'quotation_id',
     'tracking_id',
+    'company_id',
     'from_user',
     'title',
     'description',
@@ -31,9 +31,9 @@ class Todo extends \Eloquent {
     return $this->belongsTo('Optima\\Tracking');
   }
 
-  public function quotation()
+  public function company()
   {
-    return $this->belongsTo('Optima\\Quotation');
+    return $this->belongsTo('Optima\\Company');
   }
 
   public static function store($data)

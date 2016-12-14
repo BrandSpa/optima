@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import request from 'superagent';
 import Item from 'views/services/item';
 
 module.exports = React.createClass({

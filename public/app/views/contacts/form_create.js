@@ -9,11 +9,12 @@ import foundUsOptions from 'options/found_us.json';
 import howCallOptions from 'options/how_call.json';
 import genderOptions from 'options/gender.json';
 
-module.exports = React.createClass({
+const contactForm = React.createClass({
   getInitialState() {
     return {
       contact: {
-        company_id: null
+        company_id: null,
+        comment: ''
       }
     }
   },
@@ -190,6 +191,16 @@ module.exports = React.createClass({
           </div>
 
           <div className={"form-group " + size}>
+            <input
+              className="form-control"
+              ref="fax"
+              onChange={this.handleChange}
+              value={contact.birthday}
+              placeholder="Cumpleaños: 07/07/1980"
+            />
+          </div>
+
+          <div className={"form-group " + size}>
             <Select
               ref="pay_method"
               options={payMethodOptions}
@@ -238,3 +249,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default contactForm;

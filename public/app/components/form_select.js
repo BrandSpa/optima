@@ -11,13 +11,14 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    let optionNodes = this.props.options.map((option, i) => {
-      return (<option key={i} value={option.value}>{option.label}</option>);
-    });
+    let optionNodes = this.props.options.map((option, i) => 
+      <option key={i} value={option.value}>{option.label}</option>
+    );
 
-    let value = this.props.value || this.props.default || '';
+    let value = this.props.value || '';
 
     value = parseInt(value) ? parseInt(value) : value;
+    
     return (
       <select
         ref="select"

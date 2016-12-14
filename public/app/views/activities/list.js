@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import request from 'superagent';
 import * as action from 'actions/activities';
 import Item from 'views/activities/item';
 

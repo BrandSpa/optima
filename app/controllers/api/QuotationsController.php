@@ -8,7 +8,6 @@ use Crypt;
 use Mail;
 
 class QuotationsController extends \BaseController {
-	use \Traits\Quotations\checkFields;
 
 	protected $entity;
 	protected $relationships = ['contact','company', 'company.contacts', 'user'];
@@ -23,6 +22,7 @@ class QuotationsController extends \BaseController {
 		$skip = Input::get('offset');
 		$q = Input::get('query');
 		$status = Input::get('status');
+		$priority = Input::get('priority');
 		$advisor = Input::get('advisor');
 		$client_type = Input::get('client_type');
 		$quotation_type = Input::get('quotation_type');
@@ -33,6 +33,10 @@ class QuotationsController extends \BaseController {
 
 		if( Input::has('status') && $status != "" ) {
 			$collection = $collection->where("status", $status);
+		}
+
+			if( Input::has('priority') && $priority != "" ) {
+			$collection = $collection->where("priority", $priority);
 		}
 
 		if( Input::has('advisor') && $advisor != "" ) {
@@ -108,6 +112,8 @@ class QuotationsController extends \BaseController {
 		return Response::json($model, 201);
 	}
 
+	
+
 	public function update($id)
 	{
 		$data = Input::all();
@@ -128,7 +134,7 @@ class QuotationsController extends \BaseController {
 				if ($this->checkFields($fieldsToCheck)) {
 					$model->update($data);
 				} else {
-					return Response::json(['message' => 'complete los filtros'], 400);
+					return Response::json(['complete los filtros'], 400);
 				}
 			} else {
 				$model->update($data);
@@ -141,11 +147,30 @@ class QuotationsController extends \BaseController {
 		return Response::json($validator->errors()->all(), 400);
 	}
 
+	public function checkFields($fields)
+  {
+    foreach ($fields as $field) {
+      if ( !$field ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 	public function send($id)
 	{
 		$model = Quotation::find($id);
 
-		if ($this->checkFields($fieldsToCheck)) {
+		$fieldsToCheck = [
+			$quotation->type,
+			$quotation->type_category,
+			$quotation->client_type,
+			$quotation->found_us,
+			$quotation->offer,
+			$quotation->advisor,
+		];
+
+		if (checkFields($fieldsToCheck)) {
 			$this->mailer->sendQuotation($model);
 			$model->created_sent_diff = $model->diffCreateAndSent();
 			return Response::json($fieldsToCheck, 300);
@@ -169,12 +194,13 @@ class QuotationsController extends \BaseController {
 			$quotation->offer,
 			$quotation->advisor,
 		];
-		if ($this->checkFields($this->$fieldsToCheck)) {
-			$this->mailer->sendQuotation($model);
-                        $model->created_sent_diff = $model->diffCreateAndSent();
-			return Response::json($fieldsToCheck, 200);
+
+		if ($this->checkFields($fieldsToCheck)) {
+			$this->entity->diffCreateAndSent($id);
+			$this->sendQuotation($quotation);
+			return Response::json($quotation, 200);
 		} else {
-			return Response::json(["message" => "field empty"], 400);
+			return Response::json(["Ingrese todos los campos"], 400);
 		}
 	}
 
@@ -202,7 +228,7 @@ class QuotationsController extends \BaseController {
 
 		if($email) {
 			Mail::send('emails.quotation', compact('data'), function($message) use($email, $recipient_1, $recipient_2, $id) {
-				$message->subject('Avante cotización '.$id);
+				$message->subject('RentAdvisor cotización '.$id);
 				$message->to($email);
 
 				if (!empty($recipient_1)) $message->cc($recipient_1);

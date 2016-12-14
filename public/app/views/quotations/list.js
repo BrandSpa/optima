@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import request from 'superagent';
 import * as quo from 'actions/quotations';
 import Filters from 'views/quotations/filters';
 import ListTable from 'views/quotations/list_table';

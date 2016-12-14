@@ -2,12 +2,18 @@
 import React from 'react';
 
 module.exports = React.createClass({
+  getDefaultProps() {
+    return {
+      value: ''
+    }
+  },
+
   handleChange: function() {
     this.props.onTextareaChange();
   },
 
   render: function() {
-    let value = this.props.value || '';
+    let {value} = this.props;
     
     return (
       <textarea 
@@ -15,8 +21,9 @@ module.exports = React.createClass({
         ref="textarea" 
         placeholder={this.props.placeholder} 
         onChange={this.handleChange} 
-        value={value}>
-      </textarea>
+        value={value}
+      />
+
     );
   }
 });

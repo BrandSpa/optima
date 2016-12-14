@@ -1,5 +1,5 @@
 'use strict';
-import request from 'superagent';
+import request from 'axios';
 
 export function storeActivity(data) {
     // data = {

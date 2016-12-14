@@ -15,7 +15,7 @@ module.exports = React.createClass({
       quotation: {
         status: 'No efectiva',
         status_cause: null,
-        status_note: null
+        status_note: ''
       }
     }
   },

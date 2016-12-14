@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import * as action from 'actions/trackings';
 import Tracking from 'views/quotation/tracking';
 import Form from 'views/trackings/form_create';
 
@@ -9,21 +10,12 @@ export default React.createClass({
       tracking: {
         todos: []
       },
-      trackings: [],
     }
   },
-
-
-  _fetch(id) {
-    // request
-    //   .get('/api/v1/trackings')
-    //   .query({quotation_id: id})
-    //   .end((err, res) => this.setState({trackings: res.body}));
-  },
-
+  
   handleSubmit(tracking) {
     let model = {...tracking, quotation_id: this.props.quotationId};
-    console.log(model);
+    this.props.dispatch(action.store(model));
   },
 
   render() {
@@ -34,7 +26,7 @@ export default React.createClass({
     return (
       <div className="panel">
         <div className="panel-body">
-          <Form onSubmit={this.handleSubmit} />
+          <Form contacts={this.props.contacts.items} onSubmit={this.handleSubmit} />
           <br/>
           <ul className="list-group">
             {trackingNodes}

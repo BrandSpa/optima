@@ -5,6 +5,7 @@ import statusOptions from 'options/status.json';
 import advisorOptions from 'options/advisors.json';
 import typeOptions from 'options/type.json';
 import clientOptions from 'options/client_type.json';
+import priorityOptions from 'options/priority.json';
 import Select from 'components/form_select';
 import DataTime from 'components/datetime';
 
@@ -19,7 +20,8 @@ const quoFilters = React.createClass({
         client_type: null,
         quotation_type: null,
         date_start: null,
-        date_end: null
+        date_end: null,
+        priority: null
       }
     }
   },
@@ -57,11 +59,20 @@ const quoFilters = React.createClass({
         <div className="panel-body">
           <div className="row">
 
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-3">
               <input
                 placeholder="Buscar cotizaciones"
                 className="form-control"
                 onChange={e => this.handleChange('query', e)}
+              />
+            </div>
+
+             <div className="form-group col-sm-3">
+              <Select
+                options={priorityOptions}
+                default="Seleccionar prioridad"
+                value={query.priority}
+                onSelectChange={e => this.handleChange('priority', e)}
               />
             </div>
 

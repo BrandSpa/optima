@@ -62,39 +62,35 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _app = __webpack_require__(240);
+	var _app = __webpack_require__(242);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _dashboard = __webpack_require__(242);
+	var _dashboard = __webpack_require__(244);
 
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 
-	var _create_panel = __webpack_require__(466);
+	var _create_panel = __webpack_require__(463);
 
 	var _create_panel2 = _interopRequireDefault(_create_panel);
 
-	var _create_panel3 = __webpack_require__(476);
-
-	var _create_panel4 = _interopRequireDefault(_create_panel3);
-
-	var _section = __webpack_require__(484);
+	var _section = __webpack_require__(480);
 
 	var _section2 = _interopRequireDefault(_section);
 
-	var _list = __webpack_require__(512);
+	var _list = __webpack_require__(511);
 
 	var _list2 = _interopRequireDefault(_list);
 
-	var _section3 = __webpack_require__(516);
+	var _section3 = __webpack_require__(515);
 
 	var _section4 = _interopRequireDefault(_section3);
 
-	var _section5 = __webpack_require__(517);
+	var _section5 = __webpack_require__(516);
 
 	var _section6 = _interopRequireDefault(_section5);
 
-	var _section7 = __webpack_require__(403);
+	var _section7 = __webpack_require__(400);
 
 	var _section8 = _interopRequireDefault(_section7);
 
@@ -25653,39 +25649,39 @@
 
 	var _quotations2 = _interopRequireDefault(_quotations);
 
-	var _todos = __webpack_require__(233);
+	var _todos = __webpack_require__(232);
 
 	var _todos2 = _interopRequireDefault(_todos);
 
-	var _activities = __webpack_require__(234);
+	var _activities = __webpack_require__(233);
 
 	var _activities2 = _interopRequireDefault(_activities);
 
-	var _reports = __webpack_require__(235);
+	var _reports = __webpack_require__(234);
 
 	var _reports2 = _interopRequireDefault(_reports);
 
-	var _companies = __webpack_require__(236);
+	var _companies = __webpack_require__(235);
 
 	var _companies2 = _interopRequireDefault(_companies);
 
-	var _contacts = __webpack_require__(238);
+	var _contacts = __webpack_require__(237);
 
 	var _contacts2 = _interopRequireDefault(_contacts);
 
-	var _services = __webpack_require__(239);
+	var _services = __webpack_require__(238);
 
 	var _services2 = _interopRequireDefault(_services);
 
-	var _products = __webpack_require__(524);
+	var _products = __webpack_require__(239);
 
 	var _products2 = _interopRequireDefault(_products);
 
-	var _trackings = __webpack_require__(525);
+	var _trackings = __webpack_require__(240);
 
 	var _trackings2 = _interopRequireDefault(_trackings);
 
-	var _user = __webpack_require__(523);
+	var _user = __webpack_require__(241);
 
 	var _user2 = _interopRequireDefault(_user);
 
@@ -25722,6 +25718,8 @@
 		items: [],
 		errors: [],
 		quotation: {},
+		contact: {},
+		company: {},
 		services: []
 	};
 
@@ -25744,7 +25742,9 @@
 
 			case TYPE + '_SET_QUOTATION':
 				return _extends({}, state, {
-					quotation: action.payload
+					quotation: action.payload,
+					company: action.payload.company,
+					contact: action.payload.contact
 				});
 				break;
 
@@ -25785,8 +25785,7 @@
 	}
 
 /***/ },
-/* 232 */,
-/* 233 */
+/* 232 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25862,7 +25861,7 @@
 	}
 
 /***/ },
-/* 234 */
+/* 233 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25910,7 +25909,7 @@
 	}
 
 /***/ },
-/* 235 */
+/* 234 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25952,7 +25951,7 @@
 	}
 
 /***/ },
-/* 236 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25967,7 +25966,7 @@
 
 	exports.default = reducer;
 
-	var _clean_object = __webpack_require__(237);
+	var _clean_object = __webpack_require__(236);
 
 	var _clean_object2 = _interopRequireDefault(_clean_object);
 
@@ -26052,7 +26051,7 @@
 	}
 
 /***/ },
-/* 237 */
+/* 236 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26074,7 +26073,7 @@
 	}
 
 /***/ },
-/* 238 */
+/* 237 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26162,7 +26161,7 @@
 	}
 
 /***/ },
-/* 239 */
+/* 238 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26247,7 +26246,217 @@
 	}
 
 /***/ },
+/* 239 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'PRODUCTS';
+	var initialState = {
+		items: [],
+		errors: [],
+		product: {}
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		var _ret = function () {
+			switch (action.type) {
+				case TYPE + '_FETCH':
+					return {
+						v: _extends({}, state, {
+							items: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_SET_PRODUCT':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							product: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_STORE':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							items: [action.payload].concat(state.items)
+						})
+					};
+					break;
+
+				case TYPE + '_UPDATE':
+					var updated = action.payload;
+
+					return {
+						v: _extends({}, state, {
+							contact: {},
+							errors: [],
+							items: state.items.map(function (model) {
+								return model.id == updated.id ? _extends({}, model, updated) : model;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_FAIL':
+					return {
+						v: _extends({}, state, {
+							errors: [action.payload]
+						})
+					};
+					break;
+
+				default:
+					return {
+						v: state
+					};
+					break;
+			}
+		}();
+
+		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+/***/ },
 /* 240 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'TRACKINGS';
+	var initialState = {
+		items: [],
+		errors: [],
+		tracking: {}
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		var _ret = function () {
+			switch (action.type) {
+				case TYPE + '_FETCH':
+					return {
+						v: _extends({}, state, {
+							items: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_SET_TRACKING':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							product: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_STORE':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							items: [action.payload].concat(state.items)
+						})
+					};
+					break;
+
+				case TYPE + '_UPDATE':
+					var updated = action.payload;
+
+					return {
+						v: _extends({}, state, {
+							contact: {},
+							errors: [],
+							items: state.items.map(function (model) {
+								return model.id == updated.id ? _extends({}, model, updated) : model;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_FAIL':
+					return {
+						v: _extends({}, state, {
+							errors: [action.payload]
+						})
+					};
+					break;
+
+				default:
+					return {
+						v: state
+					};
+					break;
+			}
+		}();
+
+		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+/***/ },
+/* 241 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'USER';
+	var initialState = {
+		user: JSON.parse(localStorage.getItem('user')) || {},
+		errors: []
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		switch (action.type) {
+			case TYPE + '_FAIL':
+				return _extends({}, state, {
+					errors: [action.payload]
+				});
+				break;
+
+			default:
+				return state;
+				break;
+		}
+	}
+
+/***/ },
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26256,7 +26465,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _app_header = __webpack_require__(241);
+	var _app_header = __webpack_require__(243);
 
 	var _app_header2 = _interopRequireDefault(_app_header);
 
@@ -26275,7 +26484,7 @@
 	});
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26368,7 +26577,7 @@
 	});
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26377,19 +26586,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _list = __webpack_require__(243);
+	var _list = __webpack_require__(245);
 
 	var _list2 = _interopRequireDefault(_list);
 
-	var _list3 = __webpack_require__(400);
+	var _list3 = __webpack_require__(397);
 
 	var _list4 = _interopRequireDefault(_list3);
 
-	var _section = __webpack_require__(403);
+	var _section = __webpack_require__(400);
 
 	var _section2 = _interopRequireDefault(_section);
 
-	var _section3 = __webpack_require__(411);
+	var _section3 = __webpack_require__(408);
 
 	var _section4 = _interopRequireDefault(_section3);
 
@@ -26420,7 +26629,7 @@
 	});
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26437,19 +26646,15 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _quotations = __webpack_require__(250);
+	var _quotations = __webpack_require__(246);
 
 	var quo = _interopRequireWildcard(_quotations);
 
-	var _filters = __webpack_require__(276);
+	var _filters = __webpack_require__(272);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
-	var _list_table = __webpack_require__(286);
+	var _list_table = __webpack_require__(283);
 
 	var _list_table2 = _interopRequireDefault(_list_table);
 
@@ -26563,1517 +26768,7 @@
 	})(quotations);
 
 /***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Module dependencies.
-	 */
-
-	var Emitter = __webpack_require__(245);
-	var reduce = __webpack_require__(246);
-	var requestBase = __webpack_require__(247);
-	var isObject = __webpack_require__(248);
-
-	/**
-	 * Root reference for iframes.
-	 */
-
-	var root;
-	if (typeof window !== 'undefined') { // Browser window
-	  root = window;
-	} else if (typeof self !== 'undefined') { // Web Worker
-	  root = self;
-	} else { // Other environments
-	  root = this;
-	}
-
-	/**
-	 * Noop.
-	 */
-
-	function noop(){};
-
-	/**
-	 * Check if `obj` is a host object,
-	 * we don't want to serialize these :)
-	 *
-	 * TODO: future proof, move to compoent land
-	 *
-	 * @param {Object} obj
-	 * @return {Boolean}
-	 * @api private
-	 */
-
-	function isHost(obj) {
-	  var str = {}.toString.call(obj);
-
-	  switch (str) {
-	    case '[object File]':
-	    case '[object Blob]':
-	    case '[object FormData]':
-	      return true;
-	    default:
-	      return false;
-	  }
-	}
-
-	/**
-	 * Expose `request`.
-	 */
-
-	var request = module.exports = __webpack_require__(249).bind(null, Request);
-
-	/**
-	 * Determine XHR.
-	 */
-
-	request.getXHR = function () {
-	  if (root.XMLHttpRequest
-	      && (!root.location || 'file:' != root.location.protocol
-	          || !root.ActiveXObject)) {
-	    return new XMLHttpRequest;
-	  } else {
-	    try { return new ActiveXObject('Microsoft.XMLHTTP'); } catch(e) {}
-	    try { return new ActiveXObject('Msxml2.XMLHTTP.6.0'); } catch(e) {}
-	    try { return new ActiveXObject('Msxml2.XMLHTTP.3.0'); } catch(e) {}
-	    try { return new ActiveXObject('Msxml2.XMLHTTP'); } catch(e) {}
-	  }
-	  return false;
-	};
-
-	/**
-	 * Removes leading and trailing whitespace, added to support IE.
-	 *
-	 * @param {String} s
-	 * @return {String}
-	 * @api private
-	 */
-
-	var trim = ''.trim
-	  ? function(s) { return s.trim(); }
-	  : function(s) { return s.replace(/(^\s*|\s*$)/g, ''); };
-
-	/**
-	 * Serialize the given `obj`.
-	 *
-	 * @param {Object} obj
-	 * @return {String}
-	 * @api private
-	 */
-
-	function serialize(obj) {
-	  if (!isObject(obj)) return obj;
-	  var pairs = [];
-	  for (var key in obj) {
-	    if (null != obj[key]) {
-	      pushEncodedKeyValuePair(pairs, key, obj[key]);
-	        }
-	      }
-	  return pairs.join('&');
-	}
-
-	/**
-	 * Helps 'serialize' with serializing arrays.
-	 * Mutates the pairs array.
-	 *
-	 * @param {Array} pairs
-	 * @param {String} key
-	 * @param {Mixed} val
-	 */
-
-	function pushEncodedKeyValuePair(pairs, key, val) {
-	  if (Array.isArray(val)) {
-	    return val.forEach(function(v) {
-	      pushEncodedKeyValuePair(pairs, key, v);
-	    });
-	  }
-	  pairs.push(encodeURIComponent(key)
-	    + '=' + encodeURIComponent(val));
-	}
-
-	/**
-	 * Expose serialization method.
-	 */
-
-	 request.serializeObject = serialize;
-
-	 /**
-	  * Parse the given x-www-form-urlencoded `str`.
-	  *
-	  * @param {String} str
-	  * @return {Object}
-	  * @api private
-	  */
-
-	function parseString(str) {
-	  var obj = {};
-	  var pairs = str.split('&');
-	  var parts;
-	  var pair;
-
-	  for (var i = 0, len = pairs.length; i < len; ++i) {
-	    pair = pairs[i];
-	    parts = pair.split('=');
-	    obj[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
-	  }
-
-	  return obj;
-	}
-
-	/**
-	 * Expose parser.
-	 */
-
-	request.parseString = parseString;
-
-	/**
-	 * Default MIME type map.
-	 *
-	 *     superagent.types.xml = 'application/xml';
-	 *
-	 */
-
-	request.types = {
-	  html: 'text/html',
-	  json: 'application/json',
-	  xml: 'application/xml',
-	  urlencoded: 'application/x-www-form-urlencoded',
-	  'form': 'application/x-www-form-urlencoded',
-	  'form-data': 'application/x-www-form-urlencoded'
-	};
-
-	/**
-	 * Default serialization map.
-	 *
-	 *     superagent.serialize['application/xml'] = function(obj){
-	 *       return 'generated xml here';
-	 *     };
-	 *
-	 */
-
-	 request.serialize = {
-	   'application/x-www-form-urlencoded': serialize,
-	   'application/json': JSON.stringify
-	 };
-
-	 /**
-	  * Default parsers.
-	  *
-	  *     superagent.parse['application/xml'] = function(str){
-	  *       return { object parsed from str };
-	  *     };
-	  *
-	  */
-
-	request.parse = {
-	  'application/x-www-form-urlencoded': parseString,
-	  'application/json': JSON.parse
-	};
-
-	/**
-	 * Parse the given header `str` into
-	 * an object containing the mapped fields.
-	 *
-	 * @param {String} str
-	 * @return {Object}
-	 * @api private
-	 */
-
-	function parseHeader(str) {
-	  var lines = str.split(/\r?\n/);
-	  var fields = {};
-	  var index;
-	  var line;
-	  var field;
-	  var val;
-
-	  lines.pop(); // trailing CRLF
-
-	  for (var i = 0, len = lines.length; i < len; ++i) {
-	    line = lines[i];
-	    index = line.indexOf(':');
-	    field = line.slice(0, index).toLowerCase();
-	    val = trim(line.slice(index + 1));
-	    fields[field] = val;
-	  }
-
-	  return fields;
-	}
-
-	/**
-	 * Check if `mime` is json or has +json structured syntax suffix.
-	 *
-	 * @param {String} mime
-	 * @return {Boolean}
-	 * @api private
-	 */
-
-	function isJSON(mime) {
-	  return /[\/+]json\b/.test(mime);
-	}
-
-	/**
-	 * Return the mime type for the given `str`.
-	 *
-	 * @param {String} str
-	 * @return {String}
-	 * @api private
-	 */
-
-	function type(str){
-	  return str.split(/ *; */).shift();
-	};
-
-	/**
-	 * Return header field parameters.
-	 *
-	 * @param {String} str
-	 * @return {Object}
-	 * @api private
-	 */
-
-	function params(str){
-	  return reduce(str.split(/ *; */), function(obj, str){
-	    var parts = str.split(/ *= */)
-	      , key = parts.shift()
-	      , val = parts.shift();
-
-	    if (key && val) obj[key] = val;
-	    return obj;
-	  }, {});
-	};
-
-	/**
-	 * Initialize a new `Response` with the given `xhr`.
-	 *
-	 *  - set flags (.ok, .error, etc)
-	 *  - parse header
-	 *
-	 * Examples:
-	 *
-	 *  Aliasing `superagent` as `request` is nice:
-	 *
-	 *      request = superagent;
-	 *
-	 *  We can use the promise-like API, or pass callbacks:
-	 *
-	 *      request.get('/').end(function(res){});
-	 *      request.get('/', function(res){});
-	 *
-	 *  Sending data can be chained:
-	 *
-	 *      request
-	 *        .post('/user')
-	 *        .send({ name: 'tj' })
-	 *        .end(function(res){});
-	 *
-	 *  Or passed to `.send()`:
-	 *
-	 *      request
-	 *        .post('/user')
-	 *        .send({ name: 'tj' }, function(res){});
-	 *
-	 *  Or passed to `.post()`:
-	 *
-	 *      request
-	 *        .post('/user', { name: 'tj' })
-	 *        .end(function(res){});
-	 *
-	 * Or further reduced to a single call for simple cases:
-	 *
-	 *      request
-	 *        .post('/user', { name: 'tj' }, function(res){});
-	 *
-	 * @param {XMLHTTPRequest} xhr
-	 * @param {Object} options
-	 * @api private
-	 */
-
-	function Response(req, options) {
-	  options = options || {};
-	  this.req = req;
-	  this.xhr = this.req.xhr;
-	  // responseText is accessible only if responseType is '' or 'text' and on older browsers
-	  this.text = ((this.req.method !='HEAD' && (this.xhr.responseType === '' || this.xhr.responseType === 'text')) || typeof this.xhr.responseType === 'undefined')
-	     ? this.xhr.responseText
-	     : null;
-	  this.statusText = this.req.xhr.statusText;
-	  this.setStatusProperties(this.xhr.status);
-	  this.header = this.headers = parseHeader(this.xhr.getAllResponseHeaders());
-	  // getAllResponseHeaders sometimes falsely returns "" for CORS requests, but
-	  // getResponseHeader still works. so we get content-type even if getting
-	  // other headers fails.
-	  this.header['content-type'] = this.xhr.getResponseHeader('content-type');
-	  this.setHeaderProperties(this.header);
-	  this.body = this.req.method != 'HEAD'
-	    ? this.parseBody(this.text ? this.text : this.xhr.response)
-	    : null;
-	}
-
-	/**
-	 * Get case-insensitive `field` value.
-	 *
-	 * @param {String} field
-	 * @return {String}
-	 * @api public
-	 */
-
-	Response.prototype.get = function(field){
-	  return this.header[field.toLowerCase()];
-	};
-
-	/**
-	 * Set header related properties:
-	 *
-	 *   - `.type` the content type without params
-	 *
-	 * A response of "Content-Type: text/plain; charset=utf-8"
-	 * will provide you with a `.type` of "text/plain".
-	 *
-	 * @param {Object} header
-	 * @api private
-	 */
-
-	Response.prototype.setHeaderProperties = function(header){
-	  // content-type
-	  var ct = this.header['content-type'] || '';
-	  this.type = type(ct);
-
-	  // params
-	  var obj = params(ct);
-	  for (var key in obj) this[key] = obj[key];
-	};
-
-	/**
-	 * Parse the given body `str`.
-	 *
-	 * Used for auto-parsing of bodies. Parsers
-	 * are defined on the `superagent.parse` object.
-	 *
-	 * @param {String} str
-	 * @return {Mixed}
-	 * @api private
-	 */
-
-	Response.prototype.parseBody = function(str){
-	  var parse = request.parse[this.type];
-	  if (!parse && isJSON(this.type)) {
-	    parse = request.parse['application/json'];
-	  }
-	  return parse && str && (str.length || str instanceof Object)
-	    ? parse(str)
-	    : null;
-	};
-
-	/**
-	 * Set flags such as `.ok` based on `status`.
-	 *
-	 * For example a 2xx response will give you a `.ok` of __true__
-	 * whereas 5xx will be __false__ and `.error` will be __true__. The
-	 * `.clientError` and `.serverError` are also available to be more
-	 * specific, and `.statusType` is the class of error ranging from 1..5
-	 * sometimes useful for mapping respond colors etc.
-	 *
-	 * "sugar" properties are also defined for common cases. Currently providing:
-	 *
-	 *   - .noContent
-	 *   - .badRequest
-	 *   - .unauthorized
-	 *   - .notAcceptable
-	 *   - .notFound
-	 *
-	 * @param {Number} status
-	 * @api private
-	 */
-
-	Response.prototype.setStatusProperties = function(status){
-	  // handle IE9 bug: http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
-	  if (status === 1223) {
-	    status = 204;
-	  }
-
-	  var type = status / 100 | 0;
-
-	  // status / class
-	  this.status = this.statusCode = status;
-	  this.statusType = type;
-
-	  // basics
-	  this.info = 1 == type;
-	  this.ok = 2 == type;
-	  this.clientError = 4 == type;
-	  this.serverError = 5 == type;
-	  this.error = (4 == type || 5 == type)
-	    ? this.toError()
-	    : false;
-
-	  // sugar
-	  this.accepted = 202 == status;
-	  this.noContent = 204 == status;
-	  this.badRequest = 400 == status;
-	  this.unauthorized = 401 == status;
-	  this.notAcceptable = 406 == status;
-	  this.notFound = 404 == status;
-	  this.forbidden = 403 == status;
-	};
-
-	/**
-	 * Return an `Error` representative of this response.
-	 *
-	 * @return {Error}
-	 * @api public
-	 */
-
-	Response.prototype.toError = function(){
-	  var req = this.req;
-	  var method = req.method;
-	  var url = req.url;
-
-	  var msg = 'cannot ' + method + ' ' + url + ' (' + this.status + ')';
-	  var err = new Error(msg);
-	  err.status = this.status;
-	  err.method = method;
-	  err.url = url;
-
-	  return err;
-	};
-
-	/**
-	 * Expose `Response`.
-	 */
-
-	request.Response = Response;
-
-	/**
-	 * Initialize a new `Request` with the given `method` and `url`.
-	 *
-	 * @param {String} method
-	 * @param {String} url
-	 * @api public
-	 */
-
-	function Request(method, url) {
-	  var self = this;
-	  this._query = this._query || [];
-	  this.method = method;
-	  this.url = url;
-	  this.header = {}; // preserves header name case
-	  this._header = {}; // coerces header names to lowercase
-	  this.on('end', function(){
-	    var err = null;
-	    var res = null;
-
-	    try {
-	      res = new Response(self);
-	    } catch(e) {
-	      err = new Error('Parser is unable to parse the response');
-	      err.parse = true;
-	      err.original = e;
-	      // issue #675: return the raw response if the response parsing fails
-	      err.rawResponse = self.xhr && self.xhr.responseText ? self.xhr.responseText : null;
-	      // issue #876: return the http status code if the response parsing fails
-	      err.statusCode = self.xhr && self.xhr.status ? self.xhr.status : null;
-	      return self.callback(err);
-	    }
-
-	    self.emit('response', res);
-
-	    if (err) {
-	      return self.callback(err, res);
-	    }
-
-	    if (res.status >= 200 && res.status < 300) {
-	      return self.callback(err, res);
-	    }
-
-	    var new_err = new Error(res.statusText || 'Unsuccessful HTTP response');
-	    new_err.original = err;
-	    new_err.response = res;
-	    new_err.status = res.status;
-
-	    self.callback(new_err, res);
-	  });
-	}
-
-	/**
-	 * Mixin `Emitter` and `requestBase`.
-	 */
-
-	Emitter(Request.prototype);
-	for (var key in requestBase) {
-	  Request.prototype[key] = requestBase[key];
-	}
-
-	/**
-	 * Abort the request, and clear potential timeout.
-	 *
-	 * @return {Request}
-	 * @api public
-	 */
-
-	Request.prototype.abort = function(){
-	  if (this.aborted) return;
-	  this.aborted = true;
-	  this.xhr && this.xhr.abort();
-	  this.clearTimeout();
-	  this.emit('abort');
-	  return this;
-	};
-
-	/**
-	 * Set Content-Type to `type`, mapping values from `request.types`.
-	 *
-	 * Examples:
-	 *
-	 *      superagent.types.xml = 'application/xml';
-	 *
-	 *      request.post('/')
-	 *        .type('xml')
-	 *        .send(xmlstring)
-	 *        .end(callback);
-	 *
-	 *      request.post('/')
-	 *        .type('application/xml')
-	 *        .send(xmlstring)
-	 *        .end(callback);
-	 *
-	 * @param {String} type
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	Request.prototype.type = function(type){
-	  this.set('Content-Type', request.types[type] || type);
-	  return this;
-	};
-
-	/**
-	 * Set responseType to `val`. Presently valid responseTypes are 'blob' and 
-	 * 'arraybuffer'.
-	 *
-	 * Examples:
-	 *
-	 *      req.get('/')
-	 *        .responseType('blob')
-	 *        .end(callback);
-	 *
-	 * @param {String} val
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	Request.prototype.responseType = function(val){
-	  this._responseType = val;
-	  return this;
-	};
-
-	/**
-	 * Set Accept to `type`, mapping values from `request.types`.
-	 *
-	 * Examples:
-	 *
-	 *      superagent.types.json = 'application/json';
-	 *
-	 *      request.get('/agent')
-	 *        .accept('json')
-	 *        .end(callback);
-	 *
-	 *      request.get('/agent')
-	 *        .accept('application/json')
-	 *        .end(callback);
-	 *
-	 * @param {String} accept
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	Request.prototype.accept = function(type){
-	  this.set('Accept', request.types[type] || type);
-	  return this;
-	};
-
-	/**
-	 * Set Authorization field value with `user` and `pass`.
-	 *
-	 * @param {String} user
-	 * @param {String} pass
-	 * @param {Object} options with 'type' property 'auto' or 'basic' (default 'basic')
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	Request.prototype.auth = function(user, pass, options){
-	  if (!options) {
-	    options = {
-	      type: 'basic'
-	    }
-	  }
-
-	  switch (options.type) {
-	    case 'basic':
-	      var str = btoa(user + ':' + pass);
-	      this.set('Authorization', 'Basic ' + str);
-	    break;
-
-	    case 'auto':
-	      this.username = user;
-	      this.password = pass;
-	    break;
-	  }
-	  return this;
-	};
-
-	/**
-	* Add query-string `val`.
-	*
-	* Examples:
-	*
-	*   request.get('/shoes')
-	*     .query('size=10')
-	*     .query({ color: 'blue' })
-	*
-	* @param {Object|String} val
-	* @return {Request} for chaining
-	* @api public
-	*/
-
-	Request.prototype.query = function(val){
-	  if ('string' != typeof val) val = serialize(val);
-	  if (val) this._query.push(val);
-	  return this;
-	};
-
-	/**
-	 * Queue the given `file` as an attachment to the specified `field`,
-	 * with optional `filename`.
-	 *
-	 * ``` js
-	 * request.post('/upload')
-	 *   .attach(new Blob(['<a id="a"><b id="b">hey!</b></a>'], { type: "text/html"}))
-	 *   .end(callback);
-	 * ```
-	 *
-	 * @param {String} field
-	 * @param {Blob|File} file
-	 * @param {String} filename
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	Request.prototype.attach = function(field, file, filename){
-	  this._getFormData().append(field, file, filename || file.name);
-	  return this;
-	};
-
-	Request.prototype._getFormData = function(){
-	  if (!this._formData) {
-	    this._formData = new root.FormData();
-	  }
-	  return this._formData;
-	};
-
-	/**
-	 * Send `data` as the request body, defaulting the `.type()` to "json" when
-	 * an object is given.
-	 *
-	 * Examples:
-	 *
-	 *       // manual json
-	 *       request.post('/user')
-	 *         .type('json')
-	 *         .send('{"name":"tj"}')
-	 *         .end(callback)
-	 *
-	 *       // auto json
-	 *       request.post('/user')
-	 *         .send({ name: 'tj' })
-	 *         .end(callback)
-	 *
-	 *       // manual x-www-form-urlencoded
-	 *       request.post('/user')
-	 *         .type('form')
-	 *         .send('name=tj')
-	 *         .end(callback)
-	 *
-	 *       // auto x-www-form-urlencoded
-	 *       request.post('/user')
-	 *         .type('form')
-	 *         .send({ name: 'tj' })
-	 *         .end(callback)
-	 *
-	 *       // defaults to x-www-form-urlencoded
-	  *      request.post('/user')
-	  *        .send('name=tobi')
-	  *        .send('species=ferret')
-	  *        .end(callback)
-	 *
-	 * @param {String|Object} data
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	Request.prototype.send = function(data){
-	  var obj = isObject(data);
-	  var type = this._header['content-type'];
-
-	  // merge
-	  if (obj && isObject(this._data)) {
-	    for (var key in data) {
-	      this._data[key] = data[key];
-	    }
-	  } else if ('string' == typeof data) {
-	    if (!type) this.type('form');
-	    type = this._header['content-type'];
-	    if ('application/x-www-form-urlencoded' == type) {
-	      this._data = this._data
-	        ? this._data + '&' + data
-	        : data;
-	    } else {
-	      this._data = (this._data || '') + data;
-	    }
-	  } else {
-	    this._data = data;
-	  }
-
-	  if (!obj || isHost(data)) return this;
-	  if (!type) this.type('json');
-	  return this;
-	};
-
-	/**
-	 * @deprecated
-	 */
-	Response.prototype.parse = function serialize(fn){
-	  if (root.console) {
-	    console.warn("Client-side parse() method has been renamed to serialize(). This method is not compatible with superagent v2.0");
-	  }
-	  this.serialize(fn);
-	  return this;
-	};
-
-	Response.prototype.serialize = function serialize(fn){
-	  this._parser = fn;
-	  return this;
-	};
-
-	/**
-	 * Invoke the callback with `err` and `res`
-	 * and handle arity check.
-	 *
-	 * @param {Error} err
-	 * @param {Response} res
-	 * @api private
-	 */
-
-	Request.prototype.callback = function(err, res){
-	  var fn = this._callback;
-	  this.clearTimeout();
-	  fn(err, res);
-	};
-
-	/**
-	 * Invoke callback with x-domain error.
-	 *
-	 * @api private
-	 */
-
-	Request.prototype.crossDomainError = function(){
-	  var err = new Error('Request has been terminated\nPossible causes: the network is offline, Origin is not allowed by Access-Control-Allow-Origin, the page is being unloaded, etc.');
-	  err.crossDomain = true;
-
-	  err.status = this.status;
-	  err.method = this.method;
-	  err.url = this.url;
-
-	  this.callback(err);
-	};
-
-	/**
-	 * Invoke callback with timeout error.
-	 *
-	 * @api private
-	 */
-
-	Request.prototype.timeoutError = function(){
-	  var timeout = this._timeout;
-	  var err = new Error('timeout of ' + timeout + 'ms exceeded');
-	  err.timeout = timeout;
-	  this.callback(err);
-	};
-
-	/**
-	 * Enable transmission of cookies with x-domain requests.
-	 *
-	 * Note that for this to work the origin must not be
-	 * using "Access-Control-Allow-Origin" with a wildcard,
-	 * and also must set "Access-Control-Allow-Credentials"
-	 * to "true".
-	 *
-	 * @api public
-	 */
-
-	Request.prototype.withCredentials = function(){
-	  this._withCredentials = true;
-	  return this;
-	};
-
-	/**
-	 * Initiate request, invoking callback `fn(res)`
-	 * with an instanceof `Response`.
-	 *
-	 * @param {Function} fn
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	Request.prototype.end = function(fn){
-	  var self = this;
-	  var xhr = this.xhr = request.getXHR();
-	  var query = this._query.join('&');
-	  var timeout = this._timeout;
-	  var data = this._formData || this._data;
-
-	  // store callback
-	  this._callback = fn || noop;
-
-	  // state change
-	  xhr.onreadystatechange = function(){
-	    if (4 != xhr.readyState) return;
-
-	    // In IE9, reads to any property (e.g. status) off of an aborted XHR will
-	    // result in the error "Could not complete the operation due to error c00c023f"
-	    var status;
-	    try { status = xhr.status } catch(e) { status = 0; }
-
-	    if (0 == status) {
-	      if (self.timedout) return self.timeoutError();
-	      if (self.aborted) return;
-	      return self.crossDomainError();
-	    }
-	    self.emit('end');
-	  };
-
-	  // progress
-	  var handleProgress = function(e){
-	    if (e.total > 0) {
-	      e.percent = e.loaded / e.total * 100;
-	    }
-	    e.direction = 'download';
-	    self.emit('progress', e);
-	  };
-	  if (this.hasListeners('progress')) {
-	    xhr.onprogress = handleProgress;
-	  }
-	  try {
-	    if (xhr.upload && this.hasListeners('progress')) {
-	      xhr.upload.onprogress = handleProgress;
-	    }
-	  } catch(e) {
-	    // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.
-	    // Reported here:
-	    // https://connect.microsoft.com/IE/feedback/details/837245/xmlhttprequest-upload-throws-invalid-argument-when-used-from-web-worker-context
-	  }
-
-	  // timeout
-	  if (timeout && !this._timer) {
-	    this._timer = setTimeout(function(){
-	      self.timedout = true;
-	      self.abort();
-	    }, timeout);
-	  }
-
-	  // querystring
-	  if (query) {
-	    query = request.serializeObject(query);
-	    this.url += ~this.url.indexOf('?')
-	      ? '&' + query
-	      : '?' + query;
-	  }
-
-	  // initiate request
-	  if (this.username && this.password) {
-	    xhr.open(this.method, this.url, true, this.username, this.password);
-	  } else {
-	    xhr.open(this.method, this.url, true);
-	  }
-
-	  // CORS
-	  if (this._withCredentials) xhr.withCredentials = true;
-
-	  // body
-	  if ('GET' != this.method && 'HEAD' != this.method && 'string' != typeof data && !isHost(data)) {
-	    // serialize stuff
-	    var contentType = this._header['content-type'];
-	    var serialize = this._parser || request.serialize[contentType ? contentType.split(';')[0] : ''];
-	    if (!serialize && isJSON(contentType)) serialize = request.serialize['application/json'];
-	    if (serialize) data = serialize(data);
-	  }
-
-	  // set header fields
-	  for (var field in this.header) {
-	    if (null == this.header[field]) continue;
-	    xhr.setRequestHeader(field, this.header[field]);
-	  }
-
-	  if (this._responseType) {
-	    xhr.responseType = this._responseType;
-	  }
-
-	  // send stuff
-	  this.emit('request', this);
-
-	  // IE11 xhr.send(undefined) sends 'undefined' string as POST payload (instead of nothing)
-	  // We need null here if data is undefined
-	  xhr.send(typeof data !== 'undefined' ? data : null);
-	  return this;
-	};
-
-
-	/**
-	 * Expose `Request`.
-	 */
-
-	request.Request = Request;
-
-	/**
-	 * GET `url` with optional callback `fn(res)`.
-	 *
-	 * @param {String} url
-	 * @param {Mixed|Function} data or fn
-	 * @param {Function} fn
-	 * @return {Request}
-	 * @api public
-	 */
-
-	request.get = function(url, data, fn){
-	  var req = request('GET', url);
-	  if ('function' == typeof data) fn = data, data = null;
-	  if (data) req.query(data);
-	  if (fn) req.end(fn);
-	  return req;
-	};
-
-	/**
-	 * HEAD `url` with optional callback `fn(res)`.
-	 *
-	 * @param {String} url
-	 * @param {Mixed|Function} data or fn
-	 * @param {Function} fn
-	 * @return {Request}
-	 * @api public
-	 */
-
-	request.head = function(url, data, fn){
-	  var req = request('HEAD', url);
-	  if ('function' == typeof data) fn = data, data = null;
-	  if (data) req.send(data);
-	  if (fn) req.end(fn);
-	  return req;
-	};
-
-	/**
-	 * DELETE `url` with optional callback `fn(res)`.
-	 *
-	 * @param {String} url
-	 * @param {Function} fn
-	 * @return {Request}
-	 * @api public
-	 */
-
-	function del(url, fn){
-	  var req = request('DELETE', url);
-	  if (fn) req.end(fn);
-	  return req;
-	};
-
-	request['del'] = del;
-	request['delete'] = del;
-
-	/**
-	 * PATCH `url` with optional `data` and callback `fn(res)`.
-	 *
-	 * @param {String} url
-	 * @param {Mixed} data
-	 * @param {Function} fn
-	 * @return {Request}
-	 * @api public
-	 */
-
-	request.patch = function(url, data, fn){
-	  var req = request('PATCH', url);
-	  if ('function' == typeof data) fn = data, data = null;
-	  if (data) req.send(data);
-	  if (fn) req.end(fn);
-	  return req;
-	};
-
-	/**
-	 * POST `url` with optional `data` and callback `fn(res)`.
-	 *
-	 * @param {String} url
-	 * @param {Mixed} data
-	 * @param {Function} fn
-	 * @return {Request}
-	 * @api public
-	 */
-
-	request.post = function(url, data, fn){
-	  var req = request('POST', url);
-	  if ('function' == typeof data) fn = data, data = null;
-	  if (data) req.send(data);
-	  if (fn) req.end(fn);
-	  return req;
-	};
-
-	/**
-	 * PUT `url` with optional `data` and callback `fn(res)`.
-	 *
-	 * @param {String} url
-	 * @param {Mixed|Function} data or fn
-	 * @param {Function} fn
-	 * @return {Request}
-	 * @api public
-	 */
-
-	request.put = function(url, data, fn){
-	  var req = request('PUT', url);
-	  if ('function' == typeof data) fn = data, data = null;
-	  if (data) req.send(data);
-	  if (fn) req.end(fn);
-	  return req;
-	};
-
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * Expose `Emitter`.
-	 */
-
-	if (true) {
-	  module.exports = Emitter;
-	}
-
-	/**
-	 * Initialize a new `Emitter`.
-	 *
-	 * @api public
-	 */
-
-	function Emitter(obj) {
-	  if (obj) return mixin(obj);
-	};
-
-	/**
-	 * Mixin the emitter properties.
-	 *
-	 * @param {Object} obj
-	 * @return {Object}
-	 * @api private
-	 */
-
-	function mixin(obj) {
-	  for (var key in Emitter.prototype) {
-	    obj[key] = Emitter.prototype[key];
-	  }
-	  return obj;
-	}
-
-	/**
-	 * Listen on the given `event` with `fn`.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.on =
-	Emitter.prototype.addEventListener = function(event, fn){
-	  this._callbacks = this._callbacks || {};
-	  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
-	    .push(fn);
-	  return this;
-	};
-
-	/**
-	 * Adds an `event` listener that will be invoked a single
-	 * time then automatically removed.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.once = function(event, fn){
-	  function on() {
-	    this.off(event, on);
-	    fn.apply(this, arguments);
-	  }
-
-	  on.fn = fn;
-	  this.on(event, on);
-	  return this;
-	};
-
-	/**
-	 * Remove the given callback for `event` or all
-	 * registered callbacks.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.off =
-	Emitter.prototype.removeListener =
-	Emitter.prototype.removeAllListeners =
-	Emitter.prototype.removeEventListener = function(event, fn){
-	  this._callbacks = this._callbacks || {};
-
-	  // all
-	  if (0 == arguments.length) {
-	    this._callbacks = {};
-	    return this;
-	  }
-
-	  // specific event
-	  var callbacks = this._callbacks['$' + event];
-	  if (!callbacks) return this;
-
-	  // remove all handlers
-	  if (1 == arguments.length) {
-	    delete this._callbacks['$' + event];
-	    return this;
-	  }
-
-	  // remove specific handler
-	  var cb;
-	  for (var i = 0; i < callbacks.length; i++) {
-	    cb = callbacks[i];
-	    if (cb === fn || cb.fn === fn) {
-	      callbacks.splice(i, 1);
-	      break;
-	    }
-	  }
-	  return this;
-	};
-
-	/**
-	 * Emit `event` with the given args.
-	 *
-	 * @param {String} event
-	 * @param {Mixed} ...
-	 * @return {Emitter}
-	 */
-
-	Emitter.prototype.emit = function(event){
-	  this._callbacks = this._callbacks || {};
-	  var args = [].slice.call(arguments, 1)
-	    , callbacks = this._callbacks['$' + event];
-
-	  if (callbacks) {
-	    callbacks = callbacks.slice(0);
-	    for (var i = 0, len = callbacks.length; i < len; ++i) {
-	      callbacks[i].apply(this, args);
-	    }
-	  }
-
-	  return this;
-	};
-
-	/**
-	 * Return array of callbacks for `event`.
-	 *
-	 * @param {String} event
-	 * @return {Array}
-	 * @api public
-	 */
-
-	Emitter.prototype.listeners = function(event){
-	  this._callbacks = this._callbacks || {};
-	  return this._callbacks['$' + event] || [];
-	};
-
-	/**
-	 * Check if this emitter has `event` handlers.
-	 *
-	 * @param {String} event
-	 * @return {Boolean}
-	 * @api public
-	 */
-
-	Emitter.prototype.hasListeners = function(event){
-	  return !! this.listeners(event).length;
-	};
-
-
-/***/ },
 /* 246 */
-/***/ function(module, exports) {
-
-	
-	/**
-	 * Reduce `arr` with `fn`.
-	 *
-	 * @param {Array} arr
-	 * @param {Function} fn
-	 * @param {Mixed} initial
-	 *
-	 * TODO: combatible error handling?
-	 */
-
-	module.exports = function(arr, fn, initial){  
-	  var idx = 0;
-	  var len = arr.length;
-	  var curr = arguments.length == 3
-	    ? initial
-	    : arr[idx++];
-
-	  while (idx < len) {
-	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
-	  }
-	  
-	  return curr;
-	};
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Module of mixed-in functions shared between node and client code
-	 */
-	var isObject = __webpack_require__(248);
-
-	/**
-	 * Clear previous timeout.
-	 *
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	exports.clearTimeout = function _clearTimeout(){
-	  this._timeout = 0;
-	  clearTimeout(this._timer);
-	  return this;
-	};
-
-	/**
-	 * Force given parser
-	 *
-	 * Sets the body parser no matter type.
-	 *
-	 * @param {Function}
-	 * @api public
-	 */
-
-	exports.parse = function parse(fn){
-	  this._parser = fn;
-	  return this;
-	};
-
-	/**
-	 * Set timeout to `ms`.
-	 *
-	 * @param {Number} ms
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	exports.timeout = function timeout(ms){
-	  this._timeout = ms;
-	  return this;
-	};
-
-	/**
-	 * Faux promise support
-	 *
-	 * @param {Function} fulfill
-	 * @param {Function} reject
-	 * @return {Request}
-	 */
-
-	exports.then = function then(fulfill, reject) {
-	  return this.end(function(err, res) {
-	    err ? reject(err) : fulfill(res);
-	  });
-	}
-
-	/**
-	 * Allow for extension
-	 */
-
-	exports.use = function use(fn) {
-	  fn(this);
-	  return this;
-	}
-
-
-	/**
-	 * Get request header `field`.
-	 * Case-insensitive.
-	 *
-	 * @param {String} field
-	 * @return {String}
-	 * @api public
-	 */
-
-	exports.get = function(field){
-	  return this._header[field.toLowerCase()];
-	};
-
-	/**
-	 * Get case-insensitive header `field` value.
-	 * This is a deprecated internal API. Use `.get(field)` instead.
-	 *
-	 * (getHeader is no longer used internally by the superagent code base)
-	 *
-	 * @param {String} field
-	 * @return {String}
-	 * @api private
-	 * @deprecated
-	 */
-
-	exports.getHeader = exports.get;
-
-	/**
-	 * Set header `field` to `val`, or multiple fields with one object.
-	 * Case-insensitive.
-	 *
-	 * Examples:
-	 *
-	 *      req.get('/')
-	 *        .set('Accept', 'application/json')
-	 *        .set('X-API-Key', 'foobar')
-	 *        .end(callback);
-	 *
-	 *      req.get('/')
-	 *        .set({ Accept: 'application/json', 'X-API-Key': 'foobar' })
-	 *        .end(callback);
-	 *
-	 * @param {String|Object} field
-	 * @param {String} val
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-
-	exports.set = function(field, val){
-	  if (isObject(field)) {
-	    for (var key in field) {
-	      this.set(key, field[key]);
-	    }
-	    return this;
-	  }
-	  this._header[field.toLowerCase()] = val;
-	  this.header[field] = val;
-	  return this;
-	};
-
-	/**
-	 * Remove header `field`.
-	 * Case-insensitive.
-	 *
-	 * Example:
-	 *
-	 *      req.get('/')
-	 *        .unset('User-Agent')
-	 *        .end(callback);
-	 *
-	 * @param {String} field
-	 */
-	exports.unset = function(field){
-	  delete this._header[field.toLowerCase()];
-	  delete this.header[field];
-	  return this;
-	};
-
-	/**
-	 * Write the field `name` and `val` for "multipart/form-data"
-	 * request bodies.
-	 *
-	 * ``` js
-	 * request.post('/upload')
-	 *   .field('foo', 'bar')
-	 *   .end(callback);
-	 * ```
-	 *
-	 * @param {String} name
-	 * @param {String|Blob|File|Buffer|fs.ReadStream} val
-	 * @return {Request} for chaining
-	 * @api public
-	 */
-	exports.field = function(name, val) {
-	  this._getFormData().append(name, val);
-	  return this;
-	};
-
-
-/***/ },
-/* 248 */
-/***/ function(module, exports) {
-
-	/**
-	 * Check if `obj` is an object.
-	 *
-	 * @param {Object} obj
-	 * @return {Boolean}
-	 * @api private
-	 */
-
-	function isObject(obj) {
-	  return null != obj && 'object' == typeof obj;
-	}
-
-	module.exports = isObject;
-
-
-/***/ },
-/* 249 */
-/***/ function(module, exports) {
-
-	// The node and browser modules expose versions of this with the
-	// appropriate constructor function bound as first argument
-	/**
-	 * Issue a request:
-	 *
-	 * Examples:
-	 *
-	 *    request('GET', '/users').end(callback)
-	 *    request('/users').end(callback)
-	 *    request('/users', callback)
-	 *
-	 * @param {String} method
-	 * @param {String|Function} url or callback
-	 * @return {Request}
-	 * @api public
-	 */
-
-	function request(RequestConstructor, method, url) {
-	  // callback
-	  if ('function' == typeof url) {
-	    return new RequestConstructor('GET', method).end(url);
-	  }
-
-	  // url first
-	  if (2 == arguments.length) {
-	    return new RequestConstructor('GET', method);
-	  }
-
-	  return new RequestConstructor(method, url);
-	}
-
-	module.exports = request;
-
-
-/***/ },
-/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28085,11 +26780,12 @@
 	exports.fetchOne = fetchOne;
 	exports.store = store;
 	exports.update = update;
+	exports.sendMail = sendMail;
 	exports.fetchServices = fetchServices;
 	exports.storeService = storeService;
 	exports.removeService = removeService;
 
-	var _axios = __webpack_require__(251);
+	var _axios = __webpack_require__(247);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -28146,6 +26842,16 @@
 	  };
 	}
 
+	function sendMail(id) {
+	  return function (dispatch) {
+	    return _axios2.default.post('/api/v1/quotations/' + id + '/sendmail').then(function (res) {
+	      return dispatch({ type: TYPE + '_MAIL', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+	    });
+	  };
+	}
+
 	//services 
 
 	function fetchServices(quotationId) {
@@ -28179,21 +26885,21 @@
 	}
 
 /***/ },
-/* 251 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(252);
+	module.exports = __webpack_require__(248);
 
 /***/ },
-/* 252 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
-	var bind = __webpack_require__(254);
-	var Axios = __webpack_require__(255);
-	var defaults = __webpack_require__(256);
+	var utils = __webpack_require__(249);
+	var bind = __webpack_require__(250);
+	var Axios = __webpack_require__(251);
+	var defaults = __webpack_require__(252);
 
 	/**
 	 * Create an instance of Axios
@@ -28226,15 +26932,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(273);
-	axios.CancelToken = __webpack_require__(274);
-	axios.isCancel = __webpack_require__(270);
+	axios.Cancel = __webpack_require__(269);
+	axios.CancelToken = __webpack_require__(270);
+	axios.isCancel = __webpack_require__(266);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(275);
+	axios.spread = __webpack_require__(271);
 
 	module.exports = axios;
 
@@ -28243,12 +26949,12 @@
 
 
 /***/ },
-/* 253 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(254);
+	var bind = __webpack_require__(250);
 
 	/*global toString:true*/
 
@@ -28548,7 +27254,7 @@
 
 
 /***/ },
-/* 254 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28565,17 +27271,17 @@
 
 
 /***/ },
-/* 255 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(256);
-	var utils = __webpack_require__(253);
-	var InterceptorManager = __webpack_require__(267);
-	var dispatchRequest = __webpack_require__(268);
-	var isAbsoluteURL = __webpack_require__(271);
-	var combineURLs = __webpack_require__(272);
+	var defaults = __webpack_require__(252);
+	var utils = __webpack_require__(249);
+	var InterceptorManager = __webpack_require__(263);
+	var dispatchRequest = __webpack_require__(264);
+	var isAbsoluteURL = __webpack_require__(267);
+	var combineURLs = __webpack_require__(268);
 
 	/**
 	 * Create a new instance of Axios
@@ -28656,13 +27362,13 @@
 
 
 /***/ },
-/* 256 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(253);
-	var normalizeHeaderName = __webpack_require__(257);
+	var utils = __webpack_require__(249);
+	var normalizeHeaderName = __webpack_require__(253);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -28679,10 +27385,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(258);
+	    adapter = __webpack_require__(254);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(258);
+	    adapter = __webpack_require__(254);
 	  }
 	  return adapter;
 	}
@@ -28756,12 +27462,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 257 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
+	var utils = __webpack_require__(249);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -28774,18 +27480,18 @@
 
 
 /***/ },
-/* 258 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(253);
-	var settle = __webpack_require__(259);
-	var buildURL = __webpack_require__(262);
-	var parseHeaders = __webpack_require__(263);
-	var isURLSameOrigin = __webpack_require__(264);
-	var createError = __webpack_require__(260);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(265);
+	var utils = __webpack_require__(249);
+	var settle = __webpack_require__(255);
+	var buildURL = __webpack_require__(258);
+	var parseHeaders = __webpack_require__(259);
+	var isURLSameOrigin = __webpack_require__(260);
+	var createError = __webpack_require__(256);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(261);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -28881,7 +27587,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(266);
+	      var cookies = __webpack_require__(262);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -28958,12 +27664,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 259 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(260);
+	var createError = __webpack_require__(256);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -28989,12 +27695,12 @@
 
 
 /***/ },
-/* 260 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(261);
+	var enhanceError = __webpack_require__(257);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -29012,7 +27718,7 @@
 
 
 /***/ },
-/* 261 */
+/* 257 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29037,12 +27743,12 @@
 
 
 /***/ },
-/* 262 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
+	var utils = __webpack_require__(249);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -29111,12 +27817,12 @@
 
 
 /***/ },
-/* 263 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
+	var utils = __webpack_require__(249);
 
 	/**
 	 * Parse headers into an object
@@ -29154,12 +27860,12 @@
 
 
 /***/ },
-/* 264 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
+	var utils = __webpack_require__(249);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29228,7 +27934,7 @@
 
 
 /***/ },
-/* 265 */
+/* 261 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29270,12 +27976,12 @@
 
 
 /***/ },
-/* 266 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
+	var utils = __webpack_require__(249);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29329,12 +28035,12 @@
 
 
 /***/ },
-/* 267 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
+	var utils = __webpack_require__(249);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -29387,15 +28093,15 @@
 
 
 /***/ },
-/* 268 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
-	var transformData = __webpack_require__(269);
-	var isCancel = __webpack_require__(270);
-	var defaults = __webpack_require__(256);
+	var utils = __webpack_require__(249);
+	var transformData = __webpack_require__(265);
+	var isCancel = __webpack_require__(266);
+	var defaults = __webpack_require__(252);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -29472,12 +28178,12 @@
 
 
 /***/ },
-/* 269 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(253);
+	var utils = __webpack_require__(249);
 
 	/**
 	 * Transform the data for a request or a response
@@ -29498,7 +28204,7 @@
 
 
 /***/ },
-/* 270 */
+/* 266 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29509,7 +28215,7 @@
 
 
 /***/ },
-/* 271 */
+/* 267 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29529,7 +28235,7 @@
 
 
 /***/ },
-/* 272 */
+/* 268 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29547,7 +28253,7 @@
 
 
 /***/ },
-/* 273 */
+/* 269 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29572,12 +28278,12 @@
 
 
 /***/ },
-/* 274 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(273);
+	var Cancel = __webpack_require__(269);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -29635,7 +28341,7 @@
 
 
 /***/ },
-/* 275 */
+/* 271 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29668,7 +28374,7 @@
 
 
 /***/ },
-/* 276 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29683,31 +28389,35 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(277);
+	var _underscore = __webpack_require__(273);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _status = __webpack_require__(278);
+	var _status = __webpack_require__(274);
 
 	var _status2 = _interopRequireDefault(_status);
 
-	var _advisors = __webpack_require__(279);
+	var _advisors = __webpack_require__(275);
 
 	var _advisors2 = _interopRequireDefault(_advisors);
 
-	var _type = __webpack_require__(280);
+	var _type = __webpack_require__(276);
 
 	var _type2 = _interopRequireDefault(_type);
 
-	var _client_type = __webpack_require__(281);
+	var _client_type = __webpack_require__(277);
 
 	var _client_type2 = _interopRequireDefault(_client_type);
 
-	var _form_select = __webpack_require__(282);
+	var _priority = __webpack_require__(278);
+
+	var _priority2 = _interopRequireDefault(_priority);
+
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _datetime = __webpack_require__(283);
+	var _datetime = __webpack_require__(280);
 
 	var _datetime2 = _interopRequireDefault(_datetime);
 
@@ -29725,7 +28435,8 @@
 	        client_type: null,
 	        quotation_type: null,
 	        date_start: null,
-	        date_end: null
+	        date_end: null,
+	        priority: null
 	      }
 	    };
 	  },
@@ -29767,12 +28478,24 @@
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-group col-md-6' },
+	            { className: 'form-group col-md-3' },
 	            _react2.default.createElement('input', {
 	              placeholder: 'Buscar cotizaciones',
 	              className: 'form-control',
 	              onChange: function onChange(e) {
 	                return _this.handleChange('query', e);
+	              }
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group col-sm-3' },
+	            _react2.default.createElement(_form_select2.default, {
+	              options: _priority2.default,
+	              'default': 'Seleccionar prioridad',
+	              value: query.priority,
+	              onSelectChange: function onSelectChange(e) {
+	                return _this.handleChange('priority', e);
 	              }
 	            })
 	          ),
@@ -29861,7 +28584,7 @@
 	exports.default = quoFilters;
 
 /***/ },
-/* 277 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -31415,7 +30138,7 @@
 
 
 /***/ },
-/* 278 */
+/* 274 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -31450,11 +30173,19 @@
 		{
 			"value": "Replanteada",
 			"label": "Replanteada"
+		},
+		{
+			"value": "Por confirmar",
+			"label": "Por confirmar"
+		},
+		{
+			"value": "Nula",
+			"label": "Nula"
 		}
 	];
 
 /***/ },
-/* 279 */
+/* 275 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -31477,7 +30208,7 @@
 	];
 
 /***/ },
-/* 280 */
+/* 276 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -31492,7 +30223,7 @@
 	];
 
 /***/ },
-/* 281 */
+/* 277 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -31511,7 +30242,26 @@
 	];
 
 /***/ },
-/* 282 */
+/* 278 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": 3,
+			"label": "Alta"
+		},
+		{
+			"value": 2,
+			"label": "Media"
+		},
+		{
+			"value": 1,
+			"label": "Baja"
+		}
+	];
+
+/***/ },
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31544,9 +30294,10 @@
 	      );
 	    });
 
-	    var value = this.props.value || this.props.default || '';
+	    var value = this.props.value || '';
 
 	    value = parseInt(value) ? parseInt(value) : value;
+
 	    return _react2.default.createElement(
 	      'select',
 	      {
@@ -31568,7 +30319,7 @@
 	});
 
 /***/ },
-/* 283 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31581,11 +30332,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _flatpickr = __webpack_require__(284);
+	var _flatpickr = __webpack_require__(281);
 
 	var _flatpickr2 = _interopRequireDefault(_flatpickr);
 
-	var _uid = __webpack_require__(285);
+	var _uid = __webpack_require__(282);
 
 	var _uid2 = _interopRequireDefault(_uid);
 
@@ -31641,7 +30392,7 @@
 	});
 
 /***/ },
-/* 284 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32979,7 +31730,7 @@
 	}
 
 /***/ },
-/* 285 */
+/* 282 */
 /***/ function(module, exports) {
 
 	/**
@@ -33002,7 +31753,7 @@
 
 
 /***/ },
-/* 286 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33011,7 +31762,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _item = __webpack_require__(287);
+	var _item = __webpack_require__(284);
 
 	var _item2 = _interopRequireDefault(_item);
 
@@ -33104,7 +31855,7 @@
 	});
 
 /***/ },
-/* 287 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33117,7 +31868,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _timeago = __webpack_require__(288);
+	var _timeago = __webpack_require__(285);
 
 	var _timeago2 = _interopRequireDefault(_timeago);
 
@@ -33157,7 +31908,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'span',
-	          { className: 'label label-' + status },
+	          { className: 'label label-' + status.replace(' ', '_') },
 	          status
 	        ),
 	        rethink_from ? _react2.default.createElement(
@@ -33229,7 +31980,7 @@
 	});
 
 /***/ },
-/* 288 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33238,13 +31989,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(289);
+	var _moment = __webpack_require__(286);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(321);
+	__webpack_require__(318);
 
 	module.exports = _react2.default.createClass({
 	  displayName: 'exports',
@@ -33266,7 +32017,7 @@
 	});
 
 /***/ },
-/* 289 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -35083,7 +33834,7 @@
 	            module && module.exports) {
 	        try {
 	            oldLocale = globalLocale._abbr;
-	            __webpack_require__(290)("./" + name);
+	            __webpack_require__(287)("./" + name);
 	            // because defineLocale currently also sets the global locale, we
 	            // want to undo that for lazy loaded locales
 	            getSetGlobalLocale(oldLocale);
@@ -37574,228 +36325,228 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)(module)))
 
 /***/ },
-/* 290 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 291,
-		"./af.js": 291,
-		"./ar": 292,
-		"./ar-dz": 293,
-		"./ar-dz.js": 293,
-		"./ar-ly": 294,
-		"./ar-ly.js": 294,
-		"./ar-ma": 295,
-		"./ar-ma.js": 295,
-		"./ar-sa": 296,
-		"./ar-sa.js": 296,
-		"./ar-tn": 297,
-		"./ar-tn.js": 297,
-		"./ar.js": 292,
-		"./az": 298,
-		"./az.js": 298,
-		"./be": 299,
-		"./be.js": 299,
-		"./bg": 300,
-		"./bg-x": 301,
-		"./bg-x.js": 301,
-		"./bg.js": 300,
-		"./bn": 302,
-		"./bn.js": 302,
-		"./bo": 303,
-		"./bo.js": 303,
-		"./br": 304,
-		"./br.js": 304,
-		"./bs": 305,
-		"./bs.js": 305,
-		"./ca": 306,
-		"./ca.js": 306,
-		"./cs": 307,
-		"./cs.js": 307,
-		"./cv": 308,
-		"./cv.js": 308,
-		"./cy": 309,
-		"./cy.js": 309,
-		"./da": 310,
-		"./da.js": 310,
-		"./de": 311,
-		"./de-at": 312,
-		"./de-at.js": 312,
-		"./de.js": 311,
-		"./dv": 313,
-		"./dv.js": 313,
-		"./el": 314,
-		"./el.js": 314,
-		"./en-au": 315,
-		"./en-au.js": 315,
-		"./en-ca": 316,
-		"./en-ca.js": 316,
-		"./en-gb": 317,
-		"./en-gb.js": 317,
-		"./en-ie": 318,
-		"./en-ie.js": 318,
-		"./en-nz": 319,
-		"./en-nz.js": 319,
-		"./eo": 320,
-		"./eo.js": 320,
-		"./es": 321,
-		"./es-do": 322,
-		"./es-do.js": 322,
-		"./es.js": 321,
-		"./et": 323,
-		"./et.js": 323,
-		"./eu": 324,
-		"./eu.js": 324,
-		"./fa": 325,
-		"./fa.js": 325,
-		"./fi": 326,
-		"./fi.js": 326,
-		"./fo": 327,
-		"./fo.js": 327,
-		"./fr": 328,
-		"./fr-ca": 329,
-		"./fr-ca.js": 329,
-		"./fr-ch": 330,
-		"./fr-ch.js": 330,
-		"./fr.js": 328,
-		"./fy": 331,
-		"./fy.js": 331,
-		"./gd": 332,
-		"./gd.js": 332,
-		"./gl": 333,
-		"./gl.js": 333,
-		"./he": 334,
-		"./he.js": 334,
-		"./hi": 335,
-		"./hi.js": 335,
-		"./hr": 336,
-		"./hr.js": 336,
-		"./hu": 337,
-		"./hu.js": 337,
-		"./hy-am": 338,
-		"./hy-am.js": 338,
-		"./id": 339,
-		"./id.js": 339,
-		"./is": 340,
-		"./is.js": 340,
-		"./it": 341,
-		"./it.js": 341,
-		"./ja": 342,
-		"./ja.js": 342,
-		"./jv": 343,
-		"./jv.js": 343,
-		"./ka": 344,
-		"./ka.js": 344,
-		"./kk": 345,
-		"./kk.js": 345,
-		"./km": 346,
-		"./km.js": 346,
-		"./ko": 347,
-		"./ko.js": 347,
-		"./ky": 348,
-		"./ky.js": 348,
-		"./lb": 349,
-		"./lb.js": 349,
-		"./lo": 350,
-		"./lo.js": 350,
-		"./lt": 351,
-		"./lt.js": 351,
-		"./lv": 352,
-		"./lv.js": 352,
-		"./me": 353,
-		"./me.js": 353,
-		"./mi": 354,
-		"./mi.js": 354,
-		"./mk": 355,
-		"./mk.js": 355,
-		"./ml": 356,
-		"./ml.js": 356,
-		"./mr": 357,
-		"./mr.js": 357,
-		"./ms": 358,
-		"./ms-my": 359,
-		"./ms-my.js": 359,
-		"./ms.js": 358,
-		"./my": 360,
-		"./my.js": 360,
-		"./nb": 361,
-		"./nb.js": 361,
-		"./ne": 362,
-		"./ne.js": 362,
-		"./nl": 363,
-		"./nl-be": 364,
-		"./nl-be.js": 364,
-		"./nl.js": 363,
-		"./nn": 365,
-		"./nn.js": 365,
-		"./pa-in": 366,
-		"./pa-in.js": 366,
-		"./pl": 367,
-		"./pl.js": 367,
-		"./pt": 368,
-		"./pt-br": 369,
-		"./pt-br.js": 369,
-		"./pt.js": 368,
-		"./ro": 370,
-		"./ro.js": 370,
-		"./ru": 371,
-		"./ru.js": 371,
-		"./se": 372,
-		"./se.js": 372,
-		"./si": 373,
-		"./si.js": 373,
-		"./sk": 374,
-		"./sk.js": 374,
-		"./sl": 375,
-		"./sl.js": 375,
-		"./sq": 376,
-		"./sq.js": 376,
-		"./sr": 377,
-		"./sr-cyrl": 378,
-		"./sr-cyrl.js": 378,
-		"./sr.js": 377,
-		"./ss": 379,
-		"./ss.js": 379,
-		"./sv": 380,
-		"./sv.js": 380,
-		"./sw": 381,
-		"./sw.js": 381,
-		"./ta": 382,
-		"./ta.js": 382,
-		"./te": 383,
-		"./te.js": 383,
-		"./tet": 384,
-		"./tet.js": 384,
-		"./th": 385,
-		"./th.js": 385,
-		"./tl-ph": 386,
-		"./tl-ph.js": 386,
-		"./tlh": 387,
-		"./tlh.js": 387,
-		"./tr": 388,
-		"./tr.js": 388,
-		"./tzl": 389,
-		"./tzl.js": 389,
-		"./tzm": 390,
-		"./tzm-latn": 391,
-		"./tzm-latn.js": 391,
-		"./tzm.js": 390,
-		"./uk": 392,
-		"./uk.js": 392,
-		"./uz": 393,
-		"./uz.js": 393,
-		"./vi": 394,
-		"./vi.js": 394,
-		"./x-pseudo": 395,
-		"./x-pseudo.js": 395,
-		"./yo": 396,
-		"./yo.js": 396,
-		"./zh-cn": 397,
-		"./zh-cn.js": 397,
-		"./zh-hk": 398,
-		"./zh-hk.js": 398,
-		"./zh-tw": 399,
-		"./zh-tw.js": 399
+		"./af": 288,
+		"./af.js": 288,
+		"./ar": 289,
+		"./ar-dz": 290,
+		"./ar-dz.js": 290,
+		"./ar-ly": 291,
+		"./ar-ly.js": 291,
+		"./ar-ma": 292,
+		"./ar-ma.js": 292,
+		"./ar-sa": 293,
+		"./ar-sa.js": 293,
+		"./ar-tn": 294,
+		"./ar-tn.js": 294,
+		"./ar.js": 289,
+		"./az": 295,
+		"./az.js": 295,
+		"./be": 296,
+		"./be.js": 296,
+		"./bg": 297,
+		"./bg-x": 298,
+		"./bg-x.js": 298,
+		"./bg.js": 297,
+		"./bn": 299,
+		"./bn.js": 299,
+		"./bo": 300,
+		"./bo.js": 300,
+		"./br": 301,
+		"./br.js": 301,
+		"./bs": 302,
+		"./bs.js": 302,
+		"./ca": 303,
+		"./ca.js": 303,
+		"./cs": 304,
+		"./cs.js": 304,
+		"./cv": 305,
+		"./cv.js": 305,
+		"./cy": 306,
+		"./cy.js": 306,
+		"./da": 307,
+		"./da.js": 307,
+		"./de": 308,
+		"./de-at": 309,
+		"./de-at.js": 309,
+		"./de.js": 308,
+		"./dv": 310,
+		"./dv.js": 310,
+		"./el": 311,
+		"./el.js": 311,
+		"./en-au": 312,
+		"./en-au.js": 312,
+		"./en-ca": 313,
+		"./en-ca.js": 313,
+		"./en-gb": 314,
+		"./en-gb.js": 314,
+		"./en-ie": 315,
+		"./en-ie.js": 315,
+		"./en-nz": 316,
+		"./en-nz.js": 316,
+		"./eo": 317,
+		"./eo.js": 317,
+		"./es": 318,
+		"./es-do": 319,
+		"./es-do.js": 319,
+		"./es.js": 318,
+		"./et": 320,
+		"./et.js": 320,
+		"./eu": 321,
+		"./eu.js": 321,
+		"./fa": 322,
+		"./fa.js": 322,
+		"./fi": 323,
+		"./fi.js": 323,
+		"./fo": 324,
+		"./fo.js": 324,
+		"./fr": 325,
+		"./fr-ca": 326,
+		"./fr-ca.js": 326,
+		"./fr-ch": 327,
+		"./fr-ch.js": 327,
+		"./fr.js": 325,
+		"./fy": 328,
+		"./fy.js": 328,
+		"./gd": 329,
+		"./gd.js": 329,
+		"./gl": 330,
+		"./gl.js": 330,
+		"./he": 331,
+		"./he.js": 331,
+		"./hi": 332,
+		"./hi.js": 332,
+		"./hr": 333,
+		"./hr.js": 333,
+		"./hu": 334,
+		"./hu.js": 334,
+		"./hy-am": 335,
+		"./hy-am.js": 335,
+		"./id": 336,
+		"./id.js": 336,
+		"./is": 337,
+		"./is.js": 337,
+		"./it": 338,
+		"./it.js": 338,
+		"./ja": 339,
+		"./ja.js": 339,
+		"./jv": 340,
+		"./jv.js": 340,
+		"./ka": 341,
+		"./ka.js": 341,
+		"./kk": 342,
+		"./kk.js": 342,
+		"./km": 343,
+		"./km.js": 343,
+		"./ko": 344,
+		"./ko.js": 344,
+		"./ky": 345,
+		"./ky.js": 345,
+		"./lb": 346,
+		"./lb.js": 346,
+		"./lo": 347,
+		"./lo.js": 347,
+		"./lt": 348,
+		"./lt.js": 348,
+		"./lv": 349,
+		"./lv.js": 349,
+		"./me": 350,
+		"./me.js": 350,
+		"./mi": 351,
+		"./mi.js": 351,
+		"./mk": 352,
+		"./mk.js": 352,
+		"./ml": 353,
+		"./ml.js": 353,
+		"./mr": 354,
+		"./mr.js": 354,
+		"./ms": 355,
+		"./ms-my": 356,
+		"./ms-my.js": 356,
+		"./ms.js": 355,
+		"./my": 357,
+		"./my.js": 357,
+		"./nb": 358,
+		"./nb.js": 358,
+		"./ne": 359,
+		"./ne.js": 359,
+		"./nl": 360,
+		"./nl-be": 361,
+		"./nl-be.js": 361,
+		"./nl.js": 360,
+		"./nn": 362,
+		"./nn.js": 362,
+		"./pa-in": 363,
+		"./pa-in.js": 363,
+		"./pl": 364,
+		"./pl.js": 364,
+		"./pt": 365,
+		"./pt-br": 366,
+		"./pt-br.js": 366,
+		"./pt.js": 365,
+		"./ro": 367,
+		"./ro.js": 367,
+		"./ru": 368,
+		"./ru.js": 368,
+		"./se": 369,
+		"./se.js": 369,
+		"./si": 370,
+		"./si.js": 370,
+		"./sk": 371,
+		"./sk.js": 371,
+		"./sl": 372,
+		"./sl.js": 372,
+		"./sq": 373,
+		"./sq.js": 373,
+		"./sr": 374,
+		"./sr-cyrl": 375,
+		"./sr-cyrl.js": 375,
+		"./sr.js": 374,
+		"./ss": 376,
+		"./ss.js": 376,
+		"./sv": 377,
+		"./sv.js": 377,
+		"./sw": 378,
+		"./sw.js": 378,
+		"./ta": 379,
+		"./ta.js": 379,
+		"./te": 380,
+		"./te.js": 380,
+		"./tet": 381,
+		"./tet.js": 381,
+		"./th": 382,
+		"./th.js": 382,
+		"./tl-ph": 383,
+		"./tl-ph.js": 383,
+		"./tlh": 384,
+		"./tlh.js": 384,
+		"./tr": 385,
+		"./tr.js": 385,
+		"./tzl": 386,
+		"./tzl.js": 386,
+		"./tzm": 387,
+		"./tzm-latn": 388,
+		"./tzm-latn.js": 388,
+		"./tzm.js": 387,
+		"./uk": 389,
+		"./uk.js": 389,
+		"./uz": 390,
+		"./uz.js": 390,
+		"./vi": 391,
+		"./vi.js": 391,
+		"./x-pseudo": 392,
+		"./x-pseudo.js": 392,
+		"./yo": 393,
+		"./yo.js": 393,
+		"./zh-cn": 394,
+		"./zh-cn.js": 394,
+		"./zh-hk": 395,
+		"./zh-hk.js": 395,
+		"./zh-tw": 396,
+		"./zh-tw.js": 396
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -37808,11 +36559,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 290;
+	webpackContext.id = 287;
 
 
 /***/ },
-/* 291 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37820,7 +36571,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37890,7 +36641,7 @@
 
 
 /***/ },
-/* 292 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37900,7 +36651,7 @@
 	//! author : forabi https://github.com/forabi
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38037,7 +36788,7 @@
 
 
 /***/ },
-/* 293 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38045,7 +36796,7 @@
 	//! author : Noureddine LOUAHEDJ : https://github.com/noureddineme
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38101,7 +36852,7 @@
 
 
 /***/ },
-/* 294 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38109,7 +36860,7 @@
 	//! author : Ali Hmer: https://github.com/kikoanis
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38232,7 +36983,7 @@
 
 
 /***/ },
-/* 295 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38241,7 +36992,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38297,7 +37048,7 @@
 
 
 /***/ },
-/* 296 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38305,7 +37056,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38407,7 +37158,7 @@
 
 
 /***/ },
-/* 297 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38415,7 +37166,7 @@
 	//! author : Nader Toukabri : https://github.com/naderio
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38471,7 +37222,7 @@
 
 
 /***/ },
-/* 298 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38479,7 +37230,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38581,7 +37332,7 @@
 
 
 /***/ },
-/* 299 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38591,7 +37342,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38720,7 +37471,7 @@
 
 
 /***/ },
-/* 300 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38728,7 +37479,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38815,12 +37566,12 @@
 
 
 /***/ },
-/* 301 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38835,7 +37586,7 @@
 
 
 /***/ },
-/* 302 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38843,7 +37594,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38959,7 +37710,7 @@
 
 
 /***/ },
-/* 303 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38967,7 +37718,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39083,7 +37834,7 @@
 
 
 /***/ },
-/* 304 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39091,7 +37842,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39196,7 +37947,7 @@
 
 
 /***/ },
-/* 305 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39205,7 +37956,7 @@
 	//! based on (hr) translation by Bojan Marković
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39344,7 +38095,7 @@
 
 
 /***/ },
-/* 306 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39352,7 +38103,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39430,7 +38181,7 @@
 
 
 /***/ },
-/* 307 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39438,7 +38189,7 @@
 	//! author : petrbela : https://github.com/petrbela
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39607,7 +38358,7 @@
 
 
 /***/ },
-/* 308 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39615,7 +38366,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39675,7 +38426,7 @@
 
 
 /***/ },
-/* 309 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39684,7 +38435,7 @@
 	//! author : https://github.com/ryangreaves
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39761,7 +38512,7 @@
 
 
 /***/ },
-/* 310 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39769,7 +38520,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39826,7 +38577,7 @@
 
 
 /***/ },
-/* 311 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39836,7 +38587,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39909,7 +38660,7 @@
 
 
 /***/ },
-/* 312 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -39920,7 +38671,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39993,7 +38744,7 @@
 
 
 /***/ },
-/* 313 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40001,7 +38752,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40098,7 +38849,7 @@
 
 
 /***/ },
-/* 314 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40106,7 +38857,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40201,7 +38952,7 @@
 
 
 /***/ },
-/* 315 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40209,7 +38960,7 @@
 	//! author : Jared Morse : https://github.com/jarcoal
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40273,7 +39024,7 @@
 
 
 /***/ },
-/* 316 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40281,7 +39032,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40341,7 +39092,7 @@
 
 
 /***/ },
-/* 317 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40349,7 +39100,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40413,7 +39164,7 @@
 
 
 /***/ },
-/* 318 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40421,7 +39172,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40485,7 +39236,7 @@
 
 
 /***/ },
-/* 319 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40493,7 +39244,7 @@
 	//! author : Luke McGregor : https://github.com/lukemcgregor
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40557,7 +39308,7 @@
 
 
 /***/ },
-/* 320 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40567,7 +39318,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40635,7 +39386,7 @@
 
 
 /***/ },
-/* 321 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40643,7 +39394,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40721,14 +39472,14 @@
 
 
 /***/ },
-/* 322 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish (Dominican Republic) [es-do]
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40806,7 +39557,7 @@
 
 
 /***/ },
-/* 323 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40815,7 +39566,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40891,7 +39642,7 @@
 
 
 /***/ },
-/* 324 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40899,7 +39650,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40962,7 +39713,7 @@
 
 
 /***/ },
-/* 325 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -40970,7 +39721,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41074,7 +39825,7 @@
 
 
 /***/ },
-/* 326 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41082,7 +39833,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41186,7 +39937,7 @@
 
 
 /***/ },
-/* 327 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41194,7 +39945,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41251,7 +40002,7 @@
 
 
 /***/ },
-/* 328 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41259,7 +40010,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41320,7 +40071,7 @@
 
 
 /***/ },
-/* 329 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41328,7 +40079,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41385,7 +40136,7 @@
 
 
 /***/ },
-/* 330 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41393,7 +40144,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41454,7 +40205,7 @@
 
 
 /***/ },
-/* 331 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41462,7 +40213,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41532,7 +40283,7 @@
 
 
 /***/ },
-/* 332 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41540,7 +40291,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41613,7 +40364,7 @@
 
 
 /***/ },
-/* 333 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41621,7 +40372,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41695,7 +40446,7 @@
 
 
 /***/ },
-/* 334 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41705,7 +40456,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41799,7 +40550,7 @@
 
 
 /***/ },
-/* 335 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41807,7 +40558,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -41928,7 +40679,7 @@
 
 
 /***/ },
-/* 336 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -41936,7 +40687,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42078,7 +40829,7 @@
 
 
 /***/ },
-/* 337 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42086,7 +40837,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42192,7 +40943,7 @@
 
 
 /***/ },
-/* 338 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42200,7 +40951,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42292,7 +41043,7 @@
 
 
 /***/ },
-/* 339 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42301,7 +41052,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42380,7 +41131,7 @@
 
 
 /***/ },
-/* 340 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42388,7 +41139,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42512,7 +41263,7 @@
 
 
 /***/ },
-/* 341 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42521,7 +41272,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42587,7 +41338,7 @@
 
 
 /***/ },
-/* 342 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42595,7 +41346,7 @@
 	//! author : LI Long : https://github.com/baryon
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42668,7 +41419,7 @@
 
 
 /***/ },
-/* 343 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42677,7 +41428,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42756,7 +41507,7 @@
 
 
 /***/ },
-/* 344 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42764,7 +41515,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42850,7 +41601,7 @@
 
 
 /***/ },
-/* 345 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42858,7 +41609,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -42942,7 +41693,7 @@
 
 
 /***/ },
-/* 346 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -42950,7 +41701,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43005,7 +41756,7 @@
 
 
 /***/ },
-/* 347 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43014,7 +41765,7 @@
 	//! author : Jeeeyul Lee <jeeeyul@gmail.com>
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43075,7 +41826,7 @@
 
 
 /***/ },
-/* 348 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43083,7 +41834,7 @@
 	//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43168,7 +41919,7 @@
 
 
 /***/ },
-/* 349 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43177,7 +41928,7 @@
 	//! author : David Raison : https://github.com/kwisatz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43310,7 +42061,7 @@
 
 
 /***/ },
-/* 350 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43318,7 +42069,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43385,7 +42136,7 @@
 
 
 /***/ },
-/* 351 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43393,7 +42144,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43507,7 +42258,7 @@
 
 
 /***/ },
-/* 352 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43516,7 +42267,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43609,7 +42360,7 @@
 
 
 /***/ },
-/* 353 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43617,7 +42368,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43725,7 +42476,7 @@
 
 
 /***/ },
-/* 354 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43733,7 +42484,7 @@
 	//! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43794,7 +42545,7 @@
 
 
 /***/ },
-/* 355 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43802,7 +42553,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43889,7 +42640,7 @@
 
 
 /***/ },
-/* 356 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43897,7 +42648,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -43975,7 +42726,7 @@
 
 
 /***/ },
-/* 357 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43984,7 +42735,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44139,7 +42890,7 @@
 
 
 /***/ },
-/* 358 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44147,7 +42898,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44226,7 +42977,7 @@
 
 
 /***/ },
-/* 359 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44235,7 +42986,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44314,7 +43065,7 @@
 
 
 /***/ },
-/* 360 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44324,7 +43075,7 @@
 	//! author : Tin Aung Lin : https://github.com/thanyawzinmin
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44415,7 +43166,7 @@
 
 
 /***/ },
-/* 361 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44424,7 +43175,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44483,7 +43234,7 @@
 
 
 /***/ },
-/* 362 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44491,7 +43242,7 @@
 	//! author : suvash : https://github.com/suvash
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44611,7 +43362,7 @@
 
 
 /***/ },
-/* 363 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44620,7 +43371,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44702,7 +43453,7 @@
 
 
 /***/ },
-/* 364 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44711,7 +43462,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44793,7 +43544,7 @@
 
 
 /***/ },
-/* 365 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44801,7 +43552,7 @@
 	//! author : https://github.com/mechuwind
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44858,7 +43609,7 @@
 
 
 /***/ },
-/* 366 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44866,7 +43617,7 @@
 	//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -44987,7 +43738,7 @@
 
 
 /***/ },
-/* 367 */
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44995,7 +43746,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45097,7 +43848,7 @@
 
 
 /***/ },
-/* 368 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45105,7 +43856,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45167,7 +43918,7 @@
 
 
 /***/ },
-/* 369 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45175,7 +43926,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45233,7 +43984,7 @@
 
 
 /***/ },
-/* 370 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45242,7 +43993,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45313,7 +44064,7 @@
 
 
 /***/ },
-/* 371 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45323,7 +44074,7 @@
 	//! author : Коренберг Марк : https://github.com/socketpair
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45501,7 +44252,7 @@
 
 
 /***/ },
-/* 372 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45509,7 +44260,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45567,7 +44318,7 @@
 
 
 /***/ },
-/* 373 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45575,7 +44326,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45643,7 +44394,7 @@
 
 
 /***/ },
-/* 374 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45652,7 +44403,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45798,7 +44549,7 @@
 
 
 /***/ },
-/* 375 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45806,7 +44557,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -45965,7 +44716,7 @@
 
 
 /***/ },
-/* 376 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45975,7 +44726,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46040,7 +44791,7 @@
 
 
 /***/ },
-/* 377 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46048,7 +44799,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46155,7 +44906,7 @@
 
 
 /***/ },
-/* 378 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46163,7 +44914,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46270,7 +45021,7 @@
 
 
 /***/ },
-/* 379 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46278,7 +45029,7 @@
 	//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46364,7 +45115,7 @@
 
 
 /***/ },
-/* 380 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46372,7 +45123,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46438,7 +45189,7 @@
 
 
 /***/ },
-/* 381 */
+/* 378 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46446,7 +45197,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46502,7 +45253,7 @@
 
 
 /***/ },
-/* 382 */
+/* 379 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46510,7 +45261,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46637,7 +45388,7 @@
 
 
 /***/ },
-/* 383 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46645,7 +45396,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46731,7 +45482,7 @@
 
 
 /***/ },
-/* 384 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46740,7 +45491,7 @@
 	//! author : Onorio De J. Afonso : https://github.com/marobo
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46804,7 +45555,7 @@
 
 
 /***/ },
-/* 385 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46812,7 +45563,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46876,7 +45627,7 @@
 
 
 /***/ },
-/* 386 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46884,7 +45635,7 @@
 	//! author : Dan Hagman : https://github.com/hagmandan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -46943,7 +45694,7 @@
 
 
 /***/ },
-/* 387 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46951,7 +45702,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47068,7 +45819,7 @@
 
 
 /***/ },
-/* 388 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47077,7 +45828,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47163,7 +45914,7 @@
 
 
 /***/ },
-/* 389 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47172,7 +45923,7 @@
 	//! author : Iustì Canun
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47259,7 +46010,7 @@
 
 
 /***/ },
-/* 390 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47267,7 +46018,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47322,7 +46073,7 @@
 
 
 /***/ },
-/* 391 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47330,7 +46081,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47385,7 +46136,7 @@
 
 
 /***/ },
-/* 392 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47394,7 +46145,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47536,7 +46287,7 @@
 
 
 /***/ },
-/* 393 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47544,7 +46295,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47599,7 +46350,7 @@
 
 
 /***/ },
-/* 394 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47607,7 +46358,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47683,7 +46434,7 @@
 
 
 /***/ },
-/* 395 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47691,7 +46442,7 @@
 	//! author : Andrew Hood : https://github.com/andrewhood125
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47756,7 +46507,7 @@
 
 
 /***/ },
-/* 396 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47764,7 +46515,7 @@
 	//! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47821,7 +46572,7 @@
 
 
 /***/ },
-/* 397 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47830,7 +46581,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47953,7 +46704,7 @@
 
 
 /***/ },
-/* 398 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47963,7 +46714,7 @@
 	//! author : Konstantin : https://github.com/skfd
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48063,7 +46814,7 @@
 
 
 /***/ },
-/* 399 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48072,7 +46823,7 @@
 	//! author : Chris Lam : https://github.com/hehachris
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(289)) :
+	    true ? factory(__webpack_require__(286)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48172,7 +46923,7 @@
 
 
 /***/ },
-/* 400 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48187,15 +46938,11 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _activities = __webpack_require__(401);
+	var _activities = __webpack_require__(398);
 
 	var action = _interopRequireWildcard(_activities);
 
-	var _item = __webpack_require__(402);
+	var _item = __webpack_require__(399);
 
 	var _item2 = _interopRequireDefault(_item);
 
@@ -48251,7 +46998,7 @@
 	})(activities);
 
 /***/ },
-/* 401 */
+/* 398 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48262,7 +47009,7 @@
 	exports.fetch = fetch;
 	exports.store = store;
 
-	var _axios = __webpack_require__(251);
+	var _axios = __webpack_require__(247);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -48296,7 +47043,7 @@
 	}
 
 /***/ },
-/* 402 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48309,7 +47056,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _timeago = __webpack_require__(288);
+	var _timeago = __webpack_require__(285);
 
 	var _timeago2 = _interopRequireDefault(_timeago);
 
@@ -48341,7 +47088,7 @@
 	});
 
 /***/ },
-/* 403 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48356,19 +47103,15 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _todos = __webpack_require__(404);
+	var _todos = __webpack_require__(401);
 
 	var todos = _interopRequireWildcard(_todos);
 
-	var _form_create = __webpack_require__(405);
+	var _form_create = __webpack_require__(402);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _list = __webpack_require__(409);
+	var _list = __webpack_require__(406);
 
 	var _list2 = _interopRequireDefault(_list);
 
@@ -48416,7 +47159,7 @@
 	})(section);
 
 /***/ },
-/* 404 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48431,9 +47174,9 @@
 	exports.completed = completed;
 	exports.store = store;
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(247);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48444,9 +47187,10 @@
 	  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return _superagent2.default.get(endpoint).end(function (err, res) {
-	      if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-	      return dispatch({ type: TYPE + '_FETCH', payload: res.body });
+	    return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+	      return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err });
 	    });
 	  };
 	}
@@ -48455,8 +47199,10 @@
 	  var todo = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return _superagent2.default.put(endpoint + '/' + todo.id).send(_extends({}, todo, { completed: !todo.completed })).end(function (err, res) {
-	      return dispatch({ type: TYPE + '_COMPLETED', payload: res.body });
+	    return _axios2.default.put(endpoint + '/' + todo.id, _extends({}, todo, { completed: !todo.completed })).then(function (res) {
+	      return dispatch({ type: TYPE + '_COMPLETED', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err });
 	    });
 	  };
 	}
@@ -48465,18 +47211,23 @@
 	  var todo = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return _superagent2.default.post(endpoint).send(todo).end(function (err, res) {
-	      if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-	      return dispatch({ type: TYPE + '_STORE', payload: res.body });
+	    return _axios2.default.post(endpoint, todo).then(function (res) {
+	      return dispatch({ type: TYPE + '_STORE', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err });
 	    });
 	  };
 	}
 
 /***/ },
-/* 405 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -48484,49 +47235,49 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(247);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
-	var _moment = __webpack_require__(289);
+	var _moment = __webpack_require__(286);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _datetime = __webpack_require__(283);
+	var _datetime = __webpack_require__(280);
 
 	var _datetime2 = _interopRequireDefault(_datetime);
 
-	var _editor = __webpack_require__(406);
+	var _editor = __webpack_require__(403);
 
 	var _editor2 = _interopRequireDefault(_editor);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var todoForm = _react2.default.createClass({
+	  displayName: 'todoForm',
 	  getInitialState: function getInitialState() {
 	    return {
-	      todo: _defineProperty({
+	      todo: {
 	        expires_date: '',
 	        expires_time: '',
-	        quotation_id: ''
-	      }, 'quotation_id', 0),
-	      users: [],
-	      quotations: []
+	        company_id: '',
+	        title: '',
+	        description: ''
+	      },
+	      company: {},
+	      companies: [],
+	      users: []
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 
-	    _superagent2.default.get('api/v1/users').end(function (err, res) {
-	      if (err) return console.log(err.body);
-	      _this.setState({ users: res.body });
+	    _axios2.default.get('api/v1/users').then(function (res) {
+	      return _this.setState({ users: res.data });
 	    });
 	  },
 
@@ -48563,23 +47314,22 @@
 	    var todo = _extends({}, this.state.todo, { title: '', description: '' });
 	    this.setState({ todo: todo });
 	  },
-	  searchQuo: function searchQuo(val) {
+	  searchQuo: function searchQuo(e) {
 	    var _this2 = this;
 
-	    this.setState({
-	      todo: _extends({}, this.state.todo, { quotation_id: val })
-	    });
+	    var val = e.currentTarget.value;
 
-	    _superagent2.default.get('/api/v1/quotations/').query({ 'query': val }).end(function (err, res) {
-	      return _this2.setState({ quotations: res.body });
+	    _axios2.default.get('/api/v1/companies/', { params: { 'query': val } }).then(function (res) {
+	      return _this2.setState(_extends({}, _this2.state, { companies: res.data }));
 	    });
 	  },
-	  setQuo: function setQuo(q, e) {
-	    e.preventDefault();
+	  setCompany: function setCompany(q, e) {
+	    if (e) e.preventDefault();
 
 	    this.setState({
-	      todo: _extends({}, this.state.todo, { quotation_id: q.id }),
-	      quotations: []
+	      todo: _extends({}, this.state.todo, { company_id: q.id }),
+	      companies: [],
+	      company: q
 	    });
 	  },
 	  render: function render() {
@@ -48604,7 +47354,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Fecha vencimiento'
 	        ),
 	        _react2.default.createElement(_datetime2.default, {
@@ -48619,7 +47369,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Usuario'
 	        ),
 	        _react2.default.createElement(_form_select2.default, {
@@ -48636,30 +47386,26 @@
 	        _react2.default.createElement(
 	          'label',
 	          { 'for': '' },
-	          'Cotizaci\xF3n'
+	          'Cliente'
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',
 	          className: 'form-control',
-	          placeholder: 'Cotizaci\xF3n num',
-	          value: todo.quotation_id,
-	          onChange: function onChange(e) {
-	            return _this3.searchQuo(e.currentTarget.value);
-	          }
+	          placeholder: 'Cliente',
+	          value: this.state.company.name,
+	          onChange: this.searchQuo
 	        }),
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'list-group' },
-	          this.state.quotations.map(function (quo) {
+	          this.state.companies.map(function (company) {
 	            return _react2.default.createElement(
 	              'li',
-	              { className: 'list-group-item', key: quo.id },
+	              { className: 'list-group-item', key: company.id },
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#', onClick: function onClick(e) {
-	                    e.preventDefault();_this3.setQuo.bind(null, quo);
-	                  } },
-	                quo.id
+	                { href: '#', onClick: _this3.setCompany.bind(null, company) },
+	                company.name
 	              )
 	            );
 	          })
@@ -48670,7 +47416,7 @@
 	        { className: 'form-group col-md-12' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'T\xEDtulo'
 	        ),
 	        _react2.default.createElement('input', {
@@ -48687,7 +47433,7 @@
 	        { className: 'form-group col-md-12' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Descripci\xF3n'
 	        ),
 	        _react2.default.createElement('textarea', {
@@ -48713,8 +47459,10 @@
 	  }
 	});
 
+	exports.default = todoForm;
+
 /***/ },
-/* 406 */
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48727,11 +47475,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _quill = __webpack_require__(407);
+	var _quill = __webpack_require__(404);
 
 	var _quill2 = _interopRequireDefault(_quill);
 
-	var _uid = __webpack_require__(285);
+	var _uid = __webpack_require__(282);
 
 	var _uid2 = _interopRequireDefault(_uid);
 
@@ -48798,11 +47546,9 @@
 	    return this.props.value == null ? '' : this.props.value;
 	  },
 	  shouldComponentUpdate: function shouldComponentUpdate() {
-	    // Never re-render or we lose the element.
 	    return false;
 	  },
 	  render: function render() {
-	    console.log('content', this.getEditorContents());
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'editor' },
@@ -48862,14 +47608,14 @@
 	});
 
 /***/ },
-/* 407 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(408);
+	module.exports = __webpack_require__(405);
 
 
 /***/ },
-/* 408 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;/* WEBPACK VAR INJECTION */(function(global) {/*! Quill Editor v0.20.1
@@ -59624,7 +58370,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 409 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59637,7 +58383,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _item = __webpack_require__(410);
+	var _item = __webpack_require__(407);
 
 	var _item2 = _interopRequireDefault(_item);
 
@@ -59779,7 +58525,7 @@
 	});
 
 /***/ },
-/* 410 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59792,7 +58538,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _timeago = __webpack_require__(288);
+	var _timeago = __webpack_require__(285);
 
 	var _timeago2 = _interopRequireDefault(_timeago);
 
@@ -59844,7 +58590,7 @@
 	        assigned = todo.assigned,
 	        user = todo.user,
 	        tracking = todo.tracking,
-	        quotation = todo.quotation;
+	        company = todo.company;
 
 
 	    return _react2.default.createElement(
@@ -59885,7 +58631,9 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        quotation ? quotation.company.name : ''
+	        tracking ? tracking.quotation.company.name : '',
+	        ' ',
+	        company ? company.name : ''
 	      ),
 	      _react2.default.createElement(
 	        'td',
@@ -59904,7 +58652,7 @@
 	});
 
 /***/ },
-/* 411 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59919,35 +58667,35 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _reports = __webpack_require__(412);
+	var _reports = __webpack_require__(409);
 
 	var action = _interopRequireWildcard(_reports);
 
-	var _advisor = __webpack_require__(413);
+	var _advisor = __webpack_require__(410);
 
 	var _advisor2 = _interopRequireDefault(_advisor);
 
-	var _status = __webpack_require__(460);
+	var _status = __webpack_require__(457);
 
 	var _status2 = _interopRequireDefault(_status);
 
-	var _how_find_us = __webpack_require__(461);
+	var _how_find_us = __webpack_require__(458);
 
 	var _how_find_us2 = _interopRequireDefault(_how_find_us);
 
-	var _client_type = __webpack_require__(462);
+	var _client_type = __webpack_require__(459);
 
 	var _client_type2 = _interopRequireDefault(_client_type);
 
-	var _no_effective = __webpack_require__(463);
+	var _no_effective = __webpack_require__(460);
 
 	var _no_effective2 = _interopRequireDefault(_no_effective);
 
-	var _sent_diff = __webpack_require__(464);
+	var _sent_diff = __webpack_require__(461);
 
 	var _sent_diff2 = _interopRequireDefault(_sent_diff);
 
-	var _filters = __webpack_require__(465);
+	var _filters = __webpack_require__(462);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
@@ -59995,7 +58743,7 @@
 	})(section);
 
 /***/ },
-/* 412 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60005,7 +58753,7 @@
 	});
 	exports.fetch = fetch;
 
-	var _axios = __webpack_require__(251);
+	var _axios = __webpack_require__(247);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -60027,7 +58775,7 @@
 	}
 
 /***/ },
-/* 413 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60036,7 +58784,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _chart_bar = __webpack_require__(414);
+	var _chart_bar = __webpack_require__(411);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
 
@@ -60087,7 +58835,7 @@
 	});
 
 /***/ },
-/* 414 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60100,11 +58848,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _chart = __webpack_require__(415);
+	var _chart = __webpack_require__(412);
 
 	var _chart2 = _interopRequireDefault(_chart);
 
-	var _uid = __webpack_require__(285);
+	var _uid = __webpack_require__(282);
 
 	var _uid2 = _interopRequireDefault(_uid);
 
@@ -60157,15 +58905,18 @@
 	});
 
 /***/ },
-/* 415 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * @namespace Chart
 	 */
-	var Chart = __webpack_require__(416)();
+	var Chart = __webpack_require__(413)();
 
-	__webpack_require__(417)(Chart);
+	__webpack_require__(414)(Chart);
+	__webpack_require__(420)(Chart);
+	__webpack_require__(421)(Chart);
+	__webpack_require__(422)(Chart);
 	__webpack_require__(423)(Chart);
 	__webpack_require__(424)(Chart);
 	__webpack_require__(425)(Chart);
@@ -60177,44 +58928,41 @@
 	__webpack_require__(431)(Chart);
 	__webpack_require__(432)(Chart);
 	__webpack_require__(433)(Chart);
+
 	__webpack_require__(434)(Chart);
 	__webpack_require__(435)(Chart);
 	__webpack_require__(436)(Chart);
-
 	__webpack_require__(437)(Chart);
+
 	__webpack_require__(438)(Chart);
 	__webpack_require__(439)(Chart);
 	__webpack_require__(440)(Chart);
-
 	__webpack_require__(441)(Chart);
 	__webpack_require__(442)(Chart);
 	__webpack_require__(443)(Chart);
-	__webpack_require__(444)(Chart);
-	__webpack_require__(445)(Chart);
-	__webpack_require__(446)(Chart);
 
 	// Controllers must be loaded after elements
 	// See Chart.core.datasetController.dataElementType
+	__webpack_require__(444)(Chart);
+	__webpack_require__(445)(Chart);
+	__webpack_require__(446)(Chart);
 	__webpack_require__(447)(Chart);
 	__webpack_require__(448)(Chart);
 	__webpack_require__(449)(Chart);
+
 	__webpack_require__(450)(Chart);
 	__webpack_require__(451)(Chart);
 	__webpack_require__(452)(Chart);
-
 	__webpack_require__(453)(Chart);
 	__webpack_require__(454)(Chart);
 	__webpack_require__(455)(Chart);
 	__webpack_require__(456)(Chart);
-	__webpack_require__(457)(Chart);
-	__webpack_require__(458)(Chart);
-	__webpack_require__(459)(Chart);
 
 	window.Chart = module.exports = Chart;
 
 
 /***/ },
-/* 416 */
+/* 413 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -60276,14 +59024,14 @@
 
 
 /***/ },
-/* 417 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* global window: false */
 	/* global document: false */
 	'use strict';
 
-	var color = __webpack_require__(418);
+	var color = __webpack_require__(415);
 
 	module.exports = function(Chart) {
 		// Global Chart helpers object for utility methods and classes
@@ -61338,12 +60086,12 @@
 
 
 /***/ },
-/* 418 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* MIT license */
-	var convert = __webpack_require__(419);
-	var string = __webpack_require__(421);
+	var convert = __webpack_require__(416);
+	var string = __webpack_require__(418);
 
 	var Color = function (obj) {
 		if (obj instanceof Color) {
@@ -61827,10 +60575,10 @@
 
 
 /***/ },
-/* 419 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var conversions = __webpack_require__(420);
+	var conversions = __webpack_require__(417);
 
 	var convert = function() {
 	   return new Converter();
@@ -61924,7 +60672,7 @@
 	module.exports = convert;
 
 /***/ },
-/* 420 */
+/* 417 */
 /***/ function(module, exports) {
 
 	/* MIT license */
@@ -62628,11 +61376,11 @@
 
 
 /***/ },
-/* 421 */
+/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* MIT license */
-	var colorNames = __webpack_require__(422);
+	var colorNames = __webpack_require__(419);
 
 	module.exports = {
 	   getRgba: getRgba,
@@ -62855,7 +61603,7 @@
 
 
 /***/ },
-/* 422 */
+/* 419 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -63010,7 +61758,7 @@
 	};
 
 /***/ },
-/* 423 */
+/* 420 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -63120,7 +61868,7 @@
 
 
 /***/ },
-/* 424 */
+/* 421 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -63222,7 +61970,7 @@
 
 
 /***/ },
-/* 425 */
+/* 422 */
 /***/ function(module, exports) {
 
 	/* global window: false */
@@ -63367,7 +62115,7 @@
 
 
 /***/ },
-/* 426 */
+/* 423 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -64176,7 +62924,7 @@
 
 
 /***/ },
-/* 427 */
+/* 424 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -64491,7 +63239,7 @@
 
 
 /***/ },
-/* 428 */
+/* 425 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -64836,7 +63584,7 @@
 
 
 /***/ },
-/* 429 */
+/* 426 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -64882,7 +63630,7 @@
 
 
 /***/ },
-/* 430 */
+/* 427 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65017,7 +63765,7 @@
 
 
 /***/ },
-/* 431 */
+/* 428 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65225,7 +63973,7 @@
 
 
 /***/ },
-/* 432 */
+/* 429 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65982,7 +64730,7 @@
 
 
 /***/ },
-/* 433 */
+/* 430 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -66195,7 +64943,7 @@
 
 
 /***/ },
-/* 434 */
+/* 431 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -66700,7 +65448,7 @@
 
 
 /***/ },
-/* 435 */
+/* 432 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -67001,7 +65749,7 @@
 
 
 /***/ },
-/* 436 */
+/* 433 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -67884,7 +66632,7 @@
 
 
 /***/ },
-/* 437 */
+/* 434 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -67994,7 +66742,7 @@
 
 
 /***/ },
-/* 438 */
+/* 435 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -68184,7 +66932,7 @@
 
 
 /***/ },
-/* 439 */
+/* 436 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -68268,7 +67016,7 @@
 
 
 /***/ },
-/* 440 */
+/* 437 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -68450,7 +67198,7 @@
 
 
 /***/ },
-/* 441 */
+/* 438 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -68554,7 +67302,7 @@
 
 
 /***/ },
-/* 442 */
+/* 439 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -68689,7 +67437,7 @@
 
 
 /***/ },
-/* 443 */
+/* 440 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -68863,7 +67611,7 @@
 
 
 /***/ },
-/* 444 */
+/* 441 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -69095,7 +67843,7 @@
 
 
 /***/ },
-/* 445 */
+/* 442 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -69517,13 +68265,13 @@
 
 
 /***/ },
-/* 446 */
+/* 443 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* global window: false */
 	'use strict';
 
-	var moment = __webpack_require__(289);
+	var moment = __webpack_require__(286);
 	moment = typeof(moment) === 'function' ? moment : window.moment;
 
 	module.exports = function(Chart) {
@@ -69983,7 +68731,7 @@
 
 
 /***/ },
-/* 447 */
+/* 444 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -70539,7 +69287,7 @@
 
 
 /***/ },
-/* 448 */
+/* 445 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -70667,7 +69415,7 @@
 
 
 /***/ },
-/* 449 */
+/* 446 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -70976,7 +69724,7 @@
 
 
 /***/ },
-/* 450 */
+/* 447 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71319,7 +70067,7 @@
 
 
 /***/ },
-/* 451 */
+/* 448 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71540,7 +70288,7 @@
 
 
 /***/ },
-/* 452 */
+/* 449 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71727,7 +70475,7 @@
 
 
 /***/ },
-/* 453 */
+/* 450 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71744,7 +70492,7 @@
 
 
 /***/ },
-/* 454 */
+/* 451 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71760,7 +70508,7 @@
 
 
 /***/ },
-/* 455 */
+/* 452 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71777,7 +70525,7 @@
 
 
 /***/ },
-/* 456 */
+/* 453 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71794,7 +70542,7 @@
 
 
 /***/ },
-/* 457 */
+/* 454 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71811,7 +70559,7 @@
 
 
 /***/ },
-/* 458 */
+/* 455 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71828,7 +70576,7 @@
 
 
 /***/ },
-/* 459 */
+/* 456 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -71881,7 +70629,7 @@
 
 
 /***/ },
-/* 460 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71890,7 +70638,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _chart_bar = __webpack_require__(414);
+	var _chart_bar = __webpack_require__(411);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
 
@@ -71961,7 +70709,7 @@
 	});
 
 /***/ },
-/* 461 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71970,7 +70718,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _chart_bar = __webpack_require__(414);
+	var _chart_bar = __webpack_require__(411);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
 
@@ -72038,7 +70786,7 @@
 	});
 
 /***/ },
-/* 462 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72047,7 +70795,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _chart_bar = __webpack_require__(414);
+	var _chart_bar = __webpack_require__(411);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
 
@@ -72105,7 +70853,7 @@
 	});
 
 /***/ },
-/* 463 */
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72114,7 +70862,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _chart_bar = __webpack_require__(414);
+	var _chart_bar = __webpack_require__(411);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
 
@@ -72174,7 +70922,7 @@
 	});
 
 /***/ },
-/* 464 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72183,7 +70931,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _chart_bar = __webpack_require__(414);
+	var _chart_bar = __webpack_require__(411);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
 
@@ -72240,7 +70988,7 @@
 	});
 
 /***/ },
-/* 465 */
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72253,31 +71001,31 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(277);
+	var _underscore = __webpack_require__(273);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _status = __webpack_require__(278);
+	var _status = __webpack_require__(274);
 
 	var _status2 = _interopRequireDefault(_status);
 
-	var _advisors = __webpack_require__(279);
+	var _advisors = __webpack_require__(275);
 
 	var _advisors2 = _interopRequireDefault(_advisors);
 
-	var _type = __webpack_require__(280);
+	var _type = __webpack_require__(276);
 
 	var _type2 = _interopRequireDefault(_type);
 
-	var _client_type = __webpack_require__(281);
+	var _client_type = __webpack_require__(277);
 
 	var _client_type2 = _interopRequireDefault(_client_type);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _datetime = __webpack_require__(283);
+	var _datetime = __webpack_require__(280);
 
 	var _datetime2 = _interopRequireDefault(_datetime);
 
@@ -72398,7 +71146,7 @@
 	});
 
 /***/ },
-/* 466 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72413,43 +71161,39 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
 	var _page = __webpack_require__(32);
 
 	var _page2 = _interopRequireDefault(_page);
 
-	var _companies = __webpack_require__(467);
+	var _companies = __webpack_require__(464);
 
 	var action = _interopRequireWildcard(_companies);
 
-	var _contacts = __webpack_require__(468);
+	var _contacts = __webpack_require__(465);
 
 	var contactAction = _interopRequireWildcard(_contacts);
 
-	var _quotations = __webpack_require__(250);
+	var _quotations = __webpack_require__(246);
 
 	var quoAction = _interopRequireWildcard(_quotations);
 
-	var _form_create = __webpack_require__(469);
+	var _form_create = __webpack_require__(466);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _form_create3 = __webpack_require__(477);
+	var _form_create3 = __webpack_require__(469);
 
 	var _form_create4 = _interopRequireDefault(_form_create3);
 
-	var _list = __webpack_require__(472);
+	var _list = __webpack_require__(476);
 
 	var _list2 = _interopRequireDefault(_list);
 
-	var _loader = __webpack_require__(474);
+	var _loader = __webpack_require__(478);
 
 	var _loader2 = _interopRequireDefault(_loader);
 
-	var _autocomplete = __webpack_require__(475);
+	var _autocomplete = __webpack_require__(479);
 
 	var _autocomplete2 = _interopRequireDefault(_autocomplete);
 
@@ -72474,10 +71218,6 @@
 	    var query = { query_name: name };
 	    this.props.dispatch(action.fetch(query));
 	    this.setState({ loading: false });
-	  },
-	  continue: function _continue(company) {
-	    localStorage.setItem('company', JSON.stringify(company));
-	    location.hash = '#company/' + company.id + '/contact/create';
 	  },
 	  storeSelected: function storeSelected(company) {
 	    var dispatch = this.props.dispatch;
@@ -72691,7 +71431,7 @@
 	})(createPanel);
 
 /***/ },
-/* 467 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72705,7 +71445,7 @@
 	exports.setCompany = setCompany;
 	exports.cleanItems = cleanItems;
 
-	var _axios = __webpack_require__(251);
+	var _axios = __webpack_require__(247);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -72761,7 +71501,7 @@
 	}
 
 /***/ },
-/* 468 */
+/* 465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72774,7 +71514,7 @@
 	exports.update = update;
 	exports.setContact = setContact;
 
-	var _axios = __webpack_require__(251);
+	var _axios = __webpack_require__(247);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -72820,7 +71560,7 @@
 	}
 
 /***/ },
-/* 469 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72831,19 +71571,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _clean_object = __webpack_require__(237);
+	var _clean_object = __webpack_require__(236);
 
 	var _clean_object2 = _interopRequireDefault(_clean_object);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _sectors = __webpack_require__(470);
+	var _sectors = __webpack_require__(467);
 
 	var _sectors2 = _interopRequireDefault(_sectors);
 
-	var _cities = __webpack_require__(471);
+	var _cities = __webpack_require__(468);
 
 	var _cities2 = _interopRequireDefault(_cities);
 
@@ -73028,7 +71768,7 @@
 	});
 
 /***/ },
-/* 470 */
+/* 467 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -73191,7 +71931,7 @@
 	];
 
 /***/ },
-/* 471 */
+/* 468 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -73310,7 +72050,7 @@
 	];
 
 /***/ },
-/* 472 */
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73318,294 +72058,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _contact = __webpack_require__(473);
-
-	var _contact2 = _interopRequireDefault(_contact);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'list',
-	  handleEdit: function handleEdit(contact) {
-	    console.log(contact);
-	    this.props.onEdit(contact);
-	  },
-	  render: function render() {
-	    var _this = this;
-
-	    var contacts = this.props.contacts;
-
-	    var contactNodes = contacts.map(function (contact) {
-	      return _react2.default.createElement(_contact2.default, { key: contact.id, contact: contact, onEdit: _this.handleEdit });
-	    });
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'table-responsive' },
-	      _react2.default.createElement(
-	        'table',
-	        { className: 'table' },
-	        _react2.default.createElement(
-	          'thead',
-	          null,
-	          _react2.default.createElement(
-	            'tr',
-	            null,
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Nombre'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Email'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Tel\xE9fonos'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Celulares'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Empresa'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Opciones'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'tbody',
-	          null,
-	          contactNodes
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 473 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'contact',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      contact: {}
-	    };
-	  },
-	  handleClick: function handleClick() {
-	    var _props = this.props,
-	        onEdit = _props.onEdit,
-	        contact = _props.contact;
-
-	    if (typeof onEdit === 'function') {
-	      onEdit(contact);
-	    }
-	  },
-	  render: function render() {
-	    var _props$contact = this.props.contact,
-	        name = _props$contact.name,
-	        lastname = _props$contact.lastname,
-	        email = _props$contact.email,
-	        phone_1 = _props$contact.phone_1,
-	        phone_2 = _props$contact.phone_2,
-	        mobile_1 = _props$contact.mobile_1,
-	        mobile_2 = _props$contact.mobile_2,
-	        company = _props$contact.company;
-
-
-	    return _react2.default.createElement(
-	      'tr',
-	      null,
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        name,
-	        ' ',
-	        lastname
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        email
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        phone_1,
-	        ' ',
-	        phone_2
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        mobile_1,
-	        ' ',
-	        mobile_2
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        company ? company.name : ''
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'btn btn-sm', onClick: this.handleClick },
-	          'Editar'
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 474 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'loader',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      show: false
-	    };
-	  },
-	  render: function render() {
-	    var style = this.props.show ? { color: '#3B2B7F', margin: '15px auto', display: 'block' } : { display: 'none' };
-
-	    return _react2.default.createElement('i', { className: 'fa fa-spinner fa-pulse fa-3x fa-fw', style: style });
-	  }
-	});
-
-/***/ },
-/* 475 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _underscore = __webpack_require__(277);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var _loader = __webpack_require__(474);
-
-	var _loader2 = _interopRequireDefault(_loader);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'autocomplete',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      collection: [],
-	      field: 'name',
-	      placeholder: "Buscar",
-	      loading: false
-	    };
-	  },
-	  search: function search(e) {
-	    var query = e.currentTarget.value;
-	    if (typeof this.props.search == 'function') {
-	      this.props.search(query);
-	    }
-	  },
-	  resultSelected: function resultSelected(model) {
-	    var query = {};
-	    query[this.props.field] = model;
-	    var result = _underscore2.default.where(this.props.collection, query);
-	    if (typeof this.props.selected == 'function') {
-	      this.props.selected(result);
-	    }
-	  },
-	  render: function render() {
-	    var _this = this;
-
-	    var options = this.props.collection.map(function (model) {
-	      return model[_this.props.field];
-	    });
-
-	    var results = options.map(function (model, i) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: i, className: 'list-group-item', onClick: _this.resultSelected.bind(_this, model) },
-	        model
-	      );
-	    });
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'form-group' },
-	      _react2.default.createElement('input', {
-	        placeholder: 'Buscar empresa',
-	        type: 'text',
-	        onChange: _underscore2.default.throttle(this.search, 1000),
-	        className: 'form-control'
-	      }),
-	      _react2.default.createElement(_loader2.default, { show: this.props.loading }),
-	      _react2.default.createElement(
-	        'ul',
-	        { className: 'list-group' },
-	        results
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 476 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -73613,208 +72065,47 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form_create = __webpack_require__(477);
-
-	var _form_create2 = _interopRequireDefault(_form_create);
-
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      contacts: [],
-	      errorMessages: []
-	    };
-	  },
-
-	  componentDidMount: function componentDidMount() {
-	    this.fetchContacts();
-	  },
-
-	  fetchContacts: function fetchContacts() {
-	    var _this = this;
-
-	    _superagent2.default.get('api/v1/contacts').query({ company_id: this.props.params.companyId }).end(function (err, res) {
-	      _this.setState({ contacts: res.body });
-	    });
-	  },
-
-	  store: function store(contact) {
-	    var _this2 = this;
-
-	    var contactData = _extends({}, contact, { company_id: this.props.companyId });
-
-	    _superagent2.default.post('/api/v1/contacts').send(contactData).end(function (err, res) {
-	      if (err) return _this2.setState({ errorMessages: err.response.body });
-	      return _this2.handleQuote(res.body.id);
-	    });
-	  },
-
-	  handleQuote: function handleQuote(id, e) {
-	    if (e) e.preventDefault();
-	    var quotationData = { company_id: this.props.params.companyId, contact_id: id };
-	    _superagent2.default.post('/api/v1/quotations').send(quotationData).end(function (err, res) {
-	      location.hash = '#/quotations/' + res.body.id;
-	    });
-	  },
-
-	  handleSubmit: function handleSubmit(contact) {
-	    this.store(contact);
-	  },
-
-	  render: function render() {
-
-	    var contactNodes = this.state.contacts.map(function (contact) {
-	      return _react2.default.createElement(
-	        'tr',
-	        { key: contact.id },
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          contact.name,
-	          ' ',
-	          contact.lastname
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          contact.email
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'btn btn-primary btn-xs', onClick: this.handleQuote.bind(null, contact.id) },
-	            'Cotizar'
-	          )
-	        )
-	      );
-	    }.bind(this));
-
-	    var errorMessages = this.state.errorMessages.map(function (msg, i) {
-	      return _react2.default.createElement(
-	        'span',
-	        { className: 'alert alert-danger', key: i },
-	        msg
-	      );
-	    });
-
-	    if (contactNodes.length < 1) {
-	      contactNodes = null;
-	    }
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'col-md-6' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: contactNodes ? "panel panel-default" : "hidden" },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(
-	            'table',
-	            { className: 'table table-striped' },
-	            _react2.default.createElement(
-	              'tr',
-	              null,
-	              _react2.default.createElement(
-	                'th',
-	                null,
-	                'Nombre'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                null,
-	                'Email'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                null,
-	                'Opciones'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'tbody',
-	              null,
-	              contactNodes
-	            )
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel panel-default' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          errorMessages,
-	          _react2.default.createElement(_form_create2.default, { onSubmit: this.handleSubmit })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 477 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _clean_object = __webpack_require__(237);
+	var _clean_object = __webpack_require__(236);
 
 	var _clean_object2 = _interopRequireDefault(_clean_object);
 
-	var _form_input = __webpack_require__(478);
+	var _form_input = __webpack_require__(470);
 
 	var _form_input2 = _interopRequireDefault(_form_input);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _form_textarea = __webpack_require__(479);
+	var _form_textarea = __webpack_require__(471);
 
 	var _form_textarea2 = _interopRequireDefault(_form_textarea);
 
-	var _pay_methods = __webpack_require__(480);
+	var _pay_methods = __webpack_require__(472);
 
 	var _pay_methods2 = _interopRequireDefault(_pay_methods);
 
-	var _found_us = __webpack_require__(481);
+	var _found_us = __webpack_require__(473);
 
 	var _found_us2 = _interopRequireDefault(_found_us);
 
-	var _how_call = __webpack_require__(482);
+	var _how_call = __webpack_require__(474);
 
 	var _how_call2 = _interopRequireDefault(_how_call);
 
-	var _gender = __webpack_require__(483);
+	var _gender = __webpack_require__(475);
 
 	var _gender2 = _interopRequireDefault(_gender);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var contactForm = _react2.default.createClass({
+	  displayName: 'contactForm',
 	  getInitialState: function getInitialState() {
 	    return {
 	      contact: {
-	        company_id: null
+	        company_id: null,
+	        comment: ''
 	      }
 	    };
 	  },
@@ -74002,6 +72293,17 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'fax',
+	            onChange: this.handleChange,
+	            value: contact.birthday,
+	            placeholder: 'Cumplea\xF1os: 07/07/1980'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
 	          _react2.default.createElement(_form_select2.default, {
 	            ref: 'pay_method',
 	            options: _pay_methods2.default,
@@ -74061,8 +72363,10 @@
 	  }
 	});
 
+	exports.default = contactForm;
+
 /***/ },
-/* 478 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74090,7 +72394,7 @@
 	});
 
 /***/ },
-/* 479 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74103,25 +72407,33 @@
 
 	module.exports = _react2.default.createClass({
 	  displayName: 'exports',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      value: ''
+	    };
+	  },
+
 
 	  handleChange: function handleChange() {
 	    this.props.onTextareaChange();
 	  },
 
 	  render: function render() {
-	    var value = this.props.value || '';
+	    var value = this.props.value;
+
 
 	    return _react2.default.createElement('textarea', {
 	      className: 'form-control',
 	      ref: 'textarea',
 	      placeholder: this.props.placeholder,
 	      onChange: this.handleChange,
-	      value: value });
+	      value: value
+	    });
 	  }
 	});
 
 /***/ },
-/* 480 */
+/* 472 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -74144,7 +72456,7 @@
 	];
 
 /***/ },
-/* 481 */
+/* 473 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -74199,7 +72511,7 @@
 	];
 
 /***/ },
-/* 482 */
+/* 474 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -74214,7 +72526,7 @@
 	];
 
 /***/ },
-/* 483 */
+/* 475 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -74229,7 +72541,299 @@
 	];
 
 /***/ },
-/* 484 */
+/* 476 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _contact = __webpack_require__(477);
+
+	var _contact2 = _interopRequireDefault(_contact);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'list',
+	  handleEdit: function handleEdit(contact) {
+	    console.log(contact);
+	    this.props.onEdit(contact);
+	  },
+	  render: function render() {
+	    var _this = this;
+
+	    var contacts = this.props.contacts;
+
+	    var contactNodes = contacts.map(function (contact) {
+	      return _react2.default.createElement(_contact2.default, { key: contact.id, contact: contact, onEdit: _this.handleEdit });
+	    });
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'table-responsive' },
+	      _react2.default.createElement(
+	        'table',
+	        { className: 'table' },
+	        _react2.default.createElement(
+	          'thead',
+	          null,
+	          _react2.default.createElement(
+	            'tr',
+	            null,
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Nombre'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Email'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Tel\xE9fonos'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Celulares'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Empresa'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Opciones'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'tbody',
+	          null,
+	          contactNodes
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 477 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'contact',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      contact: {}
+	    };
+	  },
+	  handleClick: function handleClick() {
+	    var _props = this.props,
+	        onEdit = _props.onEdit,
+	        contact = _props.contact;
+
+	    if (typeof onEdit === 'function') {
+	      onEdit(contact);
+	    }
+	  },
+	  render: function render() {
+	    var _props$contact = this.props.contact,
+	        name = _props$contact.name,
+	        lastname = _props$contact.lastname,
+	        email = _props$contact.email,
+	        phone_1 = _props$contact.phone_1,
+	        phone_2 = _props$contact.phone_2,
+	        mobile_1 = _props$contact.mobile_1,
+	        mobile_2 = _props$contact.mobile_2,
+	        company = _props$contact.company;
+
+
+	    return _react2.default.createElement(
+	      'tr',
+	      null,
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        name,
+	        ' ',
+	        lastname
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        email
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        phone_1,
+	        ' ',
+	        phone_2
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        mobile_1,
+	        ' ',
+	        mobile_2
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        company ? company.name : ''
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-sm', onClick: this.handleClick },
+	          'Editar'
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 478 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'loader',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      show: false
+	    };
+	  },
+	  render: function render() {
+	    var style = this.props.show ? { color: '#3B2B7F', margin: '15px auto', display: 'block' } : { display: 'none' };
+
+	    return _react2.default.createElement('i', { className: 'fa fa-spinner fa-pulse fa-3x fa-fw', style: style });
+	  }
+	});
+
+/***/ },
+/* 479 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _underscore = __webpack_require__(273);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _loader = __webpack_require__(478);
+
+	var _loader2 = _interopRequireDefault(_loader);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'autocomplete',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      collection: [],
+	      field: 'name',
+	      placeholder: "Buscar",
+	      loading: false
+	    };
+	  },
+	  search: function search(e) {
+	    var query = e.currentTarget.value;
+	    if (typeof this.props.search == 'function') {
+	      this.props.search(query);
+	    }
+	  },
+	  resultSelected: function resultSelected(model) {
+	    var query = {};
+	    query[this.props.field] = model;
+	    var result = _underscore2.default.where(this.props.collection, query);
+	    if (typeof this.props.selected == 'function') {
+	      this.props.selected(result);
+	    }
+	  },
+	  render: function render() {
+	    var _this = this;
+
+	    var options = this.props.collection.map(function (model) {
+	      return model[_this.props.field];
+	    });
+
+	    var results = options.map(function (model, i) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: i, className: 'list-group-item', onClick: _this.resultSelected.bind(_this, model) },
+	        model
+	      );
+	    });
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'form-group' },
+	      _react2.default.createElement('input', {
+	        placeholder: 'Buscar empresa',
+	        type: 'text',
+	        onChange: _underscore2.default.throttle(this.search, 1000),
+	        className: 'form-control'
+	      }),
+	      _react2.default.createElement(_loader2.default, { show: this.props.loading }),
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'list-group' },
+	        results
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74244,102 +72848,108 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(289);
+	var _moment = __webpack_require__(286);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _quotations = __webpack_require__(250);
+	var _quotations = __webpack_require__(246);
 
 	var action = _interopRequireWildcard(_quotations);
 
-	var _services = __webpack_require__(518);
+	var _services = __webpack_require__(481);
 
 	var serviceAction = _interopRequireWildcard(_services);
 
-	var _activities = __webpack_require__(401);
+	var _activities = __webpack_require__(398);
 
 	var activityAction = _interopRequireWildcard(_activities);
 
-	var _products = __webpack_require__(526);
+	var _products = __webpack_require__(482);
 
 	var productAction = _interopRequireWildcard(_products);
 
-	var _trackings = __webpack_require__(527);
+	var _trackings = __webpack_require__(483);
 
 	var trackingAction = _interopRequireWildcard(_trackings);
 
-	var _contact = __webpack_require__(485);
+	var _contacts = __webpack_require__(465);
+
+	var contactAction = _interopRequireWildcard(_contacts);
+
+	var _contact = __webpack_require__(484);
 
 	var _contact2 = _interopRequireDefault(_contact);
 
-	var _filters = __webpack_require__(486);
+	var _filters = __webpack_require__(485);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
-	var _edit = __webpack_require__(489);
+	var _edit = __webpack_require__(488);
 
 	var _edit2 = _interopRequireDefault(_edit);
 
-	var _status = __webpack_require__(490);
+	var _status = __webpack_require__(489);
 
 	var _status2 = _interopRequireDefault(_status);
 
-	var _products2 = __webpack_require__(493);
+	var _products2 = __webpack_require__(491);
 
 	var _products3 = _interopRequireDefault(_products2);
 
-	var _services2 = __webpack_require__(499);
+	var _services2 = __webpack_require__(497);
 
 	var _services3 = _interopRequireDefault(_services2);
 
-	var _comment = __webpack_require__(500);
+	var _comment = __webpack_require__(498);
 
 	var _comment2 = _interopRequireDefault(_comment);
 
-	var _mails = __webpack_require__(501);
+	var _mails = __webpack_require__(499);
 
 	var _mails2 = _interopRequireDefault(_mails);
 
-	var _no_effective = __webpack_require__(502);
+	var _no_effective = __webpack_require__(500);
 
 	var _no_effective2 = _interopRequireDefault(_no_effective);
 
-	var _no_send = __webpack_require__(504);
+	var _no_send = __webpack_require__(502);
 
 	var _no_send2 = _interopRequireDefault(_no_send);
 
-	var _times = __webpack_require__(506);
+	var _times = __webpack_require__(504);
 
 	var _times2 = _interopRequireDefault(_times);
 
-	var _activity = __webpack_require__(507);
+	var _activity = __webpack_require__(505);
 
 	var _activity2 = _interopRequireDefault(_activity);
 
-	var _trackings2 = __webpack_require__(508);
+	var _trackings2 = __webpack_require__(506);
 
 	var _trackings3 = _interopRequireDefault(_trackings2);
+
+	var _alert = __webpack_require__(510);
+
+	var _alert2 = _interopRequireDefault(_alert);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var alertify = __webpack_require__(491);
-	alertify.set('notifier', 'position', 'top-right');
-
 	var quotationSection = _react2.default.createClass({
 	  displayName: 'quotationSection',
 
+	  alert: null,
+
 	  getInitialState: function getInitialState() {
 	    return {
-	      quotation: {},
-	      products: [],
 	      showComment: false,
 	      showMail: false,
 	      showNoEffective: false,
 	      showNoSend: false,
+	      showErrors: false,
 	      disabled: false
 	    };
 	  },
@@ -74357,14 +72967,32 @@
 
 
 	    dispatch(action.fetchOne(params.id)).then(function (actionRes) {
+	      var query = { quotation_id: params.id };
 	      _this.handleDisabled(actionRes.payload.status);
-	      dispatch(activityAction.fetch({ quotation_id: params.id }));
-	      dispatch(serviceAction.fetch());
-	      dispatch(productAction.fetch({ quotation_id: params.id }));
-	      dispatch(trackingAction.fetch({ quotation_id: params.id }));
+	      dispatch(productAction.fetch(query));
 	      dispatch(action.fetchServices(params.id));
+	      dispatch(activityAction.fetch(query));
+	      dispatch(trackingAction.fetch(query));
+	      dispatch(contactAction.fetch(query));
+	      dispatch(serviceAction.fetch());
 	    });
 	  },
+
+	  setActivity: function setActivity(message) {
+	    var _props2 = this.props,
+	        user = _props2.user,
+	        quotations = _props2.quotations;
+
+
+	    var activity = {
+	      message: message,
+	      user_id: user.user.id,
+	      quotation_id: quotations.quotation.id
+	    };
+
+	    return this.props.dispatch(activityAction.store(activity));
+	  },
+
 
 	  handleShowComment: function handleShowComment() {
 	    var show = true;
@@ -74384,34 +73012,36 @@
 	  handleShowNoSend: function handleShowNoSend() {
 	    this.setState({ showNoSend: !this.state.showNoSend });
 	  },
-	  handleOptions: function handleOptions(filters, activity) {
+	  handleOptions: function handleOptions(filters, message) {
 	    var _this2 = this;
 
-	    var _props2 = this.props,
-	        user = _props2.user,
-	        quotations = _props2.quotations;
+	    var quotations = this.props.quotations;
 
 
-	    activity = _extends({}, activity, {
-	      user_id: user.user.id,
-	      quotation_id: quotations.quotation.id
-	    });
-
-	    this.props.dispatch(activityAction.store(activity)).then(function (actionRes) {
-	      var data = _extends({}, _this2.props.quotations.quotation, filters);
+	    this.setActivity(message).then(function () {
+	      var data = _extends({}, quotations.quotation, filters);
 	      _this2._update(data);
 	    });
 	  },
 
 
 	  handleSaveComment: function handleSaveComment(comment) {
-	    this._update({ comment: comment });
-	    this.setState({ showComment: false });
+	    var _this3 = this;
+
+	    this.setActivity('edito el comentario').then(function () {
+	      _this3._update({ comment: comment });
+	      _this3.setState({ showComment: false });
+	    });
 	  },
 
 	  handleSaveMail: function handleSaveMail(mail) {
-	    this._update(mail);
-	    this.setState({ showMail: false });
+	    var _this4 = this;
+
+	    this.setActivity('edito el mail').then(function () {
+	      _this4.alert.show();
+	      _this4._update(mail);
+	      _this4.setState({ showMail: false });
+	    });
 	  },
 
 	  handleServiceApproval: function handleServiceApproval(serviceApproval) {
@@ -74426,8 +73056,12 @@
 	    });
 	  },
 
-	  handleStatus: function handleStatus(status) {
-	    this._update(status);
+	  handleStatus: function handleStatus(status, message) {
+	    var _this5 = this;
+
+	    this.setActivity(message).then(function () {
+	      _this5._update(status);
+	    });
 	  },
 
 	  changeContact: function changeContact(contactId) {
@@ -74440,9 +73074,10 @@
 	  },
 	  handleUpdate: function handleUpdate(actionRes) {
 	    if (actionRes.type == 'QUOTATIONS_FAIL') {
-	      return alertify.error(actionRes.payload);
+	      console.log(actionRes.type);
+	      return this.setState({ showErrors: true });
 	    } else {
-	      return this.handleDisabled(actionRes.status);
+	      return this.handleDisabled(actionRes.payload.status);
 	    }
 	  },
 	  handleDisabled: function handleDisabled(status) {
@@ -74452,7 +73087,10 @@
 	      disabled = true;
 	    }
 
-	    this.setState({ disabled: disabled });
+	    this.setState({
+	      disabled: disabled,
+	      showErrors: false
+	    });
 	  },
 	  render: function render() {
 	    var quotation = this.props.quotations.quotation;
@@ -74462,6 +73100,10 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
+	      _react2.default.createElement(_alert2.default, {
+	        show: this.state.showErrors,
+	        message: this.props.quotations.errors
+	      }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'col-md-12' },
@@ -74481,19 +73123,7 @@
 	                quotation.id,
 	                ' \u2022 ',
 	                quotation.status,
-	                ' \u2022 ',
-	                _react2.default.createElement(
-	                  'small',
-	                  null,
-	                  (0, _moment2.default)(quotation.created_at).fromNow()
-	                ),
-	                ' ',
-	                _react2.default.createElement(
-	                  'small',
-	                  { className: quotation.sent_at ? "" : "hidden" },
-	                  'enviada ',
-	                  (0, _moment2.default)(quotation.sent_at).fromNow()
-	                )
+	                ' \u2022'
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -74544,13 +73174,13 @@
 	          quotationId: quotation.id,
 	          disabled: this.state.disabled
 	        }),
-	        _react2.default.createElement(_status2.default, {
+	        _react2.default.createElement(_status2.default, _extends({}, this.props, {
 	          quotation: quotation,
 	          handleOpenNoEffective: this.handleShowNoEffective,
 	          handleOpenNoSend: this.handleShowNoSend,
 	          onStatusChange: this.handleStatus,
 	          disabled: this.state.disabled
-	        }),
+	        })),
 	        _react2.default.createElement(_no_effective2.default, {
 	          quotation: quotation,
 	          show: this.state.showNoEffective,
@@ -74569,11 +73199,10 @@
 	        _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2.default.createElement(_contact2.default, {
-	            contact: quotation.contact,
-	            company: quotation.company,
+	          _react2.default.createElement(_contact2.default, _extends({}, this.props, {
 	            changeContact: this.changeContact
-	          }),
+	          })),
+	          _react2.default.createElement(_times2.default, { quotation: quotation }),
 	          _react2.default.createElement(_activity2.default, {
 	            quotationId: quotation.id,
 	            activities: this.props.activities.items,
@@ -74590,7 +73219,169 @@
 	})(quotationSection);
 
 /***/ },
-/* 485 */
+/* 481 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+	exports.setService = setService;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'SERVICES';
+	var endpoint = 'api/v1/services';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err });
+			});
+		};
+	}
+
+	function store(service) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, service).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function update(service) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + service.id, service).end(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function setService(service) {
+		return function (dispatch) {
+			return new Promise(function (resolve, reject) {
+				var action = { type: TYPE + '_SET_SERVICE', payload: service };
+				dispatch(action);
+				return resolve(action);
+			});
+		};
+	}
+
+/***/ },
+/* 482 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'PRODUCTS';
+	var endpoint = '/api/v1/products';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function store(product) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, product).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function update(product) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + product.id, product).then(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+/***/ },
+/* 483 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'TRACKINGS';
+	var endpoint = '/api/v1/trackings';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function store(product) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, product).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+/***/ },
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74601,64 +73392,35 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
+	var _contacts = __webpack_require__(465);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var action = _interopRequireWildcard(_contacts);
 
-	var _form_create = __webpack_require__(477);
+	var _form_create = __webpack_require__(469);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = _react2.default.createClass({
 	  displayName: 'exports',
 
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      company: {}
-	    };
-	  },
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      contact: {},
-	      contacts: [],
-	      contactSelected: null,
-	      showForm: false,
-	      changeContact: false
+	      showForm: false
 	    };
 	  },
 
-	  fetchContacts: function fetchContacts() {
-	    var _this = this;
-
-	    _superagent2.default.get('/api/v1/contacts').query({ company_id: this.props.company.id }).end(function (err, res) {
-	      return _this.setState({ contacts: res.body });
-	    });
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    // this.fetchContacts();
-	    this.setState({ contact: props.contact });
-	  },
-
-	  handleContact: function handleContact(e) {
+	  changeContact: function changeContact(e) {
 	    var id = e.currentTarget.value;
 	    this.props.changeContact(id);
-	    this.setState({
-	      contactSelected: parseInt(id),
-	      changeContact: true
-	    });
-	  },
-
-	  changeContact: function changeContact() {
-	    var contact = this.state.contactSelected;
-	    this.props.changeContact(contact);
 	  },
 
 	  showForm: function showForm() {
@@ -74666,23 +73428,14 @@
 	  },
 
 	  handleSubmit: function handleSubmit(contact) {
-	    var _this2 = this;
+	    var _this = this;
 
-	    var contactData = _extends({}, contact, { company_id: this.props.company.id });
-
-	    _superagent2.default.post('/api/v1/contacts').send(contactData).end(function (err, res) {
-	      if (err) return _this2.setState({ errorMessages: err.response.body });
-	      _this2.fetchContacts();
-	      _this2.showForm();
+	    var contactData = _extends({}, contact, { company_id: this.props.quotations.company.id });
+	    this.props.dispatch(action.store(contactData)).then(function () {
+	      _this.showForm();
 	    });
 	  },
 
-	  getContacts: function getContacts() {
-	    var company = this.props.company;
-	    _superagent2.default.get('/api/v1/contacts').query({ company_id: company.id }).end(function (err, res) {
-	      console.log(res.body);
-	    });
-	  },
 	  show: function show(field) {
 	    if (field && field != "") {
 	      return "";
@@ -74693,20 +73446,14 @@
 
 
 	  render: function render() {
-	    var contact = this.state.contact;
-	    var company = this.props.company;
+	    var _props$quotations = this.props.quotations,
+	        contact = _props$quotations.contact,
+	        company = _props$quotations.company;
+
 	    var contactSelect = void 0;
 
-	    var contactOptions = this.state.contacts.map(function (contact, i) {
+	    var contactOptions = this.props.contacts.items.map(function (contact, i) {
 	      return { value: contact.id, label: contact.name + ' ' + contact.lastname };
-	    });
-
-	    var contactNodes = this.state.contacts.map(function (contact) {
-	      return _react2.default.createElement(
-	        'li',
-	        { className: 'list-item' },
-	        contact.name
-	      );
 	    });
 
 	    return _react2.default.createElement(
@@ -74736,7 +73483,7 @@
 	          ' '
 	        ),
 	        _react2.default.createElement(
-	          'span',
+	          'b',
 	          { className: this.show(company.name) },
 	          company.name,
 	          _react2.default.createElement('hr', null)
@@ -74786,8 +73533,8 @@
 	          _react2.default.createElement(_form_select2.default, {
 	            options: contactOptions,
 	            'default': 'Cambiar Contacto',
-	            onSelectChange: this.handleContact,
-	            value: this.state.contactSelected
+	            onSelectChange: this.changeContact,
+	            value: ''
 	          })
 	        )
 	      )
@@ -74796,7 +73543,7 @@
 	});
 
 /***/ },
-/* 486 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74811,31 +73558,31 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _category_type = __webpack_require__(487);
+	var _category_type = __webpack_require__(486);
 
 	var _category_type2 = _interopRequireDefault(_category_type);
 
-	var _advisors = __webpack_require__(279);
+	var _advisors = __webpack_require__(275);
 
 	var _advisors2 = _interopRequireDefault(_advisors);
 
-	var _type = __webpack_require__(280);
+	var _type = __webpack_require__(276);
 
 	var _type2 = _interopRequireDefault(_type);
 
-	var _client_type = __webpack_require__(281);
+	var _client_type = __webpack_require__(277);
 
 	var _client_type2 = _interopRequireDefault(_client_type);
 
-	var _found_us = __webpack_require__(481);
+	var _found_us = __webpack_require__(473);
 
 	var _found_us2 = _interopRequireDefault(_found_us);
 
-	var _products = __webpack_require__(488);
+	var _products = __webpack_require__(487);
 
 	var _products2 = _interopRequireDefault(_products);
 
@@ -74852,8 +73599,8 @@
 	  advisor: 'cambio asesor'
 	};
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'filters',
+	var quoFilters = _react2.default.createClass({
+	  displayName: 'quoFilters',
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -74873,10 +73620,9 @@
 	    var e = arguments[1];
 
 	    var val = e.currentTarget.value;
-	    var activity = { message: messages[field] };
 	    var filters = _extends({}, this.state.filters, _defineProperty({}, field, val));
-
-	    this.props.onChange(filters, activity);
+	    var message = messages[field];
+	    this.props.onChange(filters, message);
 	    this.setState({ filters: filters });
 	  },
 
@@ -74981,8 +73727,10 @@
 	  }
 	});
 
+	exports.default = quoFilters;
+
 /***/ },
-/* 487 */
+/* 486 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -74997,7 +73745,7 @@
 	];
 
 /***/ },
-/* 488 */
+/* 487 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -75048,7 +73796,7 @@
 	];
 
 /***/ },
-/* 489 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75192,7 +73940,7 @@
 	});
 
 /***/ },
-/* 490 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75201,23 +73949,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
+	var _quotations = __webpack_require__(246);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var action = _interopRequireWildcard(_quotations);
 
-	var _moment = __webpack_require__(289);
+	var _moment = __webpack_require__(286);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _alertifyjs = __webpack_require__(491);
+	var _activity = __webpack_require__(490);
 
-	var _alertifyjs2 = _interopRequireDefault(_alertifyjs);
-
-	var _activity = __webpack_require__(492);
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	_alertifyjs2.default.set('notifier', 'position', 'top-right');
 
 	module.exports = _react2.default.createClass({
 	  displayName: 'exports',
@@ -75246,26 +73990,20 @@
 	        this.props.handleOpenNoEffective();
 	        break;
 	      default:
-	        this.props.onStatusChange({ status: status });
+	        this.props.onStatusChange({ status: status, message: message });
 	    }
 	  },
 	  handleSend: function handleSend() {
+	    var _this = this;
+
 	    var id = this.props.quotation.id;
+	    var message = 'Cambio estado a enviada';
 	    this.setState({ sending: true });
 
-	    _superagent2.default.post('/api/v1/quotations/' + id + '/sendmail').end(function (err, res) {
-	      this.setState({ sending: false });
-	      if (err) return _alertifyjs2.default.error("complete los filtros");
-
-	      return this.props.onStatusChange({
-	        status: 'Enviada',
-	        created_sent_diff: this._getDiff()
-	      });
-	    }.bind(this));
-	  },
-	  _getDiff: function _getDiff() {
-	    var now = (0, _moment2.default)().format();
-	    return (0, _moment2.default)(now).diff(this.props.quotation.created_at, 'minutes');
+	    this.props.dispatch(action.sendMail(id)).then(function () {
+	      _this.setState({ sending: false });
+	      return _this.props.onStatusChange('Enviada', message);
+	    });
 	  },
 	  render: function render() {
 	    var sending = this.state.sending ? "disabled" : "";
@@ -75355,6 +74093,32 @@
 	              },
 	              'Replantear'
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                disabled: this.props.disabled ? true : false,
+	                onClick: this.handleClick.bind(this, 'Nula')
+	              },
+	              'Anular'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                disabled: this.props.disabled ? true : false,
+	                onClick: this.handleClick.bind(this, 'Por confirmar')
+	              },
+	              'Por confirmar'
+	            )
 	          )
 	        )
 	      )
@@ -75363,3585 +74127,7 @@
 	});
 
 /***/ },
-/* 491 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
-	 * alertifyjs 1.8.0 http://alertifyjs.com
-	 * AlertifyJS is a javascript framework for developing pretty browser dialogs and notifications.
-	 * Copyright 2016 Mohammad Younes <Mohammad@alertifyjs.com> (http://alertifyjs.com) 
-	 * Licensed under GPL 3 <https://opensource.org/licenses/gpl-3.0>*/
-	( function ( window ) {
-	    'use strict';
-	    
-	    /**
-	     * Keys enum
-	     * @type {Object}
-	     */
-	    var keys = {
-	        ENTER: 13,
-	        ESC: 27,
-	        F1: 112,
-	        F12: 123,
-	        LEFT: 37,
-	        RIGHT: 39
-	    };
-	    /**
-	     * Default options 
-	     * @type {Object}
-	     */
-	    var defaults = {
-	        autoReset:true,
-	        basic:false,
-	        closable:true,
-	        closableByDimmer:true,
-	        frameless:false,
-	        maintainFocus:true, //global default not per instance, applies to all dialogs
-	        maximizable:true,
-	        modal:true,
-	        movable:true,
-	        moveBounded:false,
-	        overflow:true,
-	        padding: true,
-	        pinnable:true,
-	        pinned:true,
-	        preventBodyShift:false, //global default not per instance, applies to all dialogs
-	        resizable:true,
-	        startMaximized:false,
-	        transition:'pulse',
-	        notifier:{
-	            delay:5,
-	            position:'bottom-right'
-	        },
-	        glossary:{
-	            title:'AlertifyJS',
-	            ok: 'OK',
-	            cancel: 'Cancel',
-	            acccpt: 'Accept',
-	            deny: 'Deny',
-	            confirm: 'Confirm',
-	            decline: 'Decline',
-	            close: 'Close',
-	            maximize: 'Maximize',
-	            restore: 'Restore',
-	        },
-	        theme:{
-	            input:'ajs-input',
-	            ok:'ajs-ok',
-	            cancel:'ajs-cancel',
-	        }
-	    };
-	    
-	    //holds open dialogs instances
-	    var openDialogs = [];
-
-	    /**
-	     * [Helper]  Adds the specified class(es) to the element.
-	     *
-	     * @element {node}      The element
-	     * @className {string}  One or more space-separated classes to be added to the class attribute of the element.
-	     * 
-	     * @return {undefined}
-	     */
-	    function addClass(element,classNames){
-	        element.className += ' ' + classNames;
-	    }
-	    
-	    /**
-	     * [Helper]  Removes the specified class(es) from the element.
-	     *
-	     * @element {node}      The element
-	     * @className {string}  One or more space-separated classes to be removed from the class attribute of the element.
-	     * 
-	     * @return {undefined}
-	     */
-	    function removeClass(element, classNames) {
-	        var original = element.className.split(' ');
-	        var toBeRemoved = classNames.split(' ');
-	        for (var x = 0; x < toBeRemoved.length; x += 1) {
-	            var index = original.indexOf(toBeRemoved[x]);
-	            if (index > -1){
-	                original.splice(index,1);
-	            }
-	        }
-	        element.className = original.join(' ');
-	    }
-
-	    /**
-	     * [Helper]  Checks if the document is RTL
-	     *
-	     * @return {Boolean} True if the document is RTL, false otherwise.
-	     */
-	    function isRightToLeft(){
-	        return window.getComputedStyle(document.body).direction === 'rtl';
-	    }
-	    /**
-	     * [Helper]  Get the document current scrollTop
-	     *
-	     * @return {Number} current document scrollTop value
-	     */
-	    function getScrollTop(){
-	        return ((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop);
-	    }
-
-	    /**
-	     * [Helper]  Get the document current scrollLeft
-	     *
-	     * @return {Number} current document scrollLeft value
-	     */
-	    function getScrollLeft(){
-	        return ((document.documentElement && document.documentElement.scrollLeft) || document.body.scrollLeft);
-	    }
-
-	    /**
-	    * Helper: clear contents
-	    *
-	    */
-	    function clearContents(element){
-	        while (element.lastChild) {
-	            element.removeChild(element.lastChild);
-	        }
-	    }
-	    /**
-	     * Extends a given prototype by merging properties from base into sub.
-	     *
-	     * @sub {Object} sub The prototype being overwritten.
-	     * @base {Object} base The prototype being written.
-	     *
-	     * @return {Object} The extended prototype.
-	     */
-	    function copy(src) {
-	        if(null === src){
-	            return src;
-	        }
-	        var cpy;
-	        if(Array.isArray(src)){
-	            cpy = [];
-	            for(var x=0;x<src.length;x+=1){
-	                cpy.push(copy(src[x]));
-	            }
-	            return cpy;
-	        }
-	      
-	        if(src instanceof Date){
-	            return new Date(src.getTime());
-	        }
-	      
-	        if(src instanceof RegExp){
-	            cpy = new RegExp(src.source);
-	            cpy.global = src.global;
-	            cpy.ignoreCase = src.ignoreCase;
-	            cpy.multiline = src.multiline;
-	            cpy.lastIndex = src.lastIndex;
-	            return cpy;
-	        }
-	        
-	        if(typeof src === 'object'){
-	            cpy = {};
-	            // copy dialog pototype over definition.
-	            for (var prop in src) {
-	                if (src.hasOwnProperty(prop)) {
-	                    cpy[prop] = copy(src[prop]);
-	                }
-	            }
-	            return cpy;
-	        }
-	        return src;
-	    }
-	    /**
-	      * Helper: destruct the dialog
-	      *
-	      */
-	    function destruct(instance, initialize){
-	        //delete the dom and it's references.
-	        var root = instance.elements.root;
-	        root.parentNode.removeChild(root);
-	        delete instance.elements;
-	        //copy back initial settings.
-	        instance.settings = copy(instance.__settings);
-	        //re-reference init function.
-	        instance.__init = initialize;
-	        //delete __internal variable to allow re-initialization.
-	        delete instance.__internal;
-	    }
-
-	    /**
-	     * Use a closure to return proper event listener method. Try to use
-	     * `addEventListener` by default but fallback to `attachEvent` for
-	     * unsupported browser. The closure simply ensures that the test doesn't
-	     * happen every time the method is called.
-	     *
-	     * @param    {Node}     el    Node element
-	     * @param    {String}   event Event type
-	     * @param    {Function} fn    Callback of event
-	     * @return   {Function}
-	     */
-	    var on = (function () {
-	        if (document.addEventListener) {
-	            return function (el, event, fn, useCapture) {
-	                el.addEventListener(event, fn, useCapture === true);
-	            };
-	        } else if (document.attachEvent) {
-	            return function (el, event, fn) {
-	                el.attachEvent('on' + event, fn);
-	            };
-	        }
-	    }());
-
-	    /**
-	     * Use a closure to return proper event listener method. Try to use
-	     * `removeEventListener` by default but fallback to `detachEvent` for
-	     * unsupported browser. The closure simply ensures that the test doesn't
-	     * happen every time the method is called.
-	     *
-	     * @param    {Node}     el    Node element
-	     * @param    {String}   event Event type
-	     * @param    {Function} fn    Callback of event
-	     * @return   {Function}
-	     */
-	    var off = (function () {
-	        if (document.removeEventListener) {
-	            return function (el, event, fn, useCapture) {
-	                el.removeEventListener(event, fn, useCapture === true);
-	            };
-	        } else if (document.detachEvent) {
-	            return function (el, event, fn) {
-	                el.detachEvent('on' + event, fn);
-	            };
-	        }
-	    }());
-
-	    /**
-	     * Prevent default event from firing
-	     *
-	     * @param  {Event} event Event object
-	     * @return {undefined}
-
-	    function prevent ( event ) {
-	        if ( event ) {
-	            if ( event.preventDefault ) {
-	                event.preventDefault();
-	            } else {
-	                event.returnValue = false;
-	            }
-	        }
-	    }
-	    */
-	    var transition = (function () {
-	        var t, type;
-	        var supported = false;
-	        var transitions = {
-	            'animation'        : 'animationend',
-	            'OAnimation'       : 'oAnimationEnd oanimationend',
-	            'msAnimation'      : 'MSAnimationEnd',
-	            'MozAnimation'     : 'animationend',
-	            'WebkitAnimation'  : 'webkitAnimationEnd'
-	        };
-
-	        for (t in transitions) {
-	            if (document.documentElement.style[t] !== undefined) {
-	                type = transitions[t];
-	                supported = true;
-	                break;
-	            }
-	        }
-
-	        return {
-	            type: type,
-	            supported: supported
-	        };
-	    }());
-
-	    /**
-	    * Creates event handler delegate that sends the instance as last argument.
-	    * 
-	    * @return {Function}    a function wrapper which sends the instance as last argument.
-	    */
-	    function delegate(context, method) {
-	        return function () {
-	            if (arguments.length > 0) {
-	                var args = [];
-	                for (var x = 0; x < arguments.length; x += 1) {
-	                    args.push(arguments[x]);
-	                }
-	                args.push(context);
-	                return method.apply(context, args);
-	            }
-	            return method.apply(context, [null, context]);
-	        };
-	    }
-	    /**
-	    * Helper for creating a dialog close event.
-	    * 
-	    * @return {object}
-	    */
-	    function createCloseEvent(index, button) {
-	        return {
-	            index: index,
-	            button: button,
-	            cancel: false
-	        };
-	    }
-	    /**
-	    * Helper for dispatching events.
-	    *
-	    * @param  {string} evenType The type of the event to disptach.
-	    * @param  {object} instance The dialog instance disptaching the event.
-	    *
-	    * @return {object}
-	    */
-	    function dispatchEvent(eventType, instance) {
-	        if ( typeof instance.get(eventType) === 'function' ) {
-	            instance.get(eventType).call(instance);
-	        }
-	    }
-
-
-	    /**
-	     * Super class for all dialogs
-	     *
-	     * @return {Object}		base dialog prototype
-	     */
-	    var dialog = (function () {
-	        var //holds the list of used keys.
-	            usedKeys = [],
-	            //dummy variable, used to trigger dom reflow.
-	            reflow = null,
-	            //condition for detecting safari
-	            isSafari = window.navigator.userAgent.indexOf('Safari') > -1 && window.navigator.userAgent.indexOf('Chrome') < 0,
-	            //dialog building blocks
-	            templates = {
-	                dimmer:'<div class="ajs-dimmer"></div>',
-	                /*tab index required to fire click event before body focus*/
-	                modal: '<div class="ajs-modal" tabindex="0"></div>',
-	                dialog: '<div class="ajs-dialog" tabindex="0"></div>',
-	                reset: '<button class="ajs-reset"></button>',
-	                commands: '<div class="ajs-commands"><button class="ajs-pin"></button><button class="ajs-maximize"></button><button class="ajs-close"></button></div>',
-	                header: '<div class="ajs-header"></div>',
-	                body: '<div class="ajs-body"></div>',
-	                content: '<div class="ajs-content"></div>',
-	                footer: '<div class="ajs-footer"></div>',
-	                buttons: { primary: '<div class="ajs-primary ajs-buttons"></div>', auxiliary: '<div class="ajs-auxiliary ajs-buttons"></div>' },
-	                button: '<button class="ajs-button"></button>',
-	                resizeHandle: '<div class="ajs-handle"></div>',
-	            },
-	            //common class names
-	            classes = {
-	                animationIn: 'ajs-in',
-	                animationOut: 'ajs-out',
-	                base: 'alertify',
-	                basic:'ajs-basic',
-	                capture: 'ajs-capture',
-	                closable:'ajs-closable',
-	                fixed: 'ajs-fixed',
-	                frameless:'ajs-frameless',
-	                hidden: 'ajs-hidden',
-	                maximize: 'ajs-maximize',
-	                maximized: 'ajs-maximized',
-	                maximizable:'ajs-maximizable',
-	                modeless: 'ajs-modeless',
-	                movable: 'ajs-movable',
-	                noSelection: 'ajs-no-selection',
-	                noOverflow: 'ajs-no-overflow',
-	                noPadding:'ajs-no-padding',
-	                pin:'ajs-pin',
-	                pinnable:'ajs-pinnable',
-	                prefix: 'ajs-',
-	                resizable: 'ajs-resizable',
-	                restore: 'ajs-restore',
-	                shake:'ajs-shake',
-	                unpinned:'ajs-unpinned',
-	            };
-
-	        /**
-	         * Helper: initializes the dialog instance
-	         * 
-	         * @return	{Number}	The total count of currently open modals.
-	         */
-	        function initialize(instance){
-	            
-	            if(!instance.__internal){
-
-	                //no need to expose init after this.
-	                delete instance.__init;
-	              
-	                //keep a copy of initial dialog settings
-	                if(!instance.__settings){
-	                    instance.__settings = copy(instance.settings);
-	                }
-	                //in case the script was included before body.
-	                //after first dialog gets initialized, it won't be null anymore!
-	                if(null === reflow){
-	                    // set tabindex attribute on body element this allows script to give it
-	                    // focus after the dialog is closed
-	                    document.body.setAttribute( 'tabindex', '0' );
-	                }
-
-	                //get dialog buttons/focus setup
-	                var setup;
-	                if(typeof instance.setup === 'function'){
-	                    setup = instance.setup();
-	                    setup.options = setup.options  || {};
-	                    setup.focus = setup.focus  || {};
-	                }else{
-	                    setup = {
-	                        buttons:[],
-	                        focus:{
-	                            element:null,
-	                            select:false
-	                        },
-	                        options:{
-	                        }
-	                    };
-	                }
-	                
-	                //initialize hooks object.
-	                if(typeof instance.hooks !== 'object'){
-	                    instance.hooks = {};
-	                }
-
-	                //copy buttons defintion
-	                var buttonsDefinition = [];
-	                if(Array.isArray(setup.buttons)){
-	                    for(var b=0;b<setup.buttons.length;b+=1){
-	                        var ref  = setup.buttons[b],
-	                            cpy = {};
-	                        for (var i in ref) {
-	                            if (ref.hasOwnProperty(i)) {
-	                                cpy[i] = ref[i];
-	                            }
-	                        }
-	                        buttonsDefinition.push(cpy);
-	                    }
-	                }
-
-	                var internal = instance.__internal = {
-	                    /**
-	                     * Flag holding the open state of the dialog
-	                     * 
-	                     * @type {Boolean}
-	                     */
-	                    isOpen:false,
-	                    /**
-	                     * Active element is the element that will receive focus after
-	                     * closing the dialog. It defaults as the body tag, but gets updated
-	                     * to the last focused element before the dialog was opened.
-	                     *
-	                     * @type {Node}
-	                     */
-	                    activeElement:document.body,
-	                    timerIn:undefined,
-	                    timerOut:undefined,
-	                    buttons: buttonsDefinition,
-	                    focus: setup.focus,
-	                    options: {
-	                        title: undefined,
-	                        modal: undefined,
-	                        basic:undefined,
-	                        frameless:undefined,
-	                        pinned: undefined,
-	                        movable: undefined,
-	                        moveBounded:undefined,
-	                        resizable: undefined,
-	                        autoReset: undefined,
-	                        closable: undefined,
-	                        closableByDimmer: undefined,
-	                        maximizable: undefined,
-	                        startMaximized: undefined,
-	                        pinnable: undefined,
-	                        transition: undefined,
-	                        padding:undefined,
-	                        overflow:undefined,
-	                        onshow:undefined,
-	                        onclose:undefined,
-	                        onfocus:undefined,
-	                        onmove:undefined,
-	                        onmoved:undefined,
-	                        onresize:undefined,
-	                        onresized:undefined,
-	                        onmaximize:undefined,
-	                        onmaximized:undefined,
-	                        onrestore:undefined,
-	                        onrestored:undefined
-	                    },
-	                    resetHandler:undefined,
-	                    beginMoveHandler:undefined,
-	                    beginResizeHandler:undefined,
-	                    bringToFrontHandler:undefined,
-	                    modalClickHandler:undefined,
-	                    buttonsClickHandler:undefined,
-	                    commandsClickHandler:undefined,
-	                    transitionInHandler:undefined,
-	                    transitionOutHandler:undefined,
-	                    destroy:undefined
-	                };
-
-	                var elements = {};
-	                //root node
-	                elements.root = document.createElement('div');
-	                
-	                elements.root.className = classes.base + ' ' + classes.hidden + ' ';
-
-	                elements.root.innerHTML = templates.dimmer + templates.modal;
-	                
-	                //dimmer
-	                elements.dimmer = elements.root.firstChild;
-
-	                //dialog
-	                elements.modal = elements.root.lastChild;
-	                elements.modal.innerHTML = templates.dialog;
-	                elements.dialog = elements.modal.firstChild;
-	                elements.dialog.innerHTML = templates.reset + templates.commands + templates.header + templates.body + templates.footer + templates.resizeHandle + templates.reset;
-
-	                //reset links
-	                elements.reset = [];
-	                elements.reset.push(elements.dialog.firstChild);
-	                elements.reset.push(elements.dialog.lastChild);
-	                
-	                //commands
-	                elements.commands = {};
-	                elements.commands.container = elements.reset[0].nextSibling;
-	                elements.commands.pin = elements.commands.container.firstChild;
-	                elements.commands.maximize = elements.commands.pin.nextSibling;
-	                elements.commands.close = elements.commands.maximize.nextSibling;
-	                
-	                //header
-	                elements.header = elements.commands.container.nextSibling;
-
-	                //body
-	                elements.body = elements.header.nextSibling;
-	                elements.body.innerHTML = templates.content;
-	                elements.content = elements.body.firstChild;
-
-	                //footer
-	                elements.footer = elements.body.nextSibling;
-	                elements.footer.innerHTML = templates.buttons.auxiliary + templates.buttons.primary;
-	                
-	                //resize handle
-	                elements.resizeHandle = elements.footer.nextSibling;
-
-	                //buttons
-	                elements.buttons = {};
-	                elements.buttons.auxiliary = elements.footer.firstChild;
-	                elements.buttons.primary = elements.buttons.auxiliary.nextSibling;
-	                elements.buttons.primary.innerHTML = templates.button;
-	                elements.buttonTemplate = elements.buttons.primary.firstChild;
-	                //remove button template
-	                elements.buttons.primary.removeChild(elements.buttonTemplate);
-	                               
-	                for(var x=0; x < instance.__internal.buttons.length; x+=1) {
-	                    var button = instance.__internal.buttons[x];
-	                    
-	                    // add to the list of used keys.
-	                    if(usedKeys.indexOf(button.key) < 0){
-	                        usedKeys.push(button.key);
-	                    }
-
-	                    button.element = elements.buttonTemplate.cloneNode();
-	                    button.element.innerHTML = button.text;
-	                    if(typeof button.className === 'string' &&  button.className !== ''){
-	                        addClass(button.element, button.className);
-	                    }
-	                    for(var key in button.attrs){
-	                        if(key !== 'className' && button.attrs.hasOwnProperty(key)){
-	                            button.element.setAttribute(key, button.attrs[key]);
-	                        }
-	                    }
-	                    if(button.scope === 'auxiliary'){
-	                        elements.buttons.auxiliary.appendChild(button.element);
-	                    }else{
-	                        elements.buttons.primary.appendChild(button.element);
-	                    }
-	                }
-	                //make elements pubic
-	                instance.elements = elements;
-	                
-	                //save event handlers delegates
-	                internal.resetHandler = delegate(instance, onReset);
-	                internal.beginMoveHandler = delegate(instance, beginMove);
-	                internal.beginResizeHandler = delegate(instance, beginResize);
-	                internal.bringToFrontHandler = delegate(instance, bringToFront);
-	                internal.modalClickHandler = delegate(instance, modalClickHandler);
-	                internal.buttonsClickHandler = delegate(instance, buttonsClickHandler);
-	                internal.commandsClickHandler = delegate(instance, commandsClickHandler);
-	                internal.transitionInHandler = delegate(instance, handleTransitionInEvent);
-	                internal.transitionOutHandler = delegate(instance, handleTransitionOutEvent);
-
-	                //settings
-	                for(var opKey in internal.options){
-	                    if(setup.options[opKey] !== undefined){
-	                        // if found in user options
-	                        instance.set(opKey, setup.options[opKey]);
-	                    }else if(alertify.defaults.hasOwnProperty(opKey)) {
-	                        // else if found in defaults options
-	                        instance.set(opKey, alertify.defaults[opKey]);
-	                    }else if(opKey === 'title' ) {
-	                        // else if title key, use alertify.defaults.glossary
-	                        instance.set(opKey, alertify.defaults.glossary[opKey]);
-	                    }
-	                }
-
-	                // allow dom customization
-	                if(typeof instance.build === 'function'){
-	                    instance.build();
-	                }
-	            }
-	            
-	            //add to the end of the DOM tree.
-	            document.body.appendChild(instance.elements.root);
-	        }
-
-	        /**
-	         * Helper: maintains scroll position
-	         *
-	         */
-	        var scrollX, scrollY;
-	        function saveScrollPosition(){
-	            scrollX = getScrollLeft();
-	            scrollY = getScrollTop();
-	        }
-	        function restoreScrollPosition(){
-	            window.scrollTo(scrollX, scrollY);
-	        }
-
-	        /**
-	         * Helper: adds/removes no-overflow class from body
-	         *
-	         */
-	        function ensureNoOverflow(){
-	            var requiresNoOverflow = 0;
-	            for(var x=0;x<openDialogs.length;x+=1){
-	                var instance = openDialogs[x];
-	                if(instance.isModal() || instance.isMaximized()){
-	                    requiresNoOverflow+=1;
-	                }
-	            }
-	            if(requiresNoOverflow === 0 && document.body.className.indexOf(classes.noOverflow) >= 0){
-	                //last open modal or last maximized one
-	                removeClass(document.body, classes.noOverflow);
-	                preventBodyShift(false);
-	            }else if(requiresNoOverflow > 0 && document.body.className.indexOf(classes.noOverflow) < 0){
-	                //first open modal or first maximized one
-	                preventBodyShift(true);
-	                addClass(document.body, classes.noOverflow);
-	            }
-	        }
-	        var top = '', topScroll = 0;
-	        /**
-	         * Helper: prevents body shift.
-	         *
-	         */
-	        function preventBodyShift(add){
-	            if(alertify.defaults.preventBodyShift && document.documentElement.scrollHeight > document.documentElement.clientHeight){
-	                if(add ){//&& openDialogs[openDialogs.length-1].elements.dialog.clientHeight <= document.documentElement.clientHeight){
-	                    topScroll = scrollY;
-	                    top = window.getComputedStyle(document.body).top;
-	                    addClass(document.body, classes.fixed);
-	                    document.body.style.top = -scrollY + 'px';
-	                } else {
-	                    scrollY = topScroll;
-	                    document.body.style.top = top;
-	                    removeClass(document.body, classes.fixed);
-	                    restoreScrollPosition();
-	                }
-	            }
-	        }
-			
-	        /**
-	         * Sets the name of the transition used to show/hide the dialog
-	         * 
-	         * @param {Object} instance The dilog instance.
-	         *
-	         */
-	        function updateTransition(instance, value, oldValue){
-	            if(typeof oldValue === 'string'){
-	                removeClass(instance.elements.root,classes.prefix +  oldValue);
-	            }
-	            addClass(instance.elements.root, classes.prefix + value);
-	            reflow = instance.elements.root.offsetWidth;
-	        }
-			
-	        /**
-	         * Toggles the dialog display mode
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateDisplayMode(instance){
-	            if(instance.get('modal')){
-
-	                //make modal
-	                removeClass(instance.elements.root, classes.modeless);
-
-	                //only if open
-	                if(instance.isOpen()){
-	                    unbindModelessEvents(instance);
-
-	                    //in case a pinned modless dialog was made modal while open.
-	                    updateAbsPositionFix(instance);
-
-	                    ensureNoOverflow();
-	                }
-	            }else{
-	                //make modelss
-	                addClass(instance.elements.root, classes.modeless);
-
-	                //only if open
-	                if(instance.isOpen()){
-	                    bindModelessEvents(instance);
-
-	                    //in case pin/unpin was called while a modal is open
-	                    updateAbsPositionFix(instance);
-
-	                    ensureNoOverflow();
-	                }
-	            }
-	        }
-
-	        /**
-	         * Toggles the dialog basic view mode 
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateBasicMode(instance){
-	            if (instance.get('basic')) {
-	                // add class
-	                addClass(instance.elements.root, classes.basic);
-	            } else {
-	                // remove class
-	                removeClass(instance.elements.root, classes.basic);
-	            }
-	        }
-
-	        /**
-	         * Toggles the dialog frameless view mode 
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateFramelessMode(instance){
-	            if (instance.get('frameless')) {
-	                // add class
-	                addClass(instance.elements.root, classes.frameless);
-	            } else {
-	                // remove class
-	                removeClass(instance.elements.root, classes.frameless);
-	            }
-	        }
-			
-	        /**
-	         * Helper: Brings the modeless dialog to front, attached to modeless dialogs.
-	         *
-	         * @param {Event} event Focus event
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function bringToFront(event, instance){
-	            
-	            // Do not bring to front if preceeded by an open modal
-	            var index = openDialogs.indexOf(instance);
-	            for(var x=index+1;x<openDialogs.length;x+=1){
-	                if(openDialogs[x].isModal()){
-	                    return;
-	                }
-	            }
-				
-	            // Bring to front by making it the last child.
-	            if(document.body.lastChild !== instance.elements.root){
-	                document.body.appendChild(instance.elements.root);
-	                //also make sure its at the end of the list
-	                openDialogs.splice(openDialogs.indexOf(instance),1);
-	                openDialogs.push(instance);
-	                setFocus(instance);
-	            }
-				
-	            return false;
-	        }
-			
-	        /**
-	         * Helper: reflects dialogs options updates
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {String} option The updated option name.
-	         *
-	         * @return	{undefined}	
-	         */
-	        function optionUpdated(instance, option, oldValue, newValue){
-	            switch(option){
-	            case 'title':
-	                instance.setHeader(newValue);
-	                break;
-	            case 'modal':
-	                updateDisplayMode(instance);
-	                break;
-	            case 'basic':
-	                updateBasicMode(instance);
-	                break;
-	            case 'frameless':
-	                updateFramelessMode(instance);
-	                break;
-	            case 'pinned':
-	                updatePinned(instance);
-	                break;
-	            case 'closable':
-	                updateClosable(instance);
-	                break;
-	            case 'maximizable':
-	                updateMaximizable(instance);
-	                break;
-	            case 'pinnable':
-	                updatePinnable(instance);
-	                break;
-	            case 'movable':
-	                updateMovable(instance);
-	                break;
-	            case 'resizable':
-	                updateResizable(instance);
-	                break;
-	            case 'transition':
-	                updateTransition(instance,newValue, oldValue);
-	                break;
-	            case 'padding':
-	                if(newValue){
-	                    removeClass(instance.elements.root, classes.noPadding);
-	                }else if(instance.elements.root.className.indexOf(classes.noPadding) < 0){
-	                    addClass(instance.elements.root, classes.noPadding);
-	                }
-	                break;
-	            case 'overflow':
-	                if(newValue){
-	                    removeClass(instance.elements.root, classes.noOverflow);
-	                }else if(instance.elements.root.className.indexOf(classes.noOverflow) < 0){
-	                    addClass(instance.elements.root, classes.noOverflow);
-	                }
-	                break;
-	            case 'transition':
-	                updateTransition(instance,newValue, oldValue);
-	                break;
-	            }
-
-	            // internal on option updated event
-	            if(typeof instance.hooks.onupdate === 'function'){
-	                instance.hooks.onupdate.call(instance, option, oldValue, newValue);
-	            }
-	        }
-			
-	        /**
-	         * Helper: reflects dialogs options updates
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Object} obj The object to set/get a value on/from.
-	         * @param {Function} callback The callback function to call if the key was found.
-	         * @param {String|Object} key A string specifying a propery name or a collection of key value pairs.
-	         * @param {Object} value Optional, the value associated with the key (in case it was a string).
-	         * @param {String} option The updated option name.
-	         *
-	         * @return	{Object} result object 
-	         *	The result objects has an 'op' property, indicating of this is a SET or GET operation.
-	         *		GET: 
-	         *		- found: a flag indicating if the key was found or not.
-	         *		- value: the property value.
-	         *		SET:
-	         *		- items: a list of key value pairs of the properties being set.
-	         *				each contains:
-	         *					- found: a flag indicating if the key was found or not.
-	         *					- key: the property key.
-	         *					- value: the property value.
-	         */
-	        function update(instance, obj, callback, key, value){
-	            var result = {op:undefined, items: [] };
-	            if(typeof value === 'undefined' && typeof key === 'string') {
-	                //get
-	                result.op = 'get';
-	                if(obj.hasOwnProperty(key)){
-	                    result.found = true;
-	                    result.value = obj[key];
-	                }else{
-	                    result.found = false;
-	                    result.value = undefined;
-	                }
-	            }
-	            else
-	            {
-	                var old;
-	                //set
-	                result.op = 'set';
-	                if(typeof key === 'object'){
-	                    //set multiple
-	                    var args = key;
-	                    for (var prop in args) {
-	                        if (obj.hasOwnProperty(prop)) {
-	                            if(obj[prop] !== args[prop]){
-	                                old = obj[prop];
-	                                obj[prop] = args[prop];
-	                                callback.call(instance,prop, old, args[prop]);
-	                            }
-	                            result.items.push({ 'key': prop, 'value': args[prop], 'found':true});
-	                        }else{
-	                            result.items.push({ 'key': prop, 'value': args[prop], 'found':false});
-	                        }
-	                    }
-	                } else if (typeof key === 'string'){
-	                    //set single
-	                    if (obj.hasOwnProperty(key)) {
-	                        if(obj[key] !== value){
-	                            old  = obj[key];
-	                            obj[key] = value;
-	                            callback.call(instance,key, old, value);
-	                        }
-	                        result.items.push({'key': key, 'value': value , 'found':true});
-
-	                    }else{
-	                        result.items.push({'key': key, 'value': value , 'found':false});
-	                    }
-	                } else {
-	                    //invalid params
-	                    throw new Error('args must be a string or object');
-	                }
-	            }
-	            return result;
-	        }
-
-
-	        /**
-	         * Triggers a close event.
-	         *
-	         * @param {Object} instance	The dilog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function triggerClose(instance) {
-	            var found;
-	            triggerCallback(instance, function (button) {
-	                return found = (button.invokeOnClose === true);
-	            });
-	            //none of the buttons registered as onclose callback
-	            //close the dialog
-	            if (!found && instance.isOpen()) {
-	                instance.close();
-	            }
-	        }
-
-	        /**
-	         * Dialogs commands event handler, attached to the dialog commands element.
-	         *
-	         * @param {Event} event	DOM event object.
-	         * @param {Object} instance	The dilog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function commandsClickHandler(event, instance) {
-	            var target = event.srcElement || event.target;
-	            switch (target) {
-	            case instance.elements.commands.pin:
-	                if (!instance.isPinned()) {
-	                    pin(instance);
-	                } else {
-	                    unpin(instance);
-	                }
-	                break;
-	            case instance.elements.commands.maximize:
-	                if (!instance.isMaximized()) {
-	                    maximize(instance);
-	                } else {
-	                    restore(instance);
-	                }
-	                break;
-	            case instance.elements.commands.close:
-	                triggerClose(instance);
-	                break;
-	            }
-	            return false;
-	        }
-
-	        /**
-	         * Helper: pins the modeless dialog.
-	         *
-	         * @param {Object} instance	The dialog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function pin(instance) {
-	            //pin the dialog
-	            instance.set('pinned', true);
-	        }
-
-	        /**
-	         * Helper: unpins the modeless dialog.
-	         *
-	         * @param {Object} instance	The dilog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function unpin(instance) {
-	            //unpin the dialog 
-	            instance.set('pinned', false);
-	        }
-
-
-	        /**
-	         * Helper: enlarges the dialog to fill the entire screen.
-	         *
-	         * @param {Object} instance	The dilog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function maximize(instance) {
-	            // allow custom `onmaximize` method
-	            dispatchEvent('onmaximize', instance);
-	            //maximize the dialog 
-	            addClass(instance.elements.root, classes.maximized);
-	            if (instance.isOpen()) {
-	                ensureNoOverflow();
-	            }
-	            // allow custom `onmaximized` method
-	            dispatchEvent('onmaximized', instance);
-	        }
-
-	        /**
-	         * Helper: returns the dialog to its former size.
-	         *
-	         * @param {Object} instance	The dilog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function restore(instance) {
-	            // allow custom `onrestore` method
-	            dispatchEvent('onrestore', instance);
-	            //maximize the dialog 
-	            removeClass(instance.elements.root, classes.maximized);
-	            if (instance.isOpen()) {
-	                ensureNoOverflow();
-	            }
-	            // allow custom `onrestored` method
-	            dispatchEvent('onrestored', instance);
-	        }
-
-	        /**
-	         * Show or hide the maximize box.
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Boolean} on True to add the behavior, removes it otherwise.
-	         *
-	         * @return {undefined}
-	         */
-	        function updatePinnable(instance) {
-	            if (instance.get('pinnable')) {
-	                // add class
-	                addClass(instance.elements.root, classes.pinnable);
-	            } else {
-	                // remove class
-	                removeClass(instance.elements.root, classes.pinnable);
-	            }
-	        }
-
-	        /**
-	         * Helper: Fixes the absolutly positioned modal div position.
-	         *
-	         * @param {Object} instance The dialog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function addAbsPositionFix(instance) {
-	            var scrollLeft = getScrollLeft();
-	            instance.elements.modal.style.marginTop = getScrollTop() + 'px';
-	            instance.elements.modal.style.marginLeft = scrollLeft + 'px';
-	            instance.elements.modal.style.marginRight = (-scrollLeft) + 'px';
-	        }
-
-	        /**
-	         * Helper: Removes the absolutly positioned modal div position fix.
-	         *
-	         * @param {Object} instance The dialog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function removeAbsPositionFix(instance) {
-	            var marginTop = parseInt(instance.elements.modal.style.marginTop, 10);
-	            var marginLeft = parseInt(instance.elements.modal.style.marginLeft, 10);
-	            instance.elements.modal.style.marginTop = '';
-	            instance.elements.modal.style.marginLeft = '';
-	            instance.elements.modal.style.marginRight = '';
-
-	            if (instance.isOpen()) {
-	                var top = 0,
-	                    left = 0
-	                ;
-	                if (instance.elements.dialog.style.top !== '') {
-	                    top = parseInt(instance.elements.dialog.style.top, 10);
-	                }
-	                instance.elements.dialog.style.top = (top + (marginTop - getScrollTop())) + 'px';
-
-	                if (instance.elements.dialog.style.left !== '') {
-	                    left = parseInt(instance.elements.dialog.style.left, 10);
-	                }
-	                instance.elements.dialog.style.left = (left + (marginLeft - getScrollLeft())) + 'px';
-	            }
-	        }
-	        /**
-	         * Helper: Adds/Removes the absolutly positioned modal div position fix based on its pinned setting.
-	         *
-	         * @param {Object} instance The dialog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateAbsPositionFix(instance) {
-	            // if modeless and unpinned add fix
-	            if (!instance.get('modal') && !instance.get('pinned')) {
-	                addAbsPositionFix(instance);
-	            } else {
-	                removeAbsPositionFix(instance);
-	            }
-	        }
-	        /**
-	         * Toggles the dialog position lock | modeless only.
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Boolean} on True to make it modal, false otherwise.
-	         *
-	         * @return {undefined}
-	         */
-	        function updatePinned(instance) {
-	            if (instance.get('pinned')) {
-	                removeClass(instance.elements.root, classes.unpinned);
-	                if (instance.isOpen()) {
-	                    removeAbsPositionFix(instance);
-	                }
-	            } else {
-	                addClass(instance.elements.root, classes.unpinned);
-	                if (instance.isOpen() && !instance.isModal()) {
-	                    addAbsPositionFix(instance);
-	                }
-	            }
-	        }
-
-	        /**
-	         * Show or hide the maximize box.
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Boolean} on True to add the behavior, removes it otherwise.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateMaximizable(instance) {
-	            if (instance.get('maximizable')) {
-	                // add class
-	                addClass(instance.elements.root, classes.maximizable);
-	            } else {
-	                // remove class
-	                removeClass(instance.elements.root, classes.maximizable);
-	            }
-	        }
-
-	        /**
-	         * Show or hide the close box.
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Boolean} on True to add the behavior, removes it otherwise.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateClosable(instance) {
-	            if (instance.get('closable')) {
-	                // add class
-	                addClass(instance.elements.root, classes.closable);
-	                bindClosableEvents(instance);
-	            } else {
-	                // remove class
-	                removeClass(instance.elements.root, classes.closable);
-	                unbindClosableEvents(instance);
-	            }
-	        }
-
-	        // flag to cancel click event if already handled by end resize event (the mousedown, mousemove, mouseup sequence fires a click event.).
-	        var cancelClick = false;
-
-	        /**
-	         * Helper: closes the modal dialog when clicking the modal
-	         *
-	         * @param {Event} event	DOM event object.
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function modalClickHandler(event, instance) {
-	            var target = event.srcElement || event.target;
-	            if (!cancelClick && target === instance.elements.modal && instance.get('closableByDimmer') === true) {
-	                triggerClose(instance);
-	            }
-	            cancelClick = false;
-	            return false;
-	        }
-
-	        // flag to cancel keyup event if already handled by click event (pressing Enter on a focusted button).
-	        var cancelKeyup = false;
-	        /** 
-	         * Helper: triggers a button callback
-	         *
-	         * @param {Object}		The dilog instance.
-	         * @param {Function}	Callback to check which button triggered the event.
-	         *
-	         * @return {undefined}
-	         */
-	        function triggerCallback(instance, check) {
-	            for (var idx = 0; idx < instance.__internal.buttons.length; idx += 1) {
-	                var button = instance.__internal.buttons[idx];
-	                if (!button.element.disabled && check(button)) {
-	                    var closeEvent = createCloseEvent(idx, button);
-	                    if (typeof instance.callback === 'function') {
-	                        instance.callback.apply(instance, [closeEvent]);
-	                    }
-	                    //close the dialog only if not canceled.
-	                    if (closeEvent.cancel === false) {
-	                        instance.close();
-	                    }
-	                    break;
-	                }
-	            }
-	        }
-
-	        /**
-	         * Clicks event handler, attached to the dialog footer.
-	         *
-	         * @param {Event}		DOM event object.
-	         * @param {Object}		The dilog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function buttonsClickHandler(event, instance) {
-	            var target = event.srcElement || event.target;
-	            triggerCallback(instance, function (button) {
-	                // if this button caused the click, cancel keyup event
-	                return button.element === target && (cancelKeyup = true);
-	            });
-	        }
-
-	        /**
-	         * Keyup event handler, attached to the document.body
-	         *
-	         * @param {Event}		DOM event object.
-	         * @param {Object}		The dilog instance.
-	         * 
-	         * @return {undefined}
-	         */
-	        function keyupHandler(event) {
-	            //hitting enter while button has focus will trigger keyup too.
-	            //ignore if handled by clickHandler
-	            if (cancelKeyup) {
-	                cancelKeyup = false;
-	                return;
-	            }
-	            var instance = openDialogs[openDialogs.length - 1];
-	            var keyCode = event.keyCode;
-	            if (instance.__internal.buttons.length === 0 && keyCode === keys.ESC && instance.get('closable') === true) {
-	                triggerClose(instance);
-	                return false;
-	            }else if (usedKeys.indexOf(keyCode) > -1) {
-	                triggerCallback(instance, function (button) {
-	                    return button.key === keyCode;
-	                });
-	                return false;
-	            }
-	        }
-	        /**
-	        * Keydown event handler, attached to the document.body
-	        *
-	        * @param {Event}		DOM event object.
-	        * @param {Object}		The dilog instance.
-	        * 
-	        * @return {undefined}
-	        */
-	        function keydownHandler(event) {
-	            var instance = openDialogs[openDialogs.length - 1];
-	            var keyCode = event.keyCode;
-	            if (keyCode === keys.LEFT || keyCode === keys.RIGHT) {
-	                var buttons = instance.__internal.buttons;
-	                for (var x = 0; x < buttons.length; x += 1) {
-	                    if (document.activeElement === buttons[x].element) {
-	                        switch (keyCode) {
-	                        case keys.LEFT:
-	                            buttons[(x || buttons.length) - 1].element.focus();
-	                            return;
-	                        case keys.RIGHT:
-	                            buttons[(x + 1) % buttons.length].element.focus();
-	                            return;
-	                        }
-	                    }
-	                }
-	            }else if (keyCode < keys.F12 + 1 && keyCode > keys.F1 - 1 && usedKeys.indexOf(keyCode) > -1) {
-	                event.preventDefault();
-	                event.stopPropagation();
-	                triggerCallback(instance, function (button) {
-	                    return button.key === keyCode;
-	                });
-	                return false;
-	            }
-	        }
-
-
-	        /**
-	         * Sets focus to proper dialog element
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Node} [resetTarget=undefined] DOM element to reset focus to.
-	         *
-	         * @return {undefined}
-	         */
-	        function setFocus(instance, resetTarget) {
-	            // reset target has already been determined.
-	            if (resetTarget) {
-	                resetTarget.focus();
-	            } else {
-	                // current instance focus settings
-	                var focus = instance.__internal.focus;
-	                // the focus element.
-	                var element = focus.element;
-
-	                switch (typeof focus.element) {
-	                // a number means a button index
-	                case 'number':
-	                    if (instance.__internal.buttons.length > focus.element) {
-	                        //in basic view, skip focusing the buttons.
-	                        if (instance.get('basic') === true) {
-	                            element = instance.elements.reset[0];
-	                        } else {
-	                            element = instance.__internal.buttons[focus.element].element;
-	                        }
-	                    }
-	                    break;
-	                // a string means querySelector to select from dialog body contents.
-	                case 'string':
-	                    element = instance.elements.body.querySelector(focus.element);
-	                    break;
-	                // a function should return the focus element.
-	                case 'function':
-	                    element = focus.element.call(instance);
-	                    break;
-	                }
-	                
-	                // if no focus element, default to first reset element.
-	                if ((typeof element === 'undefined' || element === null) && instance.__internal.buttons.length === 0) {
-	                    element = instance.elements.reset[0];
-	                }
-	                // focus
-	                if (element && element.focus) {
-	                    element.focus();
-	                    // if selectable
-	                    if (focus.select && element.select) {
-	                        element.select();
-	                    }
-	                }
-	            }
-	        }
-
-	        /**
-	         * Focus event handler, attached to document.body and dialogs own reset links.
-	         * handles the focus for modal dialogs only.
-	         *
-	         * @param {Event} event DOM focus event object.
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function onReset(event, instance) {
-
-	            // should work on last modal if triggered from document.body 
-	            if (!instance) {
-	                for (var x = openDialogs.length - 1; x > -1; x -= 1) {
-	                    if (openDialogs[x].isModal()) {
-	                        instance = openDialogs[x];
-	                        break;
-	                    }
-	                }
-	            }
-	            // if modal
-	            if (instance && instance.isModal()) {
-	                // determine reset target to enable forward/backward tab cycle.
-	                var resetTarget, target = event.srcElement || event.target;
-	                var lastResetElement = target === instance.elements.reset[1] || (instance.__internal.buttons.length === 0 && target === document.body);
-
-	                // if last reset link, then go to maximize or close
-	                if (lastResetElement) {
-	                    if (instance.get('maximizable')) {
-	                        resetTarget = instance.elements.commands.maximize;
-	                    } else if (instance.get('closable')) {
-	                        resetTarget = instance.elements.commands.close;
-	                    }
-	                }
-	                // if no reset target found, try finding the best button
-	                if (resetTarget === undefined) {
-	                    if (typeof instance.__internal.focus.element === 'number') {
-	                        // button focus element, go to first available button
-	                        if (target === instance.elements.reset[0]) {
-	                            resetTarget = instance.elements.buttons.auxiliary.firstChild || instance.elements.buttons.primary.firstChild;
-	                        } else if (lastResetElement) {
-	                            //restart the cycle by going to first reset link
-	                            resetTarget = instance.elements.reset[0];
-	                        }
-	                    } else {
-	                        // will reach here when tapping backwards, so go to last child
-	                        // The focus element SHOULD NOT be a button (logically!).
-	                        if (target === instance.elements.reset[0]) {
-	                            resetTarget = instance.elements.buttons.primary.lastChild || instance.elements.buttons.auxiliary.lastChild;
-	                        }
-	                    }
-	                }
-	                // focus
-	                setFocus(instance, resetTarget);
-	            }
-	        }
-	        /**
-	         * Transition in transitionend event handler. 
-	         *
-	         * @param {Event}		TransitionEnd event object.
-	         * @param {Object}		The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function handleTransitionInEvent(event, instance) {
-	            // clear the timer
-	            clearTimeout(instance.__internal.timerIn);
-
-	            // once transition is complete, set focus
-	            setFocus(instance);
-
-	            //restore scroll to prevent document jump
-	            restoreScrollPosition();
-
-	            // allow handling key up after transition ended.
-	            cancelKeyup = false;
-
-	            // allow custom `onfocus` method
-	            dispatchEvent('onfocus', instance);
-
-	            // unbind the event
-	            off(instance.elements.dialog, transition.type, instance.__internal.transitionInHandler);
-
-	            removeClass(instance.elements.root, classes.animationIn);
-	        }
-
-	        /**
-	         * Transition out transitionend event handler. 
-	         *
-	         * @param {Event}		TransitionEnd event object.
-	         * @param {Object}		The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function handleTransitionOutEvent(event, instance) {
-	            // clear the timer
-	            clearTimeout(instance.__internal.timerOut);
-	            // unbind the event
-	            off(instance.elements.dialog, transition.type, instance.__internal.transitionOutHandler);
-
-	            // reset move updates
-	            resetMove(instance);
-	            // reset resize updates
-	            resetResize(instance);
-
-	            // restore if maximized
-	            if (instance.isMaximized() && !instance.get('startMaximized')) {
-	                restore(instance);
-	            }
-
-	            // return focus to the last active element
-	            if (alertify.defaults.maintainFocus && instance.__internal.activeElement) {
-	                instance.__internal.activeElement.focus();
-	                instance.__internal.activeElement = null;
-	            }
-	            
-	            //destory the instance
-	            if (typeof instance.__internal.destroy === 'function') {
-	                instance.__internal.destroy.apply(instance);
-	            }
-	        }
-	        /* Controls moving a dialog around */
-	        //holde the current moving instance
-	        var movable = null,
-	            //holds the current X offset when move starts
-	            offsetX = 0,
-	            //holds the current Y offset when move starts
-	            offsetY = 0,
-	            xProp = 'pageX',
-	            yProp = 'pageY',
-	            bounds = null,
-	            refreshTop = false,
-	            moveDelegate = null
-	        ;
-
-	        /**
-	         * Helper: sets the element top/left coordinates
-	         *
-	         * @param {Event} event	DOM event object.
-	         * @param {Node} element The element being moved.
-	         * 
-	         * @return {undefined}
-	         */
-	        function moveElement(event, element) {
-	            var left = (event[xProp] - offsetX),
-	                top  = (event[yProp] - offsetY);
-
-	            if(refreshTop){
-	                top -= document.body.scrollTop;
-	            }
-	           
-	            element.style.left = left + 'px';
-	            element.style.top = top + 'px';
-	           
-	        }
-	        /**
-	         * Helper: sets the element top/left coordinates within screen bounds
-	         *
-	         * @param {Event} event	DOM event object.
-	         * @param {Node} element The element being moved.
-	         * 
-	         * @return {undefined}
-	         */
-	        function moveElementBounded(event, element) {
-	            var left = (event[xProp] - offsetX),
-	                top  = (event[yProp] - offsetY);
-
-	            if(refreshTop){
-	                top -= document.body.scrollTop;
-	            }
-	            
-	            element.style.left = Math.min(bounds.maxLeft, Math.max(bounds.minLeft, left)) + 'px';
-	            if(refreshTop){
-	                element.style.top = Math.min(bounds.maxTop, Math.max(bounds.minTop, top)) + 'px';
-	            }else{
-	                element.style.top = Math.max(bounds.minTop, top) + 'px';
-	            }
-	        }
-	            
-
-	        /**
-	         * Triggers the start of a move event, attached to the header element mouse down event.
-	         * Adds no-selection class to the body, disabling selection while moving.
-	         *
-	         * @param {Event} event	DOM event object.
-	         * @param {Object} instance The dilog instance.
-	         * 
-	         * @return {Boolean} false
-	         */
-	        function beginMove(event, instance) {
-	            if (resizable === null && !instance.isMaximized() && instance.get('movable')) {
-	                var eventSrc, left=0, top=0;
-	                if (event.type === 'touchstart') {
-	                    event.preventDefault();
-	                    eventSrc = event.targetTouches[0];
-	                    xProp = 'clientX';
-	                    yProp = 'clientY';
-	                } else if (event.button === 0) {
-	                    eventSrc = event;
-	                }
-
-	                if (eventSrc) {
-
-	                    var element = instance.elements.dialog;
-	                    addClass(element, classes.capture);
-
-	                    if (element.style.left) {
-	                        left = parseInt(element.style.left, 10);
-	                    }
-
-	                    if (element.style.top) {
-	                        top = parseInt(element.style.top, 10);
-	                    }
-	                    
-	                    offsetX = eventSrc[xProp] - left;
-	                    offsetY = eventSrc[yProp] - top;
-
-	                    if(instance.isModal()){
-	                        offsetY += instance.elements.modal.scrollTop;
-	                    }else if(instance.isPinned()){
-	                        offsetY -= document.body.scrollTop;
-	                    }
-	                    
-	                    if(instance.get('moveBounded')){
-	                        var current = element,
-	                            offsetLeft = -left,
-	                            offsetTop = -top;
-	                        
-	                        //calc offset
-	                        do {
-	                            offsetLeft += current.offsetLeft;
-	                            offsetTop += current.offsetTop;
-	                        } while (current = current.offsetParent);
-	                        
-	                        bounds = {
-	                            maxLeft : offsetLeft,
-	                            minLeft : -offsetLeft,
-	                            maxTop  : document.documentElement.clientHeight - element.clientHeight - offsetTop,
-	                            minTop  : -offsetTop
-	                        };
-	                        moveDelegate = moveElementBounded;
-	                    }else{
-	                        bounds = null;
-	                        moveDelegate = moveElement;
-	                    }
-	                    
-	                    // allow custom `onmove` method
-	                    dispatchEvent('onmove', instance);
-
-	                    refreshTop = !instance.isModal() && instance.isPinned();
-	                    movable = instance;
-	                    moveDelegate(eventSrc, element);
-	                    addClass(document.body, classes.noSelection);
-	                    return false;
-	                }
-	            }
-	        }
-
-	        /**
-	         * The actual move handler,  attached to document.body mousemove event.
-	         *
-	         * @param {Event} event	DOM event object.
-	         * 
-	         * @return {undefined}
-	         */
-	        function move(event) {
-	            if (movable) {
-	                var eventSrc;
-	                if (event.type === 'touchmove') {
-	                    event.preventDefault();
-	                    eventSrc = event.targetTouches[0];
-	                } else if (event.button === 0) {
-	                    eventSrc = event;
-	                }
-	                if (eventSrc) {
-	                    moveDelegate(eventSrc, movable.elements.dialog);
-	                }
-	            }
-	        }
-
-	        /**
-	         * Triggers the end of a move event,  attached to document.body mouseup event.
-	         * Removes no-selection class from document.body, allowing selection.
-	         *
-	         * @return {undefined}
-	         */
-	        function endMove() {
-	            if (movable) {
-	                var instance = movable;
-	                movable = bounds = null;
-	                removeClass(document.body, classes.noSelection);
-	                removeClass(instance.elements.dialog, classes.capture);
-	                // allow custom `onmoved` method
-	                dispatchEvent('onmoved', instance);
-	            }
-	        }
-
-	        /**
-	         * Resets any changes made by moving the element to its original state,
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function resetMove(instance) {
-	            movable = null;
-	            var element = instance.elements.dialog;
-	            element.style.left = element.style.top = '';
-	        }
-
-	        /**
-	         * Updates the dialog move behavior.
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Boolean} on True to add the behavior, removes it otherwise.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateMovable(instance) {
-	            if (instance.get('movable')) {
-	                // add class
-	                addClass(instance.elements.root, classes.movable);
-	                if (instance.isOpen()) {
-	                    bindMovableEvents(instance);
-	                }
-	            } else {
-
-	                //reset
-	                resetMove(instance);
-	                // remove class
-	                removeClass(instance.elements.root, classes.movable);
-	                if (instance.isOpen()) {
-	                    unbindMovableEvents(instance);
-	                }
-	            }
-	        }
-
-	        /* Controls moving a dialog around */
-	        //holde the current instance being resized		
-	        var resizable = null,
-	            //holds the staring left offset when resize starts.
-	            startingLeft = Number.Nan,
-	            //holds the staring width when resize starts.
-	            startingWidth = 0,
-	            //holds the initial width when resized for the first time.
-	            minWidth = 0,
-	            //holds the offset of the resize handle.
-	            handleOffset = 0
-	        ;
-
-	        /**
-	         * Helper: sets the element width/height and updates left coordinate if neccessary.
-	         *
-	         * @param {Event} event	DOM mousemove event object.
-	         * @param {Node} element The element being moved.
-	         * @param {Boolean} pinned A flag indicating if the element being resized is pinned to the screen.
-	         * 
-	         * @return {undefined}
-	         */
-	        function resizeElement(event, element, pageRelative) {
-
-	            //calculate offsets from 0,0
-	            var current = element;
-	            var offsetLeft = 0;
-	            var offsetTop = 0;
-	            do {
-	                offsetLeft += current.offsetLeft;
-	                offsetTop += current.offsetTop;
-	            } while (current = current.offsetParent);
-
-	            // determine X,Y coordinates.
-	            var X, Y;
-	            if (pageRelative === true) {
-	                X = event.pageX;
-	                Y = event.pageY;
-	            } else {
-	                X = event.clientX;
-	                Y = event.clientY;
-	            }
-	            // rtl handling
-	            var isRTL = isRightToLeft();
-	            if (isRTL) {
-	                // reverse X 
-	                X = document.body.offsetWidth - X;
-	                // if has a starting left, calculate offsetRight
-	                if (!isNaN(startingLeft)) {
-	                    offsetLeft = document.body.offsetWidth - offsetLeft - element.offsetWidth;
-	                }
-	            }
-
-	            // set width/height
-	            element.style.height = (Y - offsetTop + handleOffset) + 'px';
-	            element.style.width = (X - offsetLeft + handleOffset) + 'px';
-
-	            // if the element being resized has a starting left, maintain it.
-	            // the dialog is centered, divide by half the offset to maintain the margins.
-	            if (!isNaN(startingLeft)) {
-	                var diff = Math.abs(element.offsetWidth - startingWidth) * 0.5;
-	                if (isRTL) {
-	                    //negate the diff, why?
-	                    //when growing it should decrease left
-	                    //when shrinking it should increase left
-	                    diff *= -1;
-	                }
-	                if (element.offsetWidth > startingWidth) {
-	                    //growing
-	                    element.style.left = (startingLeft + diff) + 'px';
-	                } else if (element.offsetWidth >= minWidth) {
-	                    //shrinking
-	                    element.style.left = (startingLeft - diff) + 'px';
-	                }
-	            }
-	        }
-
-	        /**
-	         * Triggers the start of a resize event, attached to the resize handle element mouse down event.
-	         * Adds no-selection class to the body, disabling selection while moving.
-	         *
-	         * @param {Event} event	DOM event object.
-	         * @param {Object} instance The dilog instance.
-	         * 
-	         * @return {Boolean} false
-	         */
-	        function beginResize(event, instance) {
-	            if (!instance.isMaximized()) {
-	                var eventSrc;
-	                if (event.type === 'touchstart') {
-	                    event.preventDefault();
-	                    eventSrc = event.targetTouches[0];
-	                } else if (event.button === 0) {
-	                    eventSrc = event;
-	                }
-	                if (eventSrc) {
-	                    // allow custom `onresize` method
-	                    dispatchEvent('onresize', instance);
-	                    
-	                    resizable = instance;
-	                    handleOffset = instance.elements.resizeHandle.offsetHeight / 2;
-	                    var element = instance.elements.dialog;
-	                    addClass(element, classes.capture);
-	                    startingLeft = parseInt(element.style.left, 10);
-	                    element.style.height = element.offsetHeight + 'px';
-	                    element.style.minHeight = instance.elements.header.offsetHeight + instance.elements.footer.offsetHeight + 'px';
-	                    element.style.width = (startingWidth = element.offsetWidth) + 'px';
-
-	                    if (element.style.maxWidth !== 'none') {
-	                        element.style.minWidth = (minWidth = element.offsetWidth) + 'px';
-	                    }
-	                    element.style.maxWidth = 'none';
-	                    addClass(document.body, classes.noSelection);
-	                    return false;
-	                }
-	            }
-	        }
-
-	        /**
-	         * The actual resize handler,  attached to document.body mousemove event.
-	         *
-	         * @param {Event} event	DOM event object.
-	         * 
-	         * @return {undefined}
-	         */
-	        function resize(event) {
-	            if (resizable) {
-	                var eventSrc;
-	                if (event.type === 'touchmove') {
-	                    event.preventDefault();
-	                    eventSrc = event.targetTouches[0];
-	                } else if (event.button === 0) {
-	                    eventSrc = event;
-	                }
-	                if (eventSrc) {
-	                    resizeElement(eventSrc, resizable.elements.dialog, !resizable.get('modal') && !resizable.get('pinned'));
-	                }
-	            }
-	        }
-
-	        /**
-	         * Triggers the end of a resize event,  attached to document.body mouseup event.
-	         * Removes no-selection class from document.body, allowing selection.
-	         *
-	         * @return {undefined}
-	         */
-	        function endResize() {
-	            if (resizable) {
-	                var instance = resizable;
-	                resizable = null;
-	                removeClass(document.body, classes.noSelection);
-	                removeClass(instance.elements.dialog, classes.capture);
-	                cancelClick = true;
-	                // allow custom `onresized` method
-	                dispatchEvent('onresized', instance);
-	            }
-	        }
-
-	        /**
-	         * Resets any changes made by resizing the element to its original state.
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function resetResize(instance) {
-	            resizable = null;
-	            var element = instance.elements.dialog;
-	            if (element.style.maxWidth === 'none') {
-	                //clear inline styles.
-	                element.style.maxWidth = element.style.minWidth = element.style.width = element.style.height = element.style.minHeight = element.style.left = '';
-	                //reset variables.
-	                startingLeft = Number.Nan;
-	                startingWidth = minWidth = handleOffset = 0;
-	            }
-	        }
-
-
-	        /**
-	         * Updates the dialog move behavior.
-	         *
-	         * @param {Object} instance The dilog instance.
-	         * @param {Boolean} on True to add the behavior, removes it otherwise.
-	         *
-	         * @return {undefined}
-	         */
-	        function updateResizable(instance) {
-	            if (instance.get('resizable')) {
-	                // add class
-	                addClass(instance.elements.root, classes.resizable);
-	                if (instance.isOpen()) {
-	                    bindResizableEvents(instance);
-	                }
-	            } else {
-	                //reset
-	                resetResize(instance);
-	                // remove class
-	                removeClass(instance.elements.root, classes.resizable);
-	                if (instance.isOpen()) {
-	                    unbindResizableEvents(instance);
-	                }
-	            }
-	        }
-
-	        /**
-	         * Reset move/resize on window resize.
-	         *
-	         * @param {Event} event	window resize event object.
-	         *
-	         * @return {undefined}
-	         */
-	        function windowResize(/*event*/) {
-	            for (var x = 0; x < openDialogs.length; x += 1) {
-	                var instance = openDialogs[x];
-	                if (instance.get('autoReset')) {
-	                    resetMove(instance);
-	                    resetResize(instance);
-	                }
-	            }
-	        }
-	        /**
-	         * Bind dialogs events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function bindEvents(instance) {
-	            // if first dialog, hook global handlers
-	            if (openDialogs.length === 1) {
-	                //global
-	                on(window, 'resize', windowResize);
-	                on(document.body, 'keyup', keyupHandler);
-	                on(document.body, 'keydown', keydownHandler);
-	                on(document.body, 'focus', onReset);
-
-	                //move
-	                on(document.documentElement, 'mousemove', move);
-	                on(document.documentElement, 'touchmove', move);
-	                on(document.documentElement, 'mouseup', endMove);
-	                on(document.documentElement, 'touchend', endMove);
-	                //resize
-	                on(document.documentElement, 'mousemove', resize);
-	                on(document.documentElement, 'touchmove', resize);
-	                on(document.documentElement, 'mouseup', endResize);
-	                on(document.documentElement, 'touchend', endResize);
-	            }
-
-	            // common events
-	            on(instance.elements.commands.container, 'click', instance.__internal.commandsClickHandler);
-	            on(instance.elements.footer, 'click', instance.__internal.buttonsClickHandler);
-	            on(instance.elements.reset[0], 'focus', instance.__internal.resetHandler);
-	            on(instance.elements.reset[1], 'focus', instance.__internal.resetHandler);
-
-	            //prevent handling key up when dialog is being opened by a key stroke.
-	            cancelKeyup = true;
-	            // hook in transition handler
-	            on(instance.elements.dialog, transition.type, instance.__internal.transitionInHandler);
-
-	            // modelss only events
-	            if (!instance.get('modal')) {
-	                bindModelessEvents(instance);
-	            }
-
-	            // resizable
-	            if (instance.get('resizable')) {
-	                bindResizableEvents(instance);
-	            }
-
-	            // movable
-	            if (instance.get('movable')) {
-	                bindMovableEvents(instance);
-	            }
-	        }
-
-	        /**
-	         * Unbind dialogs events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function unbindEvents(instance) {
-	            // if last dialog, remove global handlers
-	            if (openDialogs.length === 1) {
-	                //global
-	                off(window, 'resize', windowResize);
-	                off(document.body, 'keyup', keyupHandler);
-	                off(document.body, 'keydown', keydownHandler);
-	                off(document.body, 'focus', onReset);
-	                //move
-	                off(document.documentElement, 'mousemove', move);
-	                off(document.documentElement, 'mouseup', endMove);
-	                //resize
-	                off(document.documentElement, 'mousemove', resize);
-	                off(document.documentElement, 'mouseup', endResize);
-	            }
-
-	            // common events
-	            off(instance.elements.commands.container, 'click', instance.__internal.commandsClickHandler);
-	            off(instance.elements.footer, 'click', instance.__internal.buttonsClickHandler);
-	            off(instance.elements.reset[0], 'focus', instance.__internal.resetHandler);
-	            off(instance.elements.reset[1], 'focus', instance.__internal.resetHandler);
-
-	            // hook out transition handler
-	            on(instance.elements.dialog, transition.type, instance.__internal.transitionOutHandler);
-
-	            // modelss only events
-	            if (!instance.get('modal')) {
-	                unbindModelessEvents(instance);
-	            }
-
-	            // movable
-	            if (instance.get('movable')) {
-	                unbindMovableEvents(instance);
-	            }
-
-	            // resizable
-	            if (instance.get('resizable')) {
-	                unbindResizableEvents(instance);
-	            }
-
-	        }
-
-	        /**
-	         * Bind modeless specific events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function bindModelessEvents(instance) {
-	            on(instance.elements.dialog, 'focus', instance.__internal.bringToFrontHandler, true);
-	        }
-
-	        /**
-	         * Unbind modeless specific events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function unbindModelessEvents(instance) {
-	            off(instance.elements.dialog, 'focus', instance.__internal.bringToFrontHandler, true);
-	        }
-
-
-
-	        /**
-	         * Bind movable specific events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function bindMovableEvents(instance) {
-	            on(instance.elements.header, 'mousedown', instance.__internal.beginMoveHandler);
-	            on(instance.elements.header, 'touchstart', instance.__internal.beginMoveHandler);
-	        }
-
-	        /**
-	         * Unbind movable specific events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function unbindMovableEvents(instance) {
-	            off(instance.elements.header, 'mousedown', instance.__internal.beginMoveHandler);
-	            off(instance.elements.header, 'touchstart', instance.__internal.beginMoveHandler);
-	        }
-
-
-
-	        /**
-	         * Bind resizable specific events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function bindResizableEvents(instance) {
-	            on(instance.elements.resizeHandle, 'mousedown', instance.__internal.beginResizeHandler);
-	            on(instance.elements.resizeHandle, 'touchstart', instance.__internal.beginResizeHandler);
-	        }
-
-	        /**
-	         * Unbind resizable specific events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function unbindResizableEvents(instance) {
-	            off(instance.elements.resizeHandle, 'mousedown', instance.__internal.beginResizeHandler);
-	            off(instance.elements.resizeHandle, 'touchstart', instance.__internal.beginResizeHandler);
-	        }
-
-	        /**
-	         * Bind closable events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function bindClosableEvents(instance) {
-	            on(instance.elements.modal, 'click', instance.__internal.modalClickHandler);
-	        }
-
-	        /**
-	         * Unbind closable specific events
-	         *
-	         * @param {Object} instance The dilog instance.
-	         *
-	         * @return {undefined}
-	         */
-	        function unbindClosableEvents(instance) {
-	            off(instance.elements.modal, 'click', instance.__internal.modalClickHandler);
-	        }
-	        // dialog API
-	        return {
-	            __init:initialize,
-	            /**
-	             * Check if dialog is currently open
-	             *
-	             * @return {Boolean}
-	             */
-	            isOpen: function () {
-	                return this.__internal.isOpen;
-	            },
-	            isModal: function (){
-	                return this.elements.root.className.indexOf(classes.modeless) < 0;
-	            },
-	            isMaximized:function(){
-	                return this.elements.root.className.indexOf(classes.maximized) > -1;
-	            },
-	            isPinned:function(){
-	                return this.elements.root.className.indexOf(classes.unpinned) < 0;
-	            },
-	            maximize:function(){
-	                if(!this.isMaximized()){
-	                    maximize(this);
-	                }
-	                return this;
-	            },
-	            restore:function(){
-	                if(this.isMaximized()){
-	                    restore(this);
-	                }
-	                return this;
-	            },
-	            pin:function(){
-	                if(!this.isPinned()){
-	                    pin(this);
-	                }
-	                return this;
-	            },
-	            unpin:function(){
-	                if(this.isPinned()){
-	                    unpin(this);
-	                }
-	                return this;
-	            },
-	            bringToFront:function(){
-	                bringToFront(null, this);
-	                return this;
-	            },
-	            /**
-	             * Move the dialog to a specific x/y coordinates
-	             *
-	             * @param {Number} x    The new dialog x coordinate in pixels.
-	             * @param {Number} y    The new dialog y coordinate in pixels.
-	             *
-	             * @return {Object} The dialog instance.
-	             */
-	            moveTo:function(x,y){
-	                if(!isNaN(x) && !isNaN(y)){
-	                    // allow custom `onmove` method
-	                    dispatchEvent('onmove', this);
-	                    
-	                    var element = this.elements.dialog,
-	                        current = element,
-	                        offsetLeft = 0,
-	                        offsetTop = 0;
-	                    
-	                    //subtract existing left,top
-	                    if (element.style.left) {
-	                        offsetLeft -= parseInt(element.style.left, 10);
-	                    }
-	                    if (element.style.top) {
-	                        offsetTop -= parseInt(element.style.top, 10);
-	                    }
-	                    //calc offset
-	                    do {
-	                        offsetLeft += current.offsetLeft;
-	                        offsetTop += current.offsetTop;
-	                    } while (current = current.offsetParent);
-
-	                    //calc left, top
-	                    var left = (x - offsetLeft);
-	                    var top  = (y - offsetTop);
-
-	                    //// rtl handling
-	                    if (isRightToLeft()) {
-	                        left *= -1;
-	                    }
-
-	                    element.style.left = left + 'px';
-	                    element.style.top = top + 'px';
-	                    
-	                    // allow custom `onmoved` method
-	                    dispatchEvent('onmoved', this);
-	                }
-	                return this;
-	            },
-	            /**
-	             * Resize the dialog to a specific width/height (the dialog must be 'resizable').
-	             * The dialog can be resized to:
-	             *  A minimum width equal to the initial display width
-	             *  A minimum height equal to the sum of header/footer heights.
-	             *
-	             *
-	             * @param {Number or String} width    The new dialog width in pixels or in percent.
-	             * @param {Number or String} height   The new dialog height in pixels or in percent.
-	             *
-	             * @return {Object} The dialog instance.
-	             */
-	            resizeTo:function(width,height){
-	                var w = parseFloat(width),
-	                    h = parseFloat(height),
-	                    regex = /(\d*\.\d+|\d+)%/
-	                ;
-
-	                if(!isNaN(w) && !isNaN(h) && this.get('resizable') === true){
-	                    
-	                    // allow custom `onresize` method
-	                    dispatchEvent('onresize', this);
-	                    
-	                    if(('' + width).match(regex)){
-	                        w = w / 100 * document.documentElement.clientWidth ;
-	                    }
-
-	                    if(('' + height).match(regex)){
-	                        h = h / 100 * document.documentElement.clientHeight;
-	                    }
-
-	                    var element = this.elements.dialog;
-	                    if (element.style.maxWidth !== 'none') {
-	                        element.style.minWidth = (minWidth = element.offsetWidth) + 'px';
-	                    }
-	                    element.style.maxWidth = 'none';
-	                    element.style.minHeight = this.elements.header.offsetHeight + this.elements.footer.offsetHeight + 'px';
-	                    element.style.width = w + 'px';
-	                    element.style.height = h + 'px';
-	                    
-	                    // allow custom `onresized` method
-	                    dispatchEvent('onresized', this);
-	                }
-	                return this;
-	            },
-	            /**
-	             * Gets or Sets dialog settings/options 
-	             *
-	             * @param {String|Object} key A string specifying a propery name or a collection of key/value pairs.
-	             * @param {Object} value Optional, the value associated with the key (in case it was a string).
-	             *
-	             * @return {undefined}
-	             */
-	            setting : function (key, value) {
-	                var self = this;
-	                var result = update(this, this.__internal.options, function(k,o,n){ optionUpdated(self,k,o,n); }, key, value);
-	                if(result.op === 'get'){
-	                    if(result.found){
-	                        return result.value;
-	                    }else if(typeof this.settings !== 'undefined'){
-	                        return update(this, this.settings, this.settingUpdated || function(){}, key, value).value;
-	                    }else{
-	                        return undefined;
-	                    }
-	                }else if(result.op === 'set'){
-	                    if(result.items.length > 0){
-	                        var callback = this.settingUpdated || function(){};
-	                        for(var x=0;x<result.items.length;x+=1){
-	                            var item = result.items[x];
-	                            if(!item.found && typeof this.settings !== 'undefined'){
-	                                update(this, this.settings, callback, item.key, item.value);
-	                            }
-	                        }
-	                    }
-	                    return this;
-	                }
-	            },
-	            /**
-	             * [Alias] Sets dialog settings/options 
-	             */
-	            set:function(key, value){
-	                this.setting(key,value);
-	                return this;
-	            },
-	            /**
-	             * [Alias] Gets dialog settings/options 
-	             */
-	            get:function(key){
-	                return this.setting(key);
-	            },
-	            /**
-	            * Sets dialog header
-	            * @content {string or element}
-	            *
-	            * @return {undefined}
-	            */
-	            setHeader:function(content){
-	                if(typeof content === 'string'){
-	                    clearContents(this.elements.header);
-	                    this.elements.header.innerHTML = content;
-	                }else if (content instanceof window.HTMLElement && this.elements.header.firstChild !== content){
-	                    clearContents(this.elements.header);
-	                    this.elements.header.appendChild(content);
-	                }
-	                return this;
-	            },
-	            /**
-	            * Sets dialog contents
-	            * @content {string or element}
-	            *
-	            * @return {undefined}
-	            */
-	            setContent:function(content){
-	                if(typeof content === 'string'){
-	                    clearContents(this.elements.content);
-	                    this.elements.content.innerHTML = content;
-	                }else if (content instanceof window.HTMLElement && this.elements.content.firstChild !== content){
-	                    clearContents(this.elements.content);
-	                    this.elements.content.appendChild(content);
-	                }
-	                return this;
-	            },
-	            /**
-	             * Show the dialog as modal
-	             *
-	             * @return {Object} the dialog instance.
-	             */
-	            showModal: function(className){
-	                return this.show(true, className);
-	            },
-	            /**
-	             * Show the dialog
-	             *
-	             * @return {Object} the dialog instance.
-	             */
-	            show: function (modal, className) {
-	                
-	                // ensure initialization
-	                initialize(this);
-
-	                if ( !this.__internal.isOpen ) {
-
-	                    // add to open dialogs
-	                    this.__internal.isOpen = true;
-	                    openDialogs.push(this);
-
-	                    // save last focused element
-	                    if(alertify.defaults.maintainFocus){
-	                        this.__internal.activeElement = document.activeElement;
-	                    }
-
-	                    //allow custom dom manipulation updates before showing the dialog.
-	                    if(typeof this.prepare === 'function'){
-	                        this.prepare();
-	                    }
-
-	                    bindEvents(this);
-
-	                    if(modal !== undefined){
-	                        this.set('modal', modal);
-	                    }
-
-	                    //save scroll to prevent document jump
-	                    saveScrollPosition();
-
-	                    ensureNoOverflow();
-
-	                    // allow custom dialog class on show
-	                    if(typeof className === 'string' && className !== ''){
-	                        this.__internal.className = className;
-	                        addClass(this.elements.root, className);
-	                    }
-
-	                    // maximize if start maximized
-	                    if ( this.get('startMaximized')) {
-	                        this.maximize();
-	                    }else if(this.isMaximized()){
-	                        restore(this);
-	                    }
-
-	                    updateAbsPositionFix(this);
-
-	                    removeClass(this.elements.root, classes.animationOut);
-	                    addClass(this.elements.root, classes.animationIn);
-
-	                    // set 1s fallback in case transition event doesn't fire
-	                    clearTimeout( this.__internal.timerIn);
-	                    this.__internal.timerIn = setTimeout( this.__internal.transitionInHandler, transition.supported ? 1000 : 100 );
-
-	                    if(isSafari){
-	                        // force desktop safari reflow
-	                        var root = this.elements.root;
-	                        root.style.display  = 'none';
-	                        setTimeout(function(){root.style.display  = 'block';}, 0);
-	                    }
-
-	                    //reflow
-	                    reflow = this.elements.root.offsetWidth;
-	                  
-	                    // show dialog
-	                    removeClass(this.elements.root, classes.hidden);
-
-	                    // internal on show event
-	                    if(typeof this.hooks.onshow === 'function'){
-	                        this.hooks.onshow.call(this);
-	                    }
-
-	                    // allow custom `onshow` method
-	                    dispatchEvent('onshow', this);
-
-	                }else{
-	                    // reset move updates
-	                    resetMove(this);
-	                    // reset resize updates
-	                    resetResize(this);
-	                    // shake the dialog to indicate its already open
-	                    addClass(this.elements.dialog, classes.shake);
-	                    var self = this;
-	                    setTimeout(function(){
-	                        removeClass(self.elements.dialog, classes.shake);
-	                    },200);
-	                }
-	                return this;
-	            },
-	            /**
-	             * Close the dialog
-	             *
-	             * @return {Object} The dialog instance
-	             */
-	            close: function () {
-	                if (this.__internal.isOpen ) {
-
-	                    unbindEvents(this);
-
-	                    removeClass(this.elements.root, classes.animationIn);
-	                    addClass(this.elements.root, classes.animationOut);
-
-	                    // set 1s fallback in case transition event doesn't fire
-	                    clearTimeout( this.__internal.timerOut );
-	                    this.__internal.timerOut = setTimeout( this.__internal.transitionOutHandler, transition.supported ? 1000 : 100 );
-	                    // hide dialog
-	                    addClass(this.elements.root, classes.hidden);
-	                    //reflow
-	                    reflow = this.elements.modal.offsetWidth;
-
-	                    // remove custom dialog class on hide
-	                    if (typeof this.__internal.className !== 'undefined' && this.__internal.className !== '') {
-	                        removeClass(this.elements.root, this.__internal.className);
-	                    }
-
-	                    // internal on close event
-	                    if(typeof this.hooks.onclose === 'function'){
-	                        this.hooks.onclose.call(this);
-	                    }
-
-	                    // allow custom `onclose` method
-	                    dispatchEvent('onclose', this);
-
-	                    //remove from open dialogs
-	                    openDialogs.splice(openDialogs.indexOf(this),1);
-	                    this.__internal.isOpen = false;
-
-	                    ensureNoOverflow();
-
-	                }
-	                return this;
-	            },
-	            /**
-	             * Close all open dialogs except this.
-	             *
-	             * @return {undefined}
-	             */
-	            closeOthers:function(){
-	                alertify.closeAll(this);
-	                return this;
-	            },
-	            /**
-	             * Destroys this dialog instance
-	             *
-	             * @return {undefined}
-	             */
-	            destroy:function(){
-	                if (this.__internal.isOpen ) {
-	                    //mark dialog for destruction, this will be called on tranistionOut event.
-	                    this.__internal.destroy = function(){
-	                        destruct(this, initialize);
-	                    };
-	                    //close the dialog to unbind all events.
-	                    this.close();
-	                }else{
-	                    destruct(this, initialize);
-	                }
-	                return this;
-	            },
-	        };
-		} () );
-	    var notifier = (function () {
-	        var reflow,
-	            element,
-	            openInstances = [],
-	            classes = {
-	                base: 'alertify-notifier',
-	                message: 'ajs-message',
-	                top: 'ajs-top',
-	                right: 'ajs-right',
-	                bottom: 'ajs-bottom',
-	                left: 'ajs-left',
-	                visible: 'ajs-visible',
-	                hidden: 'ajs-hidden'
-	            };
-	        /**
-	         * Helper: initializes the notifier instance
-	         * 
-	         */
-	        function initialize(instance) {
-
-	            if (!instance.__internal) {
-	                instance.__internal = {
-	                    position: alertify.defaults.notifier.position,
-	                    delay: alertify.defaults.notifier.delay,
-	                };
-
-	                element = document.createElement('DIV');
-
-	                updatePosition(instance);
-	            }
-
-	            //add to DOM tree.
-	            if (element.parentNode !== document.body) {
-	                document.body.appendChild(element);
-	            }
-	        }
-	        
-	        function pushInstance(instance) {
-	            instance.__internal.pushed = true;
-	            openInstances.push(instance);
-	        }
-	        function popInstance(instance) {
-	            openInstances.splice(openInstances.indexOf(instance), 1);
-	            instance.__internal.pushed = false;
-	        }
-	        /**
-	         * Helper: update the notifier instance position
-	         * 
-	         */
-	        function updatePosition(instance) {
-	            element.className = classes.base;
-	            switch (instance.__internal.position) {
-	            case 'top-right':
-	                addClass(element, classes.top + ' ' + classes.right);
-	                break;
-	            case 'top-left':
-	                addClass(element, classes.top + ' ' + classes.left);
-	                break;
-	            case 'bottom-left':
-	                addClass(element, classes.bottom + ' ' + classes.left);
-	                break;
-
-	            default:
-	            case 'bottom-right':
-	                addClass(element, classes.bottom + ' ' + classes.right);
-	                break;
-	            }
-	        }
-
-	        /**
-	        * creates a new notification message
-	        *
-	        * @param  {DOMElement} message	The notifier message element
-	        * @param  {Number} wait   Time (in ms) to wait before the message is dismissed, a value of 0 means keep open till clicked.
-	        * @param  {Function} callback A callback function to be invoked when the message is dismissed.
-	        *
-	        * @return {undefined}
-	        */
-	        function create(div, callback) {
-
-	            function clickDelegate(event, instance) {
-	                instance.dismiss(true);
-	            }
-
-	            function transitionDone(event, instance) {
-	                // unbind event
-	                off(instance.element, transition.type, transitionDone);
-	                // remove the message
-	                element.removeChild(instance.element);
-	            }
-
-	            function initialize(instance) {
-	                if (!instance.__internal) {
-	                    instance.__internal = {
-	                        pushed: false,
-	                        delay : undefined,
-	                        timer: undefined,
-	                        clickHandler: undefined,
-	                        transitionEndHandler: undefined,
-	                        transitionTimeout: undefined
-	                    };
-	                    instance.__internal.clickHandler = delegate(instance, clickDelegate);
-	                    instance.__internal.transitionEndHandler = delegate(instance, transitionDone);
-	                }
-	                return instance;
-	            }
-	            function clearTimers(instance) {
-	                clearTimeout(instance.__internal.timer);
-	                clearTimeout(instance.__internal.transitionTimeout);
-	            }
-	            return initialize({
-	                /* notification DOM element*/
-	                element: div,
-	                /*
-	                 * Pushes a notification message 
-	                 * @param {string or DOMElement} content The notification message content
-	                 * @param {Number} wait The time (in seconds) to wait before the message is dismissed, a value of 0 means keep open till clicked.
-	                 * 
-	                 */
-	                push: function (_content, _wait) {
-	                    if (!this.__internal.pushed) {
-
-	                        pushInstance(this);
-	                        clearTimers(this);
-
-	                        var content, wait;
-	                        switch (arguments.length) {
-	                        case 0:
-	                            wait = this.__internal.delay;
-	                            break;
-	                        case 1:
-	                            if (typeof (_content) === 'number') {
-	                                wait = _content;
-	                            } else {
-	                                content = _content;
-	                                wait = this.__internal.delay;
-	                            }
-	                            break;
-	                        case 2:
-	                            content = _content;
-	                            wait = _wait;
-	                            break;
-	                        }
-	                        // set contents
-	                        if (typeof content !== 'undefined') {
-	                            this.setContent(content);
-	                        }
-	                        // append or insert
-	                        if (notifier.__internal.position.indexOf('top') < 0) {
-	                            element.appendChild(this.element);
-	                        } else {
-	                            element.insertBefore(this.element, element.firstChild);
-	                        }
-	                        reflow = this.element.offsetWidth;
-	                        addClass(this.element, classes.visible);
-	                        // attach click event
-	                        on(this.element, 'click', this.__internal.clickHandler);
-	                        return this.delay(wait);
-	                    }
-	                    return this;
-	                },
-	                /*
-	                 * {Function} callback function to be invoked before dismissing the notification message.
-	                 * Remarks: A return value === 'false' will cancel the dismissal
-	                 * 
-	                 */
-	                ondismiss: function () { },
-	                /*
-	                 * {Function} callback function to be invoked when the message is dismissed.
-	                 * 
-	                 */
-	                callback: callback,
-	                /*
-	                 * Dismisses the notification message 
-	                 * @param {Boolean} clicked A flag indicating if the dismissal was caused by a click.
-	                 * 
-	                 */
-	                dismiss: function (clicked) {
-	                    if (this.__internal.pushed) {
-	                        clearTimers(this);
-	                        if (!(typeof this.ondismiss === 'function' && this.ondismiss.call(this) === false)) {
-	                            //detach click event
-	                            off(this.element, 'click', this.__internal.clickHandler);
-	                            // ensure element exists
-	                            if (typeof this.element !== 'undefined' && this.element.parentNode === element) {
-	                                //transition end or fallback
-	                                this.__internal.transitionTimeout = setTimeout(this.__internal.transitionEndHandler, transition.supported ? 1000 : 100);
-	                                removeClass(this.element, classes.visible);
-
-	                                // custom callback on dismiss
-	                                if (typeof this.callback === 'function') {
-	                                    this.callback.call(this, clicked);
-	                                }
-	                            }
-	                            popInstance(this);
-	                        }
-	                    }
-	                    return this;
-	                },
-	                /*
-	                 * Delays the notification message dismissal
-	                 * @param {Number} wait The time (in seconds) to wait before the message is dismissed, a value of 0 means keep open till clicked.
-	                 * 
-	                 */
-	                delay: function (wait) {
-	                    clearTimers(this);
-	                    this.__internal.delay = typeof wait !== 'undefined' && !isNaN(+wait) ? +wait : notifier.__internal.delay;
-	                    if (this.__internal.delay > 0) {
-	                        var  self = this;
-	                        this.__internal.timer = setTimeout(function () { self.dismiss(); }, this.__internal.delay * 1000);
-	                    }
-	                    return this;
-	                },
-	                /*
-	                 * Sets the notification message contents
-	                 * @param {string or DOMElement} content The notification message content
-	                 * 
-	                 */
-	                setContent: function (content) {
-	                    if (typeof content === 'string') {
-	                        clearContents(this.element);
-	                        this.element.innerHTML = content;
-	                    } else if (content instanceof window.HTMLElement && this.element.firstChild !== content) {
-	                        clearContents(this.element);
-	                        this.element.appendChild(content);
-	                    }
-	                    return this;
-	                },
-	                /*
-	                 * Dismisses all open notifications except this.
-	                 * 
-	                 */
-	                dismissOthers: function () {
-	                    notifier.dismissAll(this);
-	                    return this;
-	                }
-	            });
-	        }
-
-	        //notifier api
-	        return {
-	            /**
-	             * Gets or Sets notifier settings. 
-	             *
-	             * @param {string} key The setting name
-	             * @param {Variant} value The setting value.
-	             *
-	             * @return {Object}	if the called as a setter, return the notifier instance.
-	             */
-	            setting: function (key, value) {
-	                //ensure init
-	                initialize(this);
-
-	                if (typeof value === 'undefined') {
-	                    //get
-	                    return this.__internal[key];
-	                } else {
-	                    //set
-	                    switch (key) {
-	                    case 'position':
-	                        this.__internal.position = value;
-	                        updatePosition(this);
-	                        break;
-	                    case 'delay':
-	                        this.__internal.delay = value;
-	                        break;
-	                    }
-	                }
-	                return this;
-	            },
-	            /**
-	             * [Alias] Sets dialog settings/options 
-	             */
-	            set:function(key,value){
-	                this.setting(key,value);
-	                return this;
-	            },
-	            /**
-	             * [Alias] Gets dialog settings/options 
-	             */
-	            get:function(key){
-	                return this.setting(key);
-	            },
-	            /**
-	             * Creates a new notification message
-	             *
-	             * @param {string} type The type of notification message (simply a CSS class name 'ajs-{type}' to be added).
-	             * @param {Function} callback  A callback function to be invoked when the message is dismissed.
-	             *
-	             * @return {undefined}
-	             */
-	            create: function (type, callback) {
-	                //ensure notifier init
-	                initialize(this);
-	                //create new notification message
-	                var div = document.createElement('div');
-	                div.className = classes.message + ((typeof type === 'string' && type !== '') ? ' ajs-' + type : '');
-	                return create(div, callback);
-	            },
-	            /**
-	             * Dismisses all open notifications.
-	             *
-	             * @param {Object} excpet [optional] The notification object to exclude from dismissal.
-	             *
-	             */
-	            dismissAll: function (except) {
-	                var clone = openInstances.slice(0);
-	                for (var x = 0; x < clone.length; x += 1) {
-	                    var  instance = clone[x];
-	                    if (except === undefined || except !== instance) {
-	                        instance.dismiss();
-	                    }
-	                }
-	            }
-	        };
-	    })();
-	    /**
-	     * Alertify public API
-	     * This contains everything that is exposed through the alertify object.
-	     *
-	     * @return {Object}
-	     */
-	    function Alertify() {
-
-	        // holds a references of created dialogs
-	        var dialogs = {};
-
-	        /**
-	         * Extends a given prototype by merging properties from base into sub.
-	         *
-	         * @sub {Object} sub The prototype being overwritten.
-	         * @base {Object} base The prototype being written.
-	         *
-	         * @return {Object} The extended prototype.
-	         */
-	        function extend(sub, base) {
-	            // copy dialog pototype over definition.
-	            for (var prop in base) {
-	                if (base.hasOwnProperty(prop)) {
-	                    sub[prop] = base[prop];
-	                }
-	            }
-	            return sub;
-	        }
-
-
-	        /**
-	        * Helper: returns a dialog instance from saved dialogs.
-	        * and initializes the dialog if its not already initialized.
-	        *
-	        * @name {String} name The dialog name.
-	        *
-	        * @return {Object} The dialog instance.
-	        */
-	        function get_dialog(name) {
-	            var dialog = dialogs[name].dialog;
-	            //initialize the dialog if its not already initialized.
-	            if (dialog && typeof dialog.__init === 'function') {
-	                dialog.__init(dialog);
-	            }
-	            return dialog;
-	        }
-
-	        /**
-	         * Helper:  registers a new dialog definition.
-	         *
-	         * @name {String} name The dialog name.
-	         * @Factory {Function} Factory a function resposible for creating dialog prototype.
-	         * @transient {Boolean} transient True to create a new dialog instance each time the dialog is invoked, false otherwise.
-	         * @base {String} base the name of another dialog to inherit from.
-	         *
-	         * @return {Object} The dialog definition.
-	         */
-	        function register(name, Factory, transient, base) {
-	            var definition = {
-	                dialog: null,
-	                factory: Factory
-	            };
-
-	            //if this is based on an existing dialog, create a new definition
-	            //by applying the new protoype over the existing one.
-	            if (base !== undefined) {
-	                definition.factory = function () {
-	                    return extend(new dialogs[base].factory(), new Factory());
-	                };
-	            }
-
-	            if (!transient) {
-	                //create a new definition based on dialog
-	                definition.dialog = extend(new definition.factory(), dialog);
-	            }
-	            return dialogs[name] = definition;
-	        }
-
-	        return {
-	            /**
-	             * Alertify defaults
-	             * 
-	             * @type {Object}
-	             */
-	            defaults: defaults,
-	            /**
-	             * Dialogs factory 
-	             *
-	             * @param {string}      Dialog name.
-	             * @param {Function}    A Dialog factory function.
-	             * @param {Boolean}     Indicates whether to create a singleton or transient dialog.
-	             * @param {String}      The name of the base type to inherit from.
-	             */
-	            dialog: function (name, Factory, transient, base) {
-
-	                // get request, create a new instance and return it.
-	                if (typeof Factory !== 'function') {
-	                    return get_dialog(name);
-	                }
-
-	                if (this.hasOwnProperty(name)) {
-	                    throw new Error('alertify.dialog: name already exists');
-	                }
-
-	                // register the dialog
-	                var definition = register(name, Factory, transient, base);
-
-	                if (transient) {
-
-	                    // make it public
-	                    this[name] = function () {
-	                        //if passed with no params, consider it a get request
-	                        if (arguments.length === 0) {
-	                            return definition.dialog;
-	                        } else {
-	                            var instance = extend(new definition.factory(), dialog);
-	                            //ensure init
-	                            if (instance && typeof instance.__init === 'function') {
-	                                instance.__init(instance);
-	                            }
-	                            instance['main'].apply(instance, arguments);
-	                            return instance['show'].apply(instance);
-	                        }
-	                    };
-	                } else {
-	                    // make it public
-	                    this[name] = function () {
-	                        //ensure init
-	                        if (definition.dialog && typeof definition.dialog.__init === 'function') {
-	                            definition.dialog.__init(definition.dialog);
-	                        }
-	                        //if passed with no params, consider it a get request
-	                        if (arguments.length === 0) {
-	                            return definition.dialog;
-	                        } else {
-	                            var dialog = definition.dialog;
-	                            dialog['main'].apply(definition.dialog, arguments);
-	                            return dialog['show'].apply(definition.dialog);
-	                        }
-	                    };
-	                }
-	            },
-	            /**
-	             * Close all open dialogs.
-	             *
-	             * @param {Object} excpet [optional] The dialog object to exclude from closing.
-	             *
-	             * @return {undefined}
-	             */
-	            closeAll: function (except) {
-	                var clone = openDialogs.slice(0);
-	                for (var x = 0; x < clone.length; x += 1) {
-	                    var instance = clone[x];
-	                    if (except === undefined || except !== instance) {
-	                        instance.close();
-	                    }
-	                }
-	            },
-	            /**
-	             * Gets or Sets dialog settings/options. if the dialog is transient, this call does nothing.
-	             *
-	             * @param {string} name The dialog name.
-	             * @param {String|Object} key A string specifying a propery name or a collection of key/value pairs.
-	             * @param {Variant} value Optional, the value associated with the key (in case it was a string).
-	             *
-	             * @return {undefined}
-	             */
-	            setting: function (name, key, value) {
-
-	                if (name === 'notifier') {
-	                    return notifier.setting(key, value);
-	                }
-
-	                var dialog = get_dialog(name);
-	                if (dialog) {
-	                    return dialog.setting(key, value);
-	                }
-	            },
-	            /**
-	             * [Alias] Sets dialog settings/options 
-	             */
-	            set: function(name,key,value){
-	                return this.setting(name, key,value);
-	            },
-	            /**
-	             * [Alias] Gets dialog settings/options 
-	             */
-	            get: function(name, key){
-	                return this.setting(name, key);
-	            },
-	            /**
-	             * Creates a new notification message.
-	             * If a type is passed, a class name "ajs-{type}" will be added.
-	             * This allows for custom look and feel for various types of notifications.
-	             *
-	             * @param  {String | DOMElement}    [message=undefined]		Message text
-	             * @param  {String}                 [type='']				Type of log message
-	             * @param  {String}                 [wait='']				Time (in seconds) to wait before auto-close
-	             * @param  {Function}               [callback=undefined]	A callback function to be invoked when the log is closed.
-	             *
-	             * @return {Object} Notification object.
-	             */
-	            notify: function (message, type, wait, callback) {
-	                return notifier.create(type, callback).push(message, wait);
-	            },
-	            /**
-	             * Creates a new notification message.
-	             *
-	             * @param  {String}		[message=undefined]		Message text
-	             * @param  {String}     [wait='']				Time (in seconds) to wait before auto-close
-	             * @param  {Function}	[callback=undefined]	A callback function to be invoked when the log is closed.
-	             *
-	             * @return {Object} Notification object.
-	             */
-	            message: function (message, wait, callback) {
-	                return notifier.create(null, callback).push(message, wait);
-	            },
-	            /**
-	             * Creates a new notification message of type 'success'.
-	             *
-	             * @param  {String}		[message=undefined]		Message text
-	             * @param  {String}     [wait='']				Time (in seconds) to wait before auto-close
-	             * @param  {Function}	[callback=undefined]	A callback function to be invoked when the log is closed.
-	             *
-	             * @return {Object} Notification object.
-	             */
-	            success: function (message, wait, callback) {
-	                return notifier.create('success', callback).push(message, wait);
-	            },
-	            /**
-	             * Creates a new notification message of type 'error'.
-	             *
-	             * @param  {String}		[message=undefined]		Message text
-	             * @param  {String}     [wait='']				Time (in seconds) to wait before auto-close
-	             * @param  {Function}	[callback=undefined]	A callback function to be invoked when the log is closed.
-	             *
-	             * @return {Object} Notification object.
-	             */
-	            error: function (message, wait, callback) {
-	                return notifier.create('error', callback).push(message, wait);
-	            },
-	            /**
-	             * Creates a new notification message of type 'warning'.
-	             *
-	             * @param  {String}		[message=undefined]		Message text
-	             * @param  {String}     [wait='']				Time (in seconds) to wait before auto-close
-	             * @param  {Function}	[callback=undefined]	A callback function to be invoked when the log is closed.
-	             *
-	             * @return {Object} Notification object.
-	             */
-	            warning: function (message, wait, callback) {
-	                return notifier.create('warning', callback).push(message, wait);
-	            },
-	            /**
-	             * Dismisses all open notifications
-	             *
-	             * @return {undefined}
-	             */
-	            dismissAll: function () {
-	                notifier.dismissAll();
-	            }
-	        };
-	    }
-	    var alertify = new Alertify();
-
-	    /**
-	    * Alert dialog definition
-	    *
-	    * invoked by:
-	    *	alertify.alert(message);
-	    *	alertify.alert(title, message);
-	    *	alertify.alert(message, onok);
-	    *	alertify.alert(title, message, onok);
-	     */
-	    alertify.dialog('alert', function () {
-	        return {
-	            main: function (_title, _message, _onok) {
-	                var title, message, onok;
-	                switch (arguments.length) {
-	                case 1:
-	                    message = _title;
-	                    break;
-	                case 2:
-	                    if (typeof _message === 'function') {
-	                        message = _title;
-	                        onok = _message;
-	                    } else {
-	                        title = _title;
-	                        message = _message;
-	                    }
-	                    break;
-	                case 3:
-	                    title = _title;
-	                    message = _message;
-	                    onok = _onok;
-	                    break;
-	                }
-	                this.set('title', title);
-	                this.set('message', message);
-	                this.set('onok', onok);
-	                return this;
-	            },
-	            setup: function () {
-	                return {
-	                    buttons: [
-	                        {
-	                            text: alertify.defaults.glossary.ok,
-	                            key: keys.ESC,
-	                            invokeOnClose: true,
-	                            className: alertify.defaults.theme.ok,
-	                        }
-	                    ],
-	                    focus: {
-	                        element: 0,
-	                        select: false
-	                    },
-	                    options: {
-	                        maximizable: false,
-	                        resizable: false
-	                    }
-	                };
-	            },
-	            build: function () {
-	                // nothing
-	            },
-	            prepare: function () {
-	                //nothing
-	            },
-	            setMessage: function (message) {
-	                this.setContent(message);
-	            },
-	            settings: {
-	                message: undefined,
-	                onok: undefined,
-	                label: undefined,
-	            },
-	            settingUpdated: function (key, oldValue, newValue) {
-	                switch (key) {
-	                case 'message':
-	                    this.setMessage(newValue);
-	                    break;
-	                case 'label':
-	                    if (this.__internal.buttons[0].element) {
-	                        this.__internal.buttons[0].element.innerHTML = newValue;
-	                    }
-	                    break;
-	                }
-	            },
-	            callback: function (closeEvent) {
-	                if (typeof this.get('onok') === 'function') {
-	                    var returnValue = this.get('onok').call(this, closeEvent);
-	                    if (typeof returnValue !== 'undefined') {
-	                        closeEvent.cancel = !returnValue;
-	                    }
-	                }
-	            }
-	        };
-	    });
-	    /**
-	     * Confirm dialog object
-	     *
-	     *	alertify.confirm(message);
-	     *	alertify.confirm(message, onok);
-	     *	alertify.confirm(message, onok, oncancel);
-	     *	alertify.confirm(title, message, onok, oncancel);
-	     */
-	    alertify.dialog('confirm', function () {
-
-	        var autoConfirm = {
-	            timer: null,
-	            index: null,
-	            text: null,
-	            duration: null,
-	            task: function (event, self) {
-	                if (self.isOpen()) {
-	                    self.__internal.buttons[autoConfirm.index].element.innerHTML = autoConfirm.text + ' (&#8207;' + autoConfirm.duration + '&#8207;) ';
-	                    autoConfirm.duration -= 1;
-	                    if (autoConfirm.duration === -1) {
-	                        clearAutoConfirm(self);
-	                        var button = self.__internal.buttons[autoConfirm.index];
-	                        var closeEvent = createCloseEvent(autoConfirm.index, button);
-
-	                        if (typeof self.callback === 'function') {
-	                            self.callback.apply(self, [closeEvent]);
-	                        }
-	                        //close the dialog.
-	                        if (closeEvent.close !== false) {
-	                            self.close();
-	                        }
-	                    }
-	                } else {
-	                    clearAutoConfirm(self);
-	                }
-	            }
-	        };
-
-	        function clearAutoConfirm(self) {
-	            if (autoConfirm.timer !== null) {
-	                clearInterval(autoConfirm.timer);
-	                autoConfirm.timer = null;
-	                self.__internal.buttons[autoConfirm.index].element.innerHTML = autoConfirm.text;
-	            }
-	        }
-
-	        function startAutoConfirm(self, index, duration) {
-	            clearAutoConfirm(self);
-	            autoConfirm.duration = duration;
-	            autoConfirm.index = index;
-	            autoConfirm.text = self.__internal.buttons[index].element.innerHTML;
-	            autoConfirm.timer = setInterval(delegate(self, autoConfirm.task), 1000);
-	            autoConfirm.task(null, self);
-	        }
-
-
-	        return {
-	            main: function (_title, _message, _onok, _oncancel) {
-	                var title, message, onok, oncancel;
-	                switch (arguments.length) {
-	                case 1:
-	                    message = _title;
-	                    break;
-	                case 2:
-	                    message = _title;
-	                    onok = _message;
-	                    break;
-	                case 3:
-	                    message = _title;
-	                    onok = _message;
-	                    oncancel = _onok;
-	                    break;
-	                case 4:
-	                    title = _title;
-	                    message = _message;
-	                    onok = _onok;
-	                    oncancel = _oncancel;
-	                    break;
-	                }
-	                this.set('title', title);
-	                this.set('message', message);
-	                this.set('onok', onok);
-	                this.set('oncancel', oncancel);
-	                return this;
-	            },
-	            setup: function () {
-	                return {
-	                    buttons: [
-	                        {
-	                            text: alertify.defaults.glossary.ok,
-	                            key: keys.ENTER,
-	                            className: alertify.defaults.theme.ok,
-	                        },
-	                        {
-	                            text: alertify.defaults.glossary.cancel,
-	                            key: keys.ESC,
-	                            invokeOnClose: true,
-	                            className: alertify.defaults.theme.cancel,
-	                        }
-	                    ],
-	                    focus: {
-	                        element: 0,
-	                        select: false
-	                    },
-	                    options: {
-	                        maximizable: false,
-	                        resizable: false
-	                    }
-	                };
-	            },
-	            build: function () {
-	                //nothing
-	            },
-	            prepare: function () {
-	                //nothing
-	            },
-	            setMessage: function (message) {
-	                this.setContent(message);
-	            },
-	            settings: {
-	                message: null,
-	                labels: null,
-	                onok: null,
-	                oncancel: null,
-	                defaultFocus: null,
-	                reverseButtons: null,
-	            },
-	            settingUpdated: function (key, oldValue, newValue) {
-	                switch (key) {
-	                case 'message':
-	                    this.setMessage(newValue);
-	                    break;
-	                case 'labels':
-	                    if ('ok' in newValue && this.__internal.buttons[0].element) {
-	                        this.__internal.buttons[0].text = newValue.ok;
-	                        this.__internal.buttons[0].element.innerHTML = newValue.ok;
-	                    }
-	                    if ('cancel' in newValue && this.__internal.buttons[1].element) {
-	                        this.__internal.buttons[1].text = newValue.cancel;
-	                        this.__internal.buttons[1].element.innerHTML = newValue.cancel;
-	                    }
-	                    break;
-	                case 'reverseButtons':
-	                    if (newValue === true) {
-	                        this.elements.buttons.primary.appendChild(this.__internal.buttons[0].element);
-	                    } else {
-	                        this.elements.buttons.primary.appendChild(this.__internal.buttons[1].element);
-	                    }
-	                    break;
-	                case 'defaultFocus':
-	                    this.__internal.focus.element = newValue === 'ok' ? 0 : 1;
-	                    break;
-	                }
-	            },
-	            callback: function (closeEvent) {
-	                clearAutoConfirm(this);
-	                var returnValue;
-	                switch (closeEvent.index) {
-	                case 0:
-	                    if (typeof this.get('onok') === 'function') {
-	                        returnValue = this.get('onok').call(this, closeEvent);
-	                        if (typeof returnValue !== 'undefined') {
-	                            closeEvent.cancel = !returnValue;
-	                        }
-	                    }
-	                    break;
-	                case 1:
-	                    if (typeof this.get('oncancel') === 'function') {
-	                        returnValue = this.get('oncancel').call(this, closeEvent);
-	                        if (typeof returnValue !== 'undefined') {
-	                            closeEvent.cancel = !returnValue;
-	                        }
-	                    }
-	                    break;
-	                }
-	            },
-	            autoOk: function (duration) {
-	                startAutoConfirm(this, 0, duration);
-	                return this;
-	            },
-	            autoCancel: function (duration) {
-	                startAutoConfirm(this, 1, duration);
-	                return this;
-	            }
-	        };
-	    });
-	    /**
-	     * Prompt dialog object
-	     *
-	     * invoked by:
-	     *	alertify.prompt(message);
-	     *	alertify.prompt(message, value);
-	     *	alertify.prompt(message, value, onok);
-	     *	alertify.prompt(message, value, onok, oncancel);
-	     *	alertify.prompt(title, message, value, onok, oncancel);
-	     */
-	    alertify.dialog('prompt', function () {
-	        var input = document.createElement('INPUT');
-	        var p = document.createElement('P');
-	        return {
-	            main: function (_title, _message, _value, _onok, _oncancel) {
-	                var title, message, value, onok, oncancel;
-	                switch (arguments.length) {
-	                case 1:
-	                    message = _title;
-	                    break;
-	                case 2:
-	                    message = _title;
-	                    value = _message;
-	                    break;
-	                case 3:
-	                    message = _title;
-	                    value = _message;
-	                    onok = _value;
-	                    break;
-	                case 4:
-	                    message = _title;
-	                    value = _message;
-	                    onok = _value;
-	                    oncancel = _onok;
-	                    break;
-	                case 5:
-	                    title = _title;
-	                    message = _message;
-	                    value = _value;
-	                    onok = _onok;
-	                    oncancel = _oncancel;
-	                    break;
-	                }
-	                this.set('title', title);
-	                this.set('message', message);
-	                this.set('value', value);
-	                this.set('onok', onok);
-	                this.set('oncancel', oncancel);
-	                return this;
-	            },
-	            setup: function () {
-	                return {
-	                    buttons: [
-	                        {
-	                            text: alertify.defaults.glossary.ok,
-	                            key: keys.ENTER,
-	                            className: alertify.defaults.theme.ok,
-	                        },
-	                        {
-	                            text: alertify.defaults.glossary.cancel,
-	                            key: keys.ESC,
-	                            invokeOnClose: true,
-	                            className: alertify.defaults.theme.cancel,
-	                        }
-	                    ],
-	                    focus: {
-	                        element: input,
-	                        select: true
-	                    },
-	                    options: {
-	                        maximizable: false,
-	                        resizable: false
-	                    }
-	                };
-	            },
-	            build: function () {
-	                input.className = alertify.defaults.theme.input;
-	                input.setAttribute('type', 'text');
-	                input.value = this.get('value');
-	                this.elements.content.appendChild(p);
-	                this.elements.content.appendChild(input);
-	            },
-	            prepare: function () {
-	                //nothing
-	            },
-	            setMessage: function (message) {
-	                if (typeof message === 'string') {
-	                    clearContents(p);
-	                    p.innerHTML = message;
-	                } else if (message instanceof window.HTMLElement && p.firstChild !== message) {
-	                    clearContents(p);
-	                    p.appendChild(message);
-	                }
-	            },
-	            settings: {
-	                message: undefined,
-	                labels: undefined,
-	                onok: undefined,
-	                oncancel: undefined,
-	                value: '',
-	                type:'text',
-	                reverseButtons: undefined,
-	            },
-	            settingUpdated: function (key, oldValue, newValue) {
-	                switch (key) {
-	                case 'message':
-	                    this.setMessage(newValue);
-	                    break;
-	                case 'value':
-	                    input.value = newValue;
-	                    break;
-	                case 'type':
-	                    switch (newValue) {
-	                    case 'text':
-	                    case 'color':
-	                    case 'date':
-	                    case 'datetime-local':
-	                    case 'email':
-	                    case 'month':
-	                    case 'number':
-	                    case 'password':
-	                    case 'search':
-	                    case 'tel':
-	                    case 'time':
-	                    case 'week':
-	                        input.type = newValue;
-	                        break;
-	                    default:
-	                        input.type = 'text';
-	                        break;
-	                    }
-	                    break;
-	                case 'labels':
-	                    if (newValue.ok && this.__internal.buttons[0].element) {
-	                        this.__internal.buttons[0].element.innerHTML = newValue.ok;
-	                    }
-	                    if (newValue.cancel && this.__internal.buttons[1].element) {
-	                        this.__internal.buttons[1].element.innerHTML = newValue.cancel;
-	                    }
-	                    break;
-	                case 'reverseButtons':
-	                    if (newValue === true) {
-	                        this.elements.buttons.primary.appendChild(this.__internal.buttons[0].element);
-	                    } else {
-	                        this.elements.buttons.primary.appendChild(this.__internal.buttons[1].element);
-	                    }
-	                    break;
-	                }
-	            },
-	            callback: function (closeEvent) {
-	                var returnValue;
-	                switch (closeEvent.index) {
-	                case 0:
-	                    this.settings.value = input.value;
-	                    if (typeof this.get('onok') === 'function') {
-	                        returnValue = this.get('onok').call(this, closeEvent, this.settings.value);
-	                        if (typeof returnValue !== 'undefined') {
-	                            closeEvent.cancel = !returnValue;
-	                        }
-	                    }
-	                    break;
-	                case 1:
-	                    if (typeof this.get('oncancel') === 'function') {
-	                        returnValue = this.get('oncancel').call(this, closeEvent);
-	                        if (typeof returnValue !== 'undefined') {
-	                            closeEvent.cancel = !returnValue;
-	                        }
-	                    }
-	                    if(!closeEvent.cancel){
-	                        input.value = this.settings.value;
-	                    }
-	                    break;
-	                }
-	            }
-	        };
-	    });
-
-	    // CommonJS
-	    if ( typeof module === 'object' && typeof module.exports === 'object' ) {
-	        module.exports = alertify;
-	    // AMD
-	    } else if ( true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-	            return alertify;
-	        }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    // window
-	    } else if ( !window.alertify ) {
-	        window.alertify = alertify;
-	    }
-
-	} ( typeof window !== 'undefined' ? window : this ) );
-
-
-/***/ },
-/* 492 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78951,9 +74137,9 @@
 	});
 	exports.storeActivity = storeActivity;
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(247);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78963,13 +74149,13 @@
 	    //   quotation_id:"37287"
 	    // };
 
-	    _superagent2.default.post('/api/v1/activities').send(data).end(function (err, res) {
+	    _axios2.default.post('/api/v1/activities').send(data).end(function (err, res) {
 	        console.log(res.body);
 	    });
 	}
 
 /***/ },
-/* 493 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78982,27 +74168,27 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _product = __webpack_require__(494);
+	var _product = __webpack_require__(492);
 
 	var _product2 = _interopRequireDefault(_product);
 
-	var _form_create = __webpack_require__(496);
+	var _form_create = __webpack_require__(494);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _products = __webpack_require__(526);
+	var _products = __webpack_require__(482);
 
 	var action = _interopRequireWildcard(_products);
 
-	var _underscore = __webpack_require__(277);
+	var _underscore = __webpack_require__(273);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _clean_object = __webpack_require__(237);
+	var _clean_object = __webpack_require__(236);
 
 	var _clean_object2 = _interopRequireDefault(_clean_object);
 
-	var _activity = __webpack_require__(492);
+	var _activity = __webpack_require__(490);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -79226,7 +74412,7 @@
 	});
 
 /***/ },
-/* 494 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79235,7 +74421,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _numeral = __webpack_require__(495);
+	var _numeral = __webpack_require__(493);
 
 	var _numeral2 = _interopRequireDefault(_numeral);
 
@@ -79361,7 +74547,7 @@
 	});
 
 /***/ },
-/* 495 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -80211,10 +75397,14 @@
 
 
 /***/ },
-/* 496 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -80222,26 +75412,26 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _products = __webpack_require__(488);
+	var _products = __webpack_require__(487);
 
 	var _products2 = _interopRequireDefault(_products);
 
-	var _product_type = __webpack_require__(497);
+	var _product_type = __webpack_require__(495);
 
 	var _product_type2 = _interopRequireDefault(_product_type);
 
-	var _periods = __webpack_require__(498);
+	var _periods = __webpack_require__(496);
 
 	var _periods2 = _interopRequireDefault(_periods);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var productForm = _react2.default.createClass({
+	  displayName: 'productForm',
 	  getInitialState: function getInitialState() {
 	    return {
 	      product: {},
@@ -80339,7 +75529,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Producto'
 	        ),
 	        _react2.default.createElement(_form_select2.default, {
@@ -80355,7 +75545,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Tipo'
 	        ),
 	        _react2.default.createElement(_form_select2.default, {
@@ -80371,7 +75561,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Procesador'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80386,7 +75576,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'RAM'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80401,7 +75591,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Disco duro'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80416,7 +75606,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Unidad optica'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80431,7 +75621,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Tarjeta de red'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80446,7 +75636,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Bater\xEDa'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80461,7 +75651,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Monitor'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80476,7 +75666,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Teclado y mouse'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80491,7 +75681,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Sistema operativo'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80506,7 +75696,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Office'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80521,7 +75711,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Antivirus'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80536,7 +75726,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Adicional'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80551,7 +75741,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Adicional'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80566,7 +75756,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Adicional'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80581,7 +75771,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Adicional'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80596,7 +75786,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Adicional'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80611,7 +75801,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Adicional'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80627,7 +75817,7 @@
 	        { className: 'form-group col-md-3' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Lapso'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80642,7 +75832,7 @@
 	        { className: 'form-group col-md-3' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Periodo'
 	        ),
 	        _react2.default.createElement(_form_select2.default, {
@@ -80658,7 +75848,7 @@
 	        { className: 'form-group col-md-3' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Cantidad'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80673,7 +75863,7 @@
 	        { className: 'form-group col-md-3' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Precio'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80688,7 +75878,7 @@
 	        { className: 'form-group col-xs-12' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Nota'
 	        ),
 	        _react2.default.createElement('textarea', {
@@ -80741,7 +75931,7 @@
 	        { className: 'form-group col-md-3' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Espacios pdf'
 	        ),
 	        _react2.default.createElement('input', {
@@ -80774,8 +75964,10 @@
 	  }
 	});
 
+	exports.default = productForm;
+
 /***/ },
-/* 497 */
+/* 495 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -80794,7 +75986,7 @@
 	];
 
 /***/ },
-/* 498 */
+/* 496 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -80833,7 +76025,7 @@
 	];
 
 /***/ },
-/* 499 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80848,11 +76040,11 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _quotations = __webpack_require__(250);
+	var _quotations = __webpack_require__(246);
 
 	var quoAction = _interopRequireWildcard(_quotations);
 
@@ -80996,7 +76188,7 @@
 	})(quoServices);
 
 /***/ },
-/* 500 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81005,7 +76197,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _editor = __webpack_require__(406);
+	var _editor = __webpack_require__(403);
 
 	var _editor2 = _interopRequireDefault(_editor);
 
@@ -81074,7 +76266,7 @@
 	});
 
 /***/ },
-/* 501 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81083,11 +76275,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(277);
+	var _underscore = __webpack_require__(273);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _editor = __webpack_require__(406);
+	var _editor = __webpack_require__(403);
 
 	var _editor2 = _interopRequireDefault(_editor);
 
@@ -81195,14 +76387,14 @@
 	});
 
 /***/ },
-/* 502 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Select = __webpack_require__(282);
-	var reasonsOptions = __webpack_require__(503);
+	var Select = __webpack_require__(279);
+	var reasonsOptions = __webpack_require__(501);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -81216,7 +76408,7 @@
 	      quotation: {
 	        status: 'No efectiva',
 	        status_cause: null,
-	        status_note: null
+	        status_note: ''
 	      }
 	    };
 	  },
@@ -81287,7 +76479,7 @@
 	});
 
 /***/ },
-/* 503 */
+/* 501 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -81310,14 +76502,14 @@
 	];
 
 /***/ },
-/* 504 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var reasonsOptions = __webpack_require__(505);
-	var Select = __webpack_require__(282);
+	var reasonsOptions = __webpack_require__(503);
+	var Select = __webpack_require__(279);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -81331,7 +76523,7 @@
 	      quotation: {
 	        status: 'No enviada',
 	        status_cause: null,
-	        status_note: null
+	        status_note: ''
 	      }
 	    };
 	  },
@@ -81406,7 +76598,7 @@
 	});
 
 /***/ },
-/* 505 */
+/* 503 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -81425,7 +76617,7 @@
 	];
 
 /***/ },
-/* 506 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81447,7 +76639,28 @@
 	      React.createElement(
 	        'div',
 	        { className: 'panel-body' },
-	        React.createElement('br', null),
+	        React.createElement(
+	          'b',
+	          null,
+	          'Creada:'
+	        ),
+	        ' ',
+	        this.props.quotation.created_at,
+	        React.createElement('hr', null),
+	        React.createElement(
+	          'b',
+	          null,
+	          'Enviada:'
+	        ),
+	        ' ',
+	        this.props.quotation.sent_at,
+	        React.createElement('hr', null),
+	        React.createElement(
+	          'b',
+	          null,
+	          'Tiempo:'
+	        ),
+	        ' ',
 	        created_sent_diff
 	      )
 	    );
@@ -81455,7 +76668,7 @@
 	});
 
 /***/ },
-/* 507 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81468,7 +76681,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(289);
+	var _moment = __webpack_require__(286);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -81522,7 +76735,7 @@
 	});
 
 /***/ },
-/* 508 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81537,13 +76750,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _tracking = __webpack_require__(509);
+	var _trackings = __webpack_require__(483);
+
+	var action = _interopRequireWildcard(_trackings);
+
+	var _tracking = __webpack_require__(507);
 
 	var _tracking2 = _interopRequireDefault(_tracking);
 
-	var _form_create = __webpack_require__(511);
+	var _form_create = __webpack_require__(509);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -81553,19 +76772,12 @@
 	    return {
 	      tracking: {
 	        todos: []
-	      },
-	      trackings: []
+	      }
 	    };
-	  },
-	  _fetch: function _fetch(id) {
-	    // request
-	    //   .get('/api/v1/trackings')
-	    //   .query({quotation_id: id})
-	    //   .end((err, res) => this.setState({trackings: res.body}));
 	  },
 	  handleSubmit: function handleSubmit(tracking) {
 	    var model = _extends({}, tracking, { quotation_id: this.props.quotationId });
-	    console.log(model);
+	    this.props.dispatch(action.store(model));
 	  },
 	  render: function render() {
 	    var trackingNodes = this.props.trackings.items.map(function (tracking) {
@@ -81578,7 +76790,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'panel-body' },
-	        _react2.default.createElement(_form_create2.default, { onSubmit: this.handleSubmit }),
+	        _react2.default.createElement(_form_create2.default, { contacts: this.props.contacts.items, onSubmit: this.handleSubmit }),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          'ul',
@@ -81591,43 +76803,33 @@
 	});
 
 /***/ },
-/* 509 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(289);
+	var _moment = __webpack_require__(286);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _update_item = __webpack_require__(510);
+	var _update_item = __webpack_require__(508);
 
 	var _update_item2 = _interopRequireDefault(_update_item);
 
-	var _form_create = __webpack_require__(405);
-
-	var _form_create2 = _interopRequireDefault(_form_create);
-
-	var _list = __webpack_require__(409);
-
-	var _list2 = _interopRequireDefault(_list);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(321);
+	__webpack_require__(318);
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var quoTracking = _react2.default.createClass({
+	  displayName: 'quoTracking',
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -81635,125 +76837,11 @@
 	    };
 	  },
 
-	  getInitialState: function getInitialState() {
-	    return {
-	      todos: [],
-	      showForm: false
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.tracking.todos) {
-	      this.setState({ todos: props.tracking.todos });
-	    }
-	  },
-
-	  componentDidMount: function componentDidMount() {
-	    if (this.props.tracking.todos) {
-	      this.setState({ todos: this.props.tracking.todos });
-	    }
-	  },
-
-	  handleSubmit: function handleSubmit(todo) {
-	    var _this = this;
-
-	    var tracking = this.props.tracking;
-	    _superagent2.default.post('/api/v1/todos').send(todo).end(function (err, res) {
-	      _this.setState({
-	        todos: _this.state.todos.concat([res.body])
-	      });
-	    });
-	  },
-
-	  showForm: function showForm(e) {
-	    if (e) e.preventDefault();
-
-	    this.setState({ showForm: !this.state.showForm });
-	  },
-
-	  handleCompleted: function handleCompleted(todo) {
-	    var _this2 = this;
-
-	    todo = _extends({}, todo, { completed: !todo.completed });
-
-	    _superagent2.default.put('/api/v1/todos/' + todo.id).send(todo).end(function (err, res) {
-	      var todos = (0, _update_item2.default)(_this2.state.todos, res.body, 'id');
-	      _this2.setState({ todos: todos });
-	    });
-	  },
-
-
 	  render: function render() {
 	    var tracking = this.props.tracking;
 	    var showTable = false;
 	    var contact = void 0;
 	    var by = void 0;
-	    var todos = this.state.todos;
-
-	    var todoNodes = todos.map(function (todo) {
-	      if (todo.user && todo.user.name) {
-	        by = todo.user.name + ' ' + todo.user.lastname;
-	      }
-
-	      return _react2.default.createElement(
-	        'div',
-	        { key: todo.id },
-	        _react2.default.createElement('hr', null),
-	        _react2.default.createElement(
-	          'b',
-	          null,
-	          'Tarea ',
-	          todo.title,
-	          _react2.default.createElement('br', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          todo.description,
-	          _react2.default.createElement('br', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          _react2.default.createElement(
-	            'b',
-	            null,
-	            'Creada:'
-	          ),
-	          ' ',
-	          todo.created_at,
-	          _react2.default.createElement('br', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          _react2.default.createElement(
-	            'b',
-	            null,
-	            'vence: '
-	          ),
-	          ' ',
-	          todo.expires_date,
-	          ' ',
-	          todo.expires_time,
-	          _react2.default.createElement('br', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          _react2.default.createElement(
-	            'b',
-	            null,
-	            'Usuario: '
-	          ),
-	          by
-	        )
-	      );
-	    });
-
-	    if (todos.length > 0) {
-	      showTable = true;
-	    }
 
 	    if (tracking.contact.name) {
 	      contact = tracking.contact.name + ' ' + tracking.contact.lastname;
@@ -81763,60 +76851,53 @@
 	      by = tracking.user.name + ' ' + tracking.user.lastname;
 	    }
 
-	    // todos = this.state.todos.map(todo => _.extend(todo, {tracking: tracking}));
-
 	    return _react2.default.createElement(
 	      'li',
 	      { className: 'list-item' },
-	      _react2.default.createElement('hr', null),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        _react2.default.createElement(
+	          'b',
+	          null,
+	          'Contacto:'
+	        ),
+	        ' ',
+	        contact
+	      ),
 	      _react2.default.createElement(
 	        'b',
 	        null,
 	        'Reporte:'
 	      ),
-	      ' ',
-	      tracking.report,
-	      ' \u2022 ',
+	      _react2.default.createElement('br', null),
 	      _react2.default.createElement(
-	        'b',
+	        'p',
 	        null,
-	        'Contacto:'
+	        tracking.report
 	      ),
-	      ' ',
-	      contact,
-	      ' \u2022 ',
 	      _react2.default.createElement(
 	        'b',
 	        null,
-	        'Por:'
+	        'Por: '
 	      ),
 	      ' ',
 	      by,
 	      ' ',
-	      (0, _moment2.default)(tracking.register_date + ' ' + tracking.register_time).fromNow(),
-	      _react2.default.createElement('p', null),
 	      _react2.default.createElement(
-	        'div',
-	        { className: this.state.showForm ? "" : "hidden" },
-	        _react2.default.createElement(_form_create2.default, {
-	          trackingId: tracking.id,
-	          onSubmit: this.handleSubmit,
-	          hideForm: this.showForm
-	        })
+	        'i',
+	        null,
+	        (0, _moment2.default)(tracking.register_date + ' ' + tracking.register_time).fromNow()
 	      ),
-	      _react2.default.createElement(_list2.default, { todos: todos, onCompleted: this.handleCompleted }),
-	      _react2.default.createElement('p', null),
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary btn-sm', onClick: this.showForm },
-	        'Agregar tarea'
-	      )
+	      _react2.default.createElement('hr', null)
 	    );
 	  }
 	});
 
+	exports.default = quoTracking;
+
 /***/ },
-/* 510 */
+/* 508 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -81835,10 +76916,14 @@
 	}
 
 /***/ },
-/* 511 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -81846,19 +76931,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _moment = __webpack_require__(289);
+	var _moment = __webpack_require__(286);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _form_select = __webpack_require__(282);
+	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
 
-	var _datetime = __webpack_require__(283);
+	var _datetime = __webpack_require__(280);
 
 	var _datetime2 = _interopRequireDefault(_datetime);
 
@@ -81866,8 +76947,8 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var trackingForm = _react2.default.createClass({
+	  displayName: 'trackingForm',
 
 	  getInitialState: function getInitialState() {
 	    return {
@@ -81914,11 +76995,7 @@
 	  handleSubmit: function handleSubmit(e) {
 	    e.preventDefault();
 	    this.handleReport();
-	    console.log(this.state.tracking);
 	    this.props.onSubmit(this.state.tracking);
-	    // this.setState({tracking: {
-	    //   report: ''
-	    // }});
 	  },
 
 	  handleDateTime: function handleDateTime(dateObj, dateStr) {
@@ -81935,13 +77012,13 @@
 	    var contactSelect = void 0;
 
 	    if (tracking.contact_id) {
-	      contactSelect = this.state.contacts.filter(function (contact) {
+	      contactSelect = this.props.contacts.filter(function (contact) {
 	        return contact.id == tracking.contact_id;
 	      });
 	      contactValue = contactSelect.name + " " + contactSelect.lastname;
 	    }
 
-	    var contactOptions = this.state.contacts.map(function (contact, i) {
+	    var contactOptions = this.props.contacts.map(function (contact, i) {
 	      return { value: contact.id, label: contact.name + " " + contact.lastname };
 	    });
 
@@ -81954,7 +77031,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Fecha'
 	        ),
 	        _react2.default.createElement(_datetime2.default, {
@@ -81968,7 +77045,7 @@
 	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Seleccionar o buscar contacto'
 	        ),
 	        _react2.default.createElement(_form_select2.default, {
@@ -81983,7 +77060,7 @@
 	        { className: 'form-group col-md-12' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: '' },
+	          null,
 	          'Reporte'
 	        ),
 	        _react2.default.createElement('textarea', {
@@ -82003,8 +77080,66 @@
 	  }
 	});
 
+	exports.default = trackingForm;
+
 /***/ },
-/* 512 */
+/* 510 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Alert = _react2.default.createClass({
+		displayName: "Alert",
+		getDefaultProps: function getDefaultProps() {
+			return {
+				time: 3000
+			};
+		},
+		getInitialState: function getInitialState() {
+			return {
+				show: false
+			};
+		},
+		componentWillReceiveProps: function componentWillReceiveProps(props) {
+			if (props.show) {
+				this.show();
+			}
+		},
+		show: function show(e) {
+			var _this = this;
+
+			if (e) e.preventDefault();
+			this.setState({ show: true });
+
+			setTimeout(function () {
+				_this.setState({ show: false });
+			}, this.props.time);
+		},
+		render: function render() {
+			var message = this.props.message;
+
+			return _react2.default.createElement(
+				"div",
+				{ className: this.state.show ? "alert-message" : "alert-message alert-message--outside" },
+				message
+			);
+		}
+	});
+
+	exports.default = Alert;
+
+/***/ },
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82019,23 +77154,19 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _companies = __webpack_require__(467);
+	var _companies = __webpack_require__(464);
 
 	var action = _interopRequireWildcard(_companies);
 
-	var _company = __webpack_require__(513);
+	var _company = __webpack_require__(512);
 
 	var _company2 = _interopRequireDefault(_company);
 
-	var _form_create = __webpack_require__(469);
+	var _form_create = __webpack_require__(466);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _filters = __webpack_require__(515);
+	var _filters = __webpack_require__(514);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
@@ -82169,7 +77300,7 @@
 	})(list);
 
 /***/ },
-/* 513 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82180,15 +77311,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
+	var _axios = __webpack_require__(247);
 
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _axios2 = _interopRequireDefault(_axios);
 
-	var _form_create = __webpack_require__(477);
+	var _form_create = __webpack_require__(469);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _contact = __webpack_require__(514);
+	var _contact = __webpack_require__(513);
 
 	var _contact2 = _interopRequireDefault(_contact);
 
@@ -82220,7 +77351,7 @@
 	  updateContact: function updateContact(contactData) {
 	    var _this = this;
 
-	    _superagent2.default.put('/api/v1/contacts/' + contactData.id).send(contactData).end(function (err, res) {
+	    _axios2.default.put('/api/v1/contacts/' + contactData.id).send(contactData).end(function (err, res) {
 	      if (err) return _this.setState({ errorMessages: err.response.body });
 	      _this.setState({
 	        contact: {}
@@ -82231,7 +77362,7 @@
 	  storeContact: function storeContact(contactData) {
 	    var _this2 = this;
 
-	    _superagent2.default.post('/api/v1/contacts').send(contactData).end(function (err, res) {
+	    _axios2.default.post('/api/v1/contacts').send(contactData).end(function (err, res) {
 	      if (err) return _this2.setState({ errorMessages: err.response.body });
 	      _this2.setState({ contacts: _this2.state.contacts.concat([res.body]) });
 	      _this2.showForm();
@@ -82248,7 +77379,7 @@
 
 	    e.preventDefault();
 	    var id = contact.id;
-	    _superagent2.default.del('/api/v1/contacts/' + id).end(function (err, res) {
+	    _axios2.default.del('/api/v1/contacts/' + id).end(function (err, res) {
 	      return _this3.setState({
 	        contacts: _this3.state.contacts.filter(function (contact) {
 	          return contact.id !== id;
@@ -82357,7 +77488,7 @@
 	});
 
 /***/ },
-/* 514 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82421,7 +77552,7 @@
 	});
 
 /***/ },
-/* 515 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82434,7 +77565,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(277);
+	var _underscore = __webpack_require__(273);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -82514,7 +77645,7 @@
 	});
 
 /***/ },
-/* 516 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82531,19 +77662,19 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _contacts = __webpack_require__(468);
+	var _contacts = __webpack_require__(465);
 
 	var action = _interopRequireWildcard(_contacts);
 
-	var _form_create = __webpack_require__(477);
+	var _form_create = __webpack_require__(469);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _filters = __webpack_require__(515);
+	var _filters = __webpack_require__(514);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
-	var _list = __webpack_require__(472);
+	var _list = __webpack_require__(476);
 
 	var _list2 = _interopRequireDefault(_list);
 
@@ -82646,7 +77777,7 @@
 	})(section);
 
 /***/ },
-/* 517 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82661,15 +77792,15 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _services = __webpack_require__(518);
+	var _services = __webpack_require__(481);
 
 	var action = _interopRequireWildcard(_services);
 
-	var _form_create = __webpack_require__(519);
+	var _form_create = __webpack_require__(517);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _list = __webpack_require__(520);
+	var _list = __webpack_require__(518);
 
 	var _list2 = _interopRequireDefault(_list);
 
@@ -82789,66 +77920,14 @@
 	})(section);
 
 /***/ },
-/* 518 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
-	exports.fetch = fetch;
-	exports.store = store;
-	exports.update = update;
-	exports.setService = setService;
-
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'SERVICES';
-	var endpoint = 'api/v1/services';
-
-	function fetch() {
-		var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _superagent2.default.get(endpoint).query(query).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_FETCH', payload: res.body });
-			});
-		};
-	}
-
-	function store(service) {
-		return function (dispatch) {
-			return _superagent2.default.post(endpoint).send(service).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_STORE', payload: res.body });
-			});
-		};
-	}
-
-	function update(service) {
-		return function (dispatch) {
-			return _superagent2.default.put(endpoint + '/' + service.id).send(service).end(function (err, res) {
-				if (err) return dispatch({ type: TYPE + '_FAIL', payload: res.body });
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.body });
-			});
-		};
-	}
-
-	function setService(service) {
-		return { type: TYPE + '_SET_SERVICE', payload: service };
-	}
-
-/***/ },
-/* 519 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -82856,7 +77935,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _editor = __webpack_require__(406);
+	var _editor = __webpack_require__(403);
 
 	var _editor2 = _interopRequireDefault(_editor);
 
@@ -82864,8 +77943,8 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var serviceForm = _react2.default.createClass({
+	  displayName: 'serviceForm',
 	  getInitialState: function getInitialState() {
 	    return {
 	      service: {
@@ -82987,8 +78066,10 @@
 	  }
 	});
 
+	exports.default = serviceForm;
+
 /***/ },
-/* 520 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82997,11 +78078,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _superagent = __webpack_require__(244);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _item = __webpack_require__(521);
+	var _item = __webpack_require__(519);
 
 	var _item2 = _interopRequireDefault(_item);
 
@@ -83073,7 +78150,7 @@
 	});
 
 /***/ },
-/* 521 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83128,314 +78205,6 @@
 	    );
 	  }
 	});
-
-/***/ },
-/* 522 */,
-/* 523 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.default = reducer;
-	var TYPE = 'USER';
-	var initialState = {
-		user: JSON.parse(localStorage.getItem('user')) || {},
-		errors: []
-	};
-
-	function reducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-		var action = arguments[1];
-
-		switch (action.type) {
-			case TYPE + '_FAIL':
-				return _extends({}, state, {
-					errors: [action.payload]
-				});
-				break;
-
-			default:
-				return state;
-				break;
-		}
-	}
-
-/***/ },
-/* 524 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.default = reducer;
-	var TYPE = 'PRODUCTS';
-	var initialState = {
-		items: [],
-		errors: [],
-		product: {}
-	};
-
-	function reducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-		var action = arguments[1];
-
-		var _ret = function () {
-			switch (action.type) {
-				case TYPE + '_FETCH':
-					return {
-						v: _extends({}, state, {
-							items: action.payload
-						})
-					};
-					break;
-
-				case TYPE + '_SET_PRODUCT':
-					return {
-						v: _extends({}, state, {
-							errors: [],
-							product: action.payload
-						})
-					};
-					break;
-
-				case TYPE + '_STORE':
-					return {
-						v: _extends({}, state, {
-							errors: [],
-							items: [action.payload].concat(state.items)
-						})
-					};
-					break;
-
-				case TYPE + '_UPDATE':
-					var updated = action.payload;
-
-					return {
-						v: _extends({}, state, {
-							contact: {},
-							errors: [],
-							items: state.items.map(function (model) {
-								return model.id == updated.id ? _extends({}, model, updated) : model;
-							})
-						})
-					};
-					break;
-
-				case TYPE + '_FAIL':
-					return {
-						v: _extends({}, state, {
-							errors: [action.payload]
-						})
-					};
-					break;
-
-				default:
-					return {
-						v: state
-					};
-					break;
-			}
-		}();
-
-		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	}
-
-/***/ },
-/* 525 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.default = reducer;
-	var TYPE = 'TRACKINGS';
-	var initialState = {
-		items: [],
-		errors: [],
-		tracking: {}
-	};
-
-	function reducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-		var action = arguments[1];
-
-		var _ret = function () {
-			switch (action.type) {
-				case TYPE + '_FETCH':
-					return {
-						v: _extends({}, state, {
-							items: action.payload
-						})
-					};
-					break;
-
-				case TYPE + '_SET_TRACKING':
-					return {
-						v: _extends({}, state, {
-							errors: [],
-							product: action.payload
-						})
-					};
-					break;
-
-				case TYPE + '_STORE':
-					return {
-						v: _extends({}, state, {
-							errors: [],
-							items: [action.payload].concat(state.items)
-						})
-					};
-					break;
-
-				case TYPE + '_UPDATE':
-					var updated = action.payload;
-
-					return {
-						v: _extends({}, state, {
-							contact: {},
-							errors: [],
-							items: state.items.map(function (model) {
-								return model.id == updated.id ? _extends({}, model, updated) : model;
-							})
-						})
-					};
-					break;
-
-				case TYPE + '_FAIL':
-					return {
-						v: _extends({}, state, {
-							errors: [action.payload]
-						})
-					};
-					break;
-
-				default:
-					return {
-						v: state
-					};
-					break;
-			}
-		}();
-
-		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	}
-
-/***/ },
-/* 526 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.fetch = fetch;
-	exports.store = store;
-	exports.update = update;
-
-	var _axios = __webpack_require__(251);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'PRODUCTS';
-	var endpoint = '/api/v1/products';
-
-	function fetch() {
-		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function store(product) {
-		return function (dispatch) {
-			return _axios2.default.post(endpoint, product).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function update(product) {
-		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + product.id, product).then(function (res) {
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-/***/ },
-/* 527 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.fetch = fetch;
-	exports.store = store;
-
-	var _axios = __webpack_require__(251);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'TRACKINGS';
-	var endpoint = '/api/v1/trackings';
-
-	function fetch() {
-		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function store(product) {
-		return function (dispatch) {
-			return _axios2.default.post(endpoint, product).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
 
 /***/ }
 /******/ ]);
