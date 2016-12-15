@@ -26568,6 +26568,15 @@
 	                { href: 'services' },
 	                'Servicios'
 	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '/logout' },
+	                'Cerrar sesion'
+	              )
 	            )
 	          )
 	        )
