@@ -47097,6 +47097,7 @@
 	          activity.user ? activity.user.name + ' ' + activity.user.lastname : '',
 	          ' '
 	        ),
+	        ' ',
 	        activity.message,
 	        ' ',
 	        _react2.default.createElement(_timeago2.default, { date: activity.created_at })
@@ -71068,7 +71069,7 @@
 	        status: null,
 	        advisor: null,
 	        client_type: null,
-	        quotation_type: null,
+	        type: null,
 	        date_start: null,
 	        date_end: null
 	      }

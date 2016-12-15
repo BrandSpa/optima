@@ -19,7 +19,7 @@ export default React.createClass({
         status: null,
         advisor: null,
         client_type: null,
-        quotation_type: null,
+        type: null,
         date_start: null,
         date_end: null
       }
