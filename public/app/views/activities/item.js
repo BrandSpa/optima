@@ -10,7 +10,7 @@ export default React.createClass({
     return (
       <tr>
         <td>
-        <b>{`${activity.user.name} ${activity.user.lastname}`} </b>{activity.message} <Timeago date={activity.created_at} />
+        <b>{activity.user ? `${activity.user.name} ${activity.user.lastname}` : ''} </b>{activity.message} <Timeago date={activity.created_at} />
         </td>
       </tr>
     )

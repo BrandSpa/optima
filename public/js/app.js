@@ -47094,7 +47094,7 @@
 	        _react2.default.createElement(
 	          'b',
 	          null,
-	          activity.user.name + ' ' + activity.user.lastname,
+	          activity.user ? activity.user.name + ' ' + activity.user.lastname : '',
 	          ' '
 	        ),
 	        activity.message,
