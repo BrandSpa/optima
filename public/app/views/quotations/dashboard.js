@@ -6,9 +6,20 @@ import Todos from 'views/todos/section';
 import Graphs from 'views/graphs/section';
 
 const dashboard = React.createClass({
+  getInitialState() {
+    return {
+      user: {}
+    }  
+  },
+
+  componentDidMount() {
+    if(localStorage.getItem('user')) {
+      this.setState({user: JSON.parse(localStorage.getItem('user'))});
+    }
+  },
 
   render: function() {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let {user} = this.state;
 
     return (
       <div>

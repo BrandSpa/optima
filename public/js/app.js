@@ -26610,10 +26610,21 @@
 
 	var dashboard = _react2.default.createClass({
 	  displayName: 'dashboard',
+	  getInitialState: function getInitialState() {
+	    return {
+	      user: {}
+	    };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    if (localStorage.getItem('user')) {
+	      this.setState({ user: JSON.parse(localStorage.getItem('user')) });
+	    }
+	  },
 
 
 	  render: function render() {
-	    var user = JSON.parse(localStorage.getItem('user'));
+	    var user = this.state.user;
+
 
 	    return _react2.default.createElement(
 	      'div',
