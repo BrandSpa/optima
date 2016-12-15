@@ -59816,7 +59816,15 @@
 	        type: 'bar',
 	        data: {}
 	      },
-	      options: {},
+	      options: {
+	        scales: {
+	          yAxes: [{
+	            ticks: {
+	              beginAtZero: true
+	            }
+	          }]
+	        }
+	      },
 	      type: 'bar'
 	    };
 	  },

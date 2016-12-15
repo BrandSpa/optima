@@ -17,7 +17,15 @@ export default React.createClass({
         type: 'bar',
         data: {}
       },
-      options: {},
+      options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+      },
       type: 'bar'
     }
   },
