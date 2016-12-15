@@ -71635,8 +71635,8 @@
 	    };
 
 	    var options = {
-	      scaleLabel: function scaleLabel(l) {
-	        return console.log(l);
+	      scaleLabel: function scaleLabel(label) {
+	        return '$' + label.value;
 	      }
 	    };
 
