@@ -30,7 +30,8 @@ function checkAuth(ctx, next) {
 }
 
 page('/', checkAuth, () => {
-  return root(<Dashboard />);
+  let user = JSON.parse(localStorage.getItem('user'));
+  return root(<Dashboard user={user} />);
 });
 
 page('/companies', () => {

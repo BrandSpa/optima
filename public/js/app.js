@@ -113,7 +113,8 @@
 	}
 
 	(0, _page2.default)('/', checkAuth, function () {
-	  return root(_react2.default.createElement(_dashboard2.default, null));
+	  var user = JSON.parse(localStorage.getItem('user'));
+	  return root(_react2.default.createElement(_dashboard2.default, { user: user }));
 	});
 
 	(0, _page2.default)('/companies', function () {
@@ -26619,21 +26620,9 @@
 
 	var dashboard = _react2.default.createClass({
 	  displayName: 'dashboard',
-	  getInitialState: function getInitialState() {
-	    return {
-	      user: {}
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    console.log(localStorage.getItem('user'));
-	    if (localStorage.getItem('user')) {
-	      this.setState({ user: JSON.parse(localStorage.getItem('user')) });
-	    }
-	  },
-
 
 	  render: function render() {
-	    var user = this.state.user;
+	    var user = this.props.user;
 
 
 	    return _react2.default.createElement(
