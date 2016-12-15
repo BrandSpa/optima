@@ -23,9 +23,8 @@ import NoSend from 'views/quotation/no_send';
 import Times from 'views/quotation/times';
 import Activities from 'views/quotation/activity';
 import Trackings from 'views/quotation/trackings';
+import Todos from 'views/todos/section';
 import Alert from 'components/alert';
-
-
 
 const quotationSection = React.createClass({
   alert: null,
@@ -150,7 +149,6 @@ const quotationSection = React.createClass({
 
   handleUpdate(actionRes) {
     if(actionRes.type == 'QUOTATIONS_FAIL') {
-      console.log(actionRes.type);
       return this.setState({showErrors: true});
     } else {
       return this.handleDisabled(actionRes.payload.status);
@@ -177,7 +175,7 @@ const quotationSection = React.createClass({
     return (
       <div>
       <Alert 
-        show={this.state.showErrors}
+        show={this.props.quotations.errors.length ? true : false}
         message={this.props.quotations.errors} 
       />
 
@@ -262,6 +260,7 @@ const quotationSection = React.createClass({
 
           <Trackings {...this.props} quotationId={quotation.id} />
 
+          <Todos quotation_id={this.props.params.id} />
         </div>
 
         <div className="col-md-3">

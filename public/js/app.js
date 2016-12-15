@@ -26582,6 +26582,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -26604,11 +26608,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var dashboard = _react2.default.createClass({
+	  displayName: 'dashboard',
 
 
 	  render: function render() {
+	    var user = JSON.parse(localStorage.getItem('user'));
+
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -26616,7 +26622,7 @@
 	        'div',
 	        { className: 'col-md-9' },
 	        _react2.default.createElement(_list2.default, null),
-	        _react2.default.createElement(_section2.default, null),
+	        _react2.default.createElement(_section2.default, { user_id: user.id }),
 	        _react2.default.createElement(_section4.default, null)
 	      ),
 	      _react2.default.createElement(
@@ -26627,6 +26633,8 @@
 	    );
 	  }
 	});
+
+	exports.default = dashboard;
 
 /***/ },
 /* 245 */
@@ -26845,7 +26853,7 @@
 	function sendMail(id) {
 	  return function (dispatch) {
 	    return _axios2.default.post('/api/v1/quotations/' + id + '/sendmail').then(function (res) {
-	      return dispatch({ type: TYPE + '_MAIL', payload: res.data });
+	      return dispatch({ type: TYPE + '_SET_QUOTATION', payload: res.data });
 	    }).catch(function (err) {
 	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 	    });
@@ -47097,6 +47105,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -47127,9 +47137,23 @@
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
-	    this.props.dispatch(todos.fetch());
+	    var query = {};
+
+	    if (this.props.quotation_id) {
+	      query = _extends({}, query, { quotation_id: this.props.quotation_id });
+	    }
+
+	    if (this.props.user_id) {
+	      query = _extends({}, query, { user_id: this.props.user_id });
+	    }
+
+	    this.props.dispatch(todos.fetch(query));
 	  },
 	  handleSubmit: function handleSubmit(todo) {
+	    if (this.props.quotation_id) {
+	      todo = _extends({}, todo, { quotation_id: this.props.quotation_id });
+	    }
+
 	    this.props.dispatch(todos.store(todo));
 	  },
 	  handleCompleted: function handleCompleted(todo) {
@@ -47264,7 +47288,7 @@
 	      todo: {
 	        expires_date: '',
 	        expires_time: '',
-	        company_id: '',
+	        company_id: null,
 	        title: '',
 	        description: ''
 	      },
@@ -58400,7 +58424,6 @@
 	  toggleCompleted: function toggleCompleted() {
 	    this.setState({ completed: !this.state.completed });
 	  },
-	  filterByClient: function filterByClient(e) {},
 	  render: function render() {
 	    var _this = this;
 
@@ -58624,17 +58647,11 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        user.name,
+	        user ? user.name : '',
 	        ' ',
-	        user.lastname
+	        user ? user.lastname : ''
 	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        tracking ? tracking.quotation.company.name : '',
-	        ' ',
-	        company ? company.name : ''
-	      ),
+	      _react2.default.createElement('td', null),
 	      _react2.default.createElement(
 	        'td',
 	        null,
@@ -72930,6 +72947,10 @@
 
 	var _trackings3 = _interopRequireDefault(_trackings2);
 
+	var _section = __webpack_require__(400);
+
+	var _section2 = _interopRequireDefault(_section);
+
 	var _alert = __webpack_require__(510);
 
 	var _alert2 = _interopRequireDefault(_alert);
@@ -73074,7 +73095,6 @@
 	  },
 	  handleUpdate: function handleUpdate(actionRes) {
 	    if (actionRes.type == 'QUOTATIONS_FAIL') {
-	      console.log(actionRes.type);
 	      return this.setState({ showErrors: true });
 	    } else {
 	      return this.handleDisabled(actionRes.payload.status);
@@ -73101,7 +73121,7 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(_alert2.default, {
-	        show: this.state.showErrors,
+	        show: this.props.quotations.errors.length ? true : false,
 	        message: this.props.quotations.errors
 	      }),
 	      _react2.default.createElement(
@@ -73191,7 +73211,8 @@
 	          show: this.state.showNoSend,
 	          onSave: this.handleSaveNoEffective
 	        }),
-	        _react2.default.createElement(_trackings3.default, _extends({}, this.props, { quotationId: quotation.id }))
+	        _react2.default.createElement(_trackings3.default, _extends({}, this.props, { quotationId: quotation.id })),
+	        _react2.default.createElement(_section2.default, { quotation_id: this.props.params.id })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -74000,9 +74021,13 @@
 	    var message = 'Cambio estado a enviada';
 	    this.setState({ sending: true });
 
-	    this.props.dispatch(action.sendMail(id)).then(function () {
+	    this.props.dispatch(action.sendMail(id)).then(function (actionRes) {
 	      _this.setState({ sending: false });
-	      return _this.props.onStatusChange('Enviada', message);
+	      if (actionRes.type == 'QUOTATIONS_FAIL') {
+	        console.log(actionRes);
+	      } else {
+	        return _this.props.onStatusChange('Enviada', message);
+	      }
 	    });
 	  },
 	  render: function render() {
@@ -76766,8 +76791,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'trackings',
+	var quoTrackings = _react2.default.createClass({
+	  displayName: 'quoTrackings',
 	  getInitialState: function getInitialState() {
 	    return {
 	      tracking: {
@@ -76801,6 +76826,8 @@
 	    );
 	  }
 	});
+
+	exports.default = quoTrackings;
 
 /***/ },
 /* 507 */

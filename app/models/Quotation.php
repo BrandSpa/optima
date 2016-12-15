@@ -166,16 +166,14 @@ class Quotation extends \Eloquent {
 	public static function diffCreateAndSent($id)
 	{
 		$quotation = self::find($id);
-		if ($quotation->created_sent_diff < 1) {
-			$created_at = new DateTime($quotation->created_at);
-			$sent_at = new DateTime();
-			$diff = $created_at->diff($sent_at);
-			$hours = $diff->h + ($diff->days*24);
-			$minutes = $diff->i + ($hours*60);
-			$quotation->sent_at = $sent_at->format('Y-m-d H:i:s');
-			$quotation->created_sent_diff = $minutes;
-			$quotation->save();
-		}
+		$created_at = new DateTime($quotation->created_at);
+		$sent_at = new DateTime();
+		$diff = $created_at->diff($sent_at);
+		$hours = $diff->h + ($diff->days*24);
+		$minutes = $diff->i + ($hours*60);
+		$quotation->sent_at = $sent_at->format('Y-m-d H:i:s');
+		$quotation->created_sent_diff = $minutes;
+		$quotation->save();
 		
 		return $quotation;
 	}

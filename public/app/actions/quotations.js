@@ -42,7 +42,7 @@ export function sendMail(id) {
    return dispatch => {
     return request
       .post(`/api/v1/quotations/${id}/sendmail`)
-      .then(res => dispatch({ type: `${TYPE}_MAIL`, payload: res.data}))
+      .then(res => dispatch({ type: `${TYPE}_SET_QUOTATION`, payload: res.data}))
       .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
   }
 }

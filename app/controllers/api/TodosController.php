@@ -12,22 +12,25 @@ class TodosController extends \BaseController {
 
   public function index()
   {
-    $user_id = Auth::user()->id;
-    $where = Input::get('where');
+    $quotation_id = Input::get('quotation_id');
+    $user_id = Input::get('user_id');
 
-    if (isset($where)) {
-    	$collection = Todo::with(['user', 'assigned'])
-      ->whereRaw($where)
-      ->orderBy('id', 'DESC')
-      ->get();
-    } else {
-    	$collection = Todo::with(['user', 'tracking', 'assigned', 'company', 'tracking.quotation.company'])
-      ->where('user_id', $user_id)
+    $collection = new Todo;
+
+    if( Input::has('quotation_id') && $quotation_id != "" ) {
+			$collection = $collection->where("quotation_id", $quotation_id);
+		}
+
+    if( Input::has('user_id') && $user_id != "" ) {
+			$collection = $collection->where("user_id", $user_id);
+		}
+      
+    $collection = $collection
+      ->with('user', 'tracking', 'assigned', 'company', 'tracking.quotation.company')
       ->orderBy('id', 'DESC')
       ->take(25)
       ->get();
-    }
-
+    
     return Response::json($collection, 200);
   }
 
@@ -39,6 +42,7 @@ class TodosController extends \BaseController {
   public function store()
   {
     $data = Input::all();
+    $data['user_id'] = Auth::user()->id;
     $model = Todo::store($data);
 
     if (isset($model->id)) {

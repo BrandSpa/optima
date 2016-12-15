@@ -13,7 +13,7 @@ const todoForm = React.createClass({
       todo: {
         expires_date: '',
         expires_time: '',
-        company_id: '',
+        company_id: null,
         title: '',
         description: ''
       },

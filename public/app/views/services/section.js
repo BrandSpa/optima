@@ -5,7 +5,6 @@ import * as action from 'actions/services';
 import Form from 'views/services/form_create';
 import List from 'views/services/list';
 
-
 const section = React.createClass({
 
   getInitialState() {

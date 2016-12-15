@@ -14,12 +14,7 @@ export default React.createClass({
     this.setState({completed: !this.state.completed});
   },
   
-  filterByClient(e) {
-
-  },
-
-  render() { 
-  
+  render() {
     let todoNodes = this.props.todos.map((todo, i) => {
 
       if(todo.completed == this.state.completed) {

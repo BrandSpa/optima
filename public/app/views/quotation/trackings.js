@@ -4,7 +4,7 @@ import * as action from 'actions/trackings';
 import Tracking from 'views/quotation/tracking';
 import Form from 'views/trackings/form_create';
 
-export default React.createClass({
+const quoTrackings = React.createClass({
   getInitialState() {
     return {
       tracking: {
@@ -36,3 +36,5 @@ export default React.createClass({
     );
   }
 });
+
+export default quoTrackings;

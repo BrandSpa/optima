@@ -42,9 +42,13 @@ module.exports = React.createClass({
     let message = 'Cambio estado a enviada';
     this.setState({sending: true});
     
-    this.props.dispatch(action.sendMail(id)).then(() => {
-       this.setState({sending: false});
-      return this.props.onStatusChange('Enviada', message);
+    this.props.dispatch(action.sendMail(id)).then((actionRes) => {
+        this.setState({sending: false});
+        if(actionRes.type == 'QUOTATIONS_FAIL') {
+          console.log(actionRes);
+        } else {
+          return this.props.onStatusChange('Enviada', message);
+        }
     });
   },
 

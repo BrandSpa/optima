@@ -197,8 +197,11 @@ class QuotationsController extends \BaseController {
 
 		if ($this->checkFields($fieldsToCheck)) {
 			$this->entity->diffCreateAndSent($id);
+			$quo = $this->entity->with($this->relationships)->find($id);
+			return Response::json($quo, 200);
+		
 			$this->sendQuotation($quotation);
-			return Response::json($quotation, 200);
+		
 		} else {
 			return Response::json(["Ingrese todos los campos"], 400);
 		}

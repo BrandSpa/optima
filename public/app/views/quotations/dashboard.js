@@ -5,14 +5,16 @@ import Activities from 'views/activities/list';
 import Todos from 'views/todos/section';
 import Graphs from 'views/graphs/section';
 
-module.exports = React.createClass({
+const dashboard = React.createClass({
 
   render: function() {
+    let user = JSON.parse(localStorage.getItem('user'));
+
     return (
       <div>
         <div className="col-md-9">
           <List />
-          <Todos />
+          <Todos user_id={user.id} />
           <Graphs/>
         </div>
         <div className="col-md-3">
@@ -22,3 +24,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default dashboard;

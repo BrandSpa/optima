@@ -14,10 +14,24 @@ const section = React.createClass({
   },
 
   componentDidMount() {
-    this.props.dispatch(todos.fetch());
+    let query = {};
+
+    if(this.props.quotation_id) {
+      query = {...query, quotation_id: this.props.quotation_id};
+    }
+
+    if(this.props.user_id) {
+      query = {...query, user_id: this.props.user_id};
+    }
+
+    this.props.dispatch(todos.fetch(query));
   },
 
   handleSubmit(todo) {
+    if(this.props.quotation_id) {
+      todo = {...todo, quotation_id: this.props.quotation_id};
+    }
+
    this.props.dispatch(todos.store(todo));
   },
 
