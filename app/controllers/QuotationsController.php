@@ -87,4 +87,48 @@ class QuotationsController extends BaseController {
 
 		return Redirect::to('/#quotations/'.$model->id);
 	}
+
+		public function getExcel() {
+			$today = new dateTime();
+			$date_start = '2016-03-01 00:00:00';
+			$date_end = $today->format('Y-m-d H:i:s');
+
+			$collection = new Quotation;
+
+			$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
+
+			$model = $collection
+			->with('company', 'contact', 'user')
+			->select('id', 'created_at', 'company_id', 'contact_id')
+			->take(100)
+			->skip(0)
+			->orderBy('id', 'DESC')
+			->get()
+			->toArray();
+			
+			$newModel = [];
+
+			foreach($model as $mo) {
+				$mo['company_name'] = $mo['company']['name'];
+				$mo['company_city'] = $mo['company']['city'];
+				$mo['company_address'] = $mo['company']['address'];
+				$mo['company_phone'] = $mo['company']['phone'];
+				$mo['contact_name'] = $mo['contact']['name'] .' '. $mo['contact']['lastname'];
+				$mo['contact_phone'] = $mo['contact']['phone_1'];
+				$mo['contact_mobile'] = $mo['contact']['mobile_1'];
+				$mo['contact_email'] = $mo['contact']['email'];
+				$mo['contact_found_us'] = $mo['contact']['found_us'];
+				array_push($newModel, $mo);
+			}
+
+			Excel::create('Filename', function($excel) use($newModel) {
+
+				$excel->sheet('Sheetname', function($sheet) use($newModel) {
+
+					$sheet->fromArray($newModel, null);
+
+				});
+
+		})->export('xls');
+	}
 }

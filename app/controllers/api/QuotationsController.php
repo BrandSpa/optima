@@ -255,5 +255,4 @@ class QuotationsController extends \BaseController {
 		return Redirect::to('/quotations/'.$model->id);
 	}
 
-
 }

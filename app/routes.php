@@ -10,11 +10,7 @@ Route::filter('etags', function($route, $request, $response)
 Route::get('login', 'UsersController@getLogin');
 Route::post('login', 'UsersController@postLogin');
 Route::get('logout', 'UsersController@logout');
-Route::get('companies/contacts', 'Api\CompaniesController@contacts');
 Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
-
-Route::get('todos/pending/mail', 'Api\TodosController@pending');
-Route::get('todos/pendinguser/mail', 'Api\TodosController@pendingByUser');
 
 Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 {
@@ -27,8 +23,11 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	|-------------------------------------------------------------------------
 	*/
 
+
 	Route::get('quotations/{id}/pdfbn', 'QuotationsController@getPdfBn');
 	Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
+	
+	Route::get('quotations/excel', 'QuotationsController@getExcel');
 
 	Route::post('quotations/replicate/{id}', 'QuotationsController@getDuplicate');
 	Route::get('quotations/{id}/rethink', 'QuotationsController@rethink');
@@ -51,7 +50,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 		Route::resource('quotations', 'QuotationsController');
 		Route::resource('quotations.services', 'QuotationServiceController');
 		Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
-
+	
 		Route::resource('services', 'ServicesController');
 		Route::resource('activities', 'ActivitiesController');
 		Route::resource('notifications', 'NotificationsController');
@@ -69,17 +68,5 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 
 	});
 
-	/*
-	|-------------------------------------------------------------------------
-	|	Events
-	|-------------------------------------------------------------------------
-	*/
-	Route::post('companies/session/{id}', function($id){
-		Event::fire('company.session', [$id]);
-	});
-
-	Route::post('contacts/session/{id}', function($id){
-		Event::fire('contacts.store', [$id]);
-	});
 
 });
