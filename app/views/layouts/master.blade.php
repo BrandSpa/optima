@@ -149,9 +149,12 @@
 	<div id="app"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<!-- scripts -->
-  <script src="/js/app.js"></script>
+	
 	<script>
 		window.localStorage.setItem('user', JSON.stringify(<?php echo json_encode(Auth::user()) ?>));
 	</script>
+
+  <script src="/js/app.js"></script>
+	
 </body>
 </html>
