@@ -108,7 +108,7 @@ class QuotationsController extends BaseController {
 				array_push($newModel, $mo);
 			}
 
-			Excel::create('Filename', function($excel) use($newModel) {
+			Excel::create('cotizaciones', function($excel) use($newModel) {
 
 				$excel->sheet('Sheetname', function($sheet) use($newModel) {
 

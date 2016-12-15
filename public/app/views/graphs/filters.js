@@ -49,9 +49,14 @@ export default React.createClass({
     this.changeQuery(field, value);
   },
 
+  download(e) {
+    if(e) e.preventDefault();
+    window.location = `${location.origin}/quotations/excel`;
+  },
+
   render() {
     let {query} = this.state;
-
+  
     return (
       <div className="panel">
         <div className="panel-body">
@@ -99,7 +104,7 @@ export default React.createClass({
               />
             </div>
             <div className="form-group col-sm-3">
-              
+              <a href="#" onClick={this.download} className="btn-sm btn">Descargar Excel</a>
             </div>
           </div>
         </div>

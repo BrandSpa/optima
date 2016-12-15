@@ -72063,6 +72063,10 @@
 	    var value = e.currentTarget.value;
 	    this.changeQuery(field, value);
 	  },
+	  download: function download(e) {
+	    if (e) e.preventDefault();
+	    window.location = location.origin + '/quotations/excel';
+	  },
 	  render: function render() {
 	    var _this = this;
 
@@ -72134,7 +72138,15 @@
 	            }
 	          })
 	        ),
-	        _react2.default.createElement('div', { className: 'form-group col-sm-3' })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-3' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#', onClick: this.download, className: 'btn-sm btn' },
+	            'Descargar Excel'
+	          )
+	        )
 	      )
 	    );
 	  }
