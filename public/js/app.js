@@ -71643,8 +71643,14 @@
 	    };
 
 	    var options = {
-	      labelString: function labelString(label) {
-	        return '$' + label.value;
+	      tooltips: {
+	        custom: function custom(tooltip) {
+	          // tooltip will be false if tooltip is not visible or should be hidden
+	          if (!tooltip) {
+	            return;
+	          }
+	          console.log(tooltip.text);
+	        }
 	      }
 	    };
 

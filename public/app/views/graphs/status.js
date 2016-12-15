@@ -68,7 +68,15 @@ module.exports = React.createClass({
     };
 
     let options = {
-      labelString: (label) => `$${label.value}`
+      tooltips: {
+            custom: function(tooltip) {
+                // tooltip will be false if tooltip is not visible or should be hidden
+                if (!tooltip) {
+                    return;
+                }
+                console.log(tooltip.text);
+            }
+        }
     };
 
     return (
