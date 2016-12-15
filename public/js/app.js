@@ -31970,7 +31970,7 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        _react2.default.createElement('span', { className: 'center priority priority--' + (priority ? priority : 1) })
+	        _react2.default.createElement('span', { className: 'center priority priority--' + (priority > 0 ? priority : 1) })
 	      ),
 	      _react2.default.createElement(
 	        'td',
