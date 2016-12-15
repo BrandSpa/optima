@@ -32,7 +32,7 @@ module.exports = React.createClass({
     ];
 
     let dataSet1 = {label: 'Dinero', data: dataMoney};
-    let dataSet2 = {label: 'Número', data: dataCount};
+    let dataSet2 = {label: 'Cantidad', data: dataCount};
 
     let chartData = {
       labels: labels,
@@ -43,6 +43,7 @@ module.exports = React.createClass({
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
+          <b>No efectivas</b>
             <Bar data={chartData} />
           </div>
         </div>

@@ -59774,7 +59774,7 @@
 	          _react2.default.createElement(
 	            'b',
 	            null,
-	            'por asesor'
+	            'Asesor'
 	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: myChart })
 	        )
@@ -71675,7 +71675,7 @@
 	          _react2.default.createElement(
 	            'b',
 	            null,
-	            'por estado de cotizaci\xF3n'
+	            'Estado de cotizaci\xF3n'
 	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chatData, options: options })
 	        )
@@ -71736,7 +71736,7 @@
 	    };
 
 	    var dataSet2 = {
-	      label: 'Número',
+	      label: 'Cantidad',
 	      data: data2
 	    };
 
@@ -71757,7 +71757,7 @@
 	          _react2.default.createElement(
 	            'b',
 	            null,
-	            'por como nos encontr\xF3'
+	            'Como nos encontr\xF3'
 	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
 	        )
@@ -71826,6 +71826,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'Tipo de cliente'
+	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
 	        )
 	      )
@@ -71879,7 +71884,7 @@
 	    var labels = ["No disponible", "No confiable", "Competencia", "Por cliente", "sin etiquetar"];
 
 	    var dataSet1 = { label: 'Dinero', data: dataMoney };
-	    var dataSet2 = { label: 'Número', data: dataCount };
+	    var dataSet2 = { label: 'Cantidad', data: dataCount };
 
 	    var chartData = {
 	      labels: labels,
@@ -71895,6 +71900,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'No efectivas'
+	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
 	        )
 	      )
@@ -71961,6 +71971,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'tipo'
+	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
 	        )
 	      )
