@@ -1,9 +1,5 @@
 <?php
-
-use Optima\Repositories\Quotation\QuotationRepositoryInterface;
 use Optima\Pdf\QuotationPdf as Pdf;
-use Optima\Mailers\QuotationMailer as Mailer;
-use Optima\Notifies\Notify as Notify;
 use Optima\Quotation;
 
 class QuotationsController extends BaseController {
@@ -11,20 +7,11 @@ class QuotationsController extends BaseController {
 	protected $layout = "layouts.master";
 	protected $quotation;
 	protected $pdf;
-	protected $mailer;
-	protected $notify;
 
-	public function __construct
-	(
-		QuotationRepositoryInterface $quotation,
-		PDF $pdf,
-		Mailer $mailer,
-		Notify $notify
-	)	{
-		$this->quotation = $quotation;
-		$this->pdf = $pdf;
-		$this->mailer = $mailer;
-		$this->notify = $notify;
+	public function __construct ( PDF $pdf, Quotation $quotation )	
+	{ 
+		$this->quotation = $quotation; 
+		$this->pdf = $pdf; 
 	}
 
 	public function index()

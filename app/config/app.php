@@ -13,7 +13,6 @@ return array(
 	'key' => 'UxLR8016vxE0y0I234mRGBktXuP72wID',
 
 	'providers' => array(
-
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
@@ -40,10 +39,6 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider',
-		'Optima\Providers\StorageServiceProvider',
-	  'Optima\Providers\EventsServiceProvider',
-	  'Optima\Providers\MacrosServiceProvider',
 	  'Thujohn\Pdf\PdfServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider'
 	),
