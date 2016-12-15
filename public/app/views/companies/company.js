@@ -86,6 +86,7 @@ module.exports = React.createClass({
               <th>NIT</th>
               <th>Dirección</th>
               <th>Telefono</th>
+              <th>Opciones</th>
             </tr>
           </thead>
           <tbody>
@@ -94,11 +95,31 @@ module.exports = React.createClass({
               <td>{nit}</td>
               <td>{address}</td>
               <td>{phone}</td>
+              <td><button onClick={this.props.onEdit.bind(null, company)} className="btn btn-sm">Editar</button></td>
             </tr>
           </tbody>
         </table>
 
-        <button onClick={this.props.onEdit.bind(null, company)} className="btn btn-sm">Editar</button>
+        <hr/>
+
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Telefonos</th>
+              <th>Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ale</td>
+              <td>Ale</td>
+              <td>Ale</td>
+              <td>Ale</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div className={showForm ? "" : "hidden"}>
         <br/>

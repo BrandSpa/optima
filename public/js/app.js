@@ -77585,6 +77585,11 @@
 	                'th',
 	                null,
 	                'Telefono'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Opciones'
 	              )
 	            )
 	          ),
@@ -77613,14 +77618,79 @@
 	                'td',
 	                null,
 	                phone
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                _react2.default.createElement(
+	                  'button',
+	                  { onClick: this.props.onEdit.bind(null, company), className: 'btn btn-sm' },
+	                  'Editar'
+	                )
 	              )
 	            )
 	          )
 	        ),
+	        _react2.default.createElement('hr', null),
 	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.props.onEdit.bind(null, company), className: 'btn btn-sm' },
-	          'Editar'
+	          'table',
+	          { className: 'table' },
+	          _react2.default.createElement(
+	            'thead',
+	            null,
+	            _react2.default.createElement(
+	              'tr',
+	              null,
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Nombre'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Email'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Telefonos'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Opciones'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
+	            _react2.default.createElement(
+	              'tr',
+	              null,
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Ale'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Ale'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Ale'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Ale'
+	              )
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',

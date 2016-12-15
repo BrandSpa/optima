@@ -27,16 +27,11 @@ class CompaniesController extends \BaseController {
 		}
 
 		if (Input::has('query')) {
-			$collection = $collection->where(function($query) use($q) {
-				$query
-				->where('name', 'like', "%$q%")
-				->orWhereHas('contacts', function($subquery) use($q){
-						$subquery->where('name', 'like', "%$q%");
-					});
-			});
+			$collection = $collection->where('name', 'like', "%$q%");
 		}
 
 		$collection = $collection
+			->with('contacts')
 			->take(15)
 			->skip($offset)
 			->orderBy('id', 'DESC')
