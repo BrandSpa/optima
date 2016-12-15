@@ -58711,7 +58711,7 @@
 
 	var _advisor2 = _interopRequireDefault(_advisor);
 
-	var _status = __webpack_require__(457);
+	var _status = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"views/graphs/status\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _status2 = _interopRequireDefault(_status);
 
@@ -70723,86 +70723,7 @@
 
 
 /***/ },
-/* 457 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _chart_bar = __webpack_require__(411);
-
-	var _chart_bar2 = _interopRequireDefault(_chart_bar);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      status: [],
-	      count: []
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.graphsData.status && props.graphsData.statusCount) {
-	      this.setState({
-	        status: props.graphsData.status,
-	        count: props.graphsData.statusCount
-	      });
-	    }
-	  },
-
-	  render: function render() {
-	    var data1 = this.state.status.map(function (num) {
-	      return parseInt(num);
-	    });
-
-	    var data2 = this.state.count.map(function (num) {
-	      return parseInt(num);
-	    });
-
-	    var labels = ['Borrador', 'Enviada', 'Entregada', 'Seguimiento', 'Efectiva', 'No efectiva', 'No enviada', 'Replanteada', 'Por Confirmar', 'Nula'];
-
-	    var dataSet1 = {
-	      label: 'Cotizaciones dinero',
-	      data: data1,
-	      backgroundColor: ['rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)']
-	    };
-
-	    var dataSet2 = {
-	      label: 'Cotizaciones número',
-	      data: data2
-	    };
-
-	    var chatData = {
-	      labels: labels,
-	      datasets: [dataSet1, dataSet2]
-	    };
-
-	    var options = {};
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'col-md-6' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(_chart_bar2.default, { data: chatData, options: options })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
+/* 457 */,
 /* 458 */
 /***/ function(module, exports, __webpack_require__) {
 

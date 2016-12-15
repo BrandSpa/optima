@@ -68,7 +68,7 @@ module.exports = React.createClass({
     };
 
     let options = {
-
+      scaleLabel: (l) => console.log(l);
     };
 
     return (
