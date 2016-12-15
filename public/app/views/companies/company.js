@@ -112,12 +112,15 @@ module.exports = React.createClass({
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Ale</td>
-              <td>Ale</td>
-              <td>Ale</td>
-              <td>Ale</td>
+          {company.contacts.map(contact => 
+               <tr>
+              <td>{contact.name}</td>
+              <td>{contact.email}</td>
+              <td>{contact.phone_1}</td>
+              <td><button className="btn btn-sm">Editar</button></td>
             </tr>
+          )}
+         
           </tbody>
         </table>
 

@@ -77666,30 +77666,36 @@
 	          _react2.default.createElement(
 	            'tbody',
 	            null,
-	            _react2.default.createElement(
-	              'tr',
-	              null,
-	              _react2.default.createElement(
-	                'td',
+	            company.contacts.map(function (contact) {
+	              return _react2.default.createElement(
+	                'tr',
 	                null,
-	                'Ale'
-	              ),
-	              _react2.default.createElement(
-	                'td',
-	                null,
-	                'Ale'
-	              ),
-	              _react2.default.createElement(
-	                'td',
-	                null,
-	                'Ale'
-	              ),
-	              _react2.default.createElement(
-	                'td',
-	                null,
-	                'Ale'
-	              )
-	            )
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  contact.name
+	                ),
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  contact.email
+	                ),
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  contact.phone_1
+	                ),
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn btn-sm' },
+	                    'Editar'
+	                  )
+	                )
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
