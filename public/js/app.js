@@ -71649,7 +71649,6 @@
 	      scales: {
 	        yAxes: [{
 	          ticks: {
-	            stepSize: 5,
 	            callback: function callback(value) {
 	              return '$ ' + (0, _numeral2.default)(value).format('0,0');
 	            }

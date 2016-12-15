@@ -70,7 +70,6 @@ module.exports = React.createClass({
       scales: {
         yAxes: [{
         ticks: {
-          stepSize: 5,
           callback: function(value) { return `$ ${numeral(value).format('0,0')}`; }
           }
         }]
