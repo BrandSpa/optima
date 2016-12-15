@@ -58,7 +58,7 @@ module.exports = React.createClass({
     };
 
     let dataSet2 = {
-      label: 'Cotizaciones número',
+      label: 'Cantidad',
       data: data2
     };
 

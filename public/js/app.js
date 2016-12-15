@@ -71637,7 +71637,7 @@
 	    };
 
 	    var dataSet2 = {
-	      label: 'Cotizaciones número',
+	      label: 'Cantidad',
 	      data: data2
 	    };
 
