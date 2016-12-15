@@ -19,7 +19,7 @@ trait byAdvisor {
 
   public function allByAdvisors($type, $client_type, $date_start, $date_end)
   {
-    $advisors = ['Andrés Rojas', 'Diego Peña'];
+    $advisors = ['Andrés Rojas', 'Diego Peña', 'No aplica', 'Otros'];
     $result = [];
 
     foreach ($advisors as $advisor) {

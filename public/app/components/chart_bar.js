@@ -51,7 +51,8 @@ export default React.createClass({
         id={this.state.id}
         width="400"
         height="400"
-      ></canvas>
+      >
+      </canvas>
     )
   }
 });

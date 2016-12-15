@@ -20,15 +20,16 @@ module.exports = React.createClass({
   render() {
     const data1 = this.state.advisors.map(num => parseInt(num));
 
-
     var myChart = {
-        labels: ["Andres Rójas", "Diego Peña"],
+        labels: ['Andrés Rojas', 'Diego Peña', 'No aplica', 'Otros'],
         datasets: [{
             label: 'Cotizaciones',
             data: data1,
             backgroundColor: [
                 'rgba(255, 194, 1, 0.3)',
-                'rgba(255, 182, 61, 0.3)'
+                'rgba(255, 182, 61, 0.3)',
+                'rgba(255, 182, 61, 0.2)',
+                'rgba(255, 182, 61, 0.2)'
             ]
         }]
     }
@@ -37,7 +38,7 @@ module.exports = React.createClass({
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
-            <Bar data={myChart} type={this.props.type}/>
+            <Bar data={myChart} />
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+
 import Bar from 'components/chart_bar';
 
 module.exports = React.createClass({
@@ -36,7 +37,9 @@ module.exports = React.createClass({
       'Efectiva',
       'No efectiva',
       'No enviada',
-      'Replanteada'
+      'Replanteada',
+      'Por Confirmar',
+      'Nula'
     ];
 
     let dataSet1 = {

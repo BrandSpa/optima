@@ -70,11 +70,11 @@
 
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 
-	var _create_panel = __webpack_require__(463);
+	var _create_panel = __webpack_require__(464);
 
 	var _create_panel2 = _interopRequireDefault(_create_panel);
 
-	var _section = __webpack_require__(480);
+	var _section = __webpack_require__(481);
 
 	var _section2 = _interopRequireDefault(_section);
 
@@ -58703,6 +58703,10 @@
 
 	var action = _interopRequireWildcard(_reports);
 
+	var _numeral = __webpack_require__(458);
+
+	var _numeral2 = _interopRequireDefault(_numeral);
+
 	var _advisor = __webpack_require__(410);
 
 	var _advisor2 = _interopRequireDefault(_advisor);
@@ -58711,23 +58715,23 @@
 
 	var _status2 = _interopRequireDefault(_status);
 
-	var _how_find_us = __webpack_require__(458);
+	var _how_find_us = __webpack_require__(459);
 
 	var _how_find_us2 = _interopRequireDefault(_how_find_us);
 
-	var _client_type = __webpack_require__(459);
+	var _client_type = __webpack_require__(460);
 
 	var _client_type2 = _interopRequireDefault(_client_type);
 
-	var _no_effective = __webpack_require__(460);
+	var _no_effective = __webpack_require__(461);
 
 	var _no_effective2 = _interopRequireDefault(_no_effective);
 
-	var _sent_diff = __webpack_require__(461);
+	var _sent_diff = __webpack_require__(462);
 
 	var _sent_diff2 = _interopRequireDefault(_sent_diff);
 
-	var _filters = __webpack_require__(462);
+	var _filters = __webpack_require__(463);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
@@ -58761,6 +58765,63 @@
 	        { className: 'col-md-12' },
 	        _react2.default.createElement(_filters2.default, { onChange: this.handleFilters })
 	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-3' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            _react2.default.createElement(
+	              'b',
+	              null,
+	              'Cotizaciones: '
+	            ),
+	            ' ',
+	            data.total_quotations
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-3' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            _react2.default.createElement(
+	              'b',
+	              null,
+	              'Total: '
+	            ),
+	            (0, _numeral2.default)(data.total_quotations_money).format('0,0')
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-3' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            _react2.default.createElement(
+	              'b',
+	              null,
+	              'Promedio cotizaciones enviadas: '
+	            ),
+	            data.average_sent,
+	            ' Minutos'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement('div', { className: 'col-md-3' }),
 	      _react2.default.createElement(_status2.default, { type: this.state.type, graphsData: data }),
 	      _react2.default.createElement(_how_find_us2.default, { type: this.state.type, graphsData: data }),
 	      _react2.default.createElement(_advisor2.default, { type: this.state.type, graphsData: data }),
@@ -58843,11 +58904,11 @@
 	    });
 
 	    var myChart = {
-	      labels: ["Andres Rójas", "Diego Peña"],
+	      labels: ['Andrés Rojas', 'Diego Peña', 'No aplica', 'Otros'],
 	      datasets: [{
 	        label: 'Cotizaciones',
 	        data: data1,
-	        backgroundColor: ['rgba(255, 194, 1, 0.3)', 'rgba(255, 182, 61, 0.3)']
+	        backgroundColor: ['rgba(255, 194, 1, 0.3)', 'rgba(255, 182, 61, 0.3)', 'rgba(255, 182, 61, 0.2)', 'rgba(255, 182, 61, 0.2)']
 	      }]
 	    };
 
@@ -58860,7 +58921,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
-	          _react2.default.createElement(_chart_bar2.default, { data: myChart, type: this.props.type })
+	          _react2.default.createElement(_chart_bar2.default, { data: myChart })
 	        )
 	      )
 	    );
@@ -70705,7 +70766,7 @@
 	      return parseInt(num);
 	    });
 
-	    var labels = ['Borrador', 'Enviada', 'Entregada', 'Seguimiento', 'Efectiva', 'No efectiva', 'No enviada', 'Replanteada'];
+	    var labels = ['Borrador', 'Enviada', 'Entregada', 'Seguimiento', 'Efectiva', 'No efectiva', 'No enviada', 'Replanteada', 'Por Confirmar', 'Nula'];
 
 	    var dataSet1 = {
 	      label: 'Cotizaciones dinero',
@@ -70743,3851 +70804,6 @@
 
 /***/ },
 /* 458 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _chart_bar = __webpack_require__(411);
-
-	var _chart_bar2 = _interopRequireDefault(_chart_bar);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      findUs: [],
-	      count: []
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.graphsData.findUS && props.graphsData.findUSCount) {
-	      this.setState({
-	        findUs: props.graphsData.findUS,
-	        count: props.graphsData.findUSCount
-	      });
-	    }
-	  },
-
-	  render: function render() {
-	    var data1 = this.state.findUs.map(function (num) {
-	      return parseInt(num);
-	    });
-	    var data2 = this.state.count.map(function (num) {
-	      return parseInt(num);
-	    });
-
-	    var labels = ['Asesores comerciales', 'Cliente', 'Página Web Avante', 'Google Adwords', 'Referido', 'Promoción', 'Paginas Amarilladas', 'Paginas Amarilladas Web', 'Teléfono', 'Redes Sociales'];
-
-	    var dataSet1 = {
-	      label: 'Dinero',
-	      data: data1,
-	      backgroundColor: ['rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)']
-	    };
-
-	    var dataSet2 = {
-	      label: 'Número',
-	      data: data2
-	    };
-
-	    var chartData = {
-	      labels: labels,
-	      datasets: [dataSet1, dataSet2]
-	    };
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'col-md-6' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 459 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _chart_bar = __webpack_require__(411);
-
-	var _chart_bar2 = _interopRequireDefault(_chart_bar);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      client_type: []
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.graphsData.client_type) {
-	      this.setState({
-	        client_type: props.graphsData.client_type
-	      });
-	    }
-	  },
-
-	  render: function render() {
-	    var data1 = this.state.client_type.map(function (num) {
-	      return parseInt(num);
-	    });
-
-	    var labels = ['Activo', 'Inactivo', 'nuevo'];
-
-	    var dataSet1 = {
-	      label: 'Cotizaciones',
-	      data: data1,
-	      backgroundColor: ['rgba(68, 228, 135, 0.5)', 'rgba(68, 228, 135, 0.5)', 'rgba(68, 228, 135, 0.5)']
-	    };
-
-	    var chartData = {
-	      labels: labels,
-	      datasets: [dataSet1]
-	    };
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'col-md-6' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 460 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _chart_bar = __webpack_require__(411);
-
-	var _chart_bar2 = _interopRequireDefault(_chart_bar);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      no_effective: [],
-	      count: []
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.graphsData.no_effective && props.graphsData.no_effective_count) {
-	      this.setState({
-	        no_effective: props.graphsData.no_effective,
-	        count: props.graphsData.no_effective_count
-	      });
-	    }
-	  },
-
-	  render: function render() {
-	    var dataMoney = this.state.no_effective.map(function (num) {
-	      return parseInt(num);
-	    });
-	    var dataCount = this.state.count.map(function (num) {
-	      return parseInt(num);
-	    });
-
-	    var labels = ["No disponible", "No confiable", "Competencia", "Por cliente", "sin etiquetar"];
-
-	    var dataSet1 = { label: 'Dinero', data: dataMoney };
-	    var dataSet2 = { label: 'Número', data: dataCount };
-
-	    var chartData = {
-	      labels: labels,
-	      datasets: [dataSet1, dataSet2]
-	    };
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'col-md-6' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 461 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _chart_bar = __webpack_require__(411);
-
-	var _chart_bar2 = _interopRequireDefault(_chart_bar);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      sent_diff: []
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.graphsData.sent_diff) {
-	      this.setState({
-	        sent_diff: props.graphsData.sent_diff
-	      });
-	    }
-	  },
-
-	  render: function render() {
-	    var data1 = this.state.sent_diff.map(function (num) {
-	      return parseInt(num);
-	    });
-
-	    var labels = ["Dentro - Inventario", "Fuera - Inventario", "Dentro - Pedido", "Fuera - Pedido"];
-
-	    var dataSet1 = {
-	      label: 'Cotizaciones',
-	      data: data1
-	    };
-
-	    var chartData = {
-	      labels: labels,
-	      datasets: [dataSet1]
-	    };
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'col-md-6' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 462 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _status = __webpack_require__(274);
-
-	var _status2 = _interopRequireDefault(_status);
-
-	var _advisors = __webpack_require__(275);
-
-	var _advisors2 = _interopRequireDefault(_advisors);
-
-	var _type = __webpack_require__(276);
-
-	var _type2 = _interopRequireDefault(_type);
-
-	var _client_type = __webpack_require__(277);
-
-	var _client_type2 = _interopRequireDefault(_client_type);
-
-	var _form_select = __webpack_require__(279);
-
-	var _form_select2 = _interopRequireDefault(_form_select);
-
-	var _datetime = __webpack_require__(280);
-
-	var _datetime2 = _interopRequireDefault(_datetime);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'filters',
-	  getInitialState: function getInitialState() {
-	    return {
-	      query: {
-	        offset: 0,
-	        query: null,
-	        status: null,
-	        advisor: null,
-	        client_type: null,
-	        type: null,
-	        date_start: null,
-	        date_end: null
-	      }
-	    };
-	  },
-	  triggerChange: function triggerChange(query) {
-	    if (typeof this.props.onChange === 'function') {
-	      this.props.onChange(query);
-	    }
-	  },
-	  changeQuery: function changeQuery(field, value) {
-	    var query = {};
-	    query[field] = value;
-	    query = _extends({}, this.state.query, query);
-	    this.triggerChange(query);
-	    this.setState({ query: query });
-	  },
-	  handleDates: function handleDates(type, date, dateStr) {
-	    var field = type;
-	    var value = dateStr + ' 00:00:00';
-	    this.changeQuery(field, value);
-	  },
-	  handleChange: function handleChange(type, e) {
-	    var field = type;
-	    var value = e.currentTarget.value;
-	    this.changeQuery(field, value);
-	  },
-	  render: function render() {
-	    var _this = this;
-
-	    var query = this.state.query;
-
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'panel' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel-body' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-md-3' },
-	          _react2.default.createElement(_datetime2.default, {
-	            placeholder: 'Seleccionar desde',
-	            styles: 'form-control',
-	            onChange: function onChange(date, str) {
-	              _this.handleDates('date_start', date, str);
-	            }
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-md-3' },
-	          _react2.default.createElement(_datetime2.default, {
-	            placeholder: 'Seleccionar hasta',
-	            styles: 'form-control',
-	            onChange: function onChange(date, str) {
-	              _this.handleDates('date_end', date, str);
-	            }
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-3' },
-	          _react2.default.createElement(_form_select2.default, {
-	            options: _status2.default,
-	            'default': 'Seleccionar estado',
-	            value: query.status,
-	            onSelectChange: function onSelectChange(e) {
-	              return _this.handleChange('status', e);
-	            }
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-3' },
-	          _react2.default.createElement(_form_select2.default, {
-	            options: _client_type2.default,
-	            'default': 'Seleccionar cliente',
-	            value: query.client_type,
-	            onSelectChange: function onSelectChange(e) {
-	              return _this.handleChange('client_type', e);
-	            }
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-3' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'type',
-	            options: _type2.default,
-	            'default': 'Seleccionar tipo',
-	            value: query.type,
-	            onSelectChange: function onSelectChange(e) {
-	              return _this.handleChange('type', e);
-	            }
-	          })
-	        ),
-	        _react2.default.createElement('div', { className: 'form-group col-sm-3' })
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 463 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(35);
-
-	var _page = __webpack_require__(32);
-
-	var _page2 = _interopRequireDefault(_page);
-
-	var _companies = __webpack_require__(464);
-
-	var action = _interopRequireWildcard(_companies);
-
-	var _contacts = __webpack_require__(465);
-
-	var contactAction = _interopRequireWildcard(_contacts);
-
-	var _quotations = __webpack_require__(246);
-
-	var quoAction = _interopRequireWildcard(_quotations);
-
-	var _form_create = __webpack_require__(466);
-
-	var _form_create2 = _interopRequireDefault(_form_create);
-
-	var _form_create3 = __webpack_require__(469);
-
-	var _form_create4 = _interopRequireDefault(_form_create3);
-
-	var _list = __webpack_require__(476);
-
-	var _list2 = _interopRequireDefault(_list);
-
-	var _loader = __webpack_require__(478);
-
-	var _loader2 = _interopRequireDefault(_loader);
-
-	var _autocomplete = __webpack_require__(479);
-
-	var _autocomplete2 = _interopRequireDefault(_autocomplete);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var createPanel = _react2.default.createClass({
-	  displayName: 'createPanel',
-	  getInitialState: function getInitialState() {
-	    return {
-	      companyOptions: [],
-	      companies: [],
-	      contacts: [],
-	      loading: false,
-	      showCompanyForm: false,
-	      showContactForm: false
-	    };
-	  },
-	  searchCompanies: function searchCompanies(name) {
-	    this.setState({ loading: true });
-	    var query = { query_name: name };
-	    this.props.dispatch(action.fetch(query));
-	    this.setState({ loading: false });
-	  },
-	  storeSelected: function storeSelected(company) {
-	    var dispatch = this.props.dispatch;
-
-	    var query = { company_id: company[0].id };
-
-	    dispatch(contactAction.fetch(query)).then(function () {
-	      dispatch(action.setCompany(company[0]));
-	      dispatch(action.cleanItems());
-	    });
-	  },
-	  createQuotation: function createQuotation(contact, e) {
-	    e.preventDefault();
-	    var quo = { company_id: contact.company_id, contact_id: contact.id };
-	    this.props.dispatch(quoAction.store(quo)).then(function (res) {
-	      return (0, _page2.default)('/quotations/' + res.payload.id);
-	    });
-	  },
-	  handleSubmitCompany: function handleSubmitCompany(company) {
-	    var dispatch = this.props.dispatch;
-
-	    dispatch(action.store(company)).then(this.handleSubmitCompanyResponse);
-	  },
-	  handleSubmitCompanyResponse: function handleSubmitCompanyResponse(actionRes) {
-	    var _this = this;
-
-	    var dispatch = this.props.dispatch;
-
-	    if (actionRes.type == "COMPANIES_STORE") {
-	      dispatch(action.setCompany(actionRes.payload)).then(function () {
-	        return _this.setState({ showCompanyForm: false, showContactForm: true });
-	      });
-	    }
-	  },
-	  handleSubmitContact: function handleSubmitContact(contact) {
-	    this.props.dispatch(contactAction.store(contact));
-	  },
-	  toggleCompanyForm: function toggleCompanyForm(e) {
-	    if (e) e.preventDefault();
-
-	    this.setState({
-	      showCompanyForm: !this.state.showCompanyForm
-	    });
-	  },
-	  toggleContactForm: function toggleContactForm(e) {
-	    if (e) e.preventDefault();
-	    this.setState({ showContactForm: !this.state.showContactForm });
-	  },
-	  render: function render() {
-	    var _this2 = this;
-
-	    var classes = {
-	      input: "form-control autocomplete",
-	      results: 'list-group',
-	      listItem: 'list-group-item',
-	      token: 'btn btn-primary btn-sm'
-	    };
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'col-md-6', style: { float: 'none', margin: '0 auto' } },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-md-12' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body' },
-	            _react2.default.createElement(_autocomplete2.default, {
-	              collection: this.props.companies.items,
-	              search: this.searchCompanies,
-	              selected: this.storeSelected,
-	              loading: this.state.loading
-	            }),
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default pull-right btn-sm',
-	                onClick: this.toggleCompanyForm
-	              },
-	              'Nueva Empresa'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: this.state.showCompanyForm ? 'col-sm-12' : 'hidden' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: this.props.companies.errors.length ? "alert alert-danger" : "" },
-	                this.props.companies.errors
-	              ),
-	              _react2.default.createElement(_form_create2.default, {
-	                btnStoreText: 'Guardar',
-	                btnCleanText: 'Cancelar',
-	                onCancel: this.toggleCompanyForm,
-	                onSubmit: this.handleSubmitCompany
-	              })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Empresa: ',
-	              _react2.default.createElement(
-	                'b',
-	                null,
-	                this.props.companies.company.name
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: this.state.showContactForm ? 'col-sm-12' : 'hidden' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: this.props.contacts.errors.length ? "alert alert-danger" : "" },
-	                this.props.contacts.errors
-	              ),
-	              _react2.default.createElement(_form_create4.default, {
-	                company_id: this.props.companies.company.id ? this.props.companies.company.id : null,
-	                btnText: 'Guardar',
-	                onSubmit: this.handleSubmitContact,
-	                onCancel: this.toggleContactForm
-	              })
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                onClick: this.toggleContactForm,
-	                className: this.props.companies.company.id ? "btn btn-default pull-right btn-sm" : "hidden"
-	              },
-	              'Nuevo Contacto'
-	            ),
-	            _react2.default.createElement('div', { className: 'row' }),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'table-responsive' },
-	              _react2.default.createElement(
-	                'table',
-	                { className: 'table' },
-	                _react2.default.createElement(
-	                  'thead',
-	                  null,
-	                  _react2.default.createElement(
-	                    'tr',
-	                    null,
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      'Nombre'
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      'Email'
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      'Opciones'
-	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'tbody',
-	                  null,
-	                  this.props.contacts.items.map(function (contact) {
-	                    return _react2.default.createElement(
-	                      'tr',
-	                      { key: contact.id },
-	                      _react2.default.createElement(
-	                        'td',
-	                        null,
-	                        contact.name + ' ' + contact.lastname
-	                      ),
-	                      _react2.default.createElement(
-	                        'td',
-	                        null,
-	                        contact.email
-	                      ),
-	                      _react2.default.createElement(
-	                        'td',
-	                        null,
-	                        _react2.default.createElement(
-	                          'button',
-	                          { className: 'btn btn-primary btn-sm', onClick: _this2.createQuotation.bind(_this2, contact) },
-	                          'Crear Cotizaci\xF3n'
-	                        )
-	                      )
-	                    );
-	                  })
-	                )
-	              )
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-	exports.default = (0, _reactRedux.connect)(function (store) {
-	  return { companies: store.companies, contacts: store.contacts };
-	})(createPanel);
-
-/***/ },
-/* 464 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.fetch = fetch;
-	exports.store = store;
-	exports.update = update;
-	exports.setCompany = setCompany;
-	exports.cleanItems = cleanItems;
-
-	var _axios = __webpack_require__(247);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'COMPANIES';
-	var endpoint = 'api/v1/companies';
-
-	function fetch() {
-		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err });
-			});
-		};
-	}
-
-	function store(company) {
-		return function (dispatch) {
-			return _axios2.default.post(endpoint, company).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function update(company) {
-		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + company.id, company).end(function (res) {
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function setCompany(company) {
-		return function (dispatch) {
-			return new Promise(function (resolve, reject) {
-				var action = { type: TYPE + '_SET_COMPANY', payload: company };
-				dispatch(action);
-				return resolve(action);
-			});
-		};
-	}
-
-	function cleanItems() {
-		return { type: TYPE + '_CLEAN_ITEMS', payload: [] };
-	}
-
-/***/ },
-/* 465 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.fetch = fetch;
-	exports.store = store;
-	exports.update = update;
-	exports.setContact = setContact;
-
-	var _axios = __webpack_require__(247);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'CONTACTS';
-	var endpoint = 'api/v1/contacts';
-
-	function fetch() {
-		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err });
-			});
-		};
-	}
-
-	function store(contact) {
-		return function (dispatch) {
-			return _axios2.default.post(endpoint, contact).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function update(contact) {
-		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + contact.id, contact).then(function (res) {
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function setContact(contact) {
-		return { type: TYPE + '_SET_CONTACT', payload: contact };
-	}
-
-/***/ },
-/* 466 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _clean_object = __webpack_require__(236);
-
-	var _clean_object2 = _interopRequireDefault(_clean_object);
-
-	var _form_select = __webpack_require__(279);
-
-	var _form_select2 = _interopRequireDefault(_form_select);
-
-	var _sectors = __webpack_require__(467);
-
-	var _sectors2 = _interopRequireDefault(_sectors);
-
-	var _cities = __webpack_require__(468);
-
-	var _cities2 = _interopRequireDefault(_cities);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-	  getInitialState: function getInitialState() {
-	    return {
-	      company: {}
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    if (this.props.company && Object.keys(this.props.company).length) {
-	      company = this.props.company;
-	      this.setState({ company: company });
-	    }
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    var company = props.company;
-
-
-	    if (company && Object.keys(company).length) {
-	      this.setState({ company: company });
-	    }
-	  },
-	  clean: function clean(e) {
-	    e.preventDefault();
-
-	    this.setState({ company: (0, _clean_object2.default)(this.state.company) });
-	    if (this.props.onCancel) {
-	      this.props.onCancel();
-	    }
-	  },
-	  handleChange: function handleChange() {
-	    var refs = this.refs;
-
-
-	    var company = _extends({}, this.state.company, {
-	      name: refs.name.value,
-	      nit: refs.nit.value,
-	      sector: refs.sector.refs.select.value,
-	      city: refs.city.refs.select.value,
-	      address: refs.address.value,
-	      phone: refs.phone.value,
-	      web: refs.web.value,
-	      comment: refs.comment.value,
-	      type: ''
-	    });
-
-	    this.setState({ company: company });
-	  },
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
-	    var company = this.state.company;
-	    if (typeof this.props.onSubmit === 'function') {
-	      this.props.onSubmit(company);
-	    }
-	  },
-	  render: function render() {
-	    var company = this.state.company;
-	    var btnCleanText = this.props.btnCleanText || 'limpiar';
-	    var btnStoreText = this.props.btnStoreText || _react2.default.createElement('i', { className: 'fa fa-chevron-right' });
-
-	    return _react2.default.createElement(
-	      'form',
-	      { onSubmit: function onSubmit(e) {
-	          return e.preventDefault();
-	        } },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-6' },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'name',
-	            onChange: this.handleChange,
-	            value: company.name,
-	            placeholder: 'Raz\xF3n social'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-6' },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'nit',
-	            onChange: this.handleChange,
-	            value: company.nit,
-	            placeholder: 'Nit'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-6' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'sector',
-	            options: _sectors2.default,
-	            'default': 'Seleccionar sector',
-	            onSelectChange: this.handleChange,
-	            value: company.sector
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-6' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'city',
-	            options: _cities2.default,
-	            'default': 'Seleccionar ciudad',
-	            onSelectChange: this.handleChange,
-	            value: company.city
-	          })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group' },
-	        _react2.default.createElement('input', {
-	          className: 'form-control',
-	          ref: 'address',
-	          onChange: this.handleChange,
-	          value: company.address,
-	          placeholder: 'Direcci\xF3n'
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-lg-6' },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'phone',
-	            onChange: this.handleChange,
-	            value: company.phone,
-	            placeholder: 'Tel\xE9fono'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-lg-6' },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'web',
-	            onChange: this.handleChange,
-	            value: company.web,
-	            placeholder: 'Web'
-	          })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group' },
-	        _react2.default.createElement('textarea', {
-	          className: 'form-control',
-	          ref: 'comment',
-	          onChange: this.handleChange,
-	          value: company.comment,
-	          placeholder: 'Comentario'
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        {
-	          className: 'btn btn-primary btn-sm pull-right',
-	          onClick: this.handleSubmit },
-	        btnStoreText
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        {
-	          className: 'btn btn-default btn-sm',
-	          onClick: this.clean },
-	        btnCleanText
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 467 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Administración gubernamental",
-			"label": "Administración gubernamental"
-		},
-		{
-			"value": "Alimentación y bebidas",
-			"label": "Alimentación y bebidas"
-		},
-		{
-			"value": "Almacenamiento",
-			"label": "Almacenamiento"
-		},
-		{
-			"value": "Animación",
-			"label": "Animación"
-		},
-		{
-			"value": "Apuestas y casinos",
-			"label": "Apuestas y casinos"
-		},
-		{
-			"value": "Arquitectura y planificación",
-			"label": "Arquitectura y planificación"
-		},
-		{
-			"value": "Artículos de consumo",
-			"label": "Artículos de consumo"
-		},
-		{
-			"value": "Asuntos internacionales",
-			"label": "Asuntos internacionales"
-		},
-		{
-			"value": "Atención sanitaria y hospitalaria",
-			"label": "Atención sanitaria y hospitalaria"
-		},
-		{
-			"value": "Automatización industrial",
-			"label": "Automatización industrial"
-		},
-		{
-			"value": "Banca",
-			"label": "Banca"
-		},
-		{
-			"value": "Banca de inversiones",
-			"label": "Banca de inversiones"
-		},
-		{
-			"value": "Bienes inmobiliarios",
-			"label": "Bienes inmobiliarios"
-		},
-		{
-			"value": "Construcción",
-			"label": "Construcción"
-		},
-		{
-			"value": "Comercializadora",
-			"label": "Comercializadora"
-		},
-		{
-			"value": "Consultores",
-			"label": "Consultores"
-		},
-		{
-			"value": "Derecho",
-			"label": "Derecho"
-		},
-		{
-			"value": "Desarrollo de programación",
-			"label": "Desarrollo de programación"
-		},
-		{
-			"value": "Desarrollo de software",
-			"label": "Desarrollo de software"
-		},
-		{
-			"value": "Diseño",
-			"label": "Diseño"
-		},
-		{
-			"value": "Dotación y selección de personal",
-			"label": "Dotación y selección de personal"
-		},
-		{
-			"value": "Educación primaria secundaria",
-			"label": "Educación primaria/secundaria"
-		},
-		{
-			"value": "Electrónica de consumo",
-			"label": "Electrónica de consumo"
-		},
-		{
-			"value": "Enseñanza superior",
-			"label": "Enseñanza superior"
-		},
-		{
-			"value": "Entretenimiento",
-			"label": "Entretenimiento"
-		},
-		{
-			"value": "Eventos",
-			"label": "Eventos"
-		},
-		{
-			"value": "Financiero",
-			"label": "Financiero"
-		},
-		{
-			"value": "Hostelería",
-			"label": "Hostelería"
-		},
-		{
-			"value": "Marketing y publicidad",
-			"label": "Marketing y publicidad"
-		},
-		{
-			"value": "Ingeniería",
-			"label": "Ingeniería"
-		},
-		{
-			"value": "Ocio, viajes y turismo",
-			"label": "Ocio, viajes y turismo"
-		},
-		{
-			"value": "Organización política",
-			"label": "Organización política"
-		},
-		{
-			"value": "Recursos humanos",
-			"label": "Recursos humanos"
-		},
-		{
-			"value": "Restaurantes",
-			"label": "Restaurantes"
-		},
-		{
-			"value": "Salud",
-			"label": "Salud"
-		},
-		{
-			"value": "Seguridad",
-			"label": "Seguridad"
-		},
-		{
-			"value": "Sistemas",
-			"label": "Sistemas"
-		},
-		{
-			"value": "Soluciones de software",
-			"label": "Soluciones de software"
-		},
-		{
-			"value": "Telecomunicaciones",
-			"label": "Telecomunicaciones"
-		}
-	];
-
-/***/ },
-/* 468 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Bogotá",
-			"label": "Bogotá"
-		},
-		{
-			"value": "Medellín",
-			"label": "Medellín"
-		},
-		{
-			"value": "Cali",
-			"label": "Cali"
-		},
-		{
-			"value": "Barranquilla",
-			"label": "Barranquilla"
-		},
-		{
-			"value": "Cartagena",
-			"label": "Cartagena"
-		},
-		{
-			"value": "Cúcuta",
-			"label": "Cúcuta"
-		},
-		{
-			"value": "Soledad",
-			"label": "Soledad"
-		},
-		{
-			"value": "Ibagué",
-			"label": "Ibagué"
-		},
-		{
-			"value": "Bucaramanga",
-			"label": "Bucaramanga"
-		},
-		{
-			"value": "Santa Marta",
-			"label": "Santa Marta"
-		},
-		{
-			"value": "Pereira",
-			"label": "Pereira"
-		},
-		{
-			"value": "Villavicencio",
-			"label": "Villavicencio"
-		},
-		{
-			"value": "Bello",
-			"label": "Bello"
-		},
-		{
-			"value": "Valledupar",
-			"label": "Valledupar"
-		},
-		{
-			"value": "Pasto",
-			"label": "Pasto"
-		},
-		{
-			"value": "Montería",
-			"label": "Montería"
-		},
-		{
-			"value": "Manizales",
-			"label": "Manizales"
-		},
-		{
-			"value": "Buenaventura",
-			"label": "Buenaventura"
-		},
-		{
-			"value": "Neiva",
-			"label": "Neiva"
-		},
-		{
-			"value": "Palmira",
-			"label": "Palmira"
-		},
-		{
-			"value": "Armenia",
-			"label": "Armenia"
-		},
-		{
-			"value": "Popayán",
-			"label": "Popayán"
-		},
-		{
-			"value": "Sincelejo",
-			"label": "Sincelejo"
-		},
-		{
-			"value": "Floridablanca",
-			"label": "Floridablanca"
-		},
-		{
-			"value": "Itagüí",
-			"label": "Itagüí"
-		},
-		{
-			"value": "Riohacha",
-			"label": "Riohacha"
-		},
-		{
-			"value": "Envigado",
-			"label": "Envigado"
-		},
-		{
-			"value": "Tuluá",
-			"label": "Tuluá"
-		}
-	];
-
-/***/ },
-/* 469 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _clean_object = __webpack_require__(236);
-
-	var _clean_object2 = _interopRequireDefault(_clean_object);
-
-	var _form_input = __webpack_require__(470);
-
-	var _form_input2 = _interopRequireDefault(_form_input);
-
-	var _form_select = __webpack_require__(279);
-
-	var _form_select2 = _interopRequireDefault(_form_select);
-
-	var _form_textarea = __webpack_require__(471);
-
-	var _form_textarea2 = _interopRequireDefault(_form_textarea);
-
-	var _pay_methods = __webpack_require__(472);
-
-	var _pay_methods2 = _interopRequireDefault(_pay_methods);
-
-	var _found_us = __webpack_require__(473);
-
-	var _found_us2 = _interopRequireDefault(_found_us);
-
-	var _how_call = __webpack_require__(474);
-
-	var _how_call2 = _interopRequireDefault(_how_call);
-
-	var _gender = __webpack_require__(475);
-
-	var _gender2 = _interopRequireDefault(_gender);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var contactForm = _react2.default.createClass({
-	  displayName: 'contactForm',
-	  getInitialState: function getInitialState() {
-	    return {
-	      contact: {
-	        company_id: null,
-	        comment: ''
-	      }
-	    };
-	  },
-	  handleChange: function handleChange() {
-	    var ref = this.refs;
-
-	    var contact = _extends({}, this.state.contact, {
-	      name: ref.name.value,
-	      lastname: ref.lastname.value,
-	      gender: ref.gender.refs.select.value,
-	      email: ref.email.value,
-	      title: ref.title.value,
-	      position: ref.position.value,
-	      phone_1: ref.phone_1.value,
-	      phone_2: ref.phone_2.value,
-	      mobile_1: ref.mobile_1.value,
-	      mobile_2: ref.mobile_2.value,
-	      fax: ref.fax.value,
-	      pay_method: ref.pay_method.refs.select.value,
-	      found_us: ref.found_us.refs.select.value,
-	      who_call: ref.who_call.refs.select.value,
-	      comment: ref.comment.refs.textarea.value
-	    });
-
-	    this.setState({ contact: contact });
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    if (props.contact && Object.keys(props.contact).length) {
-	      this.setState({ contact: props.contact });
-	    } else {
-	      this.setState({ contact: (0, _clean_object2.default)(this.state.contact) });
-	    }
-
-	    if (props.company_id) {
-	      this.setState({
-	        contact: _extends({}, this.state.contact, { company_id: props.company_id })
-	      });
-	    }
-	  },
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
-	    if (typeof this.props.onSubmit === 'function') {
-	      this.props.onSubmit(this.state.contact);
-	    }
-	  },
-	  clean: function clean(e) {
-	    e.preventDefault();
-	    this.setState({ contact: (0, _clean_object2.default)(this.state.contact) });
-	    if (this.props.onCancel) {
-	      this.props.onCancel();
-	    }
-	  },
-	  render: function render() {
-	    var contact = this.state.contact;
-	    var size = this.props.size || 'col-md-6';
-	    var btnText = this.props.btnText || _react2.default.createElement('i', { className: 'fa fa-chevron-right' });
-
-	    return _react2.default.createElement(
-	      'form',
-	      { onSubmit: this.handleSubmit },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'name',
-	            onChange: this.handleChange,
-	            value: contact.name,
-	            placeholder: 'Nombre'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'lastname',
-	            onChange: this.handleChange,
-	            value: contact.lastname,
-	            placeholder: 'Apellido'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'gender',
-	            options: _gender2.default,
-	            'default': 'Seleccionar g\xE9nero',
-	            onSelectChange: this.handleChange,
-	            value: contact.gender
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'email',
-	            onChange: this.handleChange,
-	            value: contact.email,
-	            placeholder: 'Correo'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'title',
-	            onChange: this.handleChange,
-	            value: contact.title,
-	            placeholder: 'T\xEDtulo'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'position',
-	            onChange: this.handleChange,
-	            value: contact.position,
-	            placeholder: 'Posici\xF3n'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'phone_1',
-	            onChange: this.handleChange,
-	            value: contact.phone_1,
-	            placeholder: 'Tel\xE9fono'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'phone_2',
-	            onChange: this.handleChange,
-	            value: contact.phone_2,
-	            placeholder: 'Tel\xE9fono'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'mobile_1',
-	            onChange: this.handleChange,
-	            value: contact.mobile_1,
-	            placeholder: 'Celular'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'mobile_2',
-	            onChange: this.handleChange,
-	            value: contact.mobile_2,
-	            placeholder: 'Celular'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'fax',
-	            onChange: this.handleChange,
-	            value: contact.fax,
-	            placeholder: 'Fax'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            ref: 'fax',
-	            onChange: this.handleChange,
-	            value: contact.birthday,
-	            placeholder: 'Cumplea\xF1os: 07/07/1980'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'pay_method',
-	            options: _pay_methods2.default,
-	            'default': 'Seleccionar m\xE9todo de pago',
-	            onSelectChange: this.handleChange,
-	            value: contact.pay_method
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'found_us',
-	            options: _found_us2.default,
-	            'default': 'Seleccionar como nos encontro',
-	            onSelectChange: this.handleChange,
-	            value: contact.found_us
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: "form-group " + size },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'who_call',
-	            options: _how_call2.default,
-	            'default': 'Seleccionar quien llam\xF3',
-	            onSelectChange: this.handleChange,
-	            value: contact.who_call
-	          })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group' },
-	        _react2.default.createElement(_form_textarea2.default, {
-	          ref: 'comment',
-	          onTextareaChange: this.handleChange,
-	          value: contact.comment,
-	          placeholder: 'Comentario'
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-12' },
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.clean, className: 'btn btn-default btn-sm pull-left' },
-	          'Cancelar'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'btn btn-primary btn-sm pull-right' },
-	          btnText
-	        )
-	      )
-	    );
-	  }
-	});
-
-	exports.default = contactForm;
-
-/***/ },
-/* 470 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	module.exports = React.createClass({
-	  displayName: 'exports',
-
-
-	  handleChange: function handleChange() {
-	    this.props.onInputChange();
-	  },
-
-	  render: function render() {
-	    return React.createElement('input', {
-	      type: 'text',
-	      ref: 'input',
-	      className: 'form-control',
-	      placeholder: this.props.placeholder,
-	      value: this.props.value,
-	      onChange: this.handleChange
-	    });
-	  }
-	});
-
-/***/ },
-/* 471 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      value: ''
-	    };
-	  },
-
-
-	  handleChange: function handleChange() {
-	    this.props.onTextareaChange();
-	  },
-
-	  render: function render() {
-	    var value = this.props.value;
-
-
-	    return _react2.default.createElement('textarea', {
-	      className: 'form-control',
-	      ref: 'textarea',
-	      placeholder: this.props.placeholder,
-	      onChange: this.handleChange,
-	      value: value
-	    });
-	  }
-	});
-
-/***/ },
-/* 472 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "anticipado",
-			"label": "Anticipado"
-		},
-		{
-			"value": "30",
-			"label": "30 Días"
-		},
-		{
-			"value": "45",
-			"label": "45 Días"
-		},
-		{
-			"value": "60",
-			"label": "60 Días"
-		}
-	];
-
-/***/ },
-/* 473 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Asesores Comerciales",
-			"label": "Asesores comerciales"
-		},
-		{
-			"value": "Cliente",
-			"label": "Cliente"
-		},
-		{
-			"value": "Página Web Avante",
-			"label": "Página Web Avante"
-		},
-		{
-			"value": "Google Adwords",
-			"label": "Google Adwords"
-		},
-		{
-			"value": "Referido",
-			"label": "Referido"
-		},
-		{
-			"value": "Promoción",
-			"label": "Promoción"
-		},
-		{
-			"value": "Paginas Amarillas",
-			"label": "Paginas Amarillas"
-		},
-		{
-			"value": "Paginas Amarillas Web",
-			"label": "Paginas Amarillas Web"
-		},
-		{
-			"value": "Teléfono",
-			"label": "Teléfono"
-		},
-		{
-			"value": "Redes Sociales",
-			"label": "Redes Sociales"
-		},
-		{
-			"value": "Banner",
-			"label": "Banner"
-		},
-		{
-			"value": "Otros",
-			"label": "Otros"
-		}
-	];
-
-/***/ },
-/* 474 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Nosotros",
-			"label": "Nosotros"
-		},
-		{
-			"value": "Cliente",
-			"label": "Cliente"
-		}
-	];
-
-/***/ },
-/* 475 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Masculino",
-			"label": "Masculino"
-		},
-		{
-			"value": "Femenino",
-			"label": "Femenino"
-		}
-	];
-
-/***/ },
-/* 476 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _contact = __webpack_require__(477);
-
-	var _contact2 = _interopRequireDefault(_contact);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'list',
-	  handleEdit: function handleEdit(contact) {
-	    console.log(contact);
-	    this.props.onEdit(contact);
-	  },
-	  render: function render() {
-	    var _this = this;
-
-	    var contacts = this.props.contacts;
-
-	    var contactNodes = contacts.map(function (contact) {
-	      return _react2.default.createElement(_contact2.default, { key: contact.id, contact: contact, onEdit: _this.handleEdit });
-	    });
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'table-responsive' },
-	      _react2.default.createElement(
-	        'table',
-	        { className: 'table' },
-	        _react2.default.createElement(
-	          'thead',
-	          null,
-	          _react2.default.createElement(
-	            'tr',
-	            null,
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Nombre'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Email'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Tel\xE9fonos'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Celulares'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Empresa'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Opciones'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'tbody',
-	          null,
-	          contactNodes
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 477 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'contact',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      contact: {}
-	    };
-	  },
-	  handleClick: function handleClick() {
-	    var _props = this.props,
-	        onEdit = _props.onEdit,
-	        contact = _props.contact;
-
-	    if (typeof onEdit === 'function') {
-	      onEdit(contact);
-	    }
-	  },
-	  render: function render() {
-	    var _props$contact = this.props.contact,
-	        name = _props$contact.name,
-	        lastname = _props$contact.lastname,
-	        email = _props$contact.email,
-	        phone_1 = _props$contact.phone_1,
-	        phone_2 = _props$contact.phone_2,
-	        mobile_1 = _props$contact.mobile_1,
-	        mobile_2 = _props$contact.mobile_2,
-	        company = _props$contact.company;
-
-
-	    return _react2.default.createElement(
-	      'tr',
-	      null,
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        name,
-	        ' ',
-	        lastname
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        email
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        phone_1,
-	        ' ',
-	        phone_2
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        mobile_1,
-	        ' ',
-	        mobile_2
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        company ? company.name : ''
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'btn btn-sm', onClick: this.handleClick },
-	          'Editar'
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 478 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'loader',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      show: false
-	    };
-	  },
-	  render: function render() {
-	    var style = this.props.show ? { color: '#3B2B7F', margin: '15px auto', display: 'block' } : { display: 'none' };
-
-	    return _react2.default.createElement('i', { className: 'fa fa-spinner fa-pulse fa-3x fa-fw', style: style });
-	  }
-	});
-
-/***/ },
-/* 479 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _underscore = __webpack_require__(273);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var _loader = __webpack_require__(478);
-
-	var _loader2 = _interopRequireDefault(_loader);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'autocomplete',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      collection: [],
-	      field: 'name',
-	      placeholder: "Buscar",
-	      loading: false
-	    };
-	  },
-	  search: function search(e) {
-	    var query = e.currentTarget.value;
-	    if (typeof this.props.search == 'function') {
-	      this.props.search(query);
-	    }
-	  },
-	  resultSelected: function resultSelected(model) {
-	    var query = {};
-	    query[this.props.field] = model;
-	    var result = _underscore2.default.where(this.props.collection, query);
-	    if (typeof this.props.selected == 'function') {
-	      this.props.selected(result);
-	    }
-	  },
-	  render: function render() {
-	    var _this = this;
-
-	    var options = this.props.collection.map(function (model) {
-	      return model[_this.props.field];
-	    });
-
-	    var results = options.map(function (model, i) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: i, className: 'list-group-item', onClick: _this.resultSelected.bind(_this, model) },
-	        model
-	      );
-	    });
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'form-group' },
-	      _react2.default.createElement('input', {
-	        placeholder: 'Buscar empresa',
-	        type: 'text',
-	        onChange: _underscore2.default.throttle(this.search, 1000),
-	        className: 'form-control'
-	      }),
-	      _react2.default.createElement(_loader2.default, { show: this.props.loading }),
-	      _react2.default.createElement(
-	        'ul',
-	        { className: 'list-group' },
-	        results
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 480 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _moment = __webpack_require__(286);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _reactRedux = __webpack_require__(35);
-
-	var _quotations = __webpack_require__(246);
-
-	var action = _interopRequireWildcard(_quotations);
-
-	var _services = __webpack_require__(481);
-
-	var serviceAction = _interopRequireWildcard(_services);
-
-	var _activities = __webpack_require__(398);
-
-	var activityAction = _interopRequireWildcard(_activities);
-
-	var _products = __webpack_require__(482);
-
-	var productAction = _interopRequireWildcard(_products);
-
-	var _trackings = __webpack_require__(483);
-
-	var trackingAction = _interopRequireWildcard(_trackings);
-
-	var _contacts = __webpack_require__(465);
-
-	var contactAction = _interopRequireWildcard(_contacts);
-
-	var _contact = __webpack_require__(484);
-
-	var _contact2 = _interopRequireDefault(_contact);
-
-	var _filters = __webpack_require__(485);
-
-	var _filters2 = _interopRequireDefault(_filters);
-
-	var _edit = __webpack_require__(488);
-
-	var _edit2 = _interopRequireDefault(_edit);
-
-	var _status = __webpack_require__(489);
-
-	var _status2 = _interopRequireDefault(_status);
-
-	var _products2 = __webpack_require__(491);
-
-	var _products3 = _interopRequireDefault(_products2);
-
-	var _services2 = __webpack_require__(497);
-
-	var _services3 = _interopRequireDefault(_services2);
-
-	var _comment = __webpack_require__(498);
-
-	var _comment2 = _interopRequireDefault(_comment);
-
-	var _mails = __webpack_require__(499);
-
-	var _mails2 = _interopRequireDefault(_mails);
-
-	var _no_effective = __webpack_require__(500);
-
-	var _no_effective2 = _interopRequireDefault(_no_effective);
-
-	var _no_send = __webpack_require__(502);
-
-	var _no_send2 = _interopRequireDefault(_no_send);
-
-	var _times = __webpack_require__(504);
-
-	var _times2 = _interopRequireDefault(_times);
-
-	var _activity = __webpack_require__(505);
-
-	var _activity2 = _interopRequireDefault(_activity);
-
-	var _trackings2 = __webpack_require__(506);
-
-	var _trackings3 = _interopRequireDefault(_trackings2);
-
-	var _section = __webpack_require__(400);
-
-	var _section2 = _interopRequireDefault(_section);
-
-	var _alert = __webpack_require__(510);
-
-	var _alert2 = _interopRequireDefault(_alert);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var quotationSection = _react2.default.createClass({
-	  displayName: 'quotationSection',
-
-	  alert: null,
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      showComment: false,
-	      showMail: false,
-	      showNoEffective: false,
-	      showNoSend: false,
-	      showErrors: false,
-	      disabled: false
-	    };
-	  },
-
-	  componentWillMount: function componentWillMount() {
-	    this.fetchQuotation();
-	  },
-
-	  fetchQuotation: function fetchQuotation() {
-	    var _this = this;
-
-	    var _props = this.props,
-	        params = _props.params,
-	        dispatch = _props.dispatch;
-
-
-	    dispatch(action.fetchOne(params.id)).then(function (actionRes) {
-	      var query = { quotation_id: params.id };
-	      _this.handleDisabled(actionRes.payload.status);
-	      dispatch(productAction.fetch(query));
-	      dispatch(action.fetchServices(params.id));
-	      dispatch(activityAction.fetch(query));
-	      dispatch(trackingAction.fetch(query));
-	      dispatch(contactAction.fetch(query));
-	      dispatch(serviceAction.fetch());
-	    });
-	  },
-
-	  setActivity: function setActivity(message) {
-	    var _props2 = this.props,
-	        user = _props2.user,
-	        quotations = _props2.quotations;
-
-
-	    var activity = {
-	      message: message,
-	      user_id: user.user.id,
-	      quotation_id: quotations.quotation.id
-	    };
-
-	    return this.props.dispatch(activityAction.store(activity));
-	  },
-
-
-	  handleShowComment: function handleShowComment() {
-	    var show = true;
-	    if (this.state.showComment) {
-	      show = false;
-	    }
-
-	    this.setState({ showComment: show });
-	  },
-
-	  handleShowMail: function handleShowMail() {
-	    this.setState({ showMail: !this.state.showMail });
-	  },
-	  handleShowNoEffective: function handleShowNoEffective() {
-	    this.setState({ showNoEffective: !this.state.showNoEffective });
-	  },
-	  handleShowNoSend: function handleShowNoSend() {
-	    this.setState({ showNoSend: !this.state.showNoSend });
-	  },
-	  handleOptions: function handleOptions(filters, message) {
-	    var _this2 = this;
-
-	    var quotations = this.props.quotations;
-
-
-	    this.setActivity(message).then(function () {
-	      var data = _extends({}, quotations.quotation, filters);
-	      _this2._update(data);
-	    });
-	  },
-
-
-	  handleSaveComment: function handleSaveComment(comment) {
-	    var _this3 = this;
-
-	    this.setActivity('edito el comentario').then(function () {
-	      _this3._update({ comment: comment });
-	      _this3.setState({ showComment: false });
-	    });
-	  },
-
-	  handleSaveMail: function handleSaveMail(mail) {
-	    var _this4 = this;
-
-	    this.setActivity('edito el mail').then(function () {
-	      _this4.alert.show();
-	      _this4._update(mail);
-	      _this4.setState({ showMail: false });
-	    });
-	  },
-
-	  handleServiceApproval: function handleServiceApproval(serviceApproval) {
-	    this._update({ service_approval: serviceApproval });
-	  },
-
-	  handleSaveNoEffective: function handleSaveNoEffective(status) {
-	    this._update(status);
-	    this.setState({
-	      showNoEffective: false,
-	      showNoSend: false
-	    });
-	  },
-
-	  handleStatus: function handleStatus(status, message) {
-	    var _this5 = this;
-
-	    this.setActivity(message).then(function () {
-	      _this5._update(status);
-	    });
-	  },
-
-	  changeContact: function changeContact(contactId) {
-	    this._update({ contact_id: contactId });
-	  },
-
-	  _update: function _update(data) {
-	    var quo = _extends({}, this.props.quotations.quotation, data);
-	    this.props.dispatch(action.update(this.props.params.id, quo)).then(this.handleUpdate);
-	  },
-	  handleUpdate: function handleUpdate(actionRes) {
-	    if (actionRes.type == 'QUOTATIONS_FAIL') {
-	      return this.setState({ showErrors: true });
-	    } else {
-	      return this.handleDisabled(actionRes.payload.status);
-	    }
-	  },
-	  handleDisabled: function handleDisabled(status) {
-	    var disabled = false;
-
-	    if (status !== 'Borrador') {
-	      disabled = true;
-	    }
-
-	    this.setState({
-	      disabled: disabled,
-	      showErrors: false
-	    });
-	  },
-	  render: function render() {
-	    var quotation = this.props.quotations.quotation;
-	    var user = this.props.user.user;
-
-
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_alert2.default, {
-	        show: this.props.quotations.errors.length ? true : false,
-	        message: this.props.quotations.errors
-	      }),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-md-12' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body quo-header' },
-	            _react2.default.createElement(
-	              'div',
-	              null,
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Cotizaci\xF3n ',
-	                quotation.id,
-	                ' \u2022 ',
-	                quotation.status,
-	                ' \u2022'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'quo-header__priority' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Prioridad: ',
-	                _react2.default.createElement('div', { className: 'priority priority--' + quotation.priority })
-	              )
-	            )
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-md-9' },
-	        _react2.default.createElement(_filters2.default, {
-	          onChange: this.handleOptions,
-	          quotation: quotation,
-	          user: user,
-	          disabled: this.state.disabled
-	        }),
-	        _react2.default.createElement(_edit2.default, {
-	          quotation: quotation,
-	          onShowComment: this.handleShowComment,
-	          onShowMails: this.handleShowMail,
-	          onServiceApproval: this.handleServiceApproval
-	        }),
-	        _react2.default.createElement(_comment2.default, {
-	          show: this.state.showComment,
-	          onClose: this.handleShowComment,
-	          comment: quotation.comment,
-	          OnSaveComment: this.handleSaveComment
-	        }),
-	        _react2.default.createElement(_mails2.default, {
-	          show: this.state.showMail,
-	          onClose: this.handleShowMail,
-	          quotation: quotation,
-	          onSaveMail: this.handleSaveMail
-	        }),
-	        _react2.default.createElement(_products3.default, _extends({}, this.props, {
-	          quotationId: quotation.id,
-	          disabled: this.state.disabled
-	        })),
-	        _react2.default.createElement(_services3.default, {
-	          quotationId: quotation.id,
-	          disabled: this.state.disabled
-	        }),
-	        _react2.default.createElement(_status2.default, _extends({}, this.props, {
-	          quotation: quotation,
-	          handleOpenNoEffective: this.handleShowNoEffective,
-	          handleOpenNoSend: this.handleShowNoSend,
-	          onStatusChange: this.handleStatus,
-	          disabled: this.state.disabled
-	        })),
-	        _react2.default.createElement(_no_effective2.default, {
-	          quotation: quotation,
-	          show: this.state.showNoEffective,
-	          onSave: this.handleSaveNoEffective
-	        }),
-	        _react2.default.createElement(_no_send2.default, {
-	          quotation: quotation,
-	          show: this.state.showNoSend,
-	          onSave: this.handleSaveNoEffective
-	        }),
-	        _react2.default.createElement(_trackings3.default, _extends({}, this.props, { quotationId: quotation.id })),
-	        _react2.default.createElement(_section2.default, { quotation_id: this.props.params.id })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-md-3' },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_contact2.default, _extends({}, this.props, {
-	            changeContact: this.changeContact
-	          })),
-	          _react2.default.createElement(_times2.default, { quotation: quotation }),
-	          _react2.default.createElement(_activity2.default, {
-	            quotationId: quotation.id,
-	            activities: this.props.activities.items,
-	            user: this.props.user.user
-	          })
-	        )
-	      )
-	    );
-	  }
-	});
-
-	exports.default = (0, _reactRedux.connect)(function (store) {
-	  return store;
-	})(quotationSection);
-
-/***/ },
-/* 481 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.fetch = fetch;
-	exports.store = store;
-	exports.update = update;
-	exports.setService = setService;
-
-	var _axios = __webpack_require__(247);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'SERVICES';
-	var endpoint = 'api/v1/services';
-
-	function fetch() {
-		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err });
-			});
-		};
-	}
-
-	function store(service) {
-		return function (dispatch) {
-			return _axios2.default.post(endpoint, service).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function update(service) {
-		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + service.id, service).end(function (res) {
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function setService(service) {
-		return function (dispatch) {
-			return new Promise(function (resolve, reject) {
-				var action = { type: TYPE + '_SET_SERVICE', payload: service };
-				dispatch(action);
-				return resolve(action);
-			});
-		};
-	}
-
-/***/ },
-/* 482 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.fetch = fetch;
-	exports.store = store;
-	exports.update = update;
-
-	var _axios = __webpack_require__(247);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'PRODUCTS';
-	var endpoint = '/api/v1/products';
-
-	function fetch() {
-		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function store(product) {
-		return function (dispatch) {
-			return _axios2.default.post(endpoint, product).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function update(product) {
-		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + product.id, product).then(function (res) {
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-/***/ },
-/* 483 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.fetch = fetch;
-	exports.store = store;
-
-	var _axios = __webpack_require__(247);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TYPE = 'TRACKINGS';
-	var endpoint = '/api/v1/trackings';
-
-	function fetch() {
-		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-	function store(product) {
-		return function (dispatch) {
-			return _axios2.default.post(endpoint, product).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
-		};
-	}
-
-/***/ },
-/* 484 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _contacts = __webpack_require__(465);
-
-	var action = _interopRequireWildcard(_contacts);
-
-	var _form_create = __webpack_require__(469);
-
-	var _form_create2 = _interopRequireDefault(_form_create);
-
-	var _form_select = __webpack_require__(279);
-
-	var _form_select2 = _interopRequireDefault(_form_select);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      showForm: false
-	    };
-	  },
-
-	  changeContact: function changeContact(e) {
-	    var id = e.currentTarget.value;
-	    this.props.changeContact(id);
-	  },
-
-	  showForm: function showForm() {
-	    this.setState({ showForm: !this.state.showForm });
-	  },
-
-	  handleSubmit: function handleSubmit(contact) {
-	    var _this = this;
-
-	    var contactData = _extends({}, contact, { company_id: this.props.quotations.company.id });
-	    this.props.dispatch(action.store(contactData)).then(function () {
-	      _this.showForm();
-	    });
-	  },
-
-	  show: function show(field) {
-	    if (field && field != "") {
-	      return "";
-	    }
-
-	    return "hidden";
-	  },
-
-
-	  render: function render() {
-	    var _props$quotations = this.props.quotations,
-	        contact = _props$quotations.contact,
-	        company = _props$quotations.company;
-
-	    var contactSelect = void 0;
-
-	    var contactOptions = this.props.contacts.items.map(function (contact, i) {
-	      return { value: contact.id, label: contact.name + ' ' + contact.lastname };
-	    });
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'panel' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel-body' },
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'btn btn-primary btn-sm', onClick: this.showForm },
-	          'Agregar contacto'
-	        ),
-	        _react2.default.createElement('hr', null),
-	        _react2.default.createElement(
-	          'div',
-	          { className: this.state.showForm ? "" : "hidden" },
-	          _react2.default.createElement(_form_create2.default, {
-	            size: 'col-md-12',
-	            btnText: 'Guardar',
-	            onSubmit: this.handleSubmit
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          ' '
-	        ),
-	        _react2.default.createElement(
-	          'b',
-	          { className: this.show(company.name) },
-	          company.name,
-	          _react2.default.createElement('hr', null)
-	        ),
-	        _react2.default.createElement(
-	          'b',
-	          { className: this.show(contact.name) },
-	          contact.name,
-	          ' ',
-	          contact.lastname,
-	          _react2.default.createElement('hr', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          { className: this.show(contact.email) },
-	          contact.email,
-	          _react2.default.createElement('hr', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          { className: this.show(contact.phone_1) },
-	          contact.phone_1,
-	          _react2.default.createElement('hr', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          { className: this.show(contact.phone_2) },
-	          ' ',
-	          contact.phone_2,
-	          _react2.default.createElement('hr', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          { className: this.show(contact.mobile_1) },
-	          contact.mobile_1,
-	          _react2.default.createElement('hr', null)
-	        ),
-	        _react2.default.createElement(
-	          'span',
-	          { className: this.show(contact.mobile_2) },
-	          ' ',
-	          contact.mobile_2
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group' },
-	          _react2.default.createElement(_form_select2.default, {
-	            options: contactOptions,
-	            'default': 'Cambiar Contacto',
-	            onSelectChange: this.changeContact,
-	            value: ''
-	          })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 485 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _form_select = __webpack_require__(279);
-
-	var _form_select2 = _interopRequireDefault(_form_select);
-
-	var _category_type = __webpack_require__(486);
-
-	var _category_type2 = _interopRequireDefault(_category_type);
-
-	var _advisors = __webpack_require__(275);
-
-	var _advisors2 = _interopRequireDefault(_advisors);
-
-	var _type = __webpack_require__(276);
-
-	var _type2 = _interopRequireDefault(_type);
-
-	var _client_type = __webpack_require__(277);
-
-	var _client_type2 = _interopRequireDefault(_client_type);
-
-	var _found_us = __webpack_require__(473);
-
-	var _found_us2 = _interopRequireDefault(_found_us);
-
-	var _products = __webpack_require__(487);
-
-	var _products2 = _interopRequireDefault(_products);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	var messages = {
-	  type: 'cambio tipo',
-	  type_category: 'cambio categoría',
-	  client_type: 'cambio tipo de cliente',
-	  found_us: 'cambio como llegó',
-	  offer: 'cambio ofrecer producto',
-	  advisor: 'cambio asesor'
-	};
-
-	var quoFilters = _react2.default.createClass({
-	  displayName: 'quoFilters',
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      quotation: {},
-	      disabled: false
-	    };
-	  },
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      filters: {}
-	    };
-	  },
-
-	  handleChange: function handleChange() {
-	    var field = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-	    var e = arguments[1];
-
-	    var val = e.currentTarget.value;
-	    var filters = _extends({}, this.state.filters, _defineProperty({}, field, val));
-	    var message = messages[field];
-	    this.props.onChange(filters, message);
-	    this.setState({ filters: filters });
-	  },
-
-
-	  update: function update() {
-	    var filters = {
-	      type: 'cambio tipo de cotización',
-	      type_category: this.refs.type_category.refs.select.value,
-	      client_type: this.refs.client_type.refs.select.value,
-	      found_us: this.refs.found_us.refs.select.value,
-	      offer: this.refs.offer.refs.select.value,
-	      advisor: this.refs.advisor.refs.select.value
-	    };
-
-	    this.props.onChange(filters);
-	    this.setState({ filters: filters });
-	  },
-
-	  render: function render() {
-	    var quotation = this.props.quotation;
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'panel panel-default' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel-body' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-4' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'type',
-	            options: _type2.default,
-	            'default': 'Seleccionar tipo',
-	            onSelectChange: this.handleChange.bind(null, 'type'),
-	            value: quotation.type,
-	            disabled: this.props.disabled
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-4' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'type_category',
-	            options: _category_type2.default,
-	            'default': 'Seleccionar categor\xEDa de tipo',
-	            onSelectChange: this.handleChange.bind(null, 'type_category'),
-	            value: quotation.type_category,
-	            disabled: this.props.disabled
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-4' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'client_type',
-	            options: _client_type2.default,
-	            'default': 'Seleccionar tipo de cliente',
-	            onSelectChange: this.handleChange.bind(null, 'client_type'),
-	            value: quotation.client_type,
-	            disabled: this.props.disabled
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-4' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'found_us',
-	            options: _found_us2.default,
-	            'default': 'Seleccionar como lleg\xF3',
-	            onSelectChange: this.handleChange.bind(null, 'found_us'),
-	            value: quotation.found_us,
-	            disabled: this.props.disabled
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-4' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'offer',
-	            options: _products2.default,
-	            'default': 'Seleccionar ofrecer producto',
-	            onSelectChange: this.handleChange.bind(null, 'offer'),
-	            value: quotation.offer,
-	            disabled: this.props.disabled
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-sm-4' },
-	          _react2.default.createElement(_form_select2.default, {
-	            ref: 'advisor',
-	            options: _advisors2.default,
-	            'default': 'Seleccionar asesor',
-	            onSelectChange: this.handleChange.bind(null, 'advisor'),
-	            value: quotation.advisor,
-	            disabled: this.props.disabled
-	          })
-	        )
-	      )
-	    );
-	  }
-	});
-
-	exports.default = quoFilters;
-
-/***/ },
-/* 486 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Inventario",
-			"label": "Inventario"
-		},
-		{
-			"value": "Pedido",
-			"label": "Pedido"
-		}
-	];
-
-/***/ },
-/* 487 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"value": "Desktops",
-			"label": "Desktops"
-		},
-		{
-			"value": "Laptops",
-			"label": "Laptops"
-		},
-		{
-			"value": "Apple",
-			"label": "Apple"
-		},
-		{
-			"value": "Servers",
-			"label": "Servers"
-		},
-		{
-			"value": "IT Service",
-			"label": "IT Service"
-		},
-		{
-			"value": "IT Service 24/7",
-			"label": "IT  Service 24/7"
-		},
-		{
-			"value": "Rescate Online",
-			"label": "Rescate Online"
-		},
-		{
-			"value": "Discos Duros Seguros",
-			"label": "Discos Duros Seguros"
-		},
-		{
-			"value": "Networks",
-			"label": "Networks"
-		},
-		{
-			"value": "Complements",
-			"label": "Complements"
-		},
-		{
-			"value": "Printers",
-			"label": "Printers"
-		}
-	];
-
-/***/ },
-/* 488 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      quotation: {
-	        id: 0
-	      }
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      quotation: {}
-	    };
-	  },
-	  openComment: function openComment() {
-	    this.props.onShowComment();
-	  },
-	  openMails: function openMails() {
-	    this.props.onShowMails();
-	  },
-	  handleServiceApproval: function handleServiceApproval() {
-	    var quotation = this.props.quotation;
-	    if (quotation.service_approval === 0) {
-	      this.props.onServiceApproval(1);
-	    } else {
-	      this.props.onServiceApproval(0);
-	    }
-	  },
-	  render: function render() {
-	    var quotation = this.props.quotation;
-	    var serviceApprovalText = 'Quitar aprobación de servicio';
-	    if (quotation.service_approval === 0) {
-	      serviceApprovalText = 'Agregar aprobación de servicio';
-	    }
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'panel' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel-body' },
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'list-inline' },
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                href: '/quotations/' + quotation.id + '/pdf/' + quotation.id,
-	                target: '_new' },
-	              'PDF'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                href: '/quotations/' + quotation.id + '/pdfbn',
-	                target: '_blank' },
-	              ' PDF BN'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                href: '/quotations/' + quotation.id + '/pdflogos',
-	                target: '_blank' },
-	              ' PDF con logos'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                href: '/quotations/' + quotation.id + '/duplicate',
-	                className: 'btn btn-default btn-sm' },
-	              'Duplicar'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.openComment },
-	              'Editar Comentario'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.openMails
-	              },
-	              'Editar Mail'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleServiceApproval
-	              },
-	              serviceApprovalText
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 489 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _quotations = __webpack_require__(246);
-
-	var action = _interopRequireWildcard(_quotations);
-
-	var _moment = __webpack_require__(286);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _activity = __webpack_require__(490);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      disabled: false
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      sending: false
-	    };
-	  },
-	  handleClick: function handleClick(status, e) {
-	    e.preventDefault(status, e);
-	    var message = { message: 'Cambio estado a ' + status };
-
-	    switch (status) {
-	      case 'Replanteada':
-	        window.location = '/quotations/' + this.props.quotation.id + '/rethink';
-	        break;
-	      case 'No enviada':
-	        this.props.handleOpenNoSend();
-	        break;
-	      case 'No efectiva':
-	        this.props.handleOpenNoEffective();
-	        break;
-	      default:
-	        this.props.onStatusChange({ status: status, message: message });
-	    }
-	  },
-	  handleSend: function handleSend() {
-	    var _this = this;
-
-	    var id = this.props.quotation.id;
-	    var message = 'Cambio estado a enviada';
-	    this.setState({ sending: true });
-
-	    this.props.dispatch(action.sendMail(id)).then(function (actionRes) {
-	      _this.setState({ sending: false });
-	      if (actionRes.type == 'QUOTATIONS_FAIL') {
-	        console.log(actionRes);
-	      } else {
-	        return _this.props.onStatusChange('Enviada', message);
-	      }
-	    });
-	  },
-	  render: function render() {
-	    var sending = this.state.sending ? "disabled" : "";
-	    var messageSend = this.state.sending ? "Enviando..." : "Enviar";
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'panel' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel-body' },
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'list-inline' },
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleSend, disabled: sending
-	              },
-	              messageSend
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleClick.bind(null, 'Entregada'),
-	                disabled: this.props.disabled ? true : false
-	              },
-	              'Entregada'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleClick.bind(null, 'Efectiva'),
-	                disabled: this.props.disabled ? true : false
-	              },
-	              'Efectiva'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleClick.bind(this, 'No enviada'),
-	                disabled: this.props.disabled ? true : false
-	              },
-	              'No enviada'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleClick.bind(this, 'No efectiva'),
-	                disabled: this.props.disabled ? true : false
-	              },
-	              'No efectiva'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleClick.bind(this, 'Replanteada')
-	              },
-	              'Replantear'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                disabled: this.props.disabled ? true : false,
-	                onClick: this.handleClick.bind(this, 'Nula')
-	              },
-	              'Anular'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                disabled: this.props.disabled ? true : false,
-	                onClick: this.handleClick.bind(this, 'Por confirmar')
-	              },
-	              'Por confirmar'
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 490 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.storeActivity = storeActivity;
-
-	var _axios = __webpack_require__(247);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function storeActivity(data) {
-	    // data = {
-	    //   message: "cambio tipo a Alquiler",
-	    //   quotation_id:"37287"
-	    // };
-
-	    _axios2.default.post('/api/v1/activities').send(data).end(function (err, res) {
-	        console.log(res.body);
-	    });
-	}
-
-/***/ },
-/* 491 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _product = __webpack_require__(492);
-
-	var _product2 = _interopRequireDefault(_product);
-
-	var _form_create = __webpack_require__(494);
-
-	var _form_create2 = _interopRequireDefault(_form_create);
-
-	var _products = __webpack_require__(482);
-
-	var action = _interopRequireWildcard(_products);
-
-	var _underscore = __webpack_require__(273);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var _clean_object = __webpack_require__(236);
-
-	var _clean_object2 = _interopRequireDefault(_clean_object);
-
-	var _activity = __webpack_require__(490);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'products',
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      id: null,
-	      disabled: false
-	    };
-	  },
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      product: {},
-	      showForm: false,
-	      errors: []
-	    };
-	  },
-	  _handleSubmit: function _handleSubmit(product) {
-	    this.setState({ product: product });
-	    if (product.id) {
-	      this.props.dispatch(action.update(product)).then(this.handleStoreReponse);
-	    } else {
-	      this.props.dispatch(action.store(product)).then(this.handleStoreReponse);
-	    }
-	  },
-	  handleStoreReponse: function handleStoreReponse(actionRes) {
-	    var payload = actionRes.payload;
-
-	    if (actionRes.type == "PRODUCTS_FAIL") {
-	      var errors = Object.keys(payload).map(function (key) {
-	        return payload[key];
-	      });
-	      this.setState({ errors: errors });
-	    } else {
-	      this.cleanProduct();
-	    }
-	  },
-
-
-	  handleDuplicate: function handleDuplicate(id, e) {
-	    var _this = this;
-
-	    e.preventDefault();
-
-	    request.post('/api/v1/products/' + id + '/duplicate').end(function (err, res) {
-	      _this.setState({
-	        products: _this.state.products.concat([res.body])
-	      });
-	    });
-	  },
-
-	  handleEdit: function handleEdit(product) {
-	    this.setState({
-	      product: product,
-	      showForm: true
-	    });
-	  },
-
-	  handleOrder: function handleOrder(product) {
-	    var _this2 = this;
-
-	    var order = true;
-
-	    if (product.ordered && product.ordered == true || product.ordered == 1) {
-	      order = false;
-	    }
-
-	    var product = _underscore2.default.extend(product, { ordered: order });
-	    this.setState({ product: product });
-
-	    request.put('/api/v1/products/' + product.id).send(product).end(function (err, res) {
-	      _this2.setState({ product: {} });
-	    });
-	  },
-
-	  handleDelete: function handleDelete(id, e) {
-	    var _this3 = this;
-
-	    e.preventDefault();
-	    var products = _underscore2.default.reject(this.state.products, function (company) {
-	      return company.id === id;
-	    });
-
-	    request.del('/api/v1/products/' + id).end(function (err, res) {
-	      _this3.setState({
-	        products: products
-	      });
-	    });
-	  },
-
-	  showForm: function showForm(e) {
-	    var show = !this.state.showForm;
-	    if (show) this.cleanProduct();
-	    this.setState({ showForm: show });
-	  },
-
-	  cleanProduct: function cleanProduct() {
-	    this.setState({
-	      product: (0, _clean_object2.default)(this.state.product),
-	      errors: []
-	    });
-	  },
-
-
-	  render: function render() {
-	    var _this4 = this;
-
-	    var products = this.props.products.items;
-	    var productNodes = products.map(function (product) {
-	      return _react2.default.createElement(_product2.default, {
-	        key: product.id,
-	        product: product,
-	        onEdit: _this4.handleEdit,
-	        onDuplicate: _this4.handleDuplicate,
-	        onOrder: _this4.handleOrder,
-	        onDelete: _this4.handleDelete,
-	        disabled: _this4.props.disabled
-	      });
-	    });
-
-	    var showTable = false;
-
-	    if (products.length > 0) {
-	      showTable = true;
-	    }
-
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel panel-default' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(
-	            'button',
-	            {
-	              className: 'btn btn-primary btn-sm',
-	              onClick: this.showForm,
-	              disabled: this.props.disabled
-	            },
-	            'Agregar producto'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'table-responsive' },
-	            _react2.default.createElement('hr', null),
-	            _react2.default.createElement(
-	              'table',
-	              { className: 'table table-striped' },
-	              _react2.default.createElement(
-	                'thead',
-	                null,
-	                _react2.default.createElement(
-	                  'tr',
-	                  null,
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Producto'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Tiempo'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Cantidad'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Precio'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Total'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Opciones'
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'tbody',
-	                null,
-	                productNodes
-	              )
-	            )
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: this.state.showForm ? "panel panel-default" : "hidden" },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(_form_create2.default, {
-	            onSubmit: this._handleSubmit,
-	            product: this.state.product,
-	            quotationId: this.props.quotationId,
-	            onClose: this.showForm,
-	            errors: this.state.errors
-	          })
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 492 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _numeral = __webpack_require__(493);
-
-	var _numeral2 = _interopRequireDefault(_numeral);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      product: {}
-	    };
-	  },
-	  render: function render() {
-	    var product = this.props.product;
-	    var period = product.period;
-
-	    var plural = {
-	      Mes: "Meses",
-	      Semana: "Semanas",
-	      Día: "Días",
-	      "15 días": "15 días",
-	      "a 3 días": "a 3 días",
-	      Hora: "Horas",
-	      Servicio: "Servicios",
-	      Venta: "Ventas"
-	    };
-
-	    if (product.lapse > 1) {
-	      period = plural[product.period];
-	    }
-
-	    return _react2.default.createElement(
-	      'tr',
-	      null,
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        product.name
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        product.lapse,
-	        ' ',
-	        period
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        product.quantity
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        (0, _numeral2.default)(product.price).format('0,0')
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        (0, _numeral2.default)(product.total).format('0,0')
-	      ),
-	      _react2.default.createElement(
-	        'td',
-	        null,
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'list-inline' },
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.props.onEdit.bind(null, product),
-	                disabled: this.props.disabled ? true : false
-	              },
-	              'Editar'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.props.onDuplicate.bind(null, product.id),
-	                disabled: this.props.disabled ? true : false
-	              },
-	              'Duplicar'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.props.onOrder.bind(null, product)
-	              },
-	              product.ordered ? "Pedir" : "Pedido"
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-default btn-sm',
-	                onClick: this.props.onDelete.bind(null, product.id),
-	                disabled: this.props.disabled ? true : false
-	              },
-	              'Eliminar'
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -75437,6 +71653,3851 @@
 
 
 /***/ },
+/* 459 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _chart_bar = __webpack_require__(411);
+
+	var _chart_bar2 = _interopRequireDefault(_chart_bar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      findUs: [],
+	      count: []
+	    };
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.graphsData.findUS && props.graphsData.findUSCount) {
+	      this.setState({
+	        findUs: props.graphsData.findUS,
+	        count: props.graphsData.findUSCount
+	      });
+	    }
+	  },
+
+	  render: function render() {
+	    var data1 = this.state.findUs.map(function (num) {
+	      return parseInt(num);
+	    });
+	    var data2 = this.state.count.map(function (num) {
+	      return parseInt(num);
+	    });
+
+	    var labels = ['Asesores comerciales', 'Cliente', 'Página Web Avante', 'Google Adwords', 'Referido', 'Promoción', 'Paginas Amarilladas', 'Paginas Amarilladas Web', 'Teléfono', 'Redes Sociales'];
+
+	    var dataSet1 = {
+	      label: 'Dinero',
+	      data: data1,
+	      backgroundColor: ['rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)', 'rgba(255, 136, 124, 0.5)']
+	    };
+
+	    var dataSet2 = {
+	      label: 'Número',
+	      data: data2
+	    };
+
+	    var chartData = {
+	      labels: labels,
+	      datasets: [dataSet1, dataSet2]
+	    };
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'col-md-6' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 460 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _chart_bar = __webpack_require__(411);
+
+	var _chart_bar2 = _interopRequireDefault(_chart_bar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      client_type: []
+	    };
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.graphsData.client_type) {
+	      this.setState({
+	        client_type: props.graphsData.client_type
+	      });
+	    }
+	  },
+
+	  render: function render() {
+	    var data1 = this.state.client_type.map(function (num) {
+	      return parseInt(num);
+	    });
+
+	    var labels = ['Activo', 'Inactivo', 'nuevo'];
+
+	    var dataSet1 = {
+	      label: 'Cotizaciones',
+	      data: data1,
+	      backgroundColor: ['rgba(68, 228, 135, 0.5)', 'rgba(68, 228, 135, 0.5)', 'rgba(68, 228, 135, 0.5)']
+	    };
+
+	    var chartData = {
+	      labels: labels,
+	      datasets: [dataSet1]
+	    };
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'col-md-6' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 461 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _chart_bar = __webpack_require__(411);
+
+	var _chart_bar2 = _interopRequireDefault(_chart_bar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      no_effective: [],
+	      count: []
+	    };
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.graphsData.no_effective && props.graphsData.no_effective_count) {
+	      this.setState({
+	        no_effective: props.graphsData.no_effective,
+	        count: props.graphsData.no_effective_count
+	      });
+	    }
+	  },
+
+	  render: function render() {
+	    var dataMoney = this.state.no_effective.map(function (num) {
+	      return parseInt(num);
+	    });
+	    var dataCount = this.state.count.map(function (num) {
+	      return parseInt(num);
+	    });
+
+	    var labels = ["No disponible", "No confiable", "Competencia", "Por cliente", "sin etiquetar"];
+
+	    var dataSet1 = { label: 'Dinero', data: dataMoney };
+	    var dataSet2 = { label: 'Número', data: dataCount };
+
+	    var chartData = {
+	      labels: labels,
+	      datasets: [dataSet1, dataSet2]
+	    };
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'col-md-6' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 462 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _chart_bar = __webpack_require__(411);
+
+	var _chart_bar2 = _interopRequireDefault(_chart_bar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      sent_diff: []
+	    };
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.graphsData.sent_diff) {
+	      this.setState({
+	        sent_diff: props.graphsData.sent_diff
+	      });
+	    }
+	  },
+
+	  render: function render() {
+	    var data1 = this.state.sent_diff.map(function (num) {
+	      return parseInt(num);
+	    });
+
+	    var labels = ["Dentro - Inventario", "Fuera - Inventario", "Dentro - Pedido", "Fuera - Pedido"];
+
+	    var dataSet1 = {
+	      label: 'Cotizaciones',
+	      data: data1
+	    };
+
+	    var chartData = {
+	      labels: labels,
+	      datasets: [dataSet1]
+	    };
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'col-md-6' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 463 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _status = __webpack_require__(274);
+
+	var _status2 = _interopRequireDefault(_status);
+
+	var _advisors = __webpack_require__(275);
+
+	var _advisors2 = _interopRequireDefault(_advisors);
+
+	var _type = __webpack_require__(276);
+
+	var _type2 = _interopRequireDefault(_type);
+
+	var _client_type = __webpack_require__(277);
+
+	var _client_type2 = _interopRequireDefault(_client_type);
+
+	var _form_select = __webpack_require__(279);
+
+	var _form_select2 = _interopRequireDefault(_form_select);
+
+	var _datetime = __webpack_require__(280);
+
+	var _datetime2 = _interopRequireDefault(_datetime);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'filters',
+	  getInitialState: function getInitialState() {
+	    return {
+	      query: {
+	        offset: 0,
+	        query: null,
+	        status: null,
+	        advisor: null,
+	        client_type: null,
+	        type: null,
+	        date_start: null,
+	        date_end: null
+	      }
+	    };
+	  },
+	  triggerChange: function triggerChange(query) {
+	    if (typeof this.props.onChange === 'function') {
+	      this.props.onChange(query);
+	    }
+	  },
+	  changeQuery: function changeQuery(field, value) {
+	    var query = {};
+	    query[field] = value;
+	    query = _extends({}, this.state.query, query);
+	    this.triggerChange(query);
+	    this.setState({ query: query });
+	  },
+	  handleDates: function handleDates(type, date, dateStr) {
+	    var field = type;
+	    var value = dateStr + ' 00:00:00';
+	    this.changeQuery(field, value);
+	  },
+	  handleChange: function handleChange(type, e) {
+	    var field = type;
+	    var value = e.currentTarget.value;
+	    this.changeQuery(field, value);
+	  },
+	  render: function render() {
+	    var _this = this;
+
+	    var query = this.state.query;
+
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'panel' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-body' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-md-3' },
+	          _react2.default.createElement(_datetime2.default, {
+	            placeholder: 'Seleccionar desde',
+	            styles: 'form-control',
+	            onChange: function onChange(date, str) {
+	              _this.handleDates('date_start', date, str);
+	            }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-md-3' },
+	          _react2.default.createElement(_datetime2.default, {
+	            placeholder: 'Seleccionar hasta',
+	            styles: 'form-control',
+	            onChange: function onChange(date, str) {
+	              _this.handleDates('date_end', date, str);
+	            }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-3' },
+	          _react2.default.createElement(_form_select2.default, {
+	            options: _status2.default,
+	            'default': 'Seleccionar estado',
+	            value: query.status,
+	            onSelectChange: function onSelectChange(e) {
+	              return _this.handleChange('status', e);
+	            }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-3' },
+	          _react2.default.createElement(_form_select2.default, {
+	            options: _client_type2.default,
+	            'default': 'Seleccionar cliente',
+	            value: query.client_type,
+	            onSelectChange: function onSelectChange(e) {
+	              return _this.handleChange('client_type', e);
+	            }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-3' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'type',
+	            options: _type2.default,
+	            'default': 'Seleccionar tipo',
+	            value: query.type,
+	            onSelectChange: function onSelectChange(e) {
+	              return _this.handleChange('type', e);
+	            }
+	          })
+	        ),
+	        _react2.default.createElement('div', { className: 'form-group col-sm-3' })
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 464 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(35);
+
+	var _page = __webpack_require__(32);
+
+	var _page2 = _interopRequireDefault(_page);
+
+	var _companies = __webpack_require__(465);
+
+	var action = _interopRequireWildcard(_companies);
+
+	var _contacts = __webpack_require__(466);
+
+	var contactAction = _interopRequireWildcard(_contacts);
+
+	var _quotations = __webpack_require__(246);
+
+	var quoAction = _interopRequireWildcard(_quotations);
+
+	var _form_create = __webpack_require__(467);
+
+	var _form_create2 = _interopRequireDefault(_form_create);
+
+	var _form_create3 = __webpack_require__(470);
+
+	var _form_create4 = _interopRequireDefault(_form_create3);
+
+	var _list = __webpack_require__(477);
+
+	var _list2 = _interopRequireDefault(_list);
+
+	var _loader = __webpack_require__(479);
+
+	var _loader2 = _interopRequireDefault(_loader);
+
+	var _autocomplete = __webpack_require__(480);
+
+	var _autocomplete2 = _interopRequireDefault(_autocomplete);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var createPanel = _react2.default.createClass({
+	  displayName: 'createPanel',
+	  getInitialState: function getInitialState() {
+	    return {
+	      companyOptions: [],
+	      companies: [],
+	      contacts: [],
+	      loading: false,
+	      showCompanyForm: false,
+	      showContactForm: false
+	    };
+	  },
+	  searchCompanies: function searchCompanies(name) {
+	    this.setState({ loading: true });
+	    var query = { query_name: name };
+	    this.props.dispatch(action.fetch(query));
+	    this.setState({ loading: false });
+	  },
+	  storeSelected: function storeSelected(company) {
+	    var dispatch = this.props.dispatch;
+
+	    var query = { company_id: company[0].id };
+
+	    dispatch(contactAction.fetch(query)).then(function () {
+	      dispatch(action.setCompany(company[0]));
+	      dispatch(action.cleanItems());
+	    });
+	  },
+	  createQuotation: function createQuotation(contact, e) {
+	    e.preventDefault();
+	    var quo = { company_id: contact.company_id, contact_id: contact.id };
+	    this.props.dispatch(quoAction.store(quo)).then(function (res) {
+	      return (0, _page2.default)('/quotations/' + res.payload.id);
+	    });
+	  },
+	  handleSubmitCompany: function handleSubmitCompany(company) {
+	    var dispatch = this.props.dispatch;
+
+	    dispatch(action.store(company)).then(this.handleSubmitCompanyResponse);
+	  },
+	  handleSubmitCompanyResponse: function handleSubmitCompanyResponse(actionRes) {
+	    var _this = this;
+
+	    var dispatch = this.props.dispatch;
+
+	    if (actionRes.type == "COMPANIES_STORE") {
+	      dispatch(action.setCompany(actionRes.payload)).then(function () {
+	        return _this.setState({ showCompanyForm: false, showContactForm: true });
+	      });
+	    }
+	  },
+	  handleSubmitContact: function handleSubmitContact(contact) {
+	    this.props.dispatch(contactAction.store(contact));
+	  },
+	  toggleCompanyForm: function toggleCompanyForm(e) {
+	    if (e) e.preventDefault();
+
+	    this.setState({
+	      showCompanyForm: !this.state.showCompanyForm
+	    });
+	  },
+	  toggleContactForm: function toggleContactForm(e) {
+	    if (e) e.preventDefault();
+	    this.setState({ showContactForm: !this.state.showContactForm });
+	  },
+	  render: function render() {
+	    var _this2 = this;
+
+	    var classes = {
+	      input: "form-control autocomplete",
+	      results: 'list-group',
+	      listItem: 'list-group-item',
+	      token: 'btn btn-primary btn-sm'
+	    };
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'col-md-6', style: { float: 'none', margin: '0 auto' } },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-12' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            _react2.default.createElement(_autocomplete2.default, {
+	              collection: this.props.companies.items,
+	              search: this.searchCompanies,
+	              selected: this.storeSelected,
+	              loading: this.state.loading
+	            }),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default pull-right btn-sm',
+	                onClick: this.toggleCompanyForm
+	              },
+	              'Nueva Empresa'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.showCompanyForm ? 'col-sm-12' : 'hidden' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.companies.errors.length ? "alert alert-danger" : "" },
+	                this.props.companies.errors
+	              ),
+	              _react2.default.createElement(_form_create2.default, {
+	                btnStoreText: 'Guardar',
+	                btnCleanText: 'Cancelar',
+	                onCancel: this.toggleCompanyForm,
+	                onSubmit: this.handleSubmitCompany
+	              })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Empresa: ',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                this.props.companies.company.name
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.showContactForm ? 'col-sm-12' : 'hidden' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.contacts.errors.length ? "alert alert-danger" : "" },
+	                this.props.contacts.errors
+	              ),
+	              _react2.default.createElement(_form_create4.default, {
+	                company_id: this.props.companies.company.id ? this.props.companies.company.id : null,
+	                btnText: 'Guardar',
+	                onSubmit: this.handleSubmitContact,
+	                onCancel: this.toggleContactForm
+	              })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                onClick: this.toggleContactForm,
+	                className: this.props.companies.company.id ? "btn btn-default pull-right btn-sm" : "hidden"
+	              },
+	              'Nuevo Contacto'
+	            ),
+	            _react2.default.createElement('div', { className: 'row' }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'table-responsive' },
+	              _react2.default.createElement(
+	                'table',
+	                { className: 'table' },
+	                _react2.default.createElement(
+	                  'thead',
+	                  null,
+	                  _react2.default.createElement(
+	                    'tr',
+	                    null,
+	                    _react2.default.createElement(
+	                      'th',
+	                      null,
+	                      'Nombre'
+	                    ),
+	                    _react2.default.createElement(
+	                      'th',
+	                      null,
+	                      'Email'
+	                    ),
+	                    _react2.default.createElement(
+	                      'th',
+	                      null,
+	                      'Opciones'
+	                    )
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'tbody',
+	                  null,
+	                  this.props.contacts.items.map(function (contact) {
+	                    return _react2.default.createElement(
+	                      'tr',
+	                      { key: contact.id },
+	                      _react2.default.createElement(
+	                        'td',
+	                        null,
+	                        contact.name + ' ' + contact.lastname
+	                      ),
+	                      _react2.default.createElement(
+	                        'td',
+	                        null,
+	                        contact.email
+	                      ),
+	                      _react2.default.createElement(
+	                        'td',
+	                        null,
+	                        _react2.default.createElement(
+	                          'button',
+	                          { className: 'btn btn-primary btn-sm', onClick: _this2.createQuotation.bind(_this2, contact) },
+	                          'Crear Cotizaci\xF3n'
+	                        )
+	                      )
+	                    );
+	                  })
+	                )
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	exports.default = (0, _reactRedux.connect)(function (store) {
+	  return { companies: store.companies, contacts: store.contacts };
+	})(createPanel);
+
+/***/ },
+/* 465 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+	exports.setCompany = setCompany;
+	exports.cleanItems = cleanItems;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'COMPANIES';
+	var endpoint = 'api/v1/companies';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err });
+			});
+		};
+	}
+
+	function store(company) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, company).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function update(company) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + company.id, company).end(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function setCompany(company) {
+		return function (dispatch) {
+			return new Promise(function (resolve, reject) {
+				var action = { type: TYPE + '_SET_COMPANY', payload: company };
+				dispatch(action);
+				return resolve(action);
+			});
+		};
+	}
+
+	function cleanItems() {
+		return { type: TYPE + '_CLEAN_ITEMS', payload: [] };
+	}
+
+/***/ },
+/* 466 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+	exports.setContact = setContact;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'CONTACTS';
+	var endpoint = 'api/v1/contacts';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err });
+			});
+		};
+	}
+
+	function store(contact) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, contact).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function update(contact) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + contact.id, contact).then(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function setContact(contact) {
+		return { type: TYPE + '_SET_CONTACT', payload: contact };
+	}
+
+/***/ },
+/* 467 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _clean_object = __webpack_require__(236);
+
+	var _clean_object2 = _interopRequireDefault(_clean_object);
+
+	var _form_select = __webpack_require__(279);
+
+	var _form_select2 = _interopRequireDefault(_form_select);
+
+	var _sectors = __webpack_require__(468);
+
+	var _sectors2 = _interopRequireDefault(_sectors);
+
+	var _cities = __webpack_require__(469);
+
+	var _cities2 = _interopRequireDefault(_cities);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+	  getInitialState: function getInitialState() {
+	    return {
+	      company: {}
+	    };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    if (this.props.company && Object.keys(this.props.company).length) {
+	      company = this.props.company;
+	      this.setState({ company: company });
+	    }
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    var company = props.company;
+
+
+	    if (company && Object.keys(company).length) {
+	      this.setState({ company: company });
+	    }
+	  },
+	  clean: function clean(e) {
+	    e.preventDefault();
+
+	    this.setState({ company: (0, _clean_object2.default)(this.state.company) });
+	    if (this.props.onCancel) {
+	      this.props.onCancel();
+	    }
+	  },
+	  handleChange: function handleChange() {
+	    var refs = this.refs;
+
+
+	    var company = _extends({}, this.state.company, {
+	      name: refs.name.value,
+	      nit: refs.nit.value,
+	      sector: refs.sector.refs.select.value,
+	      city: refs.city.refs.select.value,
+	      address: refs.address.value,
+	      phone: refs.phone.value,
+	      web: refs.web.value,
+	      comment: refs.comment.value,
+	      type: ''
+	    });
+
+	    this.setState({ company: company });
+	  },
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    var company = this.state.company;
+	    if (typeof this.props.onSubmit === 'function') {
+	      this.props.onSubmit(company);
+	    }
+	  },
+	  render: function render() {
+	    var company = this.state.company;
+	    var btnCleanText = this.props.btnCleanText || 'limpiar';
+	    var btnStoreText = this.props.btnStoreText || _react2.default.createElement('i', { className: 'fa fa-chevron-right' });
+
+	    return _react2.default.createElement(
+	      'form',
+	      { onSubmit: function onSubmit(e) {
+	          return e.preventDefault();
+	        } },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-6' },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'name',
+	            onChange: this.handleChange,
+	            value: company.name,
+	            placeholder: 'Raz\xF3n social'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-6' },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'nit',
+	            onChange: this.handleChange,
+	            value: company.nit,
+	            placeholder: 'Nit'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-6' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'sector',
+	            options: _sectors2.default,
+	            'default': 'Seleccionar sector',
+	            onSelectChange: this.handleChange,
+	            value: company.sector
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-6' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'city',
+	            options: _cities2.default,
+	            'default': 'Seleccionar ciudad',
+	            onSelectChange: this.handleChange,
+	            value: company.city
+	          })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group' },
+	        _react2.default.createElement('input', {
+	          className: 'form-control',
+	          ref: 'address',
+	          onChange: this.handleChange,
+	          value: company.address,
+	          placeholder: 'Direcci\xF3n'
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-lg-6' },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'phone',
+	            onChange: this.handleChange,
+	            value: company.phone,
+	            placeholder: 'Tel\xE9fono'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-lg-6' },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'web',
+	            onChange: this.handleChange,
+	            value: company.web,
+	            placeholder: 'Web'
+	          })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group' },
+	        _react2.default.createElement('textarea', {
+	          className: 'form-control',
+	          ref: 'comment',
+	          onChange: this.handleChange,
+	          value: company.comment,
+	          placeholder: 'Comentario'
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        {
+	          className: 'btn btn-primary btn-sm pull-right',
+	          onClick: this.handleSubmit },
+	        btnStoreText
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        {
+	          className: 'btn btn-default btn-sm',
+	          onClick: this.clean },
+	        btnCleanText
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 468 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Administración gubernamental",
+			"label": "Administración gubernamental"
+		},
+		{
+			"value": "Alimentación y bebidas",
+			"label": "Alimentación y bebidas"
+		},
+		{
+			"value": "Almacenamiento",
+			"label": "Almacenamiento"
+		},
+		{
+			"value": "Animación",
+			"label": "Animación"
+		},
+		{
+			"value": "Apuestas y casinos",
+			"label": "Apuestas y casinos"
+		},
+		{
+			"value": "Arquitectura y planificación",
+			"label": "Arquitectura y planificación"
+		},
+		{
+			"value": "Artículos de consumo",
+			"label": "Artículos de consumo"
+		},
+		{
+			"value": "Asuntos internacionales",
+			"label": "Asuntos internacionales"
+		},
+		{
+			"value": "Atención sanitaria y hospitalaria",
+			"label": "Atención sanitaria y hospitalaria"
+		},
+		{
+			"value": "Automatización industrial",
+			"label": "Automatización industrial"
+		},
+		{
+			"value": "Banca",
+			"label": "Banca"
+		},
+		{
+			"value": "Banca de inversiones",
+			"label": "Banca de inversiones"
+		},
+		{
+			"value": "Bienes inmobiliarios",
+			"label": "Bienes inmobiliarios"
+		},
+		{
+			"value": "Construcción",
+			"label": "Construcción"
+		},
+		{
+			"value": "Comercializadora",
+			"label": "Comercializadora"
+		},
+		{
+			"value": "Consultores",
+			"label": "Consultores"
+		},
+		{
+			"value": "Derecho",
+			"label": "Derecho"
+		},
+		{
+			"value": "Desarrollo de programación",
+			"label": "Desarrollo de programación"
+		},
+		{
+			"value": "Desarrollo de software",
+			"label": "Desarrollo de software"
+		},
+		{
+			"value": "Diseño",
+			"label": "Diseño"
+		},
+		{
+			"value": "Dotación y selección de personal",
+			"label": "Dotación y selección de personal"
+		},
+		{
+			"value": "Educación primaria secundaria",
+			"label": "Educación primaria/secundaria"
+		},
+		{
+			"value": "Electrónica de consumo",
+			"label": "Electrónica de consumo"
+		},
+		{
+			"value": "Enseñanza superior",
+			"label": "Enseñanza superior"
+		},
+		{
+			"value": "Entretenimiento",
+			"label": "Entretenimiento"
+		},
+		{
+			"value": "Eventos",
+			"label": "Eventos"
+		},
+		{
+			"value": "Financiero",
+			"label": "Financiero"
+		},
+		{
+			"value": "Hostelería",
+			"label": "Hostelería"
+		},
+		{
+			"value": "Marketing y publicidad",
+			"label": "Marketing y publicidad"
+		},
+		{
+			"value": "Ingeniería",
+			"label": "Ingeniería"
+		},
+		{
+			"value": "Ocio, viajes y turismo",
+			"label": "Ocio, viajes y turismo"
+		},
+		{
+			"value": "Organización política",
+			"label": "Organización política"
+		},
+		{
+			"value": "Recursos humanos",
+			"label": "Recursos humanos"
+		},
+		{
+			"value": "Restaurantes",
+			"label": "Restaurantes"
+		},
+		{
+			"value": "Salud",
+			"label": "Salud"
+		},
+		{
+			"value": "Seguridad",
+			"label": "Seguridad"
+		},
+		{
+			"value": "Sistemas",
+			"label": "Sistemas"
+		},
+		{
+			"value": "Soluciones de software",
+			"label": "Soluciones de software"
+		},
+		{
+			"value": "Telecomunicaciones",
+			"label": "Telecomunicaciones"
+		}
+	];
+
+/***/ },
+/* 469 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Bogotá",
+			"label": "Bogotá"
+		},
+		{
+			"value": "Medellín",
+			"label": "Medellín"
+		},
+		{
+			"value": "Cali",
+			"label": "Cali"
+		},
+		{
+			"value": "Barranquilla",
+			"label": "Barranquilla"
+		},
+		{
+			"value": "Cartagena",
+			"label": "Cartagena"
+		},
+		{
+			"value": "Cúcuta",
+			"label": "Cúcuta"
+		},
+		{
+			"value": "Soledad",
+			"label": "Soledad"
+		},
+		{
+			"value": "Ibagué",
+			"label": "Ibagué"
+		},
+		{
+			"value": "Bucaramanga",
+			"label": "Bucaramanga"
+		},
+		{
+			"value": "Santa Marta",
+			"label": "Santa Marta"
+		},
+		{
+			"value": "Pereira",
+			"label": "Pereira"
+		},
+		{
+			"value": "Villavicencio",
+			"label": "Villavicencio"
+		},
+		{
+			"value": "Bello",
+			"label": "Bello"
+		},
+		{
+			"value": "Valledupar",
+			"label": "Valledupar"
+		},
+		{
+			"value": "Pasto",
+			"label": "Pasto"
+		},
+		{
+			"value": "Montería",
+			"label": "Montería"
+		},
+		{
+			"value": "Manizales",
+			"label": "Manizales"
+		},
+		{
+			"value": "Buenaventura",
+			"label": "Buenaventura"
+		},
+		{
+			"value": "Neiva",
+			"label": "Neiva"
+		},
+		{
+			"value": "Palmira",
+			"label": "Palmira"
+		},
+		{
+			"value": "Armenia",
+			"label": "Armenia"
+		},
+		{
+			"value": "Popayán",
+			"label": "Popayán"
+		},
+		{
+			"value": "Sincelejo",
+			"label": "Sincelejo"
+		},
+		{
+			"value": "Floridablanca",
+			"label": "Floridablanca"
+		},
+		{
+			"value": "Itagüí",
+			"label": "Itagüí"
+		},
+		{
+			"value": "Riohacha",
+			"label": "Riohacha"
+		},
+		{
+			"value": "Envigado",
+			"label": "Envigado"
+		},
+		{
+			"value": "Tuluá",
+			"label": "Tuluá"
+		}
+	];
+
+/***/ },
+/* 470 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _clean_object = __webpack_require__(236);
+
+	var _clean_object2 = _interopRequireDefault(_clean_object);
+
+	var _form_input = __webpack_require__(471);
+
+	var _form_input2 = _interopRequireDefault(_form_input);
+
+	var _form_select = __webpack_require__(279);
+
+	var _form_select2 = _interopRequireDefault(_form_select);
+
+	var _form_textarea = __webpack_require__(472);
+
+	var _form_textarea2 = _interopRequireDefault(_form_textarea);
+
+	var _pay_methods = __webpack_require__(473);
+
+	var _pay_methods2 = _interopRequireDefault(_pay_methods);
+
+	var _found_us = __webpack_require__(474);
+
+	var _found_us2 = _interopRequireDefault(_found_us);
+
+	var _how_call = __webpack_require__(475);
+
+	var _how_call2 = _interopRequireDefault(_how_call);
+
+	var _gender = __webpack_require__(476);
+
+	var _gender2 = _interopRequireDefault(_gender);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var contactForm = _react2.default.createClass({
+	  displayName: 'contactForm',
+	  getInitialState: function getInitialState() {
+	    return {
+	      contact: {
+	        company_id: null,
+	        comment: ''
+	      }
+	    };
+	  },
+	  handleChange: function handleChange() {
+	    var ref = this.refs;
+
+	    var contact = _extends({}, this.state.contact, {
+	      name: ref.name.value,
+	      lastname: ref.lastname.value,
+	      gender: ref.gender.refs.select.value,
+	      email: ref.email.value,
+	      title: ref.title.value,
+	      position: ref.position.value,
+	      phone_1: ref.phone_1.value,
+	      phone_2: ref.phone_2.value,
+	      mobile_1: ref.mobile_1.value,
+	      mobile_2: ref.mobile_2.value,
+	      fax: ref.fax.value,
+	      pay_method: ref.pay_method.refs.select.value,
+	      found_us: ref.found_us.refs.select.value,
+	      who_call: ref.who_call.refs.select.value,
+	      comment: ref.comment.refs.textarea.value
+	    });
+
+	    this.setState({ contact: contact });
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.contact && Object.keys(props.contact).length) {
+	      this.setState({ contact: props.contact });
+	    } else {
+	      this.setState({ contact: (0, _clean_object2.default)(this.state.contact) });
+	    }
+
+	    if (props.company_id) {
+	      this.setState({
+	        contact: _extends({}, this.state.contact, { company_id: props.company_id })
+	      });
+	    }
+	  },
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    if (typeof this.props.onSubmit === 'function') {
+	      this.props.onSubmit(this.state.contact);
+	    }
+	  },
+	  clean: function clean(e) {
+	    e.preventDefault();
+	    this.setState({ contact: (0, _clean_object2.default)(this.state.contact) });
+	    if (this.props.onCancel) {
+	      this.props.onCancel();
+	    }
+	  },
+	  render: function render() {
+	    var contact = this.state.contact;
+	    var size = this.props.size || 'col-md-6';
+	    var btnText = this.props.btnText || _react2.default.createElement('i', { className: 'fa fa-chevron-right' });
+
+	    return _react2.default.createElement(
+	      'form',
+	      { onSubmit: this.handleSubmit },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'name',
+	            onChange: this.handleChange,
+	            value: contact.name,
+	            placeholder: 'Nombre'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'lastname',
+	            onChange: this.handleChange,
+	            value: contact.lastname,
+	            placeholder: 'Apellido'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'gender',
+	            options: _gender2.default,
+	            'default': 'Seleccionar g\xE9nero',
+	            onSelectChange: this.handleChange,
+	            value: contact.gender
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'email',
+	            onChange: this.handleChange,
+	            value: contact.email,
+	            placeholder: 'Correo'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'title',
+	            onChange: this.handleChange,
+	            value: contact.title,
+	            placeholder: 'T\xEDtulo'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'position',
+	            onChange: this.handleChange,
+	            value: contact.position,
+	            placeholder: 'Posici\xF3n'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'phone_1',
+	            onChange: this.handleChange,
+	            value: contact.phone_1,
+	            placeholder: 'Tel\xE9fono'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'phone_2',
+	            onChange: this.handleChange,
+	            value: contact.phone_2,
+	            placeholder: 'Tel\xE9fono'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'mobile_1',
+	            onChange: this.handleChange,
+	            value: contact.mobile_1,
+	            placeholder: 'Celular'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'mobile_2',
+	            onChange: this.handleChange,
+	            value: contact.mobile_2,
+	            placeholder: 'Celular'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'fax',
+	            onChange: this.handleChange,
+	            value: contact.fax,
+	            placeholder: 'Fax'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement('input', {
+	            className: 'form-control',
+	            ref: 'fax',
+	            onChange: this.handleChange,
+	            value: contact.birthday,
+	            placeholder: 'Cumplea\xF1os: 07/07/1980'
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'pay_method',
+	            options: _pay_methods2.default,
+	            'default': 'Seleccionar m\xE9todo de pago',
+	            onSelectChange: this.handleChange,
+	            value: contact.pay_method
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'found_us',
+	            options: _found_us2.default,
+	            'default': 'Seleccionar como nos encontro',
+	            onSelectChange: this.handleChange,
+	            value: contact.found_us
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: "form-group " + size },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'who_call',
+	            options: _how_call2.default,
+	            'default': 'Seleccionar quien llam\xF3',
+	            onSelectChange: this.handleChange,
+	            value: contact.who_call
+	          })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group' },
+	        _react2.default.createElement(_form_textarea2.default, {
+	          ref: 'comment',
+	          onTextareaChange: this.handleChange,
+	          value: contact.comment,
+	          placeholder: 'Comentario'
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-12' },
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.clean, className: 'btn btn-default btn-sm pull-left' },
+	          'Cancelar'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-primary btn-sm pull-right' },
+	          btnText
+	        )
+	      )
+	    );
+	  }
+	});
+
+	exports.default = contactForm;
+
+/***/ },
+/* 471 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+
+	  handleChange: function handleChange() {
+	    this.props.onInputChange();
+	  },
+
+	  render: function render() {
+	    return React.createElement('input', {
+	      type: 'text',
+	      ref: 'input',
+	      className: 'form-control',
+	      placeholder: this.props.placeholder,
+	      value: this.props.value,
+	      onChange: this.handleChange
+	    });
+	  }
+	});
+
+/***/ },
+/* 472 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      value: ''
+	    };
+	  },
+
+
+	  handleChange: function handleChange() {
+	    this.props.onTextareaChange();
+	  },
+
+	  render: function render() {
+	    var value = this.props.value;
+
+
+	    return _react2.default.createElement('textarea', {
+	      className: 'form-control',
+	      ref: 'textarea',
+	      placeholder: this.props.placeholder,
+	      onChange: this.handleChange,
+	      value: value
+	    });
+	  }
+	});
+
+/***/ },
+/* 473 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "anticipado",
+			"label": "Anticipado"
+		},
+		{
+			"value": "30",
+			"label": "30 Días"
+		},
+		{
+			"value": "45",
+			"label": "45 Días"
+		},
+		{
+			"value": "60",
+			"label": "60 Días"
+		}
+	];
+
+/***/ },
+/* 474 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Asesores Comerciales",
+			"label": "Asesores comerciales"
+		},
+		{
+			"value": "Cliente",
+			"label": "Cliente"
+		},
+		{
+			"value": "Página Web Avante",
+			"label": "Página Web Avante"
+		},
+		{
+			"value": "Google Adwords",
+			"label": "Google Adwords"
+		},
+		{
+			"value": "Referido",
+			"label": "Referido"
+		},
+		{
+			"value": "Promoción",
+			"label": "Promoción"
+		},
+		{
+			"value": "Paginas Amarillas",
+			"label": "Paginas Amarillas"
+		},
+		{
+			"value": "Paginas Amarillas Web",
+			"label": "Paginas Amarillas Web"
+		},
+		{
+			"value": "Teléfono",
+			"label": "Teléfono"
+		},
+		{
+			"value": "Redes Sociales",
+			"label": "Redes Sociales"
+		},
+		{
+			"value": "Banner",
+			"label": "Banner"
+		},
+		{
+			"value": "Otros",
+			"label": "Otros"
+		}
+	];
+
+/***/ },
+/* 475 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Nosotros",
+			"label": "Nosotros"
+		},
+		{
+			"value": "Cliente",
+			"label": "Cliente"
+		}
+	];
+
+/***/ },
+/* 476 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Masculino",
+			"label": "Masculino"
+		},
+		{
+			"value": "Femenino",
+			"label": "Femenino"
+		}
+	];
+
+/***/ },
+/* 477 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _contact = __webpack_require__(478);
+
+	var _contact2 = _interopRequireDefault(_contact);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'list',
+	  handleEdit: function handleEdit(contact) {
+	    console.log(contact);
+	    this.props.onEdit(contact);
+	  },
+	  render: function render() {
+	    var _this = this;
+
+	    var contacts = this.props.contacts;
+
+	    var contactNodes = contacts.map(function (contact) {
+	      return _react2.default.createElement(_contact2.default, { key: contact.id, contact: contact, onEdit: _this.handleEdit });
+	    });
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'table-responsive' },
+	      _react2.default.createElement(
+	        'table',
+	        { className: 'table' },
+	        _react2.default.createElement(
+	          'thead',
+	          null,
+	          _react2.default.createElement(
+	            'tr',
+	            null,
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Nombre'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Email'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Tel\xE9fonos'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Celulares'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Empresa'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Opciones'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'tbody',
+	          null,
+	          contactNodes
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 478 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'contact',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      contact: {}
+	    };
+	  },
+	  handleClick: function handleClick() {
+	    var _props = this.props,
+	        onEdit = _props.onEdit,
+	        contact = _props.contact;
+
+	    if (typeof onEdit === 'function') {
+	      onEdit(contact);
+	    }
+	  },
+	  render: function render() {
+	    var _props$contact = this.props.contact,
+	        name = _props$contact.name,
+	        lastname = _props$contact.lastname,
+	        email = _props$contact.email,
+	        phone_1 = _props$contact.phone_1,
+	        phone_2 = _props$contact.phone_2,
+	        mobile_1 = _props$contact.mobile_1,
+	        mobile_2 = _props$contact.mobile_2,
+	        company = _props$contact.company;
+
+
+	    return _react2.default.createElement(
+	      'tr',
+	      null,
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        name,
+	        ' ',
+	        lastname
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        email
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        phone_1,
+	        ' ',
+	        phone_2
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        mobile_1,
+	        ' ',
+	        mobile_2
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        company ? company.name : ''
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-sm', onClick: this.handleClick },
+	          'Editar'
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 479 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'loader',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      show: false
+	    };
+	  },
+	  render: function render() {
+	    var style = this.props.show ? { color: '#3B2B7F', margin: '15px auto', display: 'block' } : { display: 'none' };
+
+	    return _react2.default.createElement('i', { className: 'fa fa-spinner fa-pulse fa-3x fa-fw', style: style });
+	  }
+	});
+
+/***/ },
+/* 480 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _underscore = __webpack_require__(273);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _loader = __webpack_require__(479);
+
+	var _loader2 = _interopRequireDefault(_loader);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'autocomplete',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      collection: [],
+	      field: 'name',
+	      placeholder: "Buscar",
+	      loading: false
+	    };
+	  },
+	  search: function search(e) {
+	    var query = e.currentTarget.value;
+	    if (typeof this.props.search == 'function') {
+	      this.props.search(query);
+	    }
+	  },
+	  resultSelected: function resultSelected(model) {
+	    var query = {};
+	    query[this.props.field] = model;
+	    var result = _underscore2.default.where(this.props.collection, query);
+	    if (typeof this.props.selected == 'function') {
+	      this.props.selected(result);
+	    }
+	  },
+	  render: function render() {
+	    var _this = this;
+
+	    var options = this.props.collection.map(function (model) {
+	      return model[_this.props.field];
+	    });
+
+	    var results = options.map(function (model, i) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: i, className: 'list-group-item', onClick: _this.resultSelected.bind(_this, model) },
+	        model
+	      );
+	    });
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'form-group' },
+	      _react2.default.createElement('input', {
+	        placeholder: 'Buscar empresa',
+	        type: 'text',
+	        onChange: _underscore2.default.throttle(this.search, 1000),
+	        className: 'form-control'
+	      }),
+	      _react2.default.createElement(_loader2.default, { show: this.props.loading }),
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'list-group' },
+	        results
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 481 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(286);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _reactRedux = __webpack_require__(35);
+
+	var _quotations = __webpack_require__(246);
+
+	var action = _interopRequireWildcard(_quotations);
+
+	var _services = __webpack_require__(482);
+
+	var serviceAction = _interopRequireWildcard(_services);
+
+	var _activities = __webpack_require__(398);
+
+	var activityAction = _interopRequireWildcard(_activities);
+
+	var _products = __webpack_require__(483);
+
+	var productAction = _interopRequireWildcard(_products);
+
+	var _trackings = __webpack_require__(484);
+
+	var trackingAction = _interopRequireWildcard(_trackings);
+
+	var _contacts = __webpack_require__(466);
+
+	var contactAction = _interopRequireWildcard(_contacts);
+
+	var _contact = __webpack_require__(485);
+
+	var _contact2 = _interopRequireDefault(_contact);
+
+	var _filters = __webpack_require__(486);
+
+	var _filters2 = _interopRequireDefault(_filters);
+
+	var _edit = __webpack_require__(489);
+
+	var _edit2 = _interopRequireDefault(_edit);
+
+	var _status = __webpack_require__(490);
+
+	var _status2 = _interopRequireDefault(_status);
+
+	var _products2 = __webpack_require__(492);
+
+	var _products3 = _interopRequireDefault(_products2);
+
+	var _services2 = __webpack_require__(497);
+
+	var _services3 = _interopRequireDefault(_services2);
+
+	var _comment = __webpack_require__(498);
+
+	var _comment2 = _interopRequireDefault(_comment);
+
+	var _mails = __webpack_require__(499);
+
+	var _mails2 = _interopRequireDefault(_mails);
+
+	var _no_effective = __webpack_require__(500);
+
+	var _no_effective2 = _interopRequireDefault(_no_effective);
+
+	var _no_send = __webpack_require__(502);
+
+	var _no_send2 = _interopRequireDefault(_no_send);
+
+	var _times = __webpack_require__(504);
+
+	var _times2 = _interopRequireDefault(_times);
+
+	var _activity = __webpack_require__(505);
+
+	var _activity2 = _interopRequireDefault(_activity);
+
+	var _trackings2 = __webpack_require__(506);
+
+	var _trackings3 = _interopRequireDefault(_trackings2);
+
+	var _section = __webpack_require__(400);
+
+	var _section2 = _interopRequireDefault(_section);
+
+	var _alert = __webpack_require__(510);
+
+	var _alert2 = _interopRequireDefault(_alert);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var quotationSection = _react2.default.createClass({
+	  displayName: 'quotationSection',
+
+	  alert: null,
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      showComment: false,
+	      showMail: false,
+	      showNoEffective: false,
+	      showNoSend: false,
+	      showErrors: false,
+	      disabled: false
+	    };
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    this.fetchQuotation();
+	  },
+
+	  fetchQuotation: function fetchQuotation() {
+	    var _this = this;
+
+	    var _props = this.props,
+	        params = _props.params,
+	        dispatch = _props.dispatch;
+
+
+	    dispatch(action.fetchOne(params.id)).then(function (actionRes) {
+	      var query = { quotation_id: params.id };
+	      _this.handleDisabled(actionRes.payload.status);
+	      dispatch(productAction.fetch(query));
+	      dispatch(action.fetchServices(params.id));
+	      dispatch(activityAction.fetch(query));
+	      dispatch(trackingAction.fetch(query));
+	      dispatch(contactAction.fetch(query));
+	      dispatch(serviceAction.fetch());
+	    });
+	  },
+
+	  setActivity: function setActivity(message) {
+	    var _props2 = this.props,
+	        user = _props2.user,
+	        quotations = _props2.quotations;
+
+
+	    var activity = {
+	      message: message,
+	      user_id: user.user.id,
+	      quotation_id: quotations.quotation.id
+	    };
+
+	    return this.props.dispatch(activityAction.store(activity));
+	  },
+
+
+	  handleShowComment: function handleShowComment() {
+	    var show = true;
+	    if (this.state.showComment) {
+	      show = false;
+	    }
+
+	    this.setState({ showComment: show });
+	  },
+
+	  handleShowMail: function handleShowMail() {
+	    this.setState({ showMail: !this.state.showMail });
+	  },
+	  handleShowNoEffective: function handleShowNoEffective() {
+	    this.setState({ showNoEffective: !this.state.showNoEffective });
+	  },
+	  handleShowNoSend: function handleShowNoSend() {
+	    this.setState({ showNoSend: !this.state.showNoSend });
+	  },
+	  handleOptions: function handleOptions(filters, message) {
+	    var _this2 = this;
+
+	    var quotations = this.props.quotations;
+
+
+	    this.setActivity(message).then(function () {
+	      var data = _extends({}, quotations.quotation, filters);
+	      _this2._update(data);
+	    });
+	  },
+
+
+	  handleSaveComment: function handleSaveComment(comment) {
+	    var _this3 = this;
+
+	    this.setActivity('edito el comentario').then(function () {
+	      _this3._update({ comment: comment });
+	      _this3.setState({ showComment: false });
+	    });
+	  },
+
+	  handleSaveMail: function handleSaveMail(mail) {
+	    var _this4 = this;
+
+	    this.setActivity('edito el mail').then(function () {
+	      _this4.alert.show();
+	      _this4._update(mail);
+	      _this4.setState({ showMail: false });
+	    });
+	  },
+
+	  handleServiceApproval: function handleServiceApproval(serviceApproval) {
+	    this._update({ service_approval: serviceApproval });
+	  },
+
+	  handleSaveNoEffective: function handleSaveNoEffective(status) {
+	    this._update(status);
+	    this.setState({
+	      showNoEffective: false,
+	      showNoSend: false
+	    });
+	  },
+
+	  handleStatus: function handleStatus(status, message) {
+	    var _this5 = this;
+
+	    this.setActivity(message).then(function () {
+	      _this5._update(status);
+	    });
+	  },
+
+	  changeContact: function changeContact(contactId) {
+	    this._update({ contact_id: contactId });
+	  },
+
+	  _update: function _update(data) {
+	    var quo = _extends({}, this.props.quotations.quotation, data);
+	    this.props.dispatch(action.update(this.props.params.id, quo)).then(this.handleUpdate);
+	  },
+	  handleUpdate: function handleUpdate(actionRes) {
+	    if (actionRes.type == 'QUOTATIONS_FAIL') {
+	      return this.setState({ showErrors: true });
+	    } else {
+	      return this.handleDisabled(actionRes.payload.status);
+	    }
+	  },
+	  handleDisabled: function handleDisabled(status) {
+	    var disabled = false;
+
+	    if (status !== 'Borrador') {
+	      disabled = true;
+	    }
+
+	    this.setState({
+	      disabled: disabled,
+	      showErrors: false
+	    });
+	  },
+	  render: function render() {
+	    var quotation = this.props.quotations.quotation;
+	    var user = this.props.user.user;
+
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_alert2.default, {
+	        show: this.props.quotations.errors.length ? true : false,
+	        message: this.props.quotations.errors
+	      }),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-12' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body quo-header' },
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'h4',
+	                null,
+	                'Cotizaci\xF3n ',
+	                quotation.id,
+	                ' \u2022 ',
+	                quotation.status,
+	                ' \u2022'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'quo-header__priority' },
+	              _react2.default.createElement(
+	                'h5',
+	                null,
+	                'Prioridad: ',
+	                _react2.default.createElement('div', { className: 'priority priority--' + quotation.priority })
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-9' },
+	        _react2.default.createElement(_filters2.default, {
+	          onChange: this.handleOptions,
+	          quotation: quotation,
+	          user: user,
+	          disabled: this.state.disabled
+	        }),
+	        _react2.default.createElement(_edit2.default, {
+	          quotation: quotation,
+	          onShowComment: this.handleShowComment,
+	          onShowMails: this.handleShowMail,
+	          onServiceApproval: this.handleServiceApproval
+	        }),
+	        _react2.default.createElement(_comment2.default, {
+	          show: this.state.showComment,
+	          onClose: this.handleShowComment,
+	          comment: quotation.comment,
+	          OnSaveComment: this.handleSaveComment
+	        }),
+	        _react2.default.createElement(_mails2.default, {
+	          show: this.state.showMail,
+	          onClose: this.handleShowMail,
+	          quotation: quotation,
+	          onSaveMail: this.handleSaveMail
+	        }),
+	        _react2.default.createElement(_products3.default, _extends({}, this.props, {
+	          quotationId: quotation.id,
+	          disabled: this.state.disabled
+	        })),
+	        _react2.default.createElement(_services3.default, {
+	          quotationId: quotation.id,
+	          disabled: this.state.disabled
+	        }),
+	        _react2.default.createElement(_status2.default, _extends({}, this.props, {
+	          quotation: quotation,
+	          handleOpenNoEffective: this.handleShowNoEffective,
+	          handleOpenNoSend: this.handleShowNoSend,
+	          onStatusChange: this.handleStatus,
+	          disabled: this.state.disabled
+	        })),
+	        _react2.default.createElement(_no_effective2.default, {
+	          quotation: quotation,
+	          show: this.state.showNoEffective,
+	          onSave: this.handleSaveNoEffective
+	        }),
+	        _react2.default.createElement(_no_send2.default, {
+	          quotation: quotation,
+	          show: this.state.showNoSend,
+	          onSave: this.handleSaveNoEffective
+	        }),
+	        _react2.default.createElement(_trackings3.default, _extends({}, this.props, { quotationId: quotation.id })),
+	        _react2.default.createElement(_section2.default, { quotation_id: this.props.params.id })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-3' },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_contact2.default, _extends({}, this.props, {
+	            changeContact: this.changeContact
+	          })),
+	          _react2.default.createElement(_times2.default, { quotation: quotation }),
+	          _react2.default.createElement(_activity2.default, {
+	            quotationId: quotation.id,
+	            activities: this.props.activities.items,
+	            user: this.props.user.user
+	          })
+	        )
+	      )
+	    );
+	  }
+	});
+
+	exports.default = (0, _reactRedux.connect)(function (store) {
+	  return store;
+	})(quotationSection);
+
+/***/ },
+/* 482 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+	exports.setService = setService;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'SERVICES';
+	var endpoint = 'api/v1/services';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err });
+			});
+		};
+	}
+
+	function store(service) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, service).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function update(service) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + service.id, service).end(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function setService(service) {
+		return function (dispatch) {
+			return new Promise(function (resolve, reject) {
+				var action = { type: TYPE + '_SET_SERVICE', payload: service };
+				dispatch(action);
+				return resolve(action);
+			});
+		};
+	}
+
+/***/ },
+/* 483 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+	exports.update = update;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'PRODUCTS';
+	var endpoint = '/api/v1/products';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function store(product) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, product).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function update(product) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + product.id, product).then(function (res) {
+				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+/***/ },
+/* 484 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetch = fetch;
+	exports.store = store;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TYPE = 'TRACKINGS';
+	var endpoint = '/api/v1/trackings';
+
+	function fetch() {
+		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+		return function (dispatch) {
+			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function store(product) {
+		return function (dispatch) {
+			return _axios2.default.post(endpoint, product).then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+/***/ },
+/* 485 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _contacts = __webpack_require__(466);
+
+	var action = _interopRequireWildcard(_contacts);
+
+	var _form_create = __webpack_require__(470);
+
+	var _form_create2 = _interopRequireDefault(_form_create);
+
+	var _form_select = __webpack_require__(279);
+
+	var _form_select2 = _interopRequireDefault(_form_select);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      showForm: false
+	    };
+	  },
+
+	  changeContact: function changeContact(e) {
+	    var id = e.currentTarget.value;
+	    this.props.changeContact(id);
+	  },
+
+	  showForm: function showForm() {
+	    this.setState({ showForm: !this.state.showForm });
+	  },
+
+	  handleSubmit: function handleSubmit(contact) {
+	    var _this = this;
+
+	    var contactData = _extends({}, contact, { company_id: this.props.quotations.company.id });
+	    this.props.dispatch(action.store(contactData)).then(function () {
+	      _this.showForm();
+	    });
+	  },
+
+	  show: function show(field) {
+	    if (field && field != "") {
+	      return "";
+	    }
+
+	    return "hidden";
+	  },
+
+
+	  render: function render() {
+	    var _props$quotations = this.props.quotations,
+	        contact = _props$quotations.contact,
+	        company = _props$quotations.company;
+
+	    var contactSelect = void 0;
+
+	    var contactOptions = this.props.contacts.items.map(function (contact, i) {
+	      return { value: contact.id, label: contact.name + ' ' + contact.lastname };
+	    });
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'panel' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-body' },
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-primary btn-sm', onClick: this.showForm },
+	          'Agregar contacto'
+	        ),
+	        _react2.default.createElement('hr', null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.state.showForm ? "" : "hidden" },
+	          _react2.default.createElement(_form_create2.default, {
+	            size: 'col-md-12',
+	            btnText: 'Guardar',
+	            onSubmit: this.handleSubmit
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'b',
+	          { className: this.show(company.name) },
+	          company.name,
+	          _react2.default.createElement('hr', null)
+	        ),
+	        _react2.default.createElement(
+	          'b',
+	          { className: this.show(contact.name) },
+	          contact.name,
+	          ' ',
+	          contact.lastname,
+	          _react2.default.createElement('hr', null)
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: this.show(contact.email) },
+	          contact.email,
+	          _react2.default.createElement('hr', null)
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: this.show(contact.phone_1) },
+	          contact.phone_1,
+	          _react2.default.createElement('hr', null)
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: this.show(contact.phone_2) },
+	          ' ',
+	          contact.phone_2,
+	          _react2.default.createElement('hr', null)
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: this.show(contact.mobile_1) },
+	          contact.mobile_1,
+	          _react2.default.createElement('hr', null)
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: this.show(contact.mobile_2) },
+	          ' ',
+	          contact.mobile_2
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group' },
+	          _react2.default.createElement(_form_select2.default, {
+	            options: contactOptions,
+	            'default': 'Cambiar Contacto',
+	            onSelectChange: this.changeContact,
+	            value: ''
+	          })
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 486 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _form_select = __webpack_require__(279);
+
+	var _form_select2 = _interopRequireDefault(_form_select);
+
+	var _category_type = __webpack_require__(487);
+
+	var _category_type2 = _interopRequireDefault(_category_type);
+
+	var _advisors = __webpack_require__(275);
+
+	var _advisors2 = _interopRequireDefault(_advisors);
+
+	var _type = __webpack_require__(276);
+
+	var _type2 = _interopRequireDefault(_type);
+
+	var _client_type = __webpack_require__(277);
+
+	var _client_type2 = _interopRequireDefault(_client_type);
+
+	var _found_us = __webpack_require__(474);
+
+	var _found_us2 = _interopRequireDefault(_found_us);
+
+	var _products = __webpack_require__(488);
+
+	var _products2 = _interopRequireDefault(_products);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var messages = {
+	  type: 'cambio tipo',
+	  type_category: 'cambio categoría',
+	  client_type: 'cambio tipo de cliente',
+	  found_us: 'cambio como llegó',
+	  offer: 'cambio ofrecer producto',
+	  advisor: 'cambio asesor'
+	};
+
+	var quoFilters = _react2.default.createClass({
+	  displayName: 'quoFilters',
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      quotation: {},
+	      disabled: false
+	    };
+	  },
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      filters: {}
+	    };
+	  },
+
+	  handleChange: function handleChange() {
+	    var field = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	    var e = arguments[1];
+
+	    var val = e.currentTarget.value;
+	    var filters = _extends({}, this.state.filters, _defineProperty({}, field, val));
+	    var message = messages[field];
+	    this.props.onChange(filters, message);
+	    this.setState({ filters: filters });
+	  },
+
+
+	  update: function update() {
+	    var filters = {
+	      type: 'cambio tipo de cotización',
+	      type_category: this.refs.type_category.refs.select.value,
+	      client_type: this.refs.client_type.refs.select.value,
+	      found_us: this.refs.found_us.refs.select.value,
+	      offer: this.refs.offer.refs.select.value,
+	      advisor: this.refs.advisor.refs.select.value
+	    };
+
+	    this.props.onChange(filters);
+	    this.setState({ filters: filters });
+	  },
+
+	  render: function render() {
+	    var quotation = this.props.quotation;
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'panel panel-default' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-body' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-4' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'type',
+	            options: _type2.default,
+	            'default': 'Seleccionar tipo',
+	            onSelectChange: this.handleChange.bind(null, 'type'),
+	            value: quotation.type,
+	            disabled: this.props.disabled
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-4' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'type_category',
+	            options: _category_type2.default,
+	            'default': 'Seleccionar categor\xEDa de tipo',
+	            onSelectChange: this.handleChange.bind(null, 'type_category'),
+	            value: quotation.type_category,
+	            disabled: this.props.disabled
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-4' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'client_type',
+	            options: _client_type2.default,
+	            'default': 'Seleccionar tipo de cliente',
+	            onSelectChange: this.handleChange.bind(null, 'client_type'),
+	            value: quotation.client_type,
+	            disabled: this.props.disabled
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-4' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'found_us',
+	            options: _found_us2.default,
+	            'default': 'Seleccionar como lleg\xF3',
+	            onSelectChange: this.handleChange.bind(null, 'found_us'),
+	            value: quotation.found_us,
+	            disabled: this.props.disabled
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-4' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'offer',
+	            options: _products2.default,
+	            'default': 'Seleccionar ofrecer producto',
+	            onSelectChange: this.handleChange.bind(null, 'offer'),
+	            value: quotation.offer,
+	            disabled: this.props.disabled
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group col-sm-4' },
+	          _react2.default.createElement(_form_select2.default, {
+	            ref: 'advisor',
+	            options: _advisors2.default,
+	            'default': 'Seleccionar asesor',
+	            onSelectChange: this.handleChange.bind(null, 'advisor'),
+	            value: quotation.advisor,
+	            disabled: this.props.disabled
+	          })
+	        )
+	      )
+	    );
+	  }
+	});
+
+	exports.default = quoFilters;
+
+/***/ },
+/* 487 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Inventario",
+			"label": "Inventario"
+		},
+		{
+			"value": "Pedido",
+			"label": "Pedido"
+		}
+	];
+
+/***/ },
+/* 488 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"value": "Desktops",
+			"label": "Desktops"
+		},
+		{
+			"value": "Laptops",
+			"label": "Laptops"
+		},
+		{
+			"value": "Apple",
+			"label": "Apple"
+		},
+		{
+			"value": "Servers",
+			"label": "Servers"
+		},
+		{
+			"value": "IT Service",
+			"label": "IT Service"
+		},
+		{
+			"value": "IT Service 24/7",
+			"label": "IT  Service 24/7"
+		},
+		{
+			"value": "Rescate Online",
+			"label": "Rescate Online"
+		},
+		{
+			"value": "Discos Duros Seguros",
+			"label": "Discos Duros Seguros"
+		},
+		{
+			"value": "Networks",
+			"label": "Networks"
+		},
+		{
+			"value": "Complements",
+			"label": "Complements"
+		},
+		{
+			"value": "Printers",
+			"label": "Printers"
+		}
+	];
+
+/***/ },
+/* 489 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      quotation: {
+	        id: 0
+	      }
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      quotation: {}
+	    };
+	  },
+	  openComment: function openComment() {
+	    this.props.onShowComment();
+	  },
+	  openMails: function openMails() {
+	    this.props.onShowMails();
+	  },
+	  handleServiceApproval: function handleServiceApproval() {
+	    var quotation = this.props.quotation;
+	    if (quotation.service_approval === 0) {
+	      this.props.onServiceApproval(1);
+	    } else {
+	      this.props.onServiceApproval(0);
+	    }
+	  },
+	  render: function render() {
+	    var quotation = this.props.quotation;
+	    var serviceApprovalText = 'Quitar aprobación de servicio';
+	    if (quotation.service_approval === 0) {
+	      serviceApprovalText = 'Agregar aprobación de servicio';
+	    }
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'panel' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-body' },
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'list-inline' },
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                href: '/quotations/' + quotation.id + '/pdf/' + quotation.id,
+	                target: '_new' },
+	              'PDF'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                href: '/quotations/' + quotation.id + '/pdfbn',
+	                target: '_blank' },
+	              ' PDF BN'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                href: '/quotations/' + quotation.id + '/pdflogos',
+	                target: '_blank' },
+	              ' PDF con logos'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                href: '/quotations/' + quotation.id + '/duplicate',
+	                className: 'btn btn-default btn-sm' },
+	              'Duplicar'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.openComment },
+	              'Editar Comentario'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.openMails
+	              },
+	              'Editar Mail'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.handleServiceApproval
+	              },
+	              serviceApprovalText
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 490 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _quotations = __webpack_require__(246);
+
+	var action = _interopRequireWildcard(_quotations);
+
+	var _moment = __webpack_require__(286);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _activity = __webpack_require__(491);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      disabled: false
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      sending: false
+	    };
+	  },
+	  handleClick: function handleClick(status, e) {
+	    e.preventDefault(status, e);
+	    var message = { message: 'Cambio estado a ' + status };
+
+	    switch (status) {
+	      case 'Replanteada':
+	        window.location = '/quotations/' + this.props.quotation.id + '/rethink';
+	        break;
+	      case 'No enviada':
+	        this.props.handleOpenNoSend();
+	        break;
+	      case 'No efectiva':
+	        this.props.handleOpenNoEffective();
+	        break;
+	      default:
+	        this.props.onStatusChange({ status: status, message: message });
+	    }
+	  },
+	  handleSend: function handleSend() {
+	    var _this = this;
+
+	    var id = this.props.quotation.id;
+	    var message = 'Cambio estado a enviada';
+	    this.setState({ sending: true });
+
+	    this.props.dispatch(action.sendMail(id)).then(function (actionRes) {
+	      _this.setState({ sending: false });
+	      if (actionRes.type == 'QUOTATIONS_FAIL') {
+	        console.log(actionRes);
+	      } else {
+	        return _this.props.onStatusChange('Enviada', message);
+	      }
+	    });
+	  },
+	  render: function render() {
+	    var sending = this.state.sending ? "disabled" : "";
+	    var messageSend = this.state.sending ? "Enviando..." : "Enviar";
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'panel' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-body' },
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'list-inline' },
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.handleSend, disabled: sending
+	              },
+	              messageSend
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.handleClick.bind(null, 'Entregada'),
+	                disabled: this.props.disabled ? true : false
+	              },
+	              'Entregada'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.handleClick.bind(null, 'Efectiva'),
+	                disabled: this.props.disabled ? true : false
+	              },
+	              'Efectiva'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.handleClick.bind(this, 'No enviada'),
+	                disabled: this.props.disabled ? true : false
+	              },
+	              'No enviada'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.handleClick.bind(this, 'No efectiva'),
+	                disabled: this.props.disabled ? true : false
+	              },
+	              'No efectiva'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.handleClick.bind(this, 'Replanteada')
+	              },
+	              'Replantear'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                disabled: this.props.disabled ? true : false,
+	                onClick: this.handleClick.bind(this, 'Nula')
+	              },
+	              'Anular'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                disabled: this.props.disabled ? true : false,
+	                onClick: this.handleClick.bind(this, 'Por confirmar')
+	              },
+	              'Por confirmar'
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 491 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.storeActivity = storeActivity;
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function storeActivity(data) {
+	    // data = {
+	    //   message: "cambio tipo a Alquiler",
+	    //   quotation_id:"37287"
+	    // };
+
+	    _axios2.default.post('/api/v1/activities').send(data).end(function (err, res) {
+	        console.log(res.body);
+	    });
+	}
+
+/***/ },
+/* 492 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _product = __webpack_require__(493);
+
+	var _product2 = _interopRequireDefault(_product);
+
+	var _form_create = __webpack_require__(494);
+
+	var _form_create2 = _interopRequireDefault(_form_create);
+
+	var _products = __webpack_require__(483);
+
+	var action = _interopRequireWildcard(_products);
+
+	var _underscore = __webpack_require__(273);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _clean_object = __webpack_require__(236);
+
+	var _clean_object2 = _interopRequireDefault(_clean_object);
+
+	var _activity = __webpack_require__(491);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'products',
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      id: null,
+	      disabled: false
+	    };
+	  },
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      product: {},
+	      showForm: false,
+	      errors: []
+	    };
+	  },
+	  _handleSubmit: function _handleSubmit(product) {
+	    this.setState({ product: product });
+	    if (product.id) {
+	      this.props.dispatch(action.update(product)).then(this.handleStoreReponse);
+	    } else {
+	      this.props.dispatch(action.store(product)).then(this.handleStoreReponse);
+	    }
+	  },
+	  handleStoreReponse: function handleStoreReponse(actionRes) {
+	    var payload = actionRes.payload;
+
+	    if (actionRes.type == "PRODUCTS_FAIL") {
+	      var errors = Object.keys(payload).map(function (key) {
+	        return payload[key];
+	      });
+	      this.setState({ errors: errors });
+	    } else {
+	      this.cleanProduct();
+	    }
+	  },
+
+
+	  handleDuplicate: function handleDuplicate(id, e) {
+	    var _this = this;
+
+	    e.preventDefault();
+
+	    request.post('/api/v1/products/' + id + '/duplicate').end(function (err, res) {
+	      _this.setState({
+	        products: _this.state.products.concat([res.body])
+	      });
+	    });
+	  },
+
+	  handleEdit: function handleEdit(product) {
+	    this.setState({
+	      product: product,
+	      showForm: true
+	    });
+	  },
+
+	  handleOrder: function handleOrder(product) {
+	    var _this2 = this;
+
+	    var order = true;
+
+	    if (product.ordered && product.ordered == true || product.ordered == 1) {
+	      order = false;
+	    }
+
+	    var product = _underscore2.default.extend(product, { ordered: order });
+	    this.setState({ product: product });
+
+	    request.put('/api/v1/products/' + product.id).send(product).end(function (err, res) {
+	      _this2.setState({ product: {} });
+	    });
+	  },
+
+	  handleDelete: function handleDelete(id, e) {
+	    var _this3 = this;
+
+	    e.preventDefault();
+	    var products = _underscore2.default.reject(this.state.products, function (company) {
+	      return company.id === id;
+	    });
+
+	    request.del('/api/v1/products/' + id).end(function (err, res) {
+	      _this3.setState({
+	        products: products
+	      });
+	    });
+	  },
+
+	  showForm: function showForm(e) {
+	    var show = !this.state.showForm;
+	    if (show) this.cleanProduct();
+	    this.setState({ showForm: show });
+	  },
+
+	  cleanProduct: function cleanProduct() {
+	    this.setState({
+	      product: (0, _clean_object2.default)(this.state.product),
+	      errors: []
+	    });
+	  },
+
+
+	  render: function render() {
+	    var _this4 = this;
+
+	    var products = this.props.products.items;
+	    var productNodes = products.map(function (product) {
+	      return _react2.default.createElement(_product2.default, {
+	        key: product.id,
+	        product: product,
+	        onEdit: _this4.handleEdit,
+	        onDuplicate: _this4.handleDuplicate,
+	        onOrder: _this4.handleOrder,
+	        onDelete: _this4.handleDelete,
+	        disabled: _this4.props.disabled
+	      });
+	    });
+
+	    var showTable = false;
+
+	    if (products.length > 0) {
+	      showTable = true;
+	    }
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel panel-default' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            'button',
+	            {
+	              className: 'btn btn-primary btn-sm',
+	              onClick: this.showForm,
+	              disabled: this.props.disabled
+	            },
+	            'Agregar producto'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'table-responsive' },
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(
+	              'table',
+	              { className: 'table table-striped' },
+	              _react2.default.createElement(
+	                'thead',
+	                null,
+	                _react2.default.createElement(
+	                  'tr',
+	                  null,
+	                  _react2.default.createElement(
+	                    'th',
+	                    null,
+	                    'Producto'
+	                  ),
+	                  _react2.default.createElement(
+	                    'th',
+	                    null,
+	                    'Tiempo'
+	                  ),
+	                  _react2.default.createElement(
+	                    'th',
+	                    null,
+	                    'Cantidad'
+	                  ),
+	                  _react2.default.createElement(
+	                    'th',
+	                    null,
+	                    'Precio'
+	                  ),
+	                  _react2.default.createElement(
+	                    'th',
+	                    null,
+	                    'Total'
+	                  ),
+	                  _react2.default.createElement(
+	                    'th',
+	                    null,
+	                    'Opciones'
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'tbody',
+	                null,
+	                productNodes
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: this.state.showForm ? "panel panel-default" : "hidden" },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(_form_create2.default, {
+	            onSubmit: this._handleSubmit,
+	            product: this.state.product,
+	            quotationId: this.props.quotationId,
+	            onClose: this.showForm,
+	            errors: this.state.errors
+	          })
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 493 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _numeral = __webpack_require__(458);
+
+	var _numeral2 = _interopRequireDefault(_numeral);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = _react2.default.createClass({
+	  displayName: 'exports',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      product: {}
+	    };
+	  },
+	  render: function render() {
+	    var product = this.props.product;
+	    var period = product.period;
+
+	    var plural = {
+	      Mes: "Meses",
+	      Semana: "Semanas",
+	      Día: "Días",
+	      "15 días": "15 días",
+	      "a 3 días": "a 3 días",
+	      Hora: "Horas",
+	      Servicio: "Servicios",
+	      Venta: "Ventas"
+	    };
+
+	    if (product.lapse > 1) {
+	      period = plural[product.period];
+	    }
+
+	    return _react2.default.createElement(
+	      'tr',
+	      null,
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        product.name
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        product.lapse,
+	        ' ',
+	        period
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        product.quantity
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        (0, _numeral2.default)(product.price).format('0,0')
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        (0, _numeral2.default)(product.total).format('0,0')
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'list-inline' },
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.props.onEdit.bind(null, product),
+	                disabled: this.props.disabled ? true : false
+	              },
+	              'Editar'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.props.onDuplicate.bind(null, product.id),
+	                disabled: this.props.disabled ? true : false
+	              },
+	              'Duplicar'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.props.onOrder.bind(null, product)
+	              },
+	              product.ordered ? "Pedir" : "Pedido"
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                onClick: this.props.onDelete.bind(null, product.id),
+	                disabled: this.props.disabled ? true : false
+	              },
+	              'Eliminar'
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
 /* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -75452,7 +75513,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _products = __webpack_require__(487);
+	var _products = __webpack_require__(488);
 
 	var _products2 = _interopRequireDefault(_products);
 
@@ -76790,7 +76851,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _trackings = __webpack_require__(483);
+	var _trackings = __webpack_require__(484);
 
 	var action = _interopRequireWildcard(_trackings);
 
@@ -77196,7 +77257,7 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _companies = __webpack_require__(464);
+	var _companies = __webpack_require__(465);
 
 	var action = _interopRequireWildcard(_companies);
 
@@ -77204,7 +77265,7 @@
 
 	var _company2 = _interopRequireDefault(_company);
 
-	var _form_create = __webpack_require__(466);
+	var _form_create = __webpack_require__(467);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -77357,7 +77418,7 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _form_create = __webpack_require__(469);
+	var _form_create = __webpack_require__(470);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -77704,11 +77765,11 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _contacts = __webpack_require__(465);
+	var _contacts = __webpack_require__(466);
 
 	var action = _interopRequireWildcard(_contacts);
 
-	var _form_create = __webpack_require__(469);
+	var _form_create = __webpack_require__(470);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -77716,7 +77777,7 @@
 
 	var _filters2 = _interopRequireDefault(_filters);
 
-	var _list = __webpack_require__(476);
+	var _list = __webpack_require__(477);
 
 	var _list2 = _interopRequireDefault(_list);
 
@@ -77834,7 +77895,7 @@
 
 	var _reactRedux = __webpack_require__(35);
 
-	var _services = __webpack_require__(481);
+	var _services = __webpack_require__(482);
 
 	var action = _interopRequireWildcard(_services);
 

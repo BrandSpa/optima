@@ -39,6 +39,8 @@ trait ByStatus {
       'No efectiva',
       'No enviada',
       'Replanteada',
+      'Por Confirmar',
+      'Nula'
     ];
 
     $result = [];

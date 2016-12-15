@@ -2,6 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as action from 'actions/reports';
+import numeral from 'numeral';
 import Advisor from 'views/graphs/advisor';
 import Status from 'views/graphs/status';
 import HowFindUs from 'views/graphs/how_find_us';
@@ -35,6 +36,32 @@ const section = React.createClass({
           <Filters onChange={this.handleFilters}/>
         </div>
 
+        <div className="col-md-3">
+          <div className="panel">
+            <div className="panel-body">
+              <b>Cotizaciones: </b> {data.total_quotations}
+            </div>
+          </div>
+        </div>
+          <div className="col-md-3">
+          <div className="panel">
+            <div className="panel-body">
+              <b>Total: </b>{numeral(data.total_quotations_money).format('0,0') }
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-3">
+          <div className="panel">
+            <div className="panel-body">
+              <b>Promedio cotizaciones enviadas: </b>{data.average_sent} Minutos
+            </div>
+          </div>
+         
+        </div>
+        <div className="col-md-3">
+        </div>
+        
         <Status type={this.state.type} graphsData={data}/>
         <HowFindUs type={this.state.type} graphsData={data}/>
         <Advisor type={this.state.type} graphsData={data}/>
