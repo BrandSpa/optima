@@ -77460,15 +77460,21 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _axios = __webpack_require__(247);
+	var _reactRedux = __webpack_require__(35);
 
-	var _axios2 = _interopRequireDefault(_axios);
+	var _contacts = __webpack_require__(466);
+
+	var action = _interopRequireWildcard(_contacts);
 
 	var _form_create = __webpack_require__(470);
 
@@ -77478,10 +77484,12 @@
 
 	var _contact2 = _interopRequireDefault(_contact);
 
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var Company = _react2.default.createClass({
+	  displayName: 'Company',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      company: {}
@@ -77489,8 +77497,6 @@
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
-	      contact: {},
-	      contacts: [],
 	      showForm: false
 	    };
 	  },
@@ -77498,51 +77504,26 @@
 	    var contactData = _extends({}, contact, { company_id: this.props.company.id });
 
 	    if (contact.id) {
-	      this.updateContact(contactData);
+	      this.props.dispatch(action.update(contact)).then(this.handleSubmitResponse);
 	    } else {
-	      this.storeContact(contactData);
+	      this.props.dispatch(action.store(contact)).then(this.handleSubmitResponse);
 	    }
 	  },
-	  updateContact: function updateContact(contactData) {
-	    var _this = this;
-
-	    _axios2.default.put('/api/v1/contacts/' + contactData.id).send(contactData).end(function (err, res) {
-	      if (err) return _this.setState({ errorMessages: err.response.body });
-	      _this.setState({
-	        contact: {}
-	      });
-	      _this.showForm();
-	    });
-	  },
-	  storeContact: function storeContact(contactData) {
-	    var _this2 = this;
-
-	    _axios2.default.post('/api/v1/contacts').send(contactData).end(function (err, res) {
-	      if (err) return _this2.setState({ errorMessages: err.response.body });
-	      _this2.setState({ contacts: _this2.state.contacts.concat([res.body]) });
-	      _this2.showForm();
-	    });
+	  handleSubmitResponse: function handleSubmitResponse(actionRes) {
+	    this.showForm();
+	    console.log(actionRes);
 	  },
 	  showForm: function showForm() {
 	    this.setState({ showForm: !this.state.showForm });
 	  },
 	  handleEditContact: function handleEditContact(contact, e) {
 	    if (e) e.preventDefault();
-	  },
-	  handleDeleteContact: function handleDeleteContact(contact, e) {
-	    var _this3 = this;
-
-	    e.preventDefault();
-	    var id = contact.id;
-	    _axios2.default.del('/api/v1/contacts/' + id).end(function (err, res) {
-	      return _this3.setState({
-	        contacts: _this3.state.contacts.filter(function (contact) {
-	          return contact.id !== id;
-	        })
-	      });
-	    });
+	    this.showForm();
+	    this.props.dispatch(action.setContact(contact));
 	  },
 	  render: function render() {
+	    var _this = this;
+
 	    var company = this.props.company;
 	    var name = company.name,
 	        nit = company.nit,
@@ -77690,7 +77671,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'button',
-	                    { className: 'btn btn-sm' },
+	                    { className: 'btn btn-sm', onClick: _this.handleEditContact.bind(null, contact) },
 	                    'Editar'
 	                  )
 	                )
@@ -77700,7 +77681,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: showForm ? "" : "hidden" },
+	          { className: this.state.showForm ? '' : 'hidden' },
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'div',
@@ -77708,7 +77689,7 @@
 	            this.state.errorMessages ? this.state.errorMessages : ''
 	          ),
 	          _react2.default.createElement(_form_create2.default, {
-	            contact: this.state.contact,
+	            contact: this.props.contacts.contact,
 	            btnText: 'Guardar',
 	            onSubmit: this.handleSubmit
 	          })
@@ -77717,6 +77698,10 @@
 	    );
 	  }
 	});
+
+	exports.default = (0, _reactRedux.connect)(function (props) {
+	  return props;
+	})(Company);
 
 /***/ },
 /* 513 */

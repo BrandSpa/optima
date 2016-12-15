@@ -1,10 +1,11 @@
 'use strict';
 import React from 'react';
-import request from 'axios';
+import {connect} from 'react-redux';
+import * as action from 'actions/contacts'; 
 import Form from 'views/contacts/form_create';
 import Contact from 'views/companies/contact';
 
-module.exports = React.createClass({
+const Company = React.createClass({
   getDefaultProps() {
     return {
       company: {}
@@ -13,8 +14,6 @@ module.exports = React.createClass({
 
   getInitialState() {
     return {
-      contact: {},
-      contacts: [],
       showForm: false
     }
   },
@@ -23,34 +22,17 @@ module.exports = React.createClass({
     const contactData = {...contact, company_id: this.props.company.id};
 
     if(contact.id) {
-      this.updateContact(contactData);
+       this.props.dispatch(action.update(contact))
+       .then(this.handleSubmitResponse);
     } else {
-      this.storeContact(contactData);
+      this.props.dispatch(action.store(contact))
+      .then(this.handleSubmitResponse);
     }
   },
 
-  updateContact(contactData) {
-    request
-      .put('/api/v1/contacts/' + contactData.id)
-      .send(contactData)
-      .end((err, res) => {
-        if(err) return this.setState({errorMessages: err.response.body});
-        this.setState({
-          contact: {}
-        });
-        this.showForm();
-      });
-  },
-
-  storeContact(contactData) {
-    request
-      .post('/api/v1/contacts')
-      .send(contactData)
-      .end((err, res) => {
-        if(err) return this.setState({errorMessages: err.response.body});
-        this.setState({contacts: this.state.contacts.concat([res.body])});
-        this.showForm();
-      });
+  handleSubmitResponse(actionRes) {
+    this.showForm();
+    console.log(actionRes);
   },
 
   showForm() {
@@ -59,16 +41,9 @@ module.exports = React.createClass({
 
   handleEditContact(contact, e) {
     if(e) e.preventDefault();
-  },
-
-  handleDeleteContact(contact, e) {
-    e.preventDefault();
-    const id = contact.id;
-    request
-      .del('/api/v1/contacts/' + id)
-      .end((err, res) => this.setState({
-      contacts: this.state.contacts.filter(contact => contact.id !== id )
-    }));
+    this.showForm();
+    this.props.dispatch(action.setContact(contact));
+    
   },
 
   render() {
@@ -117,18 +92,18 @@ module.exports = React.createClass({
               <td>{contact.name}</td>
               <td>{contact.email}</td>
               <td>{contact.phone_1}</td>
-              <td><button className="btn btn-sm">Editar</button></td>
+              <td><button className="btn btn-sm" onClick={this.handleEditContact.bind(null, contact)}>Editar</button></td>
             </tr>
           )}
          
           </tbody>
         </table>
 
-        <div className={showForm ? "" : "hidden"}>
+        <div className={this.state.showForm ? '' : 'hidden'} >
         <br/>
         <div className={this.state.errorMessages ? 'alert alert-danger' : ''}>{this.state.errorMessages ? this.state.errorMessages : ''}</div>
           <Form
-            contact={this.state.contact}
+            contact={this.props.contacts.contact}
             btnText="Guardar"
             onSubmit={this.handleSubmit}
           />
@@ -138,3 +113,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default connect(props => props)(Company);
