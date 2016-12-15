@@ -66,6 +66,7 @@ module.exports = React.createClass({
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
+           <b>por como nos encontró</b>
             <Bar data={chartData} />
           </div>
         </div>

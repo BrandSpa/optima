@@ -59771,6 +59771,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'por asesor'
+	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: myChart })
 	        )
 	      )
@@ -71670,7 +71675,7 @@
 	          _react2.default.createElement(
 	            'b',
 	            null,
-	            'Estado'
+	            'por estado de cotizaci\xF3n'
 	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chatData, options: options })
 	        )
@@ -71749,6 +71754,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'por como nos encontr\xF3'
+	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
 	        )
 	      )
