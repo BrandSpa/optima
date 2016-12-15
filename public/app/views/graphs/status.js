@@ -68,7 +68,7 @@ module.exports = React.createClass({
     };
 
     let options = {
-      scaleLabel: (label) => `$${label.value}`
+      labelString: (label) => `$${label.value}`
     };
 
     return (
