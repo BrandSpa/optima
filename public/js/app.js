@@ -71667,6 +71667,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel-body' },
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'Estado'
+	          ),
 	          _react2.default.createElement(_chart_bar2.default, { data: chatData, options: options })
 	        )
 	      )

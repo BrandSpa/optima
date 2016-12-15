@@ -81,6 +81,7 @@ module.exports = React.createClass({
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
+          <b>Estado</b>
             <Bar data={chatData} options={options}/>
           </div>
         </div>
