@@ -97,8 +97,8 @@ export default React.createClass({
                 ref="type"
                 options={typeOptions}
                  default="Seleccionar tipo"
-                 value={query.quotation_type}
-                 onSelectChange={e => this.handleChange('quotation_type', e)}
+                 value={query.type}
+                 onSelectChange={e => this.handleChange('type', e)}
               />
             </div>
           </div>

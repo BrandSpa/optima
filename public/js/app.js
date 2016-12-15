@@ -71162,9 +71162,9 @@
 	            ref: 'type',
 	            options: _type2.default,
 	            'default': 'Seleccionar tipo',
-	            value: query.quotation_type,
+	            value: query.type,
 	            onSelectChange: function onSelectChange(e) {
-	              return _this.handleChange('quotation_type', e);
+	              return _this.handleChange('type', e);
 	            }
 	          })
 	        )
