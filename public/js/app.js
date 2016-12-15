@@ -26625,6 +26625,7 @@
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
+	    console.log(localStorage.getItem('user'));
 	    if (localStorage.getItem('user')) {
 	      this.setState({ user: JSON.parse(localStorage.getItem('user')) });
 	    }
