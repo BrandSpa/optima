@@ -14,6 +14,7 @@ const section = React.createClass({
   getInitialState() {
     return {
       filters: {},
+      type: 'line'
     }
   },
 
@@ -34,12 +35,12 @@ const section = React.createClass({
           <Filters onChange={this.handleFilters}/>
         </div>
 
-        <Status graphsData={data}/>
-        <HowFindUs graphsData={data}/>
-        <Advisor graphsData={data}/>
-        <ClientType graphsData={data}/>
-        <NoEffective graphsData={data}/>
-        <SentDiff graphsData={data}/>
+        <Status type={this.state.type} graphsData={data}/>
+        <HowFindUs type={this.state.type} graphsData={data}/>
+        <Advisor type={this.state.type} graphsData={data}/>
+        <ClientType type={this.state.type} graphsData={data}/>
+        <NoEffective type={this.state.type} graphsData={data}/>
+        <SentDiff type={this.state.type} graphsData={data}/>
       </div>
     )
   }

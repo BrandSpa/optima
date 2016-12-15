@@ -42,10 +42,10 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Optima\Providers\StorageServiceProvider',
-	    'Optima\Providers\EventsServiceProvider',
-	    'Optima\Providers\MacrosServiceProvider',
-	    'Thujohn\Pdf\PdfServiceProvider',
-
+	  'Optima\Providers\EventsServiceProvider',
+	  'Optima\Providers\MacrosServiceProvider',
+	  'Thujohn\Pdf\PdfServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider'
 	),
 
 	/*
@@ -112,7 +112,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'PDF'             => 'Thujohn\Pdf\PdfFacade',
-
+		'Excel' 					=> 'Maatwebsite\Excel\Facades\Excel'
 	),
 
 );

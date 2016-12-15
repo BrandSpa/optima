@@ -17,13 +17,13 @@ export default React.createClass({
         type: 'bar',
         data: {}
       },
-      options: {}
-
+      options: {},
+      type: 'bar'
     }
   },
 
   componentDidMount() {
-    let data = {data: this.props.data, options: this.props.options, type: 'bar'};
+    let data = {data: this.props.data, options: this.props.options, type: this.props.type};
     let ctx = document.getElementById(this.state.id).getContext("2d");
     let myChart = new Chart(ctx, data);
     this.setState({chart: myChart});

@@ -37,8 +37,7 @@ module.exports = React.createClass({
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
-            <Bar data={myChart}/>
-
+            <Bar data={myChart} type={this.props.type}/>
           </div>
         </div>
       </div>

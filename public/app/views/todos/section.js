@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import * as todos from 'actions/todos';
+import * as action from 'actions/todos';
+import * as activityAction from 'actions/activities';
 import Form from 'views/todos/form_create';
 import List from 'views/todos/list';
 
@@ -24,7 +25,7 @@ const section = React.createClass({
       query = {...query, user_id: this.props.user_id};
     }
 
-    this.props.dispatch(todos.fetch(query));
+    this.props.dispatch(action.fetch(query));
   },
 
   handleSubmit(todo) {
@@ -32,11 +33,11 @@ const section = React.createClass({
       todo = {...todo, quotation_id: this.props.quotation_id};
     }
 
-   this.props.dispatch(todos.store(todo));
+   this.props.dispatch(action.store(todo));
   },
 
   handleCompleted(todo) {
-    this.props.dispatch(todos.completed(todo));
+    this.props.dispatch(action.completed(todo));
   },
 
   render() {

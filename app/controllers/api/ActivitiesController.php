@@ -3,20 +3,11 @@
 use Input;
 use Activity;
 use Response;
-use Optima\Notifies\Notify;
 
 class ActivitiesController extends \BaseController {
 
-	protected $notify;
-
-	public function __construct()
-	{
-		$this->notify = new Notify;
-	}
-
 	public function index()
 	{
-
 		if (Input::has('quotation_id')) {
 			$quotation_id = Input::get('quotation_id');
 			$collection = Activity::with('user')->where('quotation_id', $quotation_id)->orderBy('created_at', 'desc')->get();
