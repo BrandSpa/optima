@@ -71590,6 +71590,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _numeral = __webpack_require__(410);
+
+	var _numeral2 = _interopRequireDefault(_numeral);
+
 	var _chart_bar = __webpack_require__(412);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
@@ -71627,7 +71631,6 @@
 	    var labels = ['Borrador', 'Enviada', 'Entregada', 'Seguimiento', 'Efectiva', 'No efectiva', 'No enviada', 'Replanteada', 'Por Confirmar', 'Nula'];
 
 	    var dataSet1 = {
-	      label: 'Cotizaciones dinero',
 	      data: data1,
 	      backgroundColor: ['rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)']
 	    };
@@ -71643,14 +71646,15 @@
 	    };
 
 	    var options = {
-	      tooltips: {
-	        custom: function custom(tooltip) {
-	          // tooltip will be false if tooltip is not visible or should be hidden
-	          if (!tooltip) {
-	            return;
+	      scales: {
+	        yAxes: [{
+	          ticks: {
+	            stepSize: 5,
+	            callback: function callback(value) {
+	              return '$ ' + (0, _numeral2.default)(value).format('0,0');
+	            }
 	          }
-	          console.log(tooltip.text);
-	        }
+	        }]
 	      }
 	    };
 

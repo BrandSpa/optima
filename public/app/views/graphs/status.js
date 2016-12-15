@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-
+import numeral from 'numeral';
 import Bar from 'components/chart_bar';
 
 module.exports = React.createClass({
@@ -43,7 +43,6 @@ module.exports = React.createClass({
     ];
 
     let dataSet1 = {
-      label: 'Cotizaciones dinero',
       data: data1,
       backgroundColor: [
         'rgba(0, 49, 103, 0.3)',
@@ -68,15 +67,14 @@ module.exports = React.createClass({
     };
 
     let options = {
-      tooltips: {
-            custom: function(tooltip) {
-                // tooltip will be false if tooltip is not visible or should be hidden
-                if (!tooltip) {
-                    return;
-                }
-                console.log(tooltip.text);
-            }
-        }
+      scales: {
+        yAxes: [{
+        ticks: {
+          stepSize: 5,
+          callback: function(value) { return `$ ${numeral(value).format('0,0')}`; }
+          }
+        }]
+      },
     };
 
     return (
