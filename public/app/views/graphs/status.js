@@ -43,6 +43,7 @@ module.exports = React.createClass({
     ];
 
     let dataSet1 = {
+      label: 'Dinero',
       data: data1,
       backgroundColor: [
         'rgba(0, 49, 103, 0.3)',

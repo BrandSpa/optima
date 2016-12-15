@@ -71631,6 +71631,7 @@
 	    var labels = ['Borrador', 'Enviada', 'Entregada', 'Seguimiento', 'Efectiva', 'No efectiva', 'No enviada', 'Replanteada', 'Por Confirmar', 'Nula'];
 
 	    var dataSet1 = {
+	      label: 'Dinero',
 	      data: data1,
 	      backgroundColor: ['rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)', 'rgba(0, 49, 103, 0.3)']
 	    };
