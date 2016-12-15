@@ -31931,7 +31931,7 @@
 	        ),
 	        rethink_from ? _react2.default.createElement(
 	          'a',
-	          { className: 'label label-Replanteada', href: '/#quotations/' + rethink_from },
+	          { className: 'label label-Replanteada', href: '/quotations/' + rethink_from },
 	          rethink_from
 	        ) : ""
 	      ),

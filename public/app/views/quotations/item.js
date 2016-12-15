@@ -26,7 +26,7 @@ export default React.createClass({
         <span className={`label label-${status.replace(' ', '_')}`}>
           {status}
         </span>
-        {rethink_from ? <a className="label label-Replanteada" href={`/#quotations/${rethink_from}`}>{rethink_from}</a> : ""}
+        {rethink_from ? <a className="label label-Replanteada" href={`/quotations/${rethink_from}`}>{rethink_from}</a> : ""}
       </td>
       <td>{advisor}</td>
       <td>{client_type}</td>
