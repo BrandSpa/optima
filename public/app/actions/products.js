@@ -28,3 +28,21 @@ export function update(product) {
 		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}
 }
+
+export function remove(id) {
+	return dispatch => {
+		return request
+		.delete(`${endpoint}/${id}`)
+		.then(res => dispatch({ type: `${TYPE}_REMOVE`, payload: res.data}))
+		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
+	}
+}
+
+export function duplicate(id) {
+	return dispatch => {
+		return request
+		.put(`${endpoint}/${id}/duplicate`)
+		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
+		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
+	}
+}

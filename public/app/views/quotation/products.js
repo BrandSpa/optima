@@ -3,7 +3,7 @@ import React from 'react';
 import Product from 'views/quotation/product';
 import FormCreate from 'views/products/form_create';
 import * as action from 'actions/products';
-import _ from 'underscore';
+import * as activityAction from 'actions/activities';
 import cleanObject from 'lib/clean_object';
 import {storeActivity} from 'lib/activity';
 
@@ -36,24 +36,19 @@ export default React.createClass({
 
   handleStoreReponse(actionRes) {
     const {payload} = actionRes;
+
     if(actionRes.type == "PRODUCTS_FAIL") {
       let errors = Object.keys(payload).map(key => payload[key]);
       this.setState({ errors: errors });
     } else {
+
       this.cleanProduct();
     }
   },
 
   handleDuplicate: function(id, e) {
     e.preventDefault();
-
-    request
-    .post(`/api/v1/products/${id}/duplicate`)
-    .end((err, res) => {
-      this.setState({
-        products: this.state.products.concat([res.body])
-      });
-    });
+    this.props.dispatch(action.duplicate(id));
   },
 
   handleEdit: function(product) {
@@ -70,30 +65,16 @@ export default React.createClass({
       order = false;
     }
 
-    var product = _.extend(product, {ordered: order});
-    this.setState({product: product});
+    var product = {...product, ordered: order};
+    this.setState({product});
 
-    request
-    .put(`/api/v1/products/${product.id}`)
-    .send(product)
-    .end((err, res) => {
-      this.setState({product: {}});
-    });
+    this.props.dispatch(action.update(product))
+    .then(this.handleStoreReponse);
   },
 
   handleDelete: function(id, e) {
      e.preventDefault();
-     const products = _.reject(this.state.products, function(company) {
-         return company.id === id
-    });
-
-    request
-    .del(`/api/v1/products/${id}`)
-    .end((err, res) => {
-      this.setState({
-        products: products
-      });
-    });
+     this.props.dispatch(action.remove(product));
   },
 
   showForm: function(e) {

@@ -25674,7 +25674,7 @@
 
 	var _services2 = _interopRequireDefault(_services);
 
-	var _products = __webpack_require__(239);
+	var _products = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./products\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _products2 = _interopRequireDefault(_products);
 
@@ -26288,93 +26288,7 @@
 	}
 
 /***/ },
-/* 239 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.default = reducer;
-	var TYPE = 'PRODUCTS';
-	var initialState = {
-		items: [],
-		errors: [],
-		product: {}
-	};
-
-	function reducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-		var action = arguments[1];
-
-		var _ret = function () {
-			switch (action.type) {
-				case TYPE + '_FETCH':
-					return {
-						v: _extends({}, state, {
-							items: action.payload
-						})
-					};
-					break;
-
-				case TYPE + '_SET_PRODUCT':
-					return {
-						v: _extends({}, state, {
-							errors: [],
-							product: action.payload
-						})
-					};
-					break;
-
-				case TYPE + '_STORE':
-					return {
-						v: _extends({}, state, {
-							errors: [],
-							items: [action.payload].concat(state.items)
-						})
-					};
-					break;
-
-				case TYPE + '_UPDATE':
-					var updated = action.payload;
-
-					return {
-						v: _extends({}, state, {
-							contact: {},
-							errors: [],
-							items: state.items.map(function (model) {
-								return model.id == updated.id ? _extends({}, model, updated) : model;
-							})
-						})
-					};
-					break;
-
-				case TYPE + '_FAIL':
-					return {
-						v: _extends({}, state, {
-							errors: [action.payload]
-						})
-					};
-					break;
-
-				default:
-					return {
-						v: state
-					};
-					break;
-			}
-		}();
-
-		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	}
-
-/***/ },
+/* 239 */,
 /* 240 */
 /***/ function(module, exports) {
 
@@ -74172,7 +74086,7 @@
 
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { id: 'quotation-' + quotation.id },
 	      _react2.default.createElement(_alert2.default, {
 	        show: this.props.quotations.errors.length ? true : false,
 	        message: this.props.quotations.errors
@@ -74270,19 +74184,15 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'col-md-3' },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_contact2.default, _extends({}, this.props, {
-	            changeContact: this.changeContact
-	          })),
-	          _react2.default.createElement(_times2.default, { quotation: quotation }),
-	          _react2.default.createElement(_activity2.default, {
-	            quotationId: quotation.id,
-	            activities: this.props.activities.items,
-	            user: this.props.user.user
-	          })
-	        )
+	        _react2.default.createElement(_contact2.default, _extends({}, this.props, {
+	          changeContact: this.changeContact
+	        })),
+	        _react2.default.createElement(_times2.default, { quotation: quotation }),
+	        _react2.default.createElement(_activity2.default, {
+	          quotationId: quotation.id,
+	          activities: this.props.activities.items,
+	          user: this.props.user.user
+	        })
 	      )
 	    );
 	  }
@@ -74369,6 +74279,8 @@
 	exports.fetch = fetch;
 	exports.store = store;
 	exports.update = update;
+	exports.remove = remove;
+	exports.duplicate = duplicate;
 
 	var _axios = __webpack_require__(247);
 
@@ -74405,6 +74317,26 @@
 		return function (dispatch) {
 			return _axios2.default.put(endpoint + '/' + product.id, product).then(function (res) {
 				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function remove(id) {
+		return function (dispatch) {
+			return _axios2.default.delete(endpoint + '/' + id).then(function (res) {
+				return dispatch({ type: TYPE + '_REMOVE', payload: res.data });
+			}).catch(function (err) {
+				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
+			});
+		};
+	}
+
+	function duplicate(id) {
+		return function (dispatch) {
+			return _axios2.default.put(endpoint + '/' + id + '/duplicate').then(function (res) {
+				return dispatch({ type: TYPE + '_STORE', payload: res.data });
 			}).catch(function (err) {
 				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 			});
@@ -75242,6 +75174,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -75258,9 +75192,9 @@
 
 	var action = _interopRequireWildcard(_products);
 
-	var _underscore = __webpack_require__(273);
+	var _activities = __webpack_require__(398);
 
-	var _underscore2 = _interopRequireDefault(_underscore);
+	var activityAction = _interopRequireWildcard(_activities);
 
 	var _clean_object = __webpack_require__(236);
 
@@ -75300,27 +75234,22 @@
 	  handleStoreReponse: function handleStoreReponse(actionRes) {
 	    var payload = actionRes.payload;
 
+
 	    if (actionRes.type == "PRODUCTS_FAIL") {
 	      var errors = Object.keys(payload).map(function (key) {
 	        return payload[key];
 	      });
 	      this.setState({ errors: errors });
 	    } else {
+
 	      this.cleanProduct();
 	    }
 	  },
 
 
 	  handleDuplicate: function handleDuplicate(id, e) {
-	    var _this = this;
-
 	    e.preventDefault();
-
-	    request.post('/api/v1/products/' + id + '/duplicate').end(function (err, res) {
-	      _this.setState({
-	        products: _this.state.products.concat([res.body])
-	      });
-	    });
+	    this.props.dispatch(action.duplicate(id));
 	  },
 
 	  handleEdit: function handleEdit(product) {
@@ -75331,35 +75260,21 @@
 	  },
 
 	  handleOrder: function handleOrder(product) {
-	    var _this2 = this;
-
 	    var order = true;
 
 	    if (product.ordered && product.ordered == true || product.ordered == 1) {
 	      order = false;
 	    }
 
-	    var product = _underscore2.default.extend(product, { ordered: order });
+	    var product = _extends({}, product, { ordered: order });
 	    this.setState({ product: product });
 
-	    request.put('/api/v1/products/' + product.id).send(product).end(function (err, res) {
-	      _this2.setState({ product: {} });
-	    });
+	    this.props.dispatch(action.update(product)).then(this.handleStoreReponse);
 	  },
 
 	  handleDelete: function handleDelete(id, e) {
-	    var _this3 = this;
-
 	    e.preventDefault();
-	    var products = _underscore2.default.reject(this.state.products, function (company) {
-	      return company.id === id;
-	    });
-
-	    request.del('/api/v1/products/' + id).end(function (err, res) {
-	      _this3.setState({
-	        products: products
-	      });
-	    });
+	    this.props.dispatch(action.remove(product));
 	  },
 
 	  showForm: function showForm(e) {
@@ -75377,18 +75292,18 @@
 
 
 	  render: function render() {
-	    var _this4 = this;
+	    var _this = this;
 
 	    var products = this.props.products.items;
 	    var productNodes = products.map(function (product) {
 	      return _react2.default.createElement(_product2.default, {
 	        key: product.id,
 	        product: product,
-	        onEdit: _this4.handleEdit,
-	        onDuplicate: _this4.handleDuplicate,
-	        onOrder: _this4.handleOrder,
-	        onDelete: _this4.handleDelete,
-	        disabled: _this4.props.disabled
+	        onEdit: _this.handleEdit,
+	        onDuplicate: _this.handleDuplicate,
+	        onOrder: _this.handleOrder,
+	        onDelete: _this.handleDelete,
+	        disabled: _this.props.disabled
 	      });
 	    });
 

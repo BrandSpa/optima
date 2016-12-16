@@ -41,6 +41,13 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
+		case `${TYPE}_REMOVE`:
+			return {
+				...state,
+				items: state.items.filter(item => item.id !== action.payload.id);
+			} 
+		break;
+
 		case `${TYPE}_FAIL`:
 			return {
         ...state,

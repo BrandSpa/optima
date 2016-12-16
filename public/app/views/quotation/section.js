@@ -173,13 +173,13 @@ const quotationSection = React.createClass({
     let {user} = this.props.user;
 
     return (
-      <div>
+      <div id={`quotation-${quotation.id}`}>
       <Alert 
         show={this.props.quotations.errors.length ? true : false}
         message={this.props.quotations.errors} 
       />
 
-        <div className="col-md-12">
+      <div className="col-md-12">
         <div className="panel">
           <div className="panel-body quo-header">
           <div>
@@ -264,20 +264,20 @@ const quotationSection = React.createClass({
         </div>
 
         <div className="col-md-3">
-          <div >
 
             <Contact
               {...this.props}
               changeContact={this.changeContact}
             />
-            <Times quotation={quotation} />
-              <Activities
-                quotationId={quotation.id}
-                activities={this.props.activities.items}
-                user={this.props.user.user}
-              />
 
-            </div>
+            <Times quotation={quotation} />
+            
+            <Activities
+              quotationId={quotation.id}
+              activities={this.props.activities.items}
+              user={this.props.user.user}
+            />
+
         </div>
       </div>
     );
