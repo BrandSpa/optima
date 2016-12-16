@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action) {
 			return {
         ...state,
 				company: {},
-        items: [action.payload].concat(state.items)
+        items: [action.payload, ...state.items]
       };
 		break;
 
@@ -49,7 +49,7 @@ export default function reducer(state = initialState, action) {
 
 		case `${TYPE}_ADD_CONTACT`:
 			let company = action.payload.company;
-			var contacts = [action.payload.contact].company.contacts;
+			var contacts = [action.payload.contact, ...company.contacts];
 			companyUpdated = {...company, contacts};
 
 			return {

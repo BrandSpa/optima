@@ -25973,6 +25973,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	var TYPE = 'COMPANIES';
 	var initialState = {
 		items: [],
@@ -26008,7 +26010,7 @@
 					return {
 						v: _extends({}, state, {
 							company: {},
-							items: [action.payload].concat(state.items)
+							items: [action.payload].concat(_toConsumableArray(state.items))
 						})
 					};
 					break;
@@ -26036,7 +26038,7 @@
 
 				case TYPE + '_ADD_CONTACT':
 					var company = action.payload.company;
-					contacts = [action.payload.contact].company.contacts;
+					contacts = [action.payload.contact].concat(_toConsumableArray(company.contacts));
 
 					companyUpdated = _extends({}, company, { contacts: contacts });
 
@@ -26124,6 +26126,9 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	exports.default = reducer;
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	var TYPE = 'CONTACTS';
 	var initialState = {
 		items: [],
@@ -26159,7 +26164,7 @@
 						v: _extends({}, state, {
 							contact: {},
 							errors: [],
-							items: [action.payload].concat(state.items)
+							items: [action.payload].concat(_toConsumableArray(state.items))
 						})
 					};
 					break;
@@ -77580,6 +77585,7 @@
 	    if (contact.id) {
 	      this.props.dispatch(action.update(contact)).then(this.handleSubmitResponse);
 	    } else {
+	      contact = _extends({}, contact, { company_id: this.props.company.id });
 	      this.props.dispatch(action.store(contact)).then(this.handleSubmitResponse);
 	    }
 	  },
@@ -77588,6 +77594,10 @@
 	    if (actionRes.type !== 'CONTACTS_FAIL') {
 	      if (actionRes.type == 'CONTACTS_UPDATE') {
 	        this.props.dispatch(companyAction.updateContact(this.props.company, actionRes.payload));
+	      }
+
+	      if (actionRes.type == 'CONTACTS_STORE') {
+	        this.props.dispatch(companyAction.addContact(this.props.company, actionRes.payload));
 	      }
 
 	      this.showForm();
@@ -77758,6 +77768,14 @@
 	              );
 	            })
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            className: 'btn-primary btn-sm pull-right',
+	            onClick: this.showForm
+	          },
+	          'Agregar contacto'
 	        ),
 	        _react2.default.createElement(
 	          'div',

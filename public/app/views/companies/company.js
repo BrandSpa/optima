@@ -26,6 +26,7 @@ const Company = React.createClass({
        this.props.dispatch(action.update(contact))
        .then(this.handleSubmitResponse);
     } else {
+      contact = {...contact, company_id: this.props.company.id};
       this.props.dispatch(action.store(contact))
       .then(this.handleSubmitResponse);
     }
@@ -36,6 +37,10 @@ const Company = React.createClass({
     if(actionRes.type !== 'CONTACTS_FAIL') {
       if(actionRes.type == 'CONTACTS_UPDATE') {
         this.props.dispatch(companyAction.updateContact(this.props.company, actionRes.payload));
+      }
+
+      if(actionRes.type == 'CONTACTS_STORE') {
+         this.props.dispatch(companyAction.addContact(this.props.company, actionRes.payload));
       }
 
       this.showForm();
@@ -105,6 +110,13 @@ const Company = React.createClass({
          
           </tbody>
         </table>
+
+        <button 
+          className="btn-primary btn-sm pull-right" 
+          onClick={this.showForm}
+        >
+        Agregar contacto
+      </button>
 
         <div className={this.state.showForm ? '' : 'hidden'} >
         <br/>

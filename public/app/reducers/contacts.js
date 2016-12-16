@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
         ...state,
 				contact: {},
 				errors: [],
-        items: [action.payload].concat(state.items)
+        items: [action.payload, ...state.items]
       };
 		break;
 
