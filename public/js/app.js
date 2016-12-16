@@ -25674,7 +25674,7 @@
 
 	var _services2 = _interopRequireDefault(_services);
 
-	var _products = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./products\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _products = __webpack_require__(239);
 
 	var _products2 = _interopRequireDefault(_products);
 
@@ -26288,7 +26288,103 @@
 	}
 
 /***/ },
-/* 239 */,
+/* 239 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = reducer;
+	var TYPE = 'PRODUCTS';
+	var initialState = {
+		items: [],
+		errors: [],
+		product: {}
+	};
+
+	function reducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		var _ret = function () {
+			switch (action.type) {
+				case TYPE + '_FETCH':
+					return {
+						v: _extends({}, state, {
+							items: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_SET_PRODUCT':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							product: action.payload
+						})
+					};
+					break;
+
+				case TYPE + '_STORE':
+					return {
+						v: _extends({}, state, {
+							errors: [],
+							items: [action.payload].concat(state.items)
+						})
+					};
+					break;
+
+				case TYPE + '_UPDATE':
+					var updated = action.payload;
+
+					return {
+						v: _extends({}, state, {
+							contact: {},
+							errors: [],
+							items: state.items.map(function (model) {
+								return model.id == updated.id ? _extends({}, model, updated) : model;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_REMOVE':
+					return {
+						v: _extends({}, state, {
+							items: state.items.filter(function (item) {
+								return item.id !== action.payload.id;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_FAIL':
+					return {
+						v: _extends({}, state, {
+							errors: [action.payload]
+						})
+					};
+					break;
+
+				default:
+					return {
+						v: state
+					};
+					break;
+			}
+		}();
+
+		if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+/***/ },
 /* 240 */
 /***/ function(module, exports) {
 

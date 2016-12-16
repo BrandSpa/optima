@@ -44,7 +44,7 @@ export default function reducer(state = initialState, action) {
 		case `${TYPE}_REMOVE`:
 			return {
 				...state,
-				items: state.items.filter(item => item.id !== action.payload.id);
+				items: state.items.filter(item => item.id !== action.payload.id)
 			} 
 		break;
 
