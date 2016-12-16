@@ -386,8 +386,8 @@ const productForm = React.createClass({
           </div>
 
         <div className="form-group col-xs-12">
-          <button className="btn btn-primary btn-sm">Guardar</button>
-          <button className="btn btn-default btn-sm pull-right" onClick={this.close}>Cerrar</button>
+          <button className="btn btn-primary btn-sm pull-right">Guardar</button>
+          <button className="btn btn-default btn-sm pull-left" onClick={this.close}>Cerrar</button>
         </div>
 
       </form>

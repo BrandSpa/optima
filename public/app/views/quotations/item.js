@@ -17,7 +17,8 @@ export default React.createClass({
       priority, 
       user, 
       company,
-      contact
+      contact,
+      todos
     } = quotation;
 
     return (
@@ -36,6 +37,7 @@ export default React.createClass({
       <td>{`${contact.name} ${contact.lastname}`}</td>
       <td><Timeago date={created_at} /> por {user.name}</td>
       <td><span className={`center priority priority--${priority > 0 ? priority : 1}`}></span></td>
+      <td>{todos.length}</td>
       <td>
         <a href={`/quotations/${id}/pdf/${id}`} target="_new">PDF</a> •
         <a href={`/quotations/${id}/pdfbn`} target="_blank" > PDF BN</a> •
@@ -45,4 +47,3 @@ export default React.createClass({
     )
   }
 });
-

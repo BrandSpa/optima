@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import moment from 'moment';
+import Editor from 'components/editor';
 import Select from 'components/form_select';
 import DateTime from 'components/datetime';
 
@@ -36,8 +37,8 @@ const trackingForm = React.createClass({
     this.handleChange({ contact_id: parseInt(contact) });
   },
 
-  handleReport: function() {
-    this.handleChange({ report: this.refs.report.value });
+  handleReport: function(html) {
+    this.handleChange({ report: html });
   },
 
   handleChange: function(data) {
@@ -97,13 +98,14 @@ const trackingForm = React.createClass({
 
         <div className="form-group col-md-12">
           <label>Reporte</label>
-          <textarea
-            ref="report"
-            rows="2"
-            className="form-control"
-            onChange={this.handleReport}
+          <Editor
+            style={{height: '250px'}}
             value={tracking.report}
-            ></textarea>
+            onChange={this.handleReport}
+            edit={tracking.id ? true : false}
+          />
+
+  
         </div>
 
         <button className="btn btn-primary btn-sm">Guardar</button>

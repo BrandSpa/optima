@@ -74,7 +74,7 @@ export default React.createClass({
 
   handleDelete: function(id, e) {
      e.preventDefault();
-     this.props.dispatch(action.remove(product));
+     this.props.dispatch(action.remove(id));
   },
 
   showForm: function(e) {

@@ -31909,6 +31909,11 @@
 	            _react2.default.createElement(
 	              'th',
 	              null,
+	              'Tareas'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
 	              'Opciones'
 	            )
 	          )
@@ -31957,7 +31962,8 @@
 	        priority = quotation.priority,
 	        user = quotation.user,
 	        company = quotation.company,
-	        contact = quotation.contact;
+	        contact = quotation.contact,
+	        todos = quotation.todos;
 
 
 	    return _react2.default.createElement(
@@ -32022,6 +32028,11 @@
 	        'td',
 	        null,
 	        _react2.default.createElement('span', { className: 'center priority priority--' + (priority > 0 ? priority : 1) })
+	      ),
+	      _react2.default.createElement(
+	        'td',
+	        null,
+	        todos.length
 	      ),
 	      _react2.default.createElement(
 	        'td',
@@ -74431,7 +74442,7 @@
 
 	function duplicate(id) {
 		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + id + '/duplicate').then(function (res) {
+			return _axios2.default.post(endpoint + '/' + id + '/duplicate').then(function (res) {
 				return dispatch({ type: TYPE + '_STORE', payload: res.data });
 			}).catch(function (err) {
 				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
@@ -75370,7 +75381,7 @@
 
 	  handleDelete: function handleDelete(id, e) {
 	    e.preventDefault();
-	    this.props.dispatch(action.remove(product));
+	    this.props.dispatch(action.remove(id));
 	  },
 
 	  showForm: function showForm(e) {
@@ -76190,12 +76201,12 @@
 	        { className: 'form-group col-xs-12' },
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'btn btn-primary btn-sm' },
+	          { className: 'btn btn-primary btn-sm pull-right' },
 	          'Guardar'
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'btn btn-default btn-sm pull-right', onClick: this.close },
+	          { className: 'btn btn-default btn-sm pull-left', onClick: this.close },
 	          'Cerrar'
 	        )
 	      )
@@ -77084,11 +77095,11 @@
 	    var contact = void 0;
 	    var by = void 0;
 
-	    if (tracking.contact.name) {
+	    if (tracking.contact) {
 	      contact = tracking.contact.name + ' ' + tracking.contact.lastname;
 	    }
 
-	    if (tracking.user.name) {
+	    if (tracking.user) {
 	      by = tracking.user.name + ' ' + tracking.user.lastname;
 	    }
 
@@ -77113,9 +77124,13 @@
 	      ),
 	      _react2.default.createElement('br', null),
 	      _react2.default.createElement(
-	        'p',
-	        null,
-	        tracking.report
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-12' },
+	          _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: tracking.report } })
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'b',
@@ -77176,6 +77191,10 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _editor = __webpack_require__(403);
+
+	var _editor2 = _interopRequireDefault(_editor);
+
 	var _form_select = __webpack_require__(279);
 
 	var _form_select2 = _interopRequireDefault(_form_select);
@@ -77223,8 +77242,8 @@
 	    this.handleChange({ contact_id: parseInt(contact) });
 	  },
 
-	  handleReport: function handleReport() {
-	    this.handleChange({ report: this.refs.report.value });
+	  handleReport: function handleReport(html) {
+	    this.handleChange({ report: html });
 	  },
 
 	  handleChange: function handleChange(data) {
@@ -77304,12 +77323,11 @@
 	          null,
 	          'Reporte'
 	        ),
-	        _react2.default.createElement('textarea', {
-	          ref: 'report',
-	          rows: '2',
-	          className: 'form-control',
+	        _react2.default.createElement(_editor2.default, {
+	          style: { height: '250px' },
+	          value: tracking.report,
 	          onChange: this.handleReport,
-	          value: tracking.report
+	          edit: tracking.id ? true : false
 	        })
 	      ),
 	      _react2.default.createElement(

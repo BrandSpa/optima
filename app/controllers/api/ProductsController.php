@@ -50,6 +50,7 @@ class ProductsController extends \BaseController {
 	{
 		$model = Product::find($id);
 		$model->delete();
+		return Response::json($model, 200);
 	}
 
 	public function duplicate($id)

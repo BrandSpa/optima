@@ -41,7 +41,7 @@ export function remove(id) {
 export function duplicate(id) {
 	return dispatch => {
 		return request
-		.put(`${endpoint}/${id}/duplicate`)
+		.post(`${endpoint}/${id}/duplicate`)
 		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
 		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}

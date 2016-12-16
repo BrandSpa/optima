@@ -17,11 +17,11 @@ const quoTracking = React.createClass({
     let contact;
     let by;
 
-    if(tracking.contact.name) {
+    if(tracking.contact) {
       contact = `${tracking.contact.name} ${tracking.contact.lastname}`;
     }
 
-    if(tracking.user.name) {
+    if(tracking.user) {
       by = `${tracking.user.name} ${tracking.user.lastname}`;
     }
 
@@ -30,7 +30,11 @@ const quoTracking = React.createClass({
         <p><b>Contacto:</b> {contact}</p>
         <b>Reporte:</b> 
         <br/>
-        <p>{tracking.report}</p>
+          <div className="row">
+          <div className="col-md-12">
+            <div dangerouslySetInnerHTML={{__html: tracking.report}} />
+          </div>
+          </div>
         <b>Por: </b> {by} <i>{moment(`${tracking.register_date} ${tracking.register_time}` ).fromNow()}</i>
         <hr/>
       </li>
