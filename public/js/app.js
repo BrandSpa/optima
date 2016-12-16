@@ -54,6 +54,10 @@
 
 	var _page2 = _interopRequireDefault(_page);
 
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
 	var _reactRedux = __webpack_require__(35);
 
 	var _reactDom = __webpack_require__(75);
@@ -73,6 +77,10 @@
 	var _create_panel = __webpack_require__(464);
 
 	var _create_panel2 = _interopRequireDefault(_create_panel);
+
+	var _login = __webpack_require__(521);
+
+	var _login2 = _interopRequireDefault(_login);
 
 	var _section = __webpack_require__(481);
 
@@ -109,8 +117,20 @@
 	}
 
 	function checkAuth(ctx, next) {
-	  return next();
+	  var token = localStorage.getItem('optima-token');
+	  if (token) {
+	    _axios2.default.defaults.headers.common['Authorization'] = 'bearer ' + token;
+	    return next();
+	  } else {
+	    _page2.default.redirect('/login');
+	  }
 	}
+
+	(0, _page2.default)('/login', function () {
+	  (0, _reactDom.render)(_react2.default.createElement(_login2.default, null), document.getElementById("app"));
+	});
+
+	(0, _page2.default)('/*', checkAuth);
 
 	(0, _page2.default)('/', checkAuth, function () {
 	  var user = JSON.parse(localStorage.getItem('user'));
@@ -74186,6 +74206,10 @@
 	      showErrors: false
 	    });
 	  },
+	  handlePriority: function handlePriority(priority, e) {
+	    e.preventDefault();
+	    this._update({ priority: priority });
+	  },
 	  render: function render() {
 	    var quotation = this.props.quotations.quotation;
 	    var user = this.props.user.user;
@@ -74226,8 +74250,34 @@
 	              _react2.default.createElement(
 	                'h5',
 	                null,
-	                'Prioridad: ',
-	                _react2.default.createElement('div', { className: 'priority priority--' + quotation.priority })
+	                'Prioridad:',
+	                _react2.default.createElement(
+	                  'a',
+	                  {
+	                    className: 'btn btn-sm',
+	                    onClick: this.handlePriority.bind(null, '1'),
+	                    disabled: quotation.priority == 1 ? true : false
+	                  },
+	                  _react2.default.createElement('div', { className: 'priority priority--1' })
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  {
+	                    className: 'btn btn-sm',
+	                    onClick: this.handlePriority.bind(null, '2'),
+	                    disabled: quotation.priority == 2 ? true : false
+	                  },
+	                  _react2.default.createElement('div', { className: 'priority priority--2' })
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  {
+	                    className: 'btn btn-sm',
+	                    onClick: this.handlePriority.bind(null, '3'),
+	                    disabled: quotation.priority == 3 ? true : false
+	                  },
+	                  _react2.default.createElement('div', { className: 'priority priority--3' })
+	                )
 	              )
 	            )
 	          )
@@ -74286,7 +74336,11 @@
 	          onSave: this.handleSaveNoEffective
 	        }),
 	        _react2.default.createElement(_trackings3.default, _extends({}, this.props, { quotationId: quotation.id })),
-	        _react2.default.createElement(_section2.default, { quotation_id: this.props.params.id })
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'todos-' + quotation.id },
+	          _react2.default.createElement(_section2.default, { quotation_id: this.props.params.id })
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76298,6 +76352,10 @@
 
 	var quoAction = _interopRequireWildcard(_quotations);
 
+	var _activities = __webpack_require__(398);
+
+	var acitivityAction = _interopRequireWildcard(_activities);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -76322,16 +76380,20 @@
 	    });
 	  },
 	  store: function store() {
+	    var _this = this;
+
 	    var service = { service_id: this.state.serviceId };
 	    var quotationId = this.props.quotations.quotation.id;
-	    this.props.dispatch(quoAction.storeService(quotationId, service));
+	    this.props.dispatch(quoAction.storeService(quotationId, service)).then(function () {
+	      _this.props.dispatch(acitivityAction.store());
+	    });
 	  },
 	  handleDelete: function handleDelete(id) {
 	    var quotationId = this.props.quotations.quotation.id;
 	    this.props.dispatch(quoAction.removeService(id, quotationId));
 	  },
 	  render: function render() {
-	    var _this = this;
+	    var _this2 = this;
 
 	    var options = this.props.services.items.map(function (opt) {
 	      return {
@@ -76356,8 +76418,8 @@
 	            'button',
 	            {
 	              className: 'btn btn-default btn-sm',
-	              onClick: _this.handleDelete.bind(null, service.id),
-	              disabled: _this.props.disabled ? true : false
+	              onClick: _this2.handleDelete.bind(null, service.id),
+	              disabled: _this2.props.disabled ? true : false
 	            },
 	            'Eliminar'
 	          )
@@ -78548,6 +78610,104 @@
 	    );
 	  }
 	});
+
+/***/ },
+/* 520 */,
+/* 521 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(247);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _page = __webpack_require__(32);
+
+	var _page2 = _interopRequireDefault(_page);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var Alert = _react2.default.createClass({
+		displayName: 'Alert',
+		getDefaultProps: function getDefaultProps() {
+			return {
+				time: 3000
+			};
+		},
+		getInitialState: function getInitialState() {
+			return {
+				email: '',
+				password: ''
+			};
+		},
+		login: function login(e) {
+			e.preventDefault();
+			console.log(this.state);
+			_axios2.default.post('/login', this.state).then(function (res) {
+				localStorage.setItem('optima-token', res.data.token);
+				_page2.default.redirect('/');
+			});
+		},
+		handleChange: function handleChange(field, e) {
+			this.setState(_extends({}, this.state, _defineProperty({}, field, e.currentTarget.value)));
+		},
+		render: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement(
+					'form',
+					{ onSubmit: this.login, className: 'form-signin col-md-6', style: { margin: 'auto', float: 'none', background: '#fff', padding: '40px' } },
+					_react2.default.createElement(
+						'div',
+						{ className: 'form-group' },
+						_react2.default.createElement('input', {
+							type: 'text',
+							name: 'email',
+							className: 'form-control',
+							placeholder: 'Email',
+							onChange: this.handleChange.bind(null, 'email')
+						})
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'form-group' },
+						_react2.default.createElement('input', {
+							type: 'password',
+							name: 'password',
+							className: 'form-control',
+							placeholder: 'Contrase\xF1a',
+							onChange: this.handleChange.bind(null, 'password')
+						})
+					),
+					_react2.default.createElement(
+						'button',
+						{
+							className: 'btn btn-lg btn-warning btn-block',
+							type: 'submit',
+							onClick: this.login
+						},
+						'Ingresar'
+					)
+				)
+			);
+		}
+	});
+
+	exports.default = Alert;
 
 /***/ }
 /******/ ]);

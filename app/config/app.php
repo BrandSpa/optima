@@ -40,7 +40,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 	  'Thujohn\Pdf\PdfServiceProvider',
-		'Maatwebsite\Excel\ExcelServiceProvider'
+		'Maatwebsite\Excel\ExcelServiceProvider',
+		'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
 	),
 
 	/*
@@ -107,7 +108,9 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'PDF'             => 'Thujohn\Pdf\PdfFacade',
-		'Excel' 					=> 'Maatwebsite\Excel\Facades\Excel'
+		'Excel' 					=> 'Maatwebsite\Excel\Facades\Excel',
+		'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+		'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
 	),
 
 );

@@ -157,28 +157,6 @@ class QuotationsController extends \BaseController {
     return true;
   }
 
-	public function send($id)
-	{
-		$model = Quotation::find($id);
-
-		$fieldsToCheck = [
-			$quotation->type,
-			$quotation->type_category,
-			$quotation->client_type,
-			$quotation->found_us,
-			$quotation->offer,
-			$quotation->advisor,
-		];
-
-		if (checkFields($fieldsToCheck)) {
-			$this->mailer->sendQuotation($model);
-			$model->created_sent_diff = $model->diffCreateAndSent();
-			return Response::json($fieldsToCheck, 300);
-		} else {
-			return Response::json(["message" => "field empty"], 400);
-		}
-	}
-
 	/**
 	 * POST send mail to contact mail
 	 * @return Response json object

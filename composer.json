@@ -6,6 +6,7 @@
     },
     "require": {
         "laravel/framework": "4.2.*",
+        "tymon/jwt-auth": "0.4.*",
         "thujohn/pdf": "1.0.6",
         "maatwebsite/excel": "~1.3"
     },

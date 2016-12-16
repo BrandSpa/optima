@@ -1,13 +1,14 @@
 'use strict';
 import React from 'react';
 import page from 'page';
+import axios from 'axios';
 import {Provider} from 'react-redux';
 import {render} from 'react-dom';
 import store from './store';
 import App from './views/app';
 import Dashboard from 'views/quotations/dashboard';
 import CompanyCreate from './views/companies/create_panel';
-
+import Login from './login';
 import Quotation from './views/quotation/section';
 import Companies from './views/companies/list';
 import Contacts from './views/contacts/section';
@@ -26,8 +27,20 @@ function root(component) {
 }
 
 function checkAuth(ctx, next) {
-  return next();
+  let token = localStorage.getItem('optima-token');
+  if(token) {
+    axios.defaults.headers.common['Authorization'] = `bearer ${token}`;
+    return next();
+  } else {
+     page.redirect('/login');
+  } 
 }
+
+page('/login', function() {
+  render(<Login />, document.getElementById("app"));
+});
+
+page('/*', checkAuth);
 
 page('/', checkAuth, () => {
   let user = JSON.parse(localStorage.getItem('user'));
