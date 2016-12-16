@@ -40,6 +40,26 @@ export function setCompany(company) {
 	}
 }
 
+export function addContact(company, contact) {
+	return dispatch => {
+		return new Promise((resolve, reject) => {
+			let action = { type: `${TYPE}_ADD_CONTACT`, payload: {company, contact}};
+			dispatch(action);
+			return resolve(action);
+		});
+	}
+}
+
+export function updateContact(company, contact) {
+	return dispatch => {
+		return new Promise((resolve, reject) => {
+			let action = { type: `${TYPE}_UPDATE_CONTACT`, payload: {company, contact}};
+			dispatch(action);
+			return resolve(action);
+		});
+	}
+}
+
 export function cleanItems() {
 	return { type: `${TYPE}_CLEAN_ITEMS`, payload: []};	
 }

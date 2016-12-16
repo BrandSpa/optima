@@ -25983,6 +25983,8 @@
 	function reducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 		var action = arguments[1];
+		var contacts;
+		var contacts;
 
 		var _ret = function () {
 			switch (action.type) {
@@ -26028,6 +26030,40 @@
 					return {
 						v: _extends({}, state, {
 							items: []
+						})
+					};
+					break;
+
+				case TYPE + '_ADD_CONTACT':
+					var company = action.payload.company;
+					contacts = [action.payload.contact].company.contacts;
+
+					companyUpdated = _extends({}, company, { contacts: contacts });
+
+					return {
+						v: _extends({}, state, {
+							items: state.items.map(function (item) {
+								return item.id == companyUpdated.id ? _extends({}, item, companyUpdated) : item;
+							})
+						})
+					};
+					break;
+
+				case TYPE + '_UPDATE_CONTACT':
+					var contact = action.payload.contact;
+
+					contacts = action.payload.company.contacts.map(function (comContact) {
+						return comContact.id == contact.id ? _extends({}, comContact, contact) : comContact;
+					});
+
+
+					var companyUpdated = _extends({}, action.payload.company, { contacts: contacts });
+
+					return {
+						v: _extends({}, state, {
+							items: state.items.map(function (item) {
+								return item.id == companyUpdated.id ? _extends({}, item, companyUpdated) : item;
+							})
 						})
 					};
 					break;
@@ -72450,6 +72486,8 @@
 	exports.store = store;
 	exports.update = update;
 	exports.setCompany = setCompany;
+	exports.addContact = addContact;
+	exports.updateContact = updateContact;
 	exports.cleanItems = cleanItems;
 
 	var _axios = __webpack_require__(247);
@@ -72497,6 +72535,26 @@
 		return function (dispatch) {
 			return new Promise(function (resolve, reject) {
 				var action = { type: TYPE + '_SET_COMPANY', payload: company };
+				dispatch(action);
+				return resolve(action);
+			});
+		};
+	}
+
+	function addContact(company, contact) {
+		return function (dispatch) {
+			return new Promise(function (resolve, reject) {
+				var action = { type: TYPE + '_ADD_CONTACT', payload: { company: company, contact: contact } };
+				dispatch(action);
+				return resolve(action);
+			});
+		};
+	}
+
+	function updateContact(company, contact) {
+		return function (dispatch) {
+			return new Promise(function (resolve, reject) {
+				var action = { type: TYPE + '_UPDATE_CONTACT', payload: { company: company, contact: contact } };
 				dispatch(action);
 				return resolve(action);
 			});
@@ -77488,6 +77546,10 @@
 
 	var action = _interopRequireWildcard(_contacts);
 
+	var _companies = __webpack_require__(465);
+
+	var companyAction = _interopRequireWildcard(_companies);
+
 	var _form_create = __webpack_require__(470);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
@@ -77522,8 +77584,14 @@
 	    }
 	  },
 	  handleSubmitResponse: function handleSubmitResponse(actionRes) {
-	    this.showForm();
-	    console.log(actionRes);
+
+	    if (actionRes.type !== 'CONTACTS_FAIL') {
+	      if (actionRes.type == 'CONTACTS_UPDATE') {
+	        this.props.dispatch(companyAction.updateContact(this.props.company, actionRes.payload));
+	      }
+
+	      this.showForm();
+	    }
 	  },
 	  showForm: function showForm() {
 	    this.setState({ showForm: !this.state.showForm });
@@ -77697,8 +77765,8 @@
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'div',
-	            { className: this.state.errorMessages ? 'alert alert-danger' : '' },
-	            this.state.errorMessages ? this.state.errorMessages : ''
+	            { className: this.props.contacts.errors.length ? "alert alert-danger" : "" },
+	            this.props.contacts.errors
 	          ),
 	          _react2.default.createElement(_form_create2.default, {
 	            contact: this.props.contacts.contact,

@@ -47,6 +47,32 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
+		case `${TYPE}_ADD_CONTACT`:
+			let company = action.payload.company;
+			var contacts = [action.payload.contact].company.contacts;
+			companyUpdated = {...company, contacts};
+
+			return {
+				...state,
+				items: state.items.map(item => item.id == companyUpdated.id ? {...item, ...companyUpdated} : item)
+			}
+		break;
+
+		case `${TYPE}_UPDATE_CONTACT`:
+			let contact = action.payload.contact;
+
+			var contacts = action.payload.company.contacts.map(comContact => 
+				comContact.id == contact.id ? {...comContact, ...contact} : comContact
+			);
+
+			let companyUpdated = {...action.payload.company, contacts};
+
+			return {
+				...state,
+				items: state.items.map(item => item.id == companyUpdated.id ? {...item, ...companyUpdated} : item)
+			}
+		break;
+
 		case `${TYPE}_FAIL`:
 			return {
         ...state,

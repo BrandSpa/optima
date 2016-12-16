@@ -5,6 +5,7 @@ import Timeago from 'components/timeago';
 export default React.createClass({
   render() {
     const {quotation} = this.props;
+    
     const {
       id, 
       status, 
@@ -44,3 +45,4 @@ export default React.createClass({
     )
   }
 });
+

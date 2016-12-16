@@ -2,6 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as action from 'actions/contacts'; 
+import * as companyAction from 'actions/companies'; 
 import Form from 'views/contacts/form_create';
 import Contact from 'views/companies/contact';
 
@@ -31,8 +32,14 @@ const Company = React.createClass({
   },
 
   handleSubmitResponse(actionRes) {
-    this.showForm();
-    console.log(actionRes);
+    
+    if(actionRes.type !== 'CONTACTS_FAIL') {
+      if(actionRes.type == 'CONTACTS_UPDATE') {
+        this.props.dispatch(companyAction.updateContact(this.props.company, actionRes.payload));
+      }
+
+      this.showForm();
+    }
   },
 
   showForm() {
@@ -101,7 +108,9 @@ const Company = React.createClass({
 
         <div className={this.state.showForm ? '' : 'hidden'} >
         <br/>
-        <div className={this.state.errorMessages ? 'alert alert-danger' : ''}>{this.state.errorMessages ? this.state.errorMessages : ''}</div>
+          <div className={this.props.contacts.errors.length ? "alert alert-danger" : ""}>
+            {this.props.contacts.errors}
+          </div>
           <Form
             contact={this.props.contacts.contact}
             btnText="Guardar"
