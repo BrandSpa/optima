@@ -40,7 +40,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 	  'Thujohn\Pdf\PdfServiceProvider',
-		'Maatwebsite\Excel\ExcelServiceProvider'
+	'Maatwebsite\Excel\ExcelServiceProvider'
 	),
 
 	/*
