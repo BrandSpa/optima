@@ -31,6 +31,7 @@ class UsersController extends BaseController{
 		$credentials = ['email' => Input::get('email'), 'password' => Input::get('password')];
 		if (Auth::Attempt($credentials)) {
 			return Redirect::to('/');
+			return Response::json('ok');
 		}
 		
 		return Redirect::to('/login');
