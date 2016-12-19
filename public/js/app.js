@@ -117,22 +117,24 @@
 	}
 
 	function checkAuth(ctx, next) {
-	  var token = localStorage.getItem('optima-token');
-	  if (token) {
-	    _axios2.default.defaults.headers.common['Authorization'] = 'bearer ' + token;
-	    return next();
-	  } else {
-	    _page2.default.redirect('/login');
-	  }
+	  return next();
+	  // let token = localStorage.getItem('optima-token');
+
+	  // if(token) {
+	  //   axios.defaults.headers.common['Authorization'] = `bearer ${token}`;
+
+	  // } else {
+	  //    page.redirect('/login');
+	  // } 
 	}
 
-	(0, _page2.default)('/login', function () {
-	  (0, _reactDom.render)(_react2.default.createElement(_login2.default, null), document.getElementById("app"));
-	});
+	// page('/login', function() {
+	//   render(<Login />, document.getElementById("app"));
+	// });
 
-	(0, _page2.default)('/*', checkAuth);
+	// page('/*', checkAuth);
 
-	(0, _page2.default)('/', checkAuth, function () {
+	(0, _page2.default)('/', function () {
 	  var user = JSON.parse(localStorage.getItem('user'));
 	  return root(_react2.default.createElement(_dashboard2.default, { user: user }));
 	});
@@ -26703,7 +26705,7 @@
 	        'div',
 	        { className: 'col-md-9' },
 	        _react2.default.createElement(_list2.default, null),
-	        _react2.default.createElement(_section2.default, { user_id: user.id }),
+	        _react2.default.createElement(_section2.default, { user_id: 1 }),
 	        _react2.default.createElement(_section4.default, null)
 	      ),
 	      _react2.default.createElement(

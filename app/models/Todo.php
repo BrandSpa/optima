@@ -19,12 +19,12 @@ class Todo extends \Eloquent {
 
   public function user()
   {
-    return $this->belongsTo('Optima\\User');
+    return $this->belongsTo('User');
   }
 
   public function assigned()
   {
-    return $this->belongsTo('Optima\\User', 'from_user');
+    return $this->belongsTo('User', 'from_user');
   }
 
   public function tracking()

@@ -20,6 +20,12 @@ class UsersController extends BaseController{
         return Response::json(compact('token'));
 	}
 
+	public function getLogin()
+	{
+		return View::make('users.login');
+	}
+
+
 	public function postLogin()
 	{
 		$credentials = ['email' => Input::get('email'), 'password' => Input::get('password')];

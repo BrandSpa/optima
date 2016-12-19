@@ -8,7 +8,7 @@ class Notification extends \Eloquent {
 
   public function user()
   {
-    return $this->belongsTo('Optima\\User');
+    return $this->belongsTo('User');
   }
 
   public static function store($data)

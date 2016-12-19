@@ -8,18 +8,22 @@ Route::filter('etags', function($route, $request, $response)
 });
 
 Route::get('login', 'UsersController@getLogin');
-Route::post('login', 'UsersController@login');
+Route::post('login', 'UsersController@postLogin');
 Route::get('logout', 'UsersController@logout');
 Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
-Route::get('', 'PagesController@quotations');
+
+Route::group(['before' => ['auth'], 'after' => 'etags'], function()
+{
+
+	Route::get('', 'PagesController@quotations');
 
 	/*
 	|-------------------------------------------------------------------------
-	|	API v1
+	|	Quotations routes
 	|-------------------------------------------------------------------------
 	*/
 
-Route::group(['before' => ['jwt-auth'], 'after' => 'etags'], function() {
+
 	Route::get('quotations/{id}/pdfbn', 'QuotationsController@getPdfBn');
 	Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
 	
@@ -31,6 +35,11 @@ Route::group(['before' => ['jwt-auth'], 'after' => 'etags'], function() {
 
 	Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
 
+	/*
+	|-------------------------------------------------------------------------
+	|	API v1
+	|-------------------------------------------------------------------------
+	*/
 
 	Route::group(['prefix' => 'api/v1', 'namespace' => 'Api'], function(){
 
@@ -58,4 +67,6 @@ Route::group(['before' => ['jwt-auth'], 'after' => 'etags'], function() {
 		// Route::get('results', 'QuotationsController@results');
 
 	});
+
+
 });
