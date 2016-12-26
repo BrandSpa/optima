@@ -71736,6 +71736,15 @@
 	    };
 
 	    var options = {
+	      tooltips: {
+	        enabled: true,
+	        mode: 'single',
+	        callbacks: {
+	          label: function label(tooltipItems, data) {
+	            return '$ ' + (0, _numeral2.default)(tooltipItems.yLabel).format('0,0');
+	          }
+	        }
+	      },
 	      scales: {
 	        yAxes: [{
 	          ticks: {
@@ -71834,6 +71843,15 @@
 	    };
 
 	    var options = {
+	      tooltips: {
+	        enabled: true,
+	        mode: 'single',
+	        callbacks: {
+	          label: function label(tooltipItems, data) {
+	            return '$ ' + (0, _numeral2.default)(tooltipItems.yLabel).format('0,0');
+	          }
+	        }
+	      },
 	      scales: {
 	        yAxes: [{
 	          ticks: {
