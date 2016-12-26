@@ -57,7 +57,6 @@ const quotationSection = React.createClass({
       dispatch(activityAction.fetch(query));
       dispatch(trackingAction.fetch(query));
       dispatch(contactAction.fetch(query));
-      dispatch(serviceAction.fetch());
     });
   },
 

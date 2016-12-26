@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import Select from 'components/form_select';
 import * as quoAction from 'actions/quotations';
+import * as action from 'actions/services';
 import * as acitivityAction from 'actions/activities';
 
 const quoServices = React.createClass({
@@ -15,27 +15,29 @@ const quoServices = React.createClass({
     }
   },
 
-  handleChange(e) {
-    let id = e.currentTarget.value;
-
-    this.setState({
-      optionSelected: id,
-      serviceId: id,
-      disableAdd: false
-    });
-  },
-
-  store() {
-    let service = {service_id: this.state.serviceId};
+  store(id) {
+    let service = {service_id: id};
     let quotationId = this.props.quotations.quotation.id;
-    this.props.dispatch( quoAction.storeService(quotationId, service) ).then(() => {
+    this.props.dispatch( quoAction.storeService(quotationId, service) )
+    .then(() => {
       this.props.dispatch(acitivityAction.store());
+      this.props.dispatch(action.cleanItems());
     })
   },
 
   handleDelete(id) {
     let quotationId = this.props.quotations.quotation.id;
     this.props.dispatch( quoAction.removeService(id, quotationId) );
+  },
+
+  fetch(query = {}) {
+    this.props.dispatch(action.fetch(query));
+  },
+
+  search(e) {
+    let val = e.currentTarget.value;
+    this.setState({query: val});
+    this.fetch({query: val});
   },
 
   render() {
@@ -64,21 +66,21 @@ const quoServices = React.createClass({
         <div className="panel-body">
           <div className="row">
             <div className="form-group col-sm-12">
-             <Select
-                placeholder="Servicios"
-                value={this.state.optionSelected}
-                options={options}
-                onSelectChange={this.handleChange}
-                disabled={this.props.disabled ? true : false}
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Buscar"
+                onChange={this.search}
               />
+              <ul className="list-group">
+                {this.props.services.items.map((service, i) => 
+                  <li className="list-group-item" key={i}>
+                    {service.title} <button className="btn btn-primary btn-sm" onClick={this.store.bind(null, service.id)} > Agregar Servicio </button>
+                  </li>
+                )}
+              </ul>
+
              <br/>
-            <button
-              className="btn btn-primary btn-sm"
-              disabled={this.state.disableAdd}
-              onClick={this.store}
-            >
-              Agregar Servicio
-            </button>
             </div>
              <hr/>
              <div className="table-responsive col-sm-12">

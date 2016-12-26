@@ -36,7 +36,18 @@ export function setService(service) {
 			dispatch(action);
 			return resolve(action);
 		});
-	
 	}
 }
+
+export function cleanItems() {
+	return dispatch => {
+		return new Promise((resolve, reject) => {
+			let action = { type: `${TYPE}_CLEAN_ITEMS`, payload: []};
+			dispatch(action);
+			return resolve(action);
+		});
+	}
+}
+
+
 
