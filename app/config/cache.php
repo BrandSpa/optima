@@ -2,7 +2,7 @@
 
 return array(
 
-	'driver' => 'redis',
+	'driver' => 'file',
 
 	'path' => storage_path().'/cache',
 

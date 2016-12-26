@@ -168,6 +168,11 @@ const quotationSection = React.createClass({
     });
   },
 
+  handlePriority(priority, e) {
+    e.preventDefault();
+    this._update({priority});
+  },
+
   render() {
     let {quotation} = this.props.quotations;
     let {user} = this.props.user;
@@ -188,7 +193,30 @@ const quotationSection = React.createClass({
             </h4>
           </div>
           <div className="quo-header__priority">
-            <h5>Prioridad: <div className={`priority priority--${quotation.priority}`}></div></h5>
+            <h5>
+              Prioridad:
+              <a 
+                className="btn btn-sm" 
+                onClick={this.handlePriority.bind(null, '1')} 
+                disabled={quotation.priority == 1 ? true : false}
+              >
+                <div className={`priority priority--1`}></div>
+              </a>
+              <a
+                className="btn btn-sm" 
+                onClick={this.handlePriority.bind(null, '2')} 
+                disabled={quotation.priority == 2 ? true : false}
+              >
+                <div className={`priority priority--2`}></div>
+              </a>
+              <a 
+                className="btn btn-sm" 
+                onClick={this.handlePriority.bind(null, '3')} 
+                disabled={quotation.priority == 3 ? true : false}
+              >
+                <div className={`priority priority--3`}></div>
+              </a> 
+            </h5>
           </div>
     
           </div>
@@ -259,8 +287,10 @@ const quotationSection = React.createClass({
           />
 
           <Trackings {...this.props} quotationId={quotation.id} />
-
-          <Todos quotation_id={this.props.params.id} />
+          <div id={`todos-${quotation.id}`}>
+            <Todos quotation_id={this.props.params.id} />
+          </div>
+        
         </div>
 
         <div className="col-md-3">

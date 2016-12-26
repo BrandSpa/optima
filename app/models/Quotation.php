@@ -48,7 +48,7 @@ class Quotation extends \Eloquent {
 
 	public function user()
 	{
-		return $this->belongsTo('Optima\\User');
+		return $this->belongsTo('User');
 	}
 
 	public function products()
@@ -175,7 +175,7 @@ class Quotation extends \Eloquent {
 		$quotation->created_sent_diff = $minutes;
 		$quotation->save();
 		
-		return $quotation;
+		return $minutes;
 	}
 
 	public function attachService($id, $service_id)

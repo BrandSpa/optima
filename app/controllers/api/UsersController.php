@@ -1,6 +1,6 @@
 <?php namespace Api;
 
-Use Optima\User;
+Use User;
 use Response;
 use Session;
 use Input;
@@ -9,8 +9,14 @@ class UsersController extends \BaseController {
 
   public function index()
   {
-    $collection = User::all();
-    return Response::json($collection, 200);
+    $collection = new User;
+    $email = Input::get('email');
+
+    if(Input::has('email')) {
+      $collection->where('email', $email);
+    }
+
+    return Response::json($collection->get(), 200);
   }
 
   public function show($id)

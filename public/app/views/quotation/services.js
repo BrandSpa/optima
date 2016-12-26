@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Select from 'components/form_select';
 import * as quoAction from 'actions/quotations';
+import * as acitivityAction from 'actions/activities';
 
 const quoServices = React.createClass({
   getInitialState() {
@@ -27,7 +28,9 @@ const quoServices = React.createClass({
   store() {
     let service = {service_id: this.state.serviceId};
     let quotationId = this.props.quotations.quotation.id;
-    this.props.dispatch( quoAction.storeService(quotationId, service) );
+    this.props.dispatch( quoAction.storeService(quotationId, service) ).then(() => {
+      this.props.dispatch(acitivityAction.store());
+    })
   },
 
   handleDelete(id) {

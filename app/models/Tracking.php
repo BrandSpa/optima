@@ -20,7 +20,7 @@ class Tracking extends \Eloquent {
 
   public function user()
   {
-    return $this->belongsTo('Optima\\User');
+    return $this->belongsTo('User');
   }
 
   public function quotation()
