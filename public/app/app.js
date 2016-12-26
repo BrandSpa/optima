@@ -13,6 +13,7 @@ import Quotation from './views/quotation/section';
 import Companies from './views/companies/list';
 import Contacts from './views/contacts/section';
 import Services from './views/services/section';
+import Reports from './views/graphs/section';
 import Todos from './views/todos/section';
 
 function root(component) {
@@ -71,6 +72,10 @@ page('/contacts', () => {
 
 page('/services', () => {
   return root(<Services/>);
+});
+
+page('/reports', () => {
+  return root(<Reports/>);
 });
 
 page('/quotations/:id', (ctx) => {

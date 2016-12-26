@@ -31,7 +31,7 @@ const section = React.createClass({
     const {data} = this.props;
 
     return (
-      <div className="row">
+      <div>
         <div className="col-md-12">
           <Filters onChange={this.handleFilters}/>
         </div>
