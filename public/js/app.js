@@ -71741,7 +71741,7 @@
 	        mode: 'single',
 	        callbacks: {
 	          label: function label(tooltipItems, data) {
-	            return '$ ' + (0, _numeral2.default)(tooltipItems.yLabel).format('0,0');
+	            return ' ' + (0, _numeral2.default)(tooltipItems.yLabel).format('0,0');
 	          }
 	        }
 	      },
@@ -71749,7 +71749,7 @@
 	        yAxes: [{
 	          ticks: {
 	            callback: function callback(value) {
-	              return '$ ' + (0, _numeral2.default)(value).format('0,0');
+	              return ' ' + (0, _numeral2.default)(value).format('0,0');
 	            }
 	          }
 	        }]
@@ -71848,7 +71848,7 @@
 	        mode: 'single',
 	        callbacks: {
 	          label: function label(tooltipItems, data) {
-	            return '$ ' + (0, _numeral2.default)(tooltipItems.yLabel).format('0,0');
+	            return ' ' + (0, _numeral2.default)(tooltipItems.yLabel).format('0,0');
 	          }
 	        }
 	      },
@@ -71856,7 +71856,7 @@
 	        yAxes: [{
 	          ticks: {
 	            callback: function callback(value) {
-	              return '$ ' + (0, _numeral2.default)(value).format('0,0');
+	              return '' + (0, _numeral2.default)(value).format('0,0');
 	            }
 	          }
 	        }]
