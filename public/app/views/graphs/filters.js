@@ -1,5 +1,7 @@
 'use strict';
 import React from 'react';
+import request from 'axios';
+import qs from 'qs';
 import statusOptions from 'options/status.json';
 import advisorOptions from 'options/advisors.json';
 import typeOptions from 'options/type.json';
@@ -19,7 +21,8 @@ export default React.createClass({
         type: null,
         date_start: null,
         date_end: null
-      }
+      },
+      loading: false
     }
   },
 
@@ -51,7 +54,10 @@ export default React.createClass({
 
   download(e) {
     if(e) e.preventDefault();
-    window.location = `${location.origin}/quotations/excel`;
+    this.setState({laoding: true});
+    let url = encodeURI(`${location.origin}/quotations/excel?${qs.stringify(this.state.query)}`);
+    window.location = url;
+    this.setState({laoding: false});
   },
 
   render() {
@@ -104,7 +110,7 @@ export default React.createClass({
               />
             </div>
             <div className="form-group col-sm-3">
-              <a href="#" onClick={this.download} className="btn-sm btn">Descargar Excel</a>
+              <a href="#" onClick={this.download} className="btn-sm btn btn-primary" disable={this.state.loading}>Descargar Excel</a>
             </div>
           </div>
         </div>
