@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import numeral from 'numeral';
 import Bar from 'components/chart_bar';
 
 module.exports = React.createClass({
@@ -62,12 +63,22 @@ module.exports = React.createClass({
       datasets: [dataSet1, dataSet2]
     };
 
+      let options = {
+      scales: {
+        yAxes: [{
+        ticks: {
+          callback: function(value) { return `$ ${numeral(value).format('0,0')}`; }
+          }
+        }]
+      },
+    };
+
     return (
       <div className="col-md-6">
         <div className="panel">
           <div className="panel-body">
            <b>Como nos encontró</b>
-            <Bar data={chartData} />
+            <Bar data={chartData} options={options} />
           </div>
         </div>
       </div>

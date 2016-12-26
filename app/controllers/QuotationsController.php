@@ -112,7 +112,7 @@ class QuotationsController extends BaseController {
 			$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
 		}
 
-			$model = $collection
+		$model = $collection
 			->with('company', 'contact', 'user')
 			->select('id', 'created_at', 'company_id', 'contact_id')
 			->orderBy('id', 'DESC')
