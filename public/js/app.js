@@ -71778,6 +71778,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _numeral = __webpack_require__(410);
+
+	var _numeral2 = _interopRequireDefault(_numeral);
+
 	var _chart_bar = __webpack_require__(412);
 
 	var _chart_bar2 = _interopRequireDefault(_chart_bar);
@@ -71829,6 +71833,18 @@
 	      datasets: [dataSet1, dataSet2]
 	    };
 
+	    var options = {
+	      scales: {
+	        yAxes: [{
+	          ticks: {
+	            callback: function callback(value) {
+	              return '$ ' + (0, _numeral2.default)(value).format('0,0');
+	            }
+	          }
+	        }]
+	      }
+	    };
+
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'col-md-6' },
@@ -71843,7 +71859,7 @@
 	            null,
 	            'Como nos encontr\xF3'
 	          ),
-	          _react2.default.createElement(_chart_bar2.default, { data: chartData })
+	          _react2.default.createElement(_chart_bar2.default, { data: chartData, options: options })
 	        )
 	      )
 	    );
