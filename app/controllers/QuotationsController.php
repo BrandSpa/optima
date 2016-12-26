@@ -77,18 +77,44 @@ class QuotationsController extends BaseController {
 
 		public function getExcel() {
 			$today = new dateTime();
-			$date_start = '2016-03-01 00:00:00';
-			$date_end = $today->format('Y-m-d H:i:s');
+			$status = Input::get('status');
+			$priority = Input::get('priority');
+			$advisor = Input::get('advisor');
+			$client_type = Input::get('client_type');
+			$quotation_type = Input::get('quotation_type');
+			$date_start = Input::get('date_start');
+			$date_end = Input::get('date_end');
 
 			$collection = new Quotation;
 
+			
+		if( Input::has('status') && $status != "" ) {
+			$collection = $collection->where("status", $status);
+		}
+
+			if( Input::has('priority') && $priority != "" ) {
+			$collection = $collection->where("priority", $priority);
+		}
+
+		if( Input::has('advisor') && $advisor != "" ) {
+			$collection = $collection->where("advisor", $advisor);
+		}
+
+		if( Input::has('client_type') && $client_type != "" ) {
+			$collection = $collection->where("client_type", $client_type);
+		}
+
+		if( Input::has('quotation_type') && $quotation_type != "" ) {
+			$collection = $collection->where("type", $quotation_type);
+		}
+
+		if(Input::has('date_start') && Input::has('date_end')) {
 			$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
+		}
 
 			$model = $collection
 			->with('company', 'contact', 'user')
 			->select('id', 'created_at', 'company_id', 'contact_id')
-			->take(100)
-			->skip(0)
 			->orderBy('id', 'DESC')
 			->get()
 			->toArray();

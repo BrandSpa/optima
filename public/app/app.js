@@ -19,7 +19,7 @@ function root(component) {
   return render(
     <App>
       <Provider store={store}>
-      {component}
+        {component}
       </Provider>
     </App>,
     document.getElementById("app")
