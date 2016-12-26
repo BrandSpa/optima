@@ -69,7 +69,7 @@ module.exports = React.createClass({
           mode: 'single',
           callbacks: {
             label: function(tooltipItems, data) { 
-              return tooltipItems.yLabel + ' $';
+              return `$ ${numeral(tooltipItems.yLabel).format('0,0')}`;
           }
         }
       },
