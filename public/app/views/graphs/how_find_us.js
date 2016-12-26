@@ -64,6 +64,15 @@ module.exports = React.createClass({
     };
 
       let options = {
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function(tooltipItems, data) { 
+              return tooltipItems.yLabel + ' $';
+          }
+        }
+      },
       scales: {
         yAxes: [{
         ticks: {

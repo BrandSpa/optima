@@ -71834,6 +71834,15 @@
 	    };
 
 	    var options = {
+	      tooltips: {
+	        enabled: true,
+	        mode: 'single',
+	        callbacks: {
+	          label: function label(tooltipItems, data) {
+	            return tooltipItems.yLabel + ' $';
+	          }
+	        }
+	      },
 	      scales: {
 	        yAxes: [{
 	          ticks: {
