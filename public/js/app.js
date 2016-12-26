@@ -78707,10 +78707,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(273);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
@@ -78928,6 +78924,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -78958,7 +78956,12 @@
 	      service: {
 	        price_1: '',
 	        price_2: ''
-	      }
+	      },
+	      filters: {
+	        query: '',
+	        offset: 0
+	      },
+	      base: 15
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
@@ -78970,7 +78973,9 @@
 	    }
 	  },
 	  fetch: function fetch() {
-	    this.props.dispatch(action.fetch());
+	    var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	    this.props.dispatch(action.fetch(query));
 	  },
 	  handleEdit: function handleEdit(service) {
 	    this.props.dispatch(action.setService(service));
@@ -78984,20 +78989,44 @@
 	  },
 	  search: function search(e) {
 	    var val = e.currentTarget.value;
-	    var q = new RegExp(val, 'i');
-	    var services = this.state.services.filter(function (service) {
-	      return service.title.match(q);
-	    });
-	    if (val.length == 0) {
-	      this.setState({ services: this.state.allServices });
-	    } else {
-	      this.setState({ services: services });
-	    }
+	    this.setState({ query: val });
+	    this.fetch(_extends({}, this.state.filters, { query: val }));
 	  },
+
+
+	  // search(e) {
+	  //   let val = e.currentTarget.value;
+	  //   let q = new RegExp(val, 'i');
+	  //   let services = this.state.services.filter(service => service.title.match(q));
+	  //   if(val.length == 0) {
+	  //     this.setState({services: this.state.allServices});
+	  //   } else {
+	  //     this.setState({services});
+	  //   }
+	  // },
+
 	  clean: function clean() {
 	    this.setState({
 	      service: cleanObject(this.state.service)
 	    });
+	  },
+	  handlePrev: function handlePrev() {
+	    var _state = this.state,
+	        filters = _state.filters,
+	        base = _state.base;
+
+	    var offset = parseInt(filters.offset) - this.state.base;
+	    this.setState({ filters: _extends({}, this.state.filters, { offset: offset }) });
+	    this.fetch(_extends({}, this.state.filters, { offset: offset }));
+	  },
+	  handleNext: function handleNext() {
+	    var _state2 = this.state,
+	        filters = _state2.filters,
+	        base = _state2.base;
+
+	    var offset = parseInt(filters.offset) + this.state.base;
+	    this.setState({ filters: _extends({}, this.state.filters, { offset: offset }) });
+	    this.fetch(_extends({}, this.state.filters, { offset: offset }));
 	  },
 
 
@@ -79019,7 +79048,29 @@
 	              className: 'form-control',
 	              placeholder: 'Buscar',
 	              onChange: this.search
-	            })
+	            }),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'btn-group', role: 'group' },
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  className: 'btn btn-default btn-sm',
+	                  onClick: this.handlePrev,
+	                  disabled: !this.state.filters.offset
+	                },
+	                _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  className: 'btn btn-default btn-sm',
+	                  onClick: this.handleNext
+	                },
+	                _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
+	              )
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
