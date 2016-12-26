@@ -27779,6 +27779,14 @@
 					};
 					break;
 
+				case TYPE + '_CLEAN_ITEMS':
+					return {
+						v: _extends({}, state, {
+							items: []
+						})
+					};
+					break;
+
 				case TYPE + '_FAIL':
 					return {
 						v: _extends({}, state, {
@@ -74826,7 +74834,6 @@
 	      dispatch(activityAction.fetch(query));
 	      dispatch(trackingAction.fetch(query));
 	      dispatch(contactAction.fetch(query));
-	      dispatch(serviceAction.fetch());
 	    });
 	  },
 
@@ -75113,6 +75120,7 @@
 	exports.store = store;
 	exports.update = update;
 	exports.setService = setService;
+	exports.cleanItems = cleanItems;
 
 	var _axios = __webpack_require__(35);
 
@@ -75159,6 +75167,16 @@
 		return function (dispatch) {
 			return new Promise(function (resolve, reject) {
 				var action = { type: TYPE + '_SET_SERVICE', payload: service };
+				dispatch(action);
+				return resolve(action);
+			});
+		};
+	}
+
+	function cleanItems() {
+		return function (dispatch) {
+			return new Promise(function (resolve, reject) {
+				var action = { type: TYPE + '_CLEAN_ITEMS', payload: [] };
 				dispatch(action);
 				return resolve(action);
 			});
@@ -77081,13 +77099,13 @@
 
 	var _reactRedux = __webpack_require__(60);
 
-	var _form_select = __webpack_require__(279);
-
-	var _form_select2 = _interopRequireDefault(_form_select);
-
 	var _quotations = __webpack_require__(271);
 
 	var quoAction = _interopRequireWildcard(_quotations);
+
+	var _services = __webpack_require__(488);
+
+	var action = _interopRequireWildcard(_services);
 
 	var _activities = __webpack_require__(398);
 
@@ -77107,27 +77125,29 @@
 	      optionSelected: ''
 	    };
 	  },
-	  handleChange: function handleChange(e) {
-	    var id = e.currentTarget.value;
-
-	    this.setState({
-	      optionSelected: id,
-	      serviceId: id,
-	      disableAdd: false
-	    });
-	  },
-	  store: function store() {
+	  store: function store(id) {
 	    var _this = this;
 
-	    var service = { service_id: this.state.serviceId };
+	    var service = { service_id: id };
 	    var quotationId = this.props.quotations.quotation.id;
 	    this.props.dispatch(quoAction.storeService(quotationId, service)).then(function () {
 	      _this.props.dispatch(acitivityAction.store());
+	      _this.props.dispatch(action.cleanItems());
 	    });
 	  },
 	  handleDelete: function handleDelete(id) {
 	    var quotationId = this.props.quotations.quotation.id;
 	    this.props.dispatch(quoAction.removeService(id, quotationId));
+	  },
+	  fetch: function fetch() {
+	    var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	    this.props.dispatch(action.fetch(query));
+	  },
+	  search: function search(e) {
+	    var val = e.currentTarget.value;
+	    this.setState({ query: val });
+	    this.fetch({ query: val });
 	  },
 	  render: function render() {
 	    var _this2 = this;
@@ -77176,23 +77196,30 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-group col-sm-12' },
-	            _react2.default.createElement(_form_select2.default, {
-	              placeholder: 'Servicios',
-	              value: this.state.optionSelected,
-	              options: options,
-	              onSelectChange: this.handleChange,
-	              disabled: this.props.disabled ? true : false
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              className: 'form-control',
+	              placeholder: 'Buscar',
+	              onChange: this.search
 	            }),
-	            _react2.default.createElement('br', null),
 	            _react2.default.createElement(
-	              'button',
-	              {
-	                className: 'btn btn-primary btn-sm',
-	                disabled: this.state.disableAdd,
-	                onClick: this.store
-	              },
-	              'Agregar Servicio'
-	            )
+	              'ul',
+	              { className: 'list-group' },
+	              this.props.services.items.map(function (service, i) {
+	                return _react2.default.createElement(
+	                  'li',
+	                  { className: 'list-group-item', key: i },
+	                  service.title,
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn btn-primary btn-sm', onClick: _this2.store.bind(null, service.id) },
+	                    ' Agregar Servicio '
+	                  )
+	                );
+	              })
+	            ),
+	            _react2.default.createElement('br', null)
 	          ),
 	          _react2.default.createElement('hr', null),
 	          _react2.default.createElement(
@@ -78707,10 +78734,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(273);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
@@ -78928,6 +78951,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -78958,7 +78983,12 @@
 	      service: {
 	        price_1: '',
 	        price_2: ''
-	      }
+	      },
+	      filters: {
+	        query: '',
+	        offset: 0
+	      },
+	      base: 15
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
@@ -78970,7 +79000,9 @@
 	    }
 	  },
 	  fetch: function fetch() {
-	    this.props.dispatch(action.fetch());
+	    var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	    this.props.dispatch(action.fetch(query));
 	  },
 	  handleEdit: function handleEdit(service) {
 	    this.props.dispatch(action.setService(service));
@@ -78984,20 +79016,44 @@
 	  },
 	  search: function search(e) {
 	    var val = e.currentTarget.value;
-	    var q = new RegExp(val, 'i');
-	    var services = this.state.services.filter(function (service) {
-	      return service.title.match(q);
-	    });
-	    if (val.length == 0) {
-	      this.setState({ services: this.state.allServices });
-	    } else {
-	      this.setState({ services: services });
-	    }
+	    this.setState({ query: val });
+	    this.fetch(_extends({}, this.state.filters, { query: val }));
 	  },
+
+
+	  // search(e) {
+	  //   let val = e.currentTarget.value;
+	  //   let q = new RegExp(val, 'i');
+	  //   let services = this.state.services.filter(service => service.title.match(q));
+	  //   if(val.length == 0) {
+	  //     this.setState({services: this.state.allServices});
+	  //   } else {
+	  //     this.setState({services});
+	  //   }
+	  // },
+
 	  clean: function clean() {
 	    this.setState({
 	      service: cleanObject(this.state.service)
 	    });
+	  },
+	  handlePrev: function handlePrev() {
+	    var _state = this.state,
+	        filters = _state.filters,
+	        base = _state.base;
+
+	    var offset = parseInt(filters.offset) - this.state.base;
+	    this.setState({ filters: _extends({}, this.state.filters, { offset: offset }) });
+	    this.fetch(_extends({}, this.state.filters, { offset: offset }));
+	  },
+	  handleNext: function handleNext() {
+	    var _state2 = this.state,
+	        filters = _state2.filters,
+	        base = _state2.base;
+
+	    var offset = parseInt(filters.offset) + this.state.base;
+	    this.setState({ filters: _extends({}, this.state.filters, { offset: offset }) });
+	    this.fetch(_extends({}, this.state.filters, { offset: offset }));
 	  },
 
 
@@ -79019,7 +79075,29 @@
 	              className: 'form-control',
 	              placeholder: 'Buscar',
 	              onChange: this.search
-	            })
+	            }),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'btn-group', role: 'group' },
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  className: 'btn btn-default btn-sm',
+	                  onClick: this.handlePrev,
+	                  disabled: !this.state.filters.offset
+	                },
+	                _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  className: 'btn btn-default btn-sm',
+	                  onClick: this.handleNext
+	                },
+	                _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
+	              )
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(

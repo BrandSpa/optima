@@ -31,7 +31,7 @@ class ServicesController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		$collection = Service::take(15)
+		$collection = Service::take(25)
 			->skip($offset)
 			->orderBy('id', 'DESC')
 			->get();

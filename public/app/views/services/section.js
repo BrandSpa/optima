@@ -14,6 +14,11 @@ const section = React.createClass({
         price_1: '',
         price_2: '',
       },
+      filters: {
+        query: '',
+        offset: 0,
+      },
+      base: 15
     }
   },
 
@@ -27,8 +32,8 @@ const section = React.createClass({
     }
   },
 
-  fetch() {
-    this.props.dispatch(action.fetch());
+  fetch(query = {}) {
+    this.props.dispatch(action.fetch(query));
   },
 
   handleEdit(service) {
@@ -45,19 +50,39 @@ const section = React.createClass({
 
   search(e) {
     let val = e.currentTarget.value;
-    let q = new RegExp(val, 'i');
-    let services = this.state.services.filter(service => service.title.match(q));
-    if(val.length == 0) {
-      this.setState({services: this.state.allServices});
-    } else {
-      this.setState({services});
-    }
+    this.setState({query: val});
+    this.fetch({...this.state.filters, query: val});
   },
+
+  // search(e) {
+  //   let val = e.currentTarget.value;
+  //   let q = new RegExp(val, 'i');
+  //   let services = this.state.services.filter(service => service.title.match(q));
+  //   if(val.length == 0) {
+  //     this.setState({services: this.state.allServices});
+  //   } else {
+  //     this.setState({services});
+  //   }
+  // },
 
   clean() {
     this.setState({
       service: cleanObject(this.state.service),
     });
+  },
+
+  handlePrev() {
+    let {filters, base} = this.state;
+    let offset = parseInt(filters.offset) - this.state.base;
+    this.setState({filters: {...this.state.filters, offset}});
+    this.fetch({...this.state.filters, offset});
+  },
+
+  handleNext() {
+    let {filters, base} = this.state;
+    let offset = parseInt(filters.offset) + this.state.base;
+    this.setState({filters: {...this.state.filters, offset}});
+    this.fetch({...this.state.filters, offset});
   },
 
   render: function() {
@@ -72,6 +97,23 @@ const section = React.createClass({
             placeholder="Buscar"
             onChange={this.search}
             />
+            <br/>
+             <div className="btn-group" role="group">
+            <button
+              className="btn btn-default btn-sm"
+              onClick={this.handlePrev}
+              disabled={!this.state.filters.offset}
+            >
+              <i className="fa fa-chevron-left"></i>
+            </button>
+
+            <button
+              className="btn btn-default btn-sm"
+              onClick={this.handleNext}
+            >
+              <i className="fa fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
       </div>
       <div className="panel">
