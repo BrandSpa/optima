@@ -1,6 +1,7 @@
 <?php
 use Optima\Pdf\QuotationPdf as Pdf;
 use Optima\Quotation;
+use Carbon\Carbon;
 
 class QuotationsController extends BaseController {
 
@@ -75,24 +76,22 @@ class QuotationsController extends BaseController {
 		return Redirect::to('/#quotations/'.$model->id);
 	}
 
-		public function getExcel() {
-			$today = new dateTime();
+	public function getExcel() {
+			$now = Carbon::now();
 			$status = Input::get('status');
 			$priority = Input::get('priority');
 			$advisor = Input::get('advisor');
 			$client_type = Input::get('client_type');
 			$quotation_type = Input::get('quotation_type');
-			$date_start = Input::get('date_start');
-			$date_end = Input::get('date_end');
-
+			$date_start = Input::get('date_start') ? Input::get('date_start') : $now->year."-".$now->month."-1";
+			$date_end = Input::get('date_end') ? Input::get('date_end') : $now->year."-".$now->month."-31";
 			$collection = new Quotation;
 
-			
 		if( Input::has('status') && $status != "" ) {
 			$collection = $collection->where("status", $status);
 		}
 
-			if( Input::has('priority') && $priority != "" ) {
+		if( Input::has('priority') && $priority != "" ) {
 			$collection = $collection->where("priority", $priority);
 		}
 
@@ -108,33 +107,32 @@ class QuotationsController extends BaseController {
 			$collection = $collection->where("type", $quotation_type);
 		}
 
-		if(Input::has('date_start') && Input::has('date_end')) {
-			$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
-		}
+
+		$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
 
 		$model = $collection
-			->with('company', 'contact', 'user')
-			->select('id', 'created_at', 'company_id', 'contact_id')
+			->with('company', 'contact')
+			->select('id', 'status', 'created_at', 'company_id', 'contact_id')
 			->orderBy('id', 'DESC')
 			->get()
 			->toArray();
 			
-			$newModel = [];
+			$newModel = $model;
 
-			foreach($model as $mo) {
-				$mo['company_name'] = $mo['company']['name'];
-				$mo['company_city'] = $mo['company']['city'];
-				$mo['company_address'] = $mo['company']['address'];
-				$mo['company_phone'] = $mo['company']['phone'];
-				$mo['contact_name'] = $mo['contact']['name'] .' '. $mo['contact']['lastname'];
-				$mo['contact_phone'] = $mo['contact']['phone_1'];
-				$mo['contact_mobile'] = $mo['contact']['mobile_1'];
-				$mo['contact_email'] = $mo['contact']['email'];
-				$mo['contact_found_us'] = $mo['contact']['found_us'];
-				array_push($newModel, $mo);
-			}
+			// foreach($model as $mo) {
+			// 	$mo['company_name'] = $mo['company']['name'];
+			// // 	$mo['company_city'] = $mo['company']['city'];
+			// // 	$mo['company_address'] = $mo['company']['address'];
+			// // 	$mo['company_phone'] = $mo['company']['phone'];
+			// 	$mo['contact_name'] = $mo['contact']['name'] .' '. $mo['contact']['lastname'];
+			// // 	$mo['contact_phone'] = $mo['contact']['phone_1'];
+			// // 	$mo['contact_mobile'] = $mo['contact']['mobile_1'];
+			// // 	$mo['contact_email'] = $mo['contact']['email'];
+			// 	$mo['contact_found_us'] = $mo['contact']['found_us'];
+			// 	array_push($newModel, $mo);
+			// }
 
-			Excel::create('cotizaciones', function($excel) use($newModel) {
+			return Excel::create('cotizaciones', function($excel) use($newModel) {
 
 				$excel->sheet('Sheetname', function($sheet) use($newModel) {
 
