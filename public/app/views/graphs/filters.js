@@ -110,7 +110,7 @@ export default React.createClass({
               />
             </div>
             <div className="form-group col-sm-3">
-              <a href="#" onClick={this.download} className="btn-sm btn btn-primary" disable={this.state.loading}>Descargar Excel</a>
+              <button onClick={this.download} className="btn-sm btn btn-primary" disable={this.state.loading}>Descargar Reporte</button>
             </div>
           </div>
         </div>

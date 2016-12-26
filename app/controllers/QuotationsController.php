@@ -112,7 +112,7 @@ class QuotationsController extends BaseController {
 
 		$model = $collection
 			->with('company', 'contact')
-			->select('id', 'status', 'created_at', 'company_id', 'contact_id')
+			->select('id', 'status', 'created_at')
 			->orderBy('id', 'DESC')
 			->get()
 			->toArray();
