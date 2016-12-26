@@ -6,13 +6,18 @@
 	<meta name="author" content="http://BrandSpa.com">
 	<title>Optima - login</title>
 	<!-- STYLES -->
-	<link rel="stylesheet" href="[[ asset('node_modules/bootstrap/dist/css/bootstrap.css') ]]">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<style>
-		body {
+	
+	body {
+			background: url('img/background.png');
+			background-size: cover;
+			background-repeat: no-repeat;
+    background-attachment: fixed;
 			padding-top: 40px;
 			padding-bottom: 40px;
-			background: #111;
 		}
+	
 
 		.form-signin {
 			max-width: 330px;
