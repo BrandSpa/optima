@@ -19,10 +19,8 @@ const quoServices = React.createClass({
     let service = {service_id: id};
     let quotationId = this.props.quotations.quotation.id;
     this.props.dispatch( quoAction.storeService(quotationId, service) )
-    .then(() => {
-      this.props.dispatch(acitivityAction.store());
-      this.props.dispatch(action.cleanItems());
-    })
+    .then(() => this.props.setActivity({message: 'agrego servicio'}) )
+    .then(() => this.props.dispatch(action.cleanItems()))
   },
 
   handleDelete(id) {
