@@ -75081,7 +75081,8 @@
 	        })),
 	        _react2.default.createElement(_services3.default, {
 	          quotationId: quotation.id,
-	          disabled: this.state.disabled
+	          disabled: this.state.disabled,
+	          setActivity: this.setActivity
 	        }),
 	        _react2.default.createElement(_status2.default, _extends({}, this.props, {
 	          quotation: quotation,
@@ -77152,7 +77153,7 @@
 	    var service = { service_id: id };
 	    var quotationId = this.props.quotations.quotation.id;
 	    this.props.dispatch(quoAction.storeService(quotationId, service)).then(function () {
-	      return _this.props.setActivity({ message: 'agrego servicio' });
+	      return _this.props.setActivity('agrego servicio');
 	    }).then(function () {
 	      return _this.props.dispatch(action.cleanItems());
 	    });
