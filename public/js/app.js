@@ -58854,7 +58854,7 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        _react2.default.createElement('input', { type: 'checkbox', onChange: function onChange(e) {
+	        _react2.default.createElement('input', { type: 'checkbox', value: todo.completed, onChange: function onChange(e) {
 	            return _this.props.onCompleted(todo);
 	          }, checked: todo.completed })
 	      )
