@@ -14,13 +14,20 @@
 
 	<style media="screen">
 		body {
-			background: url('img/background.png');
+			background: rgba(49,46,129,1);
+		background: -moz-linear-gradient(top, rgba(49,46,129,1) 0%, rgba(128,172,218,1) 100%);
+		background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(49,46,129,1)), color-stop(100%, rgba(128,172,218,1)));
+		background: -webkit-linear-gradient(top, rgba(49,46,129,1) 0%, rgba(128,172,218,1) 100%);
+		background: -o-linear-gradient(top, rgba(49,46,129,1) 0%, rgba(128,172,218,1) 100%);
+		background: -ms-linear-gradient(top, rgba(49,46,129,1) 0%, rgba(128,172,218,1) 100%);
+		background: linear-gradient(to bottom, rgba(49,46,129,1) 0%, rgba(128,172,218,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#312e81', endColorstr='#80acda', GradientType=0 );
 			background-size: cover;
 			background-repeat: no-repeat;
     background-attachment: fixed;
 		}
 		.top-bar {
-				background: rgba(59, 43, 127, 1);
+				background: #312E81;
 		}
 
 		.sidebar__right-fixed {

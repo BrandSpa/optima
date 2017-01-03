@@ -40,6 +40,7 @@
 		.form-signin .checkbox {
 			margin-bottom: 10px;
 		}
+		
 		.form-signin .checkbox {
 			font-weight: normal;
 		}
