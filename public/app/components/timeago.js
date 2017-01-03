@@ -3,7 +3,7 @@ import React from 'react';
 import moment from 'moment';
 require('moment/locale/es');
 
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function() {
     return {
       date: Date.now()

@@ -24,6 +24,7 @@ export default React.createClass({
     let query = {};
     query[this.props.field] = model;
     let result = _.where(this.props.collection, query);
+    
     if(typeof this.props.selected == 'function') {
       this.props.selected(result);
     }

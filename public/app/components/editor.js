@@ -3,7 +3,7 @@ import React from 'react';
 import Quill from 'quill';
 import uid from 'uid';
 
-export default React.createClass({
+const Editor = React.createClass({
   getInitialState() {
     return {
       id: `editor-${ uid() }`,
@@ -25,10 +25,11 @@ export default React.createClass({
   },
 
   mountQuill() {
-    let editor = new Quill(`#${this.state.id}`, {
+    const editor = new Quill(`#${this.state.id}`, {
       modules: {toolbar: `#${this.state.idToolbar}`},
        theme: 'snow'
     });
+
     this.getChanges(editor);
     return editor;
   },
@@ -112,3 +113,5 @@ export default React.createClass({
     )
   }
 });
+
+export default Editor;

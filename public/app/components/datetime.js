@@ -3,24 +3,25 @@ import React from 'react';
 import flatpickr from 'flatpickr';
 import uid from 'uid';
 
-export default React.createClass({
+const DateTime = React.createClass({
   getInitialState() {
     return {
       id: `flatpickr-${ uid() }`,
-      lastDate: ''
+      lastDate: '',
+      active: false
     }
   },
 
   getDefaultProps() {
     return {
-      id: ``,
+      id: '',
       styles: '',
       placeholder: '',
       format: '',
+      altFormat: '',
       enableTime: false,
       time_24hr: false,
-      altInput: false,
-      altFormat: ''
+      altInput: false
     }
   },
 
@@ -47,13 +48,20 @@ export default React.createClass({
     });
   },
 
+  handleChange() {
+    this.setState({active: true});
+  },
+
   render() {
     return (
       <input
         id={this.state.id}
         placeholder={this.props.placeholder}
         className={`${this.props.styles}`}
+        onClick={this.handleChange}
       />
     )
   }
 });
+
+export default DateTime;

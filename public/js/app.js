@@ -28398,20 +28398,21 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _rest_actions = __webpack_require__(527);
+
+	var _rest_actions2 = _interopRequireDefault(_rest_actions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'QUOTATIONS';
 	var endpoint = 'api/v1/quotations';
+	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'QUOTATION');
 
 	function fetch() {
 	  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-	      return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-	    }).catch(function (err) {
-	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-	    });
+	    return rest.fetch(params, dispatch);
 	  };
 	}
 
@@ -28419,11 +28420,7 @@
 	  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	  return function (dispatch) {
-	    return _axios2.default.get(endpoint + '/' + id, { params: params }).then(function (res) {
-	      return dispatch({ type: TYPE + '_SET_QUOTATION', payload: res.data });
-	    }).catch(function (err) {
-	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-	    });
+	    return rest.fetchOne(id, params, dispatch);
 	  };
 	}
 
@@ -28431,11 +28428,7 @@
 	  var quotation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return _axios2.default.post('/api/v1/quotations', quotation).then(function (res) {
-	      return dispatch({ type: TYPE + '_STORE', payload: res.data });
-	    }).catch(function (err) {
-	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-	    });
+	    return rest.store(quotation, dispatch);
 	  };
 	}
 
@@ -28443,17 +28436,13 @@
 	  var quotation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	  return function (dispatch) {
-	    return _axios2.default.put('/api/v1/quotations/' + id, quotation).then(function (res) {
-	      return dispatch({ type: TYPE + '_SET_QUOTATION', payload: res.data });
-	    }).catch(function (err) {
-	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-	    });
+	    return rest.update(id, quotation, dispatch);
 	  };
 	}
 
 	function sendMail(id) {
 	  return function (dispatch) {
-	    return _axios2.default.post('/api/v1/quotations/' + id + '/sendmail').then(function (res) {
+	    return _axios2.default.post(endpoint + '/' + id + '/sendmail').then(function (res) {
 	      return dispatch({ type: TYPE + '_SET_QUOTATION', payload: res.data });
 	    }).catch(function (err) {
 	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
@@ -28461,11 +28450,11 @@
 	  };
 	}
 
-	//services 
+	//services
 
 	function fetchServices(quotationId) {
 	  return function (dispatch) {
-	    return _axios2.default.get('/api/v1/quotations/' + quotationId + '/services').then(function (res) {
+	    return _axios2.default.get(endpoint + '/' + quotationId + '/services').then(function (res) {
 	      return dispatch({ type: TYPE + '_FETCH_SERVICES', payload: res.data });
 	    }).catch(function (err) {
 	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
@@ -28475,7 +28464,7 @@
 
 	function storeService(quotationId, service) {
 	  return function (dispatch) {
-	    return _axios2.default.post('/api/v1/quotations/' + quotationId + '/services', service).then(function (res) {
+	    return _axios2.default.post(endpoint + '/' + quotationId + '/services', service).then(function (res) {
 	      return dispatch({ type: TYPE + '_ADD_SERVICE', payload: res.data });
 	    }).catch(function (err) {
 	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
@@ -28483,9 +28472,9 @@
 	  };
 	}
 
-	function removeService(id, quotationId) {
+	function removeService(id, quotation_id) {
 	  return function (dispatch) {
-	    return _axios2.default.delete('/api/v1/services/' + id, { params: { quotation_id: quotationId } }).then(function (res) {
+	    return _axios2.default.delete('api/v1/services/' + id, { params: { quotation_id: quotation_id } }).then(function (res) {
 	      return dispatch({ type: TYPE + '_REMOVE_SERVICE', payload: res.data });
 	    }).catch(function (err) {
 	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
@@ -30448,6 +30437,8 @@
 	  value: true
 	});
 
+	var _React$createClass;
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -30462,12 +30453,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'datetime',
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var DateTime = _react2.default.createClass((_React$createClass = {
+	  displayName: 'DateTime',
 	  getInitialState: function getInitialState() {
 	    return {
 	      id: 'flatpickr-' + (0, _uid2.default)(),
-	      lastDate: ''
+	      lastDate: '',
+	      active: false
 	    };
 	  },
 	  getDefaultProps: function getDefaultProps() {
@@ -30476,10 +30470,10 @@
 	      styles: '',
 	      placeholder: '',
 	      format: '',
+	      altFormat: '',
 	      enableTime: false,
 	      time_24hr: false,
-	      altInput: false,
-	      altFormat: ''
+	      altInput: false
 	    };
 	  },
 	  triggerChange: function triggerChange(dateObj, dateStr) {
@@ -30501,15 +30495,19 @@
 	      altInput: props.altInput,
 	      onChange: this.handleChange
 	    });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement('input', {
-	      id: this.state.id,
-	      placeholder: this.props.placeholder,
-	      className: '' + this.props.styles
-	    });
 	  }
-	});
+	}, _defineProperty(_React$createClass, 'handleChange', function handleChange() {
+	  this.setState({ active: true });
+	}), _defineProperty(_React$createClass, 'render', function render() {
+	  return _react2.default.createElement('input', {
+	    id: this.state.id,
+	    placeholder: this.props.placeholder,
+	    className: '' + this.props.styles,
+	    onClick: this.handleChange
+	  });
+	}), _React$createClass));
+
+	exports.default = DateTime;
 
 /***/ },
 /* 281 */
@@ -32001,6 +31999,22 @@
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'item',
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      id: '',
+	      status: '',
+	      rethink_from: null,
+	      advisor: '',
+	      client_type: '',
+	      type: '',
+	      created_at: '',
+	      priority: 1,
+	      user: {},
+	      company: {},
+	      contact: {},
+	      todos: []
+	    };
+	  },
 	  render: function render() {
 	    var quotation = this.props.quotation;
 	    var id = quotation.id,
@@ -32116,6 +32130,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -32128,8 +32146,8 @@
 
 	__webpack_require__(318);
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	exports.default = _react2.default.createClass({
+	  displayName: 'timeago',
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -47637,8 +47655,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'editor',
+	var Editor = _react2.default.createClass({
+	  displayName: 'Editor',
 	  getInitialState: function getInitialState() {
 	    return {
 	      id: 'editor-' + (0, _uid2.default)(),
@@ -47661,6 +47679,7 @@
 	      modules: { toolbar: '#' + this.state.idToolbar },
 	      theme: 'snow'
 	    });
+
 	    this.getChanges(editor);
 	    return editor;
 	  },
@@ -47758,6 +47777,8 @@
 	    );
 	  }
 	});
+
+	exports.default = Editor;
 
 /***/ },
 /* 404 */
@@ -74574,6 +74595,7 @@
 	    var query = {};
 	    query[this.props.field] = model;
 	    var result = _underscore2.default.where(this.props.collection, query);
+
 	    if (typeof this.props.selected == 'function') {
 	      this.props.selected(result);
 	    }
@@ -79448,6 +79470,71 @@
 	    );
 	  }
 	});
+
+/***/ },
+/* 526 */,
+/* 527 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function (endpoint, type, singularType) {
+
+		var actions = {
+			fetch: function fetch() {
+				var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+				var dispatch = arguments[1];
+
+				return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+					return dispatch({ type: type + '_FETCH', payload: res.data });
+				}).catch(function (err) {
+					return dispatch({ type: type + '_FAIL', payload: err.response.data });
+				});
+			},
+			store: function store() {
+				var model = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+				var dispatch = arguments[1];
+
+				return _axios2.default.post(endpoint, model).then(function (res) {
+					return dispatch({ type: type + '_STORE', payload: res.data });
+				}).catch(function (err) {
+					return dispatch({ type: type + '_FAIL', payload: err.response.data });
+				});
+			},
+			fetchOne: function fetchOne(id) {
+				var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+				var dispatch = arguments[2];
+
+				return _axios2.default.get(endpoint + '/' + id, { params: params }).then(function (res) {
+					return dispatch({ type: type + '_SET_' + singularType, payload: res.data });
+				}).catch(function (err) {
+					return dispatch({ type: type + '_FAIL', payload: err.response.data });
+				});
+			},
+			update: function update(id) {
+				var model = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+				var dispatch = arguments[2];
+
+				return _axios2.default.put(endpoint + '/' + id, model).then(function (res) {
+					return dispatch({ type: type + '_SET_' + singularType, payload: res.data });
+				}).catch(function (err) {
+					return dispatch({ type: type + '_FAIL', payload: err.response.data });
+				});
+			}
+		};
+
+		return actions;
+	};
+
+	var _axios = __webpack_require__(35);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }
 /******/ ]);
