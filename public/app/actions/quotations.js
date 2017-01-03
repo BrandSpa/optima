@@ -23,7 +23,7 @@ export function fetchOne(id, params = {}) {
 export function store(quotation = {}) {
   return dispatch => {
     return request
-      .post('/api/v1/quotations', quotation)
+      .post(endpoint, quotation)
       .then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
       .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
   }
@@ -32,7 +32,7 @@ export function store(quotation = {}) {
 export function update(id, quotation = {}) {
   return dispatch => {
     return request
-      .put(`/api/v1/quotations/${id}`, quotation)
+      .put(`${endpoint}/${id}`, quotation)
       .then(res => dispatch({ type: `${TYPE}_SET_QUOTATION`, payload: res.data}))
       .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
   }
@@ -41,18 +41,18 @@ export function update(id, quotation = {}) {
 export function sendMail(id) {
    return dispatch => {
     return request
-      .post(`/api/v1/quotations/${id}/sendmail`)
+      .post(`${endpoint}/${id}/sendmail`)
       .then(res => dispatch({ type: `${TYPE}_SET_QUOTATION`, payload: res.data}))
       .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
   }
 }
 
-//services 
+//services
 
 export function fetchServices(quotationId) {
   return dispatch => {
     return request
-      .get(`/api/v1/quotations/${quotationId}/services`)
+      .get(`${endpoint}/${quotationId}/services`)
       .then(res => dispatch({ type: `${TYPE}_FETCH_SERVICES`, payload: res.data}))
       .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data})); 
   }
@@ -61,16 +61,16 @@ export function fetchServices(quotationId) {
 export function storeService(quotationId, service) {
   return dispatch => { 
     return request
-    .post(`/api/v1/quotations/${quotationId}/services`, service)
+    .post(`${endpoint}/${quotationId}/services`, service)
     .then(res => dispatch({ type: `${TYPE}_ADD_SERVICE`, payload: res.data}))
     .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data})); 
   }
 }
 
-export function removeService(id, quotationId) {
+export function removeService(id, quotation_id) {
   return dispatch => { 
     return request
-    .delete(`/api/v1/services/${id}`, {params: {quotation_id: quotationId}} )
+    .delete(`api/v1/services/${id}`, {params: {quotation_id}} )
     .then(res => dispatch({ type: `${TYPE}_REMOVE_SERVICE`, payload: res.data}))
     .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
   }
