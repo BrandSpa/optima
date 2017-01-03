@@ -28089,7 +28089,7 @@
 	          _react2.default.createElement(
 	            'a',
 	            { className: 'navbar-brand', href: '#' },
-	            'OPTIMA'
+	            _react2.default.createElement('img', { src: '/img/logo.png', alt: '', style: { width: '50%' } })
 	          ),
 	          _react2.default.createElement(
 	            'ul',
