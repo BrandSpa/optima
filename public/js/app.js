@@ -58670,20 +58670,6 @@
 	          'Completadas'
 	        )
 	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group col-md-6 pull-right' },
-	          _react2.default.createElement('input', {
-	            type: 'text',
-	            placeholder: 'Filtrar por cliente',
-	            className: 'form-control',
-	            onChange: this.filterByClient
-	          })
-	        )
-	      ),
 	      _react2.default.createElement('hr', null),
 	      _react2.default.createElement(
 	        'div',
