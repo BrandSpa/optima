@@ -1,8 +1,25 @@
 'use strict';
 import React from 'react';
-import Timeago from 'components/timeago';
+import Timeago from '../../components/timeago';
 
 export default React.createClass({
+  getDefaultProps() {
+    return {
+      id: '', 
+      status: '', 
+      rethink_from: null, 
+      advisor: '',
+      client_type: '', 
+      type: '',
+      created_at: '', 
+      priority: 1, 
+      user: {}, 
+      company: {},
+      contact: {},
+      todos: []
+    }
+  },
+
   render() {
     const {quotation} = this.props;
     

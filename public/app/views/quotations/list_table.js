@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Item from 'views/quotations/item';
+import Item from './item';
 
 module.exports = React.createClass({
   getDefaultProps() {
