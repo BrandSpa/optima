@@ -53,7 +53,7 @@ export default React.createClass({
         <td>{user ? user.name : ''} {user ? user.lastname : ''}</td>
         <td></td>
         <td>{this.linkQuotation(todo)}</td>
-        <td><input type="checkbox" value={todo.completed} onChange={e => this.props.onCompleted(todo)} checked={todo.completed} /></td>
+        <td><input type="checkbox" value={todo.completed} onChange={e => this.props.onCompleted(todo)} checked={todo.completed == 1 ? true : false} /></td>
       </tr>
     )
   }

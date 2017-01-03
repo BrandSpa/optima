@@ -58856,7 +58856,7 @@
 	        null,
 	        _react2.default.createElement('input', { type: 'checkbox', value: todo.completed, onChange: function onChange(e) {
 	            return _this.props.onCompleted(todo);
-	          }, checked: todo.completed })
+	          }, checked: todo.completed == 1 ? true : false })
 	      )
 	    );
 	  }
