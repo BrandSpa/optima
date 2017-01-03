@@ -13,10 +13,7 @@ const dashboard = React.createClass({
       <div>
         <div className="col-md-9">
           <List />
-          <Todos user_id={1} />
-          <div className="row">
-          <Graphs/>
-          </div>
+          <Todos user_id={user.id} />
         </div>
         <div className="col-md-3">
           <Activities />
