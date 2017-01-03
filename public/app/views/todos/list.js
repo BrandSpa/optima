@@ -45,16 +45,6 @@ export default React.createClass({
           </button>
         </div>
 
-        <div className="row">
-          <div className="form-group col-md-6 pull-right">
-            <input
-              type="text"
-              placeholder="Filtrar por cliente" 
-              className="form-control" 
-              onChange={this.filterByClient}
-            />
-          </div>
-        </div>
         
         <hr/>
         
