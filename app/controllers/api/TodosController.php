@@ -79,8 +79,9 @@ class TodosController extends \BaseController {
   	Mail::send('emails.todos', compact('data'), function($message) use($email) {
 				$message->subject('Tarea Asignada');
 				$message->to($email);
-
-	});
+	  });
+    
+    return $model;
   }
 
   public function pending()

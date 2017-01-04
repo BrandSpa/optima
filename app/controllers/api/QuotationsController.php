@@ -112,8 +112,6 @@ class QuotationsController extends \BaseController {
 		return Response::json($model, 201);
 	}
 
-	
-
 	public function update($id)
 	{
 		$data = Input::all();
@@ -132,6 +130,7 @@ class QuotationsController extends \BaseController {
 		if ($validator->passes()) {
 			if($data['status'] != "Borrador") {
 				if ($this->checkFields($fieldsToCheck)) {
+					if($data['status'] == 'Enviada') $this->entity->diffCreateAndSent($id);
 					$model->update($data);
 				} else {
 					return Response::json(['complete los filtros'], 400);
@@ -174,11 +173,9 @@ class QuotationsController extends \BaseController {
 		];
 
 		if ($this->checkFields($fieldsToCheck)) {
-			$this->entity->diffCreateAndSent($id);
 			$quo = $this->entity->with($this->relationships)->find($id);
-			return Response::json($quo, 200);
-		
 			$this->sendQuotation($quotation);
+			return Response::json($quo, 200);
 		
 		} else {
 			return Response::json(["Ingrese todos los campos"], 400);
@@ -208,11 +205,9 @@ class QuotationsController extends \BaseController {
 		];
 
 		if($email) {
-			Mail::send('emails.quotation', compact('data'), function($message) use($email, $recipient_1, $recipient_2, $id) {
+			Mail::send('emails.quotation', compact('data'), function($message) use($recipient_1, $recipient_2, $id) {
 				$message->subject('RentAdvisor cotización '.$id);
-				$message->to($email);
-
-				if (!empty($recipient_1)) $message->cc($recipient_1);
+				$message->to($recipient_1);
 				if (!empty($recipient_2)) $message->cc($recipient_2);
 			});
 		}

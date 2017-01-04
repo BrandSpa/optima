@@ -33,7 +33,8 @@ const section = React.createClass({
       todo = {...todo, quotation_id: this.props.quotation_id};
     }
 
-   this.props.dispatch(action.store(todo));
+   this.props.dispatch(action.store(todo))
+   .then(res => this.props.dispatch(action.sendMail(res.payload.id)));
   },
 
   handleCompleted(todo) {

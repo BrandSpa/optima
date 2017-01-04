@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Avante</title>
+        <title>RentAdvisor Cotización</title>
         <style type="text/css">
         
 			#outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
@@ -416,7 +416,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader">
                                         <tr>
                                             <td valign="top" class="headerContent">
-                                            	<img src="http://optima.avante.cc/img/mail/header.png" style="max-width:600px;" id="headerImage" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
+                                            	<img src="http://optima.rentadvisor.com.co/img/mail/header.png" style="max-width:600px;" id="headerImage" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
                                             </td>
                                         </tr>
                                     </table>
@@ -433,13 +433,13 @@
                                                 @if(isset($data['message']) && !empty($data['message']))
 													[[ $data['message'] ]]
                                                 @else
-                                                	Para Avante es importante hacer de la tecnología su ventaja competitiva, con equipos y servicios a la medida de sus necesidades.
+                                                	Para RentAdvisor es importante hacer de la tecnología su ventaja competitiva, con equipos y servicios a la medida de sus necesidades.
                                                 	<br />
                                                 	Adjunta encontrará la cotización correspondiente a los equipos por usted solicitados.
                                                 @endif
                                               	<br />
                                               	<br />
-                                                <a href="http://tracking.avante.cc/quotations/[[ $data['url'] ]]" style="background:#333; color:#fff; padding: 10px 15px; text-decoration: none; margin-top: 30px">Ver cotización</a>
+                                                <a href="http://react.rentadvisor.com.co/quotations/[[ $data['url'] ]]" style="background:#333; color:#fff; padding: 10px 15px; text-decoration: none; margin-top: 30px">Ver cotización</a>
                                                 <br />
                                                 <br />
                                                 <br />
@@ -455,9 +455,9 @@
 												
                                                Por favor tenga en cuenta los términos del servicio consignados en esta guía 
                                                @if(isset($data['type']) && $data['type'] == "Servicio")
-                                               		<a href="http://www.avante.cc/it.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
+                                               		<a href="http://rentadvisor.com.co/it.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
                                            		@else
-                                           			<a href="http://www.avante.cc/guia.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
+                                           			<a href="http://rentadvisor.com.co/guia.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
                                            		@endif
                                             </td>
                                         </tr>
@@ -475,16 +475,16 @@
                                     			Recuerde que estamos siempre atentos a sus comentarios y sugerencias.
                                     			<br />
                                     			<br />
-                                    			<a href="http://avante.cc" target="_blank">www.avante.cc</a>&nbsp;&nbsp;&nbsp;PBX 6 36 10 51&nbsp;&nbsp;&nbsp;Bogotá - Colombia
+                                    			<a href="http://rentadvisor.com.co" target="_blank">www.rentadvisor.com.co</a>&nbsp;&nbsp;&nbsp;PBX 6 36 10 51&nbsp;&nbsp;&nbsp;Bogotá - Colombia
                                            <br />
                                            <br />
-                                    			[[ $data['user'] ]]&nbsp;&nbsp;&nbsp; @if($data['user'] == "Jorge Mancera") Coordinador Comercial @else Asesor Comercial @endif&nbsp;&nbsp;&nbsp;<a href="mailto:comercial@avante.cc">comercial@avante.cc</a>
+                                    			[[ $data['user'] ]]&nbsp;&nbsp;&nbsp; @if($data['user'] == "Jorge Mancera") Coordinador Comercial @else Asesor Comercial @endif&nbsp;&nbsp;&nbsp;<a href="mailto:comercial@rentadvisor.com.co">comercial@rentadvisor.com.co</a>
                                     		</td>
                                     	</tr>
                                     
                                         <tr>
                                             <td valign="top" class="footerContent" style="padding-top:0;">
-                                                <em>Copyright &copy; 2015 Avante</em>
+                                                <em>Copyright &copy; RentAdvisor</em>
                                             </td>
                                         </tr>
                                         

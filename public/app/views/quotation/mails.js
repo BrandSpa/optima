@@ -11,7 +11,8 @@ module.exports = React.createClass({
         mail_recipient_1: '',
         mail_recipient_2: ''
       },
-      show: false
+      show: false,
+      loading: false
     }
   },
 
@@ -28,8 +29,14 @@ module.exports = React.createClass({
 
   handleTextChange(text) {
     this.setState({
-      quotation: _.extend(this.state.quotation, {mail_message: text})
+      quotation: {...this.state.quotation, mail_message: text}
     });
+  },
+
+  handleMail() {
+    this.setState({loading: true});
+    this.props.onSendMail(this.state.quotation)
+      .then(() => this.setState({loading: false}));
   },
 
   handleChange() {
@@ -89,6 +96,8 @@ module.exports = React.createClass({
             <p></p>
 
           <button className="btn btn-sm btn-primary" onClick={this.handleClick}>Guardar</button>
+          <span style={{margin: '0 7px'}}></span>
+          <button className="btn btn-sm btn-primary" onClick={this.handleMail} disabled={this.state.loading}>{this.state.loading ? 'Enviado...' : 'Enviar Mail'}</button>
           <button className="btn btn-sm btn-default pull-right" onClick={this.handleClose}>Cerrar</button>
         </div>
       </div>
