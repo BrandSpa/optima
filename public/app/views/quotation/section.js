@@ -112,7 +112,6 @@ const quotationSection = React.createClass({
 
   handleSaveMail: function(mail) {
     this.setActivity('edito el mail').then(() => {
-      this.alert.show();
       this._update(mail);
       this.setState({showMail: false});
     });
@@ -157,7 +156,9 @@ const quotationSection = React.createClass({
   handleDisabled(status) {
     let disabled = false;
 
-    if(status !== 'Borrador') {
+    if(status == 'Borrador' || status == 'Enviada'  || status == 'Entregada') {
+      disabled = false;
+    } else {
       disabled = true;
     }
 
@@ -178,6 +179,7 @@ const quotationSection = React.createClass({
 
     return (
       <div id={`quotation-${quotation.id}`}>
+      
       <Alert 
         show={this.props.quotations.errors.length ? true : false}
         message={this.props.quotations.errors} 

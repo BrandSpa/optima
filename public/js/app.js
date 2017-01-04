@@ -58664,7 +58664,7 @@
 	        _react2.default.createElement(
 	          'button',
 	          {
-	            className: 'btn btn-default btn-xs',
+	            className: 'btn btn-default btn-xs completed',
 	            disabled: this.state.completed,
 	            onClick: this.toggleCompleted },
 	          'Completadas'
@@ -58854,9 +58854,14 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        _react2.default.createElement('input', { type: 'checkbox', value: todo.completed, onChange: function onChange(e) {
+	        _react2.default.createElement('input', {
+	          type: 'checkbox',
+	          value: todo.completed,
+	          onChange: function onChange(e) {
 	            return _this.props.onCompleted(todo);
-	          }, checked: todo.completed == 1 ? true : false })
+	          },
+	          checked: todo.completed == 1 ? true : false
+	        })
 	      )
 	    );
 	  }
@@ -73304,7 +73309,7 @@
 
 	function update(company) {
 		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + company.id, company).end(function (res) {
+			return _axios2.default.put(endpoint + '/' + company.id, company).then(function (res) {
 				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
 			}).catch(function (err) {
 				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
@@ -74985,7 +74990,6 @@
 	    var _this4 = this;
 
 	    this.setActivity('edito el mail').then(function () {
-	      _this4.alert.show();
 	      _this4._update(mail);
 	      _this4.setState({ showMail: false });
 	    });
@@ -75029,7 +75033,9 @@
 	  handleDisabled: function handleDisabled(status) {
 	    var disabled = false;
 
-	    if (status !== 'Borrador') {
+	    if (status == 'Borrador' || status == 'Enviada' || status == 'Entregada') {
+	      disabled = false;
+	    } else {
 	      disabled = true;
 	    }
 
@@ -76040,9 +76046,10 @@
 	              'button',
 	              {
 	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleSend, disabled: sending
+	                onClick: this.handleClick.bind(null, 'Enviada'),
+	                disabled: this.props.disabled ? true : false
 	              },
-	              messageSend
+	              'Enviada'
 	            )
 	          ),
 	          _react2.default.createElement(

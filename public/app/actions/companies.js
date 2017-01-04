@@ -24,7 +24,7 @@ export function update(company) {
 	return dispatch => {
 		return request
     .put(`${endpoint}/${company.id}`, company)
-    .end(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
+    .then(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
 		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
 	}
 }

@@ -8,8 +8,16 @@
 	<!-- STYLES -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<style>
-	
+
 	body, html {
+		height: 100%;
+			flex-direction: column;
+			display: flex;
+  		align-items: center;
+  		justify-content: center;
+	}
+
+	body {
 		background: rgba(49,46,129,1);
 		background: -moz-linear-gradient(top, rgba(49,46,129,1) 0%, rgba(128,172,218,1) 100%);
 		background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(49,46,129,1)), color-stop(100%, rgba(128,172,218,1)));
@@ -25,12 +33,14 @@
 		padding-bottom: 40px;
 		height: 100%;
 	}
-		.container {
-			flex-direction: column;
-			display: flex;
-  		align-items: center;
-  		justify-content: center;
+
+			::-webkit-input-placeholder, 
+		::-moz-placeholder,
+		:-ms-input-placeholder,
+		:-moz-placeholder, {
+			color: #fff;
 		}
+
 		.form-signin {
 			max-width: 300px;
 			margin: 0 auto;
@@ -60,6 +70,10 @@
 			text-align: center;
 		}
 
+		input::placeholder  {
+			color: #fff;
+		}
+
 		.form-signin .form-control:focus {
 			z-index: 2;
 		}
@@ -79,6 +93,12 @@
 			box-shadow: none;
 			color: #718DCD;
 			text-align: center;
+			transition: all 300ms;
+		}
+
+		.btn:hover {
+			background: #312E81;
+			color: #fff;
 		}
 
 		.logo {

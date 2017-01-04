@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Item from 'views/todos/item';
+import Item from './item';
 
 export default React.createClass({
   getInitialState() {
@@ -38,14 +38,13 @@ export default React.createClass({
           </button>
 
           <button
-            className="btn btn-default btn-xs"
+            className="btn btn-default btn-xs completed"
             disabled={this.state.completed}
             onClick={this.toggleCompleted}>
             Completadas
           </button>
         </div>
 
-        
         <hr/>
         
         <div className="table-responsive">
