@@ -12,7 +12,7 @@ export function fetch(params = {}) {
 
 export function fetchOne(id, params = {}) {
   return dispatch => {
-		  return rest.fetchOne(id, params, dispatch);
+		return rest.fetchOne(id, params, dispatch);
 	}
 }
 
