@@ -27260,6 +27260,14 @@
 				});
 				break;
 
+			case TYPE + '_UPDATE':
+				return _extends({}, state, {
+					quotation: action.payload,
+					company: action.payload.company,
+					contact: action.payload.contact
+				});
+				break;
+
 			case TYPE + '_SET_QUOTATION':
 				return _extends({}, state, {
 					quotation: action.payload,
@@ -28425,11 +28433,11 @@
 	  };
 	}
 
-	function update(id) {
-	  var quotation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	function update() {
+	  var quotation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  return function (dispatch) {
-	    return rest.update(id, quotation, dispatch);
+	    return rest.update(quotation, dispatch);
 	  };
 	}
 
@@ -28492,21 +28500,29 @@
 				var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 				var dispatch = arguments[1];
 
-				return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-					return dispatch({ type: type + '_FETCH', payload: res.data });
-				}).catch(function (err) {
-					return dispatch({ type: type + '_FAIL', payload: err.response.data });
-				});
+				if (dispatch) {
+					return _axios2.default.get(endpoint, { params: params }).then(function (res) {
+						return dispatch({ type: type + '_FETCH', payload: res.data });
+					}).catch(function (err) {
+						return dispatch({ type: type + '_FAIL', payload: err.response.data });
+					});
+				} else {
+					return console.error('rest dispatch it is missing on fetch');
+				}
 			},
 			store: function store() {
 				var model = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 				var dispatch = arguments[1];
 
-				return _axios2.default.post(endpoint, model).then(function (res) {
-					return dispatch({ type: type + '_STORE', payload: res.data });
-				}).catch(function (err) {
-					return dispatch({ type: type + '_FAIL', payload: err.response.data });
-				});
+				if (dispatch && typeof dispatch == 'function') {
+					return _axios2.default.post(endpoint, model).then(function (res) {
+						return dispatch({ type: type + '_STORE', payload: res.data });
+					}).catch(function (err) {
+						return dispatch({ type: type + '_FAIL', payload: err.response.data });
+					});
+				} else {
+					return console.error('rest dispatch it is missing on store');
+				}
 			},
 			fetchOne: function fetchOne(id) {
 				var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -28518,12 +28534,12 @@
 					return dispatch({ type: type + '_FAIL', payload: err.response.data });
 				});
 			},
-			update: function update(id) {
-				var model = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-				var dispatch = arguments[2];
+			update: function update() {
+				var model = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+				var dispatch = arguments[1];
 
-				return _axios2.default.put(endpoint + '/' + id, model).then(function (res) {
-					return dispatch({ type: type + '_SET_' + singularType, payload: res.data });
+				return _axios2.default.put(endpoint + '/' + model.id, model).then(function (res) {
+					return dispatch({ type: type + '_UPDATE', payload: res.data });
 				}).catch(function (err) {
 					return dispatch({ type: type + '_FAIL', payload: err.response.data });
 				});
@@ -73288,40 +73304,33 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _rest_actions = __webpack_require__(272);
+
+	var _rest_actions2 = _interopRequireDefault(_rest_actions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'COMPANIES';
 	var endpoint = 'api/v1/companies';
+	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'COMPANY');
 
 	function fetch() {
 		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err });
-			});
+			return rest.fetch(params, dispatch);
 		};
 	}
 
 	function store(company) {
 		return function (dispatch) {
-			return _axios2.default.post(endpoint, company).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
+			return rest.store(company, dispatch);
 		};
 	}
 
 	function update(company) {
 		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + company.id, company).then(function (res) {
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
+			return rest.update(company, dispatch);
 		};
 	}
 
@@ -73377,40 +73386,33 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _rest_actions = __webpack_require__(272);
+
+	var _rest_actions2 = _interopRequireDefault(_rest_actions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'CONTACTS';
 	var endpoint = 'api/v1/contacts';
+	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'CONTACT');
 
 	function fetch() {
 		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 		return function (dispatch) {
-			return _axios2.default.get(endpoint, { params: params }).then(function (res) {
-				return dispatch({ type: TYPE + '_FETCH', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err });
-			});
+			return rest.fetch(params, dispatch);
 		};
 	}
 
 	function store(contact) {
 		return function (dispatch) {
-			return _axios2.default.post(endpoint, contact).then(function (res) {
-				return dispatch({ type: TYPE + '_STORE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
+			return rest.store(contact, dispatch);
 		};
 	}
 
 	function update(contact) {
 		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + contact.id, contact).then(function (res) {
-				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
-			}).catch(function (err) {
-				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
-			});
+			return rest.update(contact, dispatch);
 		};
 	}
 
@@ -75037,7 +75039,7 @@
 	  },
 	  _update: function _update(data) {
 	    var quo = _extends({}, this.props.quotations.quotation, data);
-	    this.props.dispatch(action.update(this.props.params.id, quo)).then(this.handleUpdate);
+	    this.props.dispatch(action.update(quo)).then(this.handleUpdate);
 	  },
 	  handleUpdate: function handleUpdate(actionRes) {
 	    if (actionRes.type == 'QUOTATIONS_FAIL') {

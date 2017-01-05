@@ -22,9 +22,9 @@ export function store(quotation = {}) {
   }
 }
 
-export function update(id, quotation = {}) {
+export function update(quotation = {}) {
   return dispatch => {
-    return rest.update(id, quotation, dispatch);
+    return rest.update(quotation, dispatch);
   }
 }
 

@@ -19,6 +19,7 @@ export function store(company) {
 export function update(company) {
 	return dispatch => {
 		return rest.update(company, dispatch);
+	}
 }
 
 export function setCompany(company) {

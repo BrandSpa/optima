@@ -1,31 +1,24 @@
 import request from 'axios';
+import restActions from '../lib/rest_actions';
 const TYPE = 'CONTACTS';
 const endpoint = 'api/v1/contacts';
+const rest = restActions(endpoint, TYPE, 'CONTACT');
 
 export function fetch(params = {}) {
   return dispatch => {
-		  return request
-      .get(endpoint, {params})
-      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
-			.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err}));
+		return rest.fetch(params, dispatch);
 	}
 }
 
 export function store(contact) {
 	return dispatch => {
-		return request
-		.post(endpoint, contact)
-		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
+		return rest.store(contact, dispatch);
 	}
 }
 
 export function update(contact) {
 	return dispatch => {
-		return request
-    .put(`${endpoint}/${contact.id}`, contact)
-    .then(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
+		return rest.update(contact, dispatch);
 	}
 }
 

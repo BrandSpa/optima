@@ -149,7 +149,7 @@ const quotationSection = React.createClass({
 
   _update(data) {
     let quo = {...this.props.quotations.quotation, ...data};
-    this.props.dispatch(action.update(this.props.params.id, quo))
+    this.props.dispatch(action.update(quo))
     .then(this.handleUpdate);
   },
 

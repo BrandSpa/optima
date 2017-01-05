@@ -23,6 +23,15 @@ export default function reducer(state = initialState, action) {
         quotation: action.payload
       };
 		break;
+		
+		case `${TYPE}_UPDATE`:
+			return {
+        ...state,
+        quotation: action.payload,
+				company: action.payload.company,
+				contact: action.payload.contact
+      };
+		break;
 
 		case `${TYPE}_SET_QUOTATION`:
 			return {
