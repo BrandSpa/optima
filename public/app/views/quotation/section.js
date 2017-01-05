@@ -93,7 +93,6 @@ const quotationSection = React.createClass({
     this.setState({showNoSend: !this.state.showNoSend});
   },
   
-
   handleOptions(filters, message) {
     let {quotations} = this.props;
     
@@ -110,19 +109,27 @@ const quotationSection = React.createClass({
     });
   },
 
-  handleSaveMail: function(mail) {
+  handleSaveMail(mail) {
     this.setActivity('edito el mail').then(() => {
-      this.alert.show();
       this._update(mail);
       this.setState({showMail: false});
     });
   },
 
-  handleServiceApproval: function(serviceApproval) {
+  handleSendMail(mail) {
+    const {id} = this.props.quotations.quotation;
+    let quo = {...this.props.quotations.quotation, ...mail};
+    
+    return this.props.dispatch(action.update(this.props.params.id, quo))
+    .then(() => this.props.dispatch(action.sendMail(id)))
+    .then(() => this.setActivity('envio mail'));
+  },
+
+  handleServiceApproval(serviceApproval) {
     this._update({service_approval: serviceApproval})
   },
 
-  handleSaveNoEffective: function(status) {
+  handleSaveNoEffective(status) {
     this._update(status);
     this.setState({
       showNoEffective: false,
@@ -130,13 +137,13 @@ const quotationSection = React.createClass({
     });
   },
 
-  handleStatus: function(status, message) {
+  handleStatus(status, message) {
     this.setActivity(message).then(() => {
       this._update(status);
     });
   },
 
-  changeContact: function(contactId) {
+  changeContact(contactId) {
     this._update({contact_id: contactId});
   },
 
@@ -157,7 +164,9 @@ const quotationSection = React.createClass({
   handleDisabled(status) {
     let disabled = false;
 
-    if(status !== 'Borrador') {
+    if(status == 'Borrador' || status == 'Enviada'  || status == 'Entregada') {
+      disabled = false;
+    } else {
       disabled = true;
     }
 
@@ -178,6 +187,7 @@ const quotationSection = React.createClass({
 
     return (
       <div id={`quotation-${quotation.id}`}>
+      
       <Alert 
         show={this.props.quotations.errors.length ? true : false}
         message={this.props.quotations.errors} 
@@ -251,6 +261,7 @@ const quotationSection = React.createClass({
             onClose={this.handleShowMail}
             quotation={quotation}
             onSaveMail={this.handleSaveMail}
+            onSendMail={this.handleSendMail}
           />
 
           <Products

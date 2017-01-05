@@ -32,6 +32,7 @@ const DateTime = React.createClass({
   },
 
   handleChange(dateObj, dateStr) {
+    console.log('chande date', dateObj);
     this.setState({lastDate: dateStr});
     this.triggerChange(dateObj, dateStr);
   },
@@ -48,17 +49,12 @@ const DateTime = React.createClass({
     });
   },
 
-  handleChange() {
-    this.setState({active: true});
-  },
-
   render() {
     return (
       <input
         id={this.state.id}
         placeholder={this.props.placeholder}
         className={`${this.props.styles}`}
-        onClick={this.handleChange}
       />
     )
   }

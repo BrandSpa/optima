@@ -28,3 +28,13 @@ export function store(todo = {}) {
 		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err}));
   }
 }
+
+export function sendMail(id) {
+  return dispatch => {
+    return request
+      .post(`${endpoint}/${id}/sendmail`)
+      .then(res => dispatch({ type: `${TYPE}_SENT`, payload: res.data}))
+      .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
+  }
+}
+

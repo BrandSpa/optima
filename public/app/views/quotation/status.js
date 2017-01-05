@@ -63,9 +63,10 @@ module.exports = React.createClass({
             <li>
               <button
                 className="btn btn-default btn-sm"
-                onClick={this.handleSend} disabled={sending}
+                onClick={this.handleClick.bind(null, 'Enviada')} 
+                disabled={this.props.disabled ? true : false}
                 >
-                {messageSend}
+                Enviada
               </button>
             </li>
 

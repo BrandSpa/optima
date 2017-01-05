@@ -56,6 +56,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 		Route::resource('notifications', 'NotificationsController');
 		Route::resource('trackings', 'TrackingsController');
 		Route::resource('todos', 'TodosController');
+		Route::post('todos/{id}/sendmail', 'TodosController@sendNotification');
 		Route::resource('users', 'UsersController');
 		Route::resource('reports', 'ReportsController');
 

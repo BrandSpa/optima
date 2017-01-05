@@ -23,14 +23,12 @@ export default function reducer(state = initialState, action) {
 		break;
 
 		case `${TYPE}_STORE`:
-			console.log(action.payload);
-
 			return {
         ...state,
         items: [action.payload].concat(state.items)
       };
 		break;
-	
+		
 		case `${TYPE}_FAIL`:
 			return {
         ...state,

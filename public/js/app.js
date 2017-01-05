@@ -27352,8 +27352,6 @@
 					break;
 
 				case TYPE + '_STORE':
-					console.log(action.payload);
-
 					return {
 						v: _extends({}, state, {
 							items: [action.payload].concat(state.items)
@@ -30496,8 +30494,6 @@
 	  value: true
 	});
 
-	var _React$createClass;
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -30512,9 +30508,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	var DateTime = _react2.default.createClass((_React$createClass = {
+	var DateTime = _react2.default.createClass({
 	  displayName: 'DateTime',
 	  getInitialState: function getInitialState() {
 	    return {
@@ -30541,6 +30535,7 @@
 	    }
 	  },
 	  handleChange: function handleChange(dateObj, dateStr) {
+	    console.log('chande date', dateObj);
 	    this.setState({ lastDate: dateStr });
 	    this.triggerChange(dateObj, dateStr);
 	  },
@@ -30554,17 +30549,15 @@
 	      altInput: props.altInput,
 	      onChange: this.handleChange
 	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement('input', {
+	      id: this.state.id,
+	      placeholder: this.props.placeholder,
+	      className: '' + this.props.styles
+	    });
 	  }
-	}, _defineProperty(_React$createClass, 'handleChange', function handleChange() {
-	  this.setState({ active: true });
-	}), _defineProperty(_React$createClass, 'render', function render() {
-	  return _react2.default.createElement('input', {
-	    id: this.state.id,
-	    placeholder: this.props.placeholder,
-	    className: '' + this.props.styles,
-	    onClick: this.handleChange
-	  });
-	}), _React$createClass));
+	});
 
 	exports.default = DateTime;
 
@@ -47355,11 +47348,15 @@
 	    this.props.dispatch(action.fetch(query));
 	  },
 	  handleSubmit: function handleSubmit(todo) {
+	    var _this = this;
+
 	    if (this.props.quotation_id) {
 	      todo = _extends({}, todo, { quotation_id: this.props.quotation_id });
 	    }
 
-	    this.props.dispatch(action.store(todo));
+	    this.props.dispatch(action.store(todo)).then(function (res) {
+	      return _this.props.dispatch(action.sendMail(res.payload.id));
+	    });
 	  },
 	  handleCompleted: function handleCompleted(todo) {
 	    this.props.dispatch(action.completed(todo));
@@ -47402,6 +47399,7 @@
 	exports.fetch = fetch;
 	exports.completed = completed;
 	exports.store = store;
+	exports.sendMail = sendMail;
 
 	var _axios = __webpack_require__(35);
 
@@ -47444,6 +47442,16 @@
 	      return dispatch({ type: TYPE + '_STORE', payload: res.data });
 	    }).catch(function (err) {
 	      return dispatch({ type: TYPE + '_FAIL', payload: err });
+	    });
+	  };
+	}
+
+	function sendMail(id) {
+	  return function (dispatch) {
+	    return _axios2.default.post(endpoint + '/' + id + '/sendmail').then(function (res) {
+	      return dispatch({ type: TYPE + '_SENT', payload: res.data });
+	    }).catch(function (err) {
+	      return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
 	    });
 	  };
 	}
@@ -58664,7 +58672,7 @@
 	        _react2.default.createElement(
 	          'button',
 	          {
-	            className: 'btn btn-default btn-xs',
+	            className: 'btn btn-default btn-xs completed',
 	            disabled: this.state.completed,
 	            onClick: this.toggleCompleted },
 	          'Completadas'
@@ -58854,9 +58862,14 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        _react2.default.createElement('input', { type: 'checkbox', value: todo.completed, onChange: function onChange(e) {
+	        _react2.default.createElement('input', {
+	          type: 'checkbox',
+	          value: todo.completed,
+	          onChange: function onChange(e) {
 	            return _this.props.onCompleted(todo);
-	          }, checked: todo.completed == 1 ? true : false })
+	          },
+	          checked: todo.completed == 1 ? true : false
+	        })
 	      )
 	    );
 	  }
@@ -73304,7 +73317,7 @@
 
 	function update(company) {
 		return function (dispatch) {
-			return _axios2.default.put(endpoint + '/' + company.id, company).end(function (res) {
+			return _axios2.default.put(endpoint + '/' + company.id, company).then(function (res) {
 				return dispatch({ type: TYPE + '_UPDATE', payload: res.data });
 			}).catch(function (err) {
 				return dispatch({ type: TYPE + '_FAIL', payload: err.response.data });
@@ -74985,16 +74998,26 @@
 	    var _this4 = this;
 
 	    this.setActivity('edito el mail').then(function () {
-	      _this4.alert.show();
 	      _this4._update(mail);
 	      _this4.setState({ showMail: false });
 	    });
 	  },
+	  handleSendMail: function handleSendMail(mail) {
+	    var _this5 = this;
 
+	    var id = this.props.quotations.quotation.id;
+
+	    var quo = _extends({}, this.props.quotations.quotation, mail);
+
+	    return this.props.dispatch(action.update(this.props.params.id, quo)).then(function () {
+	      return _this5.props.dispatch(action.sendMail(id));
+	    }).then(function () {
+	      return _this5.setActivity('envio mail');
+	    });
+	  },
 	  handleServiceApproval: function handleServiceApproval(serviceApproval) {
 	    this._update({ service_approval: serviceApproval });
 	  },
-
 	  handleSaveNoEffective: function handleSaveNoEffective(status) {
 	    this._update(status);
 	    this.setState({
@@ -75002,19 +75025,16 @@
 	      showNoSend: false
 	    });
 	  },
-
 	  handleStatus: function handleStatus(status, message) {
-	    var _this5 = this;
+	    var _this6 = this;
 
 	    this.setActivity(message).then(function () {
-	      _this5._update(status);
+	      _this6._update(status);
 	    });
 	  },
-
 	  changeContact: function changeContact(contactId) {
 	    this._update({ contact_id: contactId });
 	  },
-
 	  _update: function _update(data) {
 	    var quo = _extends({}, this.props.quotations.quotation, data);
 	    this.props.dispatch(action.update(this.props.params.id, quo)).then(this.handleUpdate);
@@ -75029,7 +75049,9 @@
 	  handleDisabled: function handleDisabled(status) {
 	    var disabled = false;
 
-	    if (status !== 'Borrador') {
+	    if (status == 'Borrador' || status == 'Enviada' || status == 'Entregada') {
+	      disabled = false;
+	    } else {
 	      disabled = true;
 	    }
 
@@ -75140,7 +75162,8 @@
 	          show: this.state.showMail,
 	          onClose: this.handleShowMail,
 	          quotation: quotation,
-	          onSaveMail: this.handleSaveMail
+	          onSaveMail: this.handleSaveMail,
+	          onSendMail: this.handleSendMail
 	        }),
 	        _react2.default.createElement(_products3.default, _extends({}, this.props, {
 	          quotationId: quotation.id,
@@ -76040,9 +76063,10 @@
 	              'button',
 	              {
 	                className: 'btn btn-default btn-sm',
-	                onClick: this.handleSend, disabled: sending
+	                onClick: this.handleClick.bind(null, 'Enviada'),
+	                disabled: this.props.disabled ? true : false
 	              },
-	              messageSend
+	              'Enviada'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -77437,6 +77461,8 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -77460,7 +77486,8 @@
 	        mail_recipient_1: '',
 	        mail_recipient_2: ''
 	      },
-	      show: false
+	      show: false,
+	      loading: false
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -77474,7 +77501,15 @@
 	  },
 	  handleTextChange: function handleTextChange(text) {
 	    this.setState({
-	      quotation: _underscore2.default.extend(this.state.quotation, { mail_message: text })
+	      quotation: _extends({}, this.state.quotation, { mail_message: text })
+	    });
+	  },
+	  handleMail: function handleMail() {
+	    var _this = this;
+
+	    this.setState({ loading: true });
+	    this.props.onSendMail(this.state.quotation).then(function () {
+	      return _this.setState({ loading: false });
 	    });
 	  },
 	  handleChange: function handleChange() {
@@ -77541,6 +77576,12 @@
 	          'button',
 	          { className: 'btn btn-sm btn-primary', onClick: this.handleClick },
 	          'Guardar'
+	        ),
+	        _react2.default.createElement('span', { style: { margin: '0 7px' } }),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-sm btn-primary', onClick: this.handleMail, disabled: this.state.loading },
+	          this.state.loading ? 'Enviado...' : 'Enviar Mail'
 	        ),
 	        _react2.default.createElement(
 	          'button',

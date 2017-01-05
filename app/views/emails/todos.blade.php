@@ -238,15 +238,15 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 <body bgcolor="#FFFFFF">
 
 <!-- HEADER -->
-<table class="head-wrap" bgcolor="#1D2127">
+<table class="head-wrap" bgcolor="#312E81">
 	<tr>
 		<td></td>
 		<td class="header container" >
 				
 				<div class="content">
-				<table bgcolor="#1D2127">
+				<table bgcolor="#312E81">
 					<tr>
-						<td><img src="http://optima.avante.cc/img/logo-home.png" alt="Optima logo" /></td>
+						<td style="text-align:center"><img src="http://react.avante.cc/img/logo.png" alt="Optima logo" /></td>
 					</tr>
 				</table>
 				</div>
@@ -269,10 +269,11 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 					<td>
 						<h3>Hola, [[ $data->user->name ]] [[ $data->user->lastname ]]</h3>
 						<p><b>Fecha vencimiento:</b> [[ $data->expires_date ]] - [[ $data->expires_time ]]</p>
+						<p>[[ $data->title ]]</p>
 						<p>[[ $data->description ]]</p>
 						<!-- Callout Panel -->
 						<p class="callout">
-							<a href="http://optima.avante.cc">Click aquí</a> para ver mas tareas asignadas.
+							<a href="http://react.avante.cc/">Click aquí</a> para ver mas tareas asignadas.
 						</p><!-- /Callout Panel -->					
 
 					</td>

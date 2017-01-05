@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Timeago from 'components/timeago';
+import Timeago from '../../components/timeago';
 
 export default React.createClass({
   getDefaultProps() {
@@ -53,7 +53,14 @@ export default React.createClass({
         <td>{user ? user.name : ''} {user ? user.lastname : ''}</td>
         <td></td>
         <td>{this.linkQuotation(todo)}</td>
-        <td><input type="checkbox" value={todo.completed} onChange={e => this.props.onCompleted(todo)} checked={todo.completed == 1 ? true : false} /></td>
+        <td>
+          <input 
+            type="checkbox" 
+            value={todo.completed} 
+            onChange={e => this.props.onCompleted(todo)} 
+            checked={todo.completed == 1 ? true : false} 
+          />
+        </td>
       </tr>
     )
   }
