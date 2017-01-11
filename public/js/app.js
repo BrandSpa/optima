@@ -27708,6 +27708,14 @@
 					};
 					break;
 
+				case TYPE + '_CLEAN_ITEMS':
+					return {
+						v: _extends({}, state, {
+							items: []
+						})
+					};
+					break;
+
 				case TYPE + '_FAIL':
 					return {
 						v: _extends({}, state, {
