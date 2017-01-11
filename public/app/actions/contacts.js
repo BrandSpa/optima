@@ -19,3 +19,7 @@ export function update(contact) {
 export function setContact(contact) {
 	return { type: `${TYPE}_SET_CONTACT`, payload: contact};	
 }
+
+export function cleanItems() {
+	return { type: `${TYPE}_CLEAN_ITEMS`, payload: []};	
+}
