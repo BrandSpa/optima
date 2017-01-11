@@ -61,6 +61,7 @@ const quoServices = React.createClass({
 
     return (
       <div className="panel">
+        <div className="panel-heading"><h5>Servicios</h5></div>
         <div className="panel-body">
           <div className="row">
             <div className="form-group col-sm-12">

@@ -113,6 +113,7 @@ export default React.createClass({
     return (
       <div>
       <div className="panel panel-default">
+        <div className="panel-heading"><h5>Productos</h5></div>
         <div className="panel-body">
           <button
             className="btn btn-primary btn-sm"

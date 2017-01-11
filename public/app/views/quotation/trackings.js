@@ -25,6 +25,7 @@ const quoTrackings = React.createClass({
 
     return (
       <div className="panel">
+        <div className="panel-heading"><h5>Seguimiento</h5></div>
         <div className="panel-body">
           <Form contacts={this.props.contacts.items} onSubmit={this.handleSubmit} />
           <br/>

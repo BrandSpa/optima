@@ -148,6 +148,11 @@
 			box-shadow: 0;
 			outline: none;
 		}
+
+		.panel-heading h5 {
+			margin: 0;
+			font-size: 18px;
+		}
 	</style>
 
 </head>

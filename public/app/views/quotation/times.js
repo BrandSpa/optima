@@ -12,6 +12,7 @@ module.exports = React.createClass({
 
     return (
       <div className="panel">
+        <div className="panel-heading"><h5>Tiempos</h5></div>
         <div className="panel-body">
           <b>Creada:</b> {this.props.quotation.created_at}
           <hr/>

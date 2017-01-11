@@ -45,6 +45,7 @@ const section = React.createClass({
     const todos = this.props.todos.items;
     return (
       <div className="panel">
+        <div className="panel-heading"><h5>Tareas</h5></div>
         <div className="panel-body">
           <Form onSubmit={this.handleSubmit}/>
           <hr/>

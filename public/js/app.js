@@ -28318,6 +28318,15 @@
 	        { className: 'panel quotations-table' },
 	        _react2.default.createElement(
 	          'div',
+	          { className: 'panel-heading' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            'Cotizaciones'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
 	          { className: 'panel-body', style: { minHeight: '600px' } },
 	          _react2.default.createElement(
 	            'a',
@@ -45632,15 +45641,19 @@
 	      { className: 'panel', style: { position: 'fixed', margin: '0 30px 0 0' } },
 	      _react2.default.createElement(
 	        'div',
+	        { className: 'panel-heading' },
+	        _react2.default.createElement(
+	          'h5',
+	          null,
+	          'Actividad'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
 	        { className: 'panel-body' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'quotations-table' },
-	          _react2.default.createElement(
-	            'h5',
-	            null,
-	            'Actividad'
-	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'table-responsive' },
@@ -45829,6 +45842,15 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'panel' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-heading' },
+	        _react2.default.createElement(
+	          'h5',
+	          null,
+	          'Tareas'
+	        )
+	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'panel-body' },
@@ -71621,9 +71643,9 @@
 	          { className: 'panel' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'panel-body' },
+	            { className: 'panel-heading' },
 	            _react2.default.createElement(
-	              'h4',
+	              'h5',
 	              null,
 	              'Empresa: ',
 	              _react2.default.createElement(
@@ -71631,7 +71653,11 @@
 	                null,
 	                this.props.companies.company.name
 	              )
-	            ),
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: this.state.showContactForm ? 'col-sm-12' : 'hidden' },
@@ -76329,6 +76355,15 @@
 	        { className: 'panel panel-default' },
 	        _react2.default.createElement(
 	          'div',
+	          { className: 'panel-heading' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            'Productos'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
 	          { className: 'panel-body' },
 	          _react2.default.createElement(
 	            'button',
@@ -77282,6 +77317,15 @@
 	      { className: 'panel' },
 	      _react2.default.createElement(
 	        'div',
+	        { className: 'panel-heading' },
+	        _react2.default.createElement(
+	          'h5',
+	          null,
+	          'Servicios'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
 	        { className: 'panel-body' },
 	        _react2.default.createElement(
 	          'div',
@@ -77824,6 +77868,15 @@
 	      { className: 'panel' },
 	      React.createElement(
 	        'div',
+	        { className: 'panel-heading' },
+	        React.createElement(
+	          'h5',
+	          null,
+	          'Tiempos'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
 	        { className: 'panel-body' },
 	        React.createElement(
 	          'b',
@@ -77904,12 +77957,16 @@
 	      { className: 'panel' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'panel-body' },
+	        { className: 'panel-heading' },
 	        _react2.default.createElement(
 	          'h5',
 	          null,
 	          'Actividad'
-	        ),
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-body' },
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'activities' },
@@ -77973,6 +78030,15 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'panel' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-heading' },
+	        _react2.default.createElement(
+	          'h5',
+	          null,
+	          'Seguimiento'
+	        )
+	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'panel-body' },

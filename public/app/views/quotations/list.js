@@ -51,6 +51,7 @@ const quotations = React.createClass({
       <div>
         <Filters onChange={this.handleFilters} />
         <div className="panel quotations-table">
+          <div className="panel-heading"><h5>Cotizaciones</h5></div>
           <div className="panel-body" style={{minHeight: '600px'}}>
             <a href="/quotation/create" className="btn btn-primary btn-sm">Nueva cotización</a>
             <span className="pull-right">BD-COM-03</span>
