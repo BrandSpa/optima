@@ -1,32 +1,19 @@
 import request from 'axios';
+import restActions from '../lib/rest_actions';
 const TYPE = 'SERVICES';
 const endpoint = 'api/v1/services';
+const rest = restActions(endpoint, TYPE, 'SERVICE');
 
 export function fetch(params = {}) {
-  return dispatch => {
-		  return request
-      .get(endpoint, {params})
-      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
-			.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err}));
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function store(service) {
-	return dispatch => {
-		return request
-		.post(endpoint, service)
-		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.store(service, dispatch);
 }
 
 export function update(service) {
-	return dispatch => {
-		return request
-    .put(`${endpoint}/${service.id}`, service)
-    .end(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.update(service, dispatch);
 }
 
 export function setService(service) {

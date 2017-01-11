@@ -1,21 +1,13 @@
 import request from 'axios';
+import restActions from '../lib/rest_actions';
 const TYPE = 'ACTIVITIES';
 const endpoint = 'api/v1/activities';
+const rest = restActions(endpoint, TYPE, 'ACTIVITY');
 
 export function fetch(params = {}) {
-  return dispatch => {
-		  return request
-      .get(endpoint, {params})
-      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
-			.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err}));
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function store(activity = {}) {
-  return dispatch => {
-		  return request
-      .post(endpoint, activity)
-      .then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
-		  .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+  return dispatch => rest.store(activity, dispatch);
 }

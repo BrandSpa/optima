@@ -33,10 +33,26 @@ export default function(endpoint, type, singularType) {
 		},
 		
 		update(model = {}, dispatch) {
-			return request
-				.put(`${endpoint}/${model.id}`, model)
-				.then(res => dispatch({ type: `${type}_UPDATE`, payload: res.data}))
+			if(dispatch && typeof dispatch == 'function') {
+				return request
+					.put(`${endpoint}/${model.id}`, model)
+					.then(res => dispatch({ type: `${type}_UPDATE`, payload: res.data}))
+					.catch(err => dispatch({ type: `${type}_FAIL`, payload: err.response.data}));
+			} else {
+				return console.error('rest dispatch it is missing on update'); 
+			}
+		},
+
+		remove(id, dispatch) {
+			if(dispatch && typeof dispatch == 'function') { 
+				return request
+				.delete(`${endpoint}/${id}`)
+				.then(res => dispatch({ type: `${type}_REMOVE`, payload: res.data}))
 				.catch(err => dispatch({ type: `${type}_FAIL`, payload: err.response.data}));
+			} else {
+				return console.error('rest dispatch it is missing on remove');
+			}
+			
 		}
 
 	};

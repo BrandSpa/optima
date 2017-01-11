@@ -1,21 +1,13 @@
 import request from 'axios';
+import restActions from '../lib/rest_actions';
 const TYPE = 'TRACKINGS';
 const endpoint = '/api/v1/trackings';
+const rest = restActions(endpoint, TYPE, 'TRACKING');
 
 export function fetch(params = {}) {
-  return dispatch => {
-		  return request
-      .get(endpoint, {params})
-      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
-      .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function store(product) {
-	return dispatch => {
-		return request
-		.post(endpoint, product)
-		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.store(product, dispatch);
 }

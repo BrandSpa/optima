@@ -5,21 +5,15 @@ const endpoint = 'api/v1/companies';
 const rest = restActions(endpoint, TYPE, 'COMPANY');
 
 export function fetch(params = {}) {
-  return dispatch => {
-		 return rest.fetch(params, dispatch);
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function store(company) {
-	return dispatch => {
-		return rest.store(company, dispatch);
-	}
+	return dispatch => rest.store(company, dispatch);
 }
 
 export function update(company) {
-	return dispatch => {
-		return rest.update(company, dispatch);
-	}
+	return dispatch => rest.update(company, dispatch);
 }
 
 export function setCompany(company) {

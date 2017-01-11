@@ -12,11 +12,11 @@ const endpoint = 'api/v1/companies';
 
 describe('companies actions', () => {
 
-	beforeEach(function () {
+	beforeEach(() => {
   	moxios.install()
   })
 
-  afterEach(function () {
+  afterEach(() => {
   	moxios.uninstall()
   })
 

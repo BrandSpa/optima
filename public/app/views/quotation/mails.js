@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import _ from 'underscore';
-import Editor from 'components/editor';
+import Editor from '../../components/editor';
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -95,10 +95,10 @@ module.exports = React.createClass({
 
             <p></p>
 
-          <button className="btn btn-sm btn-primary" onClick={this.handleClick}>Guardar</button>
+          <button className="btn btn-sm btn-primary mail-save" onClick={this.handleClick}>Guardar</button>
           <span style={{margin: '0 7px'}}></span>
-          <button className="btn btn-sm btn-primary" onClick={this.handleMail} disabled={this.state.loading}>{this.state.loading ? 'Enviado...' : 'Enviar Mail'}</button>
-          <button className="btn btn-sm btn-default pull-right" onClick={this.handleClose}>Cerrar</button>
+          <button className="btn btn-sm btn-primary mail-send" onClick={this.handleMail} disabled={this.state.loading}>{this.state.loading ? 'Enviado...' : 'Enviar Mail'}</button>
+          <button className="btn btn-sm btn-default pull-right mail-close" onClick={this.handleClose}>Cerrar</button>
         </div>
       </div>
     );

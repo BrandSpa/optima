@@ -6,7 +6,7 @@ import uid from 'uid';
 const DateTime = React.createClass({
   getInitialState() {
     return {
-      id: `flatpickr-${ uid() }`,
+      id: `flatpickr_${ uid() }`,
       lastDate: '',
       active: false
     }
@@ -14,7 +14,6 @@ const DateTime = React.createClass({
 
   getDefaultProps() {
     return {
-      id: '',
       styles: '',
       placeholder: '',
       format: '',
@@ -32,21 +31,22 @@ const DateTime = React.createClass({
   },
 
   handleChange(dateObj, dateStr) {
-    console.log('chande date', dateObj);
     this.setState({lastDate: dateStr});
     this.triggerChange(dateObj, dateStr);
   },
 
   componentDidMount() {
     let props = this.props;
-
-    flatpickr(`#${this.state.id}`, {
+    const id = `#${this.state.id}`;
+    const options = {
       enableTime: props.enableTime,
       time_24hr: props.time_24hr,
       altFormat: props.altFormat,
       altInput: props.altInput,
       onChange: this.handleChange
-    });
+    };
+    
+    flatpickr(id, options);
   },
 
   render() {

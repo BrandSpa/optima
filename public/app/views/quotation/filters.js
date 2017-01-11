@@ -7,6 +7,7 @@ import typeOptions from 'options/type.json';
 import clientOptions from 'options/client_type.json';
 import foundUsOptions from 'options/found_us.json';
 import productOptions from 'options/products.json';
+
 const messages = {
   type: 'cambio tipo',
   type_category: 'cambio categoría',

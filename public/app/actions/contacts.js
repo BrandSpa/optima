@@ -5,21 +5,15 @@ const endpoint = 'api/v1/contacts';
 const rest = restActions(endpoint, TYPE, 'CONTACT');
 
 export function fetch(params = {}) {
-  return dispatch => {
-		return rest.fetch(params, dispatch);
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function store(contact) {
-	return dispatch => {
-		return rest.store(contact, dispatch);
-	}
+	return dispatch => rest.store(contact, dispatch);
 }
 
 export function update(contact) {
-	return dispatch => {
-		return rest.update(contact, dispatch);
-	}
+	return dispatch => rest.update(contact, dispatch);
 }
 
 export function setContact(contact) {

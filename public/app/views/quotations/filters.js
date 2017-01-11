@@ -1,13 +1,12 @@
 'use strict';
 import React from 'react';
-import _ from 'underscore';
-import statusOptions from 'options/status.json';
-import advisorOptions from 'options/advisors.json';
-import typeOptions from 'options/type.json';
-import clientOptions from 'options/client_type.json';
-import priorityOptions from 'options/priority.json';
-import Select from 'components/form_select';
-import DataTime from 'components/datetime';
+import statusOptions from '../../options/status.json';
+import advisorOptions from '../../options/advisors.json';
+import typeOptions from '../../options/type.json';
+import clientOptions from '../../options/client_type.json';
+import priorityOptions from '../../options/priority.json';
+import Select from '../../components/form_select';
+import DataTime from '../../components/datetime';
 
 const quoFilters = React.createClass({
   getInitialState() {
@@ -62,17 +61,18 @@ const quoFilters = React.createClass({
             <div className="form-group col-md-3">
               <input
                 placeholder="Buscar cotizaciones"
-                className="form-control"
-                onChange={e => this.handleChange('query', e)}
+                className="form-control input-query"
+                onChange={ this.handleChange.bind(null, 'query') }
+                value={ query.query || '' }
               />
             </div>
 
-             <div className="form-group col-sm-3">
+             <div className="form-group col-sm-3 filter-priority">
               <Select
                 options={priorityOptions}
                 default="Seleccionar prioridad"
                 value={query.priority}
-                onSelectChange={e => this.handleChange('priority', e)}
+                onSelectChange={this.handleChange.bind(null, 'priority')}
               />
             </div>
 
@@ -99,7 +99,7 @@ const quoFilters = React.createClass({
                 options={statusOptions}
                 default="Seleccionar estado"
                 value={query.status}
-                onSelectChange={e => this.handleChange('status', e)}
+                onSelectChange={this.handleChange.bind(null, 'status')}
               />
             </div>
 
@@ -108,7 +108,7 @@ const quoFilters = React.createClass({
                 options={advisorOptions}
                 default="Seleccionar asesor"
                 value={query.advisor}
-                onSelectChange={e => this.handleChange('advisor', e)}
+                onSelectChange={ this.handleChange.bind(null, 'advisor') }
               />
             </div>
 
@@ -117,7 +117,7 @@ const quoFilters = React.createClass({
                 options={clientOptions}
                 default="Seleccionar cliente"
                 value={query.client_type}
-                onSelectChange={e => this.handleChange('client_type', e)}
+                onSelectChange={this.handleChange.bind(null, 'client_type')}
               />
             </div>
 
