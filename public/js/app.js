@@ -71532,6 +71532,10 @@
 	      showContactForm: false
 	    };
 	  },
+	  componentDidMount: function componentDidMount() {
+	    this.props.dispatch(action.cleanItems());
+	    this.props.dispatch(contactAction.cleanItems());
+	  },
 	  searchCompanies: function searchCompanies(name) {
 	    this.setState({ loading: true });
 	    var query = { query_name: name };
