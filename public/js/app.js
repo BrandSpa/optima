@@ -71855,6 +71855,7 @@
 	exports.store = store;
 	exports.update = update;
 	exports.setContact = setContact;
+	exports.cleanItems = cleanItems;
 
 	var _axios = __webpack_require__(35);
 
@@ -71892,6 +71893,10 @@
 
 	function setContact(contact) {
 		return { type: TYPE + '_SET_CONTACT', payload: contact };
+	}
+
+	function cleanItems() {
+		return { type: TYPE + '_CLEAN_ITEMS', payload: [] };
 	}
 
 /***/ },
