@@ -24,6 +24,11 @@ const createPanel = React.createClass({
     }
   },
 
+  componentDidMount() {
+    this.props.dispatch(action.cleanItems());
+    this.props.dispatch(contactAction.cleanItems());
+  },
+
   searchCompanies(name) {
     this.setState({loading: true});
     let query = {query_name: name};
