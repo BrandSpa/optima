@@ -1,41 +1,23 @@
 import request from 'axios';
+import restActions from '../lib/rest_actions';
 const TYPE = 'PRODUCTS';
 const endpoint = '/api/v1/products';
+const rest = restActions(endpoint, TYPE);
 
 export function fetch(params = {}) {
-  return dispatch => {
-		  return request
-      .get(endpoint, {params})
-      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
-      .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function store(product) {
-	return dispatch => {
-		return request
-		.post(endpoint, product)
-		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.store(product, dispatch);
 }
 
 export function update(product) {
-	return dispatch => {
-		return request
-		.put(`${endpoint}/${product.id}`, product)
-		.then(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.update(product, dispatch);
 }
 
 export function remove(id) {
-	return dispatch => {
-		return request
-		.delete(`${endpoint}/${id}`)
-		.then(res => dispatch({ type: `${TYPE}_REMOVE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.remove(id, dispatch);
 }
 
 export function duplicate(id) {

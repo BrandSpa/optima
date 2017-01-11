@@ -12,11 +12,11 @@ const endpoint = 'api/v1/companies';
 
 describe('companies actions', () => {
 
-	beforeEach(function () {
+	beforeEach(() => {
   	moxios.install()
   })
 
-  afterEach(function () {
+  afterEach(() => {
   	moxios.uninstall()
   })
 
@@ -54,23 +54,29 @@ describe('companies actions', () => {
 
 	it('should set a company', () => {
 		const store = mockStore({});
+		const company = {id: 7070, name: 'brandspa'};
+		const expectedActions = [{type: `${TYPE}_SET_COMPANY`, payload: company}];
+		return store.dispatch(action.setCompany(company))
+			.then(() => expect(store.getActions()).toEqual(expectedActions));
 
 	})
 
 	it('should add a contact', () => {
 		const store = mockStore({});
-
+		const company = {id: 7070, name: 'brandspa'}; 
+		const contact = {id: 7070, name: 'Alejandro Sanabria'};
+		const expectedActions = [{type: `${TYPE}_ADD_CONTACT`, payload: {company, contact}}];
+		return store.dispatch(action.addContact(company, contact))
+			.then(() =>  expect(store.getActions()).toEqual(expectedActions));
 	})
 
 	it('should update a contact', () => {
 		const store = mockStore({});
-
+		const company = {id: 7070, name: 'brandspa'}; 
+		const contact = {id: 7070, name: 'Alejandro Sanabria'};
+		const expectedActions = [{type: `${TYPE}_UPDATE_CONTACT`, payload: {company, contact}}];
+		return store.dispatch(action.updateContact(company, contact))
+			.then(() =>  expect(store.getActions()).toEqual(expectedActions));
 	})
 
-	it('should clean items', () => {
-		const store = mockStore({});
-
-	})
-
-	
 });

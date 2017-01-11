@@ -1,6 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import expect from 'expect';
+import sinon from 'sinon';
 import DateTime from '../../app/components/datetime';
 
 describe('datetime component', () => {
@@ -11,7 +12,9 @@ describe('datetime component', () => {
 	});
 
 	it('should have state active on click', () => {
-		let wrapper = shallow(<DateTime />);
-		expect(	wrapper.simulate('click').state('active')).toBe(true);
+		const onChange = sinon.stub();
+		let wrapper = shallow(<DateTime onChange={onChange} />);
+		wrapper.simulate('change');
+		expect(	onChange.calledOnce ).toBe(true);
 	})
 });

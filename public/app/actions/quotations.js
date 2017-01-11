@@ -5,27 +5,19 @@ const endpoint = 'api/v1/quotations';
 const rest = restActions(endpoint, TYPE, 'QUOTATION');
 
 export function fetch(params = {}) {
-  return dispatch => {
-		  return rest.fetch(params, dispatch);
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function fetchOne(id, params = {}) {
-  return dispatch => {
-		  return rest.fetchOne(id, params, dispatch);
-	}
+  return dispatch => rest.fetchOne(id, params, dispatch);
 }
 
 export function store(quotation = {}) {
-  return dispatch => {
-    return rest.store(quotation, dispatch);
-  }
+  return dispatch => rest.store(quotation, dispatch);
 }
 
-export function update(id, quotation = {}) {
-  return dispatch => {
-    return rest.update(id, quotation, dispatch);
-  }
+export function update(quotation = {}) {
+  return dispatch => rest.update(quotation, dispatch);
 }
 
 export function sendMail(id) {

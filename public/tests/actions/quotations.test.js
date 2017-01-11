@@ -71,15 +71,15 @@ describe('quotations async actions', () => {
 	it('should update', () => {
 		const store = mockStore({ quotations: { quotation: {} } });
 		const stubResponse = {id: 3450, company_id: 1212, contact_id: 2020};
-		const expectedActions = { type: `${TYPE}_SET_QUOTATION`, payload: stubResponse };
+		const expectedActions = { type: `${TYPE}_UPDATE`, payload: stubResponse };
 		
 		moxios.stubRequest(`${endpoint}/${stubResponse.id}`, {
       status: 201,
       response: stubResponse
     });
 
-		return store.dispatch(action.update(stubResponse.id, stubResponse))
-			.then((res) => {
+		return store.dispatch(action.update(stubResponse))
+			.then(() => {
 				expect(store.getActions()).toEqual([expectedActions]);
 			});
 	})

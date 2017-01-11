@@ -124,8 +124,8 @@ const createPanel = React.createClass({
         </div>
 
       <div className="panel">
+        <div className="panel-heading"><h5>Empresa: <b>{this.props.companies.company.name}</b></h5></div>
         <div className="panel-body">
-          <h4>Empresa: <b>{this.props.companies.company.name}</b></h4>
             <div className={this.state.showContactForm ?  'col-sm-12' : 'hidden'}>
 
               <div className={this.props.contacts.errors.length ? "alert alert-danger" : ""}>

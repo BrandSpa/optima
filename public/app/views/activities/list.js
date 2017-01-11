@@ -15,9 +15,9 @@ const activities = React.createClass({
 
     return (
       <div className="panel" style={{position: 'fixed', margin: '0 30px 0 0'}}>
+        <div className="panel-heading"><h5>Actividad</h5></div>
         <div className="panel-body">
           <div className="quotations-table">
-          <h5>Actividad</h5>
           <div className="table-responsive">
             <table className="table">
               <tbody>

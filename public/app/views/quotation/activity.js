@@ -14,8 +14,8 @@ export default React.createClass({
 
     return (
       <div className="panel">
+        <div className="panel-heading"><h5>Actividad</h5></div>
         <div className="panel-body">
-        <h5>Actividad</h5>
         <ul className="activities">
         {activityNodes}
         </ul>

@@ -1,32 +1,19 @@
 import request from 'axios';
+import restActions from '../lib/rest_actions';
 const TYPE = 'COMPANIES';
 const endpoint = 'api/v1/companies';
+const rest = restActions(endpoint, TYPE, 'COMPANY');
 
 export function fetch(params = {}) {
-  return dispatch => {
-		  return request
-      .get(endpoint, {params})
-      .then(res => dispatch({ type: `${TYPE}_FETCH`, payload: res.data}))
-			.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err}));
-	}
+  return dispatch => rest.fetch(params, dispatch);
 }
 
 export function store(company) {
-	return dispatch => {
-		return request
-		.post(endpoint, company)
-		.then(res => dispatch({ type: `${TYPE}_STORE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.store(company, dispatch);
 }
 
 export function update(company) {
-	return dispatch => {
-		return request
-    .put(`${endpoint}/${company.id}`, company)
-    .then(res => dispatch({ type: `${TYPE}_UPDATE`, payload: res.data}))
-		.catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
-	}
+	return dispatch => rest.update(company, dispatch);
 }
 
 export function setCompany(company) {
