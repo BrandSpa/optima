@@ -52,7 +52,7 @@ export default React.createClass({
       <td>{type}</td>
       <td>{company.name}</td>
       <td>{`${contact.name} ${contact.lastname}`}</td>
-      <td><Timeago date={created_at} /> por {user.name}</td>
+      <td>{created_at} por {user.name}</td>
       <td><span className={`center priority priority--${priority > 0 ? priority : 1}`}></span></td>
       <td>{todos.length}</td>
       <td>

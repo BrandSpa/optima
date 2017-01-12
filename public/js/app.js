@@ -30620,7 +30620,7 @@
 	      _react2.default.createElement(
 	        'td',
 	        null,
-	        _react2.default.createElement(_timeago2.default, { date: created_at }),
+	        created_at,
 	        ' por ',
 	        user.name
 	      ),
