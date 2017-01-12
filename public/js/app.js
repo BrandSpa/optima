@@ -74974,6 +74974,7 @@
 	      var query = { quotation_id: params.id };
 	      _this.handleDisabled(actionRes.payload.status);
 	      dispatch(productAction.fetch(query));
+	      dispatch(serviceAction.cleanItems());
 	      dispatch(action.fetchServices(params.id));
 	      dispatch(activityAction.fetch(query));
 	      dispatch(trackingAction.fetch(query));

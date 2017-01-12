@@ -53,7 +53,8 @@ const quotationSection = React.createClass({
       let query = {quotation_id: params.id};
       this.handleDisabled(actionRes.payload.status);
       dispatch(productAction.fetch(query));
-       dispatch(action.fetchServices(params.id));
+      dispatch(serviceAction.cleanItems());
+      dispatch(action.fetchServices(params.id));
       dispatch(activityAction.fetch(query));
       dispatch(trackingAction.fetch(query));
       dispatch(contactAction.fetch(query));
