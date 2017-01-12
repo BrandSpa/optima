@@ -11,10 +11,4 @@ describe('datetime component', () => {
 		expect(wrapper.type()).toBe('input');
 	});
 
-	it('should have state active on click', () => {
-		const onChange = sinon.stub();
-		let wrapper = shallow(<DateTime onChange={onChange} />);
-		wrapper.simulate('change');
-		expect(	onChange.calledOnce ).toBe(true);
-	})
 });

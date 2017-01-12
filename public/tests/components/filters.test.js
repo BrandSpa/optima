@@ -14,13 +14,5 @@ describe('quotations filters component', () => {
 		expect(wrapper.state().query.query).toBe(3030);
 	})
 
-	it('should change priority', () => {
-		const onChange = sinon.stub();
-		let wrapper = mount(<Filters onChange={onChange} />);
-		wrapper.find(Select).first().simulate('change', {currentTarget: {value: 'Alta'}});
-		expect(onChange.args).toBe(1);
-		expect(wrapper.state().query.priority).toBe('Alta');
-	})
-
 })
   
