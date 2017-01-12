@@ -75,7 +75,7 @@ class TodosController extends \BaseController {
   public function sendNotification($id){
   	$model = Todo::find($id);
   	$email = $model->user->email;
-    $data = $model->toArray();
+    $data = $model;
     
   	Mail::send('emails.todos', compact('data'), function($message) use($model, $email) {
 				$message->subject('Tarea Asignada a ' . $model->user->name . ' ' . $model->user->lastname);
