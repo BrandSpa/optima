@@ -78,7 +78,7 @@ class TodosController extends \BaseController {
     $data = $model->toArray();
     
   	Mail::send('emails.todos', compact('data'), function($message) use($email) {
-				$message->subject('Tarea Asignada a ' . $data->user->name . ' ' . $data->user->lastname);
+				$message->subject('Tarea Asignada a ' . $model->user->name . ' ' . $model->user->lastname);
 				$message->to('comercial@rentadvisor.com.co');
 				$message->cc('alejandro@brandspa.com');
 	  });
