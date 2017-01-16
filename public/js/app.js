@@ -75096,10 +75096,10 @@
 	  handleDisabled: function handleDisabled(status) {
 	    var disabled = false;
 
-	    if (status == 'Borrador' || status == 'Enviada' || status == 'Entregada') {
-	      disabled = false;
-	    } else {
+	    if (status == 'Efectiva' || status == 'No efectiva') {
 	      disabled = true;
+	    } else {
+	      disabled = false;
 	    }
 
 	    this.setState({
