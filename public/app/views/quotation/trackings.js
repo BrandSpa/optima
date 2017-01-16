@@ -19,7 +19,7 @@ const quoTrackings = React.createClass({
   },
 
   changeStatus(res) {
-    console.log('get props ', res.type == "TRACKINGS_STORE", this.props.quotations.quotation.state, this.props.quotations.quotation.state == 'Enviada');
+    console.log('get props ', res.type == "TRACKINGS_STORE", this.props.quotations, this.props.quotations.quotation.state == 'Enviada');
     if(res.type == "TRACKINGS_STORE" && this.props.quotations.quotation.state == 'Enviada') {
       this.props.onStatusChange('Seguimiento', 'cambio estado a seguimiento');
     }
