@@ -79259,7 +79259,7 @@
 	      null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'col-md-8' },
+	        { className: 'col-md-7' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel' },

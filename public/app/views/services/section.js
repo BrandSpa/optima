@@ -88,7 +88,7 @@ const section = React.createClass({
   render: function() {
     return (
       <div>
-      <div className="col-md-8">
+      <div className="col-md-7">
       <div className="panel">
         <div className="panel-body">
           <input
