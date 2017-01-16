@@ -16,6 +16,13 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 {
 
 	Route::get('', 'PagesController@quotations');
+	Route::get('/quotation/create', 'PagesController@quotations');
+	Route::get('/companies', 'PagesController@quotations');
+	Route::get('/todos', 'PagesController@quotations');
+	Route::get('/contacts', 'PagesController@quotations');
+	Route::get('/services', 'PagesController@quotations');
+	Route::get('/reports', 'PagesController@quotations');
+	Route::get('/quotations/{id}', 'PagesController@quotations');
 
 	/*
 	|-------------------------------------------------------------------------
@@ -40,6 +47,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	|	API v1
 	|-------------------------------------------------------------------------
 	*/
+
 
 	Route::group(['prefix' => 'api/v1', 'namespace' => 'Api'], function(){
 

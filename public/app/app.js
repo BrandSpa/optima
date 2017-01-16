@@ -82,4 +82,4 @@ page('/quotations/:id', (ctx) => {
   return root(<Quotation params={ctx.params}/>)
 });
 
-page({hashbang: true});
+page();
