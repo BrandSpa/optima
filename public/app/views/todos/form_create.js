@@ -25,7 +25,7 @@ const todoForm = React.createClass({
 
   componentDidMount() {
     request
-    .get('api/v1/users')
+    .get('/api/v1/users')
     .then(res => this.setState({users: res.data}));
   },
 

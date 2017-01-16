@@ -46005,7 +46005,7 @@
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 
-	    _axios2.default.get('api/v1/users').then(function (res) {
+	    _axios2.default.get('/api/v1/users').then(function (res) {
 	      return _this.setState({ users: res.data });
 	    });
 	  },
