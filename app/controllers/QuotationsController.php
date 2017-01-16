@@ -107,9 +107,8 @@ class QuotationsController extends BaseController {
 			$collection = $collection->where("type", $quotation_type);
 		}
 
-
-		$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
-
+		$collection = $collection->whereRaw("quotations.created_at BETWEEN '" . urldecode($date_start) . "' AND '" . urldecode($date_end) . "'");	
+		
 		$model = $collection
 			->with([
 				'company' => function($query){

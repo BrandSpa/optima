@@ -55,6 +55,7 @@ class QuotationsController extends \BaseController {
 			$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
 		}
 
+
 		if(Input::has('query') && $q != "") {
 			$collection = $collection
 				->where(function($query) use($q) {
