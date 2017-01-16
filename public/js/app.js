@@ -46318,6 +46318,7 @@
 	        _react2.default.createElement('span', { className: 'ql-format-button ql-underline' }),
 	        _react2.default.createElement('div', { className: 'ql-format-separator' }),
 	        _react2.default.createElement('span', { className: 'ql-format-button ql-bullet' }),
+	        _react2.default.createElement('span', { className: 'ql-format-button ql-list' }),
 	        _react2.default.createElement('div', { className: 'ql-format-separator' }),
 	        _react2.default.createElement(
 	          'select',
