@@ -28423,7 +28423,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'QUOTATIONS';
-	var endpoint = 'api/v1/quotations';
+	var endpoint = '/api/v1/quotations';
 	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'QUOTATION');
 
 	function fetch() {
@@ -45710,7 +45710,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'ACTIVITIES';
-	var endpoint = 'api/v1/activities';
+	var endpoint = '/api/v1/activities';
 	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'ACTIVITY');
 
 	function fetch() {
@@ -45907,7 +45907,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'TODOS';
-	var endpoint = 'api/v1/todos';
+	var endpoint = '/api/v1/todos';
 	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'TODO');
 
 	function fetch() {
@@ -57539,7 +57539,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'REPORTS';
-	var endpoint = 'api/v1/reports';
+	var endpoint = '/api/v1/reports';
 
 	function fetch() {
 	    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -71796,7 +71796,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'COMPANIES';
-	var endpoint = 'api/v1/companies';
+	var endpoint = '/api/v1/companies';
 	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'COMPANY');
 
 	function fetch() {
@@ -71879,7 +71879,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'CONTACTS';
-	var endpoint = 'api/v1/contacts';
+	var endpoint = '/api/v1/contacts';
 	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'CONTACT');
 
 	function fetch() {
@@ -75292,7 +75292,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TYPE = 'SERVICES';
-	var endpoint = 'api/v1/services';
+	var endpoint = '/api/v1/services';
 	var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'SERVICE');
 
 	function fetch() {
@@ -78041,7 +78041,9 @@
 	  },
 	  handleSubmit: function handleSubmit(tracking) {
 	    var model = _extends({}, tracking, { quotation_id: this.props.quotationId });
-	    this.props.dispatch(action.store(model));
+	    this.props.dispatch(action.store(model)).then(function (res) {
+	      console.log('tracking store', res);
+	    });
 	  },
 	  render: function render() {
 	    var trackingNodes = this.props.trackings.items.map(function (tracking) {
