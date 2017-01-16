@@ -28122,7 +28122,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#!/quotation/create' },
+	                { href: '/#!/quotation/create' },
 	                'Nueva Cotizaci\xF3n'
 	              )
 	            ),
@@ -28131,7 +28131,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#!/todos' },
+	                { href: '/#!/todos' },
 	                'Tareas'
 	              )
 	            ),
@@ -28140,7 +28140,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#!/companies' },
+	                { href: '/#!/companies' },
 	                'Empresas'
 	              )
 	            ),
@@ -28149,7 +28149,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#!/contacts' },
+	                { href: '/#!/contacts' },
 	                'Contactos'
 	              )
 	            ),
@@ -28158,7 +28158,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#!/services' },
+	                { href: '/#!/services' },
 	                'Servicios'
 	              )
 	            ),
@@ -28167,7 +28167,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#!/reports' },
+	                { href: '/#!/reports' },
 	                'Reporte'
 	              )
 	            ),
