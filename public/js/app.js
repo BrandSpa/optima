@@ -74929,7 +74929,7 @@
 
 	var _activity2 = _interopRequireDefault(_activity);
 
-	var _trackings2 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"views/quotation/trackings\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _trackings2 = __webpack_require__(513);
 
 	var _trackings3 = _interopRequireDefault(_trackings2);
 
@@ -78002,10 +78002,377 @@
 	});
 
 /***/ },
-/* 513 */,
-/* 514 */,
-/* 515 */,
-/* 516 */,
+/* 513 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _trackings = __webpack_require__(491);
+
+	var action = _interopRequireWildcard(_trackings);
+
+	var _tracking = __webpack_require__(514);
+
+	var _tracking2 = _interopRequireDefault(_tracking);
+
+	var _form_create = __webpack_require__(516);
+
+	var _form_create2 = _interopRequireDefault(_form_create);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var quoTrackings = _react2.default.createClass({
+	  displayName: 'quoTrackings',
+	  getInitialState: function getInitialState() {
+	    return {
+	      tracking: {
+	        todos: []
+	      }
+	    };
+	  },
+	  handleSubmit: function handleSubmit(tracking) {
+	    var model = _extends({}, tracking, { quotation_id: this.props.quotationId });
+	    this.props.dispatch(action.store(model)).then(this.changeStatus);
+	  },
+	  changeStatus: function changeStatus(res) {
+	    if (res.type == "TRACKINGS_STORE" && this.props.quotations.quotation.state == 'Enviada') {
+	      this.props.onStatusChange('Seguimiento', 'cambio estado a seguimiento');
+	    }
+	  },
+	  render: function render() {
+	    var trackingNodes = this.props.trackings.items.map(function (tracking) {
+	      return _react2.default.createElement(_tracking2.default, { key: tracking.id, tracking: tracking });
+	    });
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'panel' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-heading' },
+	        _react2.default.createElement(
+	          'h5',
+	          null,
+	          'Seguimiento'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'panel-body' },
+	        _react2.default.createElement(_form_create2.default, { contacts: this.props.contacts.items, onSubmit: this.handleSubmit }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'list-group' },
+	          trackingNodes
+	        )
+	      )
+	    );
+	  }
+	});
+
+	exports.default = quoTrackings;
+
+/***/ },
+/* 514 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(286);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _update_item = __webpack_require__(515);
+
+	var _update_item2 = _interopRequireDefault(_update_item);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	__webpack_require__(318);
+
+	var quoTracking = _react2.default.createClass({
+	  displayName: 'quoTracking',
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      tracking: {}
+	    };
+	  },
+
+	  render: function render() {
+	    var tracking = this.props.tracking;
+	    var showTable = false;
+	    var contact = void 0;
+	    var by = void 0;
+
+	    if (tracking.contact) {
+	      contact = tracking.contact.name + ' ' + tracking.contact.lastname;
+	    }
+
+	    if (tracking.user) {
+	      by = tracking.user.name + ' ' + tracking.user.lastname;
+	    }
+
+	    return _react2.default.createElement(
+	      'li',
+	      { className: 'list-item' },
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        _react2.default.createElement(
+	          'b',
+	          null,
+	          'Contacto:'
+	        ),
+	        ' ',
+	        contact
+	      ),
+	      _react2.default.createElement(
+	        'b',
+	        null,
+	        'Reporte:'
+	      ),
+	      _react2.default.createElement('br', null),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-12' },
+	          _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: tracking.report } })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'b',
+	        null,
+	        'Por: '
+	      ),
+	      ' ',
+	      by,
+	      ' ',
+	      _react2.default.createElement(
+	        'i',
+	        null,
+	        (0, _moment2.default)(tracking.register_date + ' ' + tracking.register_time).fromNow()
+	      ),
+	      _react2.default.createElement('hr', null)
+	    );
+	  }
+	});
+
+	exports.default = quoTracking;
+
+/***/ },
+/* 515 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = updateItem;
+	function updateItem(collection, newModel, field) {
+	  return collection.map(function (model) {
+	    return model[field] == newModel[field] ? _extends({}, model, newModel) : model;
+	  });
+	}
+
+/***/ },
+/* 516 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(286);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _editor = __webpack_require__(403);
+
+	var _editor2 = _interopRequireDefault(_editor);
+
+	var _form_select = __webpack_require__(279);
+
+	var _form_select2 = _interopRequireDefault(_form_select);
+
+	var _datetime = __webpack_require__(280);
+
+	var _datetime2 = _interopRequireDefault(_datetime);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var trackingForm = _react2.default.createClass({
+	  displayName: 'trackingForm',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      tracking: {
+	        contact: {},
+	        register_date: '',
+	        register_time: '',
+	        report: '',
+	        contact_id: null
+	      },
+	      contacts: []
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.fetch();
+	  },
+
+	  fetch: function fetch() {
+	    // request
+	    // .get('/api/v1/contacts')
+	    // .query({quotation_id: this.props.quotationId})
+	    // .end((err, res) =>{
+	    //   this.setState({contacts: res.body});
+	    // });
+	  },
+
+
+	  handleContact: function handleContact(e) {
+	    var contact = e.currentTarget.value;
+	    this.handleChange({ contact_id: parseInt(contact) });
+	  },
+
+	  handleReport: function handleReport(html) {
+	    this.handleChange({ report: html });
+	  },
+
+	  handleChange: function handleChange(data) {
+	    this.setState({
+	      tracking: _extends({}, this.state.tracking, data)
+	    });
+	  },
+
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    this.handleReport();
+	    this.props.onSubmit(this.state.tracking);
+	  },
+
+	  handleDateTime: function handleDateTime(dateObj, dateStr) {
+	    var datetime = (0, _moment2.default)(dateObj).format('YYYY/MM/DD HH:mm:ss').split(' ');
+	    var date = datetime[0];
+	    var time = datetime[1];
+	    this.handleChange({ register_date: date, register_time: time });
+	  },
+
+
+	  render: function render() {
+	    var tracking = this.state.tracking;
+	    var contactValue = void 0;
+	    var contactSelect = void 0;
+
+	    if (tracking.contact_id) {
+	      contactSelect = this.props.contacts.filter(function (contact) {
+	        return contact.id == tracking.contact_id;
+	      });
+	      contactValue = contactSelect.name + " " + contactSelect.lastname;
+	    }
+
+	    var contactOptions = this.props.contacts.map(function (contact, i) {
+	      return { value: contact.id, label: contact.name + " " + contact.lastname };
+	    });
+
+	    return _react2.default.createElement(
+	      'form',
+	      _defineProperty({ onSubmit: this.handleSubmit }, 'onSubmit', this.handleSubmit),
+	      _react2.default.createElement('br', null),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-6' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Fecha'
+	        ),
+	        _react2.default.createElement(_datetime2.default, {
+	          enableTime: true,
+	          styles: 'form-control',
+	          onChange: this.handleDateTime
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-6' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Seleccionar o buscar contacto'
+	        ),
+	        _react2.default.createElement(_form_select2.default, {
+	          options: contactOptions,
+	          placeholder: 'Seleccionar contacto',
+	          onSelectChange: this.handleContact,
+	          value: this.state.tracking.contact_id
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-12' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Reporte'
+	        ),
+	        _react2.default.createElement(_editor2.default, {
+	          style: { height: '250px' },
+	          value: tracking.report,
+	          onChange: this.handleReport,
+	          edit: tracking.id ? true : false
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'btn btn-primary btn-sm' },
+	        'Guardar'
+	      )
+	    );
+	  }
+	});
+
+	exports.default = trackingForm;
+
+/***/ },
 /* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
