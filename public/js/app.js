@@ -30584,7 +30584,9 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'label label-' + status.replace(' ', '_') },
-	          status
+	          status,
+	          ' ',
+	          quotation.status_cause ? quotation.status_cause : ''
 	        ),
 	        rethink_from ? _react2.default.createElement(
 	          'a',
