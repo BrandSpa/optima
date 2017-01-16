@@ -15,9 +15,13 @@ const quoTrackings = React.createClass({
   
   handleSubmit(tracking) {
     let model = {...tracking, quotation_id: this.props.quotationId};
-    this.props.dispatch(action.store(model)).then((res) => {
-      console.log('tracking store', res);
-    });
+    this.props.dispatch(action.store(model)).then(this.changeStatus);
+  },
+
+  changeStatus(res) {
+    if(res.type == "TRACKINGS_STORE" && this.props.quotations.quotation.state == 'Enviada') {
+      this.props.onStatusChange({'Seguimiento', 'cambio estado a seguimiento'});
+    }
   },
 
   render() {

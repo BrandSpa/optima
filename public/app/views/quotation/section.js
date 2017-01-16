@@ -298,7 +298,12 @@ const quotationSection = React.createClass({
             onSave={this.handleSaveNoEffective}
           />
 
-          <Trackings {...this.props} quotationId={quotation.id} />
+          <Trackings 
+            {...this.props} 
+            quotationId={quotation.id} 
+            onStatusChange={this.handleStatus}
+          />
+
           <div id={`todos-${quotation.id}`}>
             <Todos quotation_id={this.props.params.id} />
           </div>
