@@ -96,6 +96,7 @@ const Editor = React.createClass({
           <span className="ql-format-button ql-underline"></span>
           <div className="ql-format-separator"></div>
           <span className="ql-format-button ql-bullet"></span>
+          <span className="ql-format-button ql-list"></span>
           <div className="ql-format-separator"></div>
 
           <select className="ql-align">

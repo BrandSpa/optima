@@ -66,10 +66,6 @@
 			padding: 5px;
 		}
 
-		li {
-			list-style: none;
-		}
-
 		.priority {
 			display: inline-block;
 			width: 12px;
