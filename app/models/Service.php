@@ -27,7 +27,7 @@ class Service extends \Eloquent {
 
 	public static function findAndUpdate($id = null, $data)
 	{
-		$validator = Validator::make($data, self::$rules);
+		$validator = Validator::make($data, $this->$rules);
 
 		if ($validator->passes()) {
 			$model = self::find($id);
