@@ -51,7 +51,7 @@ export default React.createClass({
     let value = e.currentTarget.value;
     this.changeQuery(field, value);
   },
-
+  
   download(e) {
     if(e) e.preventDefault();
     this.setState({laoding: true});
