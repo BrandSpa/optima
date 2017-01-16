@@ -173,7 +173,8 @@ const quotationSection = React.createClass({
 
     this.setState({
       disabled: disabled,
-      showErrors: false
+      showErrors: false,
+      errors: []
     });
   },
 

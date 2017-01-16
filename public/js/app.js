@@ -75104,7 +75104,8 @@
 
 	    this.setState({
 	      disabled: disabled,
-	      showErrors: false
+	      showErrors: false,
+	      errors: []
 	    });
 	  },
 	  handlePriority: function handlePriority(priority, e) {
@@ -78047,6 +78048,7 @@
 	    this.props.dispatch(action.store(model)).then(this.changeStatus);
 	  },
 	  changeStatus: function changeStatus(res) {
+	    console.log('get props ', this.props);
 	    if (res.type == "TRACKINGS_STORE" && this.props.quotations.quotation.state == 'Enviada') {
 	      this.props.onStatusChange('Seguimiento', 'cambio estado a seguimiento');
 	    }
