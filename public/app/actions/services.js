@@ -1,7 +1,7 @@
 import request from 'axios';
 import restActions from '../lib/rest_actions';
 const TYPE = 'SERVICES';
-const endpoint = 'api/v1/services';
+const endpoint = '/api/v1/services';
 const rest = restActions(endpoint, TYPE, 'SERVICE');
 
 export function fetch(params = {}) {

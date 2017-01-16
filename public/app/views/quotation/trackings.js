@@ -15,7 +15,9 @@ const quoTrackings = React.createClass({
   
   handleSubmit(tracking) {
     let model = {...tracking, quotation_id: this.props.quotationId};
-    this.props.dispatch(action.store(model));
+    this.props.dispatch(action.store(model)).then((res) => {
+      console.log('tracking store', res);
+    });
   },
 
   render() {

@@ -1,6 +1,6 @@
 import request from 'axios';
 const TYPE = 'USERS';
-const endpoint = 'api/v1/users';
+const endpoint = '/api/v1/users';
 
 export function fetch(params = {}) {
   return dispatch => {
