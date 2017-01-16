@@ -165,10 +165,10 @@ const quotationSection = React.createClass({
   handleDisabled(status) {
     let disabled = false;
 
-    if(status == 'Borrador' || status == 'Enviada'  || status == 'Entregada') {
-      disabled = false;
-    } else {
+    if(status == 'Efectiva' || status == 'No efectiva') {
       disabled = true;
+    } else {
+      disabled = false;
     }
 
     this.setState({
