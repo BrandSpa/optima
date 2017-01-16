@@ -15,15 +15,6 @@ Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
 Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 {
 
-	Route::get('', 'PagesController@quotations');
-	Route::get('/quotation/create', 'PagesController@quotations');
-	Route::get('/companies', 'PagesController@quotations');
-	Route::get('/todos', 'PagesController@quotations');
-	Route::get('/contacts', 'PagesController@quotations');
-	Route::get('/services', 'PagesController@quotations');
-	Route::get('/reports', 'PagesController@quotations');
-	Route::get('/quotations/{id}', 'PagesController@quotations');
-
 	/*
 	|-------------------------------------------------------------------------
 	|	Quotations routes
@@ -41,6 +32,16 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	Route::get('quotations/{id}/duplicate', 'QuotationsController@duplicate');
 
 	Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
+	
+	//front end routes
+	Route::get('', 'PagesController@quotations');
+	Route::get('/quotation/create', 'PagesController@quotations');
+	Route::get('/companies', 'PagesController@quotations');
+	Route::get('/todos', 'PagesController@quotations');
+	Route::get('/contacts', 'PagesController@quotations');
+	Route::get('/services', 'PagesController@quotations');
+	Route::get('/reports', 'PagesController@quotations');
+	Route::get('/quotations/{id}', 'PagesController@quotations');
 
 	/*
 	|-------------------------------------------------------------------------
