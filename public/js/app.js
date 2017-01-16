@@ -78048,8 +78048,8 @@
 	    this.props.dispatch(action.store(model)).then(this.changeStatus);
 	  },
 	  changeStatus: function changeStatus(res) {
-	    console.log('get props ', res.type == "TRACKINGS_STORE", this.props.quotations, this.props.quotations.quotation.state == 'Enviada');
-	    if (res.type == "TRACKINGS_STORE" && this.props.quotations.quotation.state == 'Enviada') {
+	    console.log('get props ', res.type == "TRACKINGS_STORE", this.props.quotations.quotation, this.props.quotations.quotation.status == 'Enviada');
+	    if (res.type == "TRACKINGS_STORE" && this.props.quotations.quotation.status == 'Enviada') {
 	      this.props.onStatusChange('Seguimiento', 'cambio estado a seguimiento');
 	    }
 	  },
