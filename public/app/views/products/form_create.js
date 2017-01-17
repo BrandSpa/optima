@@ -64,20 +64,20 @@ const productForm = React.createClass({
   handleChangeInput(field, e) {
     e.preventDefault();
     let val = e.currentTarget.value;
-    if(field == 'show' || field == 'iva') val = this.changeCheckbox(val);
-    console.log(field, val);
     let product = {...this.state.product, [field]: val};
     if(field == 'price' || field == 'quantity' || field == 'lapse') product = this.getTotal(product);
+    this.setState({product});
+  },
+
+  handleChangeCheckbox(field, e) {
+    let val = e.currentTarget.checked;
+    let product = {...this.state.product, [field]: val};
     this.setState({product});
   },
 
   getTotal(product) {
     let total = parseInt(product.lapse) * parseInt(product.quantity) * parseInt(product.price);
     return {...product, total};
-  },
-
-  changeCheckbox(val) {
-    return val == 0 ? 1 : 2;
   },
 
   handleSubmit(e) {
@@ -91,8 +91,8 @@ const productForm = React.createClass({
   },
 
   render() {
-    const product = this.state.product;
-  
+    const {product} = this.state;
+
     return (
       <form id="product-form" className="form" onSubmit={this.handleSubmit}>
         <div className="form-group col-md-6">
@@ -350,11 +350,12 @@ const productForm = React.createClass({
         <div className="checkbox col-md-3">
            <label>
             <input
+              ref="iva"
               type="checkbox"
-              onChange={this.handleChangeInput.bind(null, 'iva')}
+              onChange={this.handleChangeCheckbox.bind(null, 'iva')}
               checked={product.iva}
               value={product.iva}
-            /> <span>Mostrar IVA {product.iva ? 'yeah' : 'nea'}</span>
+            /> <span>Mostrar IVA {product.iva}</span>
           </label>
         </div>
 
@@ -362,10 +363,10 @@ const productForm = React.createClass({
           <label>
             <input
               type="checkbox"
-              onChange={this.handleChangeInput.bind(null, 'show')}
-              checked={product.show ? true : false}
+              onChange={this.handleChangeCheckbox.bind(null, 'show')}
+              checked={product.show}
               value={product.show}
-              /> <span>Mostrar total {product.show ? 'yeah' : 'nea'}</span>
+              /> <span>Mostrar total</span>
           </label>
         </div>
 

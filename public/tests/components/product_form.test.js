@@ -27,9 +27,9 @@ describe('test product form component', () => {
 		wrapper.find('input').at(17).simulate('change', {preventDefault, currentTarget: {value: '3'}});
 		wrapper.find('input').at(18).simulate('change', {preventDefault, currentTarget: {value: '20'}});
 		wrapper.find('input').at(19).simulate('change', {preventDefault, currentTarget: {value: '150000'}});
+		wrapper.find('input').at(20).simulate('change', {preventDefault, currentTarget: {checked: true}});
+		wrapper.find('input').at(21).simulate('change', {preventDefault, currentTarget: {checked: true}});
 		wrapper.find('textarea').at(0).simulate('change', {preventDefault, currentTarget: {value: 'una nota'}});
-		wrapper.find('input').at(20).simulate('change', {preventDefault, currentTarget: {value: 1}});
-		wrapper.find('input').at(21).simulate('change', {preventDefault, currentTarget: {value: 1}});
 		wrapper.find('input').at(22).simulate('change', {preventDefault, currentTarget: {value: 2}});
 
 		expect(wrapper.state().product).toEqual({
@@ -58,8 +58,8 @@ describe('test product form component', () => {
         quantity: '20',
         price: '150000',
         total: 9000000,
-        show: 1,
-        iva: 1,
+        show: true,
+        iva: true,
         note: 'una nota',
         spaces: 2,
 		});

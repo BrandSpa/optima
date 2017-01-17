@@ -86,15 +86,15 @@
 
 	var _section2 = _interopRequireDefault(_section);
 
-	var _list = __webpack_require__(518);
+	var _list = __webpack_require__(519);
 
 	var _list2 = _interopRequireDefault(_list);
 
-	var _section3 = __webpack_require__(522);
+	var _section3 = __webpack_require__(523);
 
 	var _section4 = _interopRequireDefault(_section3);
 
-	var _section5 = __webpack_require__(523);
+	var _section5 = __webpack_require__(524);
 
 	var _section6 = _interopRequireDefault(_section5);
 
@@ -74912,31 +74912,31 @@
 
 	var _services3 = _interopRequireDefault(_services2);
 
-	var _comment = __webpack_require__(505);
+	var _comment = __webpack_require__(506);
 
 	var _comment2 = _interopRequireDefault(_comment);
 
-	var _mails = __webpack_require__(506);
+	var _mails = __webpack_require__(507);
 
 	var _mails2 = _interopRequireDefault(_mails);
 
-	var _no_effective = __webpack_require__(507);
+	var _no_effective = __webpack_require__(508);
 
 	var _no_effective2 = _interopRequireDefault(_no_effective);
 
-	var _no_send = __webpack_require__(509);
+	var _no_send = __webpack_require__(510);
 
 	var _no_send2 = _interopRequireDefault(_no_send);
 
-	var _times = __webpack_require__(511);
+	var _times = __webpack_require__(512);
 
 	var _times2 = _interopRequireDefault(_times);
 
-	var _activity = __webpack_require__(512);
+	var _activity = __webpack_require__(513);
 
 	var _activity2 = _interopRequireDefault(_activity);
 
-	var _trackings2 = __webpack_require__(513);
+	var _trackings2 = __webpack_require__(514);
 
 	var _trackings3 = _interopRequireDefault(_trackings2);
 
@@ -74944,7 +74944,7 @@
 
 	var _section2 = _interopRequireDefault(_section);
 
-	var _alert = __webpack_require__(517);
+	var _alert = __webpack_require__(518);
 
 	var _alert2 = _interopRequireDefault(_alert);
 
@@ -76710,18 +76710,18 @@
 	  handleChangeInput: function handleChangeInput(field, e) {
 	    e.preventDefault();
 	    var val = e.currentTarget.value;
-	    if (field == 'show' || field == 'iva') val = this.changeCheckbox(val);
-	    console.log(field, val);
 	    var product = _extends({}, this.state.product, _defineProperty({}, field, val));
 	    if (field == 'price' || field == 'quantity' || field == 'lapse') product = this.getTotal(product);
+	    this.setState({ product: product });
+	  },
+	  handleChangeCheckbox: function handleChangeCheckbox(field, e) {
+	    var val = e.currentTarget.checked;
+	    var product = _extends({}, this.state.product, _defineProperty({}, field, val));
 	    this.setState({ product: product });
 	  },
 	  getTotal: function getTotal(product) {
 	    var total = parseInt(product.lapse) * parseInt(product.quantity) * parseInt(product.price);
 	    return _extends({}, product, { total: total });
-	  },
-	  changeCheckbox: function changeCheckbox(val) {
-	    return val == 0 ? 1 : 2;
 	  },
 	  handleSubmit: function handleSubmit(e) {
 	    e.preventDefault();
@@ -76733,6 +76733,7 @@
 	  },
 	  render: function render() {
 	    var product = this.state.product;
+
 
 	    return _react2.default.createElement(
 	      'form',
@@ -77115,8 +77116,9 @@
 	          'label',
 	          null,
 	          _react2.default.createElement('input', {
+	            ref: 'iva',
 	            type: 'checkbox',
-	            onChange: this.handleChangeInput.bind(null, 'iva'),
+	            onChange: this.handleChangeCheckbox.bind(null, 'iva'),
 	            checked: product.iva,
 	            value: product.iva
 	          }),
@@ -77125,7 +77127,7 @@
 	            'span',
 	            null,
 	            'Mostrar IVA ',
-	            product.iva ? 'yeah' : 'nea'
+	            product.iva
 	          )
 	        )
 	      ),
@@ -77137,16 +77139,15 @@
 	          null,
 	          _react2.default.createElement('input', {
 	            type: 'checkbox',
-	            onChange: this.handleChangeInput.bind(null, 'show'),
-	            checked: product.show ? true : false,
+	            onChange: this.handleChangeCheckbox.bind(null, 'show'),
+	            checked: product.show,
 	            value: product.show
 	          }),
 	          ' ',
 	          _react2.default.createElement(
 	            'span',
 	            null,
-	            'Mostrar total ',
-	            product.show ? 'yeah' : 'nea'
+	            'Mostrar total'
 	          )
 	        )
 	      ),
@@ -77265,7 +77266,7 @@
 
 	var _reactRedux = __webpack_require__(60);
 
-	var _form_create = __webpack_require__(524);
+	var _form_create = __webpack_require__(505);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -77458,6 +77459,154 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _editor = __webpack_require__(403);
+
+	var _editor2 = _interopRequireDefault(_editor);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var serviceForm = _react2.default.createClass({
+	  displayName: 'serviceForm',
+	  getInitialState: function getInitialState() {
+	    return {
+	      service: {
+	        title: '',
+	        price_1: '',
+	        price_2: '',
+	        text: ''
+	      }
+	    };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    var service = props.service;
+
+	    if (Object.keys(service).length) this.setState({ service: service });
+	  },
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    if (typeof this.props.onSubmit == 'function') {
+	      this.props.onSubmit(this.state.service);
+	    }
+	  },
+	  handleTextChange: function handleTextChange(html) {
+	    var ob = _extends({}, this.state.service, { text: html });
+	    this.setState({ service: ob });
+	  },
+	  handleChange: function handleChange(field, e) {
+	    var service = _extends({}, this.state.service, _defineProperty({}, field, e.currentTarget.value));
+	    this.setState({ service: service });
+	  },
+	  handleCancel: function handleCancel(e) {
+	    e.preventDefault();
+	    this.props.onCancel();
+	  },
+	  render: function render() {
+	    var service = this.state.service;
+
+	    console.log('render', service);
+
+	    return _react2.default.createElement(
+	      'form',
+	      { onSubmit: this.handleSubmit },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-12' },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: '' },
+	          'T\xEDtulo'
+	        ),
+	        _react2.default.createElement('input', {
+	          onChange: this.handleChange.bind(null, 'title'),
+	          type: 'text',
+	          className: 'form-control',
+	          value: service.title
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-12' },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: '' },
+	          'Contenido'
+	        ),
+	        _react2.default.createElement(_editor2.default, {
+	          style: { height: '250px' },
+	          value: service.text,
+	          onChange: this.handleTextChange,
+	          edit: service.id ? true : false
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-6' },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: '' },
+	          'Precio 1'
+	        ),
+	        _react2.default.createElement('input', {
+	          onChange: this.handleChange.bind(this, 'price_1'),
+	          type: 'text',
+	          className: 'form-control',
+	          value: service.price_1
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'form-group col-md-6' },
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: '' },
+	          'Precio 2'
+	        ),
+	        _react2.default.createElement('input', {
+	          onChange: this.handleChange.bind(this, 'price_2'),
+	          type: 'text',
+	          className: 'form-control',
+	          value: service.price_2
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: this.props.errors.length ? "alert alert-danger col-md-12" : "hidden" },
+	        this.props.errors
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'btn btn-default btn-sm', onClick: this.handleCancel },
+	        'Cancelar'
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'btn btn-primary btn-sm pull-right' },
+	        'Guardar'
+	      )
+	    );
+	  }
+	});
+
+	exports.default = serviceForm;
+
+/***/ },
+/* 506 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -77531,7 +77680,7 @@
 	});
 
 /***/ },
-/* 506 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77669,14 +77818,14 @@
 	});
 
 /***/ },
-/* 507 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var Select = __webpack_require__(279);
-	var reasonsOptions = __webpack_require__(508);
+	var reasonsOptions = __webpack_require__(509);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -77761,7 +77910,7 @@
 	});
 
 /***/ },
-/* 508 */
+/* 509 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -77784,13 +77933,13 @@
 	];
 
 /***/ },
-/* 509 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var reasonsOptions = __webpack_require__(510);
+	var reasonsOptions = __webpack_require__(511);
 	var Select = __webpack_require__(279);
 
 	module.exports = React.createClass({
@@ -77880,7 +78029,7 @@
 	});
 
 /***/ },
-/* 510 */
+/* 511 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -77899,7 +78048,7 @@
 	];
 
 /***/ },
-/* 511 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77959,7 +78108,7 @@
 	});
 
 /***/ },
-/* 512 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78030,7 +78179,7 @@
 	});
 
 /***/ },
-/* 513 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78049,11 +78198,11 @@
 
 	var action = _interopRequireWildcard(_trackings);
 
-	var _tracking = __webpack_require__(514);
+	var _tracking = __webpack_require__(515);
 
 	var _tracking2 = _interopRequireDefault(_tracking);
 
-	var _form_create = __webpack_require__(516);
+	var _form_create = __webpack_require__(517);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -78115,7 +78264,7 @@
 	exports.default = quoTrackings;
 
 /***/ },
-/* 514 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78132,7 +78281,7 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _update_item = __webpack_require__(515);
+	var _update_item = __webpack_require__(516);
 
 	var _update_item2 = _interopRequireDefault(_update_item);
 
@@ -78213,7 +78362,7 @@
 	exports.default = quoTracking;
 
 /***/ },
-/* 515 */
+/* 516 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -78232,7 +78381,7 @@
 	}
 
 /***/ },
-/* 516 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78402,7 +78551,7 @@
 	exports.default = trackingForm;
 
 /***/ },
-/* 517 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -78458,7 +78607,7 @@
 	exports.default = Alert;
 
 /***/ },
-/* 518 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78477,7 +78626,7 @@
 
 	var action = _interopRequireWildcard(_companies);
 
-	var _company = __webpack_require__(519);
+	var _company = __webpack_require__(520);
 
 	var _company2 = _interopRequireDefault(_company);
 
@@ -78485,7 +78634,7 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _filters = __webpack_require__(521);
+	var _filters = __webpack_require__(522);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
@@ -78619,7 +78768,7 @@
 	})(list);
 
 /***/ },
-/* 519 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78648,7 +78797,7 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _contact = __webpack_require__(520);
+	var _contact = __webpack_require__(521);
 
 	var _contact2 = _interopRequireDefault(_contact);
 
@@ -78891,7 +79040,7 @@
 	})(Company);
 
 /***/ },
-/* 520 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78955,7 +79104,7 @@
 	});
 
 /***/ },
-/* 521 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79044,7 +79193,7 @@
 	});
 
 /***/ },
-/* 522 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79069,7 +79218,7 @@
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
-	var _filters = __webpack_require__(521);
+	var _filters = __webpack_require__(522);
 
 	var _filters2 = _interopRequireDefault(_filters);
 
@@ -79176,7 +79325,7 @@
 	})(section);
 
 /***/ },
-/* 523 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79197,7 +79346,7 @@
 
 	var action = _interopRequireWildcard(_services);
 
-	var _form_create = __webpack_require__(524);
+	var _form_create = __webpack_require__(505);
 
 	var _form_create2 = _interopRequireDefault(_form_create);
 
@@ -79372,154 +79521,6 @@
 	exports.default = (0, _reactRedux.connect)(function (store) {
 	  return store.services;
 	})(section);
-
-/***/ },
-/* 524 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _editor = __webpack_require__(403);
-
-	var _editor2 = _interopRequireDefault(_editor);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	var serviceForm = _react2.default.createClass({
-	  displayName: 'serviceForm',
-	  getInitialState: function getInitialState() {
-	    return {
-	      service: {
-	        title: '',
-	        price_1: '',
-	        price_2: '',
-	        text: ''
-	      }
-	    };
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    var service = props.service;
-
-	    if (Object.keys(service).length) this.setState({ service: service });
-	  },
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
-	    if (typeof this.props.onSubmit == 'function') {
-	      this.props.onSubmit(this.state.service);
-	    }
-	  },
-	  handleTextChange: function handleTextChange(html) {
-	    var ob = _extends({}, this.state.service, { text: html });
-	    this.setState({ service: ob });
-	  },
-	  handleChange: function handleChange(field, e) {
-	    var service = _extends({}, this.state.service, _defineProperty({}, field, e.currentTarget.value));
-	    this.setState({ service: service });
-	  },
-	  handleCancel: function handleCancel(e) {
-	    e.preventDefault();
-	    this.props.onCancel();
-	  },
-	  render: function render() {
-	    var service = this.state.service;
-
-	    console.log('render', service);
-
-	    return _react2.default.createElement(
-	      'form',
-	      { onSubmit: this.handleSubmit },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-12' },
-	        _react2.default.createElement(
-	          'label',
-	          { htmlFor: '' },
-	          'T\xEDtulo'
-	        ),
-	        _react2.default.createElement('input', {
-	          onChange: this.handleChange.bind(null, 'title'),
-	          type: 'text',
-	          className: 'form-control',
-	          value: service.title
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-12' },
-	        _react2.default.createElement(
-	          'label',
-	          { htmlFor: '' },
-	          'Contenido'
-	        ),
-	        _react2.default.createElement(_editor2.default, {
-	          style: { height: '250px' },
-	          value: service.text,
-	          onChange: this.handleTextChange,
-	          edit: service.id ? true : false
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
-	        _react2.default.createElement(
-	          'label',
-	          { htmlFor: '' },
-	          'Precio 1'
-	        ),
-	        _react2.default.createElement('input', {
-	          onChange: this.handleChange.bind(this, 'price_1'),
-	          type: 'text',
-	          className: 'form-control',
-	          value: service.price_1
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
-	        _react2.default.createElement(
-	          'label',
-	          { htmlFor: '' },
-	          'Precio 2'
-	        ),
-	        _react2.default.createElement('input', {
-	          onChange: this.handleChange.bind(this, 'price_2'),
-	          type: 'text',
-	          className: 'form-control',
-	          value: service.price_2
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: this.props.errors.length ? "alert alert-danger col-md-12" : "hidden" },
-	        this.props.errors
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-default btn-sm', onClick: this.handleCancel },
-	        'Cancelar'
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary btn-sm pull-right' },
-	        'Guardar'
-	      )
-	    );
-	  }
-	});
-
-	exports.default = serviceForm;
 
 /***/ },
 /* 525 */
