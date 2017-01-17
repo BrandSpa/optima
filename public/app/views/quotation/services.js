@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
+import Form from '../services/form_create';
 import * as quoAction from 'actions/quotations';
 import * as action from 'actions/services';
 import * as acitivityAction from 'actions/activities';
@@ -48,6 +49,7 @@ const quoServices = React.createClass({
       <tr key={service.id}>
         <td>{service.title}</td>
         <td>
+          <button>Editar</button>
           <button
             className="btn btn-default btn-sm"
             onClick={this.handleDelete.bind(null, service.id)}
@@ -60,6 +62,7 @@ const quoServices = React.createClass({
     );
 
     return (
+      <div>      
       <div className="panel">
         <div className="panel-heading"><h5>Servicios</h5></div>
         <div className="panel-body">
@@ -97,6 +100,7 @@ const quoServices = React.createClass({
           </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

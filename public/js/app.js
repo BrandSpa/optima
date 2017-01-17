@@ -28921,6 +28921,12 @@
 
 	module.exports = _react2.default.createClass({
 	  displayName: 'exports',
+	  getInitialState: function getInitialState() {
+	    return {
+	      value: ''
+	    };
+	  },
+
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -28931,9 +28937,12 @@
 	    };
 	  },
 
-	  render: function render() {
-	    var _this = this;
+	  onChange: function onChange(e) {
+	    this.props.onSelectChange(e);
+	  },
 
+
+	  render: function render() {
 	    var optionNodes = this.props.options.map(function (option, i) {
 	      return _react2.default.createElement(
 	        'option',
@@ -28942,7 +28951,7 @@
 	      );
 	    });
 
-	    var value = this.props.value || '';
+	    var value = this.props.value || this.state.value;
 
 	    value = parseInt(value) ? parseInt(value) : value;
 
@@ -28950,9 +28959,7 @@
 	      'select',
 	      {
 	        ref: 'select',
-	        onChange: function onChange(e) {
-	          return _this.props.onSelectChange(e);
-	        },
+	        onChange: this.onChange,
 	        className: 'form-control ' + this.props.styles,
 	        value: value,
 	        disabled: this.props.disabled ? true : false
@@ -76645,71 +76652,76 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var productForm = _react2.default.createClass({
 	  displayName: 'productForm',
 	  getInitialState: function getInitialState() {
 	    return {
-	      product: {},
+	      product: {
+	        quotation_id: '',
+	        name: '',
+	        type: '',
+	        processor: '',
+	        ram: '',
+	        hdd: '',
+	        burner: '',
+	        network_card: '',
+	        battery: '',
+	        monitor: '',
+	        keyboard: '',
+	        os: '',
+	        office: '',
+	        antivirus: '',
+	        additional_1: '',
+	        additional_2: '',
+	        additional_3: '',
+	        additional_4: '',
+	        additional_5: '',
+	        additional_6: '',
+	        lapse: '',
+	        period: '',
+	        quantity: '',
+	        price: '',
+	        total: '',
+	        show: 0,
+	        iva: 0,
+	        note: '',
+	        spaces: ''
+	      },
 	      errors: []
 	    };
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      product: {}
+	      product: {},
+	      errors: []
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
-	    this.setState({ product: this.props.product });
+	    var product = _extends({}, this.state.product, this.props.product);
+	    this.setState({ product: product });
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this.setState({ product: props.product });
-	  },
-	  _getValue: function _getValue(ref) {
-	    return ref.value;
-	  },
-	  handleChange: function handleChange() {
-	    var ref = this.refs;
-	    var show = void 0;
-
-	    if (this._getValue(ref.show) === 1 || this._getValue(ref.show) === true) {
-	      show = true;
-	    } else {
-	      show = false;
-	    }
-
-	    var product = _extends({}, this.state.product, {
-	      quotation_id: this.props.quotationId,
-	      name: ref.name.refs.select.value,
-	      type: ref.type.refs.select.value,
-	      processor: ref.processor.value,
-	      ram: ref.ram.value,
-	      hdd: ref.hdd.value,
-	      burner: ref.burner.value,
-	      network_card: ref.network_card.value,
-	      battery: ref.battery.value,
-	      monitor: ref.monitor.value,
-	      keyboard: ref.keyboard.value,
-	      os: ref.os.value,
-	      office: ref.office.value,
-	      antivirus: ref.antivirus.value,
-	      additional_1: ref.additional_1.value,
-	      additional_2: ref.additional_2.value,
-	      additional_3: ref.additional_3.value,
-	      additional_4: ref.additional_4.value,
-	      additional_5: ref.additional_5.value,
-	      additional_6: ref.additional_6.value,
-	      lapse: ref.lapse.value,
-	      period: ref.period.refs.select.value,
-	      quantity: ref.quantity.value,
-	      price: ref.price.value,
-	      total: ref.lapse.value * ref.quantity.value * ref.price.value,
-	      show: ref.show.checked,
-	      iva: ref.iva.checked,
-	      note: ref.note.value,
-	      spaces: ref.spaces.value || 0
-	    });
-
+	    var product = _extends({}, this.state.product, props.product);
+	    product = _extends({}, product, { quotation_id: this.props.quotationId });
 	    this.setState({ product: product });
+	  },
+	  handleChangeInput: function handleChangeInput(field, e) {
+	    e.preventDefault();
+	    var val = e.currentTarget.value;
+	    if (field == 'show' || field == 'iva') val = this.changeCheckbox(val);
+	    console.log(field, val);
+	    var product = _extends({}, this.state.product, _defineProperty({}, field, val));
+	    if (field == 'price' || field == 'quantity' || field == 'lapse') product = this.getTotal(product);
+	    this.setState({ product: product });
+	  },
+	  getTotal: function getTotal(product) {
+	    var total = parseInt(product.lapse) * parseInt(product.quantity) * parseInt(product.price);
+	    return _extends({}, product, { total: total });
+	  },
+	  changeCheckbox: function changeCheckbox(val) {
+	    return val == 0 ? 1 : 2;
 	  },
 	  handleSubmit: function handleSubmit(e) {
 	    e.preventDefault();
@@ -76721,20 +76733,6 @@
 	  },
 	  render: function render() {
 	    var product = this.state.product;
-	    var iva = void 0;
-	    var show = void 0;
-
-	    if (product.iva == 1 || product.iva == true) {
-	      iva = true;
-	    } else {
-	      iva = false;
-	    }
-
-	    if (product.show == 1 || product.show == true) {
-	      show = true;
-	    } else {
-	      show = false;
-	    }
 
 	    return _react2.default.createElement(
 	      'form',
@@ -76751,7 +76749,7 @@
 	          ref: 'name',
 	          options: _products2.default,
 	          'default': 'Seleccionar producto',
-	          onSelectChange: this.handleChange,
+	          onSelectChange: this.handleChangeInput.bind(null, 'name'),
 	          value: product.name
 	        })
 	      ),
@@ -76767,7 +76765,7 @@
 	          ref: 'type',
 	          options: _product_type2.default,
 	          'default': 'Seleccionar tipo',
-	          onSelectChange: this.handleChange,
+	          onSelectChange: this.handleChangeInput.bind(null, 'type'),
 	          value: product.type
 	        })
 	      ),
@@ -76780,11 +76778,11 @@
 	          'Procesador'
 	        ),
 	        _react2.default.createElement('input', {
-	          ref: 'processor',
 	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.processor })
+	          className: 'form-control input-processor',
+	          onChange: this.handleChangeInput.bind(null, 'processor'),
+	          value: product.processor
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76795,10 +76793,9 @@
 	          'RAM'
 	        ),
 	        _react2.default.createElement('input', {
-	          ref: 'ram',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'ram'),
 	          value: product.ram })
 	      ),
 	      _react2.default.createElement(
@@ -76810,11 +76807,11 @@
 	          'Disco duro'
 	        ),
 	        _react2.default.createElement('input', {
-	          ref: 'hdd',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.hdd })
+	          onChange: this.handleChangeInput.bind(null, 'hdd'),
+	          value: product.hdd
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76825,11 +76822,11 @@
 	          'Unidad optica'
 	        ),
 	        _react2.default.createElement('input', {
-	          ref: 'burner',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.burner })
+	          onChange: this.handleChangeInput.bind(null, 'burner'),
+	          value: product.burner
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76843,7 +76840,7 @@
 	          ref: 'network_card',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'network_card'),
 	          value: product.network_card })
 	      ),
 	      _react2.default.createElement(
@@ -76858,7 +76855,7 @@
 	          ref: 'battery',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'battery'),
 	          value: product.battery })
 	      ),
 	      _react2.default.createElement(
@@ -76873,7 +76870,7 @@
 	          ref: 'monitor',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'monitor'),
 	          value: product.monitor })
 	      ),
 	      _react2.default.createElement(
@@ -76888,7 +76885,7 @@
 	          ref: 'keyboard',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'keyboard'),
 	          value: product.keyboard })
 	      ),
 	      _react2.default.createElement(
@@ -76903,8 +76900,9 @@
 	          ref: 'os',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.os })
+	          onChange: this.handleChangeInput.bind(null, 'os'),
+	          value: product.os
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76918,8 +76916,9 @@
 	          ref: 'office',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.office })
+	          onChange: this.handleChangeInput.bind(null, 'office'),
+	          value: product.office
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76933,8 +76932,9 @@
 	          ref: 'antivirus',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.antivirus })
+	          onChange: this.handleChangeInput.bind(null, 'antivirus'),
+	          value: product.antivirus
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76948,8 +76948,9 @@
 	          ref: 'additional_1',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.additional_1 })
+	          onChange: this.handleChangeInput.bind(null, 'additional_1'),
+	          value: product.additional_1
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76963,8 +76964,9 @@
 	          ref: 'additional_2',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.additional_2 })
+	          onChange: this.handleChangeInput.bind(null, 'additional_2'),
+	          value: product.additional_2
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76978,8 +76980,9 @@
 	          ref: 'additional_3',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.additional_3 })
+	          onChange: this.handleChangeInput.bind(null, 'additional_3'),
+	          value: product.additional_3
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -76993,8 +76996,9 @@
 	          ref: 'additional_4',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.additional_4 })
+	          onChange: this.handleChangeInput.bind(null, 'additional_4'),
+	          value: product.additional_4
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -77008,8 +77012,9 @@
 	          ref: 'additional_5',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.additional_5 })
+	          onChange: this.handleChangeInput.bind(null, 'additional_5'),
+	          value: product.additional_5
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -77023,7 +77028,7 @@
 	          ref: 'additional_6',
 	          type: 'text',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'additional_6'),
 	          value: product.additional_6 })
 	      ),
 	      _react2.default.createElement('div', { className: 'col-md-12' }),
@@ -77039,7 +77044,7 @@
 	          ref: 'lapse',
 	          type: 'number',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'lapse'),
 	          value: product.lapse })
 	      ),
 	      _react2.default.createElement(
@@ -77054,7 +77059,7 @@
 	          ref: 'period',
 	          options: _periods2.default,
 	          'default': 'Seleccionar periodo',
-	          onSelectChange: this.handleChange,
+	          onSelectChange: this.handleChangeInput.bind(null, 'period'),
 	          value: product.period
 	        })
 	      ),
@@ -77070,7 +77075,7 @@
 	          ref: 'quantity',
 	          type: 'number',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'quantity'),
 	          value: product.quantity })
 	      ),
 	      _react2.default.createElement(
@@ -77085,7 +77090,7 @@
 	          ref: 'price',
 	          type: 'number',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'price'),
 	          value: product.price })
 	      ),
 	      _react2.default.createElement(
@@ -77100,7 +77105,7 @@
 	          ref: 'note',
 	          cols: '4',
 	          className: 'form-control',
-	          onChange: this.handleChange,
+	          onChange: this.handleChangeInput.bind(null, 'note'),
 	          value: product.note })
 	      ),
 	      _react2.default.createElement(
@@ -77110,15 +77115,17 @@
 	          'label',
 	          null,
 	          _react2.default.createElement('input', {
-	            ref: 'iva',
 	            type: 'checkbox',
-	            onChange: this.handleChange,
-	            checked: iva }),
+	            onChange: this.handleChangeInput.bind(null, 'iva'),
+	            checked: product.iva,
+	            value: product.iva
+	          }),
 	          ' ',
 	          _react2.default.createElement(
 	            'span',
 	            null,
-	            'Mostrar IVA'
+	            'Mostrar IVA ',
+	            product.iva ? 'yeah' : 'nea'
 	          )
 	        )
 	      ),
@@ -77129,15 +77136,17 @@
 	          'label',
 	          null,
 	          _react2.default.createElement('input', {
-	            ref: 'show',
 	            type: 'checkbox',
-	            onChange: this.handleChange,
-	            checked: show }),
+	            onChange: this.handleChangeInput.bind(null, 'show'),
+	            checked: product.show ? true : false,
+	            value: product.show
+	          }),
 	          ' ',
 	          _react2.default.createElement(
 	            'span',
 	            null,
-	            'Mostrar total'
+	            'Mostrar total ',
+	            product.show ? 'yeah' : 'nea'
 	          )
 	        )
 	      ),
@@ -77153,8 +77162,9 @@
 	          ref: 'spaces',
 	          type: 'number',
 	          className: 'form-control',
-	          onChange: this.handleChange,
-	          value: product.spaces })
+	          onChange: this.handleChangeInput.bind(null, 'spaces'),
+	          value: product.spaces
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -77255,6 +77265,10 @@
 
 	var _reactRedux = __webpack_require__(60);
 
+	var _form_create = __webpack_require__(524);
+
+	var _form_create2 = _interopRequireDefault(_form_create);
+
 	var _quotations = __webpack_require__(271);
 
 	var quoAction = _interopRequireWildcard(_quotations);
@@ -77330,6 +77344,11 @@
 	          null,
 	          _react2.default.createElement(
 	            'button',
+	            null,
+	            'Editar'
+	          ),
+	          _react2.default.createElement(
+	            'button',
 	            {
 	              className: 'btn btn-default btn-sm',
 	              onClick: _this2.handleDelete.bind(null, service.id),
@@ -77343,79 +77362,83 @@
 
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'panel' },
+	      null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'panel-heading' },
-	        _react2.default.createElement(
-	          'h5',
-	          null,
-	          'Servicios'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'panel-body' },
+	        { className: 'panel' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'panel-heading' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            'Servicios'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-group col-sm-12' },
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              className: 'form-control',
-	              placeholder: 'Buscar',
-	              onChange: this.search
-	            }),
+	            { className: 'row' },
 	            _react2.default.createElement(
-	              'ul',
-	              { className: 'list-group' },
-	              this.props.services.items.map(function (service, i) {
-	                return _react2.default.createElement(
-	                  'li',
-	                  { className: 'list-group-item', key: i },
-	                  service.title,
-	                  ' ',
-	                  _react2.default.createElement(
-	                    'button',
-	                    { className: 'btn btn-primary btn-sm', onClick: _this2.store.bind(null, service.id) },
-	                    ' Agregar Servicio '
-	                  )
-	                );
-	              })
-	            ),
-	            _react2.default.createElement('br', null)
-	          ),
-	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'table-responsive col-sm-12' },
-	            _react2.default.createElement(
-	              'table',
-	              { className: 'table table-striped' },
+	              'div',
+	              { className: 'form-group col-sm-12' },
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                className: 'form-control',
+	                placeholder: 'Buscar',
+	                onChange: this.search
+	              }),
 	              _react2.default.createElement(
-	                'thead',
-	                null,
+	                'ul',
+	                { className: 'list-group' },
+	                this.props.services.items.map(function (service, i) {
+	                  return _react2.default.createElement(
+	                    'li',
+	                    { className: 'list-group-item', key: i },
+	                    service.title,
+	                    ' ',
+	                    _react2.default.createElement(
+	                      'button',
+	                      { className: 'btn btn-primary btn-sm', onClick: _this2.store.bind(null, service.id) },
+	                      ' Agregar Servicio '
+	                    )
+	                  );
+	                })
+	              ),
+	              _react2.default.createElement('br', null)
+	            ),
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'table-responsive col-sm-12' },
+	              _react2.default.createElement(
+	                'table',
+	                { className: 'table table-striped' },
 	                _react2.default.createElement(
-	                  'tr',
+	                  'thead',
 	                  null,
 	                  _react2.default.createElement(
-	                    'th',
+	                    'tr',
 	                    null,
-	                    'Servicio'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    'Opciones'
+	                    _react2.default.createElement(
+	                      'th',
+	                      null,
+	                      'Servicio'
+	                    ),
+	                    _react2.default.createElement(
+	                      'th',
+	                      null,
+	                      'Opciones'
+	                    )
 	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'tbody',
+	                  null,
+	                  serviceNodes
 	                )
-	              ),
-	              _react2.default.createElement(
-	                'tbody',
-	                null,
-	                serviceNodes
 	              )
 	            )
 	          )
@@ -79393,7 +79416,6 @@
 	  },
 	  handleSubmit: function handleSubmit(e) {
 	    e.preventDefault();
-	    console.log(this.state);
 	    if (typeof this.props.onSubmit == 'function') {
 	      this.props.onSubmit(this.state.service);
 	    }

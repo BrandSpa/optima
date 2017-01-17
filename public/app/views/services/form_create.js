@@ -21,7 +21,6 @@ const serviceForm = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     if(typeof this.props.onSubmit == 'function') {
       this.props.onSubmit(this.state.service);
     }

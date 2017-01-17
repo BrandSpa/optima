@@ -8,7 +8,7 @@ const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const TYPE = 'COMPANIES';
-const endpoint = 'api/v1/companies';
+const endpoint = '/api/v1/companies';
 
 describe('companies actions', () => {
 

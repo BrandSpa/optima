@@ -1,79 +1,83 @@
 'use strict';
 import React from 'react';
-import productsOptions from 'options/products.json';
-import productsTypesOptions from 'options/product_type.json';
-import PeriodsOptions from 'options/periods.json';
-import Select from 'components/form_select';
+import productsOptions from '../../options/products.json';
+import productsTypesOptions from '../../options/product_type.json';
+import PeriodsOptions from '../../options/periods.json';
+import Select from '../../components/form_select';
 
 const productForm = React.createClass({
   getInitialState() {
     return {
-      product: {},
+      product: {
+        quotation_id: '',
+        name: '',
+        type: '',
+        processor: '',
+        ram: '',
+        hdd: '',
+        burner: '',
+        network_card: '',
+        battery: '',
+        monitor: '',
+        keyboard: '',
+        os: '',
+        office: '',
+        antivirus: '',
+        additional_1: '',
+        additional_2: '',
+        additional_3: '',
+        additional_4: '',
+        additional_5: '',
+        additional_6: '',
+        lapse: '',
+        period: '',
+        quantity: '',
+        price: '',
+        total: '',
+        show: 0,
+        iva: 0,
+        note: '',
+        spaces: ''
+      },
       errors: []
     };
   },
 
   getDefaultProps() {
     return {
-      product: {}
+      product: {},
+      errors: []
     }
   },
 
   componentDidMount() {
-    this.setState({product: this.props.product});
+    let product = {...this.state.product, ...this.props.product};
+    this.setState({product});
   },
 
   componentWillReceiveProps(props) {
-    this.setState({product: props.product});
-  },
-
-  _getValue(ref) {
-    return ref.value;
-  },
-
-  handleChange() {
-    const ref = this.refs;
-    let show;
-
-    if(this._getValue(ref.show) === 1 || this._getValue(ref.show) === true) {
-      show = true;
-    } else {
-      show = false;
-    }
-
-    const product = {...this.state.product, 
-      quotation_id: this.props.quotationId,
-      name: ref.name.refs.select.value,
-      type: ref.type.refs.select.value,
-      processor: ref.processor.value,
-      ram: ref.ram.value,
-      hdd: ref.hdd.value,
-      burner: ref.burner.value,
-      network_card: ref.network_card.value,
-      battery: ref.battery.value,
-      monitor: ref.monitor.value,
-      keyboard: ref.keyboard.value,
-      os: ref.os.value,
-      office: ref.office.value,
-      antivirus: ref.antivirus.value,
-      additional_1: ref.additional_1.value,
-      additional_2: ref.additional_2.value,
-      additional_3: ref.additional_3.value,
-      additional_4: ref.additional_4.value,
-      additional_5: ref.additional_5.value,
-      additional_6: ref.additional_6.value,
-      lapse: ref.lapse.value,
-      period: ref.period.refs.select.value,
-      quantity: ref.quantity.value,
-      price: ref.price.value,
-      total: ref.lapse.value * ref.quantity.value * ref.price.value,
-      show: ref.show.checked,
-      iva: ref.iva.checked,
-      note: ref.note.value,
-      spaces: ref.spaces.value || 0,
-    };
-
+    let product = {...this.state.product, ...props.product};
+    product = {...product, quotation_id: this.props.quotationId};
     this.setState({product});
+  },
+
+  handleChangeInput(field, e) {
+    e.preventDefault();
+    let val = e.currentTarget.value;
+    if(field == 'show' || field == 'iva') val = this.changeCheckbox(val);
+    console.log(field, val);
+    let product = {...this.state.product, [field]: val};
+    if(field == 'price' || field == 'quantity' || field == 'lapse') product = this.getTotal(product);
+    this.setState({product});
+  },
+
+  getTotal(product) {
+    let total = parseInt(product.lapse) * parseInt(product.quantity) * parseInt(product.price);
+    return {...product, total};
+  },
+
+  changeCheckbox(val) {
+    return val == 0 ? 1 : 2;
   },
 
   handleSubmit(e) {
@@ -86,24 +90,9 @@ const productForm = React.createClass({
     this.props.onClose();
   },
 
-
   render() {
     const product = this.state.product;
-    let iva;
-    let show;
-
-    if(product.iva == 1 || product.iva == true) {
-      iva = true
-    } else {
-      iva = false
-    }
-
-    if(product.show == 1 || product.show == true) {
-      show = true
-    } else {
-      show = false
-    }
-
+  
     return (
       <form id="product-form" className="form" onSubmit={this.handleSubmit}>
         <div className="form-group col-md-6">
@@ -112,7 +101,7 @@ const productForm = React.createClass({
             ref="name"
             options={productsOptions}
             default="Seleccionar producto"
-            onSelectChange={this.handleChange}
+            onSelectChange={this.handleChangeInput.bind(null, 'name')}
             value={product.name}
             />
         </div>
@@ -123,7 +112,7 @@ const productForm = React.createClass({
             ref="type"
             options={productsTypesOptions}
             default="Seleccionar tipo"
-            onSelectChange={this.handleChange}
+            onSelectChange={this.handleChangeInput.bind(null, 'type')}
             value={product.type}
             />
         </div>
@@ -131,41 +120,40 @@ const productForm = React.createClass({
         <div className="form-group col-md-6">
           <label >Procesador</label>
           <input
-            ref="processor"
             type="text"
-            className="form-control"
-            onChange={this.handleChange}
-            value={product.processor}/>
+            className="form-control input-processor"
+            onChange={this.handleChangeInput.bind(null, 'processor')}
+            value={product.processor}
+          />
         </div>
 
         <div className="form-group col-md-6">
           <label >RAM</label>
           <input
-            ref="ram"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'ram')}
             value={product.ram}/>
         </div>
 
         <div className="form-group col-md-6">
           <label >Disco duro</label>
           <input
-            ref="hdd"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.hdd}/>
+            onChange={this.handleChangeInput.bind(null, 'hdd')}
+            value={product.hdd}
+          />
         </div>
 
         <div className="form-group col-md-6">
           <label >Unidad optica</label>
           <input
-            ref="burner"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.burner}/>
+            onChange={this.handleChangeInput.bind(null, 'burner')}
+            value={product.burner}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -174,7 +162,7 @@ const productForm = React.createClass({
             ref="network_card"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'network_card')}
             value={product.network_card}/>
         </div>
 
@@ -184,7 +172,7 @@ const productForm = React.createClass({
             ref="battery"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'battery')}
             value={product.battery}/>
         </div>
 
@@ -194,7 +182,7 @@ const productForm = React.createClass({
             ref="monitor"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'monitor')}
             value={product.monitor}/>
         </div>
 
@@ -204,7 +192,7 @@ const productForm = React.createClass({
             ref="keyboard"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'keyboard')}
             value={product.keyboard}/>
         </div>
 
@@ -214,8 +202,9 @@ const productForm = React.createClass({
             ref="os"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.os}/>
+            onChange={this.handleChangeInput.bind(null, 'os')}
+            value={product.os}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -224,8 +213,9 @@ const productForm = React.createClass({
             ref="office"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.office}/>
+            onChange={this.handleChangeInput.bind(null, 'office')}
+            value={product.office}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -234,8 +224,9 @@ const productForm = React.createClass({
             ref="antivirus"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.antivirus}/>
+            onChange={this.handleChangeInput.bind(null, 'antivirus')}
+            value={product.antivirus}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -244,8 +235,9 @@ const productForm = React.createClass({
             ref="additional_1"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.additional_1}/>
+            onChange={this.handleChangeInput.bind(null, 'additional_1')}
+            value={product.additional_1}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -254,8 +246,9 @@ const productForm = React.createClass({
             ref="additional_2"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.additional_2}/>
+            onChange={this.handleChangeInput.bind(null, 'additional_2')}
+            value={product.additional_2}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -264,8 +257,9 @@ const productForm = React.createClass({
             ref="additional_3"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.additional_3}/>
+            onChange={this.handleChangeInput.bind(null, 'additional_3')}
+            value={product.additional_3}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -274,8 +268,9 @@ const productForm = React.createClass({
             ref="additional_4"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.additional_4}/>
+            onChange={this.handleChangeInput.bind(null, 'additional_4')}
+            value={product.additional_4}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -284,8 +279,9 @@ const productForm = React.createClass({
             ref="additional_5"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.additional_5}/>
+            onChange={this.handleChangeInput.bind(null, 'additional_5')}
+            value={product.additional_5}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -294,7 +290,7 @@ const productForm = React.createClass({
             ref="additional_6"
             type="text"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'additional_6')}
             value={product.additional_6}/>
         </div>
 
@@ -306,18 +302,17 @@ const productForm = React.createClass({
             ref="lapse"
             type="number"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'lapse')}
             value={product.lapse}/>
         </div>
 
         <div className="form-group col-md-3">
           <label >Periodo</label>
-
            <Select
             ref="period"
             options={PeriodsOptions}
             default="Seleccionar periodo"
-            onSelectChange={this.handleChange}
+            onSelectChange={this.handleChangeInput.bind(null, 'period')}
             value={product.period}
             />
         </div>
@@ -328,7 +323,7 @@ const productForm = React.createClass({
             ref="quantity"
             type="number"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'quantity')}
             value={product.quantity}/>
         </div>
 
@@ -338,7 +333,7 @@ const productForm = React.createClass({
             ref="price"
             type="number"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'price')}
             value={product.price}/>
         </div>
 
@@ -348,27 +343,29 @@ const productForm = React.createClass({
             ref="note"
             cols="4"
             className="form-control"
-            onChange={this.handleChange}
+            onChange={this.handleChangeInput.bind(null, 'note')}
             value={product.note}></textarea>
         </div>
 
         <div className="checkbox col-md-3">
            <label>
             <input
-              ref="iva"
               type="checkbox"
-              onChange={this.handleChange}
-              checked={iva}/> <span>Mostrar IVA</span>
+              onChange={this.handleChangeInput.bind(null, 'iva')}
+              checked={product.iva}
+              value={product.iva}
+            /> <span>Mostrar IVA {product.iva ? 'yeah' : 'nea'}</span>
           </label>
         </div>
 
         <div className="checkbox col-md-3" style={{'marginTop': '10px'}}>
           <label>
             <input
-              ref="show"
               type="checkbox"
-              onChange={this.handleChange}
-              checked={show}/> <span>Mostrar total</span>
+              onChange={this.handleChangeInput.bind(null, 'show')}
+              checked={product.show ? true : false}
+              value={product.show}
+              /> <span>Mostrar total {product.show ? 'yeah' : 'nea'}</span>
           </label>
         </div>
 
@@ -378,8 +375,9 @@ const productForm = React.createClass({
             ref="spaces"
             type="number"
             className="form-control"
-            onChange={this.handleChange}
-            value={product.spaces} />
+            onChange={this.handleChangeInput.bind(null, 'spaces')}
+            value={product.spaces} 
+          />
         </div>
           <div className="alert alert-danger col-md-12" style={this.props.errors.length ? {} : {display: 'none'}}>
             {this.props.errors}
