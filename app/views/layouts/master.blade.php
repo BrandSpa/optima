@@ -149,11 +149,28 @@
 			margin: 0;
 			font-size: 18px;
 		}
+
+	.toast_messsage {
+		width: 100%;
+		background: #F2364E;
+		position: fixed;
+		color: #fff;
+		padding: 15px;
+		top: -200px;
+		transition: all 400ms;
+		text-align:center;
+	}
+
+	.toast_messsage--show {
+		z-index: 1090;
+		top: 0px;
+	}
 	</style>
 
 </head>
 
 <body>
+	<div id="toast_messsage" class="toast_messsage"></div>
 	<div id="app"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<!-- scripts -->

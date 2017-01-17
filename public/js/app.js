@@ -74991,6 +74991,10 @@
 
 	var _alert2 = _interopRequireDefault(_alert);
 
+	var _alert3 = __webpack_require__(531);
+
+	var _alert4 = _interopRequireDefault(_alert3);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -75040,6 +75044,8 @@
 	        user = _props2.user,
 	        quotations = _props2.quotations;
 
+
+	    (0, _alert4.default)(message);
 
 	    var activity = {
 	      message: message,
@@ -76102,7 +76108,7 @@
 	  },
 	  handleClick: function handleClick(status, e) {
 	    e.preventDefault(status, e);
-	    var message = { message: 'Cambio estado a ' + status };
+	    var message = 'Cambio estado a ' + status;
 
 	    switch (status) {
 	      case 'Replanteada':
@@ -76115,7 +76121,7 @@
 	        this.props.handleOpenNoEffective();
 	        break;
 	      default:
-	        this.props.onStatusChange({ status: status, message: message });
+	        this.props.onStatusChange(status, message);
 	    }
 	  },
 	  handleSend: function handleSend() {
@@ -79737,6 +79743,34 @@
 	    );
 	  }
 	});
+
+/***/ },
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function Alert(message) {
+		var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5000;
+
+		var el = document.getElementById('toast_messsage');
+		console.log('el', el);
+		el.innerHTML = message;
+		el.className = "toast_messsage toast_messsage--show";
+
+		setTimeout(function () {
+			el.innerHTML = '';
+			el.className = "toast_messsage";
+		}, time);
+	}
+
+	exports.default = Alert;
 
 /***/ }
 /******/ ]);

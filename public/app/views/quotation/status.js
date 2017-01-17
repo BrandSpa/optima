@@ -18,7 +18,7 @@ module.exports = React.createClass({
 
   handleClick(status, e) {
     e.preventDefault(status, e);
-    let message = {message: `Cambio estado a ${status}`};
+    let message = `Cambio estado a ${status}`;
 
     switch (status) {
       case 'Replanteada':
@@ -31,7 +31,7 @@ module.exports = React.createClass({
         this.props.handleOpenNoEffective();
         break;
       default:
-        this.props.onStatusChange({status, message});
+        this.props.onStatusChange(status, message);
     }
 
   },
