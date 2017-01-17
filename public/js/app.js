@@ -75856,6 +75856,10 @@
 		{
 			"value": "Printers",
 			"label": "Printers"
+		},
+		{
+			"value": "Adicional",
+			"label": "Adicional"
 		}
 	];
 
@@ -76377,6 +76381,21 @@
 	      null,
 	      _react2.default.createElement(
 	        'div',
+	        { className: this.state.showForm ? "panel panel-default" : "hidden" },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement(_form_create2.default, {
+	            onSubmit: this._handleSubmit,
+	            product: this.state.product,
+	            quotationId: this.props.quotationId,
+	            onClose: this.showForm,
+	            errors: this.state.errors
+	          })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
 	        { className: 'panel panel-default' },
 	        _react2.default.createElement(
 	          'div',
@@ -76451,21 +76470,6 @@
 	              )
 	            )
 	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: this.state.showForm ? "panel panel-default" : "hidden" },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(_form_create2.default, {
-	            onSubmit: this._handleSubmit,
-	            product: this.state.product,
-	            quotationId: this.props.quotationId,
-	            onClose: this.showForm,
-	            errors: this.state.errors
-	          })
 	        )
 	      )
 	    );

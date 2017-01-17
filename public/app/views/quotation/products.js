@@ -112,6 +112,17 @@ export default React.createClass({
 
     return (
       <div>
+      <div className={this.state.showForm ? "panel panel-default" : "hidden"}>
+        <div className="panel-body">
+          <FormCreate
+            onSubmit={this._handleSubmit}
+            product={this.state.product}
+            quotationId={this.props.quotationId}
+            onClose={this.showForm}
+            errors={this.state.errors}
+            />
+        </div>
+      </div>
       <div className="panel panel-default">
         <div className="panel-heading"><h5>Productos</h5></div>
         <div className="panel-body">
@@ -144,17 +155,7 @@ export default React.createClass({
         </div>
       </div>
 
-      <div className={this.state.showForm ? "panel panel-default" : "hidden"}>
-        <div className="panel-body">
-          <FormCreate
-            onSubmit={this._handleSubmit}
-            product={this.state.product}
-            quotationId={this.props.quotationId}
-            onClose={this.showForm}
-            errors={this.state.errors}
-            />
-        </div>
-      </div>
+      
 
       </div>
     );
