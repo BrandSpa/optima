@@ -60,6 +60,18 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
+		case `${TYPE}_UPDATE_SERVICE`:
+
+			let services = state.services.map((serv) => {
+				return serv.id == action.payload.id ? {...serv, ...action.payload} : serv	
+			});
+
+			return {
+        ...state,
+        services
+      };
+		break;
+
 		case `${TYPE}_REMOVE_SERVICE`:
 			return {
         ...state,

@@ -36,5 +36,15 @@ export function cleanItems() {
 	}
 }
 
+export function cleanItem() {
+	return dispatch => {
+		return new Promise((resolve, reject) => {
+			let action = { type: `${TYPE}_CLEAN_ITEM`, payload: {}};
+			dispatch(action);
+			return resolve(action);
+		});
+	}
+}
+
 
 

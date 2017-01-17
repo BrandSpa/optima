@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import * as action from 'actions/quotations';
-import moment from 'moment';
 import {storeActivity} from 'lib/activity';
 
 module.exports = React.createClass({

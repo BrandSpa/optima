@@ -14,7 +14,6 @@
     "bootstrap": "^3.3.4",
     "chart.js": "^2.1.6",
     "flatpickr": "^1.8.9",
-    "moment": "^2.10.2",
     "numeral": "^1.5.3",
     "page": "^1.7.1",
     "path": "^0.12.7",
@@ -26,6 +25,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "sinon": "^1.17.7",
+    "timeago.js": "^2.0.4",
     "uid": "0.0.2"
   },
   "devDependencies": {

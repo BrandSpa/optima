@@ -12,7 +12,8 @@ const quoServices = React.createClass({
       disableAdd: true,
       serviceId: null,
       quotationId: null,
-      optionSelected: ''
+      optionSelected: '',
+      showForm: false
     }
   },
 
@@ -29,6 +30,17 @@ const quoServices = React.createClass({
     this.props.dispatch( quoAction.removeService(id, quotationId) );
   },
 
+  handleEdit(service) {
+    this.props.dispatch(action.setService(service))
+    .then(res => this.setState({showForm: true}));
+  },
+
+  updateService(service) {
+    this.props.dispatch(action.update(service)).then(res => {
+      this.props.dispatch( quoAction.updateService(res.payload) );
+    });
+  },
+
   fetch(query = {}) {
     this.props.dispatch(action.fetch(query));
   },
@@ -39,17 +51,24 @@ const quoServices = React.createClass({
     this.fetch({query: val});
   },
 
+  handleCancel() {
+    this.props.dispatch(action.cleanItem())
+    .then(res => this.setState({showForm: false}));
+  },
+ 
   render() {
-    const options = this.props.services.items.map(opt => ({
-          value: opt.id,
-          label: opt.title
-    }));
+    const options = this.props.services.items.map(opt => ({ value: opt.id, label: opt.title }));
 
     const serviceNodes = this.props.quotations.services.map(service => 
       <tr key={service.id}>
         <td>{service.title}</td>
         <td>
-          <button>Editar</button>
+          <button 
+            className="btn btn-default btn-sm" 
+            onClick={this.handleEdit.bind(null, service)}
+          >
+          Editar
+          </button>
           <button
             className="btn btn-default btn-sm"
             onClick={this.handleDelete.bind(null, service.id)}
@@ -62,7 +81,19 @@ const quoServices = React.createClass({
     );
 
     return (
-      <div>      
+      <div>   
+
+      <div className={this.state.showForm ? "panel" : "hide"}>
+        <div className="panel-body">
+          <Form
+            service={this.props.services.service}
+            errors={[]}
+            onSubmit={this.updateService}
+            onCancel={this.handleCancel}
+          />
+        </div>
+      </div>
+
       <div className="panel">
         <div className="panel-heading"><h5>Servicios</h5></div>
         <div className="panel-body">

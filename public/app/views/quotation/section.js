@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import moment from 'moment';
 import {connect} from 'react-redux';
 
 import * as action from 'actions/quotations';

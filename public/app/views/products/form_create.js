@@ -103,7 +103,7 @@ const productForm = React.createClass({
             default="Seleccionar producto"
             onSelectChange={this.handleChangeInput.bind(null, 'name')}
             value={product.name}
-            />
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -114,7 +114,7 @@ const productForm = React.createClass({
             default="Seleccionar tipo"
             onSelectChange={this.handleChangeInput.bind(null, 'type')}
             value={product.type}
-            />
+          />
         </div>
 
         <div className="form-group col-md-6">

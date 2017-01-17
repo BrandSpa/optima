@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
-import moment from 'moment';
-require('moment/locale/es');
+import timeago from 'timeago.js';
+const es = require('timeago.js/locales/es');
 
 export default React.createClass({
   getDefaultProps: function() {
@@ -11,9 +11,12 @@ export default React.createClass({
   },
 
   render: function() {
-    var created = moment(this.props.date).fromNow();
+    timeago.register('es', es);
+    var created = new timeago().format(this.props.date, 'es');
+    console.log(created);
     return (
        <span className="timeago" >{created}</span>
     );
   }
 });
+
