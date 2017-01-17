@@ -76734,7 +76734,7 @@
 
 	    return _react2.default.createElement(
 	      'form',
-	      { className: 'form', onSubmit: this.handleSubmit },
+	      { id: 'product-form', className: 'form', onSubmit: this.handleSubmit },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'form-group col-md-6' },

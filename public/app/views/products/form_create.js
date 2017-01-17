@@ -105,7 +105,7 @@ const productForm = React.createClass({
     }
 
     return (
-      <form className="form" onSubmit={this.handleSubmit}>
+      <form id="product-form" className="form" onSubmit={this.handleSubmit}>
         <div className="form-group col-md-6">
           <label >Producto</label>
           <Select
