@@ -77083,10 +77083,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(487);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
 	var _editor = __webpack_require__(404);
 
 	var _editor2 = _interopRequireDefault(_editor);
@@ -77129,12 +77125,12 @@
 	    });
 	  },
 	  handleChange: function handleChange() {
-	    this.setState(_underscore2.default.extend(this.state.quotation, {
-	      quotation: {
-	        mail_recipient_1: this.refs.mail_recipient_1.value,
-	        mail_recipient_2: this.refs.mail_recipient_2.value
-	      }
-	    }));
+	    var quotation = _extends({}, this.state.quotation, {
+	      mail_recipient_1: this.refs.mail_recipient_1.value,
+	      mail_recipient_2: this.refs.mail_recipient_2.value
+	    });
+
+	    this.setState({ quotation: quotation });
 	  },
 	  handleClick: function handleClick() {
 	    this.props.onSaveMail(this.state.quotation);
