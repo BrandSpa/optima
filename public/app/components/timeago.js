@@ -13,7 +13,6 @@ export default React.createClass({
   render: function() {
     timeago.register('es', es);
     var created = new timeago().format(this.props.date, 'es');
-    console.log(created);
     return (
        <span className="timeago" >{created}</span>
     );

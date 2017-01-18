@@ -31,7 +31,7 @@ module.exports = React.createClass({
         this.props.handleOpenNoEffective(message);
         break;
       default:
-        this.props.onStatusChange(status, message);
+        this.props.onStatusChange({status}, message);
     }
   },
 
