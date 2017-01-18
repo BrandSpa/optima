@@ -8,7 +8,7 @@ const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const TYPE = 'ACTIVITIES';
-const endpoint = 'api/v1/activities';
+const endpoint = '/api/v1/activities';
 
 describe('activities actions', () => {
 	beforeEach(() => {

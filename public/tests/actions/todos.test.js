@@ -7,7 +7,7 @@ const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const TYPE = 'TODOS';
-const endpoint = 'api/v1/todos';
+const endpoint = '/api/v1/todos';
 
 describe('todos actions', () => {
 	beforeEach(() => {

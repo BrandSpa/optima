@@ -8,7 +8,7 @@ const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const TYPE = 'CONTACTS';
-const endpoint = 'api/v1/contacts';
+const endpoint = '/api/v1/contacts';
 
 describe('contact actions', () => {
 	beforeEach(() => {

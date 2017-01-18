@@ -1,8 +1,6 @@
 'use strict';
 import React from 'react';
-import moment from 'moment';
 import updateItem from 'lib/update_item';
-require('moment/locale/es');
 
 const quoTracking = React.createClass({
   getDefaultProps: function() {
@@ -35,7 +33,7 @@ const quoTracking = React.createClass({
             <div dangerouslySetInnerHTML={{__html: tracking.report}} />
           </div>
           </div>
-        <b>Por: </b> {by} <i>{moment(`${tracking.register_date} ${tracking.register_time}` ).fromNow()}</i>
+        <b>Por: </b> {by} <i>{`${tracking.register_date} ${tracking.register_time}`}</i>
         <hr/>
       </li>
     )

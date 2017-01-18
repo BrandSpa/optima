@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import moment from 'moment';
 import {connect} from 'react-redux';
 
 import * as action from 'actions/quotations';
@@ -25,6 +24,7 @@ import Activities from 'views/quotation/activity';
 import Trackings from 'views/quotation/trackings';
 import Todos from 'views/todos/section';
 import Alert from 'components/alert';
+import Toast from 'lib/alert';
 
 const quotationSection = React.createClass({
   alert: null,
@@ -63,6 +63,8 @@ const quotationSection = React.createClass({
 
   setActivity(message) {
     let {user, quotations} = this.props;
+
+    Toast(message);
 
     let activity = {
       message,
@@ -131,11 +133,15 @@ const quotationSection = React.createClass({
   },
 
   handleSaveNoEffective(status) {
-    this._update(status);
-    this.setState({
-      showNoEffective: false,
-      showNoSend: false
+    let message = `Cambio estado a ${status.status}`;
+    this.setActivity(message).then(() => {
+      this._update(status);
+        this.setState({
+          showNoEffective: false,
+          showNoSend: false
+        });
     });
+    
   },
 
   handleStatus(status, message) {

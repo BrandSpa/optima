@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import * as action from 'actions/quotations';
-import moment from 'moment';
 import {storeActivity} from 'lib/activity';
 
 module.exports = React.createClass({
@@ -19,22 +18,21 @@ module.exports = React.createClass({
 
   handleClick(status, e) {
     e.preventDefault(status, e);
-    let message = {message: `Cambio estado a ${status}`};
+    let message = `Cambio estado a ${status}`;
 
     switch (status) {
       case 'Replanteada':
          window.location = `/quotations/${this.props.quotation.id}/rethink`;
         break;
       case 'No enviada':
-        this.props.handleOpenNoSend();
+        this.props.handleOpenNoSend(message);
         break;
       case 'No efectiva':
-        this.props.handleOpenNoEffective();
+        this.props.handleOpenNoEffective(message);
         break;
       default:
-        this.props.onStatusChange({status, message});
+        this.props.onStatusChange(status, message);
     }
-
   },
 
   handleSend() {

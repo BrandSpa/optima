@@ -21,7 +21,6 @@ const serviceForm = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     if(typeof this.props.onSubmit == 'function') {
       this.props.onSubmit(this.state.service);
     }
@@ -44,9 +43,7 @@ const serviceForm = React.createClass({
 
   render() {
     let service = this.state.service;
-
-    console.log('render', service);
-
+    console.log(service);
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group col-md-12">
@@ -88,7 +85,9 @@ const serviceForm = React.createClass({
               value={service.price_2}
             />
         </div>
+
         <div className={this.props.errors.length ? "alert alert-danger col-md-12" : "hidden"}>{this.props.errors}</div>
+
         <button className="btn btn-default btn-sm" onClick={this.handleCancel}>Cancelar</button>
         <button className="btn btn-primary btn-sm pull-right">Guardar</button>
       </form>

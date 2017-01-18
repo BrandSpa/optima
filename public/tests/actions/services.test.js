@@ -8,7 +8,7 @@ const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const TYPE = 'SERVICES';
-const endpoint = 'api/v1/services';
+const endpoint = '/api/v1/services';
 
 describe('services actions', () => {
 

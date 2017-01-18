@@ -49,6 +49,16 @@ export function storeService(quotationId, service) {
   }
 }
 
+export function updateService(service) {
+  return dispatch => {
+		return new Promise((resolve, reject) => {
+			let action = { type: `${TYPE}_UPDATE_SERVICE`, payload: service};
+			dispatch(action);
+			return resolve(action);
+		});
+	}
+}
+
 export function removeService(id, quotation_id) {
   return dispatch => { 
     return request

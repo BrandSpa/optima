@@ -9,5 +9,6 @@
 	{"value":"Discos Duros Seguros","label": "Discos Duros Seguros"},
 	{"value":"Networks","label": "Networks"},
 	{"value":"Complements","label": "Complements"},
-	{"value":"Printers","label": "Printers"}
+	{"value":"Printers","label": "Printers"},
+	{"value":"Adicional","label": "Adicional"}
 ]

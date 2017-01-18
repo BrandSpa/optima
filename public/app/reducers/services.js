@@ -1,3 +1,4 @@
+import cleanObject from '../lib/clean_object';
 const TYPE = 'SERVICES';
 const initialState = {
 	items: [],
@@ -43,6 +44,13 @@ export default function reducer(state = initialState, action) {
 			return {
         ...state,
         items: []
+      };
+		break;
+
+		case `${TYPE}_CLEAN_ITEM`:
+			return {
+        ...state,
+        service: cleanObject(state.service)
       };
 		break;
 

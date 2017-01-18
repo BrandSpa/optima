@@ -8,7 +8,7 @@ const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const TYPE = 'QUOTATIONS';
-const endpoint = 'api/v1/quotations';
+const endpoint = '/api/v1/quotations';
 
 describe('quotations async actions', () => {
 	 beforeEach(function () {
