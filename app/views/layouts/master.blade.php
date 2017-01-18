@@ -165,6 +165,10 @@
 		z-index: 1090;
 		top: 0px;
 	}
+
+	.list-item {
+		list-style: none;
+	}
 	</style>
 
 </head>

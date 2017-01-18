@@ -36,7 +36,8 @@ const quoTrackings = React.createClass({
         <div className="panel-body">
           <Form contacts={this.props.contacts.items} onSubmit={this.handleSubmit} />
           <br/>
-          <ul className="list-group">
+
+          <ul className="list-group col-md-12">
             {trackingNodes}
           </ul>
         </div>
