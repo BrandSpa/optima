@@ -24,9 +24,7 @@
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
-    "sinon": "^1.17.7",
     "timeago.js": "^2.0.4",
-    "toastr": "^2.1.2",
     "uid": "0.0.2"
   },
   "devDependencies": {
@@ -58,7 +56,6 @@
     "nock": "^9.0.2",
     "react-addons-test-utils": "^15.4.1",
     "reactify": "^1.1.1",
-    "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-mock-store": "^1.2.1",
     "require-dir": "^0.3.0",
