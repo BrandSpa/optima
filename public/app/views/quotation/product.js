@@ -9,6 +9,8 @@ module.exports = React.createClass({
     }
   },
 
+  
+
   render() {
     const product = this.props.product;
     let period = product.period;
@@ -29,7 +31,15 @@ module.exports = React.createClass({
     }
 
     return (
-      <tr>
+      <tr
+        data-id={product.id} 
+        data-position={product.position || this.props.index} 
+        draggable='true'
+        onDragEnd={this.props.onDragEnd}
+        onDragStart={this.props.onDragStart}
+        onDragOver={this.props.onDragOver}
+        onDragLeave={this.props.onDragLeave}
+      >
         <td>{product.name}</td>
         <td>{product.lapse} {period}</td>
         <td>{product.quantity}</td>
