@@ -30739,7 +30739,6 @@
 	  render: function render() {
 	    _timeago2.default.register('es', es);
 	    var created = new _timeago2.default().format(this.props.date, 'es');
-	    console.log(created);
 	    return _react2.default.createElement(
 	      'span',
 	      { className: 'timeago' },
@@ -76126,7 +76125,7 @@
 	        this.props.handleOpenNoEffective(message);
 	        break;
 	      default:
-	        this.props.onStatusChange(status, message);
+	        this.props.onStatusChange({ status: status }, message);
 	    }
 	  },
 	  handleSend: function handleSend() {

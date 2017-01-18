@@ -3,7 +3,7 @@ function Alert(message, time = 5000) {
 	let timeout;
   el.innerHTML = message;
   el.className = "toast_messsage toast_messsage--show";
-
+	
 	timeout = setTimeout(() => {
 		el.innerHTML = '';
 		el.className = "toast_messsage";
