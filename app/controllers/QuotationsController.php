@@ -73,7 +73,7 @@ class QuotationsController extends BaseController {
 		$model->rethink_from = $id;
 		$model->save();
 
-		return Redirect::to('/#quotations/'.$model->id);
+		return Redirect::to('/quotations/'.$model->id);
 	}
 
 	public function getExcel() {
