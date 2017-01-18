@@ -71,6 +71,7 @@ class QuotationsController extends BaseController {
 		$quo->save();
 		$model = Quotation::duplicate($id, "rethink");
 		$model->rethink_from = $id;
+		$model->status_cause = '';
 		$model->save();
 
 		return Redirect::to('/quotations/'.$model->id);
