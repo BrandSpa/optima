@@ -1,17 +1,23 @@
-## Laravel PHP Framework
+## OPTIMA
 
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/version.png)](https://packagist.org/packages/laravel/framework) [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.png)](https://packagist.org/packages/laravel/framework) [![Build Status](https://travis-ci.org/laravel/framework.png)](https://travis-ci.org/laravel/framework)
+### Backend
+- laravel 4.2
+- mysql
 
-Optima
+### Frontend
+- react
+- redux
+- redux-thunk
+- axios
+- babel/es6
 
-## Official Documentation
+### Tests
+- jest
+- enzyme
+- moxios
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+### CI
+- semaphore
 
-### Contributing To Laravel
-
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## tests status
+[![Build Status](https://semaphoreci.com/api/v1/alebrandspa/avante-optima/branches/master/badge.svg)](https://semaphoreci.com/alebrandspa/avante-optima)

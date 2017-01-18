@@ -2,12 +2,11 @@
   "name": "avante-optima",
   "version": "1.0.0",
   "description": "app for avante",
-  "main": "gulpfile.js",
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
-  "author": "Alejandro Sanabria alejandro@brandspa.com",
+  "author": "Alejandro Sanabria <alejandro@brandspa.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
@@ -24,9 +23,7 @@
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
-    "sinon": "^1.17.7",
     "timeago.js": "^2.0.4",
-    "toastr": "^2.1.2",
     "uid": "0.0.2"
   },
   "devDependencies": {
@@ -36,34 +33,16 @@
     "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
-    "babelify": "^7.3.0",
-    "browserify": "^11.2.0",
-    "debowerify": "^1.3.1",
     "enzyme": "^2.7.0",
     "expect": "^1.20.2",
-    "gulp": "^3.9.1",
-    "gulp-coffee": "^2.3.1",
-    "gulp-concat": "^2.5.2",
-    "gulp-declare": "^0.3.0",
-    "gulp-handlebars": "^4.0.0",
-    "gulp-ruby-sass": "^1.0.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.1.0",
-    "gulp-util": "^3.0.7",
-    "gulp-wrap": "^0.11.0",
     "jest": "^18.1.0",
     "json-loader": "^0.5.4",
-    "lodash": "^3.10.1",
     "moxios": "^0.3.0",
-    "nock": "^9.0.2",
     "react-addons-test-utils": "^15.4.1",
     "reactify": "^1.1.1",
     "redux-logger": "^2.7.4",
     "redux-mock-store": "^1.2.1",
     "require-dir": "^0.3.0",
-    "sinon": "^1.17.7",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0"
+    "sinon": "^1.17.7"
   }
 }

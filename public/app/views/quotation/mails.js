@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import _ from 'underscore';
 import Editor from '../../components/editor';
 
 module.exports = React.createClass({
@@ -40,12 +39,13 @@ module.exports = React.createClass({
   },
 
   handleChange() {
-    this.setState(_.extend(this.state.quotation, {
-      quotation: {
-        mail_recipient_1: this.refs.mail_recipient_1.value,
-        mail_recipient_2: this.refs.mail_recipient_2.value
-      }
-    }));
+    let quotation = {
+      ...this.state.quotation,
+      mail_recipient_1: this.refs.mail_recipient_1.value,
+      mail_recipient_2: this.refs.mail_recipient_2.value
+    };
+
+    this.setState({quotation});
   },
 
   handleClick() {
