@@ -2,12 +2,11 @@
   "name": "avante-optima",
   "version": "1.0.0",
   "description": "app for avante",
-  "main": "gulpfile.js",
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
-  "author": "Alejandro Sanabria alejandro@brandspa.com",
+  "author": "Alejandro Sanabria <alejandro@brandspa.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
