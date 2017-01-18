@@ -76460,16 +76460,19 @@
 	      }
 
 	      position = _this.getPosition(position, toPosition);
+
 	      return _extends({}, product, { position: position });
 	    }).sort(this.sortByPosition);
 
-	    this.setState({ products: products });
+	    products.forEach(function (product) {
+	      return _this.props.dispatch(action.update(product));
+	    });
 	  },
 	  getPosition: function getPosition(position, toPosition) {
 	    if (this.direction == 'down') {
-	      position = toPosition >= i ? i - 1 : position;
+	      position = toPosition >= position ? position - 1 : position;
 	    } else {
-	      position = toPosition <= i ? i + 1 : position;
+	      position = toPosition <= position ? position + 1 : position;
 	    }
 
 	    return position;
@@ -76486,7 +76489,7 @@
 	    var _this2 = this;
 
 	    var products = this.state.products;
-	    var productNodes = products.map(function (product, i) {
+	    var productNodes = products.sort(this.sortByPosition).map(function (product, i) {
 	      return _react2.default.createElement(_product2.default, {
 	        product: product,
 	        index: i,

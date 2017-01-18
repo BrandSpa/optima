@@ -134,18 +134,19 @@ export default React.createClass({
         }
 
         position = this.getPosition(position, toPosition);
+
         return {...product, position};
       })
       .sort(this.sortByPosition);
 
-    this.setState({products});
+    products.forEach(product => this.props.dispatch(action.update(product)));
   },
 
   getPosition(position, toPosition) {
     if(this.direction == 'down') {
-      position =  toPosition >= i ? i - 1 : position;
+      position =  toPosition >= position ? position - 1 : position;
     } else {
-      position =  toPosition <= i ? i + 1 : position;
+      position =  toPosition <= position ? position + 1 : position;
     }
 
     return position;
@@ -160,7 +161,7 @@ export default React.createClass({
 
   render: function() {
     let products = this.state.products;
-    let productNodes = products.map((product, i) =>
+    let productNodes = products.sort(this.sortByPosition).map((product, i) =>
       <Product
         product={product}
         index={i}
