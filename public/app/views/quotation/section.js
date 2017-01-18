@@ -133,11 +133,15 @@ const quotationSection = React.createClass({
   },
 
   handleSaveNoEffective(status) {
-    this._update(status);
-    this.setState({
-      showNoEffective: false,
-      showNoSend: false
+    let message = `Cambio estado a ${status.status}`;
+    this.setActivity(message).then(() => {
+      this._update(status);
+        this.setState({
+          showNoEffective: false,
+          showNoSend: false
+        });
     });
+    
   },
 
   handleStatus(status, message) {

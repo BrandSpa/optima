@@ -75122,17 +75122,22 @@
 	    this._update({ service_approval: serviceApproval });
 	  },
 	  handleSaveNoEffective: function handleSaveNoEffective(status) {
-	    this._update(status);
-	    this.setState({
-	      showNoEffective: false,
-	      showNoSend: false
+	    var _this6 = this;
+
+	    var message = 'Cambio estado a ' + status.status;
+	    this.setActivity(message).then(function () {
+	      _this6._update(status);
+	      _this6.setState({
+	        showNoEffective: false,
+	        showNoSend: false
+	      });
 	    });
 	  },
 	  handleStatus: function handleStatus(status, message) {
-	    var _this6 = this;
+	    var _this7 = this;
 
 	    this.setActivity(message).then(function () {
-	      _this6._update(status);
+	      _this7._update(status);
 	    });
 	  },
 	  changeContact: function changeContact(contactId) {
@@ -76115,10 +76120,10 @@
 	        window.location = '/quotations/' + this.props.quotation.id + '/rethink';
 	        break;
 	      case 'No enviada':
-	        this.props.handleOpenNoSend();
+	        this.props.handleOpenNoSend(message);
 	        break;
 	      case 'No efectiva':
-	        this.props.handleOpenNoEffective();
+	        this.props.handleOpenNoEffective(message);
 	        break;
 	      default:
 	        this.props.onStatusChange(status, message);
@@ -79760,11 +79765,11 @@
 		var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5000;
 
 		var el = document.getElementById('toast_messsage');
-		console.log('el', el);
+		var timeout = void 0;
 		el.innerHTML = message;
 		el.className = "toast_messsage toast_messsage--show";
 
-		setTimeout(function () {
+		timeout = setTimeout(function () {
 			el.innerHTML = '';
 			el.className = "toast_messsage";
 		}, time);
