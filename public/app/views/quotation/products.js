@@ -19,13 +19,8 @@ export default React.createClass({
     return {
       product: {},
       showForm: false,
-      errors: [],
-      products: []
+      errors: []
     }
-  },
-
-  componentWillReceiveProps(props) {
-    this.setState({products: props.products.items});
   },
 
   _handleSubmit(product) {
@@ -126,7 +121,7 @@ export default React.createClass({
     const toPosition = parseInt(this.over.dataset.position);
     const id = this.dragged.dataset.id;
 
-    let products = this.state.products
+    let products = this.props.products.items
       .map((product, i)=> {  
         let position = i; 
         if(id == product.id) {
@@ -160,7 +155,7 @@ export default React.createClass({
   },
 
   render: function() {
-    let products = this.state.products;
+    let products = this.props.products.items;
     let productNodes = products.sort(this.sortByPosition).map((product, i) =>
       <Product
         product={product}

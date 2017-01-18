@@ -76350,12 +76350,8 @@
 	    return {
 	      product: {},
 	      showForm: false,
-	      errors: [],
-	      products: []
+	      errors: []
 	    };
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this.setState({ products: props.products.items });
 	  },
 	  _handleSubmit: function _handleSubmit(product) {
 	    var position = this.props.products.items.length > 0 ? this.props.products.items.length + 1 : 0;
@@ -76453,7 +76449,7 @@
 	    var toPosition = parseInt(this.over.dataset.position);
 	    var id = this.dragged.dataset.id;
 
-	    var products = this.state.products.map(function (product, i) {
+	    var products = this.props.products.items.map(function (product, i) {
 	      var position = i;
 	      if (id == product.id) {
 	        return _extends({}, product, { position: toPosition });
@@ -76488,7 +76484,7 @@
 	  render: function render() {
 	    var _this2 = this;
 
-	    var products = this.state.products;
+	    var products = this.props.products.items;
 	    var productNodes = products.sort(this.sortByPosition).map(function (product, i) {
 	      return _react2.default.createElement(_product2.default, {
 	        product: product,
