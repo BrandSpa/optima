@@ -11,11 +11,13 @@
 - axios
 - babel/es6
 
-## Tests
+### Tests
 - jest
 - enzyme
 - moxios
 
 ### CI
 - semaphore
-- [![Build Status](https://semaphoreci.com/api/v1/alebrandspa/avante-optima/branches/master/badge.svg)](https://semaphoreci.com/alebrandspa/avante-optima)
+
+## tests status
+[![Build Status](https://semaphoreci.com/api/v1/alebrandspa/avante-optima/branches/master/badge.svg)](https://semaphoreci.com/alebrandspa/avante-optima)
