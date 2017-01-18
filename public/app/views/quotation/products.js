@@ -24,7 +24,10 @@ export default React.createClass({
   },
 
   _handleSubmit(product) {
-    this.setState({product: product});
+    let position = this.props.products.items.length > 0 ? this.props.products.items.length + 1 : 0;
+    product = {...product, position};
+    this.setState({product});
+
     if(product.id) {
       this.props.dispatch(action.update(product))
       .then(this.handleStoreReponse);
@@ -90,19 +93,85 @@ export default React.createClass({
     });
   },
 
+  dragStart(e) {
+    this.dragged = e.currentTarget;
+    this.startY =  e.clientY;
+  },
+
+  dragOver(e) {
+    e.preventDefault();
+    e.currentTarget.style.opacity = '.2';
+    this.over = e.currentTarget;
+    this.direction = '';
+
+    if(this.startY > e.clientY) {
+      this.direction = 'up';
+    } else {
+      this.direction = 'down';
+    }
+  },
+
+  dragLeave(e) {
+    e.currentTarget.style.opacity = '1';
+  },
+
+  dragEnd(e) {
+    this.dragged.style.display = 'table-row';
+    this.over.style.opacity = '1';
+    const toPosition = parseInt(this.over.dataset.position);
+    const id = this.dragged.dataset.id;
+
+    let products = this.props.products.items
+      .map((product, i)=> {  
+        let position = i; 
+        if(id == product.id) {
+          return {...product, position: toPosition};
+        }
+
+        position = this.getPosition(position, toPosition);
+
+        return {...product, position};
+      })
+      .sort(this.sortByPosition);
+
+    products.forEach(product => this.props.dispatch(action.update(product)));
+  },
+
+  getPosition(position, toPosition) {
+    if(this.direction == 'down') {
+      position =  toPosition >= position ? position - 1 : position;
+    } else {
+      position =  toPosition <= position ? position + 1 : position;
+    }
+
+    return position;
+  },
+
+  sortByPosition(left, right) {
+    let a = left.position;
+    let b = right.position;
+    if (a > b) return 1;
+    if (a < b) return -1;
+  },
+
   render: function() {
     let products = this.props.products.items;
-    let productNodes = products.map(product =>
-        <Product
-          key={product.id}
-          product={product}
-          onEdit={this.handleEdit}
-          onDuplicate={this.handleDuplicate}
-          onOrder={this.handleOrder}
-          onDelete={this.handleDelete}
-          disabled={this.props.disabled}
-        />
-    );
+    let productNodes = products.sort(this.sortByPosition).map((product, i) =>
+      <Product
+        product={product}
+        index={i}
+        key={product.id}
+        onEdit={this.handleEdit}
+        onDuplicate={this.handleDuplicate}
+        onOrder={this.handleOrder}
+        onDelete={this.handleDelete}
+        disabled={this.props.disabled}
+        onDragEnd={this.dragEnd}
+        onDragStart={this.dragStart}
+        onDragOver={this.dragOver}
+        onDragLeave={this.dragLeave}
+      />
+    )
 
     let showTable = false;
 
@@ -154,9 +223,6 @@ export default React.createClass({
             </div>
         </div>
       </div>
-
-      
-
       </div>
     );
   }
