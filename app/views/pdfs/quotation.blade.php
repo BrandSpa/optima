@@ -55,7 +55,7 @@
 <div id="react"></div>
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/6to5/3.6.5/browser.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.0.0/browser.js"></script>
 <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
 
