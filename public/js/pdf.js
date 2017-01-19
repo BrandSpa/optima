@@ -25658,13 +25658,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(60);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Pdf = _react2.default.createClass({
 		displayName: 'Pdf',
-		componentDidMount: function componentDidMount() {},
+		componentDidMount: function componentDidMount() {
+			return {
+				items: [{ id: 1 }, { id: 2 }]
+			};
+		},
 		render: function render() {
 			var quoNodes = this.props.items.map(function (quo) {
 				return _react2.default.createElement(
@@ -25687,9 +25689,7 @@
 		}
 	});
 
-	exports.default = (0, _reactRedux.connect)(function (store) {
-		return store.quotations;
-	})(Pdf);
+	exports.default = Pdf;
 
 /***/ },
 /* 530 */,
