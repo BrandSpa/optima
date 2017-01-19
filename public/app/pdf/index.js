@@ -12,7 +12,7 @@ const Pdf = React.createClass({
 		request
       .get('/api/v1/quotations')
 			.then(res => this.setState({quotations: res.data}))
-			.catch(err => console.log(err));
+			.catch(err => err);
 	},
 
 	render() {
