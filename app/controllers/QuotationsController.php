@@ -63,9 +63,11 @@ class QuotationsController extends BaseController {
 		$snappy = new Pdf(base_path() . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
 		$snappy->setOption('enable-javascript', true);
 		$snappy->setOption('debug-javascript', true);
+		
 		// $snappy->setOption('footer-font-name', 'Nunito');
 		// $snappy->setOption('footer-font-size', '9');
 		// $snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
+
 		header('Content-Type: application/pdf');
 		echo $snappy->getOutput('http://react.avante.cc/quotations/39572/pdfhtml');
 
