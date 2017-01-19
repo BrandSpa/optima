@@ -1,10 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as action from '../actions/quotations';
 
 const Pdf = React.createClass({
 	componentDidMount() {
-		this.props.dispatch(action.fetch());
+
 	},
 
 	render() {
