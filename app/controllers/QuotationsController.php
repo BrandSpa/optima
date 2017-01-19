@@ -66,7 +66,7 @@ class QuotationsController extends BaseController {
 		$snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
 		header('Content-Type: application/pdf');
 		header('Content-Disposition: attachment; filename="file.pdf"');
-		echo $snappy->getOutput('http://localhost:8000/quotations/37215/pdfhtml');
+		echo $snappy->getOutput(url('/quotations/'. $id .'/pdfhtml'));
 
 		// $quotation = Quotation::find($id);
 		// $html = View::make('pdfs.quotation', compact('quotation'));
