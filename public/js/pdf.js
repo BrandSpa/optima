@@ -67,11 +67,7 @@
 	__webpack_require__(531);
 
 
-	(0, _reactDom.render)(_react2.default.createElement(
-	  _reactRedux.Provider,
-	  { store: _store2.default },
-	  _react2.default.createElement(_index2.default, null)
-	), document.getElementById("pdf"));
+	(0, _reactDom.render)(_react2.default.createElement(_index2.default, null), document.getElementById("pdf"));
 
 /***/ },
 /* 1 */
