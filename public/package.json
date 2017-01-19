@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-polyfill": "^6.20.0",
     "bootstrap": "^3.3.4",
     "chart.js": "^2.1.6",
     "flatpickr": "^1.8.9",
