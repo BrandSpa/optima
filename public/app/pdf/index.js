@@ -1,19 +1,21 @@
 import React from 'react';
-
+import request from 'axios';
 
 const Pdf = React.createClass({
-	getDefaultProps() {
+	getInitialState() {
 		return {
-			items: [{id: 1}, {id: 2}]
+			quotations: []
 		}
 	},
-	
+
 	componentDidMount() {
-		
+		request
+      .get('/api/v1/quotations')
+			.then(res => this.setState({quotations: res.data}));
 	},
 
 	render() {
-		const quoNodes = this.props.items.map(quo => {
+		const quoNodes = this.state.quotations.map(quo => {
 			return <div key={quo.id}>{quo.id}</div>
 		});
 
