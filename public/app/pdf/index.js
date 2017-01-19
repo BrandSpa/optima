@@ -4,8 +4,8 @@ import request from 'axios';
 const Pdf = React.createClass({
 	getInitialState() {
 		return {
-			quotations: []
-			errors: null
+			quotations: [],
+			errors: false
 		}
 	},
 
@@ -13,7 +13,7 @@ const Pdf = React.createClass({
 		request
       .get('/api/v1/quotations')
 			.then(res => this.setState({quotations: res.data}))
-			.catch(err => err);
+			.catch(err => this.setState({errors: true}));
 	},
 
 	render() {
@@ -24,7 +24,7 @@ const Pdf = React.createClass({
 		return (
 			<div>
 				<h1>Render a pdf is the work</h1>
-				
+					<span>{this.state.errors ? 'errors' : 'ne'}</span>
 				{quoNodes}
 			</div>
 		)
