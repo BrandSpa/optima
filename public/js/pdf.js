@@ -23317,6 +23317,8 @@
 
 			_axios2.default.get('/api/v1/quotations').then(function (res) {
 				return _this.setState({ quotations: res.data });
+			}).catch(function (err) {
+				return console.log(err);
 			});
 		},
 		render: function render() {

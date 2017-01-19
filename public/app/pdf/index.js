@@ -11,7 +11,8 @@ const Pdf = React.createClass({
 	componentDidMount() {
 		request
       .get('/api/v1/quotations')
-			.then(res => this.setState({quotations: res.data}));
+			.then(res => this.setState({quotations: res.data}))
+			.catch(err => console.log(err));
 	},
 
 	render() {
