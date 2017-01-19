@@ -1,3 +1,10 @@
+body {
+		font-family: 'Nunito', sans-serif;
+		padding: 0;
+		height: 100%;
+		font-size: 10pt;
+		line-height: 12pt;
+}
 
 b, h1, h2, h3, h4 {
   color: #111111;

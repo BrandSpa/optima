@@ -11,6 +11,10 @@ Route::get('login', 'UsersController@getLogin');
 Route::post('login', 'UsersController@postLogin');
 Route::get('logout', 'UsersController@logout');
 Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
+	Route::get('quotations/{id}/pdfbn', 'QuotationsController@getPdfBn');
+	Route::get('quotations/{id}/pdfhtml', 'QuotationsController@getPdf');
+	Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
+	Route::get('quotations/{id}/wkpdf', 'QuotationsController@wkpdf');
 
 Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 {
@@ -20,11 +24,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	|	Quotations routes
 	|-------------------------------------------------------------------------
 	*/
-
-	Route::get('quotations/{id}/pdfbn', 'QuotationsController@getPdfBn');
-	Route::get('quotations/{id}/pdfhtml', 'QuotationsController@getPdf');
-	Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
-	
+		
 	Route::get('quotations/excel', 'QuotationsController@getExcel');
 
 	Route::post('quotations/replicate/{id}', 'QuotationsController@getDuplicate');
