@@ -23309,7 +23309,7 @@
 		displayName: 'Pdf',
 		getInitialState: function getInitialState() {
 			return {
-				quotations: [],
+				quotations: [{ id: 1 }, { id: 2 }],
 				errors: false
 			};
 		},

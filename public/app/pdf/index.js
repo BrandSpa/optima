@@ -4,7 +4,7 @@ import request from 'axios';
 const Pdf = React.createClass({
 	getInitialState() {
 		return {
-			quotations: [],
+			quotations: [{id: 1}, {id: 2}],
 			errors: false
 		}
 	},
