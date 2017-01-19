@@ -6,5 +6,6 @@ import request from 'axios';
 let quotations = [];
 request
       .get('/api/v1/quotations')
-			.then(res =>  quotations = res.data);
+			.then(res => quotations = res.data);
+
 render( <Pdf quotations={quotations} />, document.getElementById("pdf"));

@@ -68,6 +68,7 @@
 	_axios2.default.get('/api/v1/quotations').then(function (res) {
 	      return quotations = res.data;
 	});
+
 	(0, _reactDom.render)(_react2.default.createElement(_index2.default, { quotations: quotations }), document.getElementById("pdf"));
 
 /***/ },
@@ -23336,7 +23337,7 @@
 				_react2.default.createElement(
 					'span',
 					null,
-					this.state.errors ? 'errors' : 'ne'
+					this.props.errors ? 'errors' : 'ne'
 				),
 				quoNodes
 			);
