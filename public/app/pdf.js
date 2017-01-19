@@ -9,5 +9,8 @@ request
 	.get('/api/v1/quotations', {responseType: 'text' })
 	.then(res => {
 		render( <Pdf quotations={res.data} />, document.getElementById("pdf"));
-	});
+	})
+	.catch(err => err);
+
+	
 

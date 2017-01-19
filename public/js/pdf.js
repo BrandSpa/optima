@@ -68,6 +68,8 @@
 
 	_axios2.default.get('/api/v1/quotations', { responseType: 'text' }).then(function (res) {
 		(0, _reactDom.render)(_react2.default.createElement(_index2.default, { quotations: res.data }), document.getElementById("pdf"));
+	}).catch(function (err) {
+		return err;
 	});
 
 /***/ },

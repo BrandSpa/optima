@@ -5,7 +5,7 @@
 	<title>PDF</title>
 </head>
 <body>
-	<div id="pdf"></div>
+	<div id="pdf" data-quotation="[[ json_encode($quotation) ]]"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
