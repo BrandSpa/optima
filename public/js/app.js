@@ -26173,8 +26173,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)());
-	exports.default = (0, _redux.createStore)(_reducers2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), middleware);
+	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default);
+	exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
 /***/ },
 /* 247 */

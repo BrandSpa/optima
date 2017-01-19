@@ -23570,8 +23570,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)());
-	exports.default = (0, _redux.createStore)(_reducers2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), middleware);
+	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default);
+	exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
 /***/ },
 /* 247 */
@@ -25662,11 +25662,12 @@
 
 	var Pdf = _react2.default.createClass({
 		displayName: 'Pdf',
-		componentDidMount: function componentDidMount() {
+		getDefaultProps: function getDefaultProps() {
 			return {
 				items: [{ id: 1 }, { id: 2 }]
 			};
 		},
+		componentDidMount: function componentDidMount() {},
 		render: function render() {
 			var quoNodes = this.props.items.map(function (quo) {
 				return _react2.default.createElement(

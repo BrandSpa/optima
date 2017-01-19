@@ -2,10 +2,14 @@ import React from 'react';
 
 
 const Pdf = React.createClass({
-	componentDidMount() {
+	getDefaultProps() {
 		return {
 			items: [{id: 1}, {id: 2}]
 		}
+	},
+	
+	componentDidMount() {
+		
 	},
 
 	render() {
