@@ -29,7 +29,7 @@ class QuotationsController extends BaseController {
 	public function getPdf($id)
 	{
 		$quotation = $this->quotation->find($id);
-		$html = View::make('pdfs.quotation', compact('quotation'));
+		$html = View::make('layouts.pdf_react', compact('quotation'));
 		return $html;
 	}
 
