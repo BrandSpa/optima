@@ -21,7 +21,6 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	|-------------------------------------------------------------------------
 	*/
 
-
 	Route::get('quotations/{id}/pdfbn', 'QuotationsController@getPdfBn');
 	Route::get('quotations/{id}/pdfhtml', 'QuotationsController@getPdf');
 	Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
@@ -34,7 +33,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 
 	Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
 	
-	//front end routes
+	//frontend routes
 	Route::get('', 'PagesController@quotations');
 	Route::get('/quotation/create', 'PagesController@quotations');
 	Route::get('/companies', 'PagesController@quotations');

@@ -1,13 +1,7 @@
-body {
-  padding: 0;
-  height: 100%;
-  font-size: 10pt;
-  line-height: 12pt;
-}
 
 b, h1, h2, h3, h4 {
   color: #111111;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 #header img {
@@ -16,24 +10,35 @@ b, h1, h2, h3, h4 {
 
 #header span {
   position: absolute;
-  top: 206pt;
-  right: 65px;
+  top: 203pt;
+  right: 55px;
   display: block;
   color: white;
-  font-size: 27pt;
+  font-size: 22pt;
+}
+
+#content {
+  display: block;
+  margin: 0 15px 0 15px;
+  font-size: 11pt;
+  line-height: 9pt;
+}
+
+.date {
+  padding-bottom: 30px;
+  font-weight: 600;
 }
 
 #contact {
   margin: 15px 0 0 15px;
   padding-bottom: 15px;
-  font-weight: 600;
 }
 
 #contact p {
   margin: 5px;
-  font-weight: normal;
-  font-size: 16px;
+  font-size: 12pt;
   line-height: 20px;
+  font-weight: 600;
 }
 
 #intro {
@@ -47,13 +52,7 @@ b, h1, h2, h3, h4 {
   padding-bottom: 15px;
 }
 
-#content {
-  display: block;
-  margin: 0 15px 0 15px;
-  font: 11pt/9pt;
-  line-height: 9pt;
-  background: red;
-}
+
 
 table {
   margin: 0 3px 25px 23px;
@@ -164,10 +163,7 @@ td img{
   height: 30px;
 }
 
-.date {
-  padding-bottom: 30px;
-  font-weight: 600;
-}
+
 
 .divider {
   display: block;
@@ -207,11 +203,10 @@ td img{
 }
 
 .service-content b {
-  font-family: "Stratum2-Bold" !important;
+  font-weight: 700;
 }
 
 .service-content p > span{
-  font-family: "Stratum2-Regular";
   font-weight: normal;
   font-style: normal;
 }
@@ -251,16 +246,11 @@ background: #ddd;
 
 .comment-title{
   margin-left: 30px;
-  font-family: "Stratum2-Medium"
+  font-weight: 600;
 }
 
 .comment-content {
-  font-family: "Stratum2-Regular" !important;
   margin-left: 30px;
-}
-
-.comment-content b {
-  text-decoration:line-through;
 }
 
 .comment-content ul, .comment-content ol{
@@ -279,6 +269,6 @@ background: #ddd;
 .footer{
   position: fixed;
   bottom: 15px;
-  left: 420px;
+  left: 410px;
   margin-top: 15px;
 }

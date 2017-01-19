@@ -56,12 +56,6 @@
 			transition: all 250ms all;
 		}
 
-		/*.list-group-item:hover {
-			background: #3B2B7F;
-			color: #fff;
-			transition: all 250ms all;
-		}*/
-
 		.list-inline li {
 			padding: 5px;
 		}

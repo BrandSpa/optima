@@ -1,10 +1,14 @@
-
 <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 <style>
-	html {
+	body {
 		font-family: 'Nunito', sans-serif;
+		padding: 0;
+		height: 100%;
+		font-size: 10pt;
+		line-height: 12pt;
 	}
 </style>
+
 <link rel="stylesheet" href="[[ public_path().'/css/pdf/pdf.css' ]]">
 
 @section('custom_css')
