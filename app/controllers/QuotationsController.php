@@ -60,7 +60,7 @@ class QuotationsController extends BaseController {
 	}
 
 	public function wkpdf($id) {
-		$snappy = new Pdf('wkhtmltopdf');
+		$snappy = new Pdf('/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
 		// $snappy->setOption('footer-font-name', 'Nunito');
 		// $snappy->setOption('footer-font-size', '9');
 		// $snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
