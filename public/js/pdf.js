@@ -23312,7 +23312,7 @@
 				quotations: []
 			};
 		},
-		componentDidMount: function componentDidMount() {
+		componentWillMount: function componentWillMount() {
 			var _this = this;
 
 			_axios2.default.get('/api/v1/quotations').then(function (res) {
