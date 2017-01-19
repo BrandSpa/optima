@@ -144,4 +144,4 @@ $(function () {
     });
 });
 
-</scrip>
+</script>
