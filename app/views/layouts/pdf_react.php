@@ -6,6 +6,6 @@
 </head>
 <body>
 	<div id="pdf"></div>
-	<script src="http://react.avante.cc/js/pdf.js"></script>
+	<script src="/js/pdf.js"></script>
 </body>
 </html>
