@@ -9,7 +9,8 @@ module.exports = {
   	]
 	},
 	entry: {
-		app: './app/app.js'
+		app: './app/app.js',
+		pdf: './app/pdf.js',
 	},
 	output: {
 		path: './js',
