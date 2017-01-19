@@ -50,6 +50,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(100);
+
 	var _page = __webpack_require__(32);
 
 	var _page2 = _interopRequireDefault(_page);
@@ -59,8 +61,6 @@
 	var _axios2 = _interopRequireDefault(_axios);
 
 	var _reactRedux = __webpack_require__(60);
-
-	var _reactDom = __webpack_require__(100);
 
 	var _store = __webpack_require__(246);
 
