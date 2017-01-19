@@ -23,6 +23,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 
 
 	Route::get('quotations/{id}/pdfbn', 'QuotationsController@getPdfBn');
+	Route::get('quotations/{id}/pdfhtml', 'QuotationsController@getPdf');
 	Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
 	
 	Route::get('quotations/excel', 'QuotationsController@getExcel');

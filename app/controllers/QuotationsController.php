@@ -25,7 +25,7 @@ class QuotationsController extends BaseController {
 		$this->layout->content = View::make('quotations.show');
 	}
 
-	public function getPdf($id, $hash)
+	public function getPdf($id)
 	{
 		$quotation = $this->quotation->find($id);
 		$html = View::make('pdfs.quotation', compact('quotation'));

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5a3e2a2e54c3be9c76ff523b1fb407f",
-    "content-hash": "0da69d5b34d99d1ce9fb0831120b21f2",
+    "hash": "383f306b9b1fc2fbc52cb85d97e7954c",
+    "content-hash": "6de4e9f7632965b26eda09ec529dbfaa",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -147,6 +147,46 @@
                 "zf2"
             ],
             "time": "2015-06-29 05:42:04"
+        },
+        {
+            "name": "h4cc/wkhtmltopdf-amd64",
+            "version": "0.12.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/h4cc/wkhtmltopdf-amd64.git",
+                "reference": "b80ce6720349e98cebac7e8a19426455805fa7e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/h4cc/wkhtmltopdf-amd64/zipball/b80ce6720349e98cebac7e8a19426455805fa7e1",
+                "reference": "b80ce6720349e98cebac7e8a19426455805fa7e1",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/wkhtmltopdf-amd64"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL Version 3"
+            ],
+            "authors": [
+                {
+                    "name": "Julius Beckmann",
+                    "email": "github@h4cc.de"
+                }
+            ],
+            "description": "Convert html to pdf using webkit (qtwebkit). Static linked linux binary for amd64 systems.",
+            "homepage": "http://wkhtmltopdf.org/",
+            "keywords": [
+                "binary",
+                "convert",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2016-02-02 19:38:55"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -2153,9 +2193,7 @@
                 "tymon"
             ],
             "time": "2015-04-20 19:20:44"
-        }
-    ],
-    "packages-dev": [
+        },
         {
             "name": "way/generators",
             "version": "2.6.1",
@@ -2205,6 +2243,7 @@
             "time": "2014-05-27 14:21:26"
         }
     ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": [],

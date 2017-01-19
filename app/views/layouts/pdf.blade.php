@@ -1,3 +1,10 @@
+
+<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+<style>
+	html {
+		font-family: 'Nunito', sans-serif;
+	}
+</style>
 <link rel="stylesheet" href="[[ public_path().'/css/pdf/pdf.css' ]]">
 
 @section('custom_css')
@@ -38,8 +45,8 @@
 		</p>
 	</div>
 </div>
-<br>
-<br>
+<br/>
+<br/>
 
 @yield('content')
 
