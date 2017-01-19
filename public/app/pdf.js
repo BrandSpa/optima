@@ -5,7 +5,7 @@ import Pdf from './pdf/index';
 import request from 'axios';
 let quotations = [];
 request
-      .get('/api/v1/quotations')
+      .get('/api/v1/quotations', {responseType: 'text' })
 			.then(res => quotations = res.data);
 
 render( <Pdf quotations={quotations} />, document.getElementById("pdf"));
