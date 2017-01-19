@@ -1,9 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
+
 
 const Pdf = React.createClass({
 	componentDidMount() {
-
+		return {
+			items: [{id: 1}, {id: 2}]
+		}
 	},
 
 	render() {
@@ -20,4 +22,4 @@ const Pdf = React.createClass({
 	}
 });
 
-export default connect(store => store.quotations)(Pdf);
+export default Pdf;
