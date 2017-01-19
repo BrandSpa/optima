@@ -67,7 +67,7 @@
 	var quotations = [{ id: 1 }, { id: 2 }];
 
 	_axios2.default.get('/api/v1/quotations', { responseType: 'text' }).then(function (res) {
-		return quotations = res.data;
+		return console.log(res);
 	});
 
 	(0, _reactDom.render)(_react2.default.createElement(_index2.default, { quotations: quotations }), document.getElementById("pdf"));
