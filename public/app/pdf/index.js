@@ -1,5 +1,5 @@
 import React from 'react';
-
+import request from 'axios';
 
 const Pdf = React.createClass({
 	getInitialState() {
