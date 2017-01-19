@@ -5,6 +5,7 @@ const Pdf = React.createClass({
 	getInitialState() {
 		return {
 			quotations: []
+			errors: null
 		}
 	},
 
@@ -23,6 +24,7 @@ const Pdf = React.createClass({
 		return (
 			<div>
 				<h1>Render a pdf is the work</h1>
+				
 				{quoNodes}
 			</div>
 		)
