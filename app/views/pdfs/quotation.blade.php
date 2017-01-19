@@ -64,8 +64,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script type="text/jsx">
 
-$(function () {
-	var product = React.createClass({
+var Product = React.createClass({
 		render: function() {
 			return (
 				<div> 
@@ -75,7 +74,9 @@ $(function () {
 		}
 	});
 
-	ReactDOM.render(<product />, document.getElementById('react'));
+	ReactDOM.render(<Product />, document.getElementById('react'));
+$(function () {
+	
 
     Highcharts.chart('container', {
         chart: {
