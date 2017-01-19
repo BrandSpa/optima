@@ -61,12 +61,12 @@ class QuotationsController extends BaseController {
 
 	public function wkpdf($id) {
 		$snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
-		$snappy->setOption('footer-font-name', 'Nunito');
-		$snappy->setOption('footer-font-size', '9');
-		$snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
+		// $snappy->setOption('footer-font-name', 'Nunito');
+		// $snappy->setOption('footer-font-size', '9');
+		// $snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
 		header('Content-Type: application/pdf');
 		header('Content-Disposition: attachment; filename="file.pdf"');
-		echo $snappy->getOutput(url('/quotations/'. $id .'/pdfhtml'));
+		echo $snappy->getOutput('http://www.github.com');
 
 		// $quotation = Quotation::find($id);
 		// $html = View::make('pdfs.quotation', compact('quotation'));
