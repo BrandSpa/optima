@@ -16,7 +16,7 @@ const Pdf = React.createClass({
 		return (
 			<div>
 				<h1>Render a pdf is the work</h1>
-					<span>{this.state.errors ? 'errors' : 'ne'}</span>
+					<span>{this.props.errors ? 'errors' : 'ne'}</span>
 				{quoNodes}
 			</div>
 		)
