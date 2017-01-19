@@ -56,12 +56,16 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
+	var _axios = __webpack_require__(35);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	__webpack_require__(531);
 
 	var quotations = [];
-	request.get('/api/v1/quotations').then(function (res) {
+	_axios2.default.get('/api/v1/quotations').then(function (res) {
 	      return quotations = res.data;
 	});
 	(0, _reactDom.render)(_react2.default.createElement(_index2.default, { quotations: quotations }), document.getElementById("pdf"));
@@ -23301,10 +23305,6 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(35);
-
-	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
