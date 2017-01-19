@@ -9,7 +9,7 @@ const Pdf = React.createClass({
 
 	render() {
 		const quoNodes = this.props.items.map(quo => {
-			return <div>{quo.id}</div>
+			return <div key={quo.id}>{quo.id}</div>
 		});
 
 		return (
