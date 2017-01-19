@@ -60,8 +60,11 @@
 
 	__webpack_require__(531);
 
-
-	(0, _reactDom.render)(_react2.default.createElement(_index2.default, null), document.getElementById("pdf"));
+	var quotations = [];
+	request.get('/api/v1/quotations').then(function (res) {
+	      return quotations = res.data;
+	});
+	(0, _reactDom.render)(_react2.default.createElement(_index2.default, { quotations: quotations }), document.getElementById("pdf"));
 
 /***/ },
 /* 1 */
@@ -23307,23 +23310,14 @@
 
 	var Pdf = _react2.default.createClass({
 		displayName: 'Pdf',
-		getInitialState: function getInitialState() {
+		getDefaultProps: function getDefaultProps() {
 			return {
 				quotations: [{ id: 1 }, { id: 2 }],
 				errors: false
 			};
 		},
-		componentWillMount: function componentWillMount() {
-			var _this = this;
-
-			_axios2.default.get('/api/v1/quotations').then(function (res) {
-				return _this.setState({ quotations: res.data });
-			}).catch(function (err) {
-				return _this.setState({ errors: true });
-			});
-		},
 		render: function render() {
-			var quoNodes = this.state.quotations.map(function (quo) {
+			var quoNodes = this.props.quotations.map(function (quo) {
 				return _react2.default.createElement(
 					'div',
 					{ key: quo.id },
