@@ -1,7 +1,8 @@
 <?php
-use Optima\Pdf\QuotationPdf as Pdf;
+use Optima\Pdf\QuotationPdf as DOMPDF;
 use Optima\Quotation;
 use Carbon\Carbon;
+use Knp\Snappy\Pdf;
 
 class QuotationsController extends BaseController {
 
@@ -9,7 +10,7 @@ class QuotationsController extends BaseController {
 	protected $quotation;
 	protected $pdf;
 
-	public function __construct ( PDF $pdf, Quotation $quotation )	
+	public function __construct ( DOMPDF $pdf, Quotation $quotation )	
 	{ 
 		$this->quotation = $quotation; 
 		$this->pdf = $pdf; 
@@ -28,8 +29,7 @@ class QuotationsController extends BaseController {
 	public function getPdf($id)
 	{
 		$quotation = $this->quotation->find($id);
-		$html = View::make('pdfs.quotation', compact('quotation'));
-		return $html;
+		return View::make('pdfs.quotation', compact('quotation'));
 	}
 
 	public function Showpdf($id, $hash)
@@ -56,6 +56,28 @@ class QuotationsController extends BaseController {
 		$html = View::make('pdfs.quotation_logos', compact('quotation'));
 
 		return $this->pdf->show($html);
+	}
+
+	public function wkpdf($id) {
+		$snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+		// $snappy->setOption('footer-font-name', 'Nunito');
+		$snappy->setOption('footer-font-size', '9');
+		$snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
+		header('Content-Type: application/pdf');
+		header('Content-Disposition: attachment; filename="file.pdf"');
+		echo $snappy->getOutput('http://localhost:8000/quotations/37215/pdfhtml');
+
+		// $quotation = Quotation::find($id);
+		// $html = View::make('pdfs.quotation', compact('quotation'));
+		// $file = 'quo-'. $id .'.pdf';
+		// try {
+		// 	unlink('public/' . $file);
+		// } catch(Exception $e) {
+
+		// }
+		
+		// $snappy->generateFromHtml($html, 'public/' . $file);
+		// return Redirect::to('/' . $file);
 	}
 
 	public function duplicate($id)
