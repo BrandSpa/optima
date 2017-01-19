@@ -65,7 +65,7 @@ class QuotationsController extends BaseController {
 		// $snappy->setOption('footer-font-size', '9');
 		// $snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
 		header('Content-Type: application/pdf');
-		echo $snappy->getOutput('http://www.github.com');
+		echo $snappy->getOutput('http://react.avante.cc/quotations/39572/pdfhtml');
 
 		// $quotation = Quotation::find($id);
 		// $html = View::make('pdfs.quotation', compact('quotation'));
