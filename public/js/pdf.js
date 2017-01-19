@@ -65,7 +65,7 @@
 	__webpack_require__(531);
 
 	var quotations = [];
-	_axios2.default.get('/api/v1/quotations').then(function (res) {
+	_axios2.default.get('/api/v1/quotations', { responseType: 'text' }).then(function (res) {
 	      return quotations = res.data;
 	});
 
