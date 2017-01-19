@@ -53,7 +53,15 @@
 @stop
 
 <canvas id="myChart" width="400" height="400"></canvas>
+<script>
 
+	Function.prototype.bind = Function.prototype.bind || function (thisp) {
+    var fn = this;
+    return function () {
+        return fn.apply(thisp, arguments);
+    };
+};
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script>
 var ctx = document.getElementById("myChart");
