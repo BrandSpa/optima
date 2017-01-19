@@ -61,9 +61,8 @@ class QuotationsController extends BaseController {
 
 	public function wkpdf($id) {
 		$snappy = new Pdf(base_path() . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
-		$snappy->setOption('enable-javascript', true);
-		$snappy->setOption('debug-javascript', true);
-		$snappy->setOption('javascript-delay', 1000);
+		// $snappy->setOption('enable-javascript', true);
+		$snappy->setOption('javascript-delay', 10000);
 
 		// $snappy->setOption('footer-font-name', 'Nunito');
 		// $snappy->setOption('footer-font-size', '9');
