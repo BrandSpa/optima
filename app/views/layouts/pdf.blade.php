@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<meta charset="utf-8">
-	<title>Document</title>
 	<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 	<link rel="stylesheet" href="[[ public_path().'/css/pdf/pdf.css' ]]">
 
-</head>
-<body>
 @section('custom_css')
 
 @show

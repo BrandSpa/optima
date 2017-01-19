@@ -29,7 +29,8 @@ class QuotationsController extends BaseController {
 	public function getPdf($id)
 	{
 		$quotation = $this->quotation->find($id);
-		return View::make('pdfs.quotation', compact('quotation'));
+		$html = View::make('pdfs.quotation', compact('quotation'));
+		return $html;
 	}
 
 	public function Showpdf($id, $hash)
@@ -60,7 +61,7 @@ class QuotationsController extends BaseController {
 
 	public function wkpdf($id) {
 		$snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
-		// $snappy->setOption('footer-font-name', 'Nunito');
+		$snappy->setOption('footer-font-name', 'Nunito');
 		$snappy->setOption('footer-font-size', '9');
 		$snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
 		header('Content-Type: application/pdf');
