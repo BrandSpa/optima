@@ -8,7 +8,7 @@ const Pdf = React.createClass({
 		}
 	},
 
-	componentDidMount() {
+	componentWillMount() {
 		request
       .get('/api/v1/quotations')
 			.then(res => this.setState({quotations: res.data}))
