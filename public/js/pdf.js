@@ -27343,7 +27343,7 @@
 			var quoNodes = this.props.items.map(function (quo) {
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ key: quo.id },
 					quo.id
 				);
 			});
