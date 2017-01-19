@@ -7,6 +7,6 @@ let quotations = [{id: 1}, {id: 2}];
 
 request
 	.get('/api/v1/quotations', {responseType: 'text' })
-	.then(res => quotations = res.data);
+	.then(res => console.log(res));
 
 render( <Pdf quotations={quotations} />, document.getElementById("pdf"));
