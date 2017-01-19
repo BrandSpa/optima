@@ -1,9 +1,9 @@
 'use strict';
 import React from 'react';
+import {render} from 'react-dom';
 import page from 'page';
 import axios from 'axios';
 import {Provider} from 'react-redux';
-import {render} from 'react-dom';
 import store from './store';
 import App from './views/app';
 import Dashboard from 'views/quotations/dashboard';
