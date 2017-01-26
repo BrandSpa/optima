@@ -163,6 +163,14 @@
 	.list-item {
 		list-style: none;
 	}
+
+	.my-tooltip {
+		background: #fff;
+		box-shadow: 0 0 5px rgba(0,0,0, .3);
+		padding: 10px;
+		min-width: 200px;
+		z-index: 1030;
+	}
 	</style>
 
 </head>

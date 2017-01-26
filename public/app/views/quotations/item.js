@@ -1,6 +1,8 @@
 'use strict';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Timeago from '../../components/timeago';
+import Tooltip from '../../components/tooltip';
 
 export default React.createClass({
   getDefaultProps() {
@@ -18,6 +20,21 @@ export default React.createClass({
       contact: {},
       todos: []
     }
+  },
+
+  getInitialState() {
+    return {
+      showTooltip: false
+    }
+  },
+
+  componentDidMount() {
+    this.setState({reference: ReactDOM.findDOMNode(this)});
+  },
+
+  toogleTooltip(e) {
+    e.preventDefault();
+    this.setState({showTooltip: !this.state.showTooltip});
   },
 
   render() {
@@ -50,8 +67,20 @@ export default React.createClass({
       <td>{advisor}</td>
       <td>{client_type}</td>
       <td>{type}</td>
-      <td>{company.name}</td>
-      <td>{`${contact.name} ${contact.lastname}`}</td>
+      <td 
+        style={{position: 'relative'}} 
+        onMouseOver={this.toogleTooltip} 
+        onMouseOut={this.toogleTooltip}>
+        {company.name}
+        <Tooltip show={this.state.showTooltip} >
+        <ul>
+          {company.address ? <li>{company.address}</li> : ''}
+          {company.nit ? <li>{company.nit}</li> : '' }
+          {company.phone ? <li>{company.phone}</li> : '' }
+        </ul>
+        </Tooltip>
+      </td>
+      <td >{`${contact.name} ${contact.lastname}`}</td>
       <td>{created_at} por {user.name}</td>
       <td><span className={`center priority priority--${priority > 0 ? priority : 1}`}></span></td>
       <td>{todos.length}</td>
@@ -60,6 +89,7 @@ export default React.createClass({
         <a href={`/quotations/${id}/pdfbn`} target="_blank" > PDF BN</a> •
         <a href={`/quotations/${id}/pdflogos`} target="_blank"> PDF con logos</a>
       </td>
+      
     </tr>
     )
   }

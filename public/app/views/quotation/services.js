@@ -69,6 +69,7 @@ const quoServices = React.createClass({
           >
           Editar
           </button>
+          
           <button
             className="btn btn-default btn-sm"
             onClick={this.handleDelete.bind(null, service.id)}
