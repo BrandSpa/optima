@@ -274,6 +274,7 @@ const quotationSection = React.createClass({
           />
 
           <Services
+            {...this.props}
             quotationId={quotation.id}
             disabled={this.state.disabled}
             setActivity={this.setActivity}

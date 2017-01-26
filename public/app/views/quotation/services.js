@@ -2,9 +2,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Form from '../services/form_create';
-import * as quoAction from 'actions/quotations';
-import * as action from 'actions/services';
-import * as acitivityAction from 'actions/activities';
+import * as quoAction from '../../actions/quotations';
+import * as action from '../../actions/services';
+import * as acitivityAction from '../../actions/activities';
 
 const quoServices = React.createClass({
   getInitialState() {
@@ -60,7 +60,7 @@ const quoServices = React.createClass({
     const options = this.props.services.items.map(opt => ({ value: opt.id, label: opt.title }));
 
     const serviceNodes = this.props.quotations.services.map(service => 
-      <tr key={service.id}>
+      <tr key={service.id} className="quotation-service">
         <td>{service.title}</td>
         <td>
           <button 
@@ -137,4 +137,4 @@ const quoServices = React.createClass({
   }
 });
 
-export default connect(store => store)(quoServices);
+export default quoServices;
