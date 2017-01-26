@@ -75204,11 +75204,11 @@
 	          quotationId: quotation.id,
 	          disabled: this.state.disabled
 	        })),
-	        _react2.default.createElement(_services3.default, {
+	        _react2.default.createElement(_services3.default, _extends({}, this.props, {
 	          quotationId: quotation.id,
 	          disabled: this.state.disabled,
 	          setActivity: this.setActivity
-	        }),
+	        })),
 	        _react2.default.createElement(_status2.default, _extends({}, this.props, {
 	          quotation: quotation,
 	          handleOpenNoEffective: this.handleShowNoEffective,
@@ -77422,7 +77422,7 @@
 	    var serviceNodes = this.props.quotations.services.map(function (service) {
 	      return _react2.default.createElement(
 	        'tr',
-	        { key: service.id },
+	        { key: service.id, className: 'quotation-service' },
 	        _react2.default.createElement(
 	          'td',
 	          null,
@@ -77554,9 +77554,7 @@
 	  }
 	});
 
-	exports.default = (0, _reactRedux.connect)(function (store) {
-	  return store;
-	})(quoServices);
+	exports.default = quoServices;
 
 /***/ },
 /* 506 */

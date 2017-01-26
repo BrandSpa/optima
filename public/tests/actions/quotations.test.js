@@ -142,7 +142,7 @@ describe('quotations async actions', () => {
 		const stubResponse = {id};
 		const expectedActions = {type: `${TYPE}_REMOVE_SERVICE`, payload: {id}};
 		
-		moxios.stubRequest(`api/v1/services/${id}?quotation_id=${quotationId}`, {
+		moxios.stubRequest(`/api/v1/services/${id}?quotation_id=${quotationId}`, {
 			status: 200,
       response: stubResponse
 		});

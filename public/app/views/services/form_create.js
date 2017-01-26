@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Editor from 'components/editor';
+import Editor from '../../components/editor';
 
 const serviceForm = React.createClass({
   getInitialState() {
