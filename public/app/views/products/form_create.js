@@ -128,7 +128,7 @@ const productForm = React.createClass({
         </div>
 
         <div className="form-group col-md-6">
-          <label >RAM</label>
+          <label>RAM</label>
           <input
             type="text"
             className="form-control"
@@ -163,7 +163,8 @@ const productForm = React.createClass({
             type="text"
             className="form-control"
             onChange={this.handleChangeInput.bind(null, 'network_card')}
-            value={product.network_card}/>
+            value={product.network_card}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -173,7 +174,8 @@ const productForm = React.createClass({
             type="text"
             className="form-control"
             onChange={this.handleChangeInput.bind(null, 'battery')}
-            value={product.battery}/>
+            value={product.battery}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -183,7 +185,8 @@ const productForm = React.createClass({
             type="text"
             className="form-control"
             onChange={this.handleChangeInput.bind(null, 'monitor')}
-            value={product.monitor}/>
+            value={product.monitor}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -193,7 +196,8 @@ const productForm = React.createClass({
             type="text"
             className="form-control"
             onChange={this.handleChangeInput.bind(null, 'keyboard')}
-            value={product.keyboard}/>
+            value={product.keyboard}
+          />
         </div>
 
         <div className="form-group col-md-6">
@@ -380,9 +384,13 @@ const productForm = React.createClass({
             value={product.spaces} 
           />
         </div>
-          <div className="alert alert-danger col-md-12" style={this.props.errors.length ? {} : {display: 'none'}}>
-            {this.props.errors}
-          </div>
+
+        <div 
+          className="alert alert-danger col-md-12" 
+          style={this.props.errors.length ? {} : {display: 'none'}}
+        >
+          {this.props.errors}
+        </div>
 
         <div className="form-group col-xs-12">
           <button className="btn btn-primary btn-sm pull-right">Guardar</button>

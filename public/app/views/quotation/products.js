@@ -24,8 +24,6 @@ export default React.createClass({
   },
 
   _handleSubmit(product) {
-    let position = this.props.products.items.length > 0 ? this.props.products.items.length + 1 : 0;
-    product = {...product, position};
     this.setState({product});
 
     if(product.id) {

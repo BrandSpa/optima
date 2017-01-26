@@ -1,19 +1,29 @@
 body {
-		font-family: 'Nunito', sans-serif;
+		font-family: 'nunitoregular';
+    font-weight: normal;
 		padding: 0;
 		height: 100%;
-		font-size: 10pt;
-		line-height: 12pt;
+		font-size: 14px;
+		line-height: 12px;
 }
 
 b, h1, h2, h3, h4 {
   color: #111111;
-  font-weight: 600;
+  font-weight: bold;
 }
 
- .page {
+p {
+  font-family: 'nunitoregular';
+  font-weight: normal;
+}
+
+.page {
   overflow: hidden;
   page-break-after: always;
+}
+
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
 }
 
 #header img {
@@ -22,23 +32,26 @@ b, h1, h2, h3, h4 {
 
 #header span {
   position: absolute;
-  top: 203pt;
+  top: 260px;
   right: 55px;
   display: block;
   color: white;
-  font-size: 22pt;
+  font-size: 22px;
 }
 
 #content {
-  display: block;
   margin: 0 15px 0 15px;
-  font-size: 11pt;
-  line-height: 9pt;
+  font-size: 11px;
+  line-height: 9px;
+}
+
+#welcome {
+  margin: 0 15px 0 15px;
 }
 
 .date {
   padding-bottom: 30px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 #contact {
@@ -48,44 +61,44 @@ b, h1, h2, h3, h4 {
 
 #contact p {
   margin: 5px;
-  font-size: 12pt;
+  font-size: 14px;
   line-height: 20px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 #intro {
   margin: 0 0 0 20px;
-  width: 500pt;
-  font-size: 16px;
-  line-height: 20px;
+
 }
 
 #intro p{
   padding-bottom: 15px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
 }
 
 table {
-  margin: 0 3px 25px 23px;
+	width: 100%;
+  margin: 0 0 25px 0;
   padding-bottom: 0;
-  width: 520pt;
   border-top: 1px solid #fff;
   border-bottom: none;
   empty-cells: show;
 }
 
-
 table td {
   margin: 0;
-  padding: 3pt;
+  padding: 3px;
   border-top: 1px solid #eaab20;
   border-right: 1px solid #eaab20;
   color: black;
-  font-size: 10pt;
+  font-size: 14px;
   line-height: 13px;
 }
 
 td.img-product {
-  padding: 15px 5pt 7pt 0;
+  padding: 15px 5px 7px 0;
   font-size: 16px;
 }
 
@@ -104,7 +117,7 @@ td img{
 
 .title {
   color: #111111;
-  font-weight: 600;
+  font-weight: bold;
   padding-bottom: 15px;
 }
 
@@ -115,12 +128,12 @@ td img{
 
 #banner_includes{
   margin: 15px 0 15px 15px;
-  width: 520pt;
+  width: 520px;
 }
 
 #banner {
   margin: 15px 0 15px 20px;
-  width: 510pt;
+  width: 510px;
 }
 
 #firm{
@@ -139,30 +152,34 @@ td img{
 }
 
 #observacion {
-  margin: 15px 0 15px 15pt;
+  margin: 15px 0 15px 15px;
   padding: 0 0 0 15px;
-  width: 510pt;
+  width: 510px;
 }
 
 #observacion span {
   display: block;
   margin: 0 0 15px -15px;
   padding: 0 0 25px 0;
-  width: 505pt;
+  width: 505px;
   border-bottom: 1px solid #eaab20;
-  font-size: 14pt;
-  line-height: 15pt;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.service {
+  page-break-inside: avoid !important;
 }
 
 .services {
-  margin: 0 10pt 15px 15pt;
-  width: 515pt;
+  margin: 0 10px 15px 15px;
+  width: 515px;
  font-size: 14px;
 }
 
 .service_title {
   margin: 0;
-  font-size: 12pt;
+  font-size: 12px;
 }
 
 .divide {
@@ -174,18 +191,16 @@ td img{
 }
 
 
-
 .divider {
-  display: block;
-  width: 500pt;
+  width: 100%;
   height: 15px;
   margin-bottom: 15px;
-  margin-left: 30px;
   border-bottom: 1px solid #ebab21;
 }
 
-.service-title{
-  font-weight: 600;
+.service-title {
+  font-weight: bold;
+  width: 100%;
 }
 
 .service-img{
@@ -194,17 +209,15 @@ td img{
 }
 
 .service-title span{
+  padding-top: 15px;
   display: inline-block;
-  width: 500px;
-  height: auto;
-  margin-top: 3px;
   font-size: 14px;
+  vertical-align: top;
 }
 
 .service-content{
-  width: 500pt;
   display: block;
- margin: 0 0 0 30px;
+ margin: 0 0 0 0;
 }
 
 .service-content ul, ol{
@@ -227,7 +240,7 @@ td img{
 }
 
 .price {
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .text-right{
@@ -256,7 +269,7 @@ background: #ddd;
 
 .comment-title{
   margin-left: 30px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .comment-content {

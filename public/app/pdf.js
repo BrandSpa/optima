@@ -4,10 +4,14 @@ import {render} from 'react-dom';
 import Pdf from './pdf/index';
 import request from 'axios';
 let quotations = [{id: 1}, {id: 2}];
+let data = document.getElementById("pdf").dataset.quotation;
 
-request
-	.get('/api/v1/quotations', {responseType: 'text' })
-	.then(res => {
-		render( <Pdf quotations={res.data} />, document.getElementById("pdf"));
-	});
+try {
+	data = JSON.parse( data.replace(/font-family: "Stratum2 Regular","serif";/g, '') );
+} catch(e) {
+
+}
+
+render( <Pdf quotation={data} />, document.getElementById("pdf"));
+	
 
