@@ -196,11 +196,6 @@ const quotationSection = React.createClass({
     return (
       <div id={`quotation-${quotation.id}`}>
         
-        <Alert 
-          show={this.props.quotations.errors.length ? true : false}
-          message={this.props.quotations.errors} 
-        />
-
       <div className="col-md-12">
         <div className="panel">
           <div className="panel-body quo-header">

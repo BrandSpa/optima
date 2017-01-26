@@ -28,7 +28,7 @@ class QuotationsController extends BaseController {
 
 	public function getPdf($id)
 	{
-		$quotation = $this->quotation->find($id);
+		$quotation = $this->quotation->with(['company', 'contact', 'products', 'services', 'user'])->find($id)->toArray();
 		$html = View::make('layouts.pdf_react', compact('quotation'));
 		return $html;
 	}
@@ -62,26 +62,17 @@ class QuotationsController extends BaseController {
 	public function wkpdf($id) {
 		// $snappy = new Pdf(base_path() . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
 		$snappy = new Pdf('wkhtmltopdf');
-		$snappy->setOption('javascript-delay', 3000);
-
-		// $snappy->setOption('footer-font-name', 'Nunito');
-		// $snappy->setOption('footer-font-size', '9');
-		// $snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
+		// $snappy->setOption('javascript-delay', 3000);
+		$snappy->setOption( 'lowquality' , false);
+		$snappy->setOption('footer-font-name', 'Nunito');
+		$snappy->setOption('footer-font-size', '10');
+		$snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
+		// $snappy->setOption('page-size', 'Letter');
 
 		header('Content-Type: application/pdf');
-		echo $snappy->getOutput('http://react.avante.cc/quotations/39572/pdfhtml');
-
-		// $quotation = Quotation::find($id);
-		// $html = View::make('pdfs.quotation', compact('quotation'));
-		// $file = 'quo-'. $id .'.pdf';
-		// try {
-		// 	unlink('public/' . $file);
-		// } catch(Exception $e) {
-
-		// }
-		
-		// $snappy->generateFromHtml($html, 'public/' . $file);
-		// return Redirect::to('/' . $file);
+		// header('Content-Disposition: attachment; filename="file.pdf"');
+		// echo 'http://localhost:8000/quotations/'. $id .'/pdfhtml';
+		echo $snappy->getOutput('http://localhost:4040/quotations/'.  $id .'/pdfhtml');
 	}
 
 	public function duplicate($id)

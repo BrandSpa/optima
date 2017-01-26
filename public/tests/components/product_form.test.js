@@ -7,6 +7,7 @@ describe('test product form component', () => {
 		let fnMock = jest.fn();
 		let wrapper = shallow(<ProductForm onSubmit={fnMock} />);
 		let preventDefault = () => false;
+		
 		wrapper.find('input').at(0).simulate('change', {preventDefault, currentTarget: {value: 'I7'}});
 		wrapper.find('input').at(1).simulate('change', {preventDefault, currentTarget: {value: '4GB'}});
 		wrapper.find('input').at(2).simulate('change', {preventDefault, currentTarget: {value: '1TB'}});

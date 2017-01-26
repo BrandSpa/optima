@@ -147,15 +147,15 @@
 			@if($product->lapse == 1 && $product->period == "Semana")
 			[[ " a 7 días" ]]
 			@else
-			@if($product->lapse  > 1)
-			@if($product->period == "Mes")
-			[["Meses"]]
-			@else
-			[[str_finish($product->period, 's')]]
-			@endif
-			@else
-			[[ $product->period ]]
-			@endif
+				@if($product->lapse  > 1)
+					@if($product->period == "Mes")
+						[["Meses"]]
+					@else
+						[[str_finish($product->period, 's')]]
+					@endif
+				@else
+					[[ $product->period ]]
+				@endif
 			@endif
 		</td>
 	</tr>

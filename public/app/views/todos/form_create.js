@@ -117,7 +117,7 @@ const todoForm = React.createClass({
         </div>
         
         <div className="form-group col-md-12">
-          <label for="">Cliente</label>
+          <label>Cliente</label>
           <input 
             type="text" 
             className="form-control" 

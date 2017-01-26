@@ -62,7 +62,7 @@ export function updateService(service) {
 export function removeService(id, quotation_id) {
   return dispatch => { 
     return request
-    .delete(`api/v1/services/${id}`, {params: {quotation_id}} )
+    .delete(`/api/v1/services/${id}`, {params: {quotation_id}} )
     .then(res => dispatch({ type: `${TYPE}_REMOVE_SERVICE`, payload: res.data}))
     .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
   }

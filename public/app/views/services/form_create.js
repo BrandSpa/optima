@@ -43,7 +43,7 @@ const serviceForm = React.createClass({
 
   render() {
     let service = this.state.service;
-    console.log(service);
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group col-md-12">
