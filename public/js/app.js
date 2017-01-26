@@ -80158,7 +80158,7 @@
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'my-tooltip', style: this.state.show ? { display: 'block', position: 'absolute', 'right': '-225px', 'top': 0 } : { display: 'none' } },
+				{ className: 'my-tooltip', style: this.state.show ? { display: 'block', position: 'absolute', 'right': '-200px', 'top': 0 } : { display: 'none' } },
 				this.props.children
 			);
 		}

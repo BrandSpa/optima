@@ -19,7 +19,7 @@ const Tooltip = React.createClass({
 
 	render() {
 		return (
-				<div className="my-tooltip" style={this.state.show ? {display: 'block', position: 'absolute', 'right': '-225px', 'top': 0} : {display: 'none'}}>
+				<div className="my-tooltip" style={this.state.show ? {display: 'block', position: 'absolute', 'right': '-200px', 'top': 0} : {display: 'none'}}>
 					{this.props.children}
 				</div>
 		)
