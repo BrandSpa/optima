@@ -37,6 +37,13 @@ export default React.createClass({
     this.setState({showTooltip: !this.state.showTooltip});
   },
 
+  showStatusCase() {
+    const {quotation} = this.props;
+    if(quotation.status_cause && quotation.status == 'No efectiva') return quotation.status_cause;
+    if(quotation.status_cause && quotation.status == 'No enviada') return quotation.status_cause;
+    return '';
+  },
+
   render() {
     const {quotation} = this.props;
     
@@ -60,14 +67,14 @@ export default React.createClass({
       <td><a href={`/quotations/${id}`}>{id}</a></td>
       <td>
         <span className={`label label-${status.replace(' ', '_')}`}>
-          {status} {quotation.status_cause ? quotation.status_cause : ''}
+          {status} {this.showStatusCase()}
         </span>
         {rethink_from ? <a className="label label-Replanteada" href={`/quotations/${rethink_from}`}>{rethink_from}</a> : ""}
       </td>
       <td>{advisor}</td>
       <td>{client_type}</td>
       <td>{type}</td>
-      <td 
+      <td
         style={{position: 'relative'}} 
         onMouseOver={this.toogleTooltip} 
         onMouseOut={this.toogleTooltip}>
@@ -89,7 +96,6 @@ export default React.createClass({
         <a href={`/quotations/${id}/pdfbn`} target="_blank" > PDF BN</a> •
         <a href={`/quotations/${id}/pdflogos`} target="_blank"> PDF con logos</a>
       </td>
-      
     </tr>
     )
   }

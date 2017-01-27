@@ -30524,6 +30524,13 @@
 	    e.preventDefault();
 	    this.setState({ showTooltip: !this.state.showTooltip });
 	  },
+	  showStatusCase: function showStatusCase() {
+	    var quotation = this.props.quotation;
+
+	    if (quotation.status_cause && quotation.status == 'No efectiva') return quotation.status_cause;
+	    if (quotation.status_cause && quotation.status == 'No enviada') return quotation.status_cause;
+	    return '';
+	  },
 	  render: function render() {
 	    var quotation = this.props.quotation;
 	    var id = quotation.id,
@@ -30560,7 +30567,7 @@
 	          { className: 'label label-' + status.replace(' ', '_') },
 	          status,
 	          ' ',
-	          quotation.status_cause ? quotation.status_cause : ''
+	          this.showStatusCase()
 	        ),
 	        rethink_from ? _react2.default.createElement(
 	          'a',
@@ -76793,6 +76800,7 @@
 	        note: '',
 	        spaces: ''
 	      },
+	      additional: false,
 	      errors: []
 	    };
 	  },
@@ -76815,8 +76823,9 @@
 	    e.preventDefault();
 	    var val = e.currentTarget.value;
 	    var product = _extends({}, this.state.product, _defineProperty({}, field, val));
+	    var additional = field == 'name' && val == 'Adicional' || val == 'Complements' ? true : false;
 	    if (field == 'price' || field == 'quantity' || field == 'lapse') product = this.getTotal(product);
-	    this.setState({ product: product });
+	    this.setState({ product: product, additional: additional });
 	  },
 	  handleChangeCheckbox: function handleChangeCheckbox(field, e) {
 	    var val = e.currentTarget.checked;
@@ -76876,174 +76885,178 @@
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'form-group col-md-6' },
+	        { className: this.state.additional ? "additional-hide hide" : "" },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Procesador'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Procesador'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            className: 'form-control input-processor',
+	            onChange: this.handleChangeInput.bind(null, 'processor'),
+	            value: product.processor
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          className: 'form-control input-processor',
-	          onChange: this.handleChangeInput.bind(null, 'processor'),
-	          value: product.processor
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'RAM'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'RAM'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'ram'),
+	            value: product.ram })
 	        ),
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'ram'),
-	          value: product.ram })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Disco duro'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Disco duro'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'hdd'),
+	            value: product.hdd
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'hdd'),
-	          value: product.hdd
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Unidad optica'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Unidad optica'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'burner'),
+	            value: product.burner
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'burner'),
-	          value: product.burner
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Tarjeta de red'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Tarjeta de red'
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'network_card',
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'network_card'),
+	            value: product.network_card
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          ref: 'network_card',
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'network_card'),
-	          value: product.network_card
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Bater\xEDa'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Bater\xEDa'
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'battery',
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'battery'),
+	            value: product.battery
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          ref: 'battery',
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'battery'),
-	          value: product.battery
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Monitor'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Monitor'
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'monitor',
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'monitor'),
+	            value: product.monitor
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          ref: 'monitor',
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'monitor'),
-	          value: product.monitor
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Teclado y mouse'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Teclado y mouse'
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'keyboard',
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'keyboard'),
+	            value: product.keyboard
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          ref: 'keyboard',
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'keyboard'),
-	          value: product.keyboard
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Sistema operativo'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Sistema operativo'
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'os',
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'os'),
+	            value: product.os
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          ref: 'os',
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'os'),
-	          value: product.os
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Office'
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Office'
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'office',
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'office'),
+	            value: product.office
+	          })
 	        ),
-	        _react2.default.createElement('input', {
-	          ref: 'office',
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'office'),
-	          value: product.office
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'form-group col-md-6' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Antivirus'
-	        ),
-	        _react2.default.createElement('input', {
-	          ref: 'antivirus',
-	          type: 'text',
-	          className: 'form-control',
-	          onChange: this.handleChangeInput.bind(null, 'antivirus'),
-	          value: product.antivirus
-	        })
+	          'div',
+	          { className: 'form-group col-md-6' },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Antivirus'
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'antivirus',
+	            type: 'text',
+	            className: 'form-control',
+	            onChange: this.handleChangeInput.bind(null, 'antivirus'),
+	            value: product.antivirus
+	          })
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',

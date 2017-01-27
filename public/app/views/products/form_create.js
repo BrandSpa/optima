@@ -39,6 +39,7 @@ const productForm = React.createClass({
         note: '',
         spaces: ''
       },
+      additional: false,
       errors: []
     };
   },
@@ -65,8 +66,9 @@ const productForm = React.createClass({
     e.preventDefault();
     let val = e.currentTarget.value;
     let product = {...this.state.product, [field]: val};
+    let additional = field == 'name' && val == 'Adicional' || val == 'Complements' ?  true : false;
     if(field == 'price' || field == 'quantity' || field == 'lapse') product = this.getTotal(product);
-    this.setState({product});
+    this.setState({product, additional: additional});
   },
 
   handleChangeCheckbox(field, e) {
@@ -116,123 +118,123 @@ const productForm = React.createClass({
             value={product.type}
           />
         </div>
+        <div className={this.state.additional ? "additional-hide hide" : ""}>
+          <div className="form-group col-md-6">
+            <label >Procesador</label>
+            <input
+              type="text"
+              className="form-control input-processor"
+              onChange={this.handleChangeInput.bind(null, 'processor')}
+              value={product.processor}
+            />
+          </div>
 
-        <div className="form-group col-md-6">
-          <label >Procesador</label>
-          <input
-            type="text"
-            className="form-control input-processor"
-            onChange={this.handleChangeInput.bind(null, 'processor')}
-            value={product.processor}
-          />
+          <div className="form-group col-md-6">
+            <label>RAM</label>
+            <input
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'ram')}
+              value={product.ram}/>
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Disco duro</label>
+            <input
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'hdd')}
+              value={product.hdd}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Unidad optica</label>
+            <input
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'burner')}
+              value={product.burner}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Tarjeta de red</label>
+            <input
+              ref="network_card"
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'network_card')}
+              value={product.network_card}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Batería</label>
+            <input
+              ref="battery"
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'battery')}
+              value={product.battery}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Monitor</label>
+            <input
+              ref="monitor"
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'monitor')}
+              value={product.monitor}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Teclado y mouse</label>
+            <input
+              ref="keyboard"
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'keyboard')}
+              value={product.keyboard}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Sistema operativo</label>
+            <input
+              ref="os"
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'os')}
+              value={product.os}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Office</label>
+            <input
+              ref="office"
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'office')}
+              value={product.office}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label >Antivirus</label>
+            <input
+              ref="antivirus"
+              type="text"
+              className="form-control"
+              onChange={this.handleChangeInput.bind(null, 'antivirus')}
+              value={product.antivirus}
+            />
+          </div>
         </div>
-
-        <div className="form-group col-md-6">
-          <label>RAM</label>
-          <input
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'ram')}
-            value={product.ram}/>
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Disco duro</label>
-          <input
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'hdd')}
-            value={product.hdd}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Unidad optica</label>
-          <input
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'burner')}
-            value={product.burner}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Tarjeta de red</label>
-          <input
-            ref="network_card"
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'network_card')}
-            value={product.network_card}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Batería</label>
-          <input
-            ref="battery"
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'battery')}
-            value={product.battery}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Monitor</label>
-          <input
-            ref="monitor"
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'monitor')}
-            value={product.monitor}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Teclado y mouse</label>
-          <input
-            ref="keyboard"
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'keyboard')}
-            value={product.keyboard}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Sistema operativo</label>
-          <input
-            ref="os"
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'os')}
-            value={product.os}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Office</label>
-          <input
-            ref="office"
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'office')}
-            value={product.office}
-          />
-        </div>
-
-        <div className="form-group col-md-6">
-          <label >Antivirus</label>
-          <input
-            ref="antivirus"
-            type="text"
-            className="form-control"
-            onChange={this.handleChangeInput.bind(null, 'antivirus')}
-            value={product.antivirus}
-          />
-        </div>
-
         <div className="form-group col-md-6">
           <label >Adicional</label>
           <input
