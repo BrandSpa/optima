@@ -79293,7 +79293,7 @@
 	            company.contacts.map(function (contact) {
 	              return _react2.default.createElement(
 	                'tr',
-	                null,
+	                { key: contact.id },
 	                _react2.default.createElement(
 	                  'td',
 	                  null,
