@@ -20,8 +20,9 @@ const Tooltip = React.createClass({
 		let showStyle = {
 			display: 'block', 
 			position: 'absolute', 
-			right: '-200px', 
-			top: 0
+			right: '-200px',
+			fontSize: '10px',
+			top: '-10%'
 		};
 
 		let hideStyle = {display: 'none'};

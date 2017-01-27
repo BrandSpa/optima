@@ -30595,20 +30595,20 @@
 	          { show: this.state.showTooltip },
 	          _react2.default.createElement(
 	            'ul',
-	            null,
+	            { className: 'list-group' },
 	            company.address ? _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'list-group-item' },
 	              company.address
 	            ) : '',
 	            company.nit ? _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'list-group-item' },
 	              company.nit
 	            ) : '',
 	            company.phone ? _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'list-group-item' },
 	              company.phone
 	            ) : ''
 	          )
@@ -80159,7 +80159,8 @@
 				display: 'block',
 				position: 'absolute',
 				right: '-200px',
-				top: 0
+				fontSize: '10px',
+				top: '-10%'
 			};
 
 			var hideStyle = { display: 'none' };

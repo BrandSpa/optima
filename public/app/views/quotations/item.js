@@ -73,11 +73,11 @@ export default React.createClass({
         onMouseOut={this.toogleTooltip}>
         {company.name}
         <Tooltip show={this.state.showTooltip} >
-        <ul>
-          {company.address ? <li>{company.address}</li> : ''}
-          {company.nit ? <li>{company.nit}</li> : '' }
-          {company.phone ? <li>{company.phone}</li> : '' }
-        </ul>
+          <ul className="list-group">
+            {company.address ? <li className="list-group-item">{company.address}</li> : ''}
+            {company.nit ? <li className="list-group-item">{company.nit}</li> : '' }
+            {company.phone ? <li className="list-group-item">{company.phone}</li> : '' }
+          </ul>
         </Tooltip>
       </td>
       <td >{`${contact.name} ${contact.lastname}`}</td>
