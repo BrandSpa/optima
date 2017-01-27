@@ -165,11 +165,13 @@
 	}
 
 	.my-tooltip {
-		background: #fff;
-		box-shadow: 0 0 5px rgba(0,0,0, .3);
-		padding: 10px;
+		background: #f9f9f9;
+		box-shadow: 0 0 10px rgba(0,0,0, .2);
+		padding: 7px 7px 0 7px;
 		width: 200px;
 		z-index: 1030;
+		border-radius: 3px;
+		transition: all 300ms;
 	}
 	</style>
 

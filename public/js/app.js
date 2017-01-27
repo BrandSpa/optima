@@ -30595,20 +30595,20 @@
 	          { show: this.state.showTooltip },
 	          _react2.default.createElement(
 	            'ul',
-	            null,
+	            { className: 'list-group' },
 	            company.address ? _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'list-group-item' },
 	              company.address
 	            ) : '',
 	            company.nit ? _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'list-group-item' },
 	              company.nit
 	            ) : '',
 	            company.phone ? _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'list-group-item' },
 	              company.phone
 	            ) : ''
 	          )
@@ -80152,13 +80152,25 @@
 			var tooltip = _reactDom2.default.findDOMNode(this);
 		},
 		componentWillReceiveProps: function componentWillReceiveProps(props) {
-
 			this.setState({ show: props.show });
 		},
 		render: function render() {
+			var showStyle = {
+				display: 'block',
+				position: 'absolute',
+				right: '-200px',
+				fontSize: '10px',
+				top: '-10%'
+			};
+
+			var hideStyle = { display: 'none' };
+
 			return _react2.default.createElement(
 				'div',
-				{ className: 'my-tooltip', style: this.state.show ? { display: 'block', position: 'absolute', 'right': '-225px', 'top': 0 } : { display: 'none' } },
+				{
+					className: this.state.show ? "my-tooltip my-tooltip--active" : "my-tooltip",
+					style: this.state.show ? showStyle : hideStyle
+				},
 				this.props.children
 			);
 		}

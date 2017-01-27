@@ -13,13 +13,25 @@ const Tooltip = React.createClass({
 	},
 	
 	componentWillReceiveProps(props) {
-
 		this.setState({show: props.show});
 	},
 
 	render() {
+		let showStyle = {
+			display: 'block', 
+			position: 'absolute', 
+			right: '-200px',
+			fontSize: '10px',
+			top: '-10%'
+		};
+
+		let hideStyle = {display: 'none'};
+
 		return (
-				<div className="my-tooltip" style={this.state.show ? {display: 'block', position: 'absolute', 'right': '-225px', 'top': 0} : {display: 'none'}}>
+				<div 
+					className={this.state.show ? "my-tooltip my-tooltip--active" : "my-tooltip" }
+					style={this.state.show ? showStyle : hideStyle}
+				>
 					{this.props.children}
 				</div>
 		)
