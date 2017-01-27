@@ -3,7 +3,7 @@ const React = require('react');
 const Select = require('components/form_select');
 const reasonsOptions = require('options/no_effective_reasons.json');
 
-module.exports = React.createClass({
+const QuoNoEffective = React.createClass({
   getDefaultProps() {
     return {
       show: false
@@ -63,7 +63,7 @@ module.exports = React.createClass({
               ref="note"
               placeholder="Nota"
               onChange={this.handleChange}
-              value={this.state.quotation.status_note}>
+              value={this.state.quotation.status_note ? this.state.quotation.status_note : ''}>
             </textarea>
 
           </div>
@@ -74,3 +74,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoNoEffective;

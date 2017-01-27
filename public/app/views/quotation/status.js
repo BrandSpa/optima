@@ -1,9 +1,9 @@
 'use strict';
 import React from 'react';
-import * as action from 'actions/quotations';
-import {storeActivity} from 'lib/activity';
+import * as action from '../../actions/quotations';
+import {storeActivity} from '../../lib/activity';
 
-module.exports = React.createClass({
+const QuoStatus = React.createClass({
   getDefaultProps() {
     return {
       disabled: false
@@ -17,7 +17,7 @@ module.exports = React.createClass({
   },
 
   handleClick(status, e) {
-    e.preventDefault(status, e);
+    e.preventDefault();
     let message = `Cambio estado a ${status}`;
 
     switch (status) {
@@ -43,7 +43,7 @@ module.exports = React.createClass({
     this.props.dispatch(action.sendMail(id)).then((actionRes) => {
         this.setState({sending: false});
         if(actionRes.type == 'QUOTATIONS_FAIL') {
-          console.log(actionRes);
+          console.error('quo fail', actionRes);
         } else {
           return this.props.onStatusChange('Enviada', message);
         }
@@ -60,7 +60,7 @@ module.exports = React.createClass({
           <ul className="list-inline">
             <li>
               <button
-                className="btn btn-default btn-sm"
+                className="btn btn-sm btn-warning"
                 onClick={this.handleClick.bind(null, 'Enviada')} 
                 disabled={this.props.disabled ? true : false}
                 >
@@ -70,7 +70,7 @@ module.exports = React.createClass({
 
             <li>
               <button
-                className="btn btn-default btn-sm"
+                className="btn btn-warning btn-sm"
                 onClick={this.handleClick.bind(null, 'Entregada')}
                 disabled={this.props.disabled ? true : false}
                 >
@@ -80,7 +80,7 @@ module.exports = React.createClass({
 
              <li>
               <button
-                className="btn btn-default btn-sm"
+                className="btn btn-success btn-sm"
                 onClick={this.handleClick.bind(null, 'Efectiva')}
                 disabled={this.props.disabled ? true : false}
                 >
@@ -90,7 +90,7 @@ module.exports = React.createClass({
 
             <li>
               <button
-                className="btn btn-default btn-sm"
+                className="btn btn-danger btn-sm"
                 onClick={this.handleClick.bind(this, 'No enviada')}
                 disabled={this.props.disabled ? true : false}
               >
@@ -100,7 +100,7 @@ module.exports = React.createClass({
 
             <li>
               <button
-                className="btn btn-default btn-sm"
+                className="btn btn-danger btn-sm"
                 onClick={this.handleClick.bind(this, 'No efectiva')}
                 disabled={this.props.disabled ? true : false}
               >
@@ -143,3 +143,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoStatus;

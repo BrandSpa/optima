@@ -2,7 +2,7 @@
 import React from 'react';
 import Editor from 'components/editor';
 
-module.exports = React.createClass({
+const QuoComment = React.createClass({
   getDefaultProps() {
     return {
       show: false,
@@ -62,3 +62,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoComment;

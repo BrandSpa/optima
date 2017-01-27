@@ -2,7 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 
-export default React.createClass({
+const QuoActivity =  React.createClass({
 
   render() {
     const activityNodes = this.props.activities.map(activity =>
@@ -24,3 +24,5 @@ export default React.createClass({
     );
   }
 });
+
+export default QuoActivity;

@@ -1,7 +1,5 @@
 'use strict';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Timeago from '../../components/timeago';
 import Tooltip from '../../components/tooltip';
 
 export default React.createClass({
@@ -26,10 +24,6 @@ export default React.createClass({
     return {
       showTooltip: false
     }
-  },
-
-  componentDidMount() {
-    this.setState({reference: ReactDOM.findDOMNode(this)});
   },
 
   toogleTooltip(e) {
