@@ -80152,13 +80152,24 @@
 			var tooltip = _reactDom2.default.findDOMNode(this);
 		},
 		componentWillReceiveProps: function componentWillReceiveProps(props) {
-
 			this.setState({ show: props.show });
 		},
 		render: function render() {
+			var showStyle = {
+				display: 'block',
+				position: 'absolute',
+				right: '-200px',
+				top: 0
+			};
+
+			var hideStyle = { display: 'none' };
+
 			return _react2.default.createElement(
 				'div',
-				{ className: 'my-tooltip', style: this.state.show ? { display: 'block', position: 'absolute', 'right': '-200px', 'top': 0 } : { display: 'none' } },
+				{
+					className: this.state.show ? "my-tooltip my-tooltip--active" : "my-tooltip",
+					style: this.state.show ? showStyle : hideStyle
+				},
 				this.props.children
 			);
 		}
