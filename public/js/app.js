@@ -72013,6 +72013,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
@@ -72037,8 +72041,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var CompaniesForm = _react2.default.createClass({
+	  displayName: 'CompaniesForm',
 	  getInitialState: function getInitialState() {
 	    return {
 	      company: {}
@@ -72066,22 +72072,11 @@
 	      this.props.onCancel();
 	    }
 	  },
-	  handleChange: function handleChange() {
+	  handleChange: function handleChange(field, e) {
 	    var refs = this.refs;
 
-
-	    var company = _extends({}, this.state.company, {
-	      name: refs.name.value,
-	      nit: refs.nit.value,
-	      sector: refs.sector.refs.select.value,
-	      city: refs.city.refs.select.value,
-	      address: refs.address.value,
-	      phone: refs.phone.value,
-	      web: refs.web.value,
-	      comment: refs.comment.value,
-	      type: ''
-	    });
-
+	    var val = e.currentTarget.value;
+	    var company = _extends({}, this.state.company, _defineProperty({}, field, val));
 	    this.setState({ company: company });
 	  },
 	  handleSubmit: function handleSubmit(e) {
@@ -72110,7 +72105,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'name',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'name'),
 	            value: company.name,
 	            placeholder: 'Raz\xF3n social'
 	          })
@@ -72121,7 +72116,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'nit',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'nit'),
 	            value: company.nit,
 	            placeholder: 'Nit'
 	          })
@@ -72133,7 +72128,7 @@
 	            ref: 'sector',
 	            options: _sectors2.default,
 	            'default': 'Seleccionar sector',
-	            onSelectChange: this.handleChange,
+	            onSelectChange: this.handleChange.bind(null, 'sector'),
 	            value: company.sector
 	          })
 	        ),
@@ -72144,7 +72139,7 @@
 	            ref: 'city',
 	            options: _cities2.default,
 	            'default': 'Seleccionar ciudad',
-	            onSelectChange: this.handleChange,
+	            onSelectChange: this.handleChange.bind(null, 'city'),
 	            value: company.city
 	          })
 	        )
@@ -72155,7 +72150,7 @@
 	        _react2.default.createElement('input', {
 	          className: 'form-control',
 	          ref: 'address',
-	          onChange: this.handleChange,
+	          onChange: this.handleChange.bind(null, 'address'),
 	          value: company.address,
 	          placeholder: 'Direcci\xF3n'
 	        })
@@ -72169,7 +72164,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'phone',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'phone'),
 	            value: company.phone,
 	            placeholder: 'Tel\xE9fono'
 	          })
@@ -72180,7 +72175,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'web',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'web'),
 	            value: company.web,
 	            placeholder: 'Web'
 	          })
@@ -72192,7 +72187,7 @@
 	        _react2.default.createElement('textarea', {
 	          className: 'form-control',
 	          ref: 'comment',
-	          onChange: this.handleChange,
+	          onChange: this.handleChange.bind(null, 'comment'),
 	          value: company.comment,
 	          placeholder: 'Comentario'
 	        })
@@ -72201,7 +72196,8 @@
 	        'button',
 	        {
 	          className: 'btn btn-primary btn-sm pull-right',
-	          onClick: this.handleSubmit },
+	          onClick: this.handleSubmit
+	        },
 	        btnStoreText
 	      ),
 	      _react2.default.createElement(
@@ -72214,6 +72210,8 @@
 	    );
 	  }
 	});
+
+	exports.default = CompaniesForm;
 
 /***/ },
 /* 475 */
@@ -72769,9 +72767,9 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'form-group' },
-	        _react2.default.createElement(_form_textarea2.default, {
-	          ref: 'comment',
-	          onTextareaChange: this.handleChange.bind(null, 'comment'),
+	        _react2.default.createElement('textarea', {
+	          className: 'form-control',
+	          onChange: this.handleChange.bind(null, 'comment'),
 	          value: contact.comment,
 	          placeholder: 'Comentario'
 	        })
@@ -75025,8 +75023,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var quotationSection = _react2.default.createClass({
-	  displayName: 'quotationSection',
+	var QuotationSection = _react2.default.createClass({
+	  displayName: 'QuotationSection',
 
 	  alert: null,
 
@@ -75367,7 +75365,7 @@
 
 	exports.default = (0, _reactRedux.connect)(function (store) {
 	  return store;
-	})(quotationSection);
+	})(QuotationSection);
 
 /***/ },
 /* 491 */
@@ -76422,8 +76420,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'products',
+	var QuoProducts = _react2.default.createClass({
+	  displayName: 'QuoProducts',
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -76691,6 +76689,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoProducts;
 
 /***/ },
 /* 502 */
@@ -78343,10 +78343,13 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var React = __webpack_require__(1);
 
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var QuoTimes = React.createClass({
+	  displayName: 'QuoTimes',
 	  render: function render() {
 	    var created_sent_diff = void 0;
 
@@ -78396,6 +78399,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoTimes;
 
 /***/ },
 /* 515 */

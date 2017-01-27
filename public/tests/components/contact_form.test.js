@@ -9,7 +9,7 @@ describe('contact form component', () => {
 		const preventDefault = () => false;
 		const expectedState = {
 			"birthday": "07/02/1990",
-			"comment": "",
+			"comment": "esto es una nota",
 			"company_id": null, 
 			"email": "ale@brandspa.com", 
 			"fax": "fax num",
@@ -35,6 +35,8 @@ describe('contact form component', () => {
 		wrapper.find('input').at(9).simulate('change', {preventDefault, currentTarget: {value: expectedState.fax}});
 		wrapper.find('input').at(10).simulate('change', {preventDefault, currentTarget: {value: expectedState.birthday}});
 		wrapper.find('input').at(11).simulate('change', {preventDefault, currentTarget: {value: 'adicional random'}});
+
+		wrapper.find('textarea').at(0).simulate('change', {preventDefault, currentTarget: {value: 'esto es una nota'}});
 
 		expect(wrapper.state().contact).toEqual(expectedState);
 		expect(wrapper.find('input').length).toBe(11);

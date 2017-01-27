@@ -7,7 +7,7 @@ import * as activityAction from 'actions/activities';
 import cleanObject from 'lib/clean_object';
 import {storeActivity} from 'lib/activity';
 
-export default React.createClass({
+const QuoProducts = React.createClass({
   getDefaultProps: function() {
     return {
       id: null,
@@ -225,3 +225,5 @@ export default React.createClass({
     );
   }
 });
+
+export default QuoProducts;

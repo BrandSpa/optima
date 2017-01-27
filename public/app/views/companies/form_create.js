@@ -1,11 +1,11 @@
 'use strict';
 import React from 'react';
-import cleanObject from 'lib/clean_object';
-import Select from 'components/form_select';
-import sectors from 'options/sectors.json';
-import cities from 'options/cities.json';
+import cleanObject from '../../lib/clean_object';
+import Select from '../../components/form_select';
+import sectors from '../../options/sectors.json';
+import cities from '../../options/cities.json';
 
-module.exports = React.createClass({
+const CompaniesForm = React.createClass({
   getInitialState() {
     return {
       company: {}
@@ -36,21 +36,10 @@ module.exports = React.createClass({
     }
   },
 
-  handleChange() {
+  handleChange(field, e) {
     const {refs} = this;
-
-    const company = {...this.state.company,
-      name: refs.name.value,
-      nit: refs.nit.value,
-      sector: refs.sector.refs.select.value,
-      city: refs.city.refs.select.value,
-      address: refs.address.value,
-      phone: refs.phone.value,
-      web: refs.web.value,
-      comment: refs.comment.value,
-      type: ''
-    };
-
+    const val = e.currentTarget.value;
+    const company = {...this.state.company, [field]: val};
     this.setState({company});
   },
 
@@ -75,7 +64,7 @@ module.exports = React.createClass({
           <input
             className="form-control"
             ref="name"
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(null, 'name')}
             value={company.name}
             placeholder="Razón social"
           />
@@ -85,7 +74,7 @@ module.exports = React.createClass({
           <input
             className="form-control"
             ref="nit"
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(null, 'nit')}
             value={company.nit}
             placeholder="Nit"
           />
@@ -96,7 +85,7 @@ module.exports = React.createClass({
             ref="sector"
             options={sectors}
             default="Seleccionar sector"
-            onSelectChange={this.handleChange}
+            onSelectChange={this.handleChange.bind(null, 'sector')}
             value={company.sector}
           />
          </div>
@@ -106,7 +95,7 @@ module.exports = React.createClass({
             ref="city"
             options={cities}
             default="Seleccionar ciudad"
-            onSelectChange={this.handleChange}
+            onSelectChange={this.handleChange.bind(null, 'city')}
             value={company.city}
           />
          </div>
@@ -116,7 +105,7 @@ module.exports = React.createClass({
        <input
         className="form-control"
           ref="address"
-          onChange={this.handleChange}
+          onChange={this.handleChange.bind(null, 'address')}
           value={company.address}
           placeholder="Dirección"
         />
@@ -127,7 +116,7 @@ module.exports = React.createClass({
            <input
             className="form-control"
               ref="phone"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'phone')}
               value={company.phone}
               placeholder="Teléfono"
             />
@@ -137,7 +126,7 @@ module.exports = React.createClass({
             <input
               className="form-control"
               ref="web"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'web')}
               value={company.web}
               placeholder="Web"
             />
@@ -148,7 +137,7 @@ module.exports = React.createClass({
           <textarea
             className="form-control"
             ref="comment"
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(null, 'comment')}
             value={company.comment}
             placeholder="Comentario"
           />
@@ -156,7 +145,8 @@ module.exports = React.createClass({
 
       <button
         className="btn btn-primary btn-sm pull-right"
-        onClick={this.handleSubmit}>
+        onClick={this.handleSubmit}
+      >
         {btnStoreText}
       </button>
 
@@ -169,3 +159,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default CompaniesForm;
