@@ -4,24 +4,30 @@ import * as action from 'actions/contacts';
 import Form from 'views/contacts/form_create';
 import Select from 'components/form_select';
 
-module.exports = React.createClass({
+const QuoContact = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       showForm: false,
+      contact: {}
     }
   },
 
-  changeContact: function(e) {
+  changeContact(e) {
    let id = e.currentTarget.value;
     this.props.changeContact(id);
   },
 
-  showForm: function() {
+  editContact() {
+    this.setState({contact: this.props.quotations.contact});
+    this.showForm();
+  },
+
+  showForm() {
     this.setState({showForm: !this.state.showForm});
   },
 
-  handleSubmit: function(contact) {
+  handleSubmit(contact) {
     const contactData = {...contact, company_id: this.props.quotations.company.id};
     this.props.dispatch(action.store(contactData)).then(() => {
        this.showForm();
@@ -36,7 +42,7 @@ module.exports = React.createClass({
     return "hidden";
   },
 
-  render: function() {
+  render() {
     const {contact, company} = this.props.quotations;
     let contactSelect;
 
@@ -48,11 +54,13 @@ module.exports = React.createClass({
       <div className="panel">
         <div className="panel-body">
           <button className="btn btn-primary btn-sm" onClick={this.showForm}>Agregar contacto</button>
+          <button className="btn btn-primary btn-sm" onClick={this.editContact}>Editar contacto</button>
           <hr/>
           <div className={this.state.showForm ? "" : "hidden"}>
             <Form
               size="col-md-12"
               btnText="Guardar"
+              contact={this.state.contact}
               onSubmit={this.handleSubmit}
               />
           </div>
@@ -79,3 +87,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoContact;

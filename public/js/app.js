@@ -28908,6 +28908,7 @@
 	        ref: 'select',
 	        onChange: this.onChange,
 	        className: 'form-control ' + this.props.styles,
+	        defaultValue: value,
 	        value: value,
 	        disabled: this.props.disabled ? true : false
 	      },
@@ -28973,6 +28974,9 @@
 	  handleChange: function handleChange(dateObj, dateStr) {
 	    this.setState({ lastDate: dateStr });
 	    this.triggerChange(dateObj, dateStr);
+	  },
+	  shouldComponentUpdate: function shouldComponentUpdate() {
+	    return false;
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var props = this.props;
@@ -72487,6 +72491,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var contactForm = _react2.default.createClass({
 	  displayName: 'contactForm',
 	  getInitialState: function getInitialState() {
@@ -72497,27 +72503,10 @@
 	      }
 	    };
 	  },
-	  handleChange: function handleChange() {
+	  handleChange: function handleChange(field) {
 	    var ref = this.refs;
-
-	    var contact = _extends({}, this.state.contact, {
-	      name: ref.name.value,
-	      lastname: ref.lastname.value,
-	      gender: ref.gender.refs.select.value,
-	      email: ref.email.value,
-	      title: ref.title.value,
-	      position: ref.position.value,
-	      phone_1: ref.phone_1.value,
-	      phone_2: ref.phone_2.value,
-	      mobile_1: ref.mobile_1.value,
-	      mobile_2: ref.mobile_2.value,
-	      fax: ref.fax.value,
-	      pay_method: ref.pay_method.refs.select.value,
-	      found_us: ref.found_us.refs.select.value,
-	      who_call: ref.who_call.refs.select.value,
-	      comment: ref.comment.refs.textarea.value
-	    });
-
+	    var val = e.currentTarget.value;
+	    var contact = _extends({}, this.state.contact, _defineProperty({}, field, val));
 	    this.setState({ contact: contact });
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(props) {
@@ -72563,7 +72552,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'name',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'name'),
 	            value: contact.name,
 	            placeholder: 'Nombre'
 	          })
@@ -72574,7 +72563,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'lastname',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'lastname'),
 	            value: contact.lastname,
 	            placeholder: 'Apellido'
 	          })
@@ -72586,7 +72575,7 @@
 	            ref: 'gender',
 	            options: _gender2.default,
 	            'default': 'Seleccionar g\xE9nero',
-	            onSelectChange: this.handleChange,
+	            onSelectChange: this.handleChange.bind(null, 'gender'),
 	            value: contact.gender
 	          })
 	        ),
@@ -72596,7 +72585,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'email',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'email'),
 	            value: contact.email,
 	            placeholder: 'Correo'
 	          })
@@ -72607,7 +72596,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'title',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'title'),
 	            value: contact.title,
 	            placeholder: 'T\xEDtulo'
 	          })
@@ -72618,7 +72607,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'position',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'position'),
 	            value: contact.position,
 	            placeholder: 'Posici\xF3n'
 	          })
@@ -72629,7 +72618,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'phone_1',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'phone_1'),
 	            value: contact.phone_1,
 	            placeholder: 'Tel\xE9fono'
 	          })
@@ -72640,7 +72629,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'phone_2',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'phone_2'),
 	            value: contact.phone_2,
 	            placeholder: 'Tel\xE9fono'
 	          })
@@ -72651,7 +72640,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'mobile_1',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'mobile_1'),
 	            value: contact.mobile_1,
 	            placeholder: 'Celular'
 	          })
@@ -72662,7 +72651,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'mobile_2',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'mobile_2'),
 	            value: contact.mobile_2,
 	            placeholder: 'Celular'
 	          })
@@ -72673,7 +72662,7 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
 	            ref: 'fax',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'fax'),
 	            value: contact.fax,
 	            placeholder: 'Fax'
 	          })
@@ -72683,8 +72672,7 @@
 	          { className: "form-group " + size },
 	          _react2.default.createElement('input', {
 	            className: 'form-control',
-	            ref: 'fax',
-	            onChange: this.handleChange,
+	            onChange: this.handleChange.bind(null, 'birthday'),
 	            value: contact.birthday,
 	            placeholder: 'Cumplea\xF1os: 07/07/1980'
 	          })
@@ -72696,7 +72684,7 @@
 	            ref: 'pay_method',
 	            options: _pay_methods2.default,
 	            'default': 'Seleccionar m\xE9todo de pago',
-	            onSelectChange: this.handleChange,
+	            onSelectChange: this.handleChange.bind(null, 'pay_method'),
 	            value: contact.pay_method
 	          })
 	        ),
@@ -72707,7 +72695,7 @@
 	            ref: 'found_us',
 	            options: _found_us2.default,
 	            'default': 'Seleccionar como nos encontro',
-	            onSelectChange: this.handleChange,
+	            onSelectChange: this.handleChange.bind(null, 'found_us'),
 	            value: contact.found_us
 	          })
 	        ),
@@ -72718,7 +72706,7 @@
 	            ref: 'who_call',
 	            options: _how_call2.default,
 	            'default': 'Seleccionar quien llam\xF3',
-	            onSelectChange: this.handleChange,
+	            onSelectChange: this.handleChange.bind(null, 'who_call'),
 	            value: contact.who_call
 	          })
 	        )
@@ -72728,7 +72716,7 @@
 	        { className: 'form-group' },
 	        _react2.default.createElement(_form_textarea2.default, {
 	          ref: 'comment',
-	          onTextareaChange: this.handleChange,
+	          onTextareaChange: this.handleChange.bind(null, 'comment'),
 	          value: contact.comment,
 	          placeholder: 'Comentario'
 	        })
@@ -75515,6 +75503,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
@@ -75537,25 +75529,25 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
-
-
+	var QuoContact = _react2.default.createClass({
+	  displayName: 'QuoContact',
 	  getInitialState: function getInitialState() {
 	    return {
-	      showForm: false
+	      showForm: false,
+	      contact: {}
 	    };
 	  },
-
 	  changeContact: function changeContact(e) {
 	    var id = e.currentTarget.value;
 	    this.props.changeContact(id);
 	  },
-
+	  editContact: function editContact() {
+	    this.setState({ contact: this.props.quotations.contact });
+	    this.showForm();
+	  },
 	  showForm: function showForm() {
 	    this.setState({ showForm: !this.state.showForm });
 	  },
-
 	  handleSubmit: function handleSubmit(contact) {
 	    var _this = this;
 
@@ -75564,7 +75556,6 @@
 	      _this.showForm();
 	    });
 	  },
-
 	  show: function show(field) {
 	    if (field && field != "") {
 	      return "";
@@ -75572,8 +75563,6 @@
 
 	    return "hidden";
 	  },
-
-
 	  render: function render() {
 	    var _props$quotations = this.props.quotations,
 	        contact = _props$quotations.contact,
@@ -75596,6 +75585,11 @@
 	          { className: 'btn btn-primary btn-sm', onClick: this.showForm },
 	          'Agregar contacto'
 	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-primary btn-sm', onClick: this.editContact },
+	          'Editar contacto'
+	        ),
 	        _react2.default.createElement('hr', null),
 	        _react2.default.createElement(
 	          'div',
@@ -75603,6 +75597,7 @@
 	          _react2.default.createElement(_form_create2.default, {
 	            size: 'col-md-12',
 	            btnText: 'Guardar',
+	            contact: this.state.contact,
 	            onSubmit: this.handleSubmit
 	          })
 	        ),
@@ -75670,6 +75665,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoContact;
 
 /***/ },
 /* 494 */
