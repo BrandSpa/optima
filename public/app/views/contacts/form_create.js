@@ -1,13 +1,13 @@
 'use strict';
 import React from 'react';
-import cleanObject from 'lib/clean_object';
-import Input from 'components/form_input';
-import Select from 'components/form_select';
-import Textarea from 'components/form_textarea';
-import payMethodOptions from 'options/pay_methods.json';
-import foundUsOptions from 'options/found_us.json';
-import howCallOptions from 'options/how_call.json';
-import genderOptions from 'options/gender.json';
+import cleanObject from '../../lib/clean_object';
+import Input from '../../components/form_input';
+import Select from '../../components/form_select';
+import Textarea from '../../components/form_textarea';
+import payMethodOptions from '../../options/pay_methods.json';
+import foundUsOptions from '../../options/found_us.json';
+import howCallOptions from '../../options/how_call.json';
+import genderOptions from '../../options/gender.json';
 
 const contactForm = React.createClass({
   getInitialState() {
@@ -19,8 +19,7 @@ const contactForm = React.createClass({
     }
   },
 
-  handleChange(field) {
-    const ref = this.refs;
+  handleChange(field, e) {
     const val = e.currentTarget.value;
     const contact = {...this.state.contact, [field]: val};
     this.setState({contact});

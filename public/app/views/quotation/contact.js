@@ -1,8 +1,10 @@
 'use strict';
 import React from 'react';
 import * as action from 'actions/contacts';
+import * as quoAction from 'actions/quotations';
 import Form from 'views/contacts/form_create';
 import Select from 'components/form_select';
+import clearObject from '../../lib/clean_object';
 
 const QuoContact = React.createClass({
 
@@ -27,18 +29,32 @@ const QuoContact = React.createClass({
     this.setState({showForm: !this.state.showForm});
   },
 
+  handleCancelForm() {
+    this.setState({contact: clearObject(this.state.contact)});
+    this.showForm();
+  },
+
   handleSubmit(contact) {
     const contactData = {...contact, company_id: this.props.quotations.company.id};
-    this.props.dispatch(action.store(contactData)).then(() => {
-       this.showForm();
-    });
+
+    if(contactData.id) {
+      this.props.dispatch(action.update(contactData))
+      .then((res) => this.props.dispatch(quoAction.updateContact(res.payload)))
+      .then(() => {
+          this.setState({contact: clearObject(this.state.contact)});
+         this.showForm();
+      });
+    } else {
+      this.props.dispatch(action.store(contactData)).then(() => {
+        this.showForm();
+      });
+    }
   },
 
   show(field) {
     if(field && field != "") {
       return ""
     }
-
     return "hidden";
   },
 
@@ -46,15 +62,19 @@ const QuoContact = React.createClass({
     const {contact, company} = this.props.quotations;
     let contactSelect;
 
-    const contactOptions = this.props.contacts.items.map(function(contact, i) {
+    const contactOptions = this.props.contacts.items.map((contact, i) => {
       return {value: contact.id, label: `${contact.name} ${contact.lastname}`}
     });
 
     return (
       <div className="panel">
         <div className="panel-body">
-          <button className="btn btn-primary btn-sm" onClick={this.showForm}>Agregar contacto</button>
-          <button className="btn btn-primary btn-sm" onClick={this.editContact}>Editar contacto</button>
+          <button 
+            className="btn btn-primary btn-sm" 
+            onClick={this.showForm}
+          >
+            Agregar contacto
+          </button> <button className="btn btn-primary btn-sm" onClick={this.editContact}>Editar contacto</button>
           <hr/>
           <div className={this.state.showForm ? "" : "hidden"}>
             <Form
@@ -62,6 +82,7 @@ const QuoContact = React.createClass({
               btnText="Guardar"
               contact={this.state.contact}
               onSubmit={this.handleSubmit}
+              onCancel={this.handleCancelForm}
               />
           </div>
           <div className="row"> </div>

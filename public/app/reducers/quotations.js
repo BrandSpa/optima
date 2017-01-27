@@ -42,6 +42,13 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
+		case `${TYPE}_UPDATE_CONTACT`:
+			return {
+        ...state,
+				contact: action.payload
+      };
+		break;
+
 		case `${TYPE}_FETCH_SERVICES`:
 			return {
         ...state,
