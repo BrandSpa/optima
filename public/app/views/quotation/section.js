@@ -26,7 +26,7 @@ import Todos from 'views/todos/section';
 import Alert from 'components/alert';
 import Toast from 'lib/alert';
 
-const quotationSection = React.createClass({
+const QuotationSection = React.createClass({
   alert: null,
 
   getInitialState: function() {
@@ -341,4 +341,4 @@ const quotationSection = React.createClass({
   }
 });
 
-export default connect(store => store)(quotationSection);
+export default connect(store => store)(QuotationSection);

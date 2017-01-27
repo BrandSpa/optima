@@ -1,7 +1,7 @@
 'use strict';
 const React = require('react');
 
-module.exports = React.createClass({
+const QuoTimes = React.createClass({
 
   render() {
     let created_sent_diff;
@@ -24,3 +24,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoTimes;
