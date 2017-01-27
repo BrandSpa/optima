@@ -72767,9 +72767,9 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'form-group' },
-	        _react2.default.createElement(_form_textarea2.default, {
-	          ref: 'comment',
-	          onTextareaChange: this.handleChange.bind(null, 'comment'),
+	        _react2.default.createElement('textarea', {
+	          className: 'form-control',
+	          onChange: this.handleChange.bind(null, 'comment'),
 	          value: contact.comment,
 	          placeholder: 'Comentario'
 	        })

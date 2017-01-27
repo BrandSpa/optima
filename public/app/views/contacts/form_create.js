@@ -213,9 +213,9 @@ const contactForm = React.createClass({
         </div>
 
         <div className="form-group">
-          <Textarea
-            ref="comment"
-            onTextareaChange={this.handleChange.bind(null, 'comment')}
+          <textarea
+            className="form-control"
+            onChange={this.handleChange.bind(null, 'comment')}
             value={contact.comment}
             placeholder="Comentario"
           />

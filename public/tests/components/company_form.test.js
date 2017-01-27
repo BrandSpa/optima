@@ -14,6 +14,7 @@ describe('company form component', () => {
       address: 'calle 147',
       phone: '30034980',
       web: 'brandspa.com',
+      comment: 'this is a comment'
 		};
 
 		wrapper.find('input').at(0).simulate('change', {preventDefault, currentTarget: {value: expectedState.name}});
@@ -21,6 +22,7 @@ describe('company form component', () => {
 		wrapper.find('input').at(2).simulate('change', {preventDefault, currentTarget: {value: expectedState.address}});
 		wrapper.find('input').at(3).simulate('change', {preventDefault, currentTarget: {value: expectedState.phone}});
 		wrapper.find('input').at(4).simulate('change', {preventDefault, currentTarget: {value: expectedState.web}});
+		wrapper.find('textarea').at(0).simulate('change', {preventDefault, currentTarget: {value: expectedState.comment}});
 		expect(wrapper.find('input').length).toBe(5);
 		expect(wrapper.state().company).toEqual(expectedState);
 		
