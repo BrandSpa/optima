@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-module.exports = React.createClass({
+const Dashboard = React.createClass({
 
   render() {
     return (
@@ -25,3 +25,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default Dashboard;

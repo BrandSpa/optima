@@ -2,7 +2,7 @@
 import React from 'react';
 import Timeago from '../../components/timeago';
 
-export default React.createClass({
+const TodoItem =  React.createClass({
   getDefaultProps() {
     return {
       title: '',
@@ -56,7 +56,7 @@ export default React.createClass({
         <td>
           <input 
             type="checkbox" 
-            value={todo.completed} 
+            value={todo.completed ? todo.completed : false} 
             onChange={e => this.props.onCompleted(todo)} 
             checked={todo.completed == 1 ? true : false} 
           />
@@ -65,3 +65,5 @@ export default React.createClass({
     )
   }
 });
+
+export default TodoItem;

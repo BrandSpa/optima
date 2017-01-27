@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-module.exports = React.createClass({
+const QuoEdit = React.createClass({
   getDefaultProps() {
     return {
       quotation: {
@@ -97,3 +97,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoEdit;

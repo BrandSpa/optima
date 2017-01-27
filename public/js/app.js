@@ -120,24 +120,6 @@
 	  ), document.getElementById("app"));
 	}
 
-	function checkAuth(ctx, next) {
-	  return next();
-	  // let token = localStorage.getItem('optima-token');
-
-	  // if(token) {
-	  //   axios.defaults.headers.common['Authorization'] = `bearer ${token}`;
-
-	  // } else {
-	  //    page.redirect('/login');
-	  // } 
-	}
-
-	// page('/login', function() {
-	//   render(<Login />, document.getElementById("app"));
-	// });
-
-	// page('/*', checkAuth);
-
 	(0, _page2.default)('/', function () {
 	  var user = JSON.parse(localStorage.getItem('user'));
 	  return root(_react2.default.createElement(_dashboard2.default, { user: user }));
@@ -28025,14 +28007,18 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var Dashboard = _react2.default.createClass({
+	  displayName: 'Dashboard',
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -28129,6 +28115,8 @@
 	    );
 	  }
 	});
+
+	exports.default = Dashboard;
 
 /***/ },
 /* 268 */
@@ -30504,14 +30492,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(32);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _timeago = __webpack_require__(284);
-
-	var _timeago2 = _interopRequireDefault(_timeago);
-
 	var _tooltip = __webpack_require__(287);
 
 	var _tooltip2 = _interopRequireDefault(_tooltip);
@@ -30540,9 +30520,6 @@
 	    return {
 	      showTooltip: false
 	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.setState({ reference: _reactDom2.default.findDOMNode(this) });
 	  },
 	  toogleTooltip: function toogleTooltip(e) {
 	    e.preventDefault();
@@ -57380,8 +57357,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'item',
+	var TodoItem = _react2.default.createClass({
+	  displayName: 'TodoItem',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      title: '',
@@ -57475,7 +57452,7 @@
 	        null,
 	        _react2.default.createElement('input', {
 	          type: 'checkbox',
-	          value: todo.completed,
+	          value: todo.completed ? todo.completed : false,
 	          onChange: function onChange(e) {
 	            return _this.props.onCompleted(todo);
 	          },
@@ -57485,6 +57462,8 @@
 	    );
 	  }
 	});
+
+	exports.default = TodoItem;
 
 /***/ },
 /* 410 */
@@ -76035,14 +76014,18 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var QuoEdit = _react2.default.createClass({
+	  displayName: 'QuoEdit',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      quotation: {
@@ -76172,6 +76155,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoEdit;
 
 /***/ },
 /* 499 */
@@ -76713,6 +76698,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -76723,8 +76712,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var QuoProduct = _react2.default.createClass({
+	  displayName: 'QuoProduct',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      product: {}
@@ -76849,6 +76838,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoProduct;
 
 /***/ },
 /* 503 */
@@ -77888,6 +77879,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -77898,8 +77893,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var QuoComment = _react2.default.createClass({
+	  displayName: 'QuoComment',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      show: false,
@@ -77960,11 +77955,17 @@
 	  }
 	});
 
+	exports.default = QuoComment;
+
 /***/ },
 /* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -77978,8 +77979,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var QuoMails = _react2.default.createClass({
+	  displayName: 'QuoMails',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      quotation: {
@@ -78094,18 +78095,23 @@
 	  }
 	});
 
+	exports.default = QuoMails;
+
 /***/ },
 /* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var React = __webpack_require__(1);
 	var Select = __webpack_require__(278);
 	var reasonsOptions = __webpack_require__(511);
 
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var QuoNoEffective = React.createClass({
+	  displayName: 'QuoNoEffective',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      show: false
@@ -78169,7 +78175,7 @@
 	            ref: 'note',
 	            placeholder: 'Nota',
 	            onChange: this.handleChange,
-	            value: this.state.quotation.status_note })
+	            value: this.state.quotation.status_note ? this.state.quotation.status_note : '' })
 	        ),
 	        React.createElement(
 	          'button',
@@ -78185,6 +78191,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoNoEffective;
 
 /***/ },
 /* 511 */
@@ -78215,12 +78223,15 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var React = __webpack_require__(1);
 	var reasonsOptions = __webpack_require__(513);
 	var Select = __webpack_require__(278);
 
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var QuoNoSend = React.createClass({
+	  displayName: 'QuoNoSend',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      show: false
@@ -78284,7 +78295,7 @@
 	            ref: 'note',
 	            placeholder: 'Nota',
 	            onChange: this.handleChange,
-	            value: this.state.quotation.status_note })
+	            value: this.state.quotation.status_note ? this.state.quotation.status_note : '' })
 	        ),
 	        React.createElement(
 	          'button',
@@ -78304,6 +78315,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoNoSend;
 
 /***/ },
 /* 513 */
@@ -78404,8 +78417,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'activity',
+	var QuoActivity = _react2.default.createClass({
+	  displayName: 'QuoActivity',
 	  render: function render() {
 	    var _this = this;
 
@@ -78454,6 +78467,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoActivity;
 
 /***/ },
 /* 516 */

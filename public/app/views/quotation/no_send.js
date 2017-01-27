@@ -3,7 +3,7 @@ const React = require('react');
 const reasonsOptions = require('options/no_send_reasons.json');
 const Select = require('components/form_select');
 
-module.exports = React.createClass({
+const QuoNoSend = React.createClass({
   getDefaultProps() {
     return {
       show: false
@@ -63,7 +63,7 @@ module.exports = React.createClass({
               ref="note"
               placeholder="Nota"
               onChange={this.handleChange}
-              value={this.state.quotation.status_note}>
+              value={this.state.quotation.status_note ? this.state.quotation.status_note : ''}>
             </textarea>
 
           </div>
@@ -82,3 +82,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoNoSend;

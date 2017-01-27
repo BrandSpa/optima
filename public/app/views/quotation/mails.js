@@ -2,7 +2,7 @@
 import React from 'react';
 import Editor from '../../components/editor';
 
-module.exports = React.createClass({
+const QuoMails = React.createClass({
   getDefaultProps() {
     return {
       quotation: {
@@ -104,3 +104,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoMails;

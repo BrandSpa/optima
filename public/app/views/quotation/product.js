@@ -2,14 +2,12 @@
 import React from 'react';
 import numeral from 'numeral';
 
-module.exports = React.createClass({
+const QuoProduct = React.createClass({
   getDefaultProps() {
     return {
       product: {}
     }
   },
-
-  
 
   render() {
     const product = this.props.product;
@@ -90,3 +88,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default QuoProduct;

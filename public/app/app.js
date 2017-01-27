@@ -27,24 +27,6 @@ function root(component) {
   );
 }
 
-function checkAuth(ctx, next) {
-  return next();
-  // let token = localStorage.getItem('optima-token');
-  
-  // if(token) {
-  //   axios.defaults.headers.common['Authorization'] = `bearer ${token}`;
-    
-  // } else {
-  //    page.redirect('/login');
-  // } 
-}
-
-// page('/login', function() {
-//   render(<Login />, document.getElementById("app"));
-// });
-
-// page('/*', checkAuth);
-
 page('/', () => {
   let user = JSON.parse(localStorage.getItem('user'));
   return root(<Dashboard user={user} />);
