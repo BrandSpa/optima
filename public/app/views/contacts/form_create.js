@@ -1,13 +1,13 @@
 'use strict';
 import React from 'react';
-import cleanObject from 'lib/clean_object';
-import Input from 'components/form_input';
-import Select from 'components/form_select';
-import Textarea from 'components/form_textarea';
-import payMethodOptions from 'options/pay_methods.json';
-import foundUsOptions from 'options/found_us.json';
-import howCallOptions from 'options/how_call.json';
-import genderOptions from 'options/gender.json';
+import cleanObject from '../../lib/clean_object';
+import Input from '../../components/form_input';
+import Select from '../../components/form_select';
+import Textarea from '../../components/form_textarea';
+import payMethodOptions from '../../options/pay_methods.json';
+import foundUsOptions from '../../options/found_us.json';
+import howCallOptions from '../../options/how_call.json';
+import genderOptions from '../../options/gender.json';
 
 const contactForm = React.createClass({
   getInitialState() {
@@ -19,27 +19,9 @@ const contactForm = React.createClass({
     }
   },
 
-  handleChange() {
-    const ref = this.refs;
-
-    const contact = {...this.state.contact,
-      name: ref.name.value,
-      lastname: ref.lastname.value,
-      gender: ref.gender.refs.select.value,
-      email: ref.email.value,
-      title: ref.title.value,
-      position: ref.position.value,
-      phone_1: ref.phone_1.value,
-      phone_2: ref.phone_2.value,
-      mobile_1: ref.mobile_1.value,
-      mobile_2: ref.mobile_2.value,
-      fax: ref.fax.value,
-      pay_method: ref.pay_method.refs.select.value,
-      found_us: ref.found_us.refs.select.value,
-      who_call: ref.who_call.refs.select.value,
-      comment: ref.comment.refs.textarea.value,
-    };
-
+  handleChange(field, e) {
+    const val = e.currentTarget.value;
+    const contact = {...this.state.contact, [field]: val};
     this.setState({contact});
   },
 
@@ -84,7 +66,7 @@ const contactForm = React.createClass({
             <input
               className="form-control"
               ref="name"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'name')}
               value={contact.name}
               placeholder="Nombre"
             />
@@ -94,7 +76,7 @@ const contactForm = React.createClass({
             <input
               className="form-control"
               ref="lastname"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'lastname')}
               value={contact.lastname}
               placeholder="Apellido"
             />
@@ -105,7 +87,7 @@ const contactForm = React.createClass({
               ref="gender"
               options={genderOptions}
               default="Seleccionar género"
-              onSelectChange={this.handleChange}
+              onSelectChange={this.handleChange.bind(null, 'gender')}
               value={contact.gender}
             />
           </div>
@@ -114,7 +96,7 @@ const contactForm = React.createClass({
              <input
               className="form-control"
               ref="email"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'email')}
               value={contact.email}
               placeholder="Correo"
             />
@@ -124,7 +106,7 @@ const contactForm = React.createClass({
              <input
               className="form-control"
               ref="title"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'title')}
               value={contact.title}
               placeholder="Título"
             />
@@ -134,7 +116,7 @@ const contactForm = React.createClass({
              <input
               className="form-control"
               ref="position"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'position')}
               value={contact.position}
               placeholder="Posición"
             />
@@ -144,7 +126,7 @@ const contactForm = React.createClass({
              <input
               className="form-control"
               ref="phone_1"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'phone_1')}
               value={contact.phone_1}
               placeholder="Teléfono"
             />
@@ -154,7 +136,7 @@ const contactForm = React.createClass({
             <input
               className="form-control"
               ref="phone_2"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'phone_2')}
               value={contact.phone_2}
               placeholder="Teléfono"
             />
@@ -164,7 +146,7 @@ const contactForm = React.createClass({
             <input
               className="form-control"
               ref="mobile_1"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'mobile_1')}
               value={contact.mobile_1}
               placeholder="Celular"
             />
@@ -174,7 +156,7 @@ const contactForm = React.createClass({
             <input
               className="form-control"
               ref="mobile_2"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'mobile_2')}
               value={contact.mobile_2}
               placeholder="Celular"
             />
@@ -184,7 +166,7 @@ const contactForm = React.createClass({
             <input
               className="form-control"
               ref="fax"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'fax')}
               value={contact.fax}
               placeholder="Fax"
             />
@@ -193,8 +175,7 @@ const contactForm = React.createClass({
           <div className={"form-group " + size}>
             <input
               className="form-control"
-              ref="fax"
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(null, 'birthday')}
               value={contact.birthday}
               placeholder="Cumpleaños: 07/07/1980"
             />
@@ -205,7 +186,7 @@ const contactForm = React.createClass({
               ref="pay_method"
               options={payMethodOptions}
               default="Seleccionar método de pago"
-              onSelectChange={this.handleChange}
+              onSelectChange={this.handleChange.bind(null, 'pay_method')}
               value={contact.pay_method}
             />
           </div>
@@ -215,7 +196,7 @@ const contactForm = React.createClass({
               ref="found_us"
               options={foundUsOptions}
               default="Seleccionar como nos encontro"
-              onSelectChange={this.handleChange}
+              onSelectChange={this.handleChange.bind(null, 'found_us')}
               value={contact.found_us}
             />
           </div>
@@ -225,7 +206,7 @@ const contactForm = React.createClass({
               ref="who_call"
               options={howCallOptions}
               default="Seleccionar quien llamó"
-              onSelectChange={this.handleChange}
+              onSelectChange={this.handleChange.bind(null, 'who_call')}
               value={contact.who_call}
             />
           </div>
@@ -234,7 +215,7 @@ const contactForm = React.createClass({
         <div className="form-group">
           <Textarea
             ref="comment"
-            onTextareaChange={this.handleChange}
+            onTextareaChange={this.handleChange.bind(null, 'comment')}
             value={contact.comment}
             placeholder="Comentario"
           />

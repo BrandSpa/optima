@@ -20,8 +20,9 @@ class Contact extends \Eloquent {
 		'pay_method',
 		'found_us',
 		'who_call',
-		'comment'
-		];
+		'comment',
+		'birthday'
+	];
 
 	public $rules = [
 		'name' => 'required', 

@@ -20,6 +20,16 @@ export function update(quotation = {}) {
   return dispatch => rest.update(quotation, dispatch);
 }
 
+export function updateContact(contact = {}) {
+   return dispatch => {
+		return new Promise((resolve, reject) => {
+			let action = { type: `${TYPE}_UPDATE_CONTACT`, payload: contact};
+			dispatch(action);
+			return resolve(action);
+		});
+	}
+}
+
 export function sendMail(id) {
    return dispatch => {
     return request

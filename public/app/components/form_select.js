@@ -35,6 +35,7 @@ module.exports = React.createClass({
         ref="select"
         onChange={this.onChange}
         className={`form-control ${this.props.styles}`}
+        defaultValue={value}
         value={value}
         disabled={this.props.disabled ? true : false}
       >

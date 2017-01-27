@@ -35,6 +35,10 @@ const DateTime = React.createClass({
     this.triggerChange(dateObj, dateStr);
   },
 
+  shouldComponentUpdate() {
+		return false
+	},
+
   componentDidMount() {
     let props = this.props;
     const id = `#${this.state.id}`;
