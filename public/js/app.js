@@ -75278,7 +75278,9 @@
 	                    onClick: this.handlePriority.bind(null, '1'),
 	                    disabled: quotation.priority == 1 ? true : false
 	                  },
-	                  _react2.default.createElement('div', { className: 'priority priority--1' })
+	                  _react2.default.createElement('div', {
+	                    className: quotation.priority == 1 ? 'priority priority--1 priority--active' : 'priority priority--1 '
+	                  })
 	                ),
 	                _react2.default.createElement(
 	                  'a',
@@ -75287,7 +75289,7 @@
 	                    onClick: this.handlePriority.bind(null, '2'),
 	                    disabled: quotation.priority == 2 ? true : false
 	                  },
-	                  _react2.default.createElement('div', { className: 'priority priority--2' })
+	                  _react2.default.createElement('div', { className: quotation.priority == 2 ? 'priority priority--2 priority--active' : 'priority priority--2 ' })
 	                ),
 	                _react2.default.createElement(
 	                  'a',
@@ -75296,7 +75298,7 @@
 	                    onClick: this.handlePriority.bind(null, '3'),
 	                    disabled: quotation.priority == 3 ? true : false
 	                  },
-	                  _react2.default.createElement('div', { className: 'priority priority--3' })
+	                  _react2.default.createElement('div', { className: quotation.priority == 3 ? 'priority priority--3 priority--active' : 'priority priority--3 ' })
 	                )
 	              )
 	            )
@@ -76177,6 +76179,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -76191,8 +76197,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	var QuoStatus = _react2.default.createClass({
+	  displayName: 'QuoStatus',
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      disabled: false
@@ -76204,7 +76210,7 @@
 	    };
 	  },
 	  handleClick: function handleClick(status, e) {
-	    e.preventDefault(status, e);
+	    e.preventDefault();
 	    var message = 'Cambio estado a ' + status;
 
 	    switch (status) {
@@ -76231,7 +76237,7 @@
 	    this.props.dispatch(action.sendMail(id)).then(function (actionRes) {
 	      _this.setState({ sending: false });
 	      if (actionRes.type == 'QUOTATIONS_FAIL') {
-	        console.log(actionRes);
+	        console.error('quo fail', actionRes);
 	      } else {
 	        return _this.props.onStatusChange('Enviada', message);
 	      }
@@ -76256,7 +76262,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              {
-	                className: 'btn btn-default btn-sm',
+	                className: 'btn btn-sm btn-warning',
 	                onClick: this.handleClick.bind(null, 'Enviada'),
 	                disabled: this.props.disabled ? true : false
 	              },
@@ -76269,7 +76275,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              {
-	                className: 'btn btn-default btn-sm',
+	                className: 'btn btn-warning btn-sm',
 	                onClick: this.handleClick.bind(null, 'Entregada'),
 	                disabled: this.props.disabled ? true : false
 	              },
@@ -76282,7 +76288,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              {
-	                className: 'btn btn-default btn-sm',
+	                className: 'btn btn-success btn-sm',
 	                onClick: this.handleClick.bind(null, 'Efectiva'),
 	                disabled: this.props.disabled ? true : false
 	              },
@@ -76295,7 +76301,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              {
-	                className: 'btn btn-default btn-sm',
+	                className: 'btn btn-danger btn-sm',
 	                onClick: this.handleClick.bind(this, 'No enviada'),
 	                disabled: this.props.disabled ? true : false
 	              },
@@ -76308,7 +76314,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              {
-	                className: 'btn btn-default btn-sm',
+	                className: 'btn btn-danger btn-sm',
 	                onClick: this.handleClick.bind(this, 'No efectiva'),
 	                disabled: this.props.disabled ? true : false
 	              },
@@ -76358,6 +76364,8 @@
 	    );
 	  }
 	});
+
+	exports.default = QuoStatus;
 
 /***/ },
 /* 500 */

@@ -217,21 +217,23 @@ const quotationSection = React.createClass({
                 onClick={this.handlePriority.bind(null, '1')} 
                 disabled={quotation.priority == 1 ? true : false}
               >
-                <div className={`priority priority--1`}></div>
+                <div 
+                  className={quotation.priority == 1 ? 'priority priority--1 priority--active' : 'priority priority--1 '}
+                ></div>
               </a>
               <a
                 className="btn btn-sm" 
                 onClick={this.handlePriority.bind(null, '2')} 
                 disabled={quotation.priority == 2 ? true : false}
               >
-                <div className={`priority priority--2`}></div>
+                <div className={quotation.priority == 2 ? 'priority priority--2 priority--active' : 'priority priority--2 '}></div>
               </a>
-              <a 
+              <a
                 className="btn btn-sm" 
                 onClick={this.handlePriority.bind(null, '3')} 
                 disabled={quotation.priority == 3 ? true : false}
               >
-                <div className={`priority priority--3`}></div>
+               <div className={quotation.priority == 3 ? 'priority priority--3 priority--active' : 'priority priority--3 '}></div>
               </a> 
             </h5>
           </div>

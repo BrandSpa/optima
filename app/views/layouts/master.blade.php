@@ -65,6 +65,11 @@
 			width: 12px;
 			height: 12px;
 			border-radius: 12px;
+			transition: all 300ms;
+		}
+
+		.priority--active {
+			border: 2px solid #333;
 		}
 
 		.priority--1 {
