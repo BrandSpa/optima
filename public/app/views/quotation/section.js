@@ -44,6 +44,11 @@ const quotationSection = React.createClass({
     this.fetchQuotation();
   },
 
+  componentWillReceiveProps(props) {
+    if(parseInt(props.params.id) !== parseInt(this.props.quotations.quotation.id)) {
+      this.fetchQuotation();
+    }
+  },
 
   fetchQuotation: function() {
     const {params, dispatch} = this.props;
@@ -201,7 +206,7 @@ const quotationSection = React.createClass({
           <div className="panel-body quo-header">
           <div>
              <h4>
-              Cotización {quotation.id} • {quotation.status} •
+              Cotización {quotation.id}  {quotation.rethink_from ? <a href={`/quotations/${quotation.rethink_from}`}>replanteada de {quotation.rethink_from}</a> : ""} • {quotation.status} •
             </h4>
           </div>
           <div className="quo-header__priority">

@@ -75002,6 +75002,13 @@
 	    this.fetchQuotation();
 	  },
 
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (parseInt(props.params.id) !== parseInt(this.props.quotations.quotation.id)) {
+	      this.fetchQuotation();
+	    }
+	  },
+
+
 	  fetchQuotation: function fetchQuotation() {
 	    var _this = this;
 
@@ -75181,6 +75188,13 @@
 	                null,
 	                'Cotizaci\xF3n ',
 	                quotation.id,
+	                '  ',
+	                quotation.rethink_from ? _react2.default.createElement(
+	                  'a',
+	                  { href: '/quotations/' + quotation.rethink_from },
+	                  'replanteada de ',
+	                  quotation.rethink_from
+	                ) : "",
 	                ' \u2022 ',
 	                quotation.status,
 	                ' \u2022'
