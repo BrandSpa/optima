@@ -133,7 +133,7 @@ class QuotationsController extends BaseController {
 				 $query->select('id', 'name');
 				 },
 				 'contact' => function($query){
-				 $query->select('id', 'name', 'lastname', 'found_us');
+				 $query->select('id', 'name', 'lastname', 'found_us', 'client_type', 'type');
 				 } 
 			])
 			->select('id', 'status', 'created_at', 'company_id', 'contact_id', 'found_us')
