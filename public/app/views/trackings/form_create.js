@@ -23,15 +23,6 @@ const trackingForm = React.createClass({
     this.fetch();
   },
 
-  fetch() {
-    // request
-    // .get('/api/v1/contacts')
-    // .query({quotation_id: this.props.quotationId})
-    // .end((err, res) =>{
-    //   this.setState({contacts: res.body});
-    // });
-  },
-
   handleContact: function(e) {
     let contact = e.currentTarget.value;
     this.handleChange({ contact_id: parseInt(contact) });
@@ -104,8 +95,6 @@ const trackingForm = React.createClass({
             onChange={this.handleReport}
             edit={tracking.id ? true : false}
           />
-
-  
         </div>
 
         <button className="btn btn-primary btn-sm">Guardar</button>

@@ -136,7 +136,7 @@ class QuotationsController extends BaseController {
 				 $query->select('id', 'name', 'lastname', 'found_us');
 				 } 
 			])
-			->select('id', 'status', 'created_at', 'company_id', 'contact_id')
+			->select('id', 'status', 'created_at', 'company_id', 'contact_id', 'found_us')
 			->orderBy('id', 'DESC')
 			->get()
 			->toArray();
@@ -152,7 +152,6 @@ class QuotationsController extends BaseController {
 			// 	$mo['contact_phone'] = $mo['contact']['phone_1'];
 			// 	$mo['contact_mobile'] = $mo['contact']['mobile_1'];
 			// 	$mo['contact_email'] = $mo['contact']['email'];
-				$mo['contact_found_us'] = $mo['contact']['found_us'];
 				array_push($newModel, $mo);
 			}
 

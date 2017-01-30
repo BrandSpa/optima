@@ -32,11 +32,9 @@ const quoFilters = React.createClass({
   },
 
   changeQuery(field, value) {
-    let query = {};
-    query[field] = value;
-    query = {...this.state.query, ...query};
+    let query = {...this.state.query, [field]: value};
     this.triggerChange(query);
-    this.setState({query: query});
+    this.setState({query});
   },
 
   handleDates(type, date, dateStr) {
@@ -45,8 +43,7 @@ const quoFilters = React.createClass({
     this.changeQuery(field, value);
   },
 
-  handleChange(type, e) {
-    let field = type;
+  handleChange(field, e) {
     let value = e.currentTarget.value;
     this.changeQuery(field, value);
   },
