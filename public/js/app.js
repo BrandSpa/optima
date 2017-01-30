@@ -28588,6 +28588,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var quoFilters = _react2.default.createClass({
 	  displayName: 'quoFilters',
 	  getInitialState: function getInitialState() {
@@ -28611,9 +28613,7 @@
 	    }
 	  },
 	  changeQuery: function changeQuery(field, value) {
-	    var query = {};
-	    query[field] = value;
-	    query = _extends({}, this.state.query, query);
+	    var query = _extends({}, this.state.query, _defineProperty({}, field, value));
 	    this.triggerChange(query);
 	    this.setState({ query: query });
 	  },
@@ -28622,8 +28622,7 @@
 	    var value = dateStr + ' 00:00:00';
 	    this.changeQuery(field, value);
 	  },
-	  handleChange: function handleChange(type, e) {
-	    var field = type;
+	  handleChange: function handleChange(field, e) {
 	    var value = e.currentTarget.value;
 	    this.changeQuery(field, value);
 	  },
@@ -28948,17 +28947,12 @@
 
 	var _flatpickr2 = _interopRequireDefault(_flatpickr);
 
-	var _uid = __webpack_require__(281);
-
-	var _uid2 = _interopRequireDefault(_uid);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var DateTime = _react2.default.createClass({
 	  displayName: 'DateTime',
 	  getInitialState: function getInitialState() {
 	    return {
-	      id: 'flatpickr_' + (0, _uid2.default)(),
 	      lastDate: '',
 	      active: false
 	    };
@@ -28988,7 +28982,8 @@
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var props = this.props;
-	    var id = '#' + this.state.id;
+
+
 	    var options = {
 	      enableTime: props.enableTime,
 	      time_24hr: props.time_24hr,
@@ -28997,11 +28992,15 @@
 	      onChange: this.handleChange
 	    };
 
-	    (0, _flatpickr2.default)(id, options);
+	    new _flatpickr2.default(this.node, options);
 	  },
 	  render: function render() {
+	    var _this = this;
+
 	    return _react2.default.createElement('input', {
-	      id: this.state.id,
+	      ref: function ref(node) {
+	        return _this.node = node;
+	      },
 	      placeholder: this.props.placeholder,
 	      className: '' + this.props.styles
 	    });
@@ -78725,16 +78724,6 @@
 	  componentDidMount: function componentDidMount() {
 	    this.fetch();
 	  },
-
-	  fetch: function fetch() {
-	    // request
-	    // .get('/api/v1/contacts')
-	    // .query({quotation_id: this.props.quotationId})
-	    // .end((err, res) =>{
-	    //   this.setState({contacts: res.body});
-	    // });
-	  },
-
 
 	  handleContact: function handleContact(e) {
 	    var contact = e.currentTarget.value;

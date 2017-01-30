@@ -1,12 +1,10 @@
 'use strict';
 import React from 'react';
 import flatpickr from 'flatpickr';
-import uid from 'uid';
 
 const DateTime = React.createClass({
   getInitialState() {
     return {
-      id: `flatpickr_${ uid() }`,
       lastDate: '',
       active: false
     }
@@ -40,8 +38,8 @@ const DateTime = React.createClass({
 	},
 
   componentDidMount() {
-    let props = this.props;
-    const id = `#${this.state.id}`;
+    let {props} = this;
+
     const options = {
       enableTime: props.enableTime,
       time_24hr: props.time_24hr,
@@ -50,13 +48,13 @@ const DateTime = React.createClass({
       onChange: this.handleChange
     };
     
-    flatpickr(id, options);
+    new flatpickr(this.node, options);
   },
 
   render() {
     return (
       <input
-        id={this.state.id}
+        ref={node => this.node = node} 
         placeholder={this.props.placeholder}
         className={`${this.props.styles}`}
       />
