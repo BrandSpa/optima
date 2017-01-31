@@ -133,7 +133,7 @@ class QuotationsController extends BaseController {
 				 $query->select('id', 'name');
 				 },
 				 'contact' => function($query){
-				 $query->select('id', 'name', 'lastname');
+				 $query->select('id', 'name', 'lastname', 'email', 'birthday');
 				 } 
 			])
 			->select('id', 'status', 'created_at', 'company_id', 'contact_id', 'found_us','client_type', 'type')
@@ -149,6 +149,8 @@ class QuotationsController extends BaseController {
 			// 	$mo['company_address'] = $mo['company']['address'];
 			// 	$mo['company_phone'] = $mo['company']['phone'];
 				$mo['contact_name'] = $mo['contact']['name'] .' '. $mo['contact']['lastname'];
+				$mo['contact_email'] = $mo['contact']['email'];
+				$mo['contact_birthday'] = $mo['contact']['birthday'];
 			// 	$mo['contact_phone'] = $mo['contact']['phone_1'];
 			// 	$mo['contact_mobile'] = $mo['contact']['mobile_1'];
 			// 	$mo['contact_email'] = $mo['contact']['email'];
