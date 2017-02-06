@@ -20,7 +20,7 @@ const trackingForm = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch();
+
   },
 
   handleContact: function(e) {
