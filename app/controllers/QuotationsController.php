@@ -145,15 +145,9 @@ class QuotationsController extends BaseController {
 
 			foreach($model as $mo) {
 				$mo['company_name'] = $mo['company']['name'];
-			// 	$mo['company_city'] = $mo['company']['city'];
-			// 	$mo['company_address'] = $mo['company']['address'];
-			// 	$mo['company_phone'] = $mo['company']['phone'];
 				$mo['contact_name'] = $mo['contact']['name'] .' '. $mo['contact']['lastname'];
 				$mo['contact_email'] = $mo['contact']['email'];
 				$mo['contact_birthday'] = $mo['contact']['birthday'];
-			// 	$mo['contact_phone'] = $mo['contact']['phone_1'];
-			// 	$mo['contact_mobile'] = $mo['contact']['mobile_1'];
-			// 	$mo['contact_email'] = $mo['contact']['email'];
 				array_push($newModel, $mo);
 			}
 
