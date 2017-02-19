@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import * as action from '../../actions/quotations';
-import {storeActivity} from '../../lib/activity';
+import { storeActivity } from '../../lib/activity';
 
 const QuoStatus = React.createClass({
   getDefaultProps() {
@@ -134,6 +134,16 @@ const QuoStatus = React.createClass({
                 onClick={this.handleClick.bind(this, 'Por confirmar')}
               >
                 Por confirmar
+              </a>
+            </li>
+
+            <li>
+              <a
+                className="btn btn-default btn-sm"
+                disabled={this.props.disabled ? true : false}
+                onClick={this.handleClick.bind(this, 'Seguimiento')}
+              >
+                Seguimiento
               </a>
             </li>
 
