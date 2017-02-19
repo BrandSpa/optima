@@ -137,6 +137,16 @@ const QuoStatus = React.createClass({
               </a>
             </li>
 
+            <li>
+              <a
+                className="btn btn-default btn-sm"
+                disabled={this.props.disabled ? true : false}
+                onClick={this.handleClick.bind(this, 'Seguimiento')}
+              >
+                Seguimiento
+              </a>
+            </li>
+
           </ul>
         </div>
       </div>

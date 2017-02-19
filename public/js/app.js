@@ -75187,7 +75187,7 @@
 	  handleDisabled: function handleDisabled(status) {
 	    var disabled = false;
 
-	    if (status == 'Efectiva' || status == 'No efectiva') {
+	    if (status == 'Efectiva') {
 	      disabled = true;
 	    } else {
 	      disabled = false;
@@ -76339,6 +76339,19 @@
 	                onClick: this.handleClick.bind(this, 'Por confirmar')
 	              },
 	              'Por confirmar'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'btn btn-default btn-sm',
+	                disabled: this.props.disabled ? true : false,
+	                onClick: this.handleClick.bind(this, 'Seguimiento')
+	              },
+	              'Seguimiento'
 	            )
 	          )
 	        )

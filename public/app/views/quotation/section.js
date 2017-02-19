@@ -176,7 +176,7 @@ const QuotationSection = React.createClass({
   handleDisabled(status) {
     let disabled = false;
 
-    if(status == 'Efectiva' || status == 'No efectiva') {
+    if(status == 'Efectiva') {
       disabled = true;
     } else {
       disabled = false;
