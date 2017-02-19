@@ -28742,62 +28742,124 @@
 /* 273 */
 /***/ function(module, exports) {
 
-	[
-		{"value": "Borrador", "label": "Borrador"},
-		{"value": "Enviada", "label": "Enviada"},
-		{"value": "Entregada", "label": "Entregada"},
-		{"value": "Seguimiento", "label": "Seguimiento"},
-		{"value": "No enviada", "label": "No enviada"},
-		{"value": "Efectiva", "label": "Efectiva"},
-		{"value": "No efectiva", "label": "No efectiva"},
-		{"value": "Replanteada", "label": "Replanteada"},
-		{"value": "Por confirmar", "label": "Por confirmar"},
-		{"value": "Nula", "label": "Nula"}
-	]
-
+	module.exports = [
+		{
+			"value": "Borrador",
+			"label": "Borrador"
+		},
+		{
+			"value": "Enviada",
+			"label": "Enviada"
+		},
+		{
+			"value": "Entregada",
+			"label": "Entregada"
+		},
+		{
+			"value": "Seguimiento",
+			"label": "Seguimiento"
+		},
+		{
+			"value": "No enviada",
+			"label": "No enviada"
+		},
+		{
+			"value": "Efectiva",
+			"label": "Efectiva"
+		},
+		{
+			"value": "No efectiva",
+			"label": "No efectiva"
+		},
+		{
+			"value": "Replanteada",
+			"label": "Replanteada"
+		},
+		{
+			"value": "Por confirmar",
+			"label": "Por confirmar"
+		},
+		{
+			"value": "Nula",
+			"label": "Nula"
+		}
+	];
 
 /***/ },
 /* 274 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "Andrés Rojas", "label": "Andrés Rojas"},
-	  {"value": "Diego Peña", "label": "Diego Peña"},
-	  {"value": "No aplica", "label": "No aplica"},
-	  {"value": "Otros", "label": "Otros"}
-	]
-
+	module.exports = [
+		{
+			"value": "Andrés Rojas",
+			"label": "Andrés Rojas"
+		},
+		{
+			"value": "Diego Peña",
+			"label": "Diego Peña"
+		},
+		{
+			"value": "No aplica",
+			"label": "No aplica"
+		},
+		{
+			"value": "Otros",
+			"label": "Otros"
+		}
+	];
 
 /***/ },
 /* 275 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "Alquiler", "label": "Alquiler"},
-	  {"value": "Servicio", "label": "Servicio"}
-	]
+	module.exports = [
+		{
+			"value": "Alquiler",
+			"label": "Alquiler"
+		},
+		{
+			"value": "Servicio",
+			"label": "Servicio"
+		}
+	];
 
 /***/ },
 /* 276 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "Activo", "label": "Activo"},
-	  {"value": "Inactivo", "label": "Inactivo"},
-	  {"value": "Nuevo", "label": "Nuevo"}
-	]
+	module.exports = [
+		{
+			"value": "Activo",
+			"label": "Activo"
+		},
+		{
+			"value": "Inactivo",
+			"label": "Inactivo"
+		},
+		{
+			"value": "Nuevo",
+			"label": "Nuevo"
+		}
+	];
 
 /***/ },
 /* 277 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": 3, "label": "Alta"},
-	  {"value": 2, "label": "Media"},
-	  {"value": 1, "label": "Baja"}
-	]
-	   
-	   
+	module.exports = [
+		{
+			"value": 3,
+			"label": "Alta"
+		},
+		{
+			"value": 2,
+			"label": "Media"
+		},
+		{
+			"value": 1,
+			"label": "Baja"
+		}
+	];
 
 /***/ },
 /* 278 */
@@ -72156,82 +72218,283 @@
 /* 475 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "Administración gubernamental", "label": "Administración gubernamental"},
-	  {"value": "Alimentación y bebidas", "label":"Alimentación y bebidas"},
-	  {"value": "Almacenamiento", "label":"Almacenamiento"},
-	  {"value": "Animación", "label":"Animación"},
-	  {"value": "Apuestas y casinos", "label":"Apuestas y casinos"},
-	  {"value": "Arquitectura y planificación", "label":"Arquitectura y planificación"},
-	  {"value": "Artículos de consumo", "label":"Artículos de consumo"},
-	  {"value": "Asuntos internacionales", "label":"Asuntos internacionales"},
-	  {"value": "Atención sanitaria y hospitalaria", "label":"Atención sanitaria y hospitalaria"},
-	  {"value": "Automatización industrial", "label":"Automatización industrial"},
-	  {"value": "Banca", "label":"Banca"},
-	  {"value": "Banca de inversiones", "label":"Banca de inversiones"},
-	  {"value": "Bienes inmobiliarios", "label":"Bienes inmobiliarios"},
-	  {"value": "Construcción", "label":"Construcción"},
-	  {"value": "Comercializadora", "label":"Comercializadora"},
-	  {"value": "Consultores", "label":"Consultores"},
-	  {"value": "Derecho", "label":"Derecho"},
-	  {"value": "Desarrollo de programación", "label":"Desarrollo de programación"},
-	  {"value": "Desarrollo de software", "label":"Desarrollo de software"},
-	  {"value": "Diseño", "label":"Diseño"},
-	  {"value": "Dotación y selección de personal", "label":"Dotación y selección de personal"},
-	  {"value": "Educación primaria secundaria", "label":"Educación primaria/secundaria"},
-	  {"value": "Electrónica de consumo", "label":"Electrónica de consumo"},
-	  {"value": "Enseñanza superior", "label":"Enseñanza superior"},
-	  {"value": "Entretenimiento", "label":"Entretenimiento"},
-	  {"value": "Eventos", "label":"Eventos"},
-	  {"value": "Financiero", "label":"Financiero"},
-	  {"value": "Hostelería", "label":"Hostelería"},
-	  {"value": "Marketing y publicidad", "label":"Marketing y publicidad"},
-	  {"value": "Ingeniería", "label":"Ingeniería"},
-	  {"value": "Ocio, viajes y turismo", "label":"Ocio, viajes y turismo"},
-	  {"value": "Organización política", "label":"Organización política"},
-	  {"value": "Recursos humanos", "label":"Recursos humanos"},
-	  {"value": "Restaurantes", "label":"Restaurantes"},
-	  {"value": "Salud", "label":"Salud"},
-	  {"value": "Seguridad", "label":"Seguridad"},
-	  {"value": "Sistemas", "label":"Sistemas"},
-	  {"value": "Soluciones de software", "label":"Soluciones de software"},
-	  {"value": "Telecomunicaciones", "label":"Telecomunicaciones"}
-	]
+	module.exports = [
+		{
+			"value": "Administración gubernamental",
+			"label": "Administración gubernamental"
+		},
+		{
+			"value": "Alimentación y bebidas",
+			"label": "Alimentación y bebidas"
+		},
+		{
+			"value": "Almacenamiento",
+			"label": "Almacenamiento"
+		},
+		{
+			"value": "Animación",
+			"label": "Animación"
+		},
+		{
+			"value": "Apuestas y casinos",
+			"label": "Apuestas y casinos"
+		},
+		{
+			"value": "Arquitectura y planificación",
+			"label": "Arquitectura y planificación"
+		},
+		{
+			"value": "Artículos de consumo",
+			"label": "Artículos de consumo"
+		},
+		{
+			"value": "Asuntos internacionales",
+			"label": "Asuntos internacionales"
+		},
+		{
+			"value": "Atención sanitaria y hospitalaria",
+			"label": "Atención sanitaria y hospitalaria"
+		},
+		{
+			"value": "Automatización industrial",
+			"label": "Automatización industrial"
+		},
+		{
+			"value": "Banca",
+			"label": "Banca"
+		},
+		{
+			"value": "Banca de inversiones",
+			"label": "Banca de inversiones"
+		},
+		{
+			"value": "Bienes inmobiliarios",
+			"label": "Bienes inmobiliarios"
+		},
+		{
+			"value": "Construcción",
+			"label": "Construcción"
+		},
+		{
+			"value": "Comercializadora",
+			"label": "Comercializadora"
+		},
+		{
+			"value": "Consultores",
+			"label": "Consultores"
+		},
+		{
+			"value": "Derecho",
+			"label": "Derecho"
+		},
+		{
+			"value": "Desarrollo de programación",
+			"label": "Desarrollo de programación"
+		},
+		{
+			"value": "Desarrollo de software",
+			"label": "Desarrollo de software"
+		},
+		{
+			"value": "Diseño",
+			"label": "Diseño"
+		},
+		{
+			"value": "Dotación y selección de personal",
+			"label": "Dotación y selección de personal"
+		},
+		{
+			"value": "Educación primaria secundaria",
+			"label": "Educación primaria/secundaria"
+		},
+		{
+			"value": "Electrónica de consumo",
+			"label": "Electrónica de consumo"
+		},
+		{
+			"value": "Enseñanza superior",
+			"label": "Enseñanza superior"
+		},
+		{
+			"value": "Entretenimiento",
+			"label": "Entretenimiento"
+		},
+		{
+			"value": "Eventos",
+			"label": "Eventos"
+		},
+		{
+			"value": "Financiero",
+			"label": "Financiero"
+		},
+		{
+			"value": "Hostelería",
+			"label": "Hostelería"
+		},
+		{
+			"value": "Marketing y publicidad",
+			"label": "Marketing y publicidad"
+		},
+		{
+			"value": "Ingeniería",
+			"label": "Ingeniería"
+		},
+		{
+			"value": "Ocio, viajes y turismo",
+			"label": "Ocio, viajes y turismo"
+		},
+		{
+			"value": "Organización política",
+			"label": "Organización política"
+		},
+		{
+			"value": "Recursos humanos",
+			"label": "Recursos humanos"
+		},
+		{
+			"value": "Restaurantes",
+			"label": "Restaurantes"
+		},
+		{
+			"value": "Salud",
+			"label": "Salud"
+		},
+		{
+			"value": "Seguridad",
+			"label": "Seguridad"
+		},
+		{
+			"value": "Sistemas",
+			"label": "Sistemas"
+		},
+		{
+			"value": "Soluciones de software",
+			"label": "Soluciones de software"
+		},
+		{
+			"value": "Telecomunicaciones",
+			"label": "Telecomunicaciones"
+		}
+	];
 
 /***/ },
 /* 476 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "Bogotá", "label": "Bogotá"},
-	  {"value": "Medellín", "label": "Medellín"},
-	  {"value": "Cali", "label": "Cali"},
-	  {"value": "Barranquilla", "label": "Barranquilla"},
-	  {"value": "Cartagena", "label": "Cartagena"},
-	  {"value": "Cúcuta", "label": "Cúcuta"},
-	  {"value": "Soledad", "label": "Soledad"},
-	  {"value": "Ibagué", "label": "Ibagué"},
-	  {"value": "Bucaramanga", "label": "Bucaramanga"},
-	  {"value": "Santa Marta", "label": "Santa Marta"},
-	  {"value": "Pereira", "label": "Pereira"},
-	  {"value": "Villavicencio", "label": "Villavicencio"},
-	  {"value": "Bello", "label": "Bello"},
-	  {"value": "Valledupar", "label": "Valledupar"},
-	  {"value": "Pasto", "label": "Pasto"},
-	  {"value": "Montería", "label": "Montería"},
-	  {"value": "Manizales", "label": "Manizales"},
-	  {"value": "Buenaventura", "label": "Buenaventura"},
-	  {"value": "Neiva", "label": "Neiva"},
-	  {"value": "Palmira", "label": "Palmira"},
-	  {"value": "Armenia", "label": "Armenia"},
-	  {"value": "Popayán", "label": "Popayán"},
-	  {"value": "Sincelejo", "label": "Sincelejo"},
-	  {"value": "Floridablanca", "label": "Floridablanca"},
-	  {"value": "Itagüí", "label": "Itagüí"},
-	  {"value": "Riohacha", "label": "Riohacha"},
-	  {"value": "Envigado", "label": "Envigado"},
-	  {"value": "Tuluá", "label": "Tuluá"}
-	]
+	module.exports = [
+		{
+			"value": "Bogotá",
+			"label": "Bogotá"
+		},
+		{
+			"value": "Medellín",
+			"label": "Medellín"
+		},
+		{
+			"value": "Cali",
+			"label": "Cali"
+		},
+		{
+			"value": "Barranquilla",
+			"label": "Barranquilla"
+		},
+		{
+			"value": "Cartagena",
+			"label": "Cartagena"
+		},
+		{
+			"value": "Cúcuta",
+			"label": "Cúcuta"
+		},
+		{
+			"value": "Soledad",
+			"label": "Soledad"
+		},
+		{
+			"value": "Ibagué",
+			"label": "Ibagué"
+		},
+		{
+			"value": "Bucaramanga",
+			"label": "Bucaramanga"
+		},
+		{
+			"value": "Santa Marta",
+			"label": "Santa Marta"
+		},
+		{
+			"value": "Pereira",
+			"label": "Pereira"
+		},
+		{
+			"value": "Villavicencio",
+			"label": "Villavicencio"
+		},
+		{
+			"value": "Bello",
+			"label": "Bello"
+		},
+		{
+			"value": "Valledupar",
+			"label": "Valledupar"
+		},
+		{
+			"value": "Pasto",
+			"label": "Pasto"
+		},
+		{
+			"value": "Montería",
+			"label": "Montería"
+		},
+		{
+			"value": "Manizales",
+			"label": "Manizales"
+		},
+		{
+			"value": "Buenaventura",
+			"label": "Buenaventura"
+		},
+		{
+			"value": "Neiva",
+			"label": "Neiva"
+		},
+		{
+			"value": "Palmira",
+			"label": "Palmira"
+		},
+		{
+			"value": "Armenia",
+			"label": "Armenia"
+		},
+		{
+			"value": "Popayán",
+			"label": "Popayán"
+		},
+		{
+			"value": "Sincelejo",
+			"label": "Sincelejo"
+		},
+		{
+			"value": "Floridablanca",
+			"label": "Floridablanca"
+		},
+		{
+			"value": "Itagüí",
+			"label": "Itagüí"
+		},
+		{
+			"value": "Riohacha",
+			"label": "Riohacha"
+		},
+		{
+			"value": "Envigado",
+			"label": "Envigado"
+		},
+		{
+			"value": "Tuluá",
+			"label": "Tuluá"
+		}
+	];
 
 /***/ },
 /* 477 */
@@ -72603,52 +72866,109 @@
 /* 480 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "anticipado", "label": "Anticipado"},
-	  {"value": "30", "label": "30 Días"},
-	  {"value": "45", "label": "45 Días"},
-	  {"value": "60", "label": "60 Días"}
-	]
-
+	module.exports = [
+		{
+			"value": "anticipado",
+			"label": "Anticipado"
+		},
+		{
+			"value": "30",
+			"label": "30 Días"
+		},
+		{
+			"value": "45",
+			"label": "45 Días"
+		},
+		{
+			"value": "60",
+			"label": "60 Días"
+		}
+	];
 
 /***/ },
 /* 481 */
 /***/ function(module, exports) {
 
-	[
-		{"value": "Asesores Comerciales", "label": "Asesores comerciales"},
-		{"value": "Cliente", "label": "Cliente"},
-		{"value": "Página Web Avante", "label": "Página Web Avante"},
-		{"value": "Google Adwords", "label": "Google Adwords"},
-		{"value": "Referido", "label": "Referido"},
-		{"value": "Promoción", "label": "Promoción"},
-		{"value": "Paginas Amarillas", "label": "Paginas Amarillas"},
-		{"value": "Paginas Amarillas Web", "label": "Paginas Amarillas Web"},
-		{"value": "Teléfono", "label": "Teléfono"},
-		{"value": "Redes Sociales", "label": "Redes Sociales"},
-		{"value": "Banner", "label": "Banner"},
-		{"value": "Otros", "label": "Otros"}
-	]
-
+	module.exports = [
+		{
+			"value": "Asesores Comerciales",
+			"label": "Asesores comerciales"
+		},
+		{
+			"value": "Cliente",
+			"label": "Cliente"
+		},
+		{
+			"value": "Página Web Avante",
+			"label": "Página Web Avante"
+		},
+		{
+			"value": "Google Adwords",
+			"label": "Google Adwords"
+		},
+		{
+			"value": "Referido",
+			"label": "Referido"
+		},
+		{
+			"value": "Promoción",
+			"label": "Promoción"
+		},
+		{
+			"value": "Paginas Amarillas",
+			"label": "Paginas Amarillas"
+		},
+		{
+			"value": "Paginas Amarillas Web",
+			"label": "Paginas Amarillas Web"
+		},
+		{
+			"value": "Teléfono",
+			"label": "Teléfono"
+		},
+		{
+			"value": "Redes Sociales",
+			"label": "Redes Sociales"
+		},
+		{
+			"value": "Banner",
+			"label": "Banner"
+		},
+		{
+			"value": "Otros",
+			"label": "Otros"
+		}
+	];
 
 /***/ },
 /* 482 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "Nosotros", "label": "Nosotros"},
-	  {"value": "Cliente", "label": "Cliente"}
-	]
+	module.exports = [
+		{
+			"value": "Nosotros",
+			"label": "Nosotros"
+		},
+		{
+			"value": "Cliente",
+			"label": "Cliente"
+		}
+	];
 
 /***/ },
 /* 483 */
 /***/ function(module, exports) {
 
-	[
-		{"value": "Masculino", "label": "Masculino"},
-		{"value": "Femenino", "label": "Femenino"}
-	]
-
+	module.exports = [
+		{
+			"value": "Masculino",
+			"label": "Masculino"
+		},
+		{
+			"value": "Femenino",
+			"label": "Femenino"
+		}
+	];
 
 /***/ },
 /* 484 */
@@ -75621,30 +75941,71 @@
 /* 496 */
 /***/ function(module, exports) {
 
-	[
-		{"value": "Inventario", "label": "Inventario"},
-		{"value": "Pedido", "label": "Pedido"}
-	]
+	module.exports = [
+		{
+			"value": "Inventario",
+			"label": "Inventario"
+		},
+		{
+			"value": "Pedido",
+			"label": "Pedido"
+		}
+	];
 
 /***/ },
 /* 497 */
 /***/ function(module, exports) {
 
-	[
-		{"value":"Desktops", "label": "Desktops"},
-		{"value":"Laptops", "label": "Laptops"},
-		{"value":"Apple", "label": "Apple"},
-		{"value":"Servers", "label": "Servers"},
-		{"value":"IT Service", "label": "IT Service"},
-		{"value":"IT Service 24/7","label": "IT  Service 24/7"},
-		{"value":"Rescate Online","label": "Rescate Online"},
-		{"value":"Discos Duros Seguros","label": "Discos Duros Seguros"},
-		{"value":"Networks","label": "Networks"},
-		{"value":"Complements","label": "Complements"},
-		{"value":"Printers","label": "Printers"},
-		{"value":"Adicional","label": "Adicional"}
-	]
-
+	module.exports = [
+		{
+			"value": "Desktops",
+			"label": "Desktops"
+		},
+		{
+			"value": "Laptops",
+			"label": "Laptops"
+		},
+		{
+			"value": "Apple",
+			"label": "Apple"
+		},
+		{
+			"value": "Servers",
+			"label": "Servers"
+		},
+		{
+			"value": "IT Service",
+			"label": "IT Service"
+		},
+		{
+			"value": "IT Service 24/7",
+			"label": "IT  Service 24/7"
+		},
+		{
+			"value": "Rescate Online",
+			"label": "Rescate Online"
+		},
+		{
+			"value": "Discos Duros Seguros",
+			"label": "Discos Duros Seguros"
+		},
+		{
+			"value": "Networks",
+			"label": "Networks"
+		},
+		{
+			"value": "Complements",
+			"label": "Complements"
+		},
+		{
+			"value": "Printers",
+			"label": "Printers"
+		},
+		{
+			"value": "Adicional",
+			"label": "Adicional"
+		}
+	];
 
 /***/ },
 /* 498 */
@@ -77085,28 +77446,63 @@
 /* 504 */
 /***/ function(module, exports) {
 
-	[
-	{"value": "WorkPro", "label": "WorkPro"},
-	{"value": "WorkPlus", "label": "WorkPlus"},
-	{"value": "WorkPremium", "label": "WorkPremium"}
-	]
-
+	module.exports = [
+		{
+			"value": "WorkPro",
+			"label": "WorkPro"
+		},
+		{
+			"value": "WorkPlus",
+			"label": "WorkPlus"
+		},
+		{
+			"value": "WorkPremium",
+			"label": "WorkPremium"
+		}
+	];
 
 /***/ },
 /* 505 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "Mes", "label": "Mes"},
-	  {"value": "Semana", "label": "Semana"},
-	  {"value": "Día", "label": "Día"},
-	  {"value": "15 días", "label": "15 días"},
-	  {"value": "a 7 días", "label": "a 7 días"},
-	  {"value": "a 3 días", "label": "a 3 días"},
-	  {"value": "Hora", "label": "Hora"},
-	  {"value": "Servicio", "label": "Servicio"},
-	  {"value": "Venta", "label": "Venta"}
-	]
+	module.exports = [
+		{
+			"value": "Mes",
+			"label": "Mes"
+		},
+		{
+			"value": "Semana",
+			"label": "Semana"
+		},
+		{
+			"value": "Día",
+			"label": "Día"
+		},
+		{
+			"value": "15 días",
+			"label": "15 días"
+		},
+		{
+			"value": "a 7 días",
+			"label": "a 7 días"
+		},
+		{
+			"value": "a 3 días",
+			"label": "a 3 días"
+		},
+		{
+			"value": "Hora",
+			"label": "Hora"
+		},
+		{
+			"value": "Servicio",
+			"label": "Servicio"
+		},
+		{
+			"value": "Venta",
+			"label": "Venta"
+		}
+	];
 
 /***/ },
 /* 506 */
@@ -77816,13 +78212,24 @@
 /* 511 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "No disponible", "label": "No disponible"},
-	  {"value": "No confiable", "label": "No confiable"},
-	  {"value": "Competencia", "label": "Competencia"},
-	  {"value": "Por cliente", "label": "Por cliente"}
-	]
-
+	module.exports = [
+		{
+			"value": "No disponible",
+			"label": "No disponible"
+		},
+		{
+			"value": "No confiable",
+			"label": "No confiable"
+		},
+		{
+			"value": "Competencia",
+			"label": "Competencia"
+		},
+		{
+			"value": "Por cliente",
+			"label": "Por cliente"
+		}
+	];
 
 /***/ },
 /* 512 */
@@ -77929,12 +78336,20 @@
 /* 513 */
 /***/ function(module, exports) {
 
-	[
-	  {"value": "No confiable", "label": "No confiable"},
-	  {"value": "Competencia", "label": "Competencia"},
-	  {"value": "Por cliente", "label": "Por cliente"}
-	]
-
+	module.exports = [
+		{
+			"value": "No confiable",
+			"label": "No confiable"
+		},
+		{
+			"value": "Competencia",
+			"label": "Competencia"
+		},
+		{
+			"value": "Por cliente",
+			"label": "Por cliente"
+		}
+	];
 
 /***/ },
 /* 514 */
