@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import * as action from '../../actions/quotations';
-import {storeActivity} from '../../lib/activity';
+import { storeActivity } from '../../lib/activity';
 
 const QuoStatus = React.createClass({
   getDefaultProps() {
