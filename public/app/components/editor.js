@@ -46,7 +46,9 @@ const Editor = React.createClass({
   },
 
   componentWillUnmount() {
-		this.destroyEditor(this.state.editor);
+	  if(this.state.editor) {
+      this.destroyEditor(this.state.editor);
+    }	
 	},
 
   setContent(html) {

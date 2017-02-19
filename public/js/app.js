@@ -46263,7 +46263,9 @@
 	    editor.destroy();
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.destroyEditor(this.state.editor);
+	    if (this.state.editor) {
+	      this.destroyEditor(this.state.editor);
+	    }
 	  },
 	  setContent: function setContent(html) {
 	    var editor = this.state.editor;
