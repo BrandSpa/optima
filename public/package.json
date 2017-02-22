@@ -6,6 +6,11 @@
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
+   "jest": {
+    "modulePaths": [
+      "./app"
+    ]
+  },
   "author": "Alejandro Sanabria <alejandro@brandspa.com>",
   "license": "ISC",
   "dependencies": {

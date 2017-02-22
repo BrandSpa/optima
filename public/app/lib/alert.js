@@ -1,4 +1,4 @@
-function Alert(message, time = 5000) {
+const Alert = function(message, time = 5000) {
 	const el = document.getElementById('toast_messsage');
 	let timeout;
   el.innerHTML = message;

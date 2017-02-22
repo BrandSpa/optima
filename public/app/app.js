@@ -1,15 +1,15 @@
 'use strict';
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import page from 'page';
 import axios from 'axios';
-import {Provider} from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import store from './store';
 import App from './views/app';
 import Dashboard from 'views/quotations/dashboard';
 import CompanyCreate from './views/companies/create_panel';
 import Login from './login';
-import Quotation from './views/quotation/section';
+import QuotationSection from './views/quotation/section';
 import Companies from './views/companies/list';
 import Contacts from './views/contacts/section';
 import Services from './views/services/section';
@@ -61,7 +61,7 @@ page('/reports', () => {
 });
 
 page('/quotations/:id', (ctx) => {
-  return root(<Quotation params={ctx.params}/>)
+  return root(<QuotationSection params={ctx.params}/>)
 });
 
 page();
