@@ -1,9 +1,9 @@
 'use strict';
 import React from 'react';
-import * as action from 'actions/contacts';
-import * as quoAction from 'actions/quotations';
-import Form from 'views/contacts/form_create';
-import Select from 'components/form_select';
+import * as action from '../../actions/contacts';
+import * as quoAction from '../../actions/quotations';
+import Form from '../../views/contacts/form_create';
+import Select from '../../components/form_select';
 import clearObject from '../../lib/clean_object';
 
 const QuoContact = React.createClass({

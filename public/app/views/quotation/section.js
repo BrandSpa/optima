@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
-import {connect} from 'react-redux';
-
+import { connect } from 'react-redux';
 import * as action from 'actions/quotations';
 import * as serviceAction from 'actions/services';
 import * as activityAction from 'actions/activities';
@@ -26,7 +25,7 @@ import Todos from 'views/todos/section';
 import Alert from 'components/alert';
 import Toast from 'lib/alert';
 
-const QuotationSection = React.createClass({
+export const QuotationSection = React.createClass({
   alert: null,
 
   getInitialState: function() {
@@ -127,16 +126,19 @@ const QuotationSection = React.createClass({
   handleSendMail(mail) {
     const {id} = this.props.quotations.quotation;
     let quo = {...this.props.quotations.quotation, ...mail};
-    console.log('handleSendMail', this.props.params.id, quo);
 
     return this.props.dispatch(action.update(quo))
-    .then(() => this.props.dispatch(action.sendMail(id)))
-    .then((res) => {
-      if(res.type == 'QUOTATIONS_FAIL') {
-        return Toast(res.payload[0]);
-      }
-      this.setActivity('envio el mail');
-    });
+      .then(() => this.props.dispatch(action.sendMail(id)))
+      .then(res => {
+        if(res.type == 'QUOTATIONS_FAIL') {
+          console.log('inside');
+          Toast(res.payload[0]);
+          return;
+        }
+
+        this.setActivity('envio el mail');
+        return res;
+      });
   },
 
   handleServiceApproval(serviceApproval) {
@@ -201,8 +203,8 @@ const QuotationSection = React.createClass({
   },
 
   render() {
-    let {quotation} = this.props.quotations;
-    let {user} = this.props.user;
+    let { quotation } = this.props.quotations;
+    let { user } = this.props.user;
 
     return (
       <div id={`quotation-${quotation.id}`}>
