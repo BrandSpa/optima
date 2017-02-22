@@ -127,7 +127,8 @@ const QuotationSection = React.createClass({
   handleSendMail(mail) {
     const {id} = this.props.quotations.quotation;
     let quo = {...this.props.quotations.quotation, ...mail};
-    
+    console.log('handleSendMail', this.props.params.id, quo);
+
     return this.props.dispatch(action.update(this.props.params.id, quo))
     .then(() => this.props.dispatch(action.sendMail(id)))
     .then((res) => {
