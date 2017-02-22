@@ -177,23 +177,23 @@ export const QuotationSection = React.createClass({
     if(actionRes.type == 'QUOTATIONS_FAIL') {
       return this.setState({showErrors: true});
     } else {
-      return this.handleDisabled(actionRes.payload.status);
+      // return this.handleDisabled(actionRes.payload.status);
     }
   },
 
   handleDisabled(status) {
     let disabled = false;
 
-    if(status == 'Efectiva') {
-      disabled = true;
-    } else {
-      disabled = false;
-    }
+    // if(status == 'Efectiva') {
+    //   disabled = true;
+    // } else {
+    //   disabled = false;
+    // }
 
     this.setState({
-      disabled: disabled,
       showErrors: false,
-      errors: []
+      errors: [],
+      disabled
     });
   },
 
