@@ -129,7 +129,7 @@ const QuotationSection = React.createClass({
     let quo = {...this.props.quotations.quotation, ...mail};
     console.log('handleSendMail', this.props.params.id, quo);
 
-    return this.props.dispatch(action.update(this.props.params.id, quo))
+    return this.props.dispatch(action.update(quo))
     .then(() => this.props.dispatch(action.sendMail(id)))
     .then((res) => {
       if(res.type == 'QUOTATIONS_FAIL') {

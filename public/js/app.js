@@ -75145,7 +75145,7 @@
 	    var quo = _extends({}, this.props.quotations.quotation, mail);
 	    console.log('handleSendMail', this.props.params.id, quo);
 
-	    return this.props.dispatch(action.update(this.props.params.id, quo)).then(function () {
+	    return this.props.dispatch(action.update(quo)).then(function () {
 	      return _this5.props.dispatch(action.sendMail(id));
 	    }).then(function (res) {
 	      if (res.type == 'QUOTATIONS_FAIL') {
