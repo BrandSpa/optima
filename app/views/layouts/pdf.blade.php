@@ -25,7 +25,7 @@
 	</div>
 	<div id="intro">
 		<p>
-			En Avante trabajamos para que usted y su compañía tengan a mano herramientas tecnológicas siempre actualizadas.
+			En RentAdvisor trabajamos para que usted y su compañía tengan a mano herramientas tecnológicas siempre actualizadas.
 			Nuestro modelo de Renting le permite contar con equipos de última tecnología a su medida,
 			en las principales marcas del mundo, por los periodos que su compañía los necesite,
 			ofreciéndole grandes ventajas tributarias y valores agregados fundamentales como nuestro Servicio Técnico 24/7®,
