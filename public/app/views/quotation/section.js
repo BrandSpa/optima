@@ -130,7 +130,8 @@ const QuotationSection = React.createClass({
     
     return this.props.dispatch(action.update(this.props.params.id, quo))
     .then(() => this.props.dispatch(action.sendMail(id)))
-    .then(() => this.setActivity('envio mail'));
+    .then((res) => console.log('sendmail', res))
+    .catch(err => console.error('sendmail', err));
   },
 
   handleServiceApproval(serviceApproval) {
