@@ -132,8 +132,9 @@ const QuotationSection = React.createClass({
     .then(() => this.props.dispatch(action.sendMail(id)))
     .then((res) => {
       if(res.type == 'QUOTATIONS_FAIL') {
-        Toast(res.payload[0]);
+        return Toast(res.payload[0]);
       }
+      this.setActivity('envio el mail');
     });
   },
 
