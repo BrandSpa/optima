@@ -136,7 +136,7 @@ class QuotationsController extends BaseController {
 				 $query->select('id', 'name', 'lastname', 'email', 'birthday');
 				 } 
 			])
-			->select('id', 'status', 'created_at', 'company_id', 'contact_id', 'found_us','client_type', 'type')
+			->select('id', 'status', 'created_at', 'company_id', 'contact_id', 'found_us','client_type', 'type', 'advisor')
 			->orderBy('id', 'DESC')
 			->get()
 			->toArray();
