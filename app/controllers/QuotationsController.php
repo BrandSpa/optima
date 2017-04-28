@@ -64,7 +64,7 @@ class QuotationsController extends BaseController {
 		$snappy = new Pdf('wkhtmltopdf');
 		// $snappy->setOption('javascript-delay', 3000);
 		$snappy->setOption( 'lowquality' , false);
-		$snappy->setOption('footer-font-name', 'Nunito');
+		// $snappy->setOption('footer-font-name', 'Nunito');
 		$snappy->setOption('footer-font-size', '10');
 		$snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
 		// $snappy->setOption('page-size', 'Letter');
