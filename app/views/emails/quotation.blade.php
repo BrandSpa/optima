@@ -455,9 +455,9 @@
 												
                                                Por favor tenga en cuenta los términos del servicio consignados en esta guía 
                                                @if(isset($data['type']) && $data['type'] == "Servicio")
-                                               		<a href="http://rentadvisor.com.co/it.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
+                                               		<a href="http://rentadvisor.com.co/wp-content/uploads/it.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
                                            		@else
-                                           			<a href="http://rentadvisor.com.co/guia.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
+                                           			<a href="http://rentadvisor.com.co/wp-content/uploads/guia.pdf" target="_blank"  style="background:#333; color:#fff; padding: 5px 10px; text-decoration: none; margin-top: 30px">Ver guía</a>
                                            		@endif
                                             </td>
                                         </tr>
