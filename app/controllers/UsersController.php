@@ -25,6 +25,33 @@ class UsersController extends BaseController{
 		return View::make('users.login');
 	}
 
+	public function getCreate()
+	{
+		return View::make('users.create');
+	}
+
+	public function postCreate(){
+		$validation=Validator::make(Input::all(),
+        array(
+			'email'=>'required|max:255|unique:users,email',
+			'name' => 'required',
+			'lastname' => 'required',
+			'password'=>'required',
+		));
+		if($validation->fails())
+		return Redirect::route('create')->withInput()->withErrors($validation->messages());
+		else
+		{
+			$user=new User();
+			$user->email=Input::get('email');
+			$user->name=Input::get('name');
+			$user->lastname=Input::get('lastname');
+			$user->password=Hash::make(Input::get('password'));
+			$user->save();
+			return Redirect::route('');
+		}
+		return View::make('create');
+	}
 
 	public function postLogin()
 	{
