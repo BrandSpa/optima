@@ -1,19 +1,28 @@
 'use strict';
-var path = require('path');
+const fs = require("fs");
+const Path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
-	watch: true,
 	resolve: {
-  	root: [
-    	path.resolve('./app')
-  	]
+		modules: ['./app', 'node_modules']
 	},
 	entry: {
+		vendor: [
+			'react',
+			'react-dom',
+			'react-redux',
+			'redux-thunk',
+			'redux',
+			'page',
+			'chart.js',
+			'quill'
+		],
 		app: './app/app.js',
-		pdf: './app/pdf.js',
+		pdf: './app/pdf.js'
 	},
 	output: {
-		path: './js',
+		path: Path.join(__dirname, "/js/"),
 		filename: '[name].js'
 	},
 	module: {
@@ -23,10 +32,17 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'babel-loader'
 			},
-			{ test: /\.json$/, loader: 'json' },
+			{ test: /\.json$/, loader: 'json-loader' },
 			{
 				test: /\.scss$/,
 				loaders: ['css', 'sass']
 			}
-		]}
+	]},
+	plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+        name: "vendor",
+        filename: "vendor.js",
+        minChunks: 2
+    })
+  ]
 };

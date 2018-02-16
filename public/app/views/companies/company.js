@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import * as action from 'actions/contacts'; 
-import * as companyAction from 'actions/companies'; 
+import * as action from 'actions/contacts';
+import * as companyAction from 'actions/companies';
 import Form from 'views/contacts/form_create';
 import Contact from 'views/companies/contact';
 
@@ -33,7 +33,7 @@ const Company = React.createClass({
   },
 
   handleSubmitResponse(actionRes) {
-    
+
     if(actionRes.type !== 'CONTACTS_FAIL') {
       if(actionRes.type == 'CONTACTS_UPDATE') {
         this.props.dispatch(companyAction.updateContact(this.props.company, actionRes.payload));
@@ -55,7 +55,7 @@ const Company = React.createClass({
     if(e) e.preventDefault();
     this.showForm();
     this.props.dispatch(action.setContact(contact));
-    
+
   },
 
   render() {
@@ -99,7 +99,7 @@ const Company = React.createClass({
             </tr>
           </thead>
           <tbody>
-          {company.contacts.map(contact => 
+          {company.contacts.map(contact =>
             <tr key={contact.id}>
               <td>{contact.name}</td>
               <td>{contact.email}</td>
@@ -107,12 +107,12 @@ const Company = React.createClass({
               <td><button className="btn btn-sm" onClick={this.handleEditContact.bind(null, contact)}>Editar</button></td>
             </tr>
           )}
-         
+
           </tbody>
         </table>
 
-        <button 
-          className="btn-primary btn-sm pull-right" 
+        <button
+          className="btn-primary btn-sm pull-right"
           onClick={this.showForm}
         >
         Agregar contacto
