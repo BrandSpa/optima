@@ -204,7 +204,6 @@ class QuotationsController extends BaseController {
 				$mo['contact_name'] = $mo['contact']['name'] .' '. $mo['contact']['lastname'];
 				$mo['contact_email'] = $mo['contact']['email'];
 				$mo['contact_birthday'] = $mo['contact']['birthday'];
-				$mo['status_note'] = mb_convert_encoding($mo['status_note'], 'UTF-16LE', 'UTF-8');
 				array_push($newModel, $mo);
 			}
 
