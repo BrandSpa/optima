@@ -5,10 +5,11 @@
 	{"value": "Google Adwords", "label": "Google Adwords"},
 	{"value": "Referido", "label": "Referido"},
 	{"value": "Promoción", "label": "Promoción"},
-	{"value": "Paginas Amarillas", "label": "Paginas Amarillas"},
-	{"value": "Paginas Amarillas Web", "label": "Paginas Amarillas Web"},
 	{"value": "Teléfono", "label": "Teléfono"},
 	{"value": "Redes Sociales", "label": "Redes Sociales"},
 	{"value": "Banner", "label": "Banner"},
+	{"value": "Landing Page", "label": "Landing Page"},
+	{"value": "Chat", "label": "Chat"},
+	{"value": "WhatsApp", "label": "WhatsApp"},
 	{"value": "Otros", "label": "Otros"}
 ]
