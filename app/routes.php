@@ -8,6 +8,8 @@ Route::filter('etags', function($route, $request, $response)
 });
 
 Route::get('login', 'UsersController@getLogin');
+Route::get('create', 'UsersController@getCreate');
+Route::post('create', 'UsersController@postCreate');
 Route::post('login', 'UsersController@postLogin');
 Route::get('logout', 'UsersController@logout');
 Route::get('quotations/{id}/pdf/{hash}', 'QuotationsController@showPdf');
