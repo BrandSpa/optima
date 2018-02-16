@@ -10,5 +10,13 @@
 	{"value":"Networks","label": "Networks"},
 	{"value":"Complements","label": "Complements"},
 	{"value":"Printers","label": "Printers"},
+	{"value":"Tablets","label": "Tablets"},
+	{"value":"Video Beams","label": "Video Beams"},
+	{"value":"Televisores","label": "Televisores"},
+	{"value":"Sonido","label": "Sonido"},
+	{"value":"Xbox y PS4","label": "Xbox y PS4"},
+	{"value":"Scanners","label": "Scanners"},
+	{"value":"Redes","label": "Redes"},
+	{"value":"UPS","label": "UPS"},
 	{"value":"Adicional","label": "Adicional"}
 ]
