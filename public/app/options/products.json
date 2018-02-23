@@ -1,5 +1,6 @@
 [
 	{"value":"Desktops", "label": "Desktops"},
+	{"value":"Desktops-promo", "label": "Desktops Promo 1"},
 	{"value":"Laptops", "label": "Laptops"},
 	{"value":"Apple", "label": "Apple"},
 	{"value":"Servers", "label": "Servers"},
