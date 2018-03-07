@@ -92,12 +92,7 @@ class QuotationsController extends BaseController {
 	public function Showpdf($id, $hash)
 	{
 		$quotation = $this->quotation->find($id);
-		echo '<pre>';
-		foreach($quotation->products as $product){
-			print_r($product);
-			echo "<br>____________________________________<br>";
-		}
-		exit;
+
 		
 		$html = View::make('pdfs.quotation', compact('quotation'));
 
