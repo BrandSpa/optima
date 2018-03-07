@@ -53,7 +53,7 @@ class Quotation extends \Eloquent {
 
 	public function products()
 	{
-		return $this->hasMany('Optima\\Product')->orderBy('id', 'asc');
+		return $this->hasMany('Optima\\Product')->orderBy('position, id', 'asc');
 	}
 
 	public function trackings()
