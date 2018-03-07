@@ -92,6 +92,7 @@ class QuotationsController extends BaseController {
 	public function Showpdf($id, $hash)
 	{
 		$quotation = $this->quotation->find($id);
+		
 		$html = View::make('pdfs.quotation', compact('quotation'));
 
 		return $this->pdf->show($html);
@@ -100,7 +101,6 @@ class QuotationsController extends BaseController {
 	public function getPdfBn($id)
 	{
 		$quotation = Quotation::find($id);
-
 		$html = View::make('pdfs.quotation_bn', compact('quotation'));
 
 		return $this->pdf->show($html);
