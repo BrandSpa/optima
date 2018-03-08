@@ -1,7 +1,4 @@
 <table cellspacing="0">
-	<pre>
-	[[print_r($quotation->products); exit]]
-	</pre>
 	@foreach($quotation->products as $product)
 	<tr>
 		<td colspan="3" class="no-border img-product">
