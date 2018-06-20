@@ -93,7 +93,6 @@ class QuotationsController extends BaseController {
 	{
 		$quotation = $this->quotation->find($id);
 
-		
 		$html = View::make('pdfs.quotation', compact('quotation'));
 
 		return $this->pdf->show($html);
@@ -193,7 +192,7 @@ class QuotationsController extends BaseController {
 				 $query->select('id', 'name', 'lastname', 'email', 'birthday');
 				 } 
 			])
-			->select('id', 'status', 'created_at', 'company_id', 'contact_id', 'found_us','client_type', 'type', 'advisor', 'status_note')
+			->select('id', 'status', 'created_at', 'sent_at', DB::raw('CONCAT(TIMESTAMPDIFF(HOUR,created_at, sent_at), "Horas") as Diff'),'company_id', 'contact_id', 'found_us','client_type', 'type', 'advisor', 'status_note')
 			->orderBy('id', 'DESC')
 			->get()
 			->toArray();
