@@ -30,6 +30,7 @@ module.exports = React.createClass({
       'Página Web Avante',
       'Google Adwords',
       'Referido',
+      'App Referidos',
       'Promoción',
       'Paginas Amarilladas',
       'Paginas Amarilladas Web',
