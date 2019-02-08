@@ -1,5 +1,10 @@
 [
 	{"value":"Desktops", "label": "Desktops"},
+	{"value":"RentingTablets", "label": "Renting Tablets"},
+	{"value":"Gana3", "label": "Gana 3"},
+	{"value":"Desktops-promo", "label": "Desktops Promo"},
+	{"value":"multifuncionales-promo", "label": "Multifuncionales Promo"},
+	{"value":"xbox-y-playstation-promo", "label": "Xbox y PlayStation Promo"},
 	{"value":"Laptops", "label": "Laptops"},
 	{"value":"Apple", "label": "Apple"},
 	{"value":"Servers", "label": "Servers"},
@@ -10,5 +15,13 @@
 	{"value":"Networks","label": "Networks"},
 	{"value":"Complements","label": "Complements"},
 	{"value":"Printers","label": "Printers"},
+	{"value":"Tablets","label": "Tablets"},
+	{"value":"Video Beams","label": "Video Beams"},
+	{"value":"Televisores","label": "Televisores"},
+	{"value":"Sonido","label": "Sonido"},
+	{"value":"Xbox y PS4","label": "Xbox y PS4"},
+	{"value":"Scanners","label": "Scanners"},
+	{"value":"Redes","label": "Redes"},
+	{"value":"UPS","label": "UPS"},
 	{"value":"Adicional","label": "Adicional"}
 ]

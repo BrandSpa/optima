@@ -25,7 +25,7 @@ b, h1, h2, h3, h4 {
   top: 203pt;
   right: 55px;
   display: block;
-  color: white;
+  color: #111111;
   font-size: 22pt;
 }
 
@@ -77,8 +77,8 @@ table {
 table td {
   margin: 0;
   padding: 3pt;
-  border-top: 1px solid #eaab20;
-  border-right: 1px solid #eaab20;
+  border-top: 1px solid #a5d6ec;
+  border-right: 1px solid #a5d6ec;
   color: black;
   font-size: 9pt;
   line-height: 13px;
@@ -149,7 +149,7 @@ td img{
   margin: 0 0 15px -15px;
   padding: 0 0 25px 0;
   width: 505pt;
-  border-bottom: 1px solid #eaab20;
+  border-bottom: 1px solid #a5d6ec;
   font-size: 10pt;
   line-height: 15pt;
 }
@@ -181,7 +181,7 @@ td img{
   height: 15px;
   margin-bottom: 15px;
   margin-left: 30px;
-  border-bottom: 1px solid #ebab21;
+  border-bottom: 1px solid #a5d6ec;
 }
 
 .service-title{

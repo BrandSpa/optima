@@ -33,9 +33,66 @@ class QuotationsController extends BaseController {
 		return $html;
 	}
 
+	public function viewMail( $id ){
+		
+		if($id == 1){
+			$data = array(
+				"data" => array(
+					'message' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam purus lacus, volutpat sed ipsum in, pulvinar aliquet enim. Phasellus ultrices risus non dapibus facilisis. Morbi quis suscipit mauris, a hendrerit enim. Pellentesque purus neque, suscipit vel mattis tempor, iaculis eu lorem. Praesent pulvinar tellus sit amet eros sollicitudin viverra. Sed finibus nisl vel tellus pulvinar, aliquam maximus mi vulputate. Aenean condimentum diam vel fringilla malesuada.",
+					'name' => "Michael",
+					"lastname" => "Sanchez",
+					"url" => "http://michaelsanchez.co",
+					"service_approval" => 1,
+					"user" => "User"
+				)
+			);
+			return View::make('emails.quotation', $data);
+		}
+
+		if($id == 2){
+			$collection = new Quotation();
+			$collection = $collection->where("id", 100);
+			$data = array(
+				"collection" => $collection
+			);
+			return View::make('emails.todos_remains', $data);
+		}
+
+		if($id == 3){
+			$collection = new Quotation();
+			$collection = $collection->where("id", 100);
+			$data = array(
+				"collection" => $collection,
+				"data" => (object) array(
+					"user" => (object) array(
+						'message' => "Hola k ase",
+						'name' => "Michael",
+						"lastname" => "Sanchez",
+						"url" => "http://michaelsanchez.co",
+						"service_approval" => 1,
+						"user" => "User"
+					),
+					"expires_date" => "12/dic/2001",
+					"expires_time" => "13:00:00",
+					"title" => "remember",
+					"description" => "description"
+				)
+			);
+			return View::make('emails.todos', $data);
+		}
+
+		if( $id == 4 ) {
+			$data = array('token' => "abcjahdjsadka");
+			return View::make('emails.auth.reminder', $data);
+
+		}
+		
+	}
+
 	public function Showpdf($id, $hash)
 	{
 		$quotation = $this->quotation->find($id);
+
 		$html = View::make('pdfs.quotation', compact('quotation'));
 
 		return $this->pdf->show($html);
@@ -44,7 +101,6 @@ class QuotationsController extends BaseController {
 	public function getPdfBn($id)
 	{
 		$quotation = Quotation::find($id);
-
 		$html = View::make('pdfs.quotation_bn', compact('quotation'));
 
 		return $this->pdf->show($html);
@@ -136,7 +192,7 @@ class QuotationsController extends BaseController {
 				 $query->select('id', 'name', 'lastname', 'email', 'birthday');
 				 } 
 			])
-			->select('id', 'status', 'created_at', 'company_id', 'contact_id', 'found_us','client_type', 'type', 'advisor')
+			->select('id', 'status', 'created_at', 'sent_at', DB::raw('CONCAT(TIMESTAMPDIFF(MINUTE,created_at, sent_at), " Minutos") as Diff'),'company_id', 'contact_id', 'found_us','client_type', 'type', 'advisor', 'type_category as categoria', 'status_note')
 			->orderBy('id', 'DESC')
 			->get()
 			->toArray();

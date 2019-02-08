@@ -43,10 +43,14 @@
 		</p>
 	</div>
 
-	<img src="[[ public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png' ]]" id="firm" alt="">
+	@if(file_exists( public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png'))
+		<img src="[[ public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png' ]]" id="firm" alt="">
+	@else
+		<br /><br/ >
+	@endif
 	<span class="firm">[[ $quotation->user->name ]] [[ $quotation->user->lastname ]]</span>
-	<span class="firm">@if($quotation->user->id == 3) Coordinador Comercial @else Asesor Comercial @endif</span>
-	<span class="firm">comercial@rentadvisor.com.co</span>
+	<span class="firm">@if($quotation->user->id == 3) Coordinador Comercial @elseif($quotation->user->id == 12) Director Comercial @else Asesor Comercial @endif</span>
+	<span class="firm">[[ $quotation->user->email ]]</span>
 	<span class="firm">PBX 6 36 10 51</span>
 
 	<img src="[[ public_path().'/img/pdf/final.jpg' ]]" alt="" id="final">
