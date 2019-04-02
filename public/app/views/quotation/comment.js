@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Editor from 'components/editor';
+import ReactQuill from 'react-quill';
 
 const QuoComment = React.createClass({
   getDefaultProps() {
@@ -38,7 +38,7 @@ const QuoComment = React.createClass({
         <div className="panel-body">
         <h5>Comentario</h5>
 
-          <Editor
+          <ReactQuill
             value={this.state.comment}
             onChange={this.handleChange}
           />
