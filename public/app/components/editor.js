@@ -26,8 +26,32 @@ const Editor = React.createClass({
 
   mountQuill() {
     const editor = new Quill(`#${this.state.id}`, {
-      modules: {toolbar: `#${this.state.idToolbar}`},
-       theme: 'snow'
+      theme: 'snow',
+      modules: {
+        toolbar: {
+          container:
+          [
+              ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+              ['blockquote', 'code-block'],
+  
+              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+              [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+              [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+              [{ 'direction': 'rtl' }],                         // text direction
+  
+              [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  
+              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+              [{ 'font': [] }],
+              [{ 'align': [] }],
+  
+              ['clean']                                    // remove formatting button
+             
+          ]
+        }
+      }
     });
 
     this.getChanges(editor);
@@ -36,8 +60,10 @@ const Editor = React.createClass({
   
   getChanges(editor) {
      editor.on('text-change', (delta, source) => {
-      let html = editor.getHTML();
-      this.handleChange(html);
+      let html = editor.root.innerHTML;
+      if(typeof this.props.onChange === 'function') {
+        return this.props.onChange(html);
+      }
     });
   },
 
@@ -54,7 +80,7 @@ const Editor = React.createClass({
   setContent(html) {
     let editor = this.state.editor;
     let range = editor.getSelection();
-    editor.setHTML(html)
+    editor.pasteHTML(html)
     editor.setSelection(range);
   },
 
@@ -65,6 +91,7 @@ const Editor = React.createClass({
   },
 
   handleChange(html) {
+    console.log(html);
     if(typeof this.props.onChange === 'function') {
       return this.props.onChange(html);
     }
@@ -81,34 +108,6 @@ const Editor = React.createClass({
   render() {
     return (
       <div className="editor">
-        <div id={this.state.idToolbar}>
-          <select className="ql-size">
-            <option value="10px">Small</option>
-            <option value="13px" selected>Normal</option>
-            <option value="18px">Large</option>
-            <option value="32px">Huge</option>
-          </select>
-
-          <div className="ql-format-separator"></div>
-          <span className="ql-format-button ql-bold"></span>
-          <div className="ql-format-separator"></div>
-          <div className="ql-format-separator"></div>
-          <span className="ql-format-button ql-italic"></span>
-          <div className="ql-format-separator"></div>
-          <span className="ql-format-button ql-underline"></span>
-          <div className="ql-format-separator"></div>
-          <span className="ql-format-button ql-bullet"></span>
-          <span className="ql-format-button ql-list"></span>
-          <div className="ql-format-separator"></div>
-
-          <select className="ql-align">
-            <option value="left"></option>
-            <option value="center"></option>
-            <option value="right"></option>
-            <option value="justify"></option>
-          </select>
-        </div>
-
         <div id={this.state.id} style={this.props.style}>
           <div dangerouslySetInnerHTML={{__html: this.getEditorContents()}} />
         </div>

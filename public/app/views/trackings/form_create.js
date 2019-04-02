@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import moment from 'moment';
-import Editor from 'components/editor';
+import ReactQuill from 'react-quill';
 import Select from 'components/form_select';
 import DateTime from 'components/datetime';
 
@@ -89,15 +89,17 @@ const trackingForm = React.createClass({
 
         <div className="form-group col-md-12">
           <label>Reporte</label>
-          <Editor
-            style={{height: '250px'}}
+          <ReactQuill
+            style={{height: '200px'}}
             value={tracking.report}
             onChange={this.handleReport}
             edit={tracking.id ? true : false}
           />
         </div>
-
+        <div className="col-md-12">
         <button className="btn btn-primary btn-sm">Guardar</button>
+        </div>
+        
       </form>
     );
   }

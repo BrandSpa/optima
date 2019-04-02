@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Editor from '../../components/editor';
+import ReactQuill from 'react-quill';
 
 const serviceForm = React.createClass({
   getInitialState() {
@@ -58,7 +58,7 @@ const serviceForm = React.createClass({
 
         <div className="form-group col-md-12">
           <label htmlFor="">Contenido</label>
-          <Editor
+          <ReactQuill
             style={{height: '250px'}}
             value={service.text}
             onChange={this.handleTextChange}
