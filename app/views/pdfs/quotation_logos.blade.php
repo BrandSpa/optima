@@ -66,10 +66,10 @@
 			<img src="[[ public_path().'/img/pdf/banners/'.$quotation->offer.'.png' ]]" alt="" id="banner">
 		@endif
 	@endif
-		<div class="message">
+		<div class="">
 		<p>
 			Para hacer los mantenimientos preventivos el cliente debe enviar solicitud a nuestro departamento 
-			de Infraestructura Y Tecnología a los correos  tecnicorentadvisor.com.co y/o ctecnico@rentadvisor.com.co
+			de Infraestructura Y Tecnología a los correos  tecnico@rentadvisor.com.co y/o ctecnico@rentadvisor.com.co.
 		</p>
 		<p>
 			La seguridad y buen cuidado de los equipos en alquiler, están bajo la responsabilidad del cliente durante el 
@@ -79,6 +79,7 @@
 			arrendamiento durante el tiempo que demore en pagar el valor comercial del mismo, previa presentación de la factura 
 			por parte de RentAdvisor.
 		</p>
+		<p>Por favor tener en cuenta los términos del servicio consignados en el siguiente link: <a style="text-decoration:none"  href="http://rentadvisor.com.co/wp-content/uploads/guia.pdf">Guía del servicio.</a></p>
 	</div>
 	<img src="[[ public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png' ]]" id="firm" alt="">
 	<span class="firm">[[ $quotation->user->name ]] [[ $quotation->user->lastname ]]</span>
