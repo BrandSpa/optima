@@ -55,7 +55,7 @@
 	@if(file_exists( public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png'))
 		<img src="[[ public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png' ]]" id="firm" alt="">
 	@else
-		<br /><br/ >
+		<br /><br>
 	@endif
 	<span class="firm">[[ $quotation->user->name ]] [[ $quotation->user->lastname ]]</span>
 	<span class="firm">@if($quotation->user->id == 3) Coordinador Comercial @elseif($quotation->user->id == 12) Director Comercial @else Asesor Comercial @endif</span>
