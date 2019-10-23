@@ -127,7 +127,10 @@ class Quotation extends \Eloquent {
 		if (isset($type) && $type == "rethink") {
 			self::duplicateAssociated($trackings, $modelNew);
 			self::duplicateAssociated($activities, $modelNew);
-		}
+		}else{
+		    $modelNew->rethink_from = null;
+		    $modelNew->save();
+        }
 
 		return $modelNew;
 	}
