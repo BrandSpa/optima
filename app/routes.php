@@ -18,6 +18,12 @@ Route::get('quotations/{id}/pdfhtml', 'QuotationsController@getPdf');
 Route::get('quotations/{id}/pdflogos', 'QuotationsController@getPdfLogos');
 Route::get('quotations/{id}/wkpdf', 'QuotationsController@wkpdf');
 
+Route::get('solicitudes/{id}/pdf/{hash}', 'SolicitudesController@showPdf');
+Route::get('solicitudes/{id}/pdfbn', 'SolicitudesController@getPdfBn');
+Route::get('solicitudes/{id}/pdfhtml', 'SolicitudesController@getPdf');
+Route::get('solicitudes/{id}/pdflogos', 'SolicitudesController@getPdfLogos');
+Route::get('solicitudes/{id}/wkpdf', 'SolicitudesController@wkpdf');
+
 Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 {
 
@@ -39,12 +45,15 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	//frontend routes
 	Route::get('', 'PagesController@quotations');
 	Route::get('/quotation/create', 'PagesController@quotations');
+	Route::get('/solicitudes/create', 'PagesController@quotations');
+	Route::get('/solicitudes', 'PagesController@quotations');
 	Route::get('/companies', 'PagesController@quotations');
 	Route::get('/todos', 'PagesController@quotations');
 	Route::get('/contacts', 'PagesController@quotations');
 	Route::get('/services', 'PagesController@quotations');
 	Route::get('/reports', 'PagesController@quotations');
 	Route::get('/quotations/{id}', 'PagesController@quotations');
+	Route::get('/solicitudes/{id}', 'PagesController@quotations');
 
 	/*
 	|-------------------------------------------------------------------------
@@ -60,6 +69,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 		Route::resource('contacts', 'ContactsController');
 
 		Route::resource('quotations', 'QuotationsController');
+		Route::resource('solicitudes', 'SolicitudesController');
 		Route::resource('quotations.services', 'QuotationServiceController');
 		Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
 	

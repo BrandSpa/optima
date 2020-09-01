@@ -10,7 +10,7 @@ return array(
 
 	'locale' => 'es',
 
-	'key' => 'UxLR8016vxE0y0I234mRGBktXuP72wID',
+	'key' => '3iEgbaLdRbRU53P0rzLxq8YB6HZoFxFB',
 
 	'providers' => array(
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',

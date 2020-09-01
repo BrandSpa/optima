@@ -9,11 +9,13 @@ import contacts from './contacts';
 import services from './services';
 import products from './products';
 import trackings from './trackings';
+import solicitudes from './solicitudes';
 import user from './user';
 
 export default combineReducers({
 	todos,
 	quotations,
+	solicitudes,
 	activities,
 	reports,
 	companies,
