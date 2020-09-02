@@ -310,10 +310,15 @@ export const SolicitudSection = React.createClass({
             solicitudId={solicitud.id} 
             onStatusChange={this.handleStatus}
           />
+          {
+            false ? 
+             <div id={`todos-${solicitud.id}`}>
+             <Todos solicitud_id={this.props.params.id} />
+            </div>
 
-          <div id={`todos-${solicitud.id}`}>
-            <Todos solicitud_id={this.props.params.id} />
-          </div>
+            : null
+          }
+         
         
         </div>
 

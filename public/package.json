@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "build": "webpack --p"
+    "build": "webpack --p",
+    "dev": "webpack --watch --progress --hide-modules"
   },
   "jest": {
     "modulePaths": [
