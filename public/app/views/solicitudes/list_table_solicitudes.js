@@ -10,8 +10,8 @@ module.exports = React.createClass({
   },
 
   render() {
-    var quotationNodes = this.props.solicitudes.map(quotation => 
-      <Item key={quotation.id} quotation={quotation} />
+    var solicitudNodes = this.props.solicitudes.map(solicitud => 
+      <Item key={solicitud.id} solicitud={solicitud} />
     );
 
     return (
@@ -28,12 +28,11 @@ module.exports = React.createClass({
               <th>Contacto</th>
               <th>Creada</th>
               <th>Prioridad</th>
-              <th>Tareas</th>
               <th>Opciones</th>
             </tr>
           </thead>
           <tbody>
-            {quotationNodes}
+            {solicitudNodes}
           </tbody>
         </table>
       </div>

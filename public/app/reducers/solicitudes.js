@@ -11,6 +11,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case `${TYPE}_FETCH`:
+			console.log(action.payload)
 			return {
         ...state,
         items: action.payload
@@ -20,23 +21,23 @@ export default function reducer(state = initialState, action) {
 		case `${TYPE}_STORE`:
 			return {
         ...state,
-        quotation: action.payload
+        solicitud: action.payload
       };
 		break;
 		
 		case `${TYPE}_UPDATE`:
 			return {
         ...state,
-        quotation: action.payload,
+        solicitud: action.payload,
 				company: action.payload.company,
 				contact: action.payload.contact
       };
 		break;
 
-		case `${TYPE}_SET_QUOTATION`:
+		case `${TYPE}_SET_SOLICITUD`:
 			return {
         ...state,
-        quotation: action.payload,
+        solicitud: action.payload,
 				company: action.payload.company,
 				contact: action.payload.contact
       };

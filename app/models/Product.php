@@ -7,6 +7,7 @@ class Product extends \Eloquent {
 	
 	protected $fillable = [
 		'quotation_id',
+		'solicitud_id',
 		'name',
 		'type',
 		'processor',

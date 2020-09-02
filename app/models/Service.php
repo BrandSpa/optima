@@ -66,6 +66,23 @@ class Service extends \Eloquent {
 		return $model;
 	}
 
+	public static function attachToSolicitud($id, $solicitud_id)
+	{
+		$check = DB::table('quotation_service')
+						->where('solicitud_id', $solicitud_id)
+						->where('service_id', $id)
+						->first();
+
+		$model = self::find($id);
+
+		if ( count($check) <= 0 ) {
+			$model->quotations()->attach($solicitud_id);
+			return $model;
+		}
+
+		return $model;
+	}
+
 	public static function detachToQuotation($id, $quotation_id)
 	{
 			$model = DB::table('quotation_service')

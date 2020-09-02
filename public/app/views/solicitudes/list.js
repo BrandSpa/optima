@@ -1,11 +1,12 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-import * as solicitudes from 'actions/solicitudes';
+import * as actions from 'actions/solicitudes';
 import Filters from 'views/quotations/filters';
 import ListTable from 'views/solicitudes/list_table_solicitudes';
 
-const quotations = React.createClass({
+
+const Solicitudes = React.createClass({
   
   getInitialState() {
     return {
@@ -16,8 +17,8 @@ const quotations = React.createClass({
   },
 
   componentDidMount() {
-    this.props.dispatch(solicitudes.fetch());
-    console.log(this.props);
+    this.props.dispatch(actions.fetch());
+    // console.log(this.props)
   },
 
   loadMore() {
@@ -28,7 +29,11 @@ const quotations = React.createClass({
       query: query
     });
     
-    this.props.dispatch(solicitudes.fetch(query));
+    this.props.dispatch(actions.fetch(query));
+  },
+
+  componentDidUpdate() {
+    console.log(this.props);
   },
 
   loadLess() {
@@ -37,12 +42,12 @@ const quotations = React.createClass({
     if ( offset >= 0) {
       var query = {...this.state.query, offset: offset};
       this.setState({query: query});
-      this.props.dispatch(solicitudes.fetch(query));
+      this.props.dispatch(actions.fetch(query));
     }
   },
 
   handleFilters(query) {
-    this.props.dispatch(solicitudes.fetch(query));
+    this.props.dispatch(actions.fetch(query));
     this.setState({query: query});
   },
 
@@ -70,7 +75,7 @@ const quotations = React.createClass({
               </button>
             </div>
 
-            <ListTable quotations={this.props.items} />
+            <ListTable solicitudes={this.props.items} />
 
             <div className="btn-group" role="group">
               <button
@@ -89,4 +94,4 @@ const quotations = React.createClass({
   }
 });
 
-export default connect(store => store.quotations)(quotations);
+export default connect(store =>  store.solicitudes )(Solicitudes);

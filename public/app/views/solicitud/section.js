@@ -8,18 +8,18 @@ import * as productAction from 'actions/products';
 import * as trackingAction from 'actions/trackings';
 import * as contactAction from 'actions/contacts';
 
-import Contact from 'views/quotation/contact';
-import Filters from 'views/quotation/filters';
-import Edit from 'views/quotation/edit';
-import Status from 'views/quotation/status';
-import Products from 'views/quotation/products';
-import Services from 'views/quotation/services';
-import Comment from 'views/quotation/comment';
-import Mail from 'views/quotation/mails';
-import NoEffective from 'views/quotation/no_effective';
-import NoSend from 'views/quotation/no_send';
-import Times from 'views/quotation/times';
-import Trackings from 'views/quotation/trackings';
+import Contact from 'views/solicitud/contact';
+import Filters from 'views/solicitud/filters';
+import Edit from 'views/solicitud/edit';
+import Status from 'views/solicitud/status';
+import Products from 'views/solicitud/products';
+import Services from 'views/solicitud/services';
+import Comment from 'views/solicitud/comment';
+import Mail from 'views/solicitud/mails';
+import NoEffective from 'views/solicitud/no_effective';
+import NoSend from 'views/solicitud/no_send';
+import Times from 'views/solicitud/times';
+import Trackings from 'views/solicitud/trackings';
 import Todos from 'views/todos/section';
 import Alert from 'components/alert';
 import Toast from 'lib/alert';
@@ -43,8 +43,11 @@ export const SolicitudSection = React.createClass({
   },
 
   componentWillReceiveProps(props) {
-    if(parseInt(props.params.id) !== parseInt(this.props.solicitudes.solicitud.id)) {
-      this.fetchQuotation();
+    console.log('uta',this.props.solicitudes)
+    if(this.props.solicitudes.solicitud) {
+      if(parseInt(props.params.id) !== parseInt(this.props.solicitudes.solicitud.id)) {
+        this.fetchQuotation();
+      }
     }
   },
 
@@ -188,18 +191,19 @@ export const SolicitudSection = React.createClass({
   },
 
   render() {
-    let { quotation } = this.props.quotations;
+    let { solicitud } = this.props.solicitudes;
     let { user } = this.props.user;
 
     return (
-      <div id={`quotation-${quotation.id}`}>
+      solicitud ? 
+      <div id={`solicitud-${solicitud.id}`}>
         
       <div className="col-md-12">
         <div className="panel">
           <div className="panel-body quo-header">
           <div>
              <h4>
-              Cotización {quotation.id}  {quotation.rethink_from ? <a href={`/quotations/${quotation.rethink_from}`}>replanteada de {quotation.rethink_from}</a> : ""} • {quotation.status} •
+              Solicitud {solicitud.id}  {solicitud.rethink_from ? <a href={`/solicituds/${solicitud.rethink_from}`}>replanteada de {solicitud.rethink_from}</a> : ""} • {solicitud.status} •
             </h4>
           </div>
           <div className="quo-header__priority">
@@ -208,25 +212,25 @@ export const SolicitudSection = React.createClass({
               <a 
                 className="btn btn-sm" 
                 onClick={this.handlePriority.bind(null, '1')} 
-                disabled={quotation.priority == 1 ? true : false}
+                disabled={solicitud.priority == 1 ? true : false}
               >
                 <div 
-                  className={quotation.priority == 1 ? 'priority priority--1 priority--active' : 'priority priority--1 '}
+                  className={solicitud.priority == 1 ? 'priority priority--1 priority--active' : 'priority priority--1 '}
                 ></div>
               </a>
               <a
                 className="btn btn-sm" 
                 onClick={this.handlePriority.bind(null, '2')} 
-                disabled={quotation.priority == 2 ? true : false}
+                disabled={solicitud.priority == 2 ? true : false}
               >
-                <div className={quotation.priority == 2 ? 'priority priority--2 priority--active' : 'priority priority--2 '}></div>
+                <div className={solicitud.priority == 2 ? 'priority priority--2 priority--active' : 'priority priority--2 '}></div>
               </a>
               <a
                 className="btn btn-sm" 
                 onClick={this.handlePriority.bind(null, '3')} 
-                disabled={quotation.priority == 3 ? true : false}
+                disabled={solicitud.priority == 3 ? true : false}
               >
-               <div className={quotation.priority == 3 ? 'priority priority--3 priority--active' : 'priority priority--3 '}></div>
+               <div className={solicitud.priority == 3 ? 'priority priority--3 priority--active' : 'priority priority--3 '}></div>
               </a> 
             </h5>
           </div>
@@ -240,13 +244,13 @@ export const SolicitudSection = React.createClass({
 
           <Filters
             onChange={this.handleOptions}
-            quotation={quotation}
+            solicitud={solicitud}
             user={user}
             disabled={this.state.disabled}
           />
 
           <Edit
-            quotation={quotation}
+            solicitud={solicitud}
             onShowComment={this.handleShowComment}
             onShowMails={this.handleShowMail}
             onServiceApproval={this.handleServiceApproval}
@@ -255,34 +259,34 @@ export const SolicitudSection = React.createClass({
           <Comment
             show={this.state.showComment}
             onClose={this.handleShowComment}
-            comment={quotation.comment}
+            comment={solicitud.comment}
             OnSaveComment={this.handleSaveComment}
             />
 
           <Mail
             show={this.state.showMail}
             onClose={this.handleShowMail}
-            quotation={quotation}
+            solicitud={solicitud}
             onSaveMail={this.handleSaveMail}
             onSendMail={this.handleSendMail}
           />
 
           <Products
             {...this.props}
-            quotationId={quotation.id}
+            solicitudId={solicitud.id}
             disabled={this.state.disabled}
           />
 
           <Services
             {...this.props}
-            quotationId={quotation.id}
+            solicitudId={solicitud.id}
             disabled={this.state.disabled}
             setActivity={this.setActivity}
           />
 
           <Status
             {...this.props}
-            quotation={quotation}
+            solicitud={solicitud}
             handleOpenNoEffective={this.handleShowNoEffective}
             handleOpenNoSend={this.handleShowNoSend}
             onStatusChange={this.handleStatus}
@@ -290,25 +294,25 @@ export const SolicitudSection = React.createClass({
           />
 
           <NoEffective
-            quotation={quotation}
+            solicitud={solicitud}
             show={this.state.showNoEffective}
             onSave={this.handleSaveNoEffective}
           />
 
           <NoSend
-            quotation={quotation}
+            solicitud={solicitud}
             show={this.state.showNoSend}
             onSave={this.handleSaveNoEffective}
           />
 
           <Trackings 
             {...this.props} 
-            quotationId={quotation.id} 
+            solicitudId={solicitud.id} 
             onStatusChange={this.handleStatus}
           />
 
-          <div id={`todos-${quotation.id}`}>
-            <Todos quotation_id={this.props.params.id} />
+          <div id={`todos-${solicitud.id}`}>
+            <Todos solicitud_id={this.props.params.id} />
           </div>
         
         </div>
@@ -320,10 +324,11 @@ export const SolicitudSection = React.createClass({
               changeContact={this.changeContact}
             />
 
-            <Times quotation={quotation} />
+            <Times solicitud={solicitud} />
 
         </div>
       </div>
+      : null
     );
   }
 });

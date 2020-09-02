@@ -4,6 +4,7 @@ use Response;
 use Session;
 use Optima\Contact;
 use Optima\Quotation;
+use Optima\Solicitudes;
 use Input;
 
 class ContactsController extends \BaseController {
@@ -19,6 +20,7 @@ class ContactsController extends \BaseController {
 	{
 		$company = Input::get('company_id');
 		$quotation = Input::get('quotation_id');
+		$solicitud = Input::get('solicitud_id');
 		$q = Input::get('query');
 		$offset = Input::get('offset');
 
@@ -41,6 +43,11 @@ class ContactsController extends \BaseController {
 
 		if (Input::has('quotation_id')) {
 			$collection = Quotation::find($quotation)->company->contacts()->get();
+			return Response::json($collection, 200);
+		}
+
+		if (Input::has('solicitud_id')) {
+			$collection = Solicitudes::find($solicitud)->company->contacts()->get();
 			return Response::json($collection, 200);
 		}
 

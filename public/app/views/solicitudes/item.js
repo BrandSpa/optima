@@ -16,7 +16,6 @@ export default React.createClass({
       user: {}, 
       company: {},
       contact: {},
-      todos: []
     }
   },
 
@@ -32,14 +31,14 @@ export default React.createClass({
   },
 
   showStatusCase() {
-    const {quotation} = this.props;
-    if(quotation.status_cause && quotation.status == 'No efectiva') return quotation.status_cause;
-    if(quotation.status_cause && quotation.status == 'No enviada') return quotation.status_cause;
+    const {solicitud} = this.props;
+    if(solicitud.status_cause && solicitud.status == 'No efectiva') return solicitud.status_cause;
+    if(solicitud.status_cause && solicitud.status == 'No enviada') return solicitud.status_cause;
     return '';
   },
 
   render() {
-    const {quotation} = this.props;
+    const {solicitud} = this.props;
     
     const {
       id, 
@@ -53,12 +52,11 @@ export default React.createClass({
       user, 
       company,
       contact,
-      todos
-    } = quotation;
+    } = solicitud;
 
     return (
       <tr key={id}>
-      <td><a href={`/quotations/${id}`}>{id}</a></td>
+      <td><a href={`/solicitudes/${id}`}>{id}</a></td>
       <td>
         <span className={`label label-${status.replace(' ', '_')}`}>
           {status} {this.showStatusCase()}
@@ -84,11 +82,10 @@ export default React.createClass({
       <td >{`${contact.name} ${contact.lastname}`}</td>
       <td>{created_at} por {user.name}</td>
       <td><span className={`center priority priority--${priority > 0 ? priority : 1}`}></span></td>
-      <td>{todos.length}</td>
       <td>
-        <a href={`/quotations/${id}/pdf/${id}`} target="_new">PDF</a> •
-        <a href={`/quotations/${id}/pdfbn`} target="_blank" > PDF BN</a> •
-        <a href={`/quotations/${id}/pdflogos`} target="_blank"> PDF con logos</a>
+        <a href={`/solicitudes/${id}/pdf/${id}`} target="_new">PDF</a> •
+        <a href={`/solicitudes/${id}/pdfbn`} target="_blank" > PDF BN</a> •
+        <a href={`/solicitudes/${id}/pdflogos`} target="_blank"> PDF con logos</a>
       </td>
     </tr>
     )

@@ -49,7 +49,7 @@ page('/quotation/create', () => {
 
 page('/solicitudes', () => {
   let user = JSON.parse(localStorage.getItem('user'));
-  return root(<DashboardSolicitudes user={user} solicitudes={true}/>);
+  return root(<DashboardSolicitudes user={user}/>);
 });
 
 page('/solicitudes/create', () => {

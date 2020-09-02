@@ -4,6 +4,7 @@ export default function(endpoint, type, singularType) {
 	
 	const actions = {
 		fetch(params = {}, dispatch) {
+			console.log(`${type}_FETCH`);
 			if(dispatch) {
 				return request
 				.get(endpoint, {params})
