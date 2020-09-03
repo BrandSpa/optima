@@ -161,7 +161,7 @@ class Solicitudes extends \Eloquent {
 		    $quotationModel->rethink_from = null;
 		    $quotationModel->save();
         }
-
+		$model->delete();
 		return $quotationModel;
 	}
 
