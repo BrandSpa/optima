@@ -69,10 +69,10 @@ export function updateService(service) {
 	}
 }
 
-export function removeService(id, solicitud_id) {
+export function removeService(id, solicitudes_id) {
   return dispatch => { 
     return request
-    .delete(`/api/v1/services/${id}`, {params: {solicitud_id}} )
+    .delete(`/api/v1/services/${id}`, {params: {solicitudes_id}} )
     .then(res => dispatch({ type: `${TYPE}_REMOVE_SERVICE`, payload: res.data}))
     .catch(err => dispatch({ type: `${TYPE}_FAIL`, payload: err.response.data}));
   }

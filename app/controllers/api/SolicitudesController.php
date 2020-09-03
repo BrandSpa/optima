@@ -97,7 +97,7 @@ class SolicitudesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$id = Input::get('solicitud_id');
+		$id = Input::get('solicitudes_id');
 		$service_id = Input::get('service_id');
 
 		$data = Input::all();
@@ -217,7 +217,7 @@ class SolicitudesController extends \BaseController {
 	public function duplicate()
 	{
 		$model = Solicitudes::duplicate($id);
-		return Redirect::to('/quotations/'.$model->id);
+		return Redirect::to('/solicitudes/'.$model->id);
 	}
 
 	public function rethink($id)
@@ -226,7 +226,7 @@ class SolicitudesController extends \BaseController {
 		$model->rethink_from = $id;
 		$model->save();
 
-		return Redirect::to('/quotations/'.$model->id);
+		return Redirect::to('/solicitudes/'.$model->id);
 	}
 
 }

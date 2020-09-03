@@ -14,7 +14,7 @@ const quoTrackings = React.createClass({
   },
   
   handleSubmit(tracking) {
-    let model = {...tracking, solicitud_id: this.props.solicitudId};
+    let model = {...tracking, solicitudes_id: this.props.solicitudId};
     this.props.dispatch(action.store(model)).then(this.changeStatus);
   },
 

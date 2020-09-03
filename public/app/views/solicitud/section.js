@@ -70,7 +70,7 @@ export const SolicitudSection = React.createClass({
 
     dispatch(action.fetchOne(params.id))
     .then(actionRes => { 
-      let query = {solicitud_id: params.id};
+      let query = {solicitudes_id: params.id};
       this.handleDisabled(actionRes.payload.status);
       dispatch(productAction.fetch(query));
       dispatch(serviceAction.cleanItems());
@@ -327,7 +327,7 @@ export const SolicitudSection = React.createClass({
           {
             false ? 
              <div id={`todos-${solicitud.id}`}>
-             <Todos solicitud_id={this.props.params.id} />
+             <Todos solicitudes_id={this.props.params.id} />
             </div>
 
             : null

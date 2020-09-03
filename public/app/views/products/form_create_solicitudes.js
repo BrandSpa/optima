@@ -9,7 +9,7 @@ const productFormSolicitudes = React.createClass({
   getInitialState() {
     return {
       product: {
-        solicitud_id: '',
+        solicitudes_id: '',
         name: '',
         type: '',
         processor: '',
@@ -58,7 +58,7 @@ const productFormSolicitudes = React.createClass({
 
   componentWillReceiveProps(props) {
     let product = {...this.state.product, ...props.product};
-    product = {...product, solicitud_id: this.props.solicitudId};
+    product = {...product, solicitudes_id: this.props.solicitudId};
     this.setState({product});
   },
 

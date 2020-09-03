@@ -1,18 +1,18 @@
 <?php
-use Optima\Pdf\QuotationPdf as DOMPDF;
-use Optima\Quotation;
+use Optima\Pdf\SolicitudesPdf as DOMPDF;
+use Optima\Solicitudes;
 use Carbon\Carbon;
 use Knp\Snappy\Pdf;
 
 class SolicitudesController extends BaseController {
 
 	protected $layout = "layouts.master";
-	protected $quotation;
+	protected $solicitudes;
 	protected $pdf;
 
-	public function __construct ( DOMPDF $pdf, Quotation $quotation )	
+	public function __construct ( DOMPDF $pdf, Solicitudes $solicitudes )	
 	{ 
-		$this->quotation = $quotation; 
+		$this->solicitudes = $solicitudes; 
 		$this->pdf = $pdf; 
 	}
 
@@ -23,13 +23,13 @@ class SolicitudesController extends BaseController {
 
 	public function show($id)
 	{
-		$this->layout->content = View::make('quotations.show');
+		$this->layout->content = View::make('solicitudess.show');
 	}
 
 	public function getPdf($id)
 	{
-		$quotation = $this->quotation->with(['company', 'contact', 'products', 'services', 'user'])->find($id)->toArray();
-		$html = View::make('layouts.pdf_react', compact('quotation'));
+		$solicitudes = $this->solicitudes->with(['company', 'contact', 'products', 'services', 'user'])->find($id)->toArray();
+		$html = View::make('layouts.pdf_react', compact('solicitudes'));
 		return $html;
 	}
 
@@ -46,11 +46,11 @@ class SolicitudesController extends BaseController {
 					"user" => "User"
 				)
 			);
-			return View::make('emails.quotation', $data);
+			return View::make('emails.solicitudes', $data);
 		}
 
 		if($id == 2){
-			$collection = new Quotation();
+			$collection = new solicitudes();
 			$collection = $collection->where("id", 100);
 			$data = array(
 				"collection" => $collection
@@ -59,7 +59,7 @@ class SolicitudesController extends BaseController {
 		}
 
 		if($id == 3){
-			$collection = new Quotation();
+			$collection = new solicitudes();
 			$collection = $collection->where("id", 100);
 			$data = array(
 				"collection" => $collection,
@@ -91,26 +91,26 @@ class SolicitudesController extends BaseController {
 
 	public function Showpdf($id, $hash)
 	{
-		$quotation = $this->quotation->find($id);
+		$solicitudes = $this->solicitudes->find($id);
 
-		$html = View::make('pdfs.quotation', compact('quotation'));
+		$html = View::make('pdfs.solicitudes', compact('solicitudes'));
 
 		return $this->pdf->show($html);
 	}
 
 	public function getPdfBn($id)
 	{
-		$quotation = Quotation::find($id);
-		$html = View::make('pdfs.quotation_bn', compact('quotation'));
+		$solicitudes = Solicitudes::find($id);
+		$html = View::make('pdfs.solicitudes_bn', compact('solicitudes'));
 
 		return $this->pdf->show($html);
 	}
 
 	public function getPdfLogos($id)
 	{
-		$quotation = $this->quotation->find($id);
+		$solicitudes = $this->solicitudes->find($id);
 
-		$html = View::make('pdfs.quotation_logos', compact('quotation'));
+		$html = View::make('pdfs.solicitudes_logos', compact('solicitudes'));
 
 		return $this->pdf->show($html);
 	}
@@ -127,27 +127,27 @@ class SolicitudesController extends BaseController {
 
 		header('Content-Type: application/pdf');
 		// header('Content-Disposition: attachment; filename="file.pdf"');
-		// echo 'http://localhost:8000/quotations/'. $id .'/pdfhtml';
-		echo $snappy->getOutput('http://localhost:4040/quotations/'.  $id .'/pdfhtml');
+		// echo 'http://localhost:8000/solicitudess/'. $id .'/pdfhtml';
+		echo $snappy->getOutput('http://localhost:4040/solicitudess/'.  $id .'/pdfhtml');
 	}
 
 	public function duplicate($id)
 	{
-		$model = Quotation::duplicate($id, "duplicate");
-		return Redirect::to('/quotations/'.$model->id);
+		$model = Solicitudes::duplicate($id, "duplicate");
+		return Redirect::to('/solicitudes/'.$model->id);
 	}
 
 	public function rethink($id)
 	{
-		$quo = Quotation::find($id);
+		$quo = Solicitudes::find($id);
 		$quo->status = 'Replanteada';
 		$quo->save();
-		$model = Quotation::duplicate($id, "rethink");
+		$model = Solicitudes::duplicate($id, "rethink");
 		$model->rethink_from = $id;
 		$model->status_cause = '';
 		$model->save();
 
-		return Redirect::to('/quotations/'.$model->id);
+		return Redirect::to('/solicitudes/'.$model->id);
 	}
 
 	public function getExcel() {
@@ -156,10 +156,10 @@ class SolicitudesController extends BaseController {
 			$priority = Input::get('priority');
 			$advisor = Input::get('advisor');
 			$client_type = Input::get('client_type');
-			$quotation_type = Input::get('quotation_type');
+			$solicitudes_type = Input::get('solicitudes_type');
 			$date_start = Input::get('date_start') ? Input::get('date_start') : $now->year."-".$now->month."-1";
 			$date_end = Input::get('date_end') ? Input::get('date_end') : $now->year."-".$now->month."-31";
-			$collection = new Quotation;
+			$collection = new Solicitud;
 
 		if( Input::has('status') && $status != "" ) {
 			$collection = $collection->where("status", $status);
@@ -177,11 +177,11 @@ class SolicitudesController extends BaseController {
 			$collection = $collection->where("client_type", $client_type);
 		}
 
-		if( Input::has('quotation_type') && $quotation_type != "" ) {
-			$collection = $collection->where("type", $quotation_type);
+		if( Input::has('solicitudes_type') && $solicitudes_type != "" ) {
+			$collection = $collection->where("type", $solicitudes_type);
 		}
 
-		$collection = $collection->whereRaw("quotations.created_at BETWEEN '" . urldecode($date_start) . "' AND '" . urldecode($date_end) . "'");	
+		$collection = $collection->whereRaw("solicitudess.created_at BETWEEN '" . urldecode($date_start) . "' AND '" . urldecode($date_end) . "'");	
 		
 		$model = $collection
 			->with([

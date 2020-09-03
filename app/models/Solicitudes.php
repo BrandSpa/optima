@@ -2,6 +2,7 @@
 
 use DateTime;
 use Auth;
+use Quotation;
 
 class Solicitudes extends \Eloquent {
 
@@ -135,8 +136,48 @@ class Solicitudes extends \Eloquent {
 		return $modelNew;
 	}
 
+	public static function toQuotation($id, $type)
+	{
+		$model = self::find($id);
+		$modelNew = $model->replicate();
+		$modelNew->created_at = new DateTime;
+		$modelNew->status = 'Borrador';
+		$modelNew->sent_at = null;
+		$modelNew->created_sent_diff = null;
+		$quotationModel = Quotation::store($modelNew);
+		// $modelNew->save();
+		$products = $model->products;
+		$services = $model->services;
+		$trackings = $model->trackings;
+		$activities = $model->activities;
+
+		self::duplicateAssociatedQuotation($products, $quotationModel);
+
+		self::duplicateServices($services, $quotationModel);
+		if (isset($type) && $type == "rethink") {
+			self::duplicateAssociatedQuotation($trackings, $quotationModel);
+			self::duplicateAssociatedQuotation($activities, $quotationModel);
+		}else{
+		    $quotationModel->rethink_from = null;
+		    $quotationModel->save();
+        }
+
+		return $quotationModel;
+	}
+
 
 	public static function duplicateAssociated($collection, $quotation)
+	{
+		if ($collection) {
+			foreach ($collection as $oldModel) {
+				$model = $oldModel->replicate();
+				$model->solicitudes_id = $quotation->id;
+				$model->save();
+			}
+		}
+	}
+
+	public static function duplicateAssociatedQuotation($collection, $quotation)
 	{
 		if ($collection) {
 			foreach ($collection as $oldModel) {

@@ -20,7 +20,7 @@ class ContactsController extends \BaseController {
 	{
 		$company = Input::get('company_id');
 		$quotation = Input::get('quotation_id');
-		$solicitud = Input::get('solicitud_id');
+		$solicitud = Input::get('solicitudes_id');
 		$q = Input::get('query');
 		$offset = Input::get('offset');
 
@@ -46,7 +46,7 @@ class ContactsController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		if (Input::has('solicitud_id')) {
+		if (Input::has('solicitudes_id')) {
 			$collection = Solicitudes::find($solicitud)->company->contacts()->get();
 			return Response::json($collection, 200);
 		}

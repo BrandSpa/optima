@@ -7,7 +7,7 @@ class Todo extends \Eloquent {
     'tracking_id',
     'company_id',
     'quotation_id',
-    'solicitud_id',
+    'solicitudes_id',
     'from_user',
     'title',
     'description',

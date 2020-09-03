@@ -14,9 +14,9 @@ class ActivitiesController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
-		if (Input::has('solicitud_id')) {
-			$solicitud_id = Input::get('solicitud_id');
-			$collection = Activity::with('user')->where('solicitud_id', $solicitud_id)->orderBy('created_at', 'desc')->get();
+		if (Input::has('solicitudes_id')) {
+			$solicitudes_id = Input::get('solicitudes_id');
+			$collection = Activity::with('user')->where('solicitudes_id', $solicitudes_id)->orderBy('created_at', 'desc')->get();
 			return Response::json($collection, 200);
 		}
 
