@@ -2,7 +2,7 @@
 
 use DateTime;
 use Auth;
-use Quotation;
+use Optima\Quotation;
 
 class Solicitudes extends \Eloquent {
 
@@ -144,7 +144,7 @@ class Solicitudes extends \Eloquent {
 		$modelNew->status = 'Borrador';
 		$modelNew->sent_at = null;
 		$modelNew->created_sent_diff = null;
-		$quotationModel = Quotation::store($modelNew);
+		$quotationModel = Quotation::store($modelNew->toArray());
 		// $modelNew->save();
 		$products = $model->products;
 		$services = $model->services;

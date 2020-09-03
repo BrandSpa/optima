@@ -137,6 +137,12 @@ class SolicitudesController extends BaseController {
 		return Redirect::to('/solicitudes/'.$model->id);
 	}
 
+	public function toQuotation($id)
+	{
+		$model = Solicitudes::toQuotation($id, "duplicate");
+		return Redirect::to('/quotations/'.$model->id);
+	}
+
 	public function rethink($id)
 	{
 		$quo = Solicitudes::find($id);

@@ -40,6 +40,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	Route::get('quotations/{id}/rethink', 'QuotationsController@rethink');
 	Route::get('quotations/{id}/duplicate', 'QuotationsController@duplicate');
 	Route::get('solicitudes/{id}/duplicate', 'SolicitudesController@duplicate');
+	Route::get('solicitudes/{id}/toquotation', 'SolicitudesController@toQuotation');
 	Route::get('quotations/{id}/rethink', 'SolicitudesController@rethink');
 
 	Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
