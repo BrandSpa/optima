@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import Product from 'views/quotation/product';
-import FormCreate from 'views/products/form_create';
+import FormCreate from 'views/products/form_create_solicitudes';
 import * as action from 'actions/products';
 import * as activityAction from 'actions/activities';
 import cleanObject from 'lib/clean_object';
@@ -184,7 +184,7 @@ const QuoProducts = React.createClass({
           <FormCreate
             onSubmit={this._handleSubmit}
             product={this.state.product}
-            quotationId={this.props.quotationId}
+            solicitudId={this.props.solicitudId}
             onClose={this.showForm}
             errors={this.state.errors}
             />

@@ -35,7 +35,7 @@ class SolicitudesController extends \BaseController {
 			$collection = $collection->where("status", $status);
 		}
 
-			if( Input::has('priority') && $priority != "" ) {
+		if( Input::has('priority') && $priority != "" ) {
 			$collection = $collection->where("priority", $priority);
 		}
 

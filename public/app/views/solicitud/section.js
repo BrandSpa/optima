@@ -51,6 +51,20 @@ export const SolicitudSection = React.createClass({
     }
   },
 
+  setActivity(message) {
+    let {user, solicitudes} = this.props;
+
+    Toast(message);
+
+    let activity = {
+      message,
+      user_id: user.user.id,
+      quotation_id: solicitudes.quotation.id
+    };
+
+    return this.props.dispatch(activityAction.store(activity));
+  },
+
   fetchQuotation: function() {
     const {params, dispatch} = this.props;
 
@@ -156,7 +170,7 @@ export const SolicitudSection = React.createClass({
   },
 
   _update(data) {
-    let quo = {...this.props.quotations.quotation, ...data};
+    let quo = {...this.props.solicitudes.solicitud, ...data};
     this.props.dispatch(action.update(quo))
     .then(this.handleUpdate);
   },
