@@ -11,6 +11,7 @@ import products from './products';
 import trackings from './trackings';
 import solicitudes from './solicitudes';
 import asesores from './asesores';
+import areas from './areas';
 import user from './user';
 
 export default combineReducers({
@@ -25,5 +26,6 @@ export default combineReducers({
 	products,
 	trackings,
 	asesores,
+	areas,
 	user
 });

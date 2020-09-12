@@ -1,8 +1,8 @@
 import request from 'axios';
 import restActions from '../lib/rest_actions';
-const TYPE = 'ASESORES';
-const endpoint = '/api/v1/asesores';
-const rest = restActions(endpoint, TYPE, 'ASESOR');
+const TYPE = 'AREAS';
+const endpoint = '/api/v1/areas';
+const rest = restActions(endpoint, TYPE, 'AREA');
 
 export function fetch(params = {}) {
   return dispatch => rest.fetch(params, dispatch);
@@ -17,8 +17,8 @@ export function update(contact) {
 	return dispatch => rest.update(contact, dispatch);
 }
 
-export function setAsesor(contact) {
-	return { type: `${TYPE}_SET_ASESOR`, payload: contact};	
+export function setArea(contact) {
+	return { type: `${TYPE}_SET_AREA`, payload: contact};	
 }
 
 export function cleanItems() {

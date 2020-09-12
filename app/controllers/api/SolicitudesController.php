@@ -70,7 +70,7 @@ class SolicitudesController extends \BaseController {
 				});
 		}
 
-		$collection = $collection->with('company', 'contact', 'user')
+		$collection = $collection->with('company', 'contact', 'user', 'asesor', 'area')
 			->take(10)
 			->skip($skip)
 			->orderBy('id', 'DESC')

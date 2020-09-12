@@ -30,7 +30,9 @@ class Solicitudes extends \Eloquent {
 		'sent_in',
 		'ordered',
 		'service_approval',
-		'priority'
+		'priority',
+		'asesor_id',
+		'area_id'
 	];
 
 	public $rules = [
@@ -45,6 +47,16 @@ class Solicitudes extends \Eloquent {
 	public function contact()
 	{
 		return $this->belongsTo('Optima\\Contact');
+	}
+
+	public function asesor()
+	{
+		return $this->belongsTo('Asesor');
+	}
+
+	public function area()
+	{
+		return $this->belongsTo('Area');
 	}
 
 	public function user()

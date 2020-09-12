@@ -1,4 +1,4 @@
-const TYPE = 'ASESORES';
+const TYPE = 'AREAS';
 const initialState = {
 	items: [],
 	errors: [],
@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
-		case `${TYPE}_SET_ASESOR`:
+		case `${TYPE}_SET_AREA`:
 			return {
         ...state,
 				errors: [],

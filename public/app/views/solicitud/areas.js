@@ -1,16 +1,12 @@
 'use strict';
 import React from 'react';
-import * as action from '../../actions/asesores';
-import * as quoAction from '../../actions/quotations';
-import Select from '../../components/form_select';
-import clearObject from '../../lib/clean_object';
+import * as action from '../../actions/areas';
 
-const Asesores = React.createClass({
+const Areas = React.createClass({
 
   getInitialState() {
     return {
       showForm: false,
-      contact: {},
       form: {
         name
       }
@@ -25,15 +21,15 @@ const Asesores = React.createClass({
   },
 
   handleSave() {
-    // console.log('here', this.props);
+    console.log('here', this.props);
     this.props.dispatch(action.store(this.state.form)).then( res => {
       this.toggleShowForm()
     })
   },
 
-  changeAsesor(e) {
+  changeArea(e) {
     let id = e.currentTarget.value;
-     this.props.changeAsesor(id);
+     this.props.changeArea(id);
    },
 
   toggleShowForm() {
@@ -49,14 +45,14 @@ const Asesores = React.createClass({
               className="btn btn-primary btn-sm" 
               onClick={this.toggleShowForm}
             >
-            Agregar asesor
+            Agregar area
           </button>
           {
             this.state.showForm ? 
               <div className="form-group" style={{marginTop: "2rem"}}>
                 <div className="row">
                   <div className="col-xs-12">
-                    <input type="text" className="form-control" placeholder="Nombre" onKeyUp={this.handleInputChange} placeholder="Nombre asesor"/>
+                    <input type="text" className="form-control" placeholder="Nombre" onKeyUp={this.handleInputChange} placeholder="Nombre area"/>
                   </div>
                   <hr />
                   <div className="col-xs-12" style={{marginTop: "2rem"}}>
@@ -68,19 +64,19 @@ const Asesores = React.createClass({
             : null
           }
           {
-            this.props.asesores.items.length > 0 ?
+            this.props.areas && this.props.areas.items.length > 0 ?
             <div className="form-group">
               <hr />
-              <select className="form-control" onChange={this.changeAsesor}>
-                <option>Seleccionar asesor</option>
+              <select className="form-control" onChange={this.changeArea}>
+                <option>Seleccionar area</option>
                 {
-                  this.props.asesores.items.map( asesor => {
-                    return <option key={asesor.id} value={asesor.id} selected={this.props.solicitud.asesor_id === asesor.id}>{asesor.name}</option>
+                  this.props.areas.items.map( area => {
+                    return <option key={area.id} value={area.id} selected={this.props.solicitud.area_id === area.id}>{area.name}</option>
                   })
                 }
               </select>
             </div>
-            : <div>No hay asesores creados</div>
+            : <div>No hay areas creadas</div>
           }
           
         </div>
@@ -89,4 +85,4 @@ const Asesores = React.createClass({
   }
 });
 
-export default Asesores;
+export default Areas;

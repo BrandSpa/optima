@@ -4,6 +4,8 @@ const initialState = {
 	errors: [],
 	quotation: {},
 	contact: {},
+	asesor: {},
+	area: {},
 	company: {},
 	services: []
 };
@@ -30,7 +32,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         solicitud: action.payload,
 				company: action.payload.company,
-				contact: action.payload.contact
+				contact: action.payload.contact,
+				asesor: action.payload.asesor
       };
 		break;
 
@@ -39,7 +42,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         solicitud: action.payload,
 				company: action.payload.company,
-				contact: action.payload.contact
+				contact: action.payload.contact,
+				asesor: action.payload.asesor
       };
 		break;
 
@@ -50,6 +54,18 @@ export default function reducer(state = initialState, action) {
       };
 		break;
 
+		case `${TYPE}_UPDATE_ASESOR`:
+			return {
+        ...state,
+				asesor: action.payload
+		}
+		break;
+		case `${TYPE}_UPDATE_AREA`:
+			return {
+        ...state,
+				_UPDATE_AREA: action.payload
+		}
+		break;
 		case `${TYPE}_FETCH_SERVICES`:
 			return {
         ...state,

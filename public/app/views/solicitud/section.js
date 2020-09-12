@@ -22,6 +22,7 @@ import Times from 'views/solicitud/times';
 import Trackings from 'views/solicitud/trackings';
 import Todos from 'views/todos/section';
 import Asesores from 'views/solicitud/asesores'
+import Area from 'views/solicitud/areas'
 import Alert from 'components/alert';
 import Toast from 'lib/alert';
 
@@ -168,6 +169,14 @@ export const SolicitudSection = React.createClass({
 
   changeContact(contactId) {
     this._update({contact_id: contactId});
+  },
+
+  changeAsesor(asesorId) {
+    this._update({asesor_id: asesorId});
+  },
+
+  changeArea(areaId) {
+    this._update({area_id: areaId});
   },
 
   _update(data) {
@@ -346,7 +355,15 @@ export const SolicitudSection = React.createClass({
 
             <Asesores 
             {...this.props}
-            solicitud={solicitud} />
+            solicitud={solicitud} 
+            changeAsesor={this.changeAsesor}
+            />
+
+            <Area  
+            {...this.props}
+            solicitud={solicitud} 
+            changeArea={this.changeArea}
+            />
 
             <Times solicitud={solicitud} />
 

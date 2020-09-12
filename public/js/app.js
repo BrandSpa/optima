@@ -7995,6 +7995,10 @@ var _asesores = __webpack_require__(541);
 
 var _asesores2 = _interopRequireDefault(_asesores);
 
+var _areas = __webpack_require__(1047);
+
+var _areas2 = _interopRequireDefault(_areas);
+
 var _alert = __webpack_require__(219);
 
 var _alert2 = _interopRequireDefault(_alert);
@@ -8165,6 +8169,12 @@ var SolicitudSection = exports.SolicitudSection = _react2.default.createClass({
   },
   changeContact: function changeContact(contactId) {
     this._update({ contact_id: contactId });
+  },
+  changeAsesor: function changeAsesor(asesorId) {
+    this._update({ asesor_id: asesorId });
+  },
+  changeArea: function changeArea(areaId) {
+    this._update({ area_id: areaId });
   },
   _update: function _update(data) {
     var quo = _extends({}, this.props.solicitudes.solicitud, data);
@@ -8345,7 +8355,13 @@ var SolicitudSection = exports.SolicitudSection = _react2.default.createClass({
           changeContact: this.changeContact
         })),
         _react2.default.createElement(_asesores2.default, _extends({}, this.props, {
-          solicitud: solicitud })),
+          solicitud: solicitud,
+          changeAsesor: this.changeAsesor
+        })),
+        _react2.default.createElement(_areas2.default, _extends({}, this.props, {
+          solicitud: solicitud,
+          changeArea: this.changeArea
+        })),
         _react2.default.createElement(_times2.default, { solicitud: solicitud })
       )
     ) : null;
@@ -8429,7 +8445,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.fetch = fetch;
 exports.store = store;
 exports.update = update;
-exports.setContact = setContact;
+exports.setAsesor = setAsesor;
 exports.cleanItems = cleanItems;
 
 var _axios = __webpack_require__(19);
@@ -8467,7 +8483,7 @@ function update(contact) {
 	};
 }
 
-function setContact(contact) {
+function setAsesor(contact) {
 	return { type: TYPE + '_SET_ASESOR', payload: contact };
 }
 
@@ -9100,6 +9116,10 @@ var _asesores = __webpack_require__(1046);
 
 var _asesores2 = _interopRequireDefault(_asesores);
 
+var _areas = __webpack_require__(1049);
+
+var _areas2 = _interopRequireDefault(_areas);
+
 var _user = __webpack_require__(506);
 
 var _user2 = _interopRequireDefault(_user);
@@ -9118,6 +9138,7 @@ exports.default = (0, _redux.combineReducers)({
 	products: _products2.default,
 	trackings: _trackings2.default,
 	asesores: _asesores2.default,
+	areas: _areas2.default,
 	user: _user2.default
 });
 
@@ -9459,6 +9480,8 @@ var initialState = {
 	errors: [],
 	quotation: {},
 	contact: {},
+	asesor: {},
+	area: {},
 	company: {},
 	services: []
 };
@@ -9485,7 +9508,8 @@ function reducer() {
 			return _extends({}, state, {
 				solicitud: action.payload,
 				company: action.payload.company,
-				contact: action.payload.contact
+				contact: action.payload.contact,
+				asesor: action.payload.asesor
 			});
 			break;
 
@@ -9493,7 +9517,8 @@ function reducer() {
 			return _extends({}, state, {
 				solicitud: action.payload,
 				company: action.payload.company,
-				contact: action.payload.contact
+				contact: action.payload.contact,
+				asesor: action.payload.asesor
 			});
 			break;
 
@@ -9503,6 +9528,16 @@ function reducer() {
 			});
 			break;
 
+		case TYPE + '_UPDATE_ASESOR':
+			return _extends({}, state, {
+				asesor: action.payload
+			});
+			break;
+		case TYPE + '_UPDATE_AREA':
+			return _extends({}, state, {
+				_UPDATE_AREA: action.payload
+			});
+			break;
 		case TYPE + '_FETCH_SERVICES':
 			return _extends({}, state, {
 				services: action.payload
@@ -14948,13 +14983,22 @@ var Asesores = _react2.default.createClass({
     this.setState({ form: { name: event.target.value } });
   },
   handleSave: function handleSave() {
-    console.log('here', this.props);
-    this.props.dispatch(action.store(this.state.form));
+    var _this = this;
+
+    // console.log('here', this.props);
+    this.props.dispatch(action.store(this.state.form)).then(function (res) {
+      _this.toggleShowForm();
+    });
+  },
+  changeAsesor: function changeAsesor(e) {
+    var id = e.currentTarget.value;
+    this.props.changeAsesor(id);
   },
   toggleShowForm: function toggleShowForm() {
-    this.setState({ showForm: !this.state.showForm, form: { name: event.target.value } });
+    this.setState({ showForm: !this.state.showForm, form: { name: '' } });
   },
   render: function render() {
+    var _this2 = this;
 
     return _react2.default.createElement(
       'div',
@@ -15004,7 +15048,7 @@ var Asesores = _react2.default.createClass({
           _react2.default.createElement('hr', null),
           _react2.default.createElement(
             'select',
-            { className: 'form-control' },
+            { className: 'form-control', onChange: this.changeAsesor },
             _react2.default.createElement(
               'option',
               null,
@@ -15013,12 +15057,16 @@ var Asesores = _react2.default.createClass({
             this.props.asesores.items.map(function (asesor) {
               return _react2.default.createElement(
                 'option',
-                { key: asesor.id, value: asesor.id },
+                { key: asesor.id, value: asesor.id, selected: _this2.props.solicitud.asesor_id === asesor.id },
                 asesor.name
               );
             })
           )
-        ) : null
+        ) : _react2.default.createElement(
+          'div',
+          null,
+          'No hay asesores creados'
+        )
       )
     );
   }
@@ -16936,6 +16984,8 @@ exports.default = _react2.default.createClass({
         user = solicitud.user,
         company = solicitud.company,
         contact = solicitud.contact,
+        area = solicitud.area,
+        asesor = solicitud.asesor,
         found_us = solicitud.found_us;
 
 
@@ -17030,8 +17080,16 @@ exports.default = _react2.default.createClass({
         null,
         _react2.default.createElement('span', { className: 'center priority priority--' + (priority > 0 ? priority : 1) })
       ),
-      _react2.default.createElement('td', null),
-      _react2.default.createElement('td', null)
+      _react2.default.createElement(
+        'td',
+        null,
+        asesor ? asesor.name : ''
+      ),
+      _react2.default.createElement(
+        'td',
+        null,
+        area ? area.name : ''
+      )
     );
   }
 });
@@ -26194,7 +26252,7 @@ var TYPE = 'ASESORES';
 var initialState = {
 	items: [],
 	errors: [],
-	asesesor: {}
+	contact: {}
 };
 
 function reducer() {
@@ -26208,7 +26266,279 @@ function reducer() {
 			});
 			break;
 
-		case TYPE + '_SET_CONTACT':
+		case TYPE + '_SET_ASESOR':
+			return _extends({}, state, {
+				errors: [],
+				contact: action.payload
+			});
+			break;
+
+		case TYPE + '_STORE':
+			return _extends({}, state, {
+				contact: {},
+				errors: [],
+				items: [action.payload].concat(_toConsumableArray(state.items))
+			});
+			break;
+
+		case TYPE + '_UPDATE':
+			var updated = action.payload;
+
+			return _extends({}, state, {
+				contact: {},
+				errors: [],
+				items: state.items.map(function (model) {
+					return model.id == updated.id ? _extends({}, model, updated) : model;
+				})
+			});
+			break;
+
+		case TYPE + '_CLEAN_ITEMS':
+			return _extends({}, state, {
+				items: []
+			});
+			break;
+
+		case TYPE + '_FAIL':
+			return _extends({}, state, {
+				errors: [action.payload]
+			});
+			break;
+
+		default:
+			return state;
+			break;
+	}
+}
+
+/***/ }),
+/* 1047 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _areas = __webpack_require__(1048);
+
+var action = _interopRequireWildcard(_areas);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Areas = _react2.default.createClass({
+  displayName: 'Areas',
+  getInitialState: function getInitialState() {
+    return {
+      showForm: false,
+      form: {
+        name: name
+      }
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    this.props.dispatch(action.fetch());
+  },
+  handleInputChange: function handleInputChange(event) {
+    this.setState({ form: { name: event.target.value } });
+  },
+  handleSave: function handleSave() {
+    var _this = this;
+
+    console.log('here', this.props);
+    this.props.dispatch(action.store(this.state.form)).then(function (res) {
+      _this.toggleShowForm();
+    });
+  },
+  changeArea: function changeArea(e) {
+    var id = e.currentTarget.value;
+    this.props.changeArea(id);
+  },
+  toggleShowForm: function toggleShowForm() {
+    this.setState({ showForm: !this.state.showForm, form: { name: '' } });
+  },
+  render: function render() {
+    var _this2 = this;
+
+    return _react2.default.createElement(
+      'div',
+      { className: 'panel' },
+      _react2.default.createElement(
+        'div',
+        { className: 'panel-body' },
+        _react2.default.createElement(
+          'button',
+          {
+            className: 'btn btn-primary btn-sm',
+            onClick: this.toggleShowForm
+          },
+          'Agregar area'
+        ),
+        this.state.showForm ? _react2.default.createElement(
+          'div',
+          { className: 'form-group', style: { marginTop: "2rem" } },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-12' },
+              _react2.default.createElement('input', _defineProperty({ type: 'text', className: 'form-control', placeholder: 'Nombre', onKeyUp: this.handleInputChange }, 'placeholder', 'Nombre area'))
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-12', style: { marginTop: "2rem" } },
+              _react2.default.createElement(
+                'button',
+                { className: 'btn btn-default btn-sm pull-left', onClick: this.toggleShowForm },
+                'Cancelar'
+              ),
+              _react2.default.createElement(
+                'button',
+                { className: 'btn btn-primary btn-sm pull-right', onClick: this.handleSave },
+                'Guardar'
+              )
+            )
+          )
+        ) : null,
+        this.props.areas && this.props.areas.items.length > 0 ? _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('hr', null),
+          _react2.default.createElement(
+            'select',
+            { className: 'form-control', onChange: this.changeArea },
+            _react2.default.createElement(
+              'option',
+              null,
+              'Seleccionar area'
+            ),
+            this.props.areas.items.map(function (area) {
+              return _react2.default.createElement(
+                'option',
+                { key: area.id, value: area.id, selected: _this2.props.solicitud.area_id === area.id },
+                area.name
+              );
+            })
+          )
+        ) : _react2.default.createElement(
+          'div',
+          null,
+          'No hay areas creadas'
+        )
+      )
+    );
+  }
+});
+
+exports.default = Areas;
+
+/***/ }),
+/* 1048 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.fetch = fetch;
+exports.store = store;
+exports.update = update;
+exports.setArea = setArea;
+exports.cleanItems = cleanItems;
+
+var _axios = __webpack_require__(19);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _rest_actions = __webpack_require__(41);
+
+var _rest_actions2 = _interopRequireDefault(_rest_actions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TYPE = 'AREAS';
+var endpoint = '/api/v1/areas';
+var rest = (0, _rest_actions2.default)(endpoint, TYPE, 'AREA');
+
+function fetch() {
+	var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	return function (dispatch) {
+		return rest.fetch(params, dispatch);
+	};
+}
+
+function store(contact) {
+	console.log('here', rest);
+	return function (dispatch) {
+		return rest.store(contact, dispatch);
+	};
+}
+
+function update(contact) {
+	return function (dispatch) {
+		return rest.update(contact, dispatch);
+	};
+}
+
+function setArea(contact) {
+	return { type: TYPE + '_SET_AREA', payload: contact };
+}
+
+function cleanItems() {
+	return { type: TYPE + '_CLEAN_ITEMS', payload: [] };
+}
+
+/***/ }),
+/* 1049 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = reducer;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var TYPE = 'AREAS';
+var initialState = {
+	items: [],
+	errors: [],
+	contact: {}
+};
+
+function reducer() {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	switch (action.type) {
+		case TYPE + '_FETCH':
+			return _extends({}, state, {
+				items: action.payload
+			});
+			break;
+
+		case TYPE + '_SET_AREA':
 			return _extends({}, state, {
 				errors: [],
 				contact: action.payload

@@ -52,6 +52,8 @@ export default React.createClass({
       user, 
       company,
       contact,
+      area,
+      asesor,
       found_us
     } = solicitud;
 
@@ -84,10 +86,10 @@ export default React.createClass({
       <td>{created_at} por {user.name}</td>
       <td><span className={`center priority priority--${priority > 0 ? priority : 1}`}></span></td>
       <td>
-        
+        {asesor? asesor.name: ''}
       </td>
       <td>
-        
+        {area? area.name : ''}
       </td>
     </tr>
     )
