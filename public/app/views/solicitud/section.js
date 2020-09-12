@@ -21,6 +21,7 @@ import NoSend from 'views/solicitud/no_send';
 import Times from 'views/solicitud/times';
 import Trackings from 'views/solicitud/trackings';
 import Todos from 'views/todos/section';
+import Asesores from 'views/solicitud/asesores'
 import Alert from 'components/alert';
 import Toast from 'lib/alert';
 
@@ -59,7 +60,7 @@ export const SolicitudSection = React.createClass({
     let activity = {
       message,
       user_id: user.user.id,
-      quotation_id: solicitudes.quotation.id
+      solicitudes_id: solicitudes.solicitud.id
     };
 
     return this.props.dispatch(activityAction.store(activity));
@@ -211,7 +212,7 @@ export const SolicitudSection = React.createClass({
     return (
       solicitud ? 
       <div id={`solicitud-${solicitud.id}`}>
-        
+      
       <div className="col-md-12">
         <div className="panel">
           <div className="panel-body quo-header">
@@ -342,6 +343,10 @@ export const SolicitudSection = React.createClass({
               {...this.props}
               changeContact={this.changeContact}
             />
+
+            <Asesores 
+            {...this.props}
+            solicitud={solicitud} />
 
             <Times solicitud={solicitud} />
 

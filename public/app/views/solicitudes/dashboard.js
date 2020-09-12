@@ -8,7 +8,7 @@ const dashboardSolicitudes = React.createClass({
 
     return (
       <div>
-        <div className="col-md-9">
+        <div className="col-md-12">
         <Solicitudes />
         </div>
       </div>

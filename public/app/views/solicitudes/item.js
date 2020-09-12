@@ -16,6 +16,7 @@ export default React.createClass({
       user: {}, 
       company: {},
       contact: {},
+      found_us: ''
     }
   },
 
@@ -39,7 +40,6 @@ export default React.createClass({
 
   render() {
     const {solicitud} = this.props;
-    
     const {
       id, 
       status, 
@@ -52,6 +52,7 @@ export default React.createClass({
       user, 
       company,
       contact,
+      found_us
     } = solicitud;
 
     return (
@@ -79,13 +80,14 @@ export default React.createClass({
           </ul>
         </Tooltip>
       </td>
-      <td >{`${contact.name} ${contact.lastname}`}</td>
+      <td >{`${found_us ? found_us : ''}`}</td>
       <td>{created_at} por {user.name}</td>
       <td><span className={`center priority priority--${priority > 0 ? priority : 1}`}></span></td>
       <td>
-        <a href={`/solicitudes/${id}/pdf/${id}`} target="_new">PDF</a> •
-        <a href={`/solicitudes/${id}/pdfbn`} target="_blank" > PDF BN</a> •
-        <a href={`/solicitudes/${id}/pdflogos`} target="_blank"> PDF con logos</a>
+        
+      </td>
+      <td>
+        
       </td>
     </tr>
     )

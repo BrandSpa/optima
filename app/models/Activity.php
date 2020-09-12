@@ -1,7 +1,7 @@
 <?php
 
 class Activity extends \Eloquent {
-	protected $fillable = ['user_id', 'quotation_id', 'message'];
+	protected $fillable = ['user_id', 'quotation_id', 'message', 'solicitudes_id'];
 
   public function quotation()
   {

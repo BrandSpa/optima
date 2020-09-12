@@ -16,6 +16,7 @@ export default function(endpoint, type, singularType) {
 		},
 
 		store(model = {}, dispatch) {
+			console.log('model', model)
 			if(dispatch && typeof dispatch == 'function') {
 				return request
 				.post(endpoint, model)

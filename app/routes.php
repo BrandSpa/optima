@@ -73,6 +73,8 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 
 		Route::resource('quotations', 'QuotationsController');
 		Route::resource('solicitudes', 'SolicitudesController');
+		Route::resource('areas', 'AreaController');
+		Route::resource('asesores', 'AsesorController');
 		Route::resource('solicitudes.services', 'SolicitudServiceController');
 		Route::resource('quotations.services', 'QuotationServiceController');
 		Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');

@@ -25,10 +25,11 @@ module.exports = React.createClass({
               <th>Cliente</th>
               <th>Tipo</th>
               <th>Empresa</th>
-              <th>Contacto</th>
+              <th>Ubicación</th>
               <th>Creada</th>
               <th>Prioridad</th>
-              <th>Opciones</th>
+              <th>Asesor Asignado</th>
+              <th>Pendiente por</th>
             </tr>
           </thead>
           <tbody>

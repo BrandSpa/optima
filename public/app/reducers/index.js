@@ -10,6 +10,7 @@ import services from './services';
 import products from './products';
 import trackings from './trackings';
 import solicitudes from './solicitudes';
+import asesores from './asesores';
 import user from './user';
 
 export default combineReducers({
@@ -23,5 +24,6 @@ export default combineReducers({
 	services,
 	products,
 	trackings,
+	asesores,
 	user
 });

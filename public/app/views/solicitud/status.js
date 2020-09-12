@@ -60,36 +60,6 @@ const QuoStatus = React.createClass({
           <ul className="list-inline">
             <li>
               <button
-                className="btn btn-sm btn-warning"
-                onClick={this.handleClick.bind(null, 'Enviada')} 
-                disabled={this.props.disabled ? true : false}
-                >
-                Enviada
-              </button>
-            </li>
-
-            <li>
-              <button
-                className="btn btn-warning btn-sm"
-                onClick={this.handleClick.bind(null, 'Entregada')}
-                disabled={this.props.disabled ? true : false}
-                >
-                Entregada
-              </button>
-            </li>
-
-             <li>
-              <button
-                className="btn btn-success btn-sm"
-                onClick={this.handleClick.bind(null, 'Efectiva')}
-                disabled={this.props.disabled ? true : false}
-                >
-                Efectiva
-              </button>
-            </li>
-
-            <li>
-              <button
                 className="btn btn-danger btn-sm"
                 onClick={this.handleClick.bind(this, 'No enviada')}
                 disabled={this.props.disabled ? true : false}
@@ -97,26 +67,6 @@ const QuoStatus = React.createClass({
                 No enviada
               </button>
             </li>
-
-            <li>
-              <button
-                className="btn btn-danger btn-sm"
-                onClick={this.handleClick.bind(this, 'No efectiva')}
-                disabled={this.props.disabled ? true : false}
-              >
-                No efectiva
-              </button>
-            </li>
-
-            <li>
-              <a
-                className="btn btn-default btn-sm"
-                onClick={this.handleClick.bind(this, 'Replanteada')}
-              >
-                Replantear
-              </a>
-            </li>
-
             <li>
               <a
                 className="btn btn-default btn-sm"
@@ -126,27 +76,6 @@ const QuoStatus = React.createClass({
                 Anular
               </a>
             </li>
-
-             <li>
-              <a
-                className="btn btn-default btn-sm"
-                disabled={this.props.disabled ? true : false}
-                onClick={this.handleClick.bind(this, 'Por confirmar')}
-              >
-                Por confirmar
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="btn btn-default btn-sm"
-                disabled={this.props.disabled ? true : false}
-                onClick={this.handleClick.bind(this, 'Seguimiento')}
-              >
-                Seguimiento
-              </a>
-            </li>
-
           </ul>
         </div>
       </div>

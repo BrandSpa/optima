@@ -5,6 +5,6 @@
 /sockets/node_modules
 .env.*.php
 .env.php
-
+node_modules/
 
 tests/_output/*
