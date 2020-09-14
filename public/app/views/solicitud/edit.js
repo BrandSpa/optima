@@ -65,10 +65,19 @@ const QuoEdit = React.createClass({
                 Editar Mail
               </button>
               </li>
+              
               <li>
-              <a
+              {
+                solicitud.quotation_id ? 
+                <a
+                href={`/quotations/${solicitud.quotation_id}`}
+                className="btn btn-default btn-sm">Ver cotización</a>
+                :
+                <a
                 href={`/solicitudes/${solicitud.id}/toquotation`}
                 className="btn btn-default btn-sm">Crear cotización</a>
+              }
+              
             </li>
             </ul>
         </div>

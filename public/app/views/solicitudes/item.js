@@ -43,7 +43,7 @@ export default React.createClass({
     const {
       id, 
       status, 
-      rethink_from, 
+      quotation_id, 
       advisor,
       client_type, 
       type,
@@ -54,7 +54,8 @@ export default React.createClass({
       contact,
       area,
       asesor,
-      found_us
+      found_us,
+      quotation_date
     } = solicitud;
 
     return (
@@ -64,7 +65,8 @@ export default React.createClass({
         <span className={`label label-${status.replace(' ', '_')}`}>
           {status} {this.showStatusCase()}
         </span>
-        {rethink_from ? <a className="label label-Replanteada" href={`/quotations/${rethink_from}`}>{rethink_from}</a> : ""}
+        {quotation_id ? <a className="label label-Replanteada" href={`/quotations/${quotation_id}`}>{quotation_id}</a> : ""}
+        {quotation_id ? <div><a className="label label-Replanteada" href={`/quotations/${quotation_id}`}> {quotation_date}</a> </div>: ""}
       </td>
       <td>{advisor}</td>
       <td>{client_type}</td>

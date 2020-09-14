@@ -163,6 +163,14 @@ class Solicitudes extends \Eloquent {
 		$trackings = $model->trackings;
 		$activities = $model->activities;
 
+		foreach($products as $product) {
+			$product->solicitudes_id = '';
+		}
+
+		foreach($services as $service) {
+			$service->solicitudes_id = '';
+		}
+
 		self::duplicateAssociatedQuotation($products, $quotationModel);
 
 		self::duplicateServices($services, $quotationModel);
@@ -172,8 +180,15 @@ class Solicitudes extends \Eloquent {
 		}else{
 		    $quotationModel->rethink_from = null;
 		    $quotationModel->save();
-        }
-		$model->delete();
+		}
+		/* TODO
+		* Change solicitud status to cotizacion,
+		* add quotationID 
+		*/
+		$model->quotation_id = $quotationModel->id;
+		$model->status = 'Cotización';
+		$model->quotation_date = \Carbon\Carbon::now()->toDateTimeString();
+		$model->save();
 		return $quotationModel;
 	}
 

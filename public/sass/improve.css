@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Large desktops and laptops */
 /* Portrait tablets and medium desktops */
 /* Portrait tablets and small desktops */
@@ -153,6 +154,10 @@ ul {
 
 .label-Borrador {
   background: #888;
+}
+
+.label-Cotización {
+  background: #3498db;
 }
 
 .label-Replanteada {

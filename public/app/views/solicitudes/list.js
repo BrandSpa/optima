@@ -2,7 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from 'actions/solicitudes';
-import Filters from 'views/quotations/filters';
+import Filters from 'views/solicitudes/filters';
 import ListTable from 'views/solicitudes/list_table_solicitudes';
 
 
@@ -55,6 +55,7 @@ const Solicitudes = React.createClass({
 
     return (
       <div>
+        <Filters onChange={this.handleFilters} />
         <div className="panel quotations-table">
           <div className="panel-heading"><h5>Solicitudes</h5></div>
           <div className="panel-body" style={{minHeight: '600px'}}>

@@ -28,7 +28,8 @@ class SolicitudesController extends \BaseController {
 		$quotation_type = Input::get('quotation_type');
 		$date_start = Input::get('date_start');
 		$date_end = Input::get('date_end');
-
+		$date_start_quotation = Input::get('date_start_quotation');
+		$date_end_quotation = Input::get('date_end_quotation');
 		$collection = new Solicitudes;
 
 		if( Input::has('status') && $status != "" ) {
@@ -52,9 +53,12 @@ class SolicitudesController extends \BaseController {
 		}
 
 		if(Input::has('date_start') && Input::has('date_end')) {
-			$collection = $collection->whereRaw("quotations.created_at BETWEEN '$date_start' AND '$date_end' ");
+			$collection = $collection->whereRaw("solicitudes.created_at BETWEEN '$date_start' AND '$date_end' ");
 		}
 
+		if(Input::has('date_start_quotation') && Input::has('date_end_quotation')) {
+			$collection = $collection->whereRaw("solicitudes.quotation_date BETWEEN '$date_start_quotation' AND '$date_end_quotation' ");
+		}
 
 		if(Input::has('query') && $q != "") {
 			$collection = $collection
