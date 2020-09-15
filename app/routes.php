@@ -34,6 +34,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	*/
 		
 	Route::get('quotations/excel', 'QuotationsController@getExcel');
+	Route::get('solicitudes/excel', 'SolicitudesController@getExcel');
 	Route::get('quotations/viewEmail/{id}', 'QuotationsController@viewMail');
 
 	Route::post('quotations/replicate/{id}', 'QuotationsController@getDuplicate');

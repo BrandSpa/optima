@@ -79,7 +79,7 @@ class SolicitudesController extends \BaseController {
 			->skip($skip)
 			->orderBy('id', 'DESC')
 			->get();
-
+			
 		return Response::json($collection, 200);
 	}
 

@@ -7,6 +7,7 @@ import clientOptions from '../../options/client_type.json';
 import priorityOptions from '../../options/priority.json';
 import Select from '../../components/form_select';
 import DataTime from '../../components/datetime';
+import qs from 'qs';
 
 const quoFilters = React.createClass({
   getInitialState() {
@@ -46,6 +47,15 @@ const quoFilters = React.createClass({
   handleChange(field, e) {
     let value = e.currentTarget.value;
     this.changeQuery(field, value);
+  },
+
+  download(e) {
+    if(e) e.preventDefault();
+    this.setState({laoding: true});
+    let url = encodeURI(`${location.origin}/solicitudes/excel?${qs.stringify(this.state.query)}`);
+    console.log(url)
+    window.location = url;
+    this.setState({laoding: false});
   },
 
   render() {
@@ -145,6 +155,14 @@ const quoFilters = React.createClass({
                   styles="form-control"
                   onChange={(date, str) => {this.handleDates('date_end_quotation', date, str)}}
                 />
+            </div>
+            <div className="form-group col-md-3">
+              <button 
+                className="btn btn-primary btn-sm" 
+                onClick={this.download}
+              >
+              Descargar
+            </button>
             </div>
           </div>
         </div>

@@ -158,6 +158,7 @@ class SolicitudesController extends BaseController {
 
 	public function getExcel() {
 			$now = Carbon::now();
+			$q = Input::get('query');
 			$status = Input::get('status');
 			$priority = Input::get('priority');
 			$advisor = Input::get('advisor');
@@ -165,7 +166,9 @@ class SolicitudesController extends BaseController {
 			$solicitudes_type = Input::get('solicitudes_type');
 			$date_start = Input::get('date_start') ? Input::get('date_start') : $now->year."-".$now->month."-1";
 			$date_end = Input::get('date_end') ? Input::get('date_end') : $now->year."-".$now->month."-31";
-			$collection = new Solicitud;
+			$date_start_quotation = Input::get('date_start_quotation') ? urldecode(Input::get('date_start_quotation')) : $now->year."-".$now->month."-1";
+			$date_end_quotation = Input::get('date_end_quotation') ? urldecode(Input::get('date_end_quotation')) : $now->year."-".$now->month."-31";
+			$collection = new Solicitudes;
 
 		if( Input::has('status') && $status != "" ) {
 			$collection = $collection->where("status", $status);
@@ -187,14 +190,32 @@ class SolicitudesController extends BaseController {
 			$collection = $collection->where("type", $solicitudes_type);
 		}
 
-		$collection = $collection->whereRaw("solicitudess.created_at BETWEEN '" . urldecode($date_start) . "' AND '" . urldecode($date_end) . "'");	
+		if(Input::has('date_start_quotation') && Input::has('date_end_quotation')) {
+			$collection = $collection->whereRaw("solicitudes.quotation_date BETWEEN '$date_start_quotation' AND '$date_end_quotation' ");
+		}
+
+		if(Input::has('query') && $q != "") {
+			$collection = $collection
+				->where(function($query) use($q) {
+					$query
+					->where("id", "like", "$q%")
+					->orWhereHas('contact', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					})
+					->orWhereHas('company', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					});
+			});
+		}
+
+		$collection = $collection->whereRaw("solicitudes.created_at BETWEEN '" . urldecode($date_start) . "' AND '" . urldecode($date_end) . "'");	
 		
 		$model = $collection
 			->with([
-				'company' => function($query){
-				 $query->select('id', 'name', 'sector');
+				'company' => function($query) use($q){
+				 $query->select('id', 'name', 'sector')->where('name', 'like', "%$q%");
 				 },
-				 'contact' => function($query){
+				 'contact' => function($query) use($q){
 				 $query->select('id', 'name', 'lastname', 'email', 'birthday');
 				 } 
 			])
@@ -214,7 +235,7 @@ class SolicitudesController extends BaseController {
 				array_push($newModel, $mo);
 			}
 
-			return Excel::create('cotizaciones', function($excel) use($newModel) {
+			return Excel::create('solicitudes', function($excel) use($newModel) {
 
 				$excel->sheet('Sheetname', function($sheet) use($newModel) {
 
