@@ -10,9 +10,11 @@ module.exports = React.createClass({
   },
 
   render() {
-    var quotationNodes = this.props.quotations.map(quotation => 
-      <Item key={quotation.id} quotation={quotation} />
-    );
+    var quotationNodes = this.props.quotations.length > 0 ? 
+      this.props.quotations.map(quotation => 
+        <Item key={quotation.id} quotation={quotation} />
+      )
+    : null;
 
     return (
       <div className="table-responsive">
