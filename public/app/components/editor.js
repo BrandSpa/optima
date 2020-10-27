@@ -68,7 +68,9 @@ const Editor = React.createClass({
   },
 
   destroyEditor(editor) {
-    editor.destroy();
+    if(typeof editor.destroy === 'function') {
+      editor.destroy();
+    }
   },
 
   componentWillUnmount() {

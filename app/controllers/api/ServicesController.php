@@ -3,6 +3,7 @@
 use Optima\Repositories\Service\ServiceRepositoryInterface;
 use Optima\Service;
 use Optima\Quotation;
+use Optima\Solicitudes;
 use Response;
 use Input;
 use DB;
@@ -22,6 +23,13 @@ class ServicesController extends \BaseController {
 			$quotation_id = Input::get('quotation_id');
 			$quotation = Quotation::find($quotation_id);
 			$collection = $quotation->services()->get();
+			return Response::json($collection, 200);
+		}
+
+		if (Input::has('solicitudes_id')) {
+			$solicitudes_id = Input::get('solicitudes_id');
+			$solicitud = Solicitudes::find($solicitudes_id);
+			$collection = $solicitud->services()->get();
 			return Response::json($collection, 200);
 		}
 

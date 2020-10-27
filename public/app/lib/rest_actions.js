@@ -4,6 +4,7 @@ export default function(endpoint, type, singularType) {
 	
 	const actions = {
 		fetch(params = {}, dispatch) {
+			console.log(`${type}_FETCH`);
 			if(dispatch) {
 				return request
 				.get(endpoint, {params})
@@ -15,6 +16,7 @@ export default function(endpoint, type, singularType) {
 		},
 
 		store(model = {}, dispatch) {
+			console.log('model', model)
 			if(dispatch && typeof dispatch == 'function') {
 				return request
 				.post(endpoint, model)

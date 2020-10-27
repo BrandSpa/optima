@@ -186,7 +186,7 @@ class QuotationsController extends BaseController {
 		$model = $collection
 			->with([
 				'company' => function($query){
-				 $query->select('id', 'name');
+				 $query->select('id', 'name', 'sector');
 				 },
 				 'contact' => function($query){
 				 $query->select('id', 'name', 'lastname', 'email', 'birthday');
@@ -201,6 +201,7 @@ class QuotationsController extends BaseController {
 
 			foreach($model as $mo) {
 				$mo['company_name'] = $mo['company']['name'];
+				$mo['company_sector'] = $mo['company']['sector'];
 				$mo['contact_name'] = $mo['contact']['name'] .' '. $mo['contact']['lastname'];
 				$mo['contact_email'] = $mo['contact']['email'];
 				$mo['contact_birthday'] = $mo['contact']['birthday'];

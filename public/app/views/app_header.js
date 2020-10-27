@@ -12,6 +12,7 @@ const Dashboard = React.createClass({
                <ul className="nav navbar-nav navbar-collapse">
                   <li><a href="/">Dashboard</a></li>
                   <li><a href="/quotation/create">Nueva Cotización</a></li>
+                  <li><a href="/solicitudes">Solicitudes</a></li>
                   <li><a href="/todos">Tareas</a></li>
                   <li><a href="/companies">Empresas</a></li>
                   <li><a href="/contacts">Contactos</a></li>

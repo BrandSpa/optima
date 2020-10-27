@@ -7,13 +7,18 @@ import Graphs from 'views/graphs/section';
 
 const dashboard = React.createClass({
   render: function() {
-    let {user} = this.props;
+    let {user, solicitudes} = this.props;
 
     return (
       <div>
         <div className="col-md-9">
-          <List />
-          <Todos user_id={user.id} />
+        <List solicitudes={this.props.solicitudes} />
+          {
+            solicitudes? 
+              ''
+            : <Todos user_id={user.id} />
+          }
+          
         </div>
         <div className="col-md-3">
           <Activities />

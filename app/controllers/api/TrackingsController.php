@@ -12,6 +12,7 @@ class TrackingsController extends \BaseController {
     $offset = Input::get('offset');
     $query = Input::get('query');
     $quotation_id = Input::get('quotation_id');
+    $solicitudes_id = Input::get('solicitudes_id');
 
     if (Input::has('query')) {
       $collection = Tracking::search($query);
@@ -20,6 +21,11 @@ class TrackingsController extends \BaseController {
 
     if (Input::has('quotation_id')) {
       $collection = Tracking::with(['user','contact', 'todos', 'todos.user'])->orderBy('id', 'DESC')->where('quotation_id', $quotation_id)->get();
+      return Response::json($collection, 200);
+    }
+
+    if (Input::has('solicitudes_id')) {
+      $collection = Tracking::with(['user','contact', 'todos', 'todos.user'])->orderBy('id', 'DESC')->where('solicitudes_id', $solicitudes_id)->get();
       return Response::json($collection, 200);
     }
 
