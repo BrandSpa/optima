@@ -1,0 +1,71 @@
+@extends('layouts.pdf')
+@section('custom_css')
+	@parent
+	<style>
+	body{
+		border: none;
+	}
+
+	#header img{
+	height: 220px;
+}
+
+	#header span, #header p{
+		color:#000;
+	}
+
+	#header p {
+		top: 126pt;
+	}
+
+	#header span{
+		display: block;
+		position: absolute;
+		right: 0px;
+		top: 136pt;
+		font-size: 18pt;
+	}
+	#intro{
+		margin-bottom: 80px;
+	}
+	</style>
+@stop
+@section('header')
+	@parent
+	<img src="[[ public_path().'/img/pdf/empty.jpg' ]]" alt="">
+@stop
+
+@section('content')
+	@include('_sections.products_solicitudes_pdf')
+	@include('_sections.services_pdf_solicitudes')
+
+	@if($solicitudes->comment)
+	<br>
+	<table cellspacing="0"  >
+	<tr>
+		<td class="no-border"><span class="title">Observaciónes</span></td>
+		<td class="no-border">
+		[[ $solicitudes->comment ]]
+		</td>
+	</tr>
+
+	</table>
+	@endif
+		<div class="">
+		<p>
+			Para hacer los mantenimientos preventivos el cliente debe enviar solicitud a nuestro departamento 
+			de Infraestructura Y Tecnología a los correos  tecnico@rentadvisor.com.co y/o ctecnico@rentadvisor.com.co.
+		</p>
+		<p>
+			La seguridad y buen cuidado de los equipos en alquiler, están bajo la responsabilidad del cliente durante el 
+			tiempo que permanezcan en sus instalaciones. En caso de pérdida o robo el cliente deberá reponer el equipo con 
+			uno que tenga las mismas características técnicas del extraviado, presentando factura y manifiesto de aduana o 
+			cancelará a RentAdvisor el costo del mismo según el valor comercial que se cotice en el mercado y el valor del 
+			arrendamiento durante el tiempo que demore en pagar el valor comercial del mismo, previa presentación de la factura 
+			por parte de RentAdvisor.
+		</p>
+		<p>Por favor tener en cuenta los términos del servicio consignados en el siguiente link: <a style="text-decoration:none" href="http://rentadvisor.com.co/wp-content/uploads/guia.pdf">Guía del servicio.</a></p>
+	</div>
+	<img src="[[ public_path().'/img/pdf/firmas/'.$solicitudes->user->name.'-'.$solicitudes->user->lastname.'.png' ]]" id="firm" alt="">
+	<span class="firm">[[ $solicitudes->user->name ]] [[ $solicitudes->user->lastname ]]</span>
+@stop

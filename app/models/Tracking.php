@@ -8,6 +8,7 @@ class Tracking extends \Eloquent {
 
   protected $fillable = [
     'quotation_id',
+    'solicitudes_id',
     'contact_id',
     'report',
     'register_date',

@@ -17,6 +17,13 @@ class ProductsController extends \BaseController {
 			return Response::json($collection, 200);
 		}
 
+		if (Input::has('solicitudes_id')) {
+			$id = Input::get('solicitudes_id');
+			$collection = Product::where('solicitudes_id', $id)
+									->orderBy('position', 'asc')->get();
+			return Response::json($collection, 200);
+		}
+
 		return Response::json("", 404);
 	}
 
