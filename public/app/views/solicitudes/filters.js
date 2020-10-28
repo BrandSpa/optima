@@ -8,8 +8,10 @@ import priorityOptions from '../../options/priority.json';
 import Select from '../../components/form_select';
 import DataTime from '../../components/datetime';
 import qs from 'qs';
+import axios from 'axios';
 
 const quoFilters = React.createClass({
+  
   getInitialState() {
     return {
       query: {
@@ -22,8 +24,22 @@ const quoFilters = React.createClass({
         date_start: null,
         date_end: null,
         priority: null
-      }
+      },
+      counter: []
     }
+  },
+
+  componentWillMount() {
+    this.loadCounter();
+  },
+
+  loadCounter( query = null) {
+    axios.get('/solicitudes/counter', {params: query }).then((counter) => {
+      if( counter.data ) {
+        this.setState({counter: counter.data})
+        this.render();
+      }
+    })
   },
 
   triggerChange(query) {
@@ -35,6 +51,7 @@ const quoFilters = React.createClass({
   changeQuery(field, value) {
     let query = {...this.state.query, [field]: value};
     this.triggerChange(query);
+    this.loadCounter( query  );
     this.setState({query});
   },
 
@@ -163,6 +180,20 @@ const quoFilters = React.createClass({
               >
               Descargar
             </button>
+            </div>
+            <div className="form-group col-md-3 counter-container">
+              {
+                this.state.counter ? 
+                this.state.counter.map( (item) =>  {
+                  return <div className="counter" key={item.status}>
+                    <div className="counter-data">
+                      <div className="number">{item.total }</div>
+                    </div>
+                    <div className="name">{item.status}</div>
+                  </div>
+                })
+                :null
+              }
             </div>
           </div>
         </div>

@@ -245,4 +245,70 @@ class SolicitudesController extends BaseController {
 
 		})->export('csv');
 	}
+
+	public function getCounter() {
+		$date_start_quotation = Input::get('date_start_quotation');
+		$date_end_quotation = Input::get('date_end_quotation');
+		$collection = new Solicitudes;
+		$q = Input::get('query');
+		$status = Input::get('status');
+		$priority = Input::get('priority');
+		$advisor = Input::get('advisor');
+		$client_type = Input::get('client_type');
+		$quotation_type = Input::get('quotation_type');
+		$date_start = Input::get('date_start');
+		$date_end = Input::get('date_end');
+		$date_start_quotation = Input::get('date_start_quotation');
+		$date_end_quotation = Input::get('date_end_quotation');
+		$collection = new Solicitudes;
+
+		if( Input::has('status') && $status != "" ) {
+			$collection = $collection->where("status", $status);
+		}
+
+		if( Input::has('priority') && $priority != "" ) {
+			$collection = $collection->where("priority", $priority);
+		}
+
+		if( Input::has('advisor') && $advisor != "" ) {
+			$collection = $collection->where("advisor", $advisor);
+		}
+
+		if( Input::has('client_type') && $client_type != "" ) {
+			$collection = $collection->where("client_type", $client_type);
+		}
+
+		if( Input::has('quotation_type') && $quotation_type != "" ) {
+			$collection = $collection->where("type", $quotation_type);
+		}
+
+		if(Input::has('date_start') && Input::has('date_end')) {
+			$collection = $collection->whereRaw("solicitudes.created_at BETWEEN '$date_start' AND '$date_end' ");
+		}
+
+		if(Input::has('date_start_quotation') && Input::has('date_end_quotation')) {
+			$collection = $collection->whereRaw("solicitudes.quotation_date BETWEEN '$date_start_quotation' AND '$date_end_quotation' ");
+		}
+
+		if(Input::has('query') && $q != "") {
+			$collection = $collection
+				->where(function($query) use($q) {
+					$query
+					->where("id", "like", "$q%")
+					->orWhereHas('contact', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					})
+					->orWhereHas('company', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					});
+				});
+		}
+
+		$collection = $collection->with('company', 'contact', 'user', 'asesor', 'area')
+			->selectRaw('status, count(*) as total' )
+			->groupBy('status')
+			->get();
+
+		return Response::json($collection, 200);
+	}
 }
