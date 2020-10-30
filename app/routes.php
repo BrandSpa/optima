@@ -42,6 +42,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	Route::get('quotations/{id}/duplicate', 'QuotationsController@duplicate');
 	Route::get('solicitudes/{id}/duplicate', 'SolicitudesController@duplicate');
 	Route::get('solicitudes/{id}/toquotation', 'SolicitudesController@toQuotation');
+	Route::get('solicitudes/counter', 'SolicitudesController@getCounter');
 
 	Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
 	
@@ -57,7 +58,6 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	Route::get('/reports', 'PagesController@quotations');
 	Route::get('/quotations/{id}', 'PagesController@quotations');
 	Route::get('/solicitudes/{id}', 'PagesController@quotations');
-
 	/*
 	|-------------------------------------------------------------------------
 	|	API v1

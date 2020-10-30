@@ -12,5 +12,7 @@
 	{"value": "Landing Page", "label": "Landing Page"},
 	{"value": "Chat", "label": "Chat"},
 	{"value": "WhatsApp", "label": "WhatsApp"},
+	{"value": "LinkedIn", "label": "LinkedIn"},
+	{"value": "Facebook", "label": "Facebook"},
 	{"value": "Otros", "label": "Otros"}
 ]
