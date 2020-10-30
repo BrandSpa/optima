@@ -1,15 +1,18 @@
 'use strict';
-var gulp = require('gulp');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const del = require('del');
 
-
-// sass
-gulp.task('styles', function() {
-    gulp.src('./public/sass/improve.sass')
+gulp.task('styles', () => {
+    return gulp.src('./sass/*.sass')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./public/css/dist'));
+        .pipe(gulp.dest('./css/'));
 });
 
-
-gulp.task('default',function() {
-    gulp.watch('./public/sass/**/*', ['styles']).on('change', reload);
+gulp.task('clean', () => {
+    return del([
+        'css/main.css',
+    ]);
 });
+
+gulp.task('default', gulp.series(['clean', 'styles']));
