@@ -9,6 +9,7 @@ import Select from '../../components/form_select';
 import DataTime from '../../components/datetime';
 import qs from 'qs';
 import axios from 'axios';
+import _ from 'lodash'
 
 const quoFilters = React.createClass({
   
@@ -25,7 +26,29 @@ const quoFilters = React.createClass({
         date_end: null,
         priority: null
       },
-      counter: []
+      counter: [],
+      states: [
+        {
+          name:  'Borrador',
+          key: 'Borrador'
+        },
+        {
+          name:  'Enviadas',
+          key: 'Enviada'
+        },
+        {
+          name:  'Anuladas',
+          key: 'Nula'
+        },
+        {
+          name:  'No enviadas',
+          key: 'No enviada'
+        },
+        {
+          name:  'Cotización',
+          key: 'Cotización'
+        }
+      ]
     }
   },
 
@@ -73,6 +96,26 @@ const quoFilters = React.createClass({
     console.log(url)
     window.location = url;
     this.setState({laoding: false});
+  },
+
+  getCount( key ) {
+    if (this.state.counter) {
+      const items = _.filter(this.state.counter, {status: key});
+      if( items.length ) {
+        return items[0].total;
+      }
+    }
+
+    return 0
+   
+  },
+
+  getTotal() {
+    let count = 0;
+    if(this.state.counter ) {
+      this.state.counter.forEach( item => count += item.total);
+    }
+    return count;
   },
 
   render() {
@@ -173,7 +216,7 @@ const quoFilters = React.createClass({
                   onChange={(date, str) => {this.handleDates('date_end_quotation', date, str)}}
                 />
             </div>
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-2">
               <button 
                 className="btn btn-primary btn-sm" 
                 onClick={this.download}
@@ -181,15 +224,21 @@ const quoFilters = React.createClass({
               Descargar
             </button>
             </div>
-            <div className="form-group col-md-3 counter-container">
+            <div className="form-group col-md-4 counter-container">
+            <div className="counter">
+              <div className="counter-data">
+                <div className="number">{ this.getTotal() }</div>
+              </div>
+              <div className="name">Solicitudes</div>
+            </div>
               {
                 this.state.counter ? 
-                this.state.counter.map( (item) =>  {
-                  return <div className="counter" key={item.status}>
+                this.state.states.map( (item) =>  {
+                  return <div className="counter" key={item.key}>
                     <div className="counter-data">
-                      <div className="number">{item.total }</div>
+                      <div className="number">{ this.getCount(item.key) }</div>
                     </div>
-                    <div className="name">{item.status}</div>
+                    <div className="name">{item.name}</div>
                   </div>
                 })
                 :null

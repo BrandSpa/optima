@@ -233,7 +233,7 @@ ul {
   display: flex;
   flex-wrap: wrap; }
   .counter-container .counter {
-    width: 75px;
+    width: 65px;
     text-align: center;
     padding: 10px;
     background: #e3e3e3;
@@ -252,4 +252,7 @@ ul {
       overflow: hidden;
       width: 100%;
       text-align: center;
-      color: #000; }
+      color: #000;
+      font-size: 9px;
+      line-height: 1;
+      padding-top: 5px; }
