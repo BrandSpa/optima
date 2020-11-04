@@ -33,10 +33,6 @@ const quoFilters = React.createClass({
           key: 'Borrador'
         },
         {
-          name:  'Enviadas',
-          key: 'Enviada'
-        },
-        {
           name:  'Anuladas',
           key: 'Nula'
         },
