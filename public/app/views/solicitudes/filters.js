@@ -33,10 +33,6 @@ const quoFilters = React.createClass({
           key: 'Borrador'
         },
         {
-          name:  'Enviadas',
-          key: 'Enviada'
-        },
-        {
           name:  'Anuladas',
           key: 'Nula'
         },
@@ -113,7 +109,7 @@ const quoFilters = React.createClass({
   getTotal() {
     let count = 0;
     if(this.state.counter ) {
-      this.state.counter.forEach( item => count += item.total);
+      this.state.counter.forEach( item => count += parseInt(item.total, 10));
     }
     return count;
   },

@@ -233,7 +233,7 @@ ul {
   display: flex;
   flex-wrap: wrap; }
   .counter-container .counter {
-    width: 65px;
+    min-width: 65px;
     text-align: center;
     padding: 10px;
     background: #e3e3e3;
