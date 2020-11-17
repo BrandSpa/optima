@@ -189,7 +189,7 @@ const quoFilters = React.createClass({
             <div className="form-group col-sm-3">
               <Select
                 options={advisorOptions}
-                default="Seleccionar asesor"
+                default="Seleccionar asesor externo"
                 value={query.advisor}
                 onSelectChange={ this.handleChange.bind(null, 'advisor') }
               />
@@ -304,7 +304,7 @@ const quoFilters = React.createClass({
                 this.state.asesorCounter && this.state.verAsesores ? 
                 this.state.asesorCounter.map( (item) =>  {
                   return <li key={item.asesor_id}>
-                    <div className="name">{item.asesor.name}</div>
+                    <div className="name">{item.asesor.name ? item.asesor.name :  'Otros'}</div>
                     <div className="number">{ item.total }</div>
                   </li>
                 })
@@ -315,7 +315,7 @@ const quoFilters = React.createClass({
                 this.state.companyCounter && this.state.verEmpresas ? 
                 this.state.companyCounter.map( (item) =>  {
                   return <li key={item.company_id}>
-                    <div className="name">{item.company.name}</div>
+                    <div className="name">{item.company.name ? item.company.name :  'Otros'}</div>
                     <div className="number">{ item.total }</div>
                   </li>
                 })
