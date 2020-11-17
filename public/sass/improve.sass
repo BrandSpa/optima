@@ -268,3 +268,54 @@ ul
         font-size: 9px
         line-height: 1
         padding-top: 5px
+
+.panel-contador
+  position: fixed
+  right: -300px
+  top: 50%
+  transform: translateY(-50%)
+  border-top-left-radius: 15px
+  border-bottom-left-radius: 15px
+  box-shadow: -10px 4px 10px -7px rgba(0,0,0,0.34)
+  background: #fff
+  width: 300px
+  height: 50vh
+  overflow-y: scroll
+  transition: all .4s ease-in-out
+  padding: 15px
+  &.active
+    right: 0
+    transition: all .4s ease-in-out
+    .close-icon
+      position: absolute
+      top: 0
+      left: 0
+      width: 35px
+      height: 35px
+      display: flex
+      justify-content: center
+      align-items: center
+      z-index: 10
+      font-size: 30px
+      background: #e3e3e3
+      border-bottom-right-radius: 15px
+      cursor: pointer
+
+  &-body
+    width: 100%
+    ul 
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        display: flex
+        padding: 15px
+        border-bottom: 1px solid #e3e3e3
+        &:first-child
+          border-top: 1px solid #e3e3e3
+        .name, .number
+          width: 50%
+          text-align: left
+          font-weight: bold
+        .number
+          text-align: right
