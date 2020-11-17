@@ -304,7 +304,7 @@ const quoFilters = React.createClass({
                 this.state.asesorCounter && this.state.verAsesores ? 
                 this.state.asesorCounter.map( (item) =>  {
                   return <li key={item.asesor_id}>
-                    <div className="name">{item.asesor.name ? item.asesor.name :  'Otros'}</div>
+                    <div className="name">{item.asesor ? item.asesor.name :  'Otros'}</div>
                     <div className="number">{ item.total }</div>
                   </li>
                 })
