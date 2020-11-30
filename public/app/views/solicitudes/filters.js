@@ -128,7 +128,7 @@ const quoFilters = React.createClass({
 
   getTotal() {
     let count = 0;
-    if(this.state.counter ) {
+    if( this.state.counter && this.state.counter.length ) {
       this.state.counter.forEach( item => count += parseInt(item.total, 10));
     }
     return count;
