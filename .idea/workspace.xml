@@ -69,12 +69,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b301b820-3f48-456a-9ca5-78f41dc76f4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/Optima/SolicitudesTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/SolicitudesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/SolicitudesController.php" afterDir="false" />
-    </list>
+    <list default="true" id="b301b820-3f48-456a-9ca5-78f41dc76f4a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -163,6 +158,7 @@
       <workItem from="1599756170346" duration="708000" />
       <workItem from="1604804159074" duration="454000" />
       <workItem from="1604804630619" duration="1682000" />
+      <workItem from="1605727954027" duration="37000" />
     </task>
     <servers />
   </component>
@@ -179,6 +175,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="643" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1604805946366">
