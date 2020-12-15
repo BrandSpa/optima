@@ -307,7 +307,7 @@ const quoFilters = React.createClass({
                 <div className="number">Borrador</div>
                 <div className="number">Anuladas</div>
                 <div className="number">No enviadas</div>
-                <div className="number">Cotizacion</div>
+                <div className="number">Cotización</div>
               </li>
               {
                 this.state.asesorCounter && this.state.verAsesores ? 
@@ -318,7 +318,7 @@ const quoFilters = React.createClass({
                     <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
                     <div className="number">{ this.getCount(item.counter, 'Nula')}</div>
                     <div className="number">{ this.getCount(item.counter, 'No enviada')}</div>
-                    <div className="number">{ this.getCount(item.counter, 'Cotizacion')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Cotización')}</div>
                   </li>
                 })
                 :null
@@ -333,7 +333,7 @@ const quoFilters = React.createClass({
                     <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
                     <div className="number">{ this.getCount(item.counter, 'Nula')}</div>
                     <div className="number">{ this.getCount(item.counter, 'No enviada')}</div>
-                    <div className="number">{ this.getCount(item.counter, 'Cotizacion')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Cotización')}</div>
                   </li>
                 })
                 :null
