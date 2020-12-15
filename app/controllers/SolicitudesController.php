@@ -231,9 +231,6 @@ class SolicitudesController extends BaseController {
 	}
 
 	public function getCounter() {
-		$date_start_quotation = Input::get('date_start_quotation');
-		$date_end_quotation = Input::get('date_end_quotation');
-		$collection = new Solicitudes;
 		$q = Input::get('query');
 		$queryType = Input::get('queryType');
 		$status = Input::get('status');
@@ -316,6 +313,41 @@ class SolicitudesController extends BaseController {
 		$collection = $collection->with('asesor', 'company')
 			->get();
 
+
+		if($asesor || $company) {
+            foreach ($collection as $item) {
+
+                if ($asesor) {
+                    $counter = $this->getSolicitudesCounter($item->asesor_id, false);
+                }
+
+                if ($company) {
+                    $counter = $this->getSolicitudesCounter(false, $item->company_id);
+                }
+                $item->counter = $counter;
+            }
+        }
+
 		return Response::json($collection, 200);
 	}
+
+	function getSolicitudesCounter($asesor, $company) {
+        $collection = new Solicitudes;
+
+        if($company) {
+            $collection = $collection->where('company_id', $company)
+                ->groupBy('status')
+                ->selectRaw('status, count(*) as total' )
+                ->get();
+        }
+
+        if($asesor) {
+            $collection = $collection->where('asesor_id', $asesor)
+                ->groupBy('status')
+                ->selectRaw('status, count(*) as total' )
+                ->get();
+        }
+
+        return $collection;
+    }
 }

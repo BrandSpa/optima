@@ -114,9 +114,9 @@ const quoFilters = React.createClass({
     this.setState({laoding: false});
   },
 
-  getCount( key ) {
-    if (this.state.counter) {
-      const items = _.filter(this.state.counter, {status: key});
+  getCount( counter, key ) {
+    if (counter) {
+      const items = _.filter(counter, {status: key});
       if( items.length ) {
         return items[0].total;
       }
@@ -258,7 +258,7 @@ const quoFilters = React.createClass({
                 this.state.states.map( (item) =>  {
                   return <div className="counter" key={item.key}>
                     <div className="counter-data">
-                      <div className="number">{ this.getCount(item.key) }</div>
+                      <div className="number">{ this.getCount(this.state.counter, item.key) }</div>
                     </div>
                     <div className="name">{item.name}</div>
                   </div>
@@ -303,7 +303,11 @@ const quoFilters = React.createClass({
             <ul>
               <li>
                 <div className="name">Nombre</div>
-                <div className="number">Cantidad</div>
+                <div className="number">Solicitudes</div>
+                <div className="number">Borrador</div>
+                <div className="number">Anuladas</div>
+                <div className="number">No enviadas</div>
+                <div className="number">Cotizacion</div>
               </li>
               {
                 this.state.asesorCounter && this.state.verAsesores ? 
@@ -311,6 +315,10 @@ const quoFilters = React.createClass({
                   return <li key={item.asesor_id}>
                     <div className="name">{item.asesor ? item.asesor.name :  'Otros'}</div>
                     <div className="number">{ item.total }</div>
+                    <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Anuladas')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'No enviadas')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Cotizacion')}</div>
                   </li>
                 })
                 :null
@@ -322,6 +330,10 @@ const quoFilters = React.createClass({
                   return <li key={item.company_id}>
                     <div className="name">{item.company.name ? item.company.name :  'Otros'}</div>
                     <div className="number">{ item.total }</div>
+                    <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Anuladas')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'No enviadas')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Cotizacion')}</div>
                   </li>
                 })
                 :null
