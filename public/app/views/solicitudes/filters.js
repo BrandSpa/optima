@@ -316,8 +316,8 @@ const quoFilters = React.createClass({
                     <div className="name">{item.asesor ? item.asesor.name :  'Otros'}</div>
                     <div className="number">{ item.total }</div>
                     <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
-                    <div className="number">{ this.getCount(item.counter, 'Anuladas')}</div>
-                    <div className="number">{ this.getCount(item.counter, 'No enviadas')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Nula')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'No enviada')}</div>
                     <div className="number">{ this.getCount(item.counter, 'Cotizacion')}</div>
                   </li>
                 })
@@ -331,8 +331,8 @@ const quoFilters = React.createClass({
                     <div className="name">{item.company.name ? item.company.name :  'Otros'}</div>
                     <div className="number">{ item.total }</div>
                     <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
-                    <div className="number">{ this.getCount(item.counter, 'Anuladas')}</div>
-                    <div className="number">{ this.getCount(item.counter, 'No enviadas')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Nula')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'No enviada')}</div>
                     <div className="number">{ this.getCount(item.counter, 'Cotizacion')}</div>
                   </li>
                 })
