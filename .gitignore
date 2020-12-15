@@ -6,6 +6,6 @@
 .env.*.php
 .env.php
 node_modules/
-app/config/database.php
+/app/config/database.php
 
 tests/_output/*
