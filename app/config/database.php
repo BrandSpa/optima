@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'db',
-			'database'  => 'optima',
-			'username'  => 'optima',
-			'password'  => 'optima',//R3ntAdV1sor_DB+
+            'host'      => 'localhost',
+            'database'  => 'optima_tracking',
+            'username'  => 'root',
+            'password'  => 'R3ntAdV1sor_DB+',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
