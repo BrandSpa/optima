@@ -21,6 +21,7 @@ class SolicitudesController extends \BaseController {
 	{
 		$skip = Input::get('offset');
 		$q = Input::get('query');
+		$queryType = Input::get('queryType');
 		$status = Input::get('status');
 		$priority = Input::get('priority');
 		$advisor = Input::get('advisor');
@@ -60,7 +61,7 @@ class SolicitudesController extends \BaseController {
 			$collection = $collection->whereRaw("solicitudes.quotation_date BETWEEN '$date_start_quotation' AND '$date_end_quotation' ");
 		}
 
-		if(Input::has('query') && $q != "") {
+		if(Input::has('query') && $q != "" && empty($queryType)) {
 			$collection = $collection
 				->where(function($query) use($q) {
 					$query
@@ -69,6 +70,17 @@ class SolicitudesController extends \BaseController {
 						$subquery->where('name', 'like', "%$q%");
 					})
 					->orWhereHas('company', function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					});
+				});
+		}
+
+		if(Input::has('query') && $q != "" && $queryType) {
+			$collection = $collection
+				->where(function($query) use($q, $queryType) {
+					$query
+					->where("id", "like", "$q%")
+					->orWhereHas($queryType, function($subquery) use($q){
 						$subquery->where('name', 'like', "%$q%");
 					});
 				});

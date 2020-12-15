@@ -23,7 +23,7 @@ class SolicitudesController extends BaseController {
 
 	public function show($id)
 	{
-		$this->layout->content = View::make('solicitudess.show');
+		$this->layout->content = View::make('solicitudes.show');
 	}
 
 	public function getPdf($id)
@@ -113,22 +113,6 @@ class SolicitudesController extends BaseController {
 		$html = View::make('pdfs.solicitudes_logos', compact('solicitudes'));
 
 		return $this->pdf->show($html);
-	}
-
-	public function wkpdf($id) {
-		// $snappy = new Pdf(base_path() . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
-		$snappy = new Pdf('wkhtmltopdf');
-		// $snappy->setOption('javascript-delay', 3000);
-		$snappy->setOption( 'lowquality' , false);
-		// $snappy->setOption('footer-font-name', 'Nunito');
-		$snappy->setOption('footer-font-size', '10');
-		$snappy->setOption('footer-right', 'Código: FO-COM-02 Fecha: 25-mar-2014 Versión 6');
-		// $snappy->setOption('page-size', 'Letter');
-
-		header('Content-Type: application/pdf');
-		// header('Content-Disposition: attachment; filename="file.pdf"');
-		// echo 'http://localhost:8000/solicitudess/'. $id .'/pdfhtml';
-		echo $snappy->getOutput('http://localhost:4040/solicitudess/'.  $id .'/pdfhtml');
 	}
 
 	public function duplicate($id)
@@ -247,10 +231,8 @@ class SolicitudesController extends BaseController {
 	}
 
 	public function getCounter() {
-		$date_start_quotation = Input::get('date_start_quotation');
-		$date_end_quotation = Input::get('date_end_quotation');
-		$collection = new Solicitudes;
 		$q = Input::get('query');
+		$queryType = Input::get('queryType');
 		$status = Input::get('status');
 		$priority = Input::get('priority');
 		$advisor = Input::get('advisor');
@@ -260,6 +242,9 @@ class SolicitudesController extends BaseController {
 		$date_end = Input::get('date_end');
 		$date_start_quotation = Input::get('date_start_quotation');
 		$date_end_quotation = Input::get('date_end_quotation');
+		$asesor = Input::get('asesor');
+		$company = Input::get('company');
+		$empresas = Input::get('empresas');
 		$collection = new Solicitudes;
 
 		if( Input::has('status') && $status != "" ) {
@@ -290,7 +275,7 @@ class SolicitudesController extends BaseController {
 			$collection = $collection->whereRaw("solicitudes.quotation_date BETWEEN '$date_start_quotation' AND '$date_end_quotation' ");
 		}
 
-		if(Input::has('query') && $q != "") {
+		if(Input::has('query') && $q != "" && empty($queryType)) {
 			$collection = $collection
 				->where(function($query) use($q) {
 					$query
@@ -303,12 +288,66 @@ class SolicitudesController extends BaseController {
 					});
 				});
 		}
+		if(Input::has('query') && $q != "" && $queryType) {
+			$collection = $collection
+				->where(function($query) use($q, $queryType) {
+					$query
+					->where("id", "like", "$q%")
+					->orWhereHas($queryType, function($subquery) use($q){
+						$subquery->where('name', 'like', "%$q%");
+					});
+				});
+		}
+		if(!$company && !$asesor) {
+			$collection = $collection->groupBy('status')->selectRaw('status, count(*) as total' );
+		}
 
-		$collection = $collection->with('company', 'contact', 'user', 'asesor', 'area')
-			->selectRaw('status, count(*) as total' )
-			->groupBy('status')
+		if($asesor) {
+			$collection = $collection->groupBy('asesor_id')->selectRaw('asesor_id, count(*) as total' );
+		}
+
+		if($company) {
+			$collection = $collection->groupBy('company_id')->selectRaw('company_id, count(*) as total' );
+		}
+
+		$collection = $collection->with('asesor', 'company')
 			->get();
+
+
+		if($asesor || $company) {
+            foreach ($collection as $item) {
+
+                if ($asesor) {
+                    $counter = $this->getSolicitudesCounter($item->asesor_id, false);
+                }
+
+                if ($company) {
+                    $counter = $this->getSolicitudesCounter(false, $item->company_id);
+                }
+                $item->counter = $counter;
+            }
+        }
 
 		return Response::json($collection, 200);
 	}
+
+	function getSolicitudesCounter($asesor, $company) {
+        $collection = new Solicitudes;
+
+        if($company) {
+            $collection = $collection->where('company_id', $company)
+                ->groupBy('status')
+                ->selectRaw('status, count(*) as total' )
+                ->get();
+        }
+
+        if($asesor) {
+            $collection = $collection->where('asesor_id', $asesor)
+                ->groupBy('status')
+                ->selectRaw('status, count(*) as total' )
+                ->get();
+        }
+
+        return $collection;
+    }
 }

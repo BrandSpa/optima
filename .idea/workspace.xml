@@ -1,25 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:public" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:upstream" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:upstream" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:upstream" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:upstream" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:public" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="b301b820-3f48-456a-9ca5-78f41dc76f4a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/models/Activity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Activity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/solicitud/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/solicitud/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/solicitud/section.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/solicitud/section.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/solicitud/status.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/solicitud/status.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/solicitudes/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/solicitudes/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/solicitudes/item.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/solicitudes/item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/solicitudes/list_table_solicitudes.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/solicitudes/list_table_solicitudes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/pdf.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/pdf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vendor.js" afterDir="false" />
-    </list>
+    <list default="true" id="b301b820-3f48-456a-9ca5-78f41dc76f4a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -86,7 +142,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -98,10 +156,59 @@
       <option name="presentableId" value="Default" />
       <updated>1599756167685</updated>
       <workItem from="1599756170346" duration="708000" />
+      <workItem from="1604804159074" duration="454000" />
+      <workItem from="1604804630619" duration="1682000" />
+      <workItem from="1605727954027" duration="37000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="643" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1604805946366">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state x="643" y="204" key="#com.intellij.ide.util.MemberChooser/0.23.1680.985@0.23.1680.985" timestamp="1604805946366" />
+    <state x="423" y="187" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1604804603216">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state x="423" y="187" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.1680.985@0.23.1680.985" timestamp="1604804603216" />
+    <state x="341" y="154" key="SettingsEditor" timestamp="1604805568293">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state x="341" y="154" key="SettingsEditor/0.23.1680.985@0.23.1680.985" timestamp="1604805568293" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1604805332221">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state width="500" height="445" key="SwitcherDM/0.23.1680.985@0.23.1680.985" timestamp="1604805332221" />
+    <state x="638" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604805679636">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state x="638" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.985@0.23.1680.985" timestamp="1604805679636" />
+    <state x="572" y="332" key="com.jetbrains.php.test.PhpNewTestDialog" timestamp="1604805591825">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state x="572" y="332" key="com.jetbrains.php.test.PhpNewTestDialog/0.23.1680.985@0.23.1680.985" timestamp="1604805591825" />
+    <state x="541" y="148" width="598" height="735" key="find.popup" timestamp="1604805721195">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state x="541" y="148" width="598" height="735" key="find.popup/0.23.1680.985@0.23.1680.985" timestamp="1604805721195" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1604805538280">
+      <screen x="0" y="23" width="1680" height="985" />
+    </state>
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.985@0.23.1680.985" timestamp="1604805538280" />
   </component>
 </project>

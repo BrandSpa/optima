@@ -26,7 +26,11 @@ const quoFilters = React.createClass({
         date_end: null,
         priority: null
       },
+      verEmpresas: false,
+      verAsesores: false,
       counter: [],
+      asesorCounter: [],
+      companyCounter: [],
       states: [
         {
           name:  'Borrador',
@@ -58,7 +62,23 @@ const quoFilters = React.createClass({
         this.setState({counter: counter.data})
         this.render();
       }
-    })
+    });
+    
+    const queryAsesor = {...query, asesor: true};
+    axios.get('/solicitudes/counter', {params: queryAsesor }).then((counter) => {
+      if( counter.data ) {
+        this.setState({asesorCounter: counter.data})
+        this.render();
+      }
+    });
+
+    const queryCompany = {...query, company: true};
+    axios.get('/solicitudes/counter', {params: queryCompany }).then((counter) => {
+      if( counter.data ) {
+        this.setState({companyCounter: counter.data})
+        this.render();
+      }
+    });
   },
 
   triggerChange(query) {
@@ -94,9 +114,9 @@ const quoFilters = React.createClass({
     this.setState({laoding: false});
   },
 
-  getCount( key ) {
-    if (this.state.counter) {
-      const items = _.filter(this.state.counter, {status: key});
+  getCount( counter, key ) {
+    if (counter) {
+      const items = _.filter(counter, {status: key});
       if( items.length ) {
         return items[0].total;
       }
@@ -108,7 +128,7 @@ const quoFilters = React.createClass({
 
   getTotal() {
     let count = 0;
-    if(this.state.counter ) {
+    if( this.state.counter && this.state.counter.length ) {
       this.state.counter.forEach( item => count += parseInt(item.total, 10));
     }
     return count;
@@ -121,13 +141,18 @@ const quoFilters = React.createClass({
         <div className="panel-body">
           <div className="row">
 
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-3 d-flex">
               <input
                 placeholder="Buscar solicitudes"
                 className="form-control input-query"
                 onChange={ this.handleChange.bind(null, 'query') }
                 value={ query.query || '' }
               />
+               <select onChange={this.handleChange.bind(null, 'queryType')}>
+                <option value="">Todos</option>
+                <option value="company">Empresa</option>
+                <option value="contact">Contacto</option>
+              </select>
             </div>
 
              <div className="form-group col-sm-3 filter-priority">
@@ -169,7 +194,7 @@ const quoFilters = React.createClass({
             <div className="form-group col-sm-3">
               <Select
                 options={advisorOptions}
-                default="Seleccionar asesor"
+                default="Seleccionar asesor externo"
                 value={query.advisor}
                 onSelectChange={ this.handleChange.bind(null, 'advisor') }
               />
@@ -227,19 +252,93 @@ const quoFilters = React.createClass({
               </div>
               <div className="name">Solicitudes</div>
             </div>
+
               {
                 this.state.counter ? 
                 this.state.states.map( (item) =>  {
                   return <div className="counter" key={item.key}>
                     <div className="counter-data">
-                      <div className="number">{ this.getCount(item.key) }</div>
+                      <div className="number">{ this.getCount(this.state.counter, item.key) }</div>
                     </div>
                     <div className="name">{item.name}</div>
                   </div>
                 })
                 :null
               }
+
+            <div className="counter" onClick={ () => this.setState({verEmpresas: true})}>
+              <div className="counter-data">
+                <div className="number">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-box-arrow-in-up-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z"/>
+                    <path fillRule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z"/>
+                  </svg>
+                </div>
+              </div>
+              <div className="name">Empresas</div>
             </div>
+
+            <div className="counter" onClick={() => this.setState({verAsesores: true})}>
+              <div className="counter-data">
+                <div className="number">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-box-arrow-in-up-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z"/>
+                  <path fillRule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z"/>
+                  </svg>
+                </div>
+              </div>
+              <div className="name">Asesores</div>
+            </div>
+
+            </div>
+          </div>
+        </div>
+        <div className={`panel-contador ${this.state.verAsesores || this.state.verEmpresas ? 'active': ''}`} >
+          <div className="close-icon" onClick={() => this.setState({verEmpresas: false, verAsesores: false})}>
+            <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </div>
+          <div className="panel-contador-body">
+            <ul>
+              <li>
+                <div className="name">Nombre</div>
+                <div className="number">Solicitudes</div>
+                <div className="number">Borrador</div>
+                <div className="number">Anuladas</div>
+                <div className="number">No enviadas</div>
+                <div className="number">Cotización</div>
+              </li>
+              {
+                this.state.asesorCounter && this.state.verAsesores ? 
+                this.state.asesorCounter.map( (item) =>  {
+                  return <li key={item.asesor_id}>
+                    <div className="name">{item.asesor ? item.asesor.name :  'Otros'}</div>
+                    <div className="number">{ item.total }</div>
+                    <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Nula')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'No enviada')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Cotización')}</div>
+                  </li>
+                })
+                :null
+              }
+
+              {
+                this.state.companyCounter && this.state.verEmpresas ? 
+                this.state.companyCounter.map( (item) =>  {
+                  return <li key={item.company_id}>
+                    <div className="name">{item.company.name ? item.company.name :  'Otros'}</div>
+                    <div className="number">{ item.total }</div>
+                    <div className="number">{ this.getCount(item.counter, 'Borrador')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Nula')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'No enviada')}</div>
+                    <div className="number">{ this.getCount(item.counter, 'Cotización')}</div>
+                  </li>
+                })
+                :null
+              }   
+            </ul>
           </div>
         </div>
       </div>
