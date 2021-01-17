@@ -142,12 +142,12 @@ class QuotationsController extends BaseController {
 		$quo = Quotation::find($id);
 		$quo->status = 'Replanteada';
 		$quo->save();
-		$model = Quotation::duplicate($id, "rethink");
+		$model = Quotation::toSolicitud($id, "rethink");
 		$model->rethink_from = $id;
 		$model->status_cause = '';
 		$model->save();
 
-		return Redirect::to('/quotations/'.$model->id);
+		return Redirect::to('/solicitudes/'.$model->id);
 	}
 
 	public function getExcel() {

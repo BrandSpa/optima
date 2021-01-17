@@ -135,6 +135,62 @@ class Quotation extends \Eloquent {
 		return $modelNew;
 	}
 
+    public static function toSolicitud($id, $type)
+    {
+        $model = self::find($id);
+        $modelNew = $model->replicate();
+        $modelNew->created_at = new DateTime;
+        $modelNew->status = 'Borrador';
+        $modelNew->sent_at = null;
+        $modelNew->created_sent_diff = null;
+        $solicitudesModel = Solicitudes::store($modelNew->toArray());
+        // $modelNew->save();
+        $products = $model->products;
+        $services = $model->services;
+        $trackings = $model->trackings;
+        $activities = $model->activities;
+
+        foreach($products as $product) {
+            $product->quotation_id = '';
+        }
+
+        foreach($services as $service) {
+            $service->quotation_id = '';
+        }
+
+        self::duplicateAssociatedSolicitud($products, $solicitudesModel);
+
+        self::duplicateServices($services, $solicitudesModel);
+        if (isset($type) && $type == "rethink") {
+            self::duplicateAssociatedSolicitud($trackings, $solicitudesModel);
+            self::duplicateAssociatedSolicitud($activities, $solicitudesModel);
+        }else{
+            $solicitudesModel->rethink_from = null;
+            $solicitudesModel->save();
+        }
+        /* TODO
+        * Change solicitud status to cotizacion,
+        * add quotationID
+        */
+        $model->solicitudes_id = $solicitudesModel->id;
+        // $model->status = 'Cotización';
+        $model->solicitudes_date = \Carbon\Carbon::now()->toDateTimeString();
+        $model->save();
+        return $solicitudesModel;
+    }
+
+
+    public static function duplicateAssociatedSolicitud($collection, $solicitud)
+    {
+        if ($collection) {
+            foreach ($collection as $oldModel) {
+                $model = $oldModel->replicate();
+                $model->solicitudes_id = $solicitud->id;
+                $model->save();
+            }
+        }
+    }
+
 
 	public static function duplicateAssociated($collection, $quotation)
 	{
