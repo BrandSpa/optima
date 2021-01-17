@@ -227,7 +227,7 @@ export const SolicitudSection = React.createClass({
           <div className="panel-body quo-header">
           <div>
              <h4>
-              Solicitud {solicitud.id}  {solicitud.rethink_from ? <a href={`/solicituds/${solicitud.rethink_from}`}>replanteada de {solicitud.rethink_from}</a> : ""} • {solicitud.status} •
+              Solicitud {solicitud.id}  {solicitud.rethink_from ? <a href={`/quotations/${solicitud.rethink_from}`}>replanteada de {solicitud.rethink_from}</a> : ""} • {solicitud.status} •
             </h4>
           </div>
           <div className="quo-header__priority">
