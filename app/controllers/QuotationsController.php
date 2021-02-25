@@ -134,7 +134,7 @@ class QuotationsController extends BaseController {
 	public function duplicate($id)
 	{
 		$model = Quotation::duplicate($id, "duplicate");
-		return Redirect::to('/quotations/'.$model->id);
+		return Redirect::to('/solicitudes/'.$model->id);
 	}
 
 	public function rethink($id)

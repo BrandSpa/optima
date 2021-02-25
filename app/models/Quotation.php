@@ -114,25 +114,25 @@ class Quotation extends \Eloquent {
 		$modelNew->status = 'Borrador';
 		$modelNew->sent_at = null;
 		$modelNew->created_sent_diff = null;
-		$modelNew->save();
+        $solicitudesModel = Solicitudes::store($modelNew->toArray());
 
 		$products = $model->products;
 		$services = $model->services;
 		$trackings = $model->trackings;
 		$activities = $model->activities;
 
-		self::duplicateAssociated($products, $modelNew);
+		self::duplicateAssociatedSolicitud($products, $solicitudesModel);
 
-		self::duplicateServices($services, $modelNew);
-		if (isset($type) && $type == "rethink") {
-			self::duplicateAssociated($trackings, $modelNew);
-			self::duplicateAssociated($activities, $modelNew);
+        self::duplicateServices($services, $solicitudesModel);
+        if (isset($type) && $type == "rethink") {
+            self::duplicateAssociatedSolicitud($trackings, $solicitudesModel);
+			self::duplicateAssociatedSolicitud($activities, $solicitudesModel);
 		}else{
-		    $modelNew->rethink_from = null;
-		    $modelNew->save();
+            $solicitudesModel->rethink_from = null;
+            $solicitudesModel->save();
         }
 
-		return $modelNew;
+		return $solicitudesModel;
 	}
 
     public static function toSolicitud($id, $type)
