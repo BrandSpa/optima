@@ -43,6 +43,7 @@ Route::group(['before' => ['auth'], 'after' => 'etags'], function()
 	Route::get('solicitudes/{id}/duplicate', 'SolicitudesController@duplicate');
 	Route::get('solicitudes/{id}/toquotation', 'SolicitudesController@toQuotation');
 	Route::get('solicitudes/counter', 'SolicitudesController@getCounter');
+	Route::get('solicitudes/countersolicitudes', 'SolicitudesController@getSolicitudesCounter');
 
 	Route::post('quotations/{id}/sendmail', 'QuotationsController@sendMail');
 	
