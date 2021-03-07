@@ -1,5 +1,6 @@
 [
   {"value": "Activo", "label": "Activo"},
   {"value": "Inactivo", "label": "Inactivo"},
-  {"value": "Nuevo", "label": "Nuevo"}
+  {"value": "Nuevo", "label": "Nuevo"},
+  {"value": "Blacklist", "label": "Lista negra"}
 ]

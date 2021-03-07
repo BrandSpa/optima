@@ -1,5 +1,6 @@
 <?php namespace Api;
 
+use Illuminate\Support\Facades\DB;
 use Response;
 use Session;
 use Optima\Contact;
@@ -38,6 +39,16 @@ class ContactsController extends \BaseController {
 
 		if (Input::has('company_id')) {
 			$collection = Contact::where('company_id', $company)->get();
+			foreach ($collection as $contact) {
+			    $blacklisted = DB::table('quotations')->where('client_type', 'Blacklist')->where('contact_id', $contact->id)->first();
+			    $blacklistedSolicitudes = DB::table('solicitudes')->where('client_type', 'Blacklist')->where('contact_id', $contact->id)->first();
+
+			    if($blacklisted || $blacklistedSolicitudes) {
+			        $contact->blacklist = true;
+			        continue;
+                }
+                $contact->blacklist = false;
+            }
 			return Response::json($collection, 200);
 		}
 

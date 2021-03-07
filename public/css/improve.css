@@ -310,3 +310,19 @@ ul {
           font-weight: bold; }
         .panel-contador-body ul li .number {
           text-align: right; }
+
+.blacklist .btn-primary {
+  background: red;
+  font-weight: bold;
+  position: relative; }
+  .blacklist .btn-primary span {
+    display: inherit;
+    width: 20px; }
+  .blacklist .btn-primary svg {
+    fill: white;
+    width: 20px;
+    height: 20px;
+    display: inline;
+    position: absolute;
+    top: 3px;
+    right: 7px; }
