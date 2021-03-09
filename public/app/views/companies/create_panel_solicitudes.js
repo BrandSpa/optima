@@ -166,10 +166,21 @@ const createPanelSolicitudes = React.createClass({
 
               <tbody>
                 {this.props.contacts.items.map(contact =>
-                  <tr key={contact.id}>
+                  <tr key={contact.id} className={(contact.blacklist ? 'blacklist': '')}>
                     <td>{`${contact.name} ${contact.lastname}`}</td>
                     <td>{contact.email}</td>
-                    <td><button className="btn btn-primary btn-sm" onClick={this.createQuotation.bind(this, contact)}>Crear Solicitud</button></td>
+                    <td><button
+                        className="btn btn-primary btn-sm"
+                        onClick={this.createQuotation.bind(this, contact)}
+                        title={(contact.blacklist ?  'Este usuario esta marcado en una lista negra': '')}
+                    >Crear Solicitud
+                      {
+                        contact.blacklist ?
+                            <span ><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></span>
+                            : ''
+                      }
+                    </button>
+                    </td>
                   </tr>
                 )}
               </tbody>

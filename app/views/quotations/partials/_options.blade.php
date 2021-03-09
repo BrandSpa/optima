@@ -34,6 +34,7 @@
      <option value="Activo">Activo</option>
      <option value="Inactivo">Inactivo</option>
      <option value="Nuevo">Nuevo</option>
+      <option value="blacklist">Lista Negra</option>
   </select>
 </div>
 
