@@ -4,6 +4,7 @@ import cleanObject from '../../lib/clean_object';
 import Select from '../../components/form_select';
 import sectors from '../../options/sectors.json';
 import cities from '../../options/cities.json';
+import clientOptions from "../../options/client_type.json";
 
 const CompaniesForm = React.createClass({
   getInitialState() {
@@ -132,6 +133,15 @@ const CompaniesForm = React.createClass({
             />
          </div>
        </div>
+         <div className="form-group">
+             <Select
+                 ref="client_type"
+                 options={clientOptions}
+                 default="Seleccionar tipo de cliente"
+                 onSelectChange={this.handleChange.bind(null, 'client_type')}
+                 value={company.client_type}
+             />
+         </div>
 
         <div className="form-group">
           <textarea
@@ -142,6 +152,8 @@ const CompaniesForm = React.createClass({
             placeholder="Comentario"
           />
        </div>
+
+
 
       <button
         className="btn btn-primary btn-sm pull-right"

@@ -42,8 +42,9 @@ class ContactsController extends \BaseController {
 			foreach ($collection as $contact) {
 			    $blacklisted = DB::table('quotations')->where('client_type', 'Blacklist')->where('contact_id', $contact->id)->first();
 			    $blacklistedSolicitudes = DB::table('solicitudes')->where('client_type', 'Blacklist')->where('contact_id', $contact->id)->first();
+			    $blacklistedCompany =  DB::table('companies')->where('client_type', 'Blacklist')->where('id', $company);
 
-			    if($blacklisted || $blacklistedSolicitudes) {
+			    if($blacklisted || $blacklistedSolicitudes || $blacklistedCompany) {
 			        $contact->blacklist = true;
 			        continue;
                 }
