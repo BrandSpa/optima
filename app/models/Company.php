@@ -13,7 +13,8 @@ class Company extends \Eloquent {
 		'phone',
 		'type',
 		'web',
-		'comment'
+		'comment',
+        'client_type'
 	];
 
 	public $rules = [

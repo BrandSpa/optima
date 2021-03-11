@@ -72,13 +72,11 @@
     <list default="true" id="b301b820-3f48-456a-9ca5-78f41dc76f4a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/api/ContactsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api/ContactsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/quotations/partials/_options.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/quotations/partials/_options.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/options/client_type.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/options/client_type.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/companies/create_panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/companies/create_panel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/views/companies/create_panel_solicitudes.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/companies/create_panel_solicitudes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/improve.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/improve.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/app/views/companies/form_create.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/views/companies/form_create.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sass/improve.sass" beforeDir="false" afterPath="$PROJECT_DIR$/public/sass/improve.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/pdf.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/pdf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vendor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,6 +162,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="copyright" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -186,7 +185,8 @@
       <workItem from="1610886947830" duration="92000" />
       <workItem from="1610887082475" duration="3022000" />
       <workItem from="1614262287950" duration="1083000" />
-      <workItem from="1615125477859" duration="4001000" />
+      <workItem from="1615125477859" duration="4238000" />
+      <workItem from="1615468712872" duration="2062000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega conteo individual para cada empresa/asesor">
       <created>1608037062598</created>
@@ -237,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614263067753</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="[UPD] Se agrega marcacion lista negra">
+      <created>1615130206188</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615130206188</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +270,7 @@
     <MESSAGE value="Correcion keys filtro tildes" />
     <MESSAGE value="Se replantea como solicitud" />
     <MESSAGE value="Se crea solicitud al duplicar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se crea solicitud al duplicar" />
+    <MESSAGE value="[UPD] Se agrega marcacion lista negra" />
+    <option name="LAST_COMMIT_MESSAGE" value="[UPD] Se agrega marcacion lista negra" />
   </component>
 </project>
