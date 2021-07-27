@@ -186,6 +186,7 @@ class Quotation extends \Eloquent {
             foreach ($collection as $oldModel) {
                 $model = $oldModel->replicate();
                 $model->solicitudes_id = $solicitud->id;
+                $model->quotation_id = "";
                 $model->save();
             }
         }
