@@ -7,7 +7,7 @@ const dashboardSolicitudes = React.createClass({
     let {user} = this.props;
 
     return (
-      <div>
+      <div>form-group col-sm-4
         <div className="col-md-12">
         <Solicitudes />
         </div>

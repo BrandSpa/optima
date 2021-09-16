@@ -105,10 +105,9 @@ export const SolicitudSection = React.createClass({
   },
   
   handleOptions(filters, message) {
-    let {quotations} = this.props;
-    
+    let {solicitudes} = this.props;
     this.setActivity(message).then(() => {
-      const data = {...quotations.quotation, ...filters};
+      const data = {...solicitudes.solicitud, ...filters};
       this._update(data);
     }) 
   },
