@@ -32,7 +32,7 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
+RUN composer -v && php -v
 # Add user for laravel application
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
@@ -43,8 +43,16 @@ COPY . /var/www
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
-# Change current user to www
-USER www
+WORKDIR /var/www
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN composer install \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --no-dev \
+    --prefer-dist
+
+RUN composer dump-autoload
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
