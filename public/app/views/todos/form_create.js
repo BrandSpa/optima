@@ -3,7 +3,6 @@ import React from 'react';
 import request from 'axios';
 import moment from 'moment';
 import DateTime from 'components/datetime';
-import Editor from 'components/editor';
 import Select from 'components/form_select';
 
 const todoForm = React.createClass({
@@ -90,7 +89,9 @@ const todoForm = React.createClass({
     let contactValue;
 
     const userOptions = this.state.users.map(user => {
-      return {value: user.id, label: user.name +" "+ user.lastname}
+      if(user) {
+        return {value: user.id, label: user.name +" "+ user.lastname}
+      }
     });
 
     return (

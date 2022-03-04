@@ -58,28 +58,29 @@ const quoServices = React.createClass({
  
   render() {
     const options = this.props.services.items.map(opt => ({ value: opt.id, label: opt.title }));
-
-    const serviceNodes = this.props.quotations.services.map(service => 
-      <tr key={service.id} className="quotation-service">
-        <td>{service.title}</td>
-        <td>
-          <button 
-            className="btn btn-default btn-sm" 
-            onClick={this.handleEdit.bind(null, service)}
-          >
-          Editar
-          </button>
-          
-          <button
-            className="btn btn-default btn-sm"
-            onClick={this.handleDelete.bind(null, service.id)}
-            disabled={this.props.disabled ? true : false}
-          >
-          Eliminar
-          </button>
-        </td>
-      </tr>
-    );
+      const serviceNodes = this.props.quotations && this.props.quotations.services ? 
+      this.props.quotations.services.map(service => 
+        <tr key={service.id} className="quotation-service">
+          <td>{service.title}</td>
+          <td>
+            <button 
+              className="btn btn-default btn-sm" 
+              onClick={this.handleEdit.bind(null, service)}
+            >
+            Editar
+            </button>
+            
+            <button
+              className="btn btn-default btn-sm"
+              onClick={this.handleDelete.bind(null, service.id)}
+              disabled={this.props.disabled ? true : false}
+            >
+            Eliminar
+            </button>
+          </td>
+        </tr>
+    )
+    : null
 
     return (
       <div>   

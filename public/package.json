@@ -51,7 +51,6 @@
     "del": "^6.0.0",
     "enzyme": "^2.7.0",
     "expect": "^1.20.2",
-    "gulp-sass": "^4.1.0",
     "jest": "^18.1.0",
     "json-loader": "^0.5.4",
     "moxios": "^0.3.0",
@@ -60,7 +59,6 @@
     "redux-logger": "^2.7.4",
     "redux-mock-store": "^1.2.1",
     "require-dir": "^0.3.0",
-    "sass": "^1.27.0",
     "sinon": "^1.17.7",
     "webpack": "^2.7.0"
   }

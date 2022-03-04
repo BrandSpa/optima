@@ -45,7 +45,7 @@
 
 	<img src="[[ public_path().'/img/pdf/firmas/'.$quotation->user->name.'-'.$quotation->user->lastname.'.png' ]]" id="firm" alt="">
 	<span class="firm">[[ $quotation->user->name ]] [[ $quotation->user->lastname ]]</span>
-	<span class="firm">@if($quotation->user->id == 3) Coordinador Comercial @else Asesor Comercial @endif</span>
+	<span class="firm">@if($quotation->user->id == 3) Ejecutivo de cuenta @else Asesor Comercial @endif</span>
 	<span class="firm">comercial@rentadvisor.com.co</span>
 	<span class="firm">PBX 6 36 10 51</span>
 

@@ -478,7 +478,7 @@
                                     			<a href="http://rentadvisor.com.co" target="_blank">www.rentadvisor.com.co</a>&nbsp;&nbsp;&nbsp;PBX 6 36 10 51&nbsp;&nbsp;&nbsp;Bogotá - Colombia
                                            <br />
                                            <br />
-                                    			[[ $data['user'] ]]&nbsp;&nbsp;&nbsp; @if($data['user'] == "Jorge Mancera") Coordinador Comercial @else Asesor Comercial @endif&nbsp;&nbsp;&nbsp;<a href="mailto:comercial@rentadvisor.com.co">comercial@rentadvisor.com.co</a>
+                                    			[[ $data['user'] ]]&nbsp;&nbsp;&nbsp; @if($data['user'] == "Jorge Mancera") Ejecutivo de cuenta @else Asesor Comercial @endif&nbsp;&nbsp;&nbsp;<a href="mailto:comercial@rentadvisor.com.co">comercial@rentadvisor.com.co</a>
                                     		</td>
                                     	</tr>
                                     
