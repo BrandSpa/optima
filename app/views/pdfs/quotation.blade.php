@@ -58,7 +58,7 @@
 		<br /><br>
 	@endif
 	<span class="firm">[[ $quotation->user->name ]] [[ $quotation->user->lastname ]]</span>
-	<span class="firm">@if($quotation->user->id == 3) Coordinador Comercial @elseif($quotation->user->id == 12) Director Comercial @else Asesor Comercial @endif</span>
+	<span class="firm">@if($quotation->user->id == 3) Ejecutivo de cuenta @elseif($quotation->user->id == 12) Director Comercial @else Asesor Comercial @endif</span>
 	<span class="firm">[[ $quotation->user->email ]]</span>
 	<span class="firm">PBX 6 36 10 51</span>
 
