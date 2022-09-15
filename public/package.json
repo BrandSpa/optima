@@ -18,7 +18,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "babel-polyfill": "^6.20.0",
-    "bootstrap": "^3.3.4",
+    "bootstrap": "^3.4.1",
     "chart.js": "^2.1.6",
     "flatpickr": "^1.8.9",
     "gulp": "^4.0.0",
